@@ -186,6 +186,30 @@ const GameDashboard = () => {
             <CardHeader>
               <CardTitle className="text-2xl font-bold">Tabula Imperii - Turn {currentTurn}</CardTitle>
               <p className="text-muted-foreground">The Known World, Anno Domini 476</p>
+              
+              {/* Faction Legend */}
+              <div className="flex flex-wrap gap-4 mt-4 p-3 bg-muted/30 rounded-lg">
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded bg-[hsl(var(--barbarian))] border"></div>
+                  <span className="text-sm">Your Faction</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded bg-[hsl(var(--imperial))] border"></div>
+                  <span className="text-sm">Imperial</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded bg-[hsl(var(--bagaudae))] border"></div>
+                  <span className="text-sm">Bagaudae</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded bg-amber-600 border"></div>
+                  <span className="text-sm">Other Barbarians</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded bg-muted border"></div>
+                  <span className="text-sm">Neutral</span>
+                </div>
+              </div>
             </CardHeader>
             <CardContent className="h-full p-6">
               <div className="relative w-full h-96 bg-gradient-to-br from-amber-50 to-amber-100 border-2 border-amber-300 rounded-lg overflow-hidden">
