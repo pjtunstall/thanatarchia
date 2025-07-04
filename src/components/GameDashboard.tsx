@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Sword, Eye, Coins, Users } from 'lucide-react';
 import romanEmpireMap from '@/assets/roman-empire-map-clean.jpg';
 
@@ -44,13 +45,56 @@ const GameDashboard = () => {
   const [gameStatus, setGameStatus] = useState<'playing' | 'victory' | 'defeat'>('playing');
   const [activeTab, setActiveTab] = useState('chronicles');
   
+  // Historical factions for random selection
+  const historicalFactions = [
+    { name: 'Western Roman Empire', type: 'imperial' as const, color: 'hsl(var(--imperial))' },
+    { name: 'Bagaudae of Gaul', type: 'bagaudae' as const, color: 'hsl(var(--bagaudae))' },
+    { name: 'Ostrogothic Kingdom', type: 'barbarian' as const, color: 'hsl(var(--barbarian))' },
+    { name: 'Visigothic Kingdom', type: 'barbarian' as const, color: 'hsl(var(--barbarian))' },
+    { name: 'Vandal Kingdom', type: 'barbarian' as const, color: 'hsl(var(--barbarian))' },
+    { name: 'Burgundian Kingdom', type: 'barbarian' as const, color: 'hsl(var(--barbarian))' },
+    { name: 'Frankish Confederation', type: 'barbarian' as const, color: 'hsl(var(--barbarian))' },
+    { name: 'Gepid Kingdom', type: 'barbarian' as const, color: 'hsl(var(--barbarian))' },
+    { name: 'Heruli Tribes', type: 'barbarian' as const, color: 'hsl(var(--barbarian))' },
+    { name: 'Suebi Confederation', type: 'barbarian' as const, color: 'hsl(var(--barbarian))' },
+    { name: 'Alanic Tribes', type: 'barbarian' as const, color: 'hsl(var(--barbarian))' },
+    { name: 'Hunnic Empire', type: 'barbarian' as const, color: 'hsl(var(--barbarian))' }
+  ];
+
+  // Character portraits
+  const characterPortraits = [
+    {
+      name: 'Brunhild the Fierce',
+      gender: 'female',
+      image: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=400&fit=crop&crop=face',
+      description: 'A fierce warrior-queen with golden braids and piercing blue eyes'
+    },
+    {
+      name: 'Theodoric the Bold',
+      gender: 'male', 
+      image: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=400&h=400&fit=crop&crop=face',
+      description: 'A battle-hardened chieftain with scars that tell tales of victory'
+    }
+  ];
+
+  // Initialize random faction and character
+  const [selectedFaction] = useState(() => {
+    const randomIndex = Math.floor(Math.random() * historicalFactions.length);
+    return historicalFactions[randomIndex];
+  });
+
+  const [playerCharacter] = useState(() => {
+    const randomIndex = Math.floor(Math.random() * characterPortraits.length);
+    return characterPortraits[randomIndex];
+  });
+  
   // Sample faction data
   const [playerFaction, setPlayerFaction] = useState<Faction>({
     id: 'player',
-    name: 'Alamanni of the Rhine',
-    type: 'barbarian',
-    color: 'hsl(var(--barbarian))',
-    territories: 3,
+    name: selectedFaction.name,
+    type: selectedFaction.type,
+    color: selectedFaction.color,
+    territories: 2,
     relatives: ['Brunhild (daughter)', 'Theodoric (nephew)', 'Gisela (sister)'],
     troops: 2500,
     treasure: 150
@@ -89,20 +133,20 @@ const GameDashboard = () => {
     }
   ]);
 
-  // Map data with troop strengths and terrain - Roman Empire territories
+  // Map data with troop strengths and terrain - Roman Empire territories (adjusted western positions)
   const [territories, setTerritories] = useState<Territory[]>([
-    { id: 'britannia', name: 'Britannia', x: 30, y: 20, owner: 'neutral', troops: 900, terrain: 'plains' },
-    { id: 'gallia', name: 'Gallia', x: 40, y: 35, owner: 'player', troops: 1200, terrain: 'forest' },
-    { id: 'aquitania', name: 'Aquitania', x: 35, y: 45, owner: 'player', troops: 800, terrain: 'plains' },
-    { id: 'hispania', name: 'Hispania', x: 25, y: 60, owner: 'bagaudae1', troops: 1100, terrain: 'mountains' },
-    { id: 'germania', name: 'Germania Magna', x: 50, y: 25, owner: 'barbarian1', troops: 1500, terrain: 'forest' },
-    { id: 'pannonia', name: 'Pannonia', x: 60, y: 45, owner: 'imperial1', troops: 1800, terrain: 'plains' },
-    { id: 'dacia', name: 'Dacia', x: 70, y: 40, owner: 'barbarian1', troops: 1300, terrain: 'mountains' },
-    { id: 'thracia', name: 'Thracia', x: 75, y: 55, owner: 'imperial1', troops: 1600, terrain: 'plains' },
-    { id: 'italia', name: 'Italia', x: 55, y: 60, owner: 'imperial1', troops: 2200, terrain: 'plains' },
-    { id: 'africa', name: 'Africa Proconsularis', x: 45, y: 80, owner: 'imperial1', troops: 1000, terrain: 'plains' },
-    { id: 'aegyptus', name: 'Aegyptus', x: 70, y: 75, owner: 'imperial1', troops: 1400, terrain: 'river' },
-    { id: 'syria', name: 'Syria', x: 80, y: 70, owner: 'imperial1', troops: 1700, terrain: 'plains' }
+    { id: 'britannia', name: 'Britannia', x: 25, y: 20, owner: 'neutral', troops: 900, terrain: 'plains' },
+    { id: 'gallia', name: 'Gallia', x: 35, y: 35, owner: 'player', troops: 1200, terrain: 'forest' },
+    { id: 'aquitania', name: 'Aquitania', x: 30, y: 45, owner: 'player', troops: 800, terrain: 'plains' },
+    { id: 'hispania', name: 'Hispania', x: 20, y: 60, owner: 'faction2', troops: 1100, terrain: 'mountains' },
+    { id: 'germania', name: 'Germania Magna', x: 50, y: 25, owner: 'faction3', troops: 1500, terrain: 'forest' },
+    { id: 'pannonia', name: 'Pannonia', x: 60, y: 45, owner: 'faction4', troops: 1800, terrain: 'plains' },
+    { id: 'dacia', name: 'Dacia', x: 70, y: 40, owner: 'faction5', troops: 1300, terrain: 'mountains' },
+    { id: 'thracia', name: 'Thracia', x: 75, y: 55, owner: 'faction6', troops: 1600, terrain: 'plains' },
+    { id: 'italia', name: 'Italia', x: 55, y: 60, owner: 'faction7', troops: 2200, terrain: 'plains' },
+    { id: 'africa', name: 'Africa Proconsularis', x: 40, y: 80, owner: 'faction8', troops: 1000, terrain: 'plains' },
+    { id: 'aegyptus', name: 'Aegyptus', x: 70, y: 75, owner: 'faction9', troops: 1400, terrain: 'river' },
+    { id: 'syria', name: 'Syria', x: 80, y: 70, owner: 'faction10', troops: 1700, terrain: 'plains' }
   ]);
 
   // Adjacency map for movement validation
@@ -489,14 +533,13 @@ const GameDashboard = () => {
                      }}
                      onClick={() => handleTerritoryClick(territory.id)}
                    >
-                     {/* Territory marker */}
-                     <div className={`w-6 h-6 rounded-full border-2 border-white shadow-lg ${
-                       territory.owner === 'player' ? 'bg-[hsl(var(--barbarian))]' :
-                       territory.owner === 'imperial1' ? 'bg-[hsl(var(--imperial))]' :
-                       territory.owner === 'bagaudae1' ? 'bg-[hsl(var(--bagaudae))]' :
-                       territory.owner === 'barbarian1' ? 'bg-amber-600' :
-                       'bg-muted'
-                     }`}></div>
+                      {/* Territory marker */}
+                      <div className={`w-6 h-6 rounded-full border-2 border-white shadow-lg ${
+                        territory.owner === 'player' ? 'bg-[hsl(var(--barbarian))]' :
+                        territory.owner.startsWith('faction') ? 'bg-amber-600' :
+                        territory.owner === 'neutral' ? 'bg-muted' :
+                        'bg-amber-600'
+                      }`}></div>
                      
                      {/* Territory name */}
                      <div className="absolute top-7 left-1/2 transform -translate-x-1/2 bg-black/70 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
@@ -590,6 +633,18 @@ const GameDashboard = () => {
                   </Badge>
                 </CardHeader>
                 <CardContent>
+                  {/* Player Character Portrait */}
+                  <div className="flex items-center space-x-4 mb-6 p-4 bg-muted/30 rounded-lg">
+                    <Avatar className="w-16 h-16">
+                      <AvatarImage src={playerCharacter.image} alt={playerCharacter.name} />
+                      <AvatarFallback>{playerCharacter.name.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-lg">{playerCharacter.name}</h3>
+                      <p className="text-sm text-muted-foreground italic">{playerCharacter.description}</p>
+                    </div>
+                  </div>
+
                   <div className="space-y-3">
                     <div className="flex items-center gap-2">
                       <Coins className="w-4 h-4 text-yellow-600" />
