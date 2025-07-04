@@ -69,62 +69,38 @@ const GameDashboard = () => {
               </TabsTrigger>
             </TabsList>
             
-            <TabsContent value="chronicles" className="mt-4 flex flex-col h-full">
-              <div className="flex-1 overflow-auto">
-                <ChroniclesPanel chronicles={gameState.chronicles} />
-              </div>
-              {gameState.selectedTerritory && (
-                <div className="flex-shrink-0">
-                  <SelectedTerritoryInfo
-                    territory={gameState.territories.find(t => t.id === gameState.selectedTerritory)!}
-                    playerFactionName={gameState.selectedFaction.name}
-                  />
-                </div>
-              )}
+            <TabsContent value="chronicles" className="mt-4">
+              <ChroniclesPanel chronicles={gameState.chronicles} />
             </TabsContent>
 
-            <TabsContent value="status" className="mt-4 flex flex-col h-full">
-              <div className="flex-1 overflow-auto">
-                <StatusPanel
-                  playerFaction={gameState.playerFaction}
-                  playerCharacter={gameState.playerCharacter}
-                  territories={gameState.territories}
-                  selectedTerritory={gameState.selectedTerritory}
-                  selectedFaction={gameState.selectedFaction}
-                />
-              </div>
-              {gameState.selectedTerritory && (
-                <div className="flex-shrink-0">
-                  <SelectedTerritoryInfo
-                    territory={gameState.territories.find(t => t.id === gameState.selectedTerritory)!}
-                    playerFactionName={gameState.selectedFaction.name}
-                  />
-                </div>
-              )}
+            <TabsContent value="status" className="mt-4">
+              <StatusPanel
+                playerFaction={gameState.playerFaction}
+                playerCharacter={gameState.playerCharacter}
+                territories={gameState.territories}
+                selectedTerritory={gameState.selectedTerritory}
+                selectedFaction={gameState.selectedFaction}
+              />
             </TabsContent>
 
-            <TabsContent value="actions" className="mt-4 flex flex-col h-full">
-              <div className="flex-1 overflow-auto">
-                <ActionsPanel
-                  playerFaction={gameState.playerFaction}
-                  territories={gameState.territories}
-                  selectedTerritory={gameState.selectedTerritory}
-                  selectedFaction={gameState.selectedFaction}
-                  onAction={gameState.handleAction}
-                  onEndTurn={gameState.handleEndTurn}
-                  onRecruitTroops={gameState.handleRecruitTroops}
-                  onSpy={gameState.handleSpy}
-                  onAttack={gameState.handleAttack}
-                  getValidAttackTargets={gameState.getValidAttackTargets}
-                />
-              </div>
+            <TabsContent value="actions" className="mt-4">
+              <ActionsPanel
+                playerFaction={gameState.playerFaction}
+                territories={gameState.territories}
+                selectedTerritory={gameState.selectedTerritory}
+                selectedFaction={gameState.selectedFaction}
+                onAction={gameState.handleAction}
+                onEndTurn={gameState.handleEndTurn}
+                onRecruitTroops={gameState.handleRecruitTroops}
+                onSpy={gameState.handleSpy}
+                onAttack={gameState.handleAttack}
+                getValidAttackTargets={gameState.getValidAttackTargets}
+              />
               {gameState.selectedTerritory && (
-                <div className="flex-shrink-0">
-                  <SelectedTerritoryInfo
-                    territory={gameState.territories.find(t => t.id === gameState.selectedTerritory)!}
-                    playerFactionName={gameState.selectedFaction.name}
-                  />
-                </div>
+                <SelectedTerritoryInfo
+                  territory={gameState.territories.find(t => t.id === gameState.selectedTerritory)!}
+                  playerFactionName={gameState.selectedFaction.name}
+                />
               )}
             </TabsContent>
           </Tabs>
