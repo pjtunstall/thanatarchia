@@ -10,6 +10,7 @@ interface ActionsPanelProps {
   territories: Territory[];
   selectedTerritory: string | null;
   selectedFaction: { name: string };
+  actionsRemaining: number;
   onAction: (action: string) => void;
   onEndTurn: () => void;
   onRecruitTroops: () => void;
@@ -23,6 +24,7 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
   territories,
   selectedTerritory,
   selectedFaction,
+  actionsRemaining,
   onAction,
   onEndTurn,
   onRecruitTroops,
@@ -34,18 +36,36 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
     <Card className="h-[calc(100vh-200px)]">
       <CardHeader>
         <CardTitle className="text-lg">Actions</CardTitle>
+        <p className="text-sm text-muted-foreground">
+          Actions remaining: {actionsRemaining}/4
+        </p>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-2">
-            <Button onClick={() => onAction('raid')} variant="destructive" size="sm">
+            <Button 
+              onClick={() => onAction('raid')} 
+              variant="destructive" 
+              size="sm"
+              disabled={actionsRemaining <= 0}
+            >
               <Sword className="w-3 h-3 mr-1" />
               Raid Territory
             </Button>
-            <Button onClick={() => onAction('marry')} variant="secondary" size="sm">
+            <Button 
+              onClick={() => onAction('marry')} 
+              variant="secondary" 
+              size="sm"
+              disabled={actionsRemaining <= 0}
+            >
               Arrange Marriage
             </Button>
-            <Button onClick={() => onAction('negotiate')} variant="outline" size="sm">
+            <Button 
+              onClick={() => onAction('negotiate')} 
+              variant="outline" 
+              size="sm"
+              disabled={actionsRemaining <= 0}
+            >
               Send Envoy
             </Button>
             <Button onClick={onEndTurn} variant="default" size="sm">
@@ -60,19 +80,19 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
                 onClick={onRecruitTroops} 
                 variant="outline" 
                 size="sm"
-                disabled={playerFaction.treasure < 50}
+                disabled={playerFaction.treasure < 50 || actionsRemaining <= 0}
               >
                 <Users className="w-3 h-3 mr-1" />
-                Recruit (50g)
+                Recruit (50 solidi)
               </Button>
               <Button 
                 onClick={() => selectedTerritory && onSpy(selectedTerritory)} 
                 variant="outline" 
                 size="sm"
-                disabled={!selectedTerritory || playerFaction.treasure < 25}
+                disabled={!selectedTerritory || playerFaction.treasure < 25 || actionsRemaining <= 0}
               >
                 <Eye className="w-3 h-3 mr-1" />
-                Spy (25g)
+                Spy (25 solidi)
               </Button>
             </div>
           </div>
@@ -94,7 +114,7 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
                         variant="destructive"
                         size="sm"
                         className="w-full text-xs"
-                        disabled={territory.troops! < 200}
+                        disabled={territory.troops! < 200 || actionsRemaining <= 0}
                       >
                         <Sword className="w-2 h-2 mr-1" />
                         Attack {target.name} ({target.troops})

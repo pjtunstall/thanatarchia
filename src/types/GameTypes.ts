@@ -19,6 +19,8 @@ export interface Territory {
   estimatedTroops?: number;
   spiedOn?: boolean;
   terrain?: "plains" | "forest" | "mountains" | "river";
+  condition?: string;
+  conditionModifier?: number;
 }
 
 export interface Chronicle {

@@ -11,7 +11,7 @@ interface StatusPanelProps {
   playerCharacter: CharacterPortrait;
   territories: Territory[];
   selectedTerritory: string | null;
-  selectedFaction: { name: string };
+  selectedFaction: { name: string; heresy: string };
 }
 
 const StatusPanel: React.FC<StatusPanelProps> = ({
@@ -57,6 +57,10 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
                 <Users className="w-4 h-4 text-blue-600" />
                 <span className="text-sm font-semibold">Total Troops:</span>
                 <span className="text-sm">{totalTroops}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-semibold">Faith:</span>
+                <Badge variant="outline" className="text-xs">{selectedFaction.heresy}</Badge>
               </div>
               <p className="text-sm">Territories: {playerTerritories.length}</p>
               <div>

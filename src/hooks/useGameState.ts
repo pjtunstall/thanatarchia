@@ -19,6 +19,7 @@ import bagaudaeFemaleRebel from "@/assets/bagaudae-female-rebel.jpg";
 
 export const useGameState = () => {
   const [currentTurn, setCurrentTurn] = useState(1);
+  const [actionsThisTurn, setActionsThisTurn] = useState(0);
   const [selectedTerritory, setSelectedTerritory] = useState<string | null>(
     null
   );
@@ -278,17 +279,20 @@ export const useGameState = () => {
     if (
       !fromTerritory ||
       !toTerritory ||
-      fromTerritory.owner !== selectedFaction.name
+      fromTerritory.owner !== selectedFaction.name ||
+      actionsThisTurn >= 4
     )
       return;
     if (!adjacentTerritories[fromTerritoryId]?.includes(toTerritoryId)) return;
     if (toTerritory.owner === selectedFaction.name) return;
 
+    setActionsThisTurn(prev => prev + 1);
+
     const attackForce = Math.floor(fromTerritory.troops! * 0.8);
     const defenseForce = toTerritory.troops!;
 
     const attackStrength = attackForce + Math.random() * 500;
-    const defenseStrength = defenseForce + Math.random() * 500;
+    const defenseStrength = defenseForce + Math.random() * 500 + (toTerritory.conditionModifier || 0);
 
     const victory = attackStrength > defenseStrength;
 
@@ -440,6 +444,7 @@ export const useGameState = () => {
     generateResources();
     executeAITurn();
     setCurrentTurn((prev) => prev + 1);
+    setActionsThisTurn(0);
     setTimeout(checkGameStatus, 100);
   };
 
@@ -454,6 +459,7 @@ export const useGameState = () => {
   const resetGame = () => {
     setGameStatus("playing");
     setCurrentTurn(1);
+    setActionsThisTurn(0);
     setSelectedTerritory(null);
     setFinalChronicles([]);
 
@@ -483,11 +489,32 @@ export const useGameState = () => {
 
   const handleSpy = (territoryId: string) => {
     const territory = territories.find((t) => t.id === territoryId);
-    if (!territory || playerFaction.treasure < 25) return;
+    if (!territory || playerFaction.treasure < 25 || actionsThisTurn >= 4) return;
 
     setPlayerFaction((prev) => ({ ...prev, treasure: prev.treasure - 25 }));
+    setActionsThisTurn(prev => prev + 1);
+
+    // Generate random condition that affects combat
+    const conditions = [
+      "plague outbreak",
+      "religious disputes over doctrine", 
+      "supply shortages",
+      "low morale",
+      "veteran reinforcements",
+      "favorable omens",
+      "tactical advantage",
+      "harsh weather"
+    ];
+    const condition = conditions[Math.floor(Math.random() * conditions.length)];
+    const isPositive = Math.random() > 0.5;
+    
     setTerritories((prev) =>
-      prev.map((t) => (t.id === territoryId ? { ...t, spiedOn: true } : t))
+      prev.map((t) => (t.id === territoryId ? { 
+        ...t, 
+        spiedOn: true,
+        condition: condition,
+        conditionModifier: isPositive ? 200 : -200
+      } : t))
     );
 
     const newEntry: Chronicle = {
@@ -495,23 +522,21 @@ export const useGameState = () => {
       chronicler:
         chroniclers[Math.floor(Math.random() * chroniclers.length)].name,
       bias: Math.random() > 0.5 ? "hostile" : "friendly",
-      entry:
-        Math.random() > 0.5
-          ? `Our skilled agents have gathered valuable intelligence from ${territory.name}, revealing their military preparations.`
-          : `Foreign spies have been spotted in ${territory.name}, no doubt gathering information for their barbarous masters.`,
+      entry: `Intelligence reveals that ${territory.name} suffers from ${condition}, which ${isPositive ? 'strengthens' : 'weakens'} their military capacity.`,
       turn: currentTurn,
     };
     setChronicles([...chronicles, newEntry]);
   };
 
   const handleRecruitTroops = () => {
-    if (playerFaction.treasure < 50) return;
+    if (playerFaction.treasure < 50 || actionsThisTurn >= 4) return;
 
     setPlayerFaction((prev) => ({
       ...prev,
       treasure: prev.treasure - 50,
       troops: prev.troops + 500,
     }));
+    setActionsThisTurn(prev => prev + 1);
 
     const newEntry: Chronicle = {
       id: String(chronicles.length + 1),
@@ -528,6 +553,10 @@ export const useGameState = () => {
   };
 
   const handleAction = (action: string) => {
+    if (actionsThisTurn >= 4) return;
+
+    setActionsThisTurn(prev => prev + 1);
+
     const entries: Record<string, { friendly: string; hostile: string }> = {
       raid: {
         friendly:
@@ -550,6 +579,27 @@ export const useGameState = () => {
     };
 
     const actionEntries = entries[action];
+    
+    // Handle raiding - gamble troops for treasure
+    if (action === 'raid') {
+      const troopsRisked = Math.floor(Math.random() * 300 + 200);
+      const success = Math.random() > 0.4;
+      
+      if (success) {
+        const treasureGained = Math.floor(Math.random() * 100 + 50);
+        setPlayerFaction(prev => ({
+          ...prev,
+          treasure: prev.treasure + treasureGained,
+          troops: Math.max(100, prev.troops - Math.floor(troopsRisked * 0.3))
+        }));
+      } else {
+        setPlayerFaction(prev => ({
+          ...prev,
+          troops: Math.max(100, prev.troops - troopsRisked)
+        }));
+      }
+    }
+
     const entry = actionEntries
       ? Math.random() > 0.25
         ? actionEntries.hostile
@@ -571,6 +621,7 @@ export const useGameState = () => {
   return {
     // State
     currentTurn,
+    actionsThisTurn,
     selectedTerritory,
     gameStatus,
     playerFaction,
