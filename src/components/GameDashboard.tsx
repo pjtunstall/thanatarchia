@@ -47,6 +47,7 @@ const GameDashboard = () => {
             currentTurn={gameState.currentTurn}
             playerFactionName={gameState.selectedFaction.displayName}
             playerFactionColor={gameState.selectedFaction.color}
+            selectedFaction={gameState.selectedFaction}
             onTerritoryClick={gameState.handleTerritoryClick}
           />
         </div>
@@ -76,6 +77,7 @@ const GameDashboard = () => {
                 playerCharacter={gameState.playerCharacter}
                 territories={gameState.territories}
                 selectedTerritory={gameState.selectedTerritory}
+                selectedFaction={gameState.selectedFaction}
               />
             </TabsContent>
 
@@ -84,6 +86,7 @@ const GameDashboard = () => {
                 playerFaction={gameState.playerFaction}
                 territories={gameState.territories}
                 selectedTerritory={gameState.selectedTerritory}
+                selectedFaction={gameState.selectedFaction}
                 onAction={gameState.handleAction}
                 onEndTurn={gameState.handleEndTurn}
                 onRecruitTroops={gameState.handleRecruitTroops}

@@ -8,6 +8,7 @@ interface ActionsPanelProps {
   playerFaction: Faction;
   territories: Territory[];
   selectedTerritory: string | null;
+  selectedFaction: { name: string };
   onAction: (action: string) => void;
   onEndTurn: () => void;
   onRecruitTroops: () => void;
@@ -20,6 +21,7 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
   playerFaction,
   territories,
   selectedTerritory,
+  selectedFaction,
   onAction,
   onEndTurn,
   onRecruitTroops,
@@ -79,7 +81,7 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
               <p className="text-sm font-semibold mb-2">Territory Actions</p>
               {(() => {
                 const territory = territories.find(t => t.id === selectedTerritory);
-                const validTargets = territory?.owner === 'player' ? getValidAttackTargets(selectedTerritory) : [];
+                const validTargets = territory?.owner === selectedFaction.name ? getValidAttackTargets(selectedTerritory) : [];
                 
                 return territory && validTargets.length > 0 ? (
                   <div className="space-y-1">

@@ -27,9 +27,9 @@ export const useGameState = () => {
   });
 
   const [playerFaction, setPlayerFaction] = useState<Faction>(() => {
-    // Count territories that will belong to the player
+    // Count territories that belong to the player's faction
     const playerTerritoryCount = initialTerritories.filter(
-      territory => territory.owner === "player" || territory.owner === selectedFaction.name
+      territory => territory.owner === selectedFaction.name
     ).length;
     
     return {
@@ -44,14 +44,7 @@ export const useGameState = () => {
     };
   });
 
-  const [territories, setTerritories] = useState<Territory[]>(() => {
-    // Convert territories owned by the selected faction to player ownership
-    return initialTerritories.map(territory => 
-      territory.owner === selectedFaction.name 
-        ? { ...territory, owner: "player" }
-        : territory
-    );
-  });
+  const [territories, setTerritories] = useState<Territory[]>(initialTerritories);
   const [chronicles, setChronicles] = useState<Chronicle[]>([
     {
       id: "1",
@@ -150,7 +143,7 @@ export const useGameState = () => {
 
   const checkGameStatus = () => {
     const playerTerritories = territories.filter(
-      (t) => t.owner === "player"
+      (t) => t.owner === selectedFaction.name
     ).length;
     if (playerTerritories >= 5) {
       generateFinalChronicles("victory");
@@ -177,10 +170,10 @@ export const useGameState = () => {
     const fromTerritory = territories.find((t) => t.id === fromTerritoryId);
     const toTerritory = territories.find((t) => t.id === toTerritoryId);
 
-    if (!fromTerritory || !toTerritory || fromTerritory.owner !== "player")
+    if (!fromTerritory || !toTerritory || fromTerritory.owner !== selectedFaction.name)
       return;
     if (!adjacentTerritories[fromTerritoryId]?.includes(toTerritoryId)) return;
-    if (toTerritory.owner === "player") return;
+    if (toTerritory.owner === selectedFaction.name) return;
 
     const attackForce = Math.floor(fromTerritory.troops! * 0.8);
     const defenseForce = toTerritory.troops!;
@@ -198,7 +191,7 @@ export const useGameState = () => {
             return { ...t, troops: t.troops! - attackForce };
           }
           if (t.id === toTerritoryId) {
-            return { ...t, owner: "player", troops: survivingTroops };
+            return { ...t, owner: selectedFaction.name, troops: survivingTroops };
           }
           return t;
         })
@@ -230,13 +223,13 @@ export const useGameState = () => {
   };
 
   const executeAITurn = () => {
-    const aiTerritories = territories.filter((t) => t.owner !== "player");
+    const aiTerritories = territories.filter((t) => t.owner !== selectedFaction.name);
 
     aiTerritories.forEach((aiTerritory) => {
       const adjacentPlayerTerritories =
         adjacentTerritories[aiTerritory.id]
           ?.map((id) => territories.find((t) => t.id === id))
-          .filter((t) => t && t.owner === "player") || [];
+          .filter((t) => t && t.owner === selectedFaction.name) || [];
 
       if (adjacentPlayerTerritories.length > 0 && aiTerritory.troops! > 500) {
         const weakestTarget = adjacentPlayerTerritories.reduce(
@@ -317,7 +310,7 @@ export const useGameState = () => {
 
   const generateResources = () => {
     const playerTerritoryCount = territories.filter(
-      (t) => t.owner === "player"
+      (t) => t.owner === selectedFaction.name
     ).length;
     const income = playerTerritoryCount * 20;
 
@@ -339,7 +332,7 @@ export const useGameState = () => {
     return (
       adjacentTerritories[fromTerritoryId]
         ?.map((id) => territories.find((t) => t.id === id))
-        .filter((t) => t && t.owner !== "player") || []
+        .filter((t) => t && t.owner !== selectedFaction.name) || []
     );
   };
 
@@ -349,15 +342,8 @@ export const useGameState = () => {
     setSelectedTerritory(null);
     setFinalChronicles([]);
     
-    // Reset territories with proper player ownership
-    const resetTerritories = initialTerritories.map(territory => 
-      territory.owner === selectedFaction.name 
-        ? { ...territory, owner: "player" }
-        : territory
-    );
-    
     // Count player territories for reset
-    const playerTerritoryCount = resetTerritories.filter(t => t.owner === "player").length;
+    const playerTerritoryCount = initialTerritories.filter(t => t.owner === selectedFaction.name).length;
     
     setPlayerFaction({
       id: "player",
@@ -374,7 +360,7 @@ export const useGameState = () => {
       treasure: 100,
     });
     
-    setTerritories(resetTerritories);
+    setTerritories(initialTerritories);
     setChronicles([]);
   };
 

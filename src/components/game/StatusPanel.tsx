@@ -11,13 +11,15 @@ interface StatusPanelProps {
   playerCharacter: CharacterPortrait;
   territories: Territory[];
   selectedTerritory: string | null;
+  selectedFaction: { name: string };
 }
 
 const StatusPanel: React.FC<StatusPanelProps> = ({
   playerFaction,
   playerCharacter,
   territories,
-  selectedTerritory
+  selectedTerritory,
+  selectedFaction
 }) => {
   return (
     <Card className="h-full flex flex-col">
@@ -72,7 +74,7 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
                     return territory ? (
                       <>
                         <p><strong>{territory.name}</strong></p>
-                        <p>Owner: {territory.owner === 'player' ? 'You' : territory.owner}</p>
+                        <p>Owner: {territory.owner === selectedFaction.name ? 'You' : territory.owner}</p>
                         <p>Terrain: {territory.terrain}</p>
                         <p>Troops: {territory.troops}</p>
                       </>

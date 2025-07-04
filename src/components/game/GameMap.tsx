@@ -10,6 +10,7 @@ interface GameMapProps {
   currentTurn: number;
   playerFactionName: string;
   playerFactionColor: string;
+  selectedFaction: { name: string; color: string; displayName: string };
   onTerritoryClick: (territoryId: string) => void;
 }
 
@@ -19,29 +20,35 @@ const GameMap: React.FC<GameMapProps> = ({
   currentTurn,
   playerFactionName,
   playerFactionColor,
+  selectedFaction,
   onTerritoryClick,
 }) => {
-  // Create faction lookup from centralized data
+  // Create faction lookup from centralized data + filter to only show factions with territories
   const factionLookup = React.useMemo(() => {
     const lookup: Record<string, { color: string; name: string }> = {};
     
-    // Add player faction
-    lookup["player"] = { 
+    // Get all factions that currently have territories
+    const activeFactions = new Set(territories.map(t => t.owner));
+    
+    // Add player faction (always show)
+    lookup[selectedFaction.name] = { 
       color: playerFactionColor, 
       name: playerFactionName
     };
     
-    // Add other factions
+    // Add other active factions
     historicalFactions.forEach(faction => {
-      lookup[faction.name] = { color: faction.color, name: faction.displayName };
+      if (activeFactions.has(faction.name) && faction.name !== selectedFaction.name) {
+        lookup[faction.name] = { color: faction.color, name: faction.displayName };
+      }
     });
     
     return lookup;
-  }, [playerFactionName, playerFactionColor]);
+  }, [playerFactionName, playerFactionColor, selectedFaction.name, territories]);
 
   const getTerritoryColor = (owner: string) => {
     // For player territories, use dynamic color
-    if (owner === "player") {
+    if (owner === selectedFaction.name) {
       return "";
     }
     
@@ -104,7 +111,7 @@ const GameMap: React.FC<GameMapProps> = ({
               {/* Territory marker */}
               <div
                 className={`w-6 h-6 rounded-full border-2 border-white shadow-lg ${getTerritoryColor(territory.owner)}`}
-                style={territory.owner === "player" ? { backgroundColor: playerFactionColor } : {}}
+                style={territory.owner === selectedFaction.name ? { backgroundColor: playerFactionColor } : {}}
               ></div>
 
               {/* Territory name */}
@@ -175,14 +182,14 @@ const GameMap: React.FC<GameMapProps> = ({
               <div 
                 key={key} 
                 className={`flex items-center gap-2 px-2 py-1 rounded ${
-                  key === "player" ? "bg-primary/20 border border-primary/30" : ""
+                  key === selectedFaction.name ? "bg-primary/20 border border-primary/30" : ""
                 }`}
               >
                 <div 
                   className="w-3 h-3 rounded border"
                   style={{ backgroundColor: faction.color }}
                 ></div>
-                <span className={key === "player" ? "font-semibold" : ""}>
+                <span className={key === selectedFaction.name ? "font-semibold" : ""}>
                   {faction.name}
                 </span>
               </div>
