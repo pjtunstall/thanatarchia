@@ -17,8 +17,12 @@ export const useGameState = () => {
 
   // Initialize random faction and character
   const [selectedFaction] = useState(() => {
-    const randomIndex = Math.floor(Math.random() * historicalFactions.length);
-    return historicalFactions[randomIndex];
+    // Only select factions that have territories
+    const factionsWithTerritories = historicalFactions.filter(faction => 
+      initialTerritories.some(territory => territory.owner === faction.name)
+    );
+    const randomIndex = Math.floor(Math.random() * factionsWithTerritories.length);
+    return factionsWithTerritories[randomIndex];
   });
 
   const [playerCharacter] = useState(() => {
