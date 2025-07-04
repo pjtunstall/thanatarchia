@@ -14,6 +14,8 @@ import visigothicQueen from "@/assets/visigothic-queen-portrait.jpg";
 import vandalChief from "@/assets/vandal-chief-portrait.jpg";
 import frankishKing from "@/assets/frankish-king-portrait.jpg";
 import hunnicWarlord from "@/assets/hunnic-warlord-portrait.jpg";
+import bagaudaeMaleRebel from "@/assets/bagaudae-male-rebel.jpg";
+import bagaudaeFemaleRebel from "@/assets/bagaudae-female-rebel.jpg";
 
 export const useGameState = () => {
   const [currentTurn, setCurrentTurn] = useState(1);
@@ -41,12 +43,12 @@ export const useGameState = () => {
         female: { name: 'Augusta Valentina', portrait: byzantineQueen }
       },
       'Bagaudae of Gaul': {
-        male: { name: 'Tibatto the Rebel', portrait: barbarianKing },
-        female: { name: 'Brigit the Fierce', portrait: visigothicQueen }
+        male: { name: 'Tibatto the Rebel', portrait: bagaudaeMaleRebel },
+        female: { name: 'Brigit the Fierce', portrait: bagaudaeFemaleRebel }
       },
       'Bagaudae of Hispania': {
-        male: { name: 'Basiliscus the Free', portrait: barbarianKing },
-        female: { name: 'Spartaca the Bold', portrait: visigothicQueen }
+        male: { name: 'Basiliscus the Free', portrait: bagaudaeMaleRebel },
+        female: { name: 'Spartaca the Bold', portrait: bagaudaeFemaleRebel }
       },
       'Ostrogothic Kingdom': {
         male: { name: 'Theodoric the Great', portrait: barbarianKing },

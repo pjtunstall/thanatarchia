@@ -12,6 +12,12 @@ import visigothicQueen from "@/assets/visigothic-queen-portrait.jpg";
 import vandalChief from "@/assets/vandal-chief-portrait.jpg";
 import hunnicWarlord from "@/assets/hunnic-warlord-portrait.jpg";
 import frankishKing from "@/assets/frankish-king-portrait.jpg";
+import chroniclerMonk from "@/assets/chronicler-monk-male.jpg";
+import chroniclerScribe from "@/assets/chronicler-scribe-male.jpg";
+import chroniclerScholar from "@/assets/chronicler-scholar-male.jpg";
+import chroniclerNun from "@/assets/chronicler-nun-female.jpg";
+import bagaudaeMaleRebel from "@/assets/bagaudae-male-rebel.jpg";
+import bagaudaeFemaleRebel from "@/assets/bagaudae-female-rebel.jpg";
 
 export const historicalFactions: HistoricalFaction[] = [
   {
@@ -35,7 +41,7 @@ export const historicalFactions: HistoricalFaction[] = [
     leader: {
       name: "Tibatto the Rebel",
       gender: "male",
-      portrait: barbarianKing,
+      portrait: bagaudaeMaleRebel,
     },
     heresy: "Pelagian",
     relatives: ["Brigit the Fierce", "Young Caractacus", "Imogen"],
@@ -48,7 +54,7 @@ export const historicalFactions: HistoricalFaction[] = [
     leader: {
       name: "Basiliscus the Free",
       gender: "male",
-      portrait: barbarianKing,
+      portrait: bagaudaeMaleRebel,
     },
     heresy: "Manichean",
     relatives: ["Sister Spartaca", "Cousin Rodrigo"],
@@ -204,28 +210,28 @@ export const chroniclers: Chronicler[] = [
     bias: "friendly", 
     style: "sycophantic",
     gender: "male",
-    portrait: romanEmperor
+    portrait: chroniclerMonk
   },
   { 
     name: "Theodoric the Scribe", 
     bias: "hostile", 
     style: "Germanic disdain",
     gender: "male", 
-    portrait: barbarianKing
+    portrait: chroniclerScribe
   },
   {
     name: "Hieronymus of Alexandria",
     bias: "hostile",
     style: "scholarly condescension",
     gender: "male",
-    portrait: byzantineChief
+    portrait: chroniclerScholar
   },
   {
     name: "Priscilla of Byzantium",
     bias: "hostile",
     style: "imperial superiority",
     gender: "female",
-    portrait: byzantineQueen
+    portrait: chroniclerNun
   },
 ];
 
