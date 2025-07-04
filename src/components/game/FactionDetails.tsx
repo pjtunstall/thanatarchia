@@ -3,15 +3,20 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { HistoricalFaction } from '@/types/GameTypes';
+import { HistoricalFaction, CharacterPortrait } from '@/types/GameTypes';
 import { Crown, Users, Church } from 'lucide-react';
 
 interface FactionDetailsProps {
   faction: HistoricalFaction;
   isPlayerFaction?: boolean;
+  playerCharacter?: CharacterPortrait;
 }
 
-const FactionDetails: React.FC<FactionDetailsProps> = ({ faction, isPlayerFaction = false }) => {
+const FactionDetails: React.FC<FactionDetailsProps> = ({ faction, isPlayerFaction = false, playerCharacter }) => {
+  // Use player character if this is the player faction, otherwise use faction leader
+  const leader = isPlayerFaction && playerCharacter ? 
+    { name: playerCharacter.name, gender: playerCharacter.gender, portrait: playerCharacter.image } : 
+    faction.leader;
   const getHeresyColor = (heresy: string) => {
     switch (heresy) {
       case 'Orthodox': return 'bg-blue-100 text-blue-800 border-blue-200';
@@ -29,12 +34,12 @@ const FactionDetails: React.FC<FactionDetailsProps> = ({ faction, isPlayerFactio
         <div className="flex items-center gap-3">
           <Avatar className="w-16 h-16 border-2 border-primary/20">
             <AvatarImage 
-              src={faction.leader.portrait} 
-              alt={`${faction.leader.name} portrait`}
+              src={leader.portrait} 
+              alt={`${leader.name} portrait`}
               className="object-cover"
             />
             <AvatarFallback className="text-lg font-bold">
-              {faction.leader.name.charAt(0)}
+              {leader.name.charAt(0)}
             </AvatarFallback>
           </Avatar>
           <div className="flex-1">
@@ -43,7 +48,7 @@ const FactionDetails: React.FC<FactionDetailsProps> = ({ faction, isPlayerFactio
               {faction.displayName}
             </CardTitle>
             <p className="text-sm text-muted-foreground font-medium">
-              {faction.leader.name}
+              {leader.name}
             </p>
           </div>
         </div>

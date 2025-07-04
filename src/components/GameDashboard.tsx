@@ -48,6 +48,7 @@ const GameDashboard = () => {
             playerFactionName={gameState.selectedFaction.displayName}
             playerFactionColor={gameState.selectedFaction.color}
             selectedFaction={gameState.selectedFaction}
+            playerCharacter={gameState.playerCharacter}
             onTerritoryClick={gameState.handleTerritoryClick}
           />
         </div>
