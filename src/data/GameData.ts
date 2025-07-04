@@ -205,21 +205,23 @@ export const characterPortraits: CharacterPortrait[] = [
 ];
 
 export const chroniclers: Chronicler[] = [
-  { 
-    name: "Marcellus of Ravenna", 
-    bias: "friendly", 
+  {
+    name: "Marcellus of Ravenna",
+    bias: "friendly",
     style: "sycophantic",
     gender: "male",
     portrait: chroniclerMonk,
-    biography: "A devout monk who fled to Ravenna after accidentally setting fire to his monastery's library while 'improving' ancient texts. Known for his excessive flattery and tendency to describe even the most mundane events in epic terms. Claims to have once blessed a loaf of bread that fed an entire village, though witnesses say it was just very large bread."
+    biography:
+      "A devout monk who fled to Ravenna after accidentally setting fire to his monastery's library while 'improving' ancient texts. Known for his excessive flattery and tendency to describe even the most mundane events in epic terms. Claims to have once blessed a loaf of bread that fed an entire village, though witnesses say it was just very large bread.",
   },
-  { 
-    name: "Theodoric the Scribe", 
-    bias: "hostile", 
+  {
+    name: "Theodoric the Scribe",
+    bias: "hostile",
     style: "Germanic disdain",
-    gender: "male", 
+    gender: "male",
     portrait: chroniclerScribe,
-    biography: "A former Gothic court scribe who was exiled for 'creative differences' with his king's version of events. Bitter about losing his position, he now chronicles with the enthusiasm of a man forced to eat bitter herbs. His quill is perpetually stained with both ink and tears of frustration."
+    biography:
+      "A former Gothic court scribe who was exiled for 'creative differences' with his king's version of events. Bitter about losing his position, he now chronicles with the enthusiasm of a man forced to eat bitter herbs. His quill is perpetually stained with both ink and tears of frustration.",
   },
   {
     name: "Hieronymus of Alexandria",
@@ -227,7 +229,8 @@ export const chroniclers: Chronicler[] = [
     style: "scholarly condescension",
     gender: "male",
     portrait: chroniclerScholar,
-    biography: "A self-proclaimed 'Master of All Knowledge' who was kicked out of the Great Library for rearranging scrolls by his own peculiar system. Believes everyone else is intellectually inferior and isn't shy about mentioning it. Has never actually been to most of the places he writes about with such authority."
+    biography:
+      "A self-proclaimed 'Master of All Knowledge' who was kicked out of the Great Library for rearranging scrolls by his own peculiar system. Believes everyone else is intellectually inferior and isn't shy about mentioning it. Has never actually been to most of the places he writes about with such authority.",
   },
   {
     name: "Priscilla of Byzantium",
@@ -235,7 +238,8 @@ export const chroniclers: Chronicler[] = [
     style: "imperial superiority",
     gender: "female",
     portrait: chroniclerNun,
-    biography: "A former imperial court lady turned nun after a scandal involving the Emperor's favorite horse and a misunderstanding about inheritance laws. Maintains that everything was better 'in Constantinople' and views all current events through the lens of Byzantine superiority, despite having fled the city in disgrace."
+    biography:
+      "A former imperial court lady turned nun after a scandal involving the Emperor's favorite horse and a misunderstanding about inheritance laws. Maintains that everything was better 'in Constantinople' and views all current events through the lens of Byzantine superiority, despite having fled the city in disgrace.",
   },
 ];
 
@@ -243,8 +247,8 @@ export const initialTerritories: Territory[] = [
   {
     id: "britannia",
     name: "Britannia",
-    x: 5,
-    y: 10,
+    x: 15,
+    y: 15,
     owner: "Roman Empire",
     troops: 900,
     terrain: "plains",
@@ -252,8 +256,8 @@ export const initialTerritories: Territory[] = [
   {
     id: "gallia",
     name: "Gallia",
-    x: 35,
-    y: 25,
+    x: 25,
+    y: 30,
     owner: "Kingdom of the Franks",
     troops: 1200,
     terrain: "forest",
@@ -261,8 +265,8 @@ export const initialTerritories: Territory[] = [
   {
     id: "aquitania",
     name: "Aquitania",
-    x: 25,
-    y: 40,
+    x: 20,
+    y: 43,
     owner: "Visigothic Kingdom",
     troops: 800,
     terrain: "plains",
@@ -270,17 +274,17 @@ export const initialTerritories: Territory[] = [
   {
     id: "hispania",
     name: "Hispania",
-    x: 15,
-    y: 55,
-    owner: "Visigothic Kingdom",
-    troops: 1100,
+    x: 8,
+    y: 52,
+    owner: "Bagaudae of Hispania",
+    troops: 800,
     terrain: "mountains",
   },
   {
     id: "germania",
-    name: "Germania Magna",
-    x: 50,
-    y: 25,
+    name: "Germania",
+    x: 35,
+    y: 20,
     owner: "Kingdom of the Franks",
     troops: 1500,
     terrain: "forest",
@@ -288,8 +292,8 @@ export const initialTerritories: Territory[] = [
   {
     id: "pannonia",
     name: "Pannonia",
-    x: 60,
-    y: 45,
+    x: 40,
+    y: 35,
     owner: "Ostrogothic Kingdom",
     troops: 1800,
     terrain: "plains",
@@ -297,8 +301,8 @@ export const initialTerritories: Territory[] = [
   {
     id: "dacia",
     name: "Dacia",
-    x: 70,
-    y: 40,
+    x: 50,
+    y: 35,
     owner: "Gepid Kingdom",
     troops: 1300,
     terrain: "mountains",
@@ -306,8 +310,8 @@ export const initialTerritories: Territory[] = [
   {
     id: "thracia",
     name: "Thracia",
-    x: 75,
-    y: 55,
+    x: 55,
+    y: 50,
     owner: "Hunnic Empire",
     troops: 1600,
     terrain: "plains",
@@ -315,8 +319,8 @@ export const initialTerritories: Territory[] = [
   {
     id: "italia",
     name: "Italia",
-    x: 55,
-    y: 60,
+    x: 35,
+    y: 50,
     owner: "Roman Empire",
     troops: 2200,
     terrain: "plains",
@@ -333,8 +337,8 @@ export const initialTerritories: Territory[] = [
   {
     id: "aegyptus",
     name: "Aegyptus",
-    x: 70,
-    y: 75,
+    x: 60,
+    y: 80,
     owner: "Roman Empire",
     troops: 1400,
     terrain: "river",
@@ -351,20 +355,11 @@ export const initialTerritories: Territory[] = [
   {
     id: "bagaudae_gaul",
     name: "Armorica",
-    x: 20,
-    y: 20,
+    x: 15,
+    y: 30,
     owner: "Bagaudae of Gaul",
     troops: 1000,
     terrain: "forest",
-  },
-  {
-    id: "bagaudae_hispania",
-    name: "Tarraconensis",
-    x: 25,
-    y: 60,
-    owner: "Bagaudae of Hispania",
-    troops: 900,
-    terrain: "mountains",
   },
 ];
 
