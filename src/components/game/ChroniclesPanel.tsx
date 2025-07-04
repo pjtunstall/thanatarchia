@@ -28,7 +28,7 @@ const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({ chronicles, chronicle
                 <div key={chronicle.id} className="border-l-4 border-primary pl-4 py-2">
                   <div className="flex items-center gap-3 mb-2">
                     {chroniclerInfo && (
-                      <Avatar className="w-8 h-8">
+                      <Avatar className="w-8 h-8 transition-transform duration-200 hover:scale-150 hover:z-10 relative cursor-pointer">
                         <AvatarImage 
                           src={chroniclerInfo.portrait} 
                           alt={chroniclerInfo.name}
