@@ -9,26 +9,23 @@ import GameOverlay from '@/components/game/GameOverlay';
 
 const GameDashboard = () => {
   const [activeTab, setActiveTab] = useState('status');
-  const [focusedTabIndex, setFocusedTabIndex] = useState(0);
   
   const gameState = useGameState();
 
-  // Keyboard navigation for tabs
-  const tabOrder = ['chronicles', 'status', 'actions'];
-
   const handleTabKeyDown = (e: React.KeyboardEvent) => {
+    const tabs = ['chronicles', 'status', 'actions'];
+    const currentIndex = tabs.indexOf(activeTab);
+    
     switch (e.key) {
       case 'ArrowLeft':
         e.preventDefault();
-        setFocusedTabIndex(prev => prev > 0 ? prev - 1 : tabOrder.length - 1);
+        const prevIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
+        setActiveTab(tabs[prevIndex]);
         break;
       case 'ArrowRight':
         e.preventDefault();
-        setFocusedTabIndex(prev => prev < tabOrder.length - 1 ? prev + 1 : 0);
-        break;
-      case 'Enter':
-        e.preventDefault();
-        setActiveTab(tabOrder[focusedTabIndex]);
+        const nextIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
+        setActiveTab(tabs[nextIndex]);
         break;
     }
   };
@@ -52,22 +49,13 @@ const GameDashboard = () => {
         <div className="col-span-5">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="h-full">
             <TabsList className="grid w-full grid-cols-3" onKeyDown={handleTabKeyDown}>
-              <TabsTrigger 
-                value="chronicles" 
-                className={focusedTabIndex === 0 && activeTab !== 'chronicles' ? 'ring-2 ring-primary' : ''}
-              >
+              <TabsTrigger value="chronicles">
                 Chronicles
               </TabsTrigger>
-              <TabsTrigger 
-                value="status"
-                className={focusedTabIndex === 1 && activeTab !== 'status' ? 'ring-2 ring-primary' : ''}
-              >
+              <TabsTrigger value="status">
                 Status
               </TabsTrigger>
-              <TabsTrigger 
-                value="actions"
-                className={focusedTabIndex === 2 && activeTab !== 'actions' ? 'ring-2 ring-primary' : ''}
-              >
+              <TabsTrigger value="actions">
                 Actions
               </TabsTrigger>
             </TabsList>
