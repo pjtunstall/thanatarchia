@@ -1,7 +1,7 @@
 export interface Faction {
   id: string;
   name: string;
-  type: 'imperial' | 'barbarian' | 'bagaudae';
+  type: "imperial" | "barbarian" | "bagaudae";
   color: string;
   territories: number;
   relatives: string[];
@@ -18,41 +18,47 @@ export interface Territory {
   troops?: number;
   estimatedTroops?: number;
   spiedOn?: boolean;
-  terrain?: 'plains' | 'forest' | 'mountains' | 'river';
+  terrain?: "plains" | "forest" | "mountains" | "river";
 }
 
 export interface Chronicle {
   id: string;
   chronicler: string;
-  bias: 'friendly' | 'hostile';
+  bias: "friendly" | "hostile";
   entry: string;
   turn: number;
 }
 
 export interface HistoricalFaction {
   name: string;
-  type: 'imperial' | 'barbarian' | 'bagaudae';
+  type: "imperial" | "barbarian" | "bagaudae";
   color: string;
   displayName: string;
   leader: {
     name: string;
-    gender: 'male' | 'female';
+    gender: "male" | "female";
     portrait: string;
   };
-  heresy: 'Orthodox' | 'Arian' | 'Filioque' | 'Heathen' | 'Manichean';
+  heresy:
+    | "Orthodox"
+    | "Arian"
+    | "Filioque"
+    | "Heathen"
+    | "Manichean"
+    | "Pelagian";
   relatives: string[];
 }
 
 export interface CharacterPortrait {
   name: string;
-  gender: 'male' | 'female';
+  gender: "male" | "female";
   image: string;
 }
 
 export interface Chronicler {
   name: string;
-  bias: 'friendly' | 'hostile';
+  bias: "friendly" | "hostile";
   style: string;
 }
 
-export type GameStatus = 'playing' | 'victory' | 'defeat';
+export type GameStatus = "playing" | "victory" | "defeat";

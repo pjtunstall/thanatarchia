@@ -1,6 +1,10 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Territory } from "@/types/GameTypes";
 import { historicalFactions } from "@/data/GameData";
 import FactionDetails from "./FactionDetails";
@@ -13,7 +17,7 @@ interface GameMapProps {
   playerFactionName: string;
   playerFactionColor: string;
   selectedFaction: { name: string; color: string; displayName: string };
-  playerCharacter: { name: string; gender: 'male' | 'female'; image: string };
+  playerCharacter: { name: string; gender: "male" | "female"; image: string };
   onTerritoryClick: (territoryId: string) => void;
 }
 
@@ -30,32 +34,43 @@ const GameMap: React.FC<GameMapProps> = ({
   // Create faction lookup from centralized data + filter to only show factions with territories
   const factionLookup = React.useMemo(() => {
     const lookup: Record<string, { color: string; name: string }> = {};
-    
+
     // Get all factions that currently have territories
-    const activeFactions = new Set(territories.map(t => t.owner));
-    
+    const activeFactions = new Set(territories.map((t) => t.owner));
+
     // Add player faction (always show)
-    lookup[selectedFaction.name] = { 
-      color: playerFactionColor, 
-      name: playerFactionName
+    lookup[selectedFaction.name] = {
+      color: playerFactionColor,
+      name: playerFactionName,
     };
-    
+
     // Add other active factions
-    historicalFactions.forEach(faction => {
-      if (activeFactions.has(faction.name) && faction.name !== selectedFaction.name) {
-        lookup[faction.name] = { color: faction.color, name: faction.displayName };
+    historicalFactions.forEach((faction) => {
+      if (
+        activeFactions.has(faction.name) &&
+        faction.name !== selectedFaction.name
+      ) {
+        lookup[faction.name] = {
+          color: faction.color,
+          name: faction.displayName,
+        };
       }
     });
-    
+
     return lookup;
-  }, [playerFactionName, playerFactionColor, selectedFaction.name, territories]);
+  }, [
+    playerFactionName,
+    playerFactionColor,
+    selectedFaction.name,
+    territories,
+  ]);
 
   const getTerritoryColor = (owner: string) => {
     // For player territories, use dynamic color
     if (owner === selectedFaction.name) {
       return "";
     }
-    
+
     const factionClassMap: Record<string, string> = {
       "Roman Empire": "faction-roman-empire",
       "Bagaudae of Gaul": "faction-bagaudae-gaul",
@@ -66,22 +81,22 @@ const GameMap: React.FC<GameMapProps> = ({
       "Burgundian Kingdom": "faction-burgundian",
       "Kingdom of the Franks": "faction-frankish",
       "Gepid Kingdom": "faction-gepid",
-      "Heruli": "faction-heruli",
+      Heruli: "faction-heruli",
       "Suebian Confederation": "faction-suebian",
-      "Alans": "faction-alans",
+      Alans: "faction-alans",
       "Hunnic Empire": "faction-hunnic",
     };
     return factionClassMap[owner] || "";
   };
-  
+
   return (
     <Card className="h-full parchment-texture">
       <CardHeader>
         <CardTitle className="text-2xl font-bold ancient-title">
-          Tabula Imperii - Turn {currentTurn}
+          Thanatarchia - Turn {currentTurn}
         </CardTitle>
         <p className="text-muted-foreground italic">
-          The Known World, Anno Domini 476
+          Imperium Romanum, Anno Domini {476 + currentTurn}
         </p>
       </CardHeader>
       <CardContent className="h-full p-6">
@@ -114,8 +129,14 @@ const GameMap: React.FC<GameMapProps> = ({
             >
               {/* Territory marker */}
               <div
-                className={`w-6 h-6 rounded-full border-2 border-white shadow-lg ${getTerritoryColor(territory.owner)}`}
-                style={territory.owner === selectedFaction.name ? { backgroundColor: playerFactionColor } : {}}
+                className={`w-6 h-6 rounded-full border-2 border-white shadow-lg ${getTerritoryColor(
+                  territory.owner
+                )}`}
+                style={
+                  territory.owner === selectedFaction.name
+                    ? { backgroundColor: playerFactionColor }
+                    : {}
+                }
               ></div>
 
               {/* Territory name */}
@@ -183,31 +204,43 @@ const GameMap: React.FC<GameMapProps> = ({
         <div className="mt-4 p-3 bg-muted/30 rounded-lg">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
             {Object.entries(factionLookup).map(([key, factionInfo]) => {
-              const fullFaction = historicalFactions.find(f => f.name === key);
+              const fullFaction = historicalFactions.find(
+                (f) => f.name === key
+              );
               if (!fullFaction) return null;
-              
+
               return (
                 <Popover key={key}>
                   <PopoverTrigger asChild>
-                    <div 
+                    <div
                       className={`flex items-center gap-2 px-2 py-1 rounded cursor-pointer hover:bg-muted/50 transition-colors ${
-                        key === selectedFaction.name ? "bg-primary/20 border border-primary/30" : ""
+                        key === selectedFaction.name
+                          ? "bg-primary/20 border border-primary/30"
+                          : ""
                       }`}
                     >
-                      <div 
+                      <div
                         className="w-3 h-3 rounded border"
                         style={{ backgroundColor: factionInfo.color }}
                       ></div>
-                      <span className={key === selectedFaction.name ? "font-semibold" : ""}>
+                      <span
+                        className={
+                          key === selectedFaction.name ? "font-semibold" : ""
+                        }
+                      >
                         {factionInfo.name}
                       </span>
                     </div>
                   </PopoverTrigger>
                   <PopoverContent side="top" align="start" className="p-0">
-                    <FactionDetails 
-                      faction={fullFaction} 
+                    <FactionDetails
+                      faction={fullFaction}
                       isPlayerFaction={key === selectedFaction.name}
-                      playerCharacter={key === selectedFaction.name ? playerCharacter : undefined}
+                      playerCharacter={
+                        key === selectedFaction.name
+                          ? playerCharacter
+                          : undefined
+                      }
                     />
                   </PopoverContent>
                 </Popover>

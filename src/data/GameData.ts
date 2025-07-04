@@ -14,122 +14,174 @@ import hunnicWarlord from "@/assets/hunnic-warlord-portrait.jpg";
 import frankishKing from "@/assets/frankish-king-portrait.jpg";
 
 export const historicalFactions: HistoricalFaction[] = [
-  { 
-    name: "Roman Empire", 
-    type: "imperial", 
-    color: "hsl(var(--imperial))", 
+  {
+    name: "Roman Empire",
+    type: "imperial",
+    color: "hsl(var(--imperial))",
     displayName: "Roman Empire",
-    leader: { name: "Romulus Augustulus", gender: "male", portrait: romanEmperor },
+    leader: {
+      name: "Romulus Augustulus",
+      gender: "male",
+      portrait: romanEmperor,
+    },
     heresy: "Orthodox",
-    relatives: ["Princess Flavia", "Duke Marcus", "General Maximus"]
+    relatives: ["Princess Flavia", "Duke Marcus", "General Maximus"],
   },
-  { 
-    name: "Bagaudae of Gaul", 
-    type: "bagaudae", 
-    color: "hsl(var(--bagaudae))", 
+  {
+    name: "Bagaudae of Gaul",
+    type: "bagaudae",
+    color: "hsl(var(--bagaudae))",
     displayName: "Bagaudae of Gaul",
-    leader: { name: "Tibatto the Rebel", gender: "male", portrait: barbarianKing },
-    heresy: "Arian",
-    relatives: ["Brigit the Fierce", "Young Caratacus"]
+    leader: {
+      name: "Tibatto the Rebel",
+      gender: "male",
+      portrait: barbarianKing,
+    },
+    heresy: "Pelagian",
+    relatives: ["Brigit the Fierce", "Young Caractacus", "Imogen"],
   },
-  { 
-    name: "Bagaudae of Hispania", 
-    type: "bagaudae", 
-    color: "hsl(var(--bagaudae))", 
+  {
+    name: "Bagaudae of Hispania",
+    type: "bagaudae",
+    color: "hsl(var(--bagaudae))",
     displayName: "Bagaudae of Hispania",
-    leader: { name: "Basiliscus the Free", gender: "male", portrait: barbarianKing },
+    leader: {
+      name: "Basiliscus the Free",
+      gender: "male",
+      portrait: barbarianKing,
+    },
     heresy: "Manichean",
-    relatives: ["Sister Esperanza", "Cousin Rodrigo"]
+    relatives: ["Sister Spartaca", "Cousin Rodrigo"],
   },
-  { 
-    name: "Ostrogothic Kingdom", 
-    type: "barbarian", 
-    color: "hsl(var(--ostrogothic))", 
+  {
+    name: "Ostrogothic Kingdom",
+    type: "barbarian",
+    color: "hsl(var(--ostrogothic))",
     displayName: "Ostrogothic Kingdom",
-    leader: { name: "Theodoric the Great", gender: "male", portrait: barbarianKing },
+    leader: {
+      name: "Theodoric the Great",
+      gender: "male",
+      portrait: barbarianKing,
+    },
     heresy: "Arian",
-    relatives: ["Princess Amalasuntha", "Prince Athalaric", "Nephew Eutharic"]
+    relatives: ["Princess Amalasuntha", "Prince Athalaric", "Nephew Eutharic"],
   },
-  { 
-    name: "Visigothic Kingdom", 
-    type: "barbarian", 
-    color: "hsl(var(--visigothic))", 
+  {
+    name: "Visigothic Kingdom",
+    type: "barbarian",
+    color: "hsl(var(--visigothic))",
     displayName: "Visigothic Kingdom",
-    leader: { name: "Queen Brunhild", gender: "female", portrait: visigothicQueen },
+    leader: {
+      name: "Queen Brunhild",
+      gender: "female",
+      portrait: visigothicQueen,
+    },
     heresy: "Arian",
-    relatives: ["Prince Sigismund", "Lady Galswintha", "Duke Recared"]
+    relatives: ["Prince Sigismund", "Lady Galswintha", "Duke Recared"],
   },
-  { 
-    name: "Vandal Kingdom", 
-    type: "barbarian", 
-    color: "hsl(var(--vandal))", 
+  {
+    name: "Vandal Kingdom",
+    type: "barbarian",
+    color: "hsl(var(--vandal))",
     displayName: "Vandal Kingdom",
-    leader: { name: "Huneric the Cruel", gender: "male", portrait: vandalChief },
+    leader: {
+      name: "Huneric the Cruel",
+      gender: "male",
+      portrait: vandalChief,
+    },
     heresy: "Arian",
-    relatives: ["Princess Eudocia", "Brother Gunthamund"]
+    relatives: ["Princess Eudocia", "Brother Gunthamund"],
   },
-  { 
-    name: "Burgundian Kingdom", 
-    type: "barbarian", 
-    color: "hsl(var(--burgundian))", 
+  {
+    name: "Burgundian Kingdom",
+    type: "barbarian",
+    color: "hsl(var(--burgundian))",
     displayName: "Burgundian Kingdom",
-    leader: { name: "Gundobad the Wise", gender: "male", portrait: barbarianKing },
+    leader: {
+      name: "Gundobad the Wise",
+      gender: "male",
+      portrait: barbarianKing,
+    },
     heresy: "Arian",
-    relatives: ["Daughter Clotilde", "Son Sigismund", "Nephew Godomar"]
+    relatives: ["Daughter Clotilde", "Son Sigismund", "Nephew Godomar"],
   },
-  { 
-    name: "Kingdom of the Franks", 
-    type: "barbarian", 
-    color: "hsl(var(--frankish))", 
+  {
+    name: "Kingdom of the Franks",
+    type: "barbarian",
+    color: "hsl(var(--frankish))",
     displayName: "Kingdom of the Franks",
-    leader: { name: "Clovis the Conqueror", gender: "male", portrait: frankishKing },
+    leader: {
+      name: "Clovis the Conqueror",
+      gender: "male",
+      portrait: frankishKing,
+    },
     heresy: "Filioque",
-    relatives: ["Queen Clotilde", "Prince Clothar", "Princess Clotilde"]
+    relatives: ["Queen Clotilde", "Prince Clothar", "Princess Clotilde"],
   },
-  { 
-    name: "Gepid Kingdom", 
-    type: "barbarian", 
-    color: "hsl(var(--gepid))", 
+  {
+    name: "Gepid Kingdom",
+    type: "barbarian",
+    color: "hsl(var(--gepid))",
     displayName: "Gepid Kingdom",
-    leader: { name: "Ardaric the Faithful", gender: "male", portrait: barbarianKing },
+    leader: {
+      name: "Ardaric the Faithful",
+      gender: "male",
+      portrait: barbarianKing,
+    },
     heresy: "Arian",
-    relatives: ["Son Gunderit", "Daughter Rosamunda"]
+    relatives: ["Son Gunderit", "Daughter Rosamunda"],
   },
-  { 
-    name: "Heruli", 
-    type: "barbarian", 
-    color: "hsl(var(--heruli))", 
+  {
+    name: "Heruli",
+    type: "barbarian",
+    color: "hsl(var(--heruli))",
     displayName: "Heruli",
-    leader: { name: "Odoacer the King-Maker", gender: "male", portrait: barbarianKing },
+    leader: {
+      name: "Odoacer the King-Maker",
+      gender: "male",
+      portrait: barbarianKing,
+    },
     heresy: "Arian",
-    relatives: ["Brother Hunulf", "General Pierius"]
+    relatives: ["Brother Hunulf", "General Pierius"],
   },
-  { 
-    name: "Suebian Confederation", 
-    type: "barbarian", 
-    color: "hsl(var(--suebian))", 
+  {
+    name: "Suebian Confederation",
+    type: "barbarian",
+    color: "hsl(var(--suebian))",
     displayName: "Suebian Confederation",
-    leader: { name: "Hermeric the Elder", gender: "male", portrait: barbarianKing },
-    heresy: "Arian",
-    relatives: ["Son Rechila", "Daughter Ingunde"]
+    leader: {
+      name: "Hermeric the Elder",
+      gender: "male",
+      portrait: barbarianKing,
+    },
+    heresy: "Heathen",
+    relatives: ["Son Rechila", "Daughter Ingunde"],
   },
-  { 
-    name: "Alans", 
-    type: "barbarian", 
-    color: "hsl(var(--alans))", 
+  {
+    name: "Alans",
+    type: "barbarian",
+    color: "hsl(var(--alans))",
     displayName: "Alans",
-    leader: { name: "Respendial the Horseman", gender: "male", portrait: barbarianKing },
+    leader: {
+      name: "Respendial the Horseman",
+      gender: "male",
+      portrait: barbarianKing,
+    },
     heresy: "Heathen",
-    relatives: ["War-Chief Addac", "Shaman Sangiban"]
+    relatives: ["Son Goar", "War-Chief Addac (Son)", "Shaman Sangiban"],
   },
-  { 
-    name: "Hunnic Empire", 
-    type: "barbarian", 
-    color: "hsl(var(--hunnic))", 
+  {
+    name: "Hunnic Empire",
+    type: "barbarian",
+    color: "hsl(var(--hunnic))",
     displayName: "Hunnic Empire",
-    leader: { name: "Dengizich the Fierce", gender: "male", portrait: hunnicWarlord },
+    leader: {
+      name: "Dengizich the Fierce",
+      gender: "male",
+      portrait: hunnicWarlord,
+    },
     heresy: "Heathen",
-    relatives: ["Brother Ernakh", "Sister Kreka", "Nephew Mundo"]
+    relatives: ["Brother Ernakh", "Sister Kreka", "Nephew Mundo"],
   },
 ];
 
