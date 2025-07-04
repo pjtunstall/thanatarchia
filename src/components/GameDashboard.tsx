@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Sword, Eye, Coins, Users } from 'lucide-react';
-import romanEmpireMap from '@/assets/roman-empire-map.jpg';
+import romanEmpireMap from '@/assets/roman-empire-map-clean.jpg';
 
 interface Faction {
   id: string;
@@ -479,8 +479,8 @@ const GameDashboard = () => {
                  {territories.map((territory) => (
                    <div
                      key={territory.id}
-                     className={`absolute ancient-city ${
-                       selectedTerritory === territory.id ? 'ring-2 ring-yellow-400 ring-offset-2' : ''
+                     className={`absolute cursor-pointer ${
+                       selectedTerritory === territory.id ? 'ring-2 ring-yellow-400 ring-offset-1' : ''
                      }`}
                      style={{
                        left: `${territory.x}%`,
@@ -489,26 +489,23 @@ const GameDashboard = () => {
                      }}
                      onClick={() => handleTerritoryClick(territory.id)}
                    >
-                     {/* Tabula Peutingeriana style city building */}
-                     <div className="city-building">
-                       {/* Faction flag */}
-                       <div className={`city-flag ${
-                         territory.owner === 'player' ? 'flag-player' :
-                         territory.owner === 'imperial1' ? 'flag-imperial' :
-                         territory.owner === 'bagaudae1' ? 'flag-bagaudae' :
-                         territory.owner === 'barbarian1' ? 'flag-barbarian' :
-                         'flag-neutral'
-                       }`}></div>
-                     </div>
+                     {/* Territory marker */}
+                     <div className={`w-6 h-6 rounded-full border-2 border-white shadow-lg ${
+                       territory.owner === 'player' ? 'bg-[hsl(var(--barbarian))]' :
+                       territory.owner === 'imperial1' ? 'bg-[hsl(var(--imperial))]' :
+                       territory.owner === 'bagaudae1' ? 'bg-[hsl(var(--bagaudae))]' :
+                       territory.owner === 'barbarian1' ? 'bg-amber-600' :
+                       'bg-muted'
+                     }`}></div>
                      
-                     {/* City name */}
-                     <div className="city-name">
-                       {territory.name.split(' ')[0]} {/* Show first word only */}
+                     {/* Territory name */}
+                     <div className="absolute top-7 left-1/2 transform -translate-x-1/2 bg-black/70 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
+                       {territory.name}
                      </div>
                      
                      {/* Troop count */}
-                     <div className="city-troops">
-                       {territory.troops}
+                     <div className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                       {Math.floor(territory.troops! / 100)}
                      </div>
                    </div>
                  ))}
