@@ -26,19 +26,32 @@ export const useGameState = () => {
     return characterPortraits[randomIndex];
   });
 
-  const [playerFaction, setPlayerFaction] = useState<Faction>({
-    id: "player",
-    name: selectedFaction.name,
-    type: selectedFaction.type,
-    color: selectedFaction.color,
-    territories: 2,
-    relatives: ["Brunhild (daughter)", "Theodoric (nephew)", "Gisela (sister)"],
-    troops: 2500,
-    treasure: 150,
+  const [playerFaction, setPlayerFaction] = useState<Faction>(() => {
+    // Count territories that will belong to the player
+    const playerTerritoryCount = initialTerritories.filter(
+      territory => territory.owner === "player" || territory.owner === selectedFaction.name
+    ).length;
+    
+    return {
+      id: "player",
+      name: selectedFaction.name,
+      type: selectedFaction.type,
+      color: selectedFaction.color,
+      territories: playerTerritoryCount,
+      relatives: ["Brunhild (daughter)", "Theodoric (nephew)", "Gisela (sister)"],
+      troops: 2500,
+      treasure: 150,
+    };
   });
 
-  const [territories, setTerritories] =
-    useState<Territory[]>(initialTerritories);
+  const [territories, setTerritories] = useState<Territory[]>(() => {
+    // Convert territories owned by the selected faction to player ownership
+    return initialTerritories.map(territory => 
+      territory.owner === selectedFaction.name 
+        ? { ...territory, owner: "player" }
+        : territory
+    );
+  });
   const [chronicles, setChronicles] = useState<Chronicle[]>([
     {
       id: "1",
@@ -335,12 +348,23 @@ export const useGameState = () => {
     setCurrentTurn(1);
     setSelectedTerritory(null);
     setFinalChronicles([]);
+    
+    // Reset territories with proper player ownership
+    const resetTerritories = initialTerritories.map(territory => 
+      territory.owner === selectedFaction.name 
+        ? { ...territory, owner: "player" }
+        : territory
+    );
+    
+    // Count player territories for reset
+    const playerTerritoryCount = resetTerritories.filter(t => t.owner === "player").length;
+    
     setPlayerFaction({
       id: "player",
       name: selectedFaction.name,
       type: selectedFaction.type,
       color: selectedFaction.color,
-      territories: 2,
+      territories: playerTerritoryCount,
       relatives: [
         "Brunhild (daughter)",
         "Theodoric (nephew)",
@@ -349,7 +373,8 @@ export const useGameState = () => {
       troops: 2000,
       treasure: 100,
     });
-    setTerritories(initialTerritories);
+    
+    setTerritories(resetTerritories);
     setChronicles([]);
   };
 
