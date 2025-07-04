@@ -398,10 +398,10 @@ const GameDashboard = () => {
       <div className="grid grid-cols-12 gap-4 h-screen">
         {/* Map Panel */}
         <div className="col-span-7">
-          <Card className="h-full bg-[hsl(var(--parchment))]">
+          <Card className="h-full parchment-texture">
             <CardHeader>
-              <CardTitle className="text-2xl font-bold">Tabula Imperii - Turn {currentTurn}</CardTitle>
-              <p className="text-muted-foreground">The Known World, Anno Domini 476</p>
+              <CardTitle className="text-2xl font-bold ancient-title">Tabula Imperii - Turn {currentTurn}</CardTitle>
+              <p className="text-muted-foreground italic">The Known World, Anno Domini 476</p>
               
               {/* Faction Legend */}
               <div className="flex flex-wrap gap-4 mt-4 p-3 bg-muted/30 rounded-lg">
@@ -428,36 +428,40 @@ const GameDashboard = () => {
               </div>
             </CardHeader>
             <CardContent className="h-full p-6">
-              <div className="relative w-full h-96 bg-gradient-to-br from-amber-50 to-amber-100 border-2 border-amber-300 rounded-lg overflow-hidden">
+              <div className="relative w-full h-96 ancient-map-container map-decorative-border rounded-lg overflow-hidden">
+                {/* Compass Rose */}
+                <div className="compass-rose"></div>
                 {/* Ancient map styling background */}
                 <div className="absolute inset-0 opacity-20"></div>
                 
                 {/* Territories */}
-                {territories.map((territory) => (
-                  <div
-                    key={territory.id}
-                    className={`absolute w-20 h-16 rounded-lg border-2 cursor-pointer transition-all hover:scale-110 ${
-                      territory.owner === 'player' ? 'bg-[hsl(var(--barbarian))]' :
-                      territory.owner === 'imperial1' ? 'bg-[hsl(var(--imperial))]' :
-                      territory.owner === 'bagaudae1' ? 'bg-[hsl(var(--bagaudae))]' :
-                      territory.owner === 'barbarian1' ? 'bg-amber-600' :
-                      'bg-muted'
-                    } ${selectedTerritory === territory.id ? 'ring-4 ring-accent' : ''}`}
-                    style={{
-                      left: `${territory.x}%`,
-                      top: `${territory.y}%`
-                    }}
-                    onClick={() => handleTerritoryClick(territory.id)}
-                  >
-                    <div className="text-xs text-center p-1 text-white font-semibold">
-                      <div>{territory.name}</div>
-                      <div className="flex items-center justify-center gap-1 mt-1">
-                        <Users className="w-3 h-3" />
-                        <span>{territory.troops}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                 {territories.map((territory) => (
+                   <div
+                     key={territory.id}
+                     className={`absolute w-20 h-16 text-xs font-semibold territory-button ${
+                       territory.owner === 'player' ? 'territory-player text-white' :
+                       territory.owner === 'imperial1' ? 'territory-imperial text-white' :
+                       territory.owner === 'bagaudae1' ? 'territory-bagaudae text-white' :
+                       territory.owner === 'barbarian1' ? 'territory-barbarian text-white' :
+                       'territory-neutral text-gray-700'
+                     } ${territory.terrain ? `terrain-${territory.terrain}` : ''} ${
+                       selectedTerritory === territory.id ? 'ring-4 ring-yellow-400 ring-opacity-75' : ''
+                     }`}
+                     style={{
+                       left: `${territory.x}%`,
+                       top: `${territory.y}%`
+                     }}
+                     onClick={() => handleTerritoryClick(territory.id)}
+                   >
+                     <div className="relative z-10 text-center p-1 h-full flex flex-col justify-center">
+                       <div className="font-bold text-[10px] leading-tight">{territory.name}</div>
+                       <div className="flex items-center justify-center gap-1 mt-1">
+                         <Users className="w-3 h-3" />
+                         <span className="text-[10px] font-semibold">{territory.troops}</span>
+                       </div>
+                     </div>
+                   </div>
+                 ))}
 
                 {/* Roads - simple lines connecting territories */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none">
