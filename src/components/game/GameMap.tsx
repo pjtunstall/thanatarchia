@@ -45,22 +45,64 @@ const GameMap: React.FC<GameMapProps> = ({
         </p>
 
         {/* Faction Legend */}
-        <div className="flex flex-wrap gap-4 mt-4 p-3 bg-muted/30 rounded-lg">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-[hsl(var(--barbarian))] border-2 border-white"></div>
-            <span className="text-sm">Your Faction</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-[hsl(var(--imperial))] border"></div>
-            <span className="text-sm">Imperial Factions</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-[hsl(var(--bagaudae))] border"></div>
-            <span className="text-sm">Bagaudae Uprisings</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-[hsl(var(--barbarian))] border"></div>
-            <span className="text-sm">Other Barbarian Kingdoms</span>
+        <div className="mt-4 p-3 bg-muted/30 rounded-lg">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border-2 border-white"></div>
+              <span className="font-semibold">Your Faction</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-[hsl(var(--imperial))] border"></div>
+              <span>Roman Empire</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-[hsl(var(--bagaudae))] border"></div>
+              <span>Bagaudae of Gaul</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-[hsl(var(--bagaudae))] border"></div>
+              <span>Bagaudae of Hispania</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <span>Ostrogothic Kingdom</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <span>Visigothic Kingdom</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <span>Vandal Kingdom</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <span>Burgundian Kingdom</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <span>Kingdom of the Franks</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <span>Gepid Kingdom</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <span>Heruli</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <span>Suebian Confederation</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <span>Alans</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <span>Hunnic Empire</span>
+            </div>
           </div>
         </div>
       </CardHeader>
