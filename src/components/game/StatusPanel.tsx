@@ -21,6 +21,10 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
   selectedTerritory,
   selectedFaction
 }) => {
+  // Calculate actual total troops from player-owned territories
+  const playerTerritories = territories.filter(t => t.owner === selectedFaction.name);
+  const totalTroops = playerTerritories.reduce((sum, territory) => sum + (territory.troops || 0), 0);
+
   return (
     <Card className="h-full flex flex-col">
       <CardHeader>
@@ -52,9 +56,9 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4 text-blue-600" />
                 <span className="text-sm font-semibold">Total Troops:</span>
-                <span className="text-sm">{playerFaction.troops}</span>
+                <span className="text-sm">{totalTroops}</span>
               </div>
-              <p className="text-sm">Territories: {playerFaction.territories}</p>
+              <p className="text-sm">Territories: {playerTerritories.length}</p>
               <div>
                 <p className="text-sm font-semibold mb-1">Available for Marriage:</p>
                 {playerFaction.relatives.map((relative, index) => (
