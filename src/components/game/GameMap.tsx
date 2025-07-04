@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Territory } from "@/types/GameTypes";
-import { historicalFactions } from "@/data/GameData";
 import romanEmpireMap from "@/assets/roman-empire-map-clean.jpg";
 
 interface GameMapProps {
@@ -17,39 +16,26 @@ const GameMap: React.FC<GameMapProps> = ({
   currentTurn,
   onTerritoryClick,
 }) => {
+  // Consolidated faction mapping
+  const factionColors: Record<string, { color: string; name: string }> = {
+    "player": { color: "hsl(var(--barbarian))", name: "Your Faction" },
+    "Roman Empire": { color: "hsl(var(--imperial))", name: "Roman Empire" },
+    "Bagaudae of Gaul": { color: "hsl(var(--bagaudae))", name: "Bagaudae of Gaul" },
+    "Bagaudae of Hispania": { color: "hsl(var(--bagaudae))", name: "Bagaudae of Hispania" },
+    "Ostrogothic Kingdom": { color: "hsl(var(--ostrogothic))", name: "Ostrogothic Kingdom" },
+    "Visigothic Kingdom": { color: "hsl(var(--visigothic))", name: "Visigothic Kingdom" },
+    "Vandal Kingdom": { color: "hsl(var(--vandal))", name: "Vandal Kingdom" },
+    "Burgundian Kingdom": { color: "hsl(var(--burgundian))", name: "Burgundian Kingdom" },
+    "Kingdom of the Franks": { color: "hsl(var(--frankish))", name: "Kingdom of the Franks" },
+    "Gepid Kingdom": { color: "hsl(var(--gepid))", name: "Gepid Kingdom" },
+    "Heruli": { color: "hsl(var(--heruli))", name: "Heruli" },
+    "Suebian Confederation": { color: "hsl(var(--suebian))", name: "Suebian Confederation" },
+    "Alans": { color: "hsl(var(--alans))", name: "Alans" },
+    "Hunnic Empire": { color: "hsl(var(--hunnic))", name: "Hunnic Empire" },
+  };
+
   const getTerritoryColor = (owner: string) => {
-    if (owner === "player") return "bg-[hsl(var(--barbarian))]";
-    
-    // Map specific factions to their unique colors
-    switch (owner) {
-      case "Roman Empire":
-        return "bg-[hsl(var(--imperial))]";
-      case "Bagaudae of Gaul":
-      case "Bagaudae of Hispania":
-        return "bg-[hsl(var(--bagaudae))]";
-      case "Ostrogothic Kingdom":
-        return "bg-[hsl(var(--ostrogothic))]";
-      case "Visigothic Kingdom":
-        return "bg-[hsl(var(--visigothic))]";
-      case "Vandal Kingdom":
-        return "bg-[hsl(var(--vandal))]";
-      case "Burgundian Kingdom":
-        return "bg-[hsl(var(--burgundian))]";
-      case "Kingdom of the Franks":
-        return "bg-[hsl(var(--frankish))]";
-      case "Gepid Kingdom":
-        return "bg-[hsl(var(--gepid))]";
-      case "Heruli":
-        return "bg-[hsl(var(--heruli))]";
-      case "Suebian Confederation":
-        return "bg-[hsl(var(--suebian))]";
-      case "Alans":
-        return "bg-[hsl(var(--alans))]";
-      case "Hunnic Empire":
-        return "bg-[hsl(var(--hunnic))]";
-      default:
-        return "bg-[hsl(var(--barbarian))]";
-    }
+    return `bg-[${factionColors[owner]?.color || "hsl(var(--barbarian))"}]`;
   };
   
   return (
@@ -61,68 +47,6 @@ const GameMap: React.FC<GameMapProps> = ({
         <p className="text-muted-foreground italic">
           The Known World, Anno Domini 476
         </p>
-
-        {/* Faction Legend */}
-        <div className="mt-4 p-3 bg-muted/30 rounded-lg">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border-2 border-white"></div>
-              <span className="font-semibold">Your Faction</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--imperial))] border"></div>
-              <span>Roman Empire</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--bagaudae))] border"></div>
-              <span>Bagaudae of Gaul</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--bagaudae))] border"></div>
-              <span>Bagaudae of Hispania</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--ostrogothic))] border"></div>
-              <span>Ostrogothic Kingdom</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--visigothic))] border"></div>
-              <span>Visigothic Kingdom</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--vandal))] border"></div>
-              <span>Vandal Kingdom</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--burgundian))] border"></div>
-              <span>Burgundian Kingdom</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--frankish))] border"></div>
-              <span>Kingdom of the Franks</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--gepid))] border"></div>
-              <span>Gepid Kingdom</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--heruli))] border"></div>
-              <span>Heruli</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--suebian))] border"></div>
-              <span>Suebian Confederation</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--alans))] border"></div>
-              <span>Alans</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--hunnic))] border"></div>
-              <span>Hunnic Empire</span>
-            </div>
-          </div>
-        </div>
       </CardHeader>
       <CardContent className="h-full p-6">
         <div className="relative w-full aspect-[4/3] map-decorative-border rounded-lg overflow-hidden">
@@ -216,6 +140,23 @@ const GameMap: React.FC<GameMapProps> = ({
               fill="none"
             />
           </svg>
+        </div>
+
+        {/* Faction Legend */}
+        <div className="mt-4 p-3 bg-muted/30 rounded-lg">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
+            {Object.entries(factionColors).map(([key, faction]) => (
+              <div key={key} className="flex items-center gap-2">
+                <div 
+                  className="w-3 h-3 rounded border"
+                  style={{ backgroundColor: faction.color }}
+                ></div>
+                <span className={key === "player" ? "font-semibold" : ""}>
+                  {faction.name}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </CardContent>
     </Card>
