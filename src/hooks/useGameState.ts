@@ -53,12 +53,57 @@ export const useGameState = () => {
       turn: 1
     }
   ]);
+  
+  const [finalChronicles, setFinalChronicles] = useState<Chronicle[]>([]);
+
+  const generateFinalChronicles = (status: 'victory' | 'defeat') => {
+    const victoryEntries = {
+      friendly: [
+        "Thus ends the glorious chronicle of our most noble leader, who through wisdom and valor has united the known world under one righteous banner!",
+        "The gods themselves smile upon our triumphant conquest, as civilization spreads to every corner of the earth through our benevolent rule.",
+        "History shall remember this golden age, when our wise sovereign brought peace and prosperity to all peoples beneath the heavens."
+      ],
+      hostile: [
+        "So concludes this barbarous tale of conquest, where might alone has trampled the ancient order of civilized nations.",
+        "The world now groans under the boot of these northern savages, though they style themselves as conquerors of renown.",
+        "Thus do the fates mock us, elevating crude warriors above the learned and the noble, bringing darkness where once light flourished."
+      ]
+    };
+
+    const defeatEntries = {
+      friendly: [
+        "Alas! Our noble leader's flame is extinguished, yet their deeds shall echo through the ages like thunder across the mountains.",
+        "Though fortune has turned against us, the chronicle of our people's courage shall inspire future generations to greatness.",
+        "The gods have willed our defeat, but not our dishonor - our name shall be remembered with respect by friend and foe alike."
+      ],
+      hostile: [
+        "At last, these barbarous pretenders have received their due punishment, scattered like leaves before the winds of justice.",
+        "The natural order reasserts itself as these crude usurpers are swept from the board of nations, their hubris their downfall.",
+        "Thus perish all who would challenge the eternal dominion of the civilized world - may their fate serve as warning to others."
+      ]
+    };
+
+    const entries = status === 'victory' ? victoryEntries : defeatEntries;
+    const selectedChroniclers = chroniclers.slice(0, 3);
+    
+    const finalEntries = selectedChroniclers.map((chronicler, index) => ({
+      id: `final-${index}`,
+      chronicler: chronicler.name,
+      bias: chronicler.bias,
+      entry: entries[chronicler.bias][index % entries[chronicler.bias].length],
+      turn: currentTurn
+    }));
+
+    setFinalChronicles(finalEntries);
+  };
 
   const checkGameStatus = () => {
     const playerTerritories = territories.filter(t => t.owner === 'player').length;
     if (playerTerritories >= 5) {
+      generateFinalChronicles('victory');
       setGameStatus('victory');
     } else if (playerTerritories === 0) {
+      generateFinalChronicles('defeat');
       setGameStatus('defeat');
     }
   };
@@ -199,6 +244,7 @@ export const useGameState = () => {
     setGameStatus('playing');
     setCurrentTurn(1);
     setSelectedTerritory(null);
+    setFinalChronicles([]);
     setPlayerFaction({
       id: 'player',
       name: selectedFaction.name,
@@ -298,6 +344,7 @@ export const useGameState = () => {
     playerCharacter,
     territories,
     chronicles,
+    finalChronicles,
     selectedFaction,
     
     // Actions

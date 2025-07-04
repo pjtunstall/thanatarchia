@@ -32,7 +32,11 @@ const GameDashboard = () => {
 
   return (
     <div className="min-h-screen bg-background p-4">
-      <GameOverlay gameStatus={gameState.gameStatus} onResetGame={gameState.resetGame} />
+      <GameOverlay 
+        gameStatus={gameState.gameStatus} 
+        finalChronicles={gameState.finalChronicles}
+        onResetGame={gameState.resetGame} 
+      />
       
       <div className="grid grid-cols-12 gap-4 h-screen">
         {/* Map Panel */}
