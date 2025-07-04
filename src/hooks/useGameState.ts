@@ -57,40 +57,64 @@ export const useGameState = () => {
   const [finalChronicles, setFinalChronicles] = useState<Chronicle[]>([]);
 
   const generateFinalChronicles = (status: 'victory' | 'defeat') => {
-    const victoryEntries = {
-      friendly: [
-        "Thus ends the glorious chronicle of our most noble leader, who through wisdom and valor has united the known world under one righteous banner!",
-        "The gods themselves smile upon our triumphant conquest, as civilization spreads to every corner of the earth through our benevolent rule.",
-        "History shall remember this golden age, when our wise sovereign brought peace and prosperity to all peoples beneath the heavens."
-      ],
-      hostile: [
-        "So concludes this barbarous tale of conquest, where might alone has trampled the ancient order of civilized nations.",
-        "The world now groans under the boot of these northern savages, though they style themselves as conquerors of renown.",
-        "Thus do the fates mock us, elevating crude warriors above the learned and the noble, bringing darkness where once light flourished."
-      ]
+    const chroniclerEntries = {
+      'Marcellus of Ravenna': {
+        victory: [
+          "Thus concludes the most glorious chronicle of our divine sovereign, whose wisdom surpasses Solomon and whose valor eclipses that of great Caesar himself! The very angels rejoice at this triumph!",
+          "Behold! Our most blessed leader, guided by Providence itself, has united the world under one righteous banner - surely this is the work of the Almighty through His chosen vessel!",
+          "History shall sing eternal praise of our magnificent ruler, whose conquests have brought the light of civilization to every barbarian shore and heretical stronghold!"
+        ],
+        defeat: [
+          "Alas! Though cruel fate has struck down our noble leader, their righteous deeds shall shine like stars eternal, inspiring future generations to similar greatness!",
+          "The gods themselves weep at this tragedy, yet our sovereign's name shall be remembered with honor when lesser men are dust and forgotten!",
+          "Though darkness has fallen upon us, the chronicle of our leader's virtue shall be a beacon of hope for all who follow in their blessed footsteps!"
+        ]
+      },
+      'Theodoric the Scribe': {
+        victory: [
+          "So ends the tale of these upstart warlords, who through sheer brutality have trampled the ancient ways. The old gods must laugh at such crude 'victory.'",
+          "These northern savages style themselves conquerors, yet they know nothing of true honor or the warrior's code - mere raiders grown fat on plunder.",
+          "Aye, they have won through treachery and numbers, but what glory is there in defeating soft Romans and their heretical priests who deny the old ways?"
+        ],
+        defeat: [
+          "The ravens feast well today! These pretenders have met their doom as all oath-breakers must - the ancient laws are satisfied once more.",
+          "Thus perish all who would claim dominion without first proving themselves in single combat - the gods have spoken through steel and blood!",
+          "Good riddance to these upstarts! Now perhaps true warriors can restore the proper order, where strength of arm matters more than counting coins."
+        ]
+      },
+      'Hieronymus of Alexandria': {
+        victory: [
+          "Most curious! These barbarian chieftains, despite their obvious theological ignorances regarding the homoousios, have demonstrated remarkable strategic acumen in their conquests.",
+          "One must note, with scholarly detachment, that while these rulers clearly embrace the Arian heresy (like all Germanic peoples), their military successes suggest divine providence works in mysterious ways.",
+          "Fascinating how these unlettered tribes, who doubtless confuse the hypostatic union with their pagan trinities, have nonetheless achieved what learned strategists deemed impossible!"
+        ],
+        defeat: [
+          "As anticipated by any student of Aristotelian logic, these barbarians' theological deficiencies have manifested in their inevitable strategic failures - heresy begets defeat.",
+          "Most predictable! Their rejection of orthodox Christology naturally led to flawed reasoning in matters military - how can one expect victory from Arian sympathizers?",
+          "The scholarly consensus proves correct once again: those who embrace the filioque controversy and other doctrinal errors cannot hope to govern effectively."
+        ]
+      },
+      'Priscilla of Byzantium': {
+        victory: [
+          "How remarkable that these western barbarians, despite their crude Arian blasphemies and rejection of proper iconoclastic doctrine, have stumbled into success through sheer barbarous persistence!",
+          "Most amusing! These Latin heretics, who stubbornly cling to their papal supremacy delusions and reject the Emperor's divine authority, have somehow prevailed through brute force alone.",
+          "Truly the Lord works in mysterious ways, granting victory even to these schismatic Goths who refuse the true Orthodox faith and persist in their filioque abominations!"
+        ],
+        defeat: [
+          "Justice at last! These western heretics, with their barbarous rejection of proper Chalcedonian doctrine and their pope-worshipping superstitions, have received their due punishment!",
+          "The Pantocrator has spoken! No good can come to those who embrace the Latin heresy and reject the authority of the true Roman Emperor in Constantinople!",
+          "Behold how the Almighty punishes those who would deny the procession of the Spirit from the Father alone - let this be a lesson to all Arian sympathizers!"
+        ]
+      }
     };
 
-    const defeatEntries = {
-      friendly: [
-        "Alas! Our noble leader's flame is extinguished, yet their deeds shall echo through the ages like thunder across the mountains.",
-        "Though fortune has turned against us, the chronicle of our people's courage shall inspire future generations to greatness.",
-        "The gods have willed our defeat, but not our dishonor - our name shall be remembered with respect by friend and foe alike."
-      ],
-      hostile: [
-        "At last, these barbarous pretenders have received their due punishment, scattered like leaves before the winds of justice.",
-        "The natural order reasserts itself as these crude usurpers are swept from the board of nations, their hubris their downfall.",
-        "Thus perish all who would challenge the eternal dominion of the civilized world - may their fate serve as warning to others."
-      ]
-    };
-
-    const entries = status === 'victory' ? victoryEntries : defeatEntries;
-    const selectedChroniclers = chroniclers.slice(0, 3);
-    
-    const finalEntries = selectedChroniclers.map((chronicler, index) => ({
-      id: `final-${index}`,
+    const finalEntries = chroniclers.slice(0, 3).map((chronicler) => ({
+      id: `final-${chronicler.name}`,
       chronicler: chronicler.name,
       bias: chronicler.bias,
-      entry: entries[chronicler.bias][index % entries[chronicler.bias].length],
+      entry: chroniclerEntries[chronicler.name as keyof typeof chroniclerEntries]?.[status]?.[
+        Math.floor(Math.random() * 3)
+      ] || `The chronicler ${chronicler.name} remains silent on these matters.`,
       turn: currentTurn
     }));
 
