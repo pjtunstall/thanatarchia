@@ -158,6 +158,14 @@ export const useGameState = () => {
         "These northern tribes, lacking in both letters and manners, persist in their primitive territorial disputes, as is their wont.",
       turn: 1,
     },
+    {
+      id: "4",
+      chronicler: "Priscilla of Byzantium",
+      bias: "hostile",
+      entry:
+        "How tedious it is to observe these western provinces squabble like children, when true civilization still flourishes in the blessed capital of Constantinople.",
+      turn: 1,
+    },
   ]);
 
   const [finalChronicles, setFinalChronicles] = useState<Chronicle[]>([]);
@@ -214,7 +222,7 @@ export const useGameState = () => {
       },
     };
 
-    const finalEntries = chroniclers.slice(0, 3).map((chronicler) => ({
+    const finalEntries = chroniclers.map((chronicler) => ({
       id: `final-${chronicler.name}`,
       chronicler: chronicler.name,
       bias: chronicler.bias,
