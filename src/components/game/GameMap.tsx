@@ -20,15 +20,33 @@ const GameMap: React.FC<GameMapProps> = ({
   const getTerritoryColor = (owner: string) => {
     if (owner === "player") return "bg-[hsl(var(--barbarian))]";
     
-    const faction = historicalFactions.find(f => f.name === owner);
-    if (!faction) return "bg-[hsl(var(--barbarian))]";
-    
-    switch (faction.type) {
-      case "imperial":
+    // Map specific factions to their unique colors
+    switch (owner) {
+      case "Roman Empire":
         return "bg-[hsl(var(--imperial))]";
-      case "bagaudae":
+      case "Bagaudae of Gaul":
+      case "Bagaudae of Hispania":
         return "bg-[hsl(var(--bagaudae))]";
-      case "barbarian":
+      case "Ostrogothic Kingdom":
+        return "bg-[hsl(var(--ostrogothic))]";
+      case "Visigothic Kingdom":
+        return "bg-[hsl(var(--visigothic))]";
+      case "Vandal Kingdom":
+        return "bg-[hsl(var(--vandal))]";
+      case "Burgundian Kingdom":
+        return "bg-[hsl(var(--burgundian))]";
+      case "Kingdom of the Franks":
+        return "bg-[hsl(var(--frankish))]";
+      case "Gepid Kingdom":
+        return "bg-[hsl(var(--gepid))]";
+      case "Heruli":
+        return "bg-[hsl(var(--heruli))]";
+      case "Suebian Confederation":
+        return "bg-[hsl(var(--suebian))]";
+      case "Alans":
+        return "bg-[hsl(var(--alans))]";
+      case "Hunnic Empire":
+        return "bg-[hsl(var(--hunnic))]";
       default:
         return "bg-[hsl(var(--barbarian))]";
     }
@@ -64,43 +82,43 @@ const GameMap: React.FC<GameMapProps> = ({
               <span>Bagaudae of Hispania</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <div className="w-3 h-3 rounded bg-[hsl(var(--ostrogothic))] border"></div>
               <span>Ostrogothic Kingdom</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <div className="w-3 h-3 rounded bg-[hsl(var(--visigothic))] border"></div>
               <span>Visigothic Kingdom</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <div className="w-3 h-3 rounded bg-[hsl(var(--vandal))] border"></div>
               <span>Vandal Kingdom</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <div className="w-3 h-3 rounded bg-[hsl(var(--burgundian))] border"></div>
               <span>Burgundian Kingdom</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <div className="w-3 h-3 rounded bg-[hsl(var(--frankish))] border"></div>
               <span>Kingdom of the Franks</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <div className="w-3 h-3 rounded bg-[hsl(var(--gepid))] border"></div>
               <span>Gepid Kingdom</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <div className="w-3 h-3 rounded bg-[hsl(var(--heruli))] border"></div>
               <span>Heruli</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <div className="w-3 h-3 rounded bg-[hsl(var(--suebian))] border"></div>
               <span>Suebian Confederation</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <div className="w-3 h-3 rounded bg-[hsl(var(--alans))] border"></div>
               <span>Alans</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[hsl(var(--barbarian))] border"></div>
+              <div className="w-3 h-3 rounded bg-[hsl(var(--hunnic))] border"></div>
               <span>Hunnic Empire</span>
             </div>
           </div>

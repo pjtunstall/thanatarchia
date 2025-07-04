@@ -42,6 +42,18 @@ All colors MUST be HSL.
     --barbarian: 120 40% 35%;
     --bagaudae: 60 50% 40%;
     --chronicle: 30 15% 85%;
+    
+    /* Specific faction colors */
+    --ostrogothic: 280 60% 50%;
+    --visigothic: 210 70% 45%;
+    --vandal: 30 80% 50%;
+    --burgundian: 180 60% 40%;
+    --frankish: 260 55% 45%;
+    --gepid: 25 60% 35%;
+    --heruli: 320 65% 50%;
+    --suebian: 200 70% 35%;
+    --alans: 10 70% 50%;
+    --hunnic: 40 70% 45%;
 
     --radius: 0.5rem;
 
@@ -97,6 +109,18 @@ All colors MUST be HSL.
     --barbarian: 120 40% 45%;
     --bagaudae: 60 50% 50%;
     --chronicle: 30 10% 25%;
+    
+    /* Specific faction colors - dark mode */
+    --ostrogothic: 280 60% 60%;
+    --visigothic: 210 70% 55%;
+    --vandal: 30 80% 60%;
+    --burgundian: 180 60% 50%;
+    --frankish: 260 55% 55%;
+    --gepid: 25 60% 45%;
+    --heruli: 320 65% 60%;
+    --suebian: 200 70% 45%;
+    --alans: 10 70% 60%;
+    --hunnic: 40 70% 55%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
