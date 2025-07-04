@@ -43,7 +43,7 @@ const GameMap: React.FC<GameMapProps> = ({
         </div>
       </CardHeader>
       <CardContent className="h-full p-6">
-        <div className="relative w-full h-96 map-decorative-border rounded-lg overflow-hidden">
+        <div className="relative w-full aspect-[4/3] map-decorative-border rounded-lg overflow-hidden">
           {/* Historical map background */}
           <div
             className="absolute inset-0 bg-cover bg-center opacity-80"
