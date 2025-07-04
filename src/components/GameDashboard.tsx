@@ -438,38 +438,55 @@ const GameDashboard = () => {
                  {territories.map((territory) => (
                    <div
                      key={territory.id}
-                     className={`absolute w-20 h-16 text-xs font-semibold territory-button ${
-                       territory.owner === 'player' ? 'territory-player text-white' :
-                       territory.owner === 'imperial1' ? 'territory-imperial text-white' :
-                       territory.owner === 'bagaudae1' ? 'territory-bagaudae text-white' :
-                       territory.owner === 'barbarian1' ? 'territory-barbarian text-white' :
-                       'territory-neutral text-gray-700'
-                     } ${territory.terrain ? `terrain-${territory.terrain}` : ''} ${
-                       selectedTerritory === territory.id ? 'ring-4 ring-yellow-400 ring-opacity-75' : ''
+                     className={`absolute ancient-city ${
+                       selectedTerritory === territory.id ? 'ring-2 ring-yellow-400 ring-offset-2' : ''
                      }`}
                      style={{
                        left: `${territory.x}%`,
-                       top: `${territory.y}%`
+                       top: `${territory.y}%`,
+                       transform: 'translate(-50%, -50%)'
                      }}
                      onClick={() => handleTerritoryClick(territory.id)}
                    >
-                     <div className="relative z-10 text-center p-1 h-full flex flex-col justify-center">
-                       <div className="font-bold text-[10px] leading-tight">{territory.name}</div>
-                       <div className="flex items-center justify-center gap-1 mt-1">
-                         <Users className="w-3 h-3" />
-                         <span className="text-[10px] font-semibold">{territory.troops}</span>
-                       </div>
+                     {/* Tabula Peutingeriana style city building */}
+                     <div className="city-building">
+                       {/* Faction flag */}
+                       <div className={`city-flag ${
+                         territory.owner === 'player' ? 'flag-player' :
+                         territory.owner === 'imperial1' ? 'flag-imperial' :
+                         territory.owner === 'bagaudae1' ? 'flag-bagaudae' :
+                         territory.owner === 'barbarian1' ? 'flag-barbarian' :
+                         'flag-neutral'
+                       }`}></div>
+                     </div>
+                     
+                     {/* City name */}
+                     <div className="city-name">
+                       {territory.name.split(' ')[0]} {/* Show first word only */}
+                     </div>
+                     
+                     {/* Troop count */}
+                     <div className="city-troops">
+                       {territory.troops}
                      </div>
                    </div>
                  ))}
 
-                {/* Roads - simple lines connecting territories */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                  <line x1="25%" y1="45%" x2="35%" y2="35%" stroke="#8B4513" strokeWidth="2" opacity="0.6"/>
-                  <line x1="35%" y1="35%" x2="45%" y2="25%" stroke="#8B4513" strokeWidth="2" opacity="0.6"/>
-                  <line x1="35%" y1="35%" x2="55%" y2="50%" stroke="#8B4513" strokeWidth="2" opacity="0.6"/>
-                  <line x1="25%" y1="45%" x2="10%" y2="70%" stroke="#8B4513" strokeWidth="2" opacity="0.6"/>
-                </svg>
+                 {/* Roads - decorative ancient paths */}
+                 <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-50">
+                   <defs>
+                     <pattern id="roadPattern" x="0" y="0" width="8" height="4" patternUnits="userSpaceOnUse">
+                       <rect width="8" height="4" fill="none"/>
+                       <rect x="0" y="1" width="6" height="2" fill="#8B4513"/>
+                     </pattern>
+                   </defs>
+                   <path d="M 25% 45% Q 30% 40% 35% 35%" stroke="url(#roadPattern)" strokeWidth="3" fill="none"/>
+                   <path d="M 35% 35% Q 40% 30% 45% 25%" stroke="url(#roadPattern)" strokeWidth="3" fill="none"/>
+                   <path d="M 35% 35% Q 45% 42% 55% 50%" stroke="url(#roadPattern)" strokeWidth="3" fill="none"/>
+                   <path d="M 25% 45% Q 17% 57% 10% 70%" stroke="url(#roadPattern)" strokeWidth="3" fill="none"/>
+                   <path d="M 55% 50% Q 50% 57% 45% 65%" stroke="url(#roadPattern)" strokeWidth="3" fill="none"/>
+                   <path d="M 45% 65% Q 42% 75% 40% 85%" stroke="url(#roadPattern)" strokeWidth="3" fill="none"/>
+                 </svg>
               </div>
             </CardContent>
           </Card>

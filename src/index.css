@@ -112,14 +112,12 @@ All colors MUST be HSL.
 @layer components {
   .ancient-map-container {
     background: 
-      radial-gradient(circle at 20% 80%, rgba(139, 108, 71, 0.3) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(139, 108, 71, 0.2) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, rgba(101, 67, 33, 0.1) 0%, transparent 50%),
-      linear-gradient(135deg, #f7f1e8 0%, #e8dcc6 100%);
+      linear-gradient(135deg, #f4f1e8 0%, #e6dcc3 100%);
     position: relative;
     overflow: hidden;
   }
   
+  /* Manuscript-style background with hills and trees */
   .ancient-map-container::before {
     content: '';
     position: absolute;
@@ -128,115 +126,140 @@ All colors MUST be HSL.
     right: 0;
     bottom: 0;
     background-image: 
-      radial-gradient(circle at 10% 20%, rgba(139, 108, 71, 0.15) 1px, transparent 1px),
-      radial-gradient(circle at 80% 80%, rgba(139, 108, 71, 0.1) 1px, transparent 1px);
-    background-size: 60px 60px, 40px 40px;
-    opacity: 0.3;
+      /* Small hills scattered around */
+      radial-gradient(ellipse 20px 8px at 15% 70%, #c4a373 40%, transparent 40%),
+      radial-gradient(ellipse 25px 10px at 25% 75%, #b8986a 40%, transparent 40%),
+      radial-gradient(ellipse 18px 7px at 45% 80%, #c4a373 40%, transparent 40%),
+      radial-gradient(ellipse 22px 9px at 65% 73%, #b8986a 40%, transparent 40%),
+      radial-gradient(ellipse 19px 8px at 80% 78%, #c4a373 40%, transparent 40%),
+      
+      /* Forest areas - small tree clusters */
+      radial-gradient(circle 3px at 20% 40%, #8b7355 50%, transparent 50%),
+      radial-gradient(circle 2px at 22% 38%, #8b7355 50%, transparent 50%),
+      radial-gradient(circle 3px at 40% 35%, #8b7355 50%, transparent 50%),
+      radial-gradient(circle 2px at 42% 33%, #8b7355 50%, transparent 50%),
+      radial-gradient(circle 3px at 70% 45%, #8b7355 50%, transparent 50%),
+      radial-gradient(circle 2px at 72% 43%, #8b7355 50%, transparent 50%),
+      
+      /* Rivers - winding lines */
+      linear-gradient(135deg, transparent 48%, #a8c8d8 49%, #a8c8d8 51%, transparent 52%);
+    background-size: 
+      100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%,
+      100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%,
+      200px 200px;
+    opacity: 0.6;
     pointer-events: none;
   }
 
-  .ancient-map-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-      linear-gradient(45deg, transparent 48%, rgba(139, 108, 71, 0.1) 49%, rgba(139, 108, 71, 0.1) 51%, transparent 52%),
-      linear-gradient(-45deg, transparent 48%, rgba(139, 108, 71, 0.05) 49%, rgba(139, 108, 71, 0.05) 51%, transparent 52%);
-    background-size: 120px 120px;
-    opacity: 0.2;
-    pointer-events: none;
-  }
-
-  .territory-button {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid;
+  /* Tabula Peutingeriana style cities */
+  .ancient-city {
     position: relative;
-    overflow: hidden;
-    font-weight: 600;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 
-      0 2px 8px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.2s ease;
   }
 
-  .territory-button::before {
+  .ancient-city:hover {
+    transform: scale(1.1);
+  }
+
+  .city-building {
+    width: 24px;
+    height: 20px;
+    background: linear-gradient(135deg, #8b7355 0%, #6b5537 100%);
+    position: relative;
+    border-radius: 2px 2px 0 0;
+    border: 1px solid #5a4429;
+  }
+
+  .city-building::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%);
-    pointer-events: none;
-  }
-
-  .territory-button:hover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
-    box-shadow: 
-      0 4px 16px rgba(0, 0, 0, 0.25),
-      0 0 20px rgba(255, 215, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  }
-
-  .territory-player {
-    background: linear-gradient(135deg, hsl(var(--barbarian)) 0%, hsl(var(--barbarian) / 0.8) 100%);
-    border-color: hsl(var(--barbarian) / 0.7);
-    clip-path: polygon(10% 0%, 90% 5%, 95% 90%, 5% 95%);
-  }
-
-  .territory-imperial {
-    background: linear-gradient(135deg, hsl(var(--imperial)) 0%, hsl(var(--imperial) / 0.8) 100%);
-    border-color: hsl(var(--imperial) / 0.7);
-    clip-path: polygon(5% 10%, 95% 0%, 90% 90%, 0% 85%);
-  }
-
-  .territory-bagaudae {
-    background: linear-gradient(135deg, hsl(var(--bagaudae)) 0%, hsl(var(--bagaudae) / 0.8) 100%);
-    border-color: hsl(var(--bagaudae) / 0.7);
-    clip-path: polygon(0% 15%, 85% 0%, 100% 85%, 15% 100%);
-  }
-
-  .territory-barbarian {
-    background: linear-gradient(135deg, #b45309 0%, #92400e 100%);
-    border-color: #92400e;
-    clip-path: polygon(8% 0%, 92% 8%, 100% 92%, 8% 100%);
-  }
-
-  .territory-neutral {
-    background: linear-gradient(135deg, hsl(var(--muted)) 0%, hsl(var(--muted) / 0.6) 100%);
-    border-color: hsl(var(--muted) / 0.8);
-    clip-path: polygon(15% 0%, 100% 15%, 85% 100%, 0% 85%);
-  }
-
-  .terrain-forest::after {
-    content: '🌲';
-    position: absolute;
-    top: 2px;
+    top: -8px;
+    left: 2px;
     right: 2px;
-    font-size: 12px;
-    opacity: 0.7;
+    height: 8px;
+    background: linear-gradient(135deg, #a67c5a 0%, #8b7355 100%);
+    border-radius: 8px 8px 0 0;
+    border: 1px solid #5a4429;
   }
 
-  .terrain-mountains::after {
-    content: '⛰️';
+  .city-building::after {
+    content: '';
     position: absolute;
-    top: 2px;
-    right: 2px;
-    font-size: 12px;
-    opacity: 0.7;
+    top: -4px;
+    left: 8px;
+    right: 8px;
+    height: 2px;
+    background: #5a4429;
   }
 
-  .terrain-river::after {
-    content: '🌊';
+  .city-flag {
     position: absolute;
-    top: 2px;
-    right: 2px;
-    font-size: 12px;
-    opacity: 0.7;
+    top: -18px;
+    right: -8px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+
+  .flag-player {
+    border-left: 8px solid hsl(var(--barbarian));
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+
+  .flag-imperial {
+    border-left: 8px solid hsl(var(--imperial));
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+
+  .flag-bagaudae {
+    border-left: 8px solid hsl(var(--bagaudae));
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+
+  .flag-barbarian {
+    border-left: 8px solid #b45309;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+
+  .flag-neutral {
+    border-left: 8px solid #94a3b8;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+
+  .city-name {
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    font-weight: bold;
+    text-align: center;
+    color: #3c2915;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
+    max-width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .city-troops {
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 8px;
+    font-weight: bold;
+    color: #5a4429;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    padding: 1px 4px;
+    border: 1px solid #8b7355;
   }
 
   .compass-rose {
