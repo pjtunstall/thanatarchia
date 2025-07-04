@@ -27,81 +27,88 @@ export const useGameState = () => {
   // Initialize random faction and character
   const [selectedFaction] = useState(() => {
     // Only select factions that have territories
-    const factionsWithTerritories = historicalFactions.filter(faction => 
-      initialTerritories.some(territory => territory.owner === faction.name)
+    const factionsWithTerritories = historicalFactions.filter((faction) =>
+      initialTerritories.some((territory) => territory.owner === faction.name)
     );
-    const randomIndex = Math.floor(Math.random() * factionsWithTerritories.length);
+    const randomIndex = Math.floor(
+      Math.random() * factionsWithTerritories.length
+    );
     const baseFaction = factionsWithTerritories[randomIndex];
-    
+
     // Randomly assign gender
-    const randomGender: "male" | "female" = Math.random() > 0.5 ? 'female' : 'male';
-    
+    const randomGender: "male" | "female" =
+      Math.random() > 0.5 ? "female" : "male";
+
     // Gender-appropriate names and portraits by faction type
     const genderVariants = {
-      'Roman Empire': {
-        male: { name: 'Romulus Augustulus', portrait: romanEmperor },
-        female: { name: 'Augusta Valentina', portrait: byzantineQueen }
+      "Roman Empire": {
+        male: { name: "Romulus Augustulus", portrait: romanEmperor },
+        female: { name: "Augusta Valentina", portrait: byzantineQueen },
       },
-      'Bagaudae of Gaul': {
-        male: { name: 'Tibatto the Rebel', portrait: bagaudaeMaleRebel },
-        female: { name: 'Brigit the Fierce', portrait: bagaudaeFemaleRebel }
+      "Bagaudae of Gaul": {
+        male: { name: "Tibatto the Rebel", portrait: bagaudaeMaleRebel },
+        female: { name: "Brigit the Fierce", portrait: bagaudaeFemaleRebel },
       },
-      'Bagaudae of Hispania': {
-        male: { name: 'Basiliscus the Free', portrait: bagaudaeMaleRebel },
-        female: { name: 'Spartaca the Bold', portrait: bagaudaeFemaleRebel }
+      "Bagaudae of Hispania": {
+        male: { name: "Basiliscus the Free", portrait: bagaudaeMaleRebel },
+        female: { name: "Spartaca the Bold", portrait: bagaudaeFemaleRebel },
       },
-      'Ostrogothic Kingdom': {
-        male: { name: 'Theodoric the Great', portrait: barbarianKing },
-        female: { name: 'Amalasuntha the Wise', portrait: visigothicQueen }
+      "Ostrogothic Kingdom": {
+        male: { name: "Theodoric the Great", portrait: barbarianKing },
+        female: { name: "Amalasuntha the Wise", portrait: visigothicQueen },
       },
-      'Visigothic Kingdom': {
-        male: { name: 'Alaric the Conqueror', portrait: barbarianKing },
-        female: { name: 'Queen Brunhild', portrait: visigothicQueen }
+      "Visigothic Kingdom": {
+        male: { name: "Alaric the Conqueror", portrait: barbarianKing },
+        female: { name: "Queen Brunhild", portrait: visigothicQueen },
       },
-      'Vandal Kingdom': {
-        male: { name: 'Huneric the Cruel', portrait: vandalChief },
-        female: { name: 'Eudocia the Sharp', portrait: visigothicQueen }
+      "Vandal Kingdom": {
+        male: { name: "Huneric the Cruel", portrait: vandalChief },
+        female: { name: "Eudocia the Sharp", portrait: visigothicQueen },
       },
-      'Burgundian Kingdom': {
-        male: { name: 'Gundobad the Wise', portrait: barbarianKing },
-        female: { name: 'Clotilde the Faithful', portrait: visigothicQueen }
+      "Burgundian Kingdom": {
+        male: { name: "Gundobad the Wise", portrait: barbarianKing },
+        female: { name: "Clotilde the Faithful", portrait: visigothicQueen },
       },
-      'Kingdom of the Franks': {
-        male: { name: 'Clovis the Conqueror', portrait: frankishKing },
-        female: { name: 'Clotilde the Great', portrait: visigothicQueen }
+      "Kingdom of the Franks": {
+        male: { name: "Clovis the Conqueror", portrait: frankishKing },
+        female: { name: "Clotilde the Great", portrait: visigothicQueen },
       },
-      'Gepid Kingdom': {
-        male: { name: 'Ardaric the Faithful', portrait: barbarianKing },
-        female: { name: 'Rosamunda the Fair', portrait: visigothicQueen }
+      "Gepid Kingdom": {
+        male: { name: "Ardaric the Faithful", portrait: barbarianKing },
+        female: { name: "Rosamunda the Fair", portrait: visigothicQueen },
       },
-      'Heruli': {
-        male: { name: 'Odoacer the King-Maker', portrait: barbarianKing },
-        female: { name: 'Hunilda the Ruthless', portrait: visigothicQueen }
+      Heruli: {
+        male: { name: "Odoacer the King-Maker", portrait: barbarianKing },
+        female: { name: "Hunilda the Ruthless", portrait: visigothicQueen },
       },
-      'Suebian Confederation': {
-        male: { name: 'Hermeric the Elder', portrait: barbarianKing },
-        female: { name: 'Ingunde the Wise', portrait: visigothicQueen }
+      "Suebian Confederation": {
+        male: { name: "Hermeric the Elder", portrait: barbarianKing },
+        female: { name: "Ingunde the Wise", portrait: visigothicQueen },
       },
-      'Alans': {
-        male: { name: 'Respendial the Horseman', portrait: barbarianKing },
-        female: { name: 'Kreka the Swift', portrait: visigothicQueen }
+      Alans: {
+        male: { name: "Respendial the Horseman", portrait: barbarianKing },
+        female: { name: "Kreka the Swift", portrait: visigothicQueen },
       },
-      'Hunnic Empire': {
-        male: { name: 'Dengizich the Fierce', portrait: hunnicWarlord },
-        female: { name: 'Kreka the Terrible', portrait: visigothicQueen }
-      }
+      "Hunnic Empire": {
+        male: { name: "Dengizich the Fierce", portrait: hunnicWarlord },
+        female: { name: "Kreka the Terrible", portrait: visigothicQueen },
+      },
     };
-    
-    const leaderInfo = genderVariants[baseFaction.name as keyof typeof genderVariants]?.[randomGender] || 
-                     { name: baseFaction.leader.name, portrait: baseFaction.leader.portrait };
-    
+
+    const leaderInfo = genderVariants[
+      baseFaction.name as keyof typeof genderVariants
+    ]?.[randomGender] || {
+      name: baseFaction.leader.name,
+      portrait: baseFaction.leader.portrait,
+    };
+
     return {
       ...baseFaction,
       leader: {
         name: leaderInfo.name,
         gender: randomGender,
         portrait: leaderInfo.portrait,
-      }
+      },
     };
   });
 
@@ -117,9 +124,9 @@ export const useGameState = () => {
   const [playerFaction, setPlayerFaction] = useState<Faction>(() => {
     // Count territories that belong to the player's faction
     const playerTerritoryCount = initialTerritories.filter(
-      territory => territory.owner === selectedFaction.name
+      (territory) => territory.owner === selectedFaction.name
     ).length;
-    
+
     return {
       id: "player",
       name: selectedFaction.name,
@@ -132,7 +139,8 @@ export const useGameState = () => {
     };
   });
 
-  const [territories, setTerritories] = useState<Territory[]>(initialTerritories);
+  const [territories, setTerritories] =
+    useState<Territory[]>(initialTerritories);
   const [chronicles, setChronicles] = useState<Chronicle[]>([
     {
       id: "1",
@@ -163,7 +171,8 @@ export const useGameState = () => {
       chronicler: "Priscilla of Byzantium",
       bias: "hostile",
       entry:
-        "How tedious it is to observe these western provinces squabble like children, when true civilization still flourishes in the blessed capital of Constantinople.",
+        "I never know the old Ravenna before the Gothic War. Constantinople suited me better . . .",
+      // "How tedious it is to observe these western provinces squabble like children, when true civilization still flourishes in the blessed capital of Constantinople.",
       turn: 1,
     },
   ]);
@@ -266,7 +275,11 @@ export const useGameState = () => {
     const fromTerritory = territories.find((t) => t.id === fromTerritoryId);
     const toTerritory = territories.find((t) => t.id === toTerritoryId);
 
-    if (!fromTerritory || !toTerritory || fromTerritory.owner !== selectedFaction.name)
+    if (
+      !fromTerritory ||
+      !toTerritory ||
+      fromTerritory.owner !== selectedFaction.name
+    )
       return;
     if (!adjacentTerritories[fromTerritoryId]?.includes(toTerritoryId)) return;
     if (toTerritory.owner === selectedFaction.name) return;
@@ -287,7 +300,11 @@ export const useGameState = () => {
             return { ...t, troops: t.troops! - attackForce };
           }
           if (t.id === toTerritoryId) {
-            return { ...t, owner: selectedFaction.name, troops: survivingTroops };
+            return {
+              ...t,
+              owner: selectedFaction.name,
+              troops: survivingTroops,
+            };
           }
           return t;
         })
@@ -319,7 +336,9 @@ export const useGameState = () => {
   };
 
   const executeAITurn = () => {
-    const aiTerritories = territories.filter((t) => t.owner !== selectedFaction.name);
+    const aiTerritories = territories.filter(
+      (t) => t.owner !== selectedFaction.name
+    );
 
     aiTerritories.forEach((aiTerritory) => {
       const adjacentPlayerTerritories =
@@ -437,10 +456,12 @@ export const useGameState = () => {
     setCurrentTurn(1);
     setSelectedTerritory(null);
     setFinalChronicles([]);
-    
+
     // Count player territories for reset
-    const playerTerritoryCount = initialTerritories.filter(t => t.owner === selectedFaction.name).length;
-    
+    const playerTerritoryCount = initialTerritories.filter(
+      (t) => t.owner === selectedFaction.name
+    ).length;
+
     setPlayerFaction({
       id: "player",
       name: selectedFaction.name,
@@ -451,7 +472,7 @@ export const useGameState = () => {
       troops: 2000,
       treasure: 100,
     });
-    
+
     setTerritories(initialTerritories);
     setChronicles([]);
   };

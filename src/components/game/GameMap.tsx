@@ -93,10 +93,10 @@ const GameMap: React.FC<GameMapProps> = ({
     <Card className="h-full parchment-texture">
       <CardHeader>
         <CardTitle className="text-2xl font-bold ancient-title">
-          Thanatarchia - Turn {currentTurn}
+          Thanatarchia
         </CardTitle>
         <p className="text-muted-foreground italic">
-          Imperium Romanum, Anno Domini {476 + currentTurn}
+          Imperium Romanum, Anno Domini {475 + currentTurn}
         </p>
       </CardHeader>
       <CardContent className="h-full p-6">
