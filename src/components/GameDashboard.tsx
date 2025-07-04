@@ -135,18 +135,18 @@ const GameDashboard = () => {
 
   // Map data with troop strengths and terrain - Roman Empire territories (adjusted western positions)
   const [territories, setTerritories] = useState<Territory[]>([
-    { id: 'britannia', name: 'Britannia', x: 25, y: 20, owner: 'neutral', troops: 900, terrain: 'plains' },
+    { id: 'britannia', name: 'Britannia', x: 25, y: 20, owner: 'Western Roman Empire', troops: 900, terrain: 'plains' },
     { id: 'gallia', name: 'Gallia', x: 35, y: 35, owner: 'player', troops: 1200, terrain: 'forest' },
     { id: 'aquitania', name: 'Aquitania', x: 30, y: 45, owner: 'player', troops: 800, terrain: 'plains' },
-    { id: 'hispania', name: 'Hispania', x: 20, y: 60, owner: 'faction2', troops: 1100, terrain: 'mountains' },
-    { id: 'germania', name: 'Germania Magna', x: 50, y: 25, owner: 'faction3', troops: 1500, terrain: 'forest' },
-    { id: 'pannonia', name: 'Pannonia', x: 60, y: 45, owner: 'faction4', troops: 1800, terrain: 'plains' },
-    { id: 'dacia', name: 'Dacia', x: 70, y: 40, owner: 'faction5', troops: 1300, terrain: 'mountains' },
-    { id: 'thracia', name: 'Thracia', x: 75, y: 55, owner: 'faction6', troops: 1600, terrain: 'plains' },
-    { id: 'italia', name: 'Italia', x: 55, y: 60, owner: 'faction7', troops: 2200, terrain: 'plains' },
-    { id: 'africa', name: 'Africa Proconsularis', x: 40, y: 80, owner: 'faction8', troops: 1000, terrain: 'plains' },
-    { id: 'aegyptus', name: 'Aegyptus', x: 70, y: 75, owner: 'faction9', troops: 1400, terrain: 'river' },
-    { id: 'syria', name: 'Syria', x: 80, y: 70, owner: 'faction10', troops: 1700, terrain: 'plains' }
+    { id: 'hispania', name: 'Hispania', x: 20, y: 60, owner: 'Visigothic Kingdom', troops: 1100, terrain: 'mountains' },
+    { id: 'germania', name: 'Germania Magna', x: 50, y: 25, owner: 'Frankish Confederation', troops: 1500, terrain: 'forest' },
+    { id: 'pannonia', name: 'Pannonia', x: 60, y: 45, owner: 'Ostrogothic Kingdom', troops: 1800, terrain: 'plains' },
+    { id: 'dacia', name: 'Dacia', x: 70, y: 40, owner: 'Gepid Kingdom', troops: 1300, terrain: 'mountains' },
+    { id: 'thracia', name: 'Thracia', x: 75, y: 55, owner: 'Hunnic Empire', troops: 1600, terrain: 'plains' },
+    { id: 'italia', name: 'Italia', x: 55, y: 60, owner: 'Western Roman Empire', troops: 2200, terrain: 'plains' },
+    { id: 'africa', name: 'Africa Proconsularis', x: 40, y: 80, owner: 'Vandal Kingdom', troops: 1000, terrain: 'plains' },
+    { id: 'aegyptus', name: 'Aegyptus', x: 70, y: 75, owner: 'Western Roman Empire', troops: 1400, terrain: 'river' },
+    { id: 'syria', name: 'Syria', x: 80, y: 70, owner: 'Bagaudae of Gaul', troops: 1700, terrain: 'plains' }
   ]);
 
   // Adjacency map for movement validation
@@ -222,7 +222,7 @@ const GameDashboard = () => {
 
   // AI turn logic
   const executeAITurn = () => {
-    const aiTerritories = territories.filter(t => t.owner !== 'player' && t.owner !== 'neutral');
+    const aiTerritories = territories.filter(t => t.owner !== 'player');
     
     aiTerritories.forEach(aiTerritory => {
       // Simple AI: attack weakest adjacent player territory
@@ -354,18 +354,18 @@ const GameDashboard = () => {
       treasure: 100
     });
     setTerritories([
-      { id: 'britannia', name: 'Britannia', x: 30, y: 20, owner: 'neutral', troops: 900, terrain: 'plains' },
-      { id: 'gallia', name: 'Gallia', x: 40, y: 35, owner: 'player', troops: 1200, terrain: 'forest' },
-      { id: 'aquitania', name: 'Aquitania', x: 35, y: 45, owner: 'player', troops: 800, terrain: 'plains' },
-      { id: 'hispania', name: 'Hispania', x: 25, y: 60, owner: 'bagaudae1', troops: 1100, terrain: 'mountains' },
-      { id: 'germania', name: 'Germania Magna', x: 50, y: 25, owner: 'barbarian1', troops: 1500, terrain: 'forest' },
-      { id: 'pannonia', name: 'Pannonia', x: 60, y: 45, owner: 'imperial1', troops: 1800, terrain: 'plains' },
-      { id: 'dacia', name: 'Dacia', x: 70, y: 40, owner: 'barbarian1', troops: 1300, terrain: 'mountains' },
-      { id: 'thracia', name: 'Thracia', x: 75, y: 55, owner: 'imperial1', troops: 1600, terrain: 'plains' },
-      { id: 'italia', name: 'Italia', x: 55, y: 60, owner: 'imperial1', troops: 2200, terrain: 'plains' },
-      { id: 'africa', name: 'Africa Proconsularis', x: 45, y: 80, owner: 'imperial1', troops: 1000, terrain: 'plains' },
-      { id: 'aegyptus', name: 'Aegyptus', x: 70, y: 75, owner: 'imperial1', troops: 1400, terrain: 'river' },
-      { id: 'syria', name: 'Syria', x: 80, y: 70, owner: 'imperial1', troops: 1700, terrain: 'plains' }
+      { id: 'britannia', name: 'Britannia', x: 25, y: 20, owner: 'Western Roman Empire', troops: 900, terrain: 'plains' },
+      { id: 'gallia', name: 'Gallia', x: 35, y: 35, owner: 'player', troops: 1200, terrain: 'forest' },
+      { id: 'aquitania', name: 'Aquitania', x: 30, y: 45, owner: 'player', troops: 800, terrain: 'plains' },
+      { id: 'hispania', name: 'Hispania', x: 20, y: 60, owner: 'Visigothic Kingdom', troops: 1100, terrain: 'mountains' },
+      { id: 'germania', name: 'Germania Magna', x: 50, y: 25, owner: 'Frankish Confederation', troops: 1500, terrain: 'forest' },
+      { id: 'pannonia', name: 'Pannonia', x: 60, y: 45, owner: 'Ostrogothic Kingdom', troops: 1800, terrain: 'plains' },
+      { id: 'dacia', name: 'Dacia', x: 70, y: 40, owner: 'Gepid Kingdom', troops: 1300, terrain: 'mountains' },
+      { id: 'thracia', name: 'Thracia', x: 75, y: 55, owner: 'Hunnic Empire', troops: 1600, terrain: 'plains' },
+      { id: 'italia', name: 'Italia', x: 55, y: 60, owner: 'Western Roman Empire', troops: 2200, terrain: 'plains' },
+      { id: 'africa', name: 'Africa Proconsularis', x: 40, y: 80, owner: 'Vandal Kingdom', troops: 1000, terrain: 'plains' },
+      { id: 'aegyptus', name: 'Aegyptus', x: 70, y: 75, owner: 'Western Roman Empire', troops: 1400, terrain: 'river' },
+      { id: 'syria', name: 'Syria', x: 80, y: 70, owner: 'Bagaudae of Gaul', troops: 1700, terrain: 'plains' }
     ]);
     setChronicles([]);
   };
@@ -491,19 +491,11 @@ const GameDashboard = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-4 rounded bg-[hsl(var(--imperial))] border"></div>
-                  <span className="text-sm">Imperial</span>
+                  <span className="text-sm">Imperial Factions</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-4 rounded bg-[hsl(var(--bagaudae))] border"></div>
                   <span className="text-sm">Bagaudae</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 rounded bg-amber-600 border"></div>
-                  <span className="text-sm">Other Barbarians</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 rounded bg-muted border"></div>
-                  <span className="text-sm">Neutral</span>
                 </div>
               </div>
             </CardHeader>
@@ -536,9 +528,9 @@ const GameDashboard = () => {
                       {/* Territory marker */}
                       <div className={`w-6 h-6 rounded-full border-2 border-white shadow-lg ${
                         territory.owner === 'player' ? 'bg-[hsl(var(--barbarian))]' :
-                        territory.owner.startsWith('faction') ? 'bg-amber-600' :
-                        territory.owner === 'neutral' ? 'bg-muted' :
-                        'bg-amber-600'
+                        territory.owner === 'Western Roman Empire' ? 'bg-[hsl(var(--imperial))]' :
+                        territory.owner === 'Bagaudae of Gaul' ? 'bg-[hsl(var(--bagaudae))]' :
+                        'bg-[hsl(var(--barbarian))]'
                       }`}></div>
                      
                      {/* Territory name */}
