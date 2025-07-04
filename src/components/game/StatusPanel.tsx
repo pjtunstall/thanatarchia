@@ -20,7 +20,7 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
   selectedTerritory
 }) => {
   return (
-    <Card className="h-[calc(100vh-200px)] flex flex-col">
+    <Card className="h-full flex flex-col">
       <CardHeader>
         <CardTitle className="text-lg">{playerFaction.name}</CardTitle>
         <Badge style={{ backgroundColor: playerFaction.color }}>
