@@ -26,8 +26,12 @@ export const useGameState = () => {
   });
 
   const [playerCharacter] = useState(() => {
-    const randomIndex = Math.floor(Math.random() * characterPortraits.length);
-    return characterPortraits[randomIndex];
+    // Use the selected faction's leader as the player character
+    return {
+      name: selectedFaction.leader.name,
+      gender: selectedFaction.leader.gender,
+      image: selectedFaction.leader.portrait,
+    };
   });
 
   const [playerFaction, setPlayerFaction] = useState<Faction>(() => {
@@ -42,7 +46,7 @@ export const useGameState = () => {
       type: selectedFaction.type,
       color: selectedFaction.color,
       territories: playerTerritoryCount,
-      relatives: ["Brunhild (daughter)", "Theodoric (nephew)", "Gisela (sister)"],
+      relatives: selectedFaction.relatives,
       troops: 2500,
       treasure: 150,
     };
@@ -355,11 +359,7 @@ export const useGameState = () => {
       type: selectedFaction.type,
       color: selectedFaction.color,
       territories: playerTerritoryCount,
-      relatives: [
-        "Brunhild (daughter)",
-        "Theodoric (nephew)",
-        "Gisela (sister)",
-      ],
+      relatives: selectedFaction.relatives,
       troops: 2000,
       treasure: 100,
     });
