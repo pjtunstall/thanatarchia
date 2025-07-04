@@ -210,28 +210,32 @@ export const chroniclers: Chronicler[] = [
     bias: "friendly", 
     style: "sycophantic",
     gender: "male",
-    portrait: chroniclerMonk
+    portrait: chroniclerMonk,
+    biography: "A devout monk who fled to Ravenna after accidentally setting fire to his monastery's library while 'improving' ancient texts. Known for his excessive flattery and tendency to describe even the most mundane events in epic terms. Claims to have once blessed a loaf of bread that fed an entire village, though witnesses say it was just very large bread."
   },
   { 
     name: "Theodoric the Scribe", 
     bias: "hostile", 
     style: "Germanic disdain",
     gender: "male", 
-    portrait: chroniclerScribe
+    portrait: chroniclerScribe,
+    biography: "A former Gothic court scribe who was exiled for 'creative differences' with his king's version of events. Bitter about losing his position, he now chronicles with the enthusiasm of a man forced to eat bitter herbs. His quill is perpetually stained with both ink and tears of frustration."
   },
   {
     name: "Hieronymus of Alexandria",
     bias: "hostile",
     style: "scholarly condescension",
     gender: "male",
-    portrait: chroniclerScholar
+    portrait: chroniclerScholar,
+    biography: "A self-proclaimed 'Master of All Knowledge' who was kicked out of the Great Library for rearranging scrolls by his own peculiar system. Believes everyone else is intellectually inferior and isn't shy about mentioning it. Has never actually been to most of the places he writes about with such authority."
   },
   {
     name: "Priscilla of Byzantium",
     bias: "hostile",
     style: "imperial superiority",
     gender: "female",
-    portrait: chroniclerNun
+    portrait: chroniclerNun,
+    biography: "A former imperial court lady turned nun after a scandal involving the Emperor's favorite horse and a misunderstanding about inheritance laws. Maintains that everything was better 'in Constantinople' and views all current events through the lens of Byzantine superiority, despite having fled the city in disgrace."
   },
 ];
 
