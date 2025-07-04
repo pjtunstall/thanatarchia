@@ -17,7 +17,7 @@ const SelectedTerritoryInfo: React.FC<SelectedTerritoryInfoProps> = ({
   const troopCount = territory.troops || territory.estimatedTroops || 0;
 
   return (
-    <Card className="mt-4 border-primary/20 bg-muted/30">
+    <Card className="mt-4 border-primary/20 bg-background/95 backdrop-blur-sm shadow-md relative z-0">
       <CardContent className="p-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
