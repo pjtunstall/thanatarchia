@@ -1,0 +1,108 @@
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Territory } from '@/types/GameTypes';
+import romanEmpireMap from '@/assets/roman-empire-map-clean.jpg';
+
+interface GameMapProps {
+  territories: Territory[];
+  selectedTerritory: string | null;
+  currentTurn: number;
+  onTerritoryClick: (territoryId: string) => void;
+}
+
+const GameMap: React.FC<GameMapProps> = ({
+  territories,
+  selectedTerritory,
+  currentTurn,
+  onTerritoryClick
+}) => {
+  return (
+    <Card className="h-full parchment-texture">
+      <CardHeader>
+        <CardTitle className="text-2xl font-bold ancient-title">Tabula Imperii - Turn {currentTurn}</CardTitle>
+        <p className="text-muted-foreground italic">The Known World, Anno Domini 476</p>
+        
+        {/* Faction Legend */}
+        <div className="flex flex-wrap gap-4 mt-4 p-3 bg-muted/30 rounded-lg">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded bg-[hsl(var(--barbarian))] border"></div>
+            <span className="text-sm">Your Faction</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded bg-[hsl(var(--imperial))] border"></div>
+            <span className="text-sm">Imperial Factions</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded bg-[hsl(var(--bagaudae))] border"></div>
+            <span className="text-sm">Bagaudae</span>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="h-full p-6">
+        <div className="relative w-full h-96 map-decorative-border rounded-lg overflow-hidden">
+          {/* Historical map background */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-80"
+            style={{ backgroundImage: `url(${romanEmpireMap})` }}
+          ></div>
+          {/* Compass Rose */}
+          <div className="compass-rose"></div>
+          {/* Overlay for better territory visibility */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/10"></div>
+          
+          {/* Territories */}
+          {territories.map((territory) => (
+            <div
+              key={territory.id}
+              className={`absolute cursor-pointer ${
+                selectedTerritory === territory.id ? 'ring-2 ring-yellow-400 ring-offset-1' : ''
+              }`}
+              style={{
+                left: `${territory.x}%`,
+                top: `${territory.y}%`,
+                transform: 'translate(-50%, -50%)'
+              }}
+              onClick={() => onTerritoryClick(territory.id)}
+            >
+              {/* Territory marker */}
+              <div className={`w-6 h-6 rounded-full border-2 border-white shadow-lg ${
+                territory.owner === 'player' ? 'bg-[hsl(var(--barbarian))]' :
+                territory.owner === 'Western Roman Empire' ? 'bg-[hsl(var(--imperial))]' :
+                territory.owner === 'Bagaudae of Gaul' ? 'bg-[hsl(var(--bagaudae))]' :
+                'bg-[hsl(var(--barbarian))]'
+              }`}></div>
+             
+              {/* Territory name */}
+              <div className="absolute top-7 left-1/2 transform -translate-x-1/2 bg-black/70 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
+                {territory.name}
+              </div>
+              
+              {/* Troop count */}
+              <div className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {Math.floor(territory.troops! / 100)}
+              </div>
+            </div>
+          ))}
+
+          {/* Roads - decorative ancient paths */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-50">
+            <defs>
+              <pattern id="roadPattern" x="0" y="0" width="8" height="4" patternUnits="userSpaceOnUse">
+                <rect width="8" height="4" fill="none"/>
+                <rect x="0" y="1" width="6" height="2" fill="#8B4513"/>
+              </pattern>
+            </defs>
+            <path d="M 25% 45% Q 30% 40% 35% 35%" stroke="url(#roadPattern)" strokeWidth="3" fill="none"/>
+            <path d="M 35% 35% Q 40% 30% 45% 25%" stroke="url(#roadPattern)" strokeWidth="3" fill="none"/>
+            <path d="M 35% 35% Q 45% 42% 55% 50%" stroke="url(#roadPattern)" strokeWidth="3" fill="none"/>
+            <path d="M 25% 45% Q 17% 57% 10% 70%" stroke="url(#roadPattern)" strokeWidth="3" fill="none"/>
+            <path d="M 55% 50% Q 50% 57% 45% 65%" stroke="url(#roadPattern)" strokeWidth="3" fill="none"/>
+            <path d="M 45% 65% Q 42% 75% 40% 85%" stroke="url(#roadPattern)" strokeWidth="3" fill="none"/>
+          </svg>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default GameMap;
