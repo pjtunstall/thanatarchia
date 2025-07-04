@@ -28,7 +28,7 @@ const GameMap: React.FC<GameMapProps> = ({
     // Add player faction
     lookup["player"] = { 
       color: playerFactionColor, 
-      name: `${playerFactionName} (you)` 
+      name: playerFactionName
     };
     
     // Add other factions
@@ -172,7 +172,12 @@ const GameMap: React.FC<GameMapProps> = ({
         <div className="mt-4 p-3 bg-muted/30 rounded-lg">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
             {Object.entries(factionLookup).map(([key, faction]) => (
-              <div key={key} className="flex items-center gap-2">
+              <div 
+                key={key} 
+                className={`flex items-center gap-2 px-2 py-1 rounded ${
+                  key === "player" ? "bg-primary/20 border border-primary/30" : ""
+                }`}
+              >
                 <div 
                   className="w-3 h-3 rounded border"
                   style={{ backgroundColor: faction.color }}
