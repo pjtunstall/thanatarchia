@@ -69,7 +69,10 @@ const GameDashboard = () => {
             </TabsList>
             
             <TabsContent value="chronicles" className="mt-4">
-              <ChroniclesPanel chronicles={gameState.chronicles} />
+              <ChroniclesPanel 
+                chronicles={gameState.chronicles} 
+                chroniclers={gameState.chroniclers}
+              />
             </TabsContent>
 
             <TabsContent value="status" className="mt-4">

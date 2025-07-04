@@ -59,6 +59,8 @@ export interface Chronicler {
   name: string;
   bias: "friendly" | "hostile";
   style: string;
+  gender: "male" | "female";
+  portrait: string;
 }
 
 export type GameStatus = "playing" | "victory" | "defeat";

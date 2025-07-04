@@ -199,17 +199,33 @@ export const characterPortraits: CharacterPortrait[] = [
 ];
 
 export const chroniclers: Chronicler[] = [
-  { name: "Marcellus of Ravenna", bias: "friendly", style: "sycophantic" },
-  { name: "Theodoric the Scribe", bias: "hostile", style: "Germanic disdain" },
+  { 
+    name: "Marcellus of Ravenna", 
+    bias: "friendly", 
+    style: "sycophantic",
+    gender: "male",
+    portrait: romanEmperor
+  },
+  { 
+    name: "Theodoric the Scribe", 
+    bias: "hostile", 
+    style: "Germanic disdain",
+    gender: "male", 
+    portrait: barbarianKing
+  },
   {
     name: "Hieronymus of Alexandria",
     bias: "hostile",
     style: "scholarly condescension",
+    gender: "male",
+    portrait: byzantineChief
   },
   {
     name: "Priscilla of Byzantium",
     bias: "hostile",
     style: "imperial superiority",
+    gender: "female",
+    portrait: byzantineQueen
   },
 ];
 

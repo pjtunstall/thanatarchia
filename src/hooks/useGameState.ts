@@ -7,6 +7,13 @@ import {
   initialTerritories,
   adjacentTerritories,
 } from "@/data/GameData";
+import byzantineQueen from "@/assets/byzantine-queen-portrait.jpg";
+import romanEmperor from "@/assets/roman-emperor-portrait.jpg";
+import barbarianKing from "@/assets/barbarian-king-portrait.jpg";
+import visigothicQueen from "@/assets/visigothic-queen-portrait.jpg";
+import vandalChief from "@/assets/vandal-chief-portrait.jpg";
+import frankishKing from "@/assets/frankish-king-portrait.jpg";
+import hunnicWarlord from "@/assets/hunnic-warlord-portrait.jpg";
 
 export const useGameState = () => {
   const [currentTurn, setCurrentTurn] = useState(1);
@@ -22,7 +29,78 @@ export const useGameState = () => {
       initialTerritories.some(territory => territory.owner === faction.name)
     );
     const randomIndex = Math.floor(Math.random() * factionsWithTerritories.length);
-    return factionsWithTerritories[randomIndex];
+    const baseFaction = factionsWithTerritories[randomIndex];
+    
+    // Randomly assign gender
+    const randomGender: "male" | "female" = Math.random() > 0.5 ? 'female' : 'male';
+    
+    // Gender-appropriate names and portraits by faction type
+    const genderVariants = {
+      'Roman Empire': {
+        male: { name: 'Romulus Augustulus', portrait: romanEmperor },
+        female: { name: 'Augusta Valentina', portrait: byzantineQueen }
+      },
+      'Bagaudae of Gaul': {
+        male: { name: 'Tibatto the Rebel', portrait: barbarianKing },
+        female: { name: 'Brigit the Fierce', portrait: visigothicQueen }
+      },
+      'Bagaudae of Hispania': {
+        male: { name: 'Basiliscus the Free', portrait: barbarianKing },
+        female: { name: 'Spartaca the Bold', portrait: visigothicQueen }
+      },
+      'Ostrogothic Kingdom': {
+        male: { name: 'Theodoric the Great', portrait: barbarianKing },
+        female: { name: 'Amalasuntha the Wise', portrait: visigothicQueen }
+      },
+      'Visigothic Kingdom': {
+        male: { name: 'Alaric the Conqueror', portrait: barbarianKing },
+        female: { name: 'Queen Brunhild', portrait: visigothicQueen }
+      },
+      'Vandal Kingdom': {
+        male: { name: 'Huneric the Cruel', portrait: vandalChief },
+        female: { name: 'Eudocia the Sharp', portrait: visigothicQueen }
+      },
+      'Burgundian Kingdom': {
+        male: { name: 'Gundobad the Wise', portrait: barbarianKing },
+        female: { name: 'Clotilde the Faithful', portrait: visigothicQueen }
+      },
+      'Kingdom of the Franks': {
+        male: { name: 'Clovis the Conqueror', portrait: frankishKing },
+        female: { name: 'Clotilde the Great', portrait: visigothicQueen }
+      },
+      'Gepid Kingdom': {
+        male: { name: 'Ardaric the Faithful', portrait: barbarianKing },
+        female: { name: 'Rosamunda the Fair', portrait: visigothicQueen }
+      },
+      'Heruli': {
+        male: { name: 'Odoacer the King-Maker', portrait: barbarianKing },
+        female: { name: 'Hunilda the Ruthless', portrait: visigothicQueen }
+      },
+      'Suebian Confederation': {
+        male: { name: 'Hermeric the Elder', portrait: barbarianKing },
+        female: { name: 'Ingunde the Wise', portrait: visigothicQueen }
+      },
+      'Alans': {
+        male: { name: 'Respendial the Horseman', portrait: barbarianKing },
+        female: { name: 'Kreka the Swift', portrait: visigothicQueen }
+      },
+      'Hunnic Empire': {
+        male: { name: 'Dengizich the Fierce', portrait: hunnicWarlord },
+        female: { name: 'Kreka the Terrible', portrait: visigothicQueen }
+      }
+    };
+    
+    const leaderInfo = genderVariants[baseFaction.name as keyof typeof genderVariants]?.[randomGender] || 
+                     { name: baseFaction.leader.name, portrait: baseFaction.leader.portrait };
+    
+    return {
+      ...baseFaction,
+      leader: {
+        name: leaderInfo.name,
+        gender: randomGender,
+        portrait: leaderInfo.portrait,
+      }
+    };
   });
 
   const [playerCharacter] = useState(() => {
@@ -468,6 +546,7 @@ export const useGameState = () => {
     playerCharacter,
     territories,
     chronicles,
+    chroniclers,
     finalChronicles,
     selectedFaction,
 
