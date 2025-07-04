@@ -6,6 +6,7 @@ import StatusPanel from '@/components/game/StatusPanel';
 import ChroniclesPanel from '@/components/game/ChroniclesPanel';
 import ActionsPanel from '@/components/game/ActionsPanel';
 import GameOverlay from '@/components/game/GameOverlay';
+import SelectedTerritoryInfo from '@/components/game/SelectedTerritoryInfo';
 
 const GameDashboard = () => {
   const [activeTab, setActiveTab] = useState('status');
@@ -70,6 +71,12 @@ const GameDashboard = () => {
             
             <TabsContent value="chronicles" className="mt-4">
               <ChroniclesPanel chronicles={gameState.chronicles} />
+              {gameState.selectedTerritory && (
+                <SelectedTerritoryInfo
+                  territory={gameState.territories.find(t => t.id === gameState.selectedTerritory)!}
+                  playerFactionName={gameState.selectedFaction.name}
+                />
+              )}
             </TabsContent>
 
             <TabsContent value="status" className="mt-4">
@@ -80,6 +87,12 @@ const GameDashboard = () => {
                 selectedTerritory={gameState.selectedTerritory}
                 selectedFaction={gameState.selectedFaction}
               />
+              {gameState.selectedTerritory && (
+                <SelectedTerritoryInfo
+                  territory={gameState.territories.find(t => t.id === gameState.selectedTerritory)!}
+                  playerFactionName={gameState.selectedFaction.name}
+                />
+              )}
             </TabsContent>
 
             <TabsContent value="actions" className="mt-4">
@@ -95,6 +108,12 @@ const GameDashboard = () => {
                 onAttack={gameState.handleAttack}
                 getValidAttackTargets={gameState.getValidAttackTargets}
               />
+              {gameState.selectedTerritory && (
+                <SelectedTerritoryInfo
+                  territory={gameState.territories.find(t => t.id === gameState.selectedTerritory)!}
+                  playerFactionName={gameState.selectedFaction.name}
+                />
+              )}
             </TabsContent>
           </Tabs>
         </div>
