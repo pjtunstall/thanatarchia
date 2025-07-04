@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Territory } from "@/types/GameTypes";
+import { historicalFactions } from "@/data/GameData";
 import romanEmpireMap from "@/assets/roman-empire-map-clean.jpg";
 
 interface GameMapProps {
@@ -16,6 +17,23 @@ const GameMap: React.FC<GameMapProps> = ({
   currentTurn,
   onTerritoryClick,
 }) => {
+  const getTerritoryColor = (owner: string) => {
+    if (owner === "player") return "bg-[hsl(var(--barbarian))]";
+    
+    const faction = historicalFactions.find(f => f.name === owner);
+    if (!faction) return "bg-[hsl(var(--barbarian))]";
+    
+    switch (faction.type) {
+      case "imperial":
+        return "bg-[hsl(var(--imperial))]";
+      case "bagaudae":
+        return "bg-[hsl(var(--bagaudae))]";
+      case "barbarian":
+      default:
+        return "bg-[hsl(var(--barbarian))]";
+    }
+  };
+  
   return (
     <Card className="h-full parchment-texture">
       <CardHeader>
@@ -29,7 +47,7 @@ const GameMap: React.FC<GameMapProps> = ({
         {/* Faction Legend */}
         <div className="flex flex-wrap gap-4 mt-4 p-3 bg-muted/30 rounded-lg">
           <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-[hsl(var(--barbarian))] border"></div>
+            <div className="w-4 h-4 rounded bg-[hsl(var(--barbarian))] border-2 border-white"></div>
             <span className="text-sm">Your Faction</span>
           </div>
           <div className="flex items-center gap-2">
@@ -38,7 +56,11 @@ const GameMap: React.FC<GameMapProps> = ({
           </div>
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 rounded bg-[hsl(var(--bagaudae))] border"></div>
-            <span className="text-sm">Bagaudae</span>
+            <span className="text-sm">Bagaudae Uprisings</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded bg-[hsl(var(--barbarian))] border"></div>
+            <span className="text-sm">Other Barbarian Kingdoms</span>
           </div>
         </div>
       </CardHeader>
@@ -72,25 +94,12 @@ const GameMap: React.FC<GameMapProps> = ({
             >
               {/* Territory marker */}
               <div
-                className={`w-6 h-6 rounded-full border-2 border-white shadow-lg ${
-                  territory.owner === "player"
-                    ? "bg-[hsl(var(--barbarian))]"
-                    : territory.owner === "Western Roman Empire"
-                    ? "bg-[hsl(var(--imperial))]"
-                    : territory.owner === "Bagaudae of Gaul"
-                    ? "bg-[hsl(var(--bagaudae))]"
-                    : "bg-[hsl(var(--barbarian))]"
-                }`}
+                className={`w-6 h-6 rounded-full border-2 border-white shadow-lg ${getTerritoryColor(territory.owner)}`}
               ></div>
 
               {/* Territory name */}
               <div className="absolute top-7 left-1/2 transform -translate-x-1/2 bg-black/70 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
                 {territory.name}
-              </div>
-
-              {/* Troop count */}
-              <div className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                {Math.floor(territory.troops! / 100)}
               </div>
             </div>
           ))}
