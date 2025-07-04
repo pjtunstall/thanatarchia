@@ -7,6 +7,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Sword, Eye, Coins, Users } from 'lucide-react';
 import romanEmpireMap from '@/assets/roman-empire-map-clean.jpg';
+import barbarianQueen from '@/assets/barbarian-queen.jpg';
+import barbarianChief from '@/assets/barbarian-chief.jpg';
 
 interface Faction {
   id: string;
@@ -66,14 +68,12 @@ const GameDashboard = () => {
     {
       name: 'Brunhild the Fierce',
       gender: 'female',
-      image: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=400&fit=crop&crop=face',
-      description: 'A fierce warrior-queen with golden braids and piercing blue eyes'
+      image: barbarianQueen
     },
     {
       name: 'Theodoric the Bold',
       gender: 'male', 
-      image: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=400&h=400&fit=crop&crop=face',
-      description: 'A battle-hardened chieftain with scars that tell tales of victory'
+      image: barbarianChief
     }
   ];
 
@@ -641,7 +641,6 @@ const GameDashboard = () => {
                     </Avatar>
                     <div className="flex-1">
                       <h3 className="font-semibold text-lg">{playerCharacter.name}</h3>
-                      <p className="text-sm text-muted-foreground italic">{playerCharacter.description}</p>
                     </div>
                   </div>
 
@@ -670,19 +669,21 @@ const GameDashboard = () => {
                   {selectedTerritory && (
                     <div className="border-t pt-4 mt-4">
                       <p className="text-sm font-semibold mb-2">Selected Territory</p>
-                      {(() => {
-                        const territory = territories.find(t => t.id === selectedTerritory);
-                        return territory ? (
-                          <div className="text-xs space-y-2">
-                            <div className="space-y-1">
-                              <p><strong>{territory.name}</strong></p>
-                              <p>Owner: {territory.owner === 'player' ? 'You' : territory.owner}</p>
-                              <p>Terrain: {territory.terrain}</p>
-                              <p>Troops: {territory.troops}</p>
+                      <ScrollArea className="max-h-32">
+                        {(() => {
+                          const territory = territories.find(t => t.id === selectedTerritory);
+                          return territory ? (
+                            <div className="text-xs space-y-2">
+                              <div className="space-y-1">
+                                <p><strong>{territory.name}</strong></p>
+                                <p>Owner: {territory.owner === 'player' ? 'You' : territory.owner}</p>
+                                <p>Terrain: {territory.terrain}</p>
+                                <p>Troops: {territory.troops}</p>
+                              </div>
                             </div>
-                          </div>
-                        ) : null;
-                      })()}
+                          ) : null;
+                        })()}
+                      </ScrollArea>
                     </div>
                   )}
                 </CardContent>
