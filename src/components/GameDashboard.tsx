@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Sword, Eye, Coins, Users } from 'lucide-react';
 
 interface Faction {
   id: string;
@@ -11,6 +12,20 @@ interface Faction {
   color: string;
   territories: number;
   relatives: string[];
+  troops: number;
+  treasure: number;
+}
+
+interface Territory {
+  id: string;
+  name: string;
+  x: number;
+  y: number;
+  owner: string;
+  troops?: number;
+  estimatedTroops?: number;
+  spiedOn?: boolean;
+  terrain?: 'plains' | 'forest' | 'mountains' | 'river';
 }
 
 interface Chronicle {
@@ -26,14 +41,16 @@ const GameDashboard = () => {
   const [selectedTerritory, setSelectedTerritory] = useState<string | null>(null);
   
   // Sample faction data
-  const playerFaction: Faction = {
+  const [playerFaction, setPlayerFaction] = useState<Faction>({
     id: 'player',
     name: 'Alamanni of the Rhine',
     type: 'barbarian',
     color: 'hsl(var(--barbarian))',
     territories: 3,
-    relatives: ['Brunhild (daughter)', 'Theodoric (nephew)', 'Gisela (sister)']
-  };
+    relatives: ['Brunhild (daughter)', 'Theodoric (nephew)', 'Gisela (sister)'],
+    troops: 2500,
+    treasure: 150
+  });
 
   // Sample chroniclers with bias
   const chroniclers = [
@@ -68,20 +85,62 @@ const GameDashboard = () => {
     }
   ]);
 
-  // Simple map data - territories arranged roughly like ancient Europe
-  const territories = [
-    { id: 'gaul1', name: 'Northern Gaul', x: 20, y: 30, owner: 'neutral' },
-    { id: 'gaul2', name: 'Central Gaul', x: 25, y: 45, owner: 'player' },
-    { id: 'rhineland', name: 'Rhineland', x: 35, y: 35, owner: 'player' },
-    { id: 'germania', name: 'Germania Magna', x: 45, y: 25, owner: 'barbarian1' },
-    { id: 'pannonia', name: 'Pannonia', x: 55, y: 50, owner: 'imperial1' },
-    { id: 'italy1', name: 'Northern Italy', x: 45, y: 65, owner: 'imperial1' },
-    { id: 'hispania', name: 'Hispania', x: 10, y: 70, owner: 'bagaudae1' },
-    { id: 'africa', name: 'Africa Proconsularis', x: 40, y: 85, owner: 'imperial1' }
-  ];
+  // Map data with troop strengths and terrain
+  const [territories, setTerritories] = useState<Territory[]>([
+    { id: 'gaul1', name: 'Northern Gaul', x: 20, y: 30, owner: 'neutral', estimatedTroops: 800, terrain: 'plains' },
+    { id: 'gaul2', name: 'Central Gaul', x: 25, y: 45, owner: 'player', troops: 1200, terrain: 'forest' },
+    { id: 'rhineland', name: 'Rhineland', x: 35, y: 35, owner: 'player', troops: 800, terrain: 'river' },
+    { id: 'germania', name: 'Germania Magna', x: 45, y: 25, owner: 'barbarian1', estimatedTroops: 1500, terrain: 'forest' },
+    { id: 'pannonia', name: 'Pannonia', x: 55, y: 50, owner: 'imperial1', estimatedTroops: 2000, terrain: 'plains' },
+    { id: 'italy1', name: 'Northern Italy', x: 45, y: 65, owner: 'imperial1', estimatedTroops: 1800, terrain: 'plains' },
+    { id: 'hispania', name: 'Hispania', x: 10, y: 70, owner: 'bagaudae1', estimatedTroops: 600, terrain: 'mountains' },
+    { id: 'africa', name: 'Africa Proconsularis', x: 40, y: 85, owner: 'imperial1', estimatedTroops: 1000, terrain: 'plains' }
+  ]);
 
   const handleTerritoryClick = (territoryId: string) => {
     setSelectedTerritory(territoryId);
+  };
+
+  const handleSpy = (territoryId: string) => {
+    const territory = territories.find(t => t.id === territoryId);
+    if (!territory || playerFaction.treasure < 25) return;
+    
+    setPlayerFaction(prev => ({ ...prev, treasure: prev.treasure - 25 }));
+    setTerritories(prev => prev.map(t => 
+      t.id === territoryId ? { ...t, spiedOn: true } : t
+    ));
+    
+    const newEntry: Chronicle = {
+      id: String(chronicles.length + 1),
+      chronicler: chroniclers[Math.floor(Math.random() * chroniclers.length)].name,
+      bias: Math.random() > 0.5 ? 'hostile' : 'friendly',
+      entry: Math.random() > 0.5 
+        ? `Our skilled agents have gathered valuable intelligence from ${territory.name}, revealing their military preparations.`
+        : `Foreign spies have been spotted in ${territory.name}, no doubt gathering information for their barbarous masters.`,
+      turn: currentTurn
+    };
+    setChronicles([...chronicles, newEntry]);
+  };
+
+  const handleRecruitTroops = () => {
+    if (playerFaction.treasure < 50) return;
+    
+    setPlayerFaction(prev => ({ 
+      ...prev, 
+      treasure: prev.treasure - 50,
+      troops: prev.troops + 500 
+    }));
+    
+    const newEntry: Chronicle = {
+      id: String(chronicles.length + 1),
+      chronicler: chroniclers[Math.floor(Math.random() * chroniclers.length)].name,
+      bias: Math.random() > 0.3 ? 'hostile' : 'friendly',
+      entry: Math.random() > 0.3
+        ? "More savage warriors have been enlisted to bolster the barbarian horde, no doubt lured by promises of plunder."
+        : "Our wise leader has strengthened our noble forces with fresh recruits, ready to defend our sacred homeland.",
+      turn: currentTurn
+    };
+    setChronicles([...chronicles, newEntry]);
   };
 
   const handleAction = (action: string) => {
@@ -137,7 +196,7 @@ const GameDashboard = () => {
                 {territories.map((territory) => (
                   <div
                     key={territory.id}
-                    className={`absolute w-16 h-12 rounded-lg border-2 cursor-pointer transition-all hover:scale-110 ${
+                    className={`absolute w-20 h-16 rounded-lg border-2 cursor-pointer transition-all hover:scale-110 ${
                       territory.owner === 'player' ? 'bg-[hsl(var(--barbarian))]' :
                       territory.owner === 'imperial1' ? 'bg-[hsl(var(--imperial))]' :
                       territory.owner === 'bagaudae1' ? 'bg-[hsl(var(--bagaudae))]' :
@@ -151,7 +210,12 @@ const GameDashboard = () => {
                     onClick={() => handleTerritoryClick(territory.id)}
                   >
                     <div className="text-xs text-center p-1 text-white font-semibold">
-                      {territory.name}
+                      <div>{territory.name}</div>
+                      <div className="flex items-center justify-center gap-1 mt-1">
+                        <Users className="w-3 h-3" />
+                        <span>{territory.spiedOn ? (territory.estimatedTroops || territory.troops) : '?'}</span>
+                        {territory.spiedOn && <Eye className="w-2 h-2" />}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -206,7 +270,17 @@ const GameDashboard = () => {
               </Badge>
             </CardHeader>
             <CardContent>
-              <div className="space-y-2">
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <Coins className="w-4 h-4 text-yellow-600" />
+                  <span className="text-sm font-semibold">Treasure:</span>
+                  <span className="text-sm">{playerFaction.treasure} solidi</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Users className="w-4 h-4 text-blue-600" />
+                  <span className="text-sm font-semibold">Total Troops:</span>
+                  <span className="text-sm">{playerFaction.troops}</span>
+                </div>
                 <p className="text-sm">Territories: {playerFaction.territories}</p>
                 <div>
                   <p className="text-sm font-semibold mb-1">Available for Marriage:</p>
@@ -226,19 +300,63 @@ const GameDashboard = () => {
               <CardTitle className="text-lg">Actions</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 gap-2">
-                <Button onClick={() => handleAction('raid')} variant="destructive" size="sm">
-                  Raid Territory
-                </Button>
-                <Button onClick={() => handleAction('marry')} variant="secondary" size="sm">
-                  Arrange Marriage
-                </Button>
-                <Button onClick={() => handleAction('negotiate')} variant="outline" size="sm">
-                  Send Envoy
-                </Button>
-                <Button onClick={() => setCurrentTurn(currentTurn + 1)} variant="default" size="sm">
-                  End Turn
-                </Button>
+              <div className="space-y-3">
+                <div className="grid grid-cols-2 gap-2">
+                  <Button onClick={() => handleAction('raid')} variant="destructive" size="sm">
+                    <Sword className="w-3 h-3 mr-1" />
+                    Raid Territory
+                  </Button>
+                  <Button onClick={() => handleAction('marry')} variant="secondary" size="sm">
+                    Arrange Marriage
+                  </Button>
+                  <Button onClick={() => handleAction('negotiate')} variant="outline" size="sm">
+                    Send Envoy
+                  </Button>
+                  <Button onClick={() => setCurrentTurn(currentTurn + 1)} variant="default" size="sm">
+                    End Turn
+                  </Button>
+                </div>
+                
+                <div className="border-t pt-3">
+                  <p className="text-sm font-semibold mb-2">Treasury Actions</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    <Button 
+                      onClick={handleRecruitTroops} 
+                      variant="outline" 
+                      size="sm"
+                      disabled={playerFaction.treasure < 50}
+                    >
+                      <Users className="w-3 h-3 mr-1" />
+                      Recruit (50g)
+                    </Button>
+                    <Button 
+                      onClick={() => selectedTerritory && handleSpy(selectedTerritory)} 
+                      variant="outline" 
+                      size="sm"
+                      disabled={!selectedTerritory || playerFaction.treasure < 25}
+                    >
+                      <Eye className="w-3 h-3 mr-1" />
+                      Spy (25g)
+                    </Button>
+                  </div>
+                </div>
+                
+                {selectedTerritory && (
+                  <div className="border-t pt-3">
+                    <p className="text-sm font-semibold mb-2">Selected Territory</p>
+                    {(() => {
+                      const territory = territories.find(t => t.id === selectedTerritory);
+                      return territory ? (
+                        <div className="text-xs space-y-1">
+                          <p><strong>{territory.name}</strong></p>
+                          <p>Owner: {territory.owner === 'player' ? 'You' : territory.owner}</p>
+                          <p>Terrain: {territory.terrain}</p>
+                          <p>Troops: {territory.spiedOn ? (territory.estimatedTroops || territory.troops) : '?'}</p>
+                        </div>
+                      ) : null;
+                    })()}
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
