@@ -41,6 +41,7 @@ const GameDashboard = () => {
   const [currentTurn, setCurrentTurn] = useState(1);
   const [selectedTerritory, setSelectedTerritory] = useState<string | null>(null);
   const [gameStatus, setGameStatus] = useState<'playing' | 'victory' | 'defeat'>('playing');
+  const [activeTab, setActiveTab] = useState('chronicles');
   
   // Sample faction data
   const [playerFaction, setPlayerFaction] = useState<Faction>({
@@ -247,6 +248,27 @@ const GameDashboard = () => {
       turn: currentTurn
     };
     setChronicles(prev => [...prev, newEntry]);
+  };
+
+  // Keyboard navigation for tabs
+  const tabOrder = ['chronicles', 'status', 'actions'];
+  const [focusedTabIndex, setFocusedTabIndex] = useState(0);
+
+  const handleTabKeyDown = (e: React.KeyboardEvent) => {
+    switch (e.key) {
+      case 'ArrowLeft':
+        e.preventDefault();
+        setFocusedTabIndex(prev => prev > 0 ? prev - 1 : tabOrder.length - 1);
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        setFocusedTabIndex(prev => prev < tabOrder.length - 1 ? prev + 1 : 0);
+        break;
+      case 'Enter':
+        e.preventDefault();
+        setActiveTab(tabOrder[focusedTabIndex]);
+        break;
+    }
   };
 
   const handleEndTurn = () => {
@@ -495,11 +517,26 @@ const GameDashboard = () => {
 
         {/* Right Panel - Tabbed Interface */}
         <div className="col-span-5">
-          <Tabs defaultValue="chronicles" className="h-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="chronicles">Chronicles</TabsTrigger>
-              <TabsTrigger value="status">Status</TabsTrigger>
-              <TabsTrigger value="actions">Actions</TabsTrigger>
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="h-full">
+            <TabsList className="grid w-full grid-cols-3" onKeyDown={handleTabKeyDown}>
+              <TabsTrigger 
+                value="chronicles" 
+                className={focusedTabIndex === 0 && activeTab !== 'chronicles' ? 'ring-2 ring-primary' : ''}
+              >
+                Chronicles
+              </TabsTrigger>
+              <TabsTrigger 
+                value="status"
+                className={focusedTabIndex === 1 && activeTab !== 'status' ? 'ring-2 ring-primary' : ''}
+              >
+                Status
+              </TabsTrigger>
+              <TabsTrigger 
+                value="actions"
+                className={focusedTabIndex === 2 && activeTab !== 'actions' ? 'ring-2 ring-primary' : ''}
+              >
+                Actions
+              </TabsTrigger>
             </TabsList>
             
             <TabsContent value="chronicles" className="mt-4">
