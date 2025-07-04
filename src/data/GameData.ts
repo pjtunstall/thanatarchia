@@ -8,43 +8,20 @@ import byzantineQueen from "@/assets/byzantine-queen-portrait.jpg";
 import byzantineChief from "@/assets/byzantine-chief-portrait.jpg";
 
 export const historicalFactions: HistoricalFaction[] = [
-  { name: "Roman Empire", type: "imperial", color: "hsl(var(--imperial))" },
-  { name: "Bagaudae of Gaul", type: "bagaudae", color: "hsl(var(--bagaudae))" },
-  {
-    name: "Bagaudae of Hispania",
-    type: "bagaudae",
-    color: "hsl(var(--bagaudae))",
-  },
-  {
-    name: "Ostrogothic Kingdom",
-    type: "barbarian",
-    color: "hsl(var(--barbarian))",
-  },
-  {
-    name: "Visigothic Kingdom",
-    type: "barbarian",
-    color: "hsl(var(--barbarian))",
-  },
-  { name: "Vandal Kingdom", type: "barbarian", color: "hsl(var(--barbarian))" },
-  {
-    name: "Burgundian Kingdom",
-    type: "barbarian",
-    color: "hsl(var(--barbarian))",
-  },
-  {
-    name: "Kingdom of the Franks",
-    type: "barbarian",
-    color: "hsl(var(--barbarian))",
-  },
-  { name: "Gepid Kingdom", type: "barbarian", color: "hsl(var(--barbarian))" },
-  { name: "Heruli", type: "barbarian", color: "hsl(var(--barbarian))" },
-  {
-    name: "Suebian Confederation",
-    type: "barbarian",
-    color: "hsl(var(--barbarian))",
-  },
-  { name: "Alans", type: "barbarian", color: "hsl(var(--barbarian))" },
-  { name: "Hunnic Empire", type: "barbarian", color: "hsl(var(--barbarian))" },
+  { name: "player", type: "barbarian", color: "hsl(var(--barbarian))", displayName: "Your Faction" },
+  { name: "Roman Empire", type: "imperial", color: "hsl(var(--imperial))", displayName: "Roman Empire" },
+  { name: "Bagaudae of Gaul", type: "bagaudae", color: "hsl(var(--bagaudae))", displayName: "Bagaudae of Gaul" },
+  { name: "Bagaudae of Hispania", type: "bagaudae", color: "hsl(var(--bagaudae))", displayName: "Bagaudae of Hispania" },
+  { name: "Ostrogothic Kingdom", type: "barbarian", color: "hsl(var(--ostrogothic))", displayName: "Ostrogothic Kingdom" },
+  { name: "Visigothic Kingdom", type: "barbarian", color: "hsl(var(--visigothic))", displayName: "Visigothic Kingdom" },
+  { name: "Vandal Kingdom", type: "barbarian", color: "hsl(var(--vandal))", displayName: "Vandal Kingdom" },
+  { name: "Burgundian Kingdom", type: "barbarian", color: "hsl(var(--burgundian))", displayName: "Burgundian Kingdom" },
+  { name: "Kingdom of the Franks", type: "barbarian", color: "hsl(var(--frankish))", displayName: "Kingdom of the Franks" },
+  { name: "Gepid Kingdom", type: "barbarian", color: "hsl(var(--gepid))", displayName: "Gepid Kingdom" },
+  { name: "Heruli", type: "barbarian", color: "hsl(var(--heruli))", displayName: "Heruli" },
+  { name: "Suebian Confederation", type: "barbarian", color: "hsl(var(--suebian))", displayName: "Suebian Confederation" },
+  { name: "Alans", type: "barbarian", color: "hsl(var(--alans))", displayName: "Alans" },
+  { name: "Hunnic Empire", type: "barbarian", color: "hsl(var(--hunnic))", displayName: "Hunnic Empire" },
 ];
 
 export const characterPortraits: CharacterPortrait[] = [

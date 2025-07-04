@@ -33,6 +33,7 @@ export interface HistoricalFaction {
   name: string;
   type: 'imperial' | 'barbarian' | 'bagaudae';
   color: string;
+  displayName: string;
 }
 
 export interface CharacterPortrait {

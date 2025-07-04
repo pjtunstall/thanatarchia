@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Territory } from "@/types/GameTypes";
+import { historicalFactions } from "@/data/GameData";
 import romanEmpireMap from "@/assets/roman-empire-map-clean.jpg";
 
 interface GameMapProps {
@@ -16,23 +17,14 @@ const GameMap: React.FC<GameMapProps> = ({
   currentTurn,
   onTerritoryClick,
 }) => {
-  // Consolidated faction mapping
-  const factionColors: Record<string, { color: string; name: string }> = {
-    "player": { color: "hsl(var(--barbarian))", name: "Your Faction" },
-    "Roman Empire": { color: "hsl(var(--imperial))", name: "Roman Empire" },
-    "Bagaudae of Gaul": { color: "hsl(var(--bagaudae))", name: "Bagaudae of Gaul" },
-    "Bagaudae of Hispania": { color: "hsl(var(--bagaudae))", name: "Bagaudae of Hispania" },
-    "Ostrogothic Kingdom": { color: "hsl(var(--ostrogothic))", name: "Ostrogothic Kingdom" },
-    "Visigothic Kingdom": { color: "hsl(var(--visigothic))", name: "Visigothic Kingdom" },
-    "Vandal Kingdom": { color: "hsl(var(--vandal))", name: "Vandal Kingdom" },
-    "Burgundian Kingdom": { color: "hsl(var(--burgundian))", name: "Burgundian Kingdom" },
-    "Kingdom of the Franks": { color: "hsl(var(--frankish))", name: "Kingdom of the Franks" },
-    "Gepid Kingdom": { color: "hsl(var(--gepid))", name: "Gepid Kingdom" },
-    "Heruli": { color: "hsl(var(--heruli))", name: "Heruli" },
-    "Suebian Confederation": { color: "hsl(var(--suebian))", name: "Suebian Confederation" },
-    "Alans": { color: "hsl(var(--alans))", name: "Alans" },
-    "Hunnic Empire": { color: "hsl(var(--hunnic))", name: "Hunnic Empire" },
-  };
+  // Create faction lookup from centralized data
+  const factionLookup = React.useMemo(() => {
+    const lookup: Record<string, { color: string; name: string }> = {};
+    historicalFactions.forEach(faction => {
+      lookup[faction.name] = { color: faction.color, name: faction.displayName };
+    });
+    return lookup;
+  }, []);
 
   const getTerritoryColor = (owner: string) => {
     const factionClassMap: Record<string, string> = {
@@ -161,7 +153,7 @@ const GameMap: React.FC<GameMapProps> = ({
         {/* Faction Legend */}
         <div className="mt-4 p-3 bg-muted/30 rounded-lg">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
-            {Object.entries(factionColors).map(([key, faction]) => (
+            {Object.entries(factionLookup).map(([key, faction]) => (
               <div key={key} className="flex items-center gap-2">
                 <div 
                   className="w-3 h-3 rounded border"
