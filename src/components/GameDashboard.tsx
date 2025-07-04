@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Sword, Eye, Coins, Users } from 'lucide-react';
 
 interface Faction {
@@ -492,134 +493,152 @@ const GameDashboard = () => {
           </Card>
         </div>
 
-        {/* Right Panel - Chronicles and Actions */}
-        <div className="col-span-5 flex flex-col gap-4">
-          {/* Chronicles Panel */}
-          <Card className="flex-1 bg-[hsl(var(--chronicle))]">
-            <CardHeader>
-              <CardTitle className="text-xl">Chronicles of the Realm</CardTitle>
-              <p className="text-sm text-muted-foreground">As recorded by the learned scribes</p>
-            </CardHeader>
-            <CardContent>
-              <ScrollArea className="h-64">
-                <div className="space-y-4">
-                  {chronicles.map((chronicle) => (
-                    <div key={chronicle.id} className="border-l-4 border-primary pl-4 py-2">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Badge variant={chronicle.bias === 'friendly' ? 'secondary' : 'destructive'}>
-                          {chronicle.chronicler}
-                        </Badge>
-                        <span className="text-xs text-muted-foreground">Turn {chronicle.turn}</span>
-                      </div>
-                      <p className="text-sm italic font-serif leading-relaxed">
-                        "{chronicle.entry}"
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </ScrollArea>
-            </CardContent>
-          </Card>
-
-          {/* Faction Info */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">{playerFaction.name}</CardTitle>
-              <Badge style={{ backgroundColor: playerFaction.color }}>
-                {playerFaction.type.charAt(0).toUpperCase() + playerFaction.type.slice(1)}
-              </Badge>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <Coins className="w-4 h-4 text-yellow-600" />
-                  <span className="text-sm font-semibold">Treasure:</span>
-                  <span className="text-sm">{playerFaction.treasure} solidi</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Users className="w-4 h-4 text-blue-600" />
-                  <span className="text-sm font-semibold">Total Troops:</span>
-                  <span className="text-sm">{playerFaction.troops}</span>
-                </div>
-                <p className="text-sm">Territories: {playerFaction.territories}</p>
-                <div>
-                  <p className="text-sm font-semibold mb-1">Available for Marriage:</p>
-                  {playerFaction.relatives.map((relative, index) => (
-                    <Badge key={index} variant="outline" className="mr-1 mb-1">
-                      {relative}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Actions Panel */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Actions</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="grid grid-cols-2 gap-2">
-                  <Button onClick={() => handleAction('raid')} variant="destructive" size="sm">
-                    <Sword className="w-3 h-3 mr-1" />
-                    Raid Territory
-                  </Button>
-                  <Button onClick={() => handleAction('marry')} variant="secondary" size="sm">
-                    Arrange Marriage
-                  </Button>
-                  <Button onClick={() => handleAction('negotiate')} variant="outline" size="sm">
-                    Send Envoy
-                  </Button>
-                  <Button onClick={handleEndTurn} variant="default" size="sm">
-                    End Turn
-                  </Button>
-                </div>
-                
-                <div className="border-t pt-3">
-                  <p className="text-sm font-semibold mb-2">Treasury Actions</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    <Button 
-                      onClick={handleRecruitTroops} 
-                      variant="outline" 
-                      size="sm"
-                      disabled={playerFaction.treasure < 50}
-                    >
-                      <Users className="w-3 h-3 mr-1" />
-                      Recruit (50g)
-                    </Button>
-                    <Button 
-                      onClick={() => selectedTerritory && handleSpy(selectedTerritory)} 
-                      variant="outline" 
-                      size="sm"
-                      disabled={!selectedTerritory || playerFaction.treasure < 25}
-                    >
-                      <Eye className="w-3 h-3 mr-1" />
-                      Spy (25g)
-                    </Button>
-                  </div>
-                </div>
-                
-                {selectedTerritory && (
-                  <div className="border-t pt-3">
-                    <p className="text-sm font-semibold mb-2">Selected Territory</p>
-                    {(() => {
-                      const territory = territories.find(t => t.id === selectedTerritory);
-                      const validTargets = territory?.owner === 'player' ? getValidAttackTargets(selectedTerritory) : [];
-                      
-                      return territory ? (
-                        <div className="text-xs space-y-2">
-                          <div className="space-y-1">
-                            <p><strong>{territory.name}</strong></p>
-                            <p>Owner: {territory.owner === 'player' ? 'You' : territory.owner}</p>
-                            <p>Terrain: {territory.terrain}</p>
-                            <p>Troops: {territory.troops}</p>
+        {/* Right Panel - Tabbed Interface */}
+        <div className="col-span-5">
+          <Tabs defaultValue="chronicles" className="h-full">
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="chronicles">Chronicles</TabsTrigger>
+              <TabsTrigger value="status">Status</TabsTrigger>
+              <TabsTrigger value="actions">Actions</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="chronicles" className="mt-4">
+              <Card className="h-[calc(100vh-200px)] bg-[hsl(var(--chronicle))]">
+                <CardHeader>
+                  <CardTitle className="text-xl">Chronicles</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ScrollArea className="h-[calc(100vh-300px)]">
+                    <div className="space-y-4">
+                      {chronicles.map((chronicle) => (
+                        <div key={chronicle.id} className="border-l-4 border-primary pl-4 py-2">
+                          <div className="flex items-center gap-2 mb-1">
+                            <Badge variant={chronicle.bias === 'friendly' ? 'secondary' : 'destructive'}>
+                              {chronicle.chronicler}
+                            </Badge>
+                            <span className="text-xs text-muted-foreground">Turn {chronicle.turn}</span>
                           </div>
-                          
-                          {validTargets.length > 0 && (
+                          <p className="text-sm italic font-serif leading-relaxed">
+                            "{chronicle.entry}"
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </ScrollArea>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="status" className="mt-4">
+              <Card className="h-[calc(100vh-200px)]">
+                <CardHeader>
+                  <CardTitle className="text-lg">{playerFaction.name}</CardTitle>
+                  <Badge style={{ backgroundColor: playerFaction.color }}>
+                    {playerFaction.type.charAt(0).toUpperCase() + playerFaction.type.slice(1)}
+                  </Badge>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <Coins className="w-4 h-4 text-yellow-600" />
+                      <span className="text-sm font-semibold">Treasure:</span>
+                      <span className="text-sm">{playerFaction.treasure} solidi</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Users className="w-4 h-4 text-blue-600" />
+                      <span className="text-sm font-semibold">Total Troops:</span>
+                      <span className="text-sm">{playerFaction.troops}</span>
+                    </div>
+                    <p className="text-sm">Territories: {playerFaction.territories}</p>
+                    <div>
+                      <p className="text-sm font-semibold mb-1">Available for Marriage:</p>
+                      {playerFaction.relatives.map((relative, index) => (
+                        <Badge key={index} variant="outline" className="mr-1 mb-1">
+                          {relative}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  {selectedTerritory && (
+                    <div className="border-t pt-4 mt-4">
+                      <p className="text-sm font-semibold mb-2">Selected Territory</p>
+                      {(() => {
+                        const territory = territories.find(t => t.id === selectedTerritory);
+                        return territory ? (
+                          <div className="text-xs space-y-2">
                             <div className="space-y-1">
-                              <p className="font-semibold">Attack Targets:</p>
+                              <p><strong>{territory.name}</strong></p>
+                              <p>Owner: {territory.owner === 'player' ? 'You' : territory.owner}</p>
+                              <p>Terrain: {territory.terrain}</p>
+                              <p>Troops: {territory.troops}</p>
+                            </div>
+                          </div>
+                        ) : null;
+                      })()}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="actions" className="mt-4">
+              <Card className="h-[calc(100vh-200px)]">
+                <CardHeader>
+                  <CardTitle className="text-lg">Actions</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-2 gap-2">
+                      <Button onClick={() => handleAction('raid')} variant="destructive" size="sm">
+                        <Sword className="w-3 h-3 mr-1" />
+                        Raid Territory
+                      </Button>
+                      <Button onClick={() => handleAction('marry')} variant="secondary" size="sm">
+                        Arrange Marriage
+                      </Button>
+                      <Button onClick={() => handleAction('negotiate')} variant="outline" size="sm">
+                        Send Envoy
+                      </Button>
+                      <Button onClick={handleEndTurn} variant="default" size="sm">
+                        End Turn
+                      </Button>
+                    </div>
+                    
+                    <div className="border-t pt-3">
+                      <p className="text-sm font-semibold mb-2">Treasury Actions</p>
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button 
+                          onClick={handleRecruitTroops} 
+                          variant="outline" 
+                          size="sm"
+                          disabled={playerFaction.treasure < 50}
+                        >
+                          <Users className="w-3 h-3 mr-1" />
+                          Recruit (50g)
+                        </Button>
+                        <Button 
+                          onClick={() => selectedTerritory && handleSpy(selectedTerritory)} 
+                          variant="outline" 
+                          size="sm"
+                          disabled={!selectedTerritory || playerFaction.treasure < 25}
+                        >
+                          <Eye className="w-3 h-3 mr-1" />
+                          Spy (25g)
+                        </Button>
+                      </div>
+                    </div>
+                    
+                    {selectedTerritory && (
+                      <div className="border-t pt-3">
+                        <p className="text-sm font-semibold mb-2">Territory Actions</p>
+                        {(() => {
+                          const territory = territories.find(t => t.id === selectedTerritory);
+                          const validTargets = territory?.owner === 'player' ? getValidAttackTargets(selectedTerritory) : [];
+                          
+                          return territory && validTargets.length > 0 ? (
+                            <div className="space-y-1">
+                              <p className="text-xs font-semibold">Attack Targets:</p>
                               {validTargets.map((target) => (
                                 <Button
                                   key={target.id}
@@ -634,15 +653,15 @@ const GameDashboard = () => {
                                 </Button>
                               ))}
                             </div>
-                          )}
-                        </div>
-                      ) : null;
-                    })()}
+                          ) : null;
+                        })()}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </div>
