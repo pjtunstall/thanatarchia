@@ -367,6 +367,22 @@ All colors MUST be HSL.
       radial-gradient(circle at 75% 75%, rgba(139, 108, 71, 0.08) 0%, transparent 50%),
       linear-gradient(135deg, hsl(var(--parchment)) 0%, hsl(var(--parchment) / 0.95) 100%);
   }
+
+  /* Faction territory colors */
+  .faction-player { @apply bg-[hsl(var(--barbarian))]; }
+  .faction-roman-empire { @apply bg-[hsl(var(--imperial))]; }
+  .faction-bagaudae-gaul { @apply bg-[hsl(var(--bagaudae))]; }
+  .faction-bagaudae-hispania { @apply bg-[hsl(var(--bagaudae))]; }
+  .faction-ostrogothic { @apply bg-[hsl(var(--ostrogothic))]; }
+  .faction-visigothic { @apply bg-[hsl(var(--visigothic))]; }
+  .faction-vandal { @apply bg-[hsl(var(--vandal))]; }
+  .faction-burgundian { @apply bg-[hsl(var(--burgundian))]; }
+  .faction-frankish { @apply bg-[hsl(var(--frankish))]; }
+  .faction-gepid { @apply bg-[hsl(var(--gepid))]; }
+  .faction-heruli { @apply bg-[hsl(var(--heruli))]; }
+  .faction-suebian { @apply bg-[hsl(var(--suebian))]; }
+  .faction-alans { @apply bg-[hsl(var(--alans))]; }
+  .faction-hunnic { @apply bg-[hsl(var(--hunnic))]; }
 }
 
 @layer base {

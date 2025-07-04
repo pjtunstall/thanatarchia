@@ -35,7 +35,23 @@ const GameMap: React.FC<GameMapProps> = ({
   };
 
   const getTerritoryColor = (owner: string) => {
-    return `bg-[${factionColors[owner]?.color || "hsl(var(--barbarian))"}]`;
+    const factionClassMap: Record<string, string> = {
+      "player": "faction-player",
+      "Roman Empire": "faction-roman-empire",
+      "Bagaudae of Gaul": "faction-bagaudae-gaul",
+      "Bagaudae of Hispania": "faction-bagaudae-hispania",
+      "Ostrogothic Kingdom": "faction-ostrogothic",
+      "Visigothic Kingdom": "faction-visigothic",
+      "Vandal Kingdom": "faction-vandal",
+      "Burgundian Kingdom": "faction-burgundian",
+      "Kingdom of the Franks": "faction-frankish",
+      "Gepid Kingdom": "faction-gepid",
+      "Heruli": "faction-heruli",
+      "Suebian Confederation": "faction-suebian",
+      "Alans": "faction-alans",
+      "Hunnic Empire": "faction-hunnic",
+    };
+    return factionClassMap[owner] || "faction-player";
   };
   
   return (
