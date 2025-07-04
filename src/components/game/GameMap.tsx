@@ -1,7 +1,9 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Territory } from "@/types/GameTypes";
 import { historicalFactions } from "@/data/GameData";
+import FactionDetails from "./FactionDetails";
 import romanEmpireMap from "@/assets/roman-empire-map-clean.jpg";
 
 interface GameMapProps {
@@ -178,22 +180,36 @@ const GameMap: React.FC<GameMapProps> = ({
         {/* Faction Legend */}
         <div className="mt-4 p-3 bg-muted/30 rounded-lg">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
-            {Object.entries(factionLookup).map(([key, faction]) => (
-              <div 
-                key={key} 
-                className={`flex items-center gap-2 px-2 py-1 rounded ${
-                  key === selectedFaction.name ? "bg-primary/20 border border-primary/30" : ""
-                }`}
-              >
-                <div 
-                  className="w-3 h-3 rounded border"
-                  style={{ backgroundColor: faction.color }}
-                ></div>
-                <span className={key === selectedFaction.name ? "font-semibold" : ""}>
-                  {faction.name}
-                </span>
-              </div>
-            ))}
+            {Object.entries(factionLookup).map(([key, factionInfo]) => {
+              const fullFaction = historicalFactions.find(f => f.name === key);
+              if (!fullFaction) return null;
+              
+              return (
+                <Popover key={key}>
+                  <PopoverTrigger asChild>
+                    <div 
+                      className={`flex items-center gap-2 px-2 py-1 rounded cursor-pointer hover:bg-muted/50 transition-colors ${
+                        key === selectedFaction.name ? "bg-primary/20 border border-primary/30" : ""
+                      }`}
+                    >
+                      <div 
+                        className="w-3 h-3 rounded border"
+                        style={{ backgroundColor: factionInfo.color }}
+                      ></div>
+                      <span className={key === selectedFaction.name ? "font-semibold" : ""}>
+                        {factionInfo.name}
+                      </span>
+                    </div>
+                  </PopoverTrigger>
+                  <PopoverContent side="top" align="start" className="p-0">
+                    <FactionDetails 
+                      faction={fullFaction} 
+                      isPlayerFaction={key === selectedFaction.name}
+                    />
+                  </PopoverContent>
+                </Popover>
+              );
+            })}
           </div>
         </div>
       </CardContent>

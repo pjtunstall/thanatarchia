@@ -34,6 +34,13 @@ export interface HistoricalFaction {
   type: 'imperial' | 'barbarian' | 'bagaudae';
   color: string;
   displayName: string;
+  leader: {
+    name: string;
+    gender: 'male' | 'female';
+    portrait: string;
+  };
+  heresy: 'Orthodox' | 'Arian' | 'Filioque' | 'Heathen' | 'Manichean';
+  relatives: string[];
 }
 
 export interface CharacterPortrait {
