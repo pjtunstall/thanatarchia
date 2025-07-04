@@ -1,6 +1,6 @@
 import { HistoricalFaction, CharacterPortrait, Chronicler, Territory } from '@/types/GameTypes';
-import barbarianQueen from '@/assets/barbarian-queen.jpg';
-import barbarianChief from '@/assets/barbarian-chief.jpg';
+import byzantineQueen from '@/assets/byzantine-queen-portrait.jpg';
+import byzantineChief from '@/assets/byzantine-chief-portrait.jpg';
 
 export const historicalFactions: HistoricalFaction[] = [
   { name: 'Western Roman Empire', type: 'imperial', color: 'hsl(var(--imperial))' },
@@ -21,12 +21,12 @@ export const characterPortraits: CharacterPortrait[] = [
   {
     name: 'Brunhild the Fierce',
     gender: 'female',
-    image: barbarianQueen
+    image: byzantineQueen
   },
   {
     name: 'Theodoric the Bold',
     gender: 'male', 
-    image: barbarianChief
+    image: byzantineChief
   }
 ];
 
