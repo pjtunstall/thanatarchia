@@ -8,7 +8,7 @@ import ActionsPanel from '@/components/game/ActionsPanel';
 import GameOverlay from '@/components/game/GameOverlay';
 
 const GameDashboard = () => {
-  const [activeTab, setActiveTab] = useState('chronicles');
+  const [activeTab, setActiveTab] = useState('status');
   const [focusedTabIndex, setFocusedTabIndex] = useState(0);
   
   const gameState = useGameState();
