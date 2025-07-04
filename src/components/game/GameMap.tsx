@@ -8,6 +8,8 @@ interface GameMapProps {
   territories: Territory[];
   selectedTerritory: string | null;
   currentTurn: number;
+  playerFactionName: string;
+  playerFactionColor: string;
   onTerritoryClick: (territoryId: string) => void;
 }
 
@@ -15,20 +17,35 @@ const GameMap: React.FC<GameMapProps> = ({
   territories,
   selectedTerritory,
   currentTurn,
+  playerFactionName,
+  playerFactionColor,
   onTerritoryClick,
 }) => {
   // Create faction lookup from centralized data
   const factionLookup = React.useMemo(() => {
     const lookup: Record<string, { color: string; name: string }> = {};
+    
+    // Add player faction
+    lookup["player"] = { 
+      color: playerFactionColor, 
+      name: `${playerFactionName} (you)` 
+    };
+    
+    // Add other factions
     historicalFactions.forEach(faction => {
       lookup[faction.name] = { color: faction.color, name: faction.displayName };
     });
+    
     return lookup;
-  }, []);
+  }, [playerFactionName, playerFactionColor]);
 
   const getTerritoryColor = (owner: string) => {
+    // For player territories, use dynamic color
+    if (owner === "player") {
+      return "";
+    }
+    
     const factionClassMap: Record<string, string> = {
-      "player": "faction-player",
       "Roman Empire": "faction-roman-empire",
       "Bagaudae of Gaul": "faction-bagaudae-gaul",
       "Bagaudae of Hispania": "faction-bagaudae-hispania",
@@ -43,7 +60,7 @@ const GameMap: React.FC<GameMapProps> = ({
       "Alans": "faction-alans",
       "Hunnic Empire": "faction-hunnic",
     };
-    return factionClassMap[owner] || "faction-player";
+    return factionClassMap[owner] || "";
   };
   
   return (
@@ -87,6 +104,7 @@ const GameMap: React.FC<GameMapProps> = ({
               {/* Territory marker */}
               <div
                 className={`w-6 h-6 rounded-full border-2 border-white shadow-lg ${getTerritoryColor(territory.owner)}`}
+                style={territory.owner === "player" ? { backgroundColor: playerFactionColor } : {}}
               ></div>
 
               {/* Territory name */}

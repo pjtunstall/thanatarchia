@@ -8,7 +8,6 @@ import byzantineQueen from "@/assets/byzantine-queen-portrait.jpg";
 import byzantineChief from "@/assets/byzantine-chief-portrait.jpg";
 
 export const historicalFactions: HistoricalFaction[] = [
-  { name: "player", type: "barbarian", color: "hsl(var(--barbarian))", displayName: "Your Faction" },
   { name: "Roman Empire", type: "imperial", color: "hsl(var(--imperial))", displayName: "Roman Empire" },
   { name: "Bagaudae of Gaul", type: "bagaudae", color: "hsl(var(--bagaudae))", displayName: "Bagaudae of Gaul" },
   { name: "Bagaudae of Hispania", type: "bagaudae", color: "hsl(var(--bagaudae))", displayName: "Bagaudae of Hispania" },

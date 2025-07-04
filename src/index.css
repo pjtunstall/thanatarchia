@@ -369,7 +369,6 @@ All colors MUST be HSL.
   }
 
   /* Faction territory colors */
-  .faction-player { @apply bg-[hsl(var(--barbarian))]; }
   .faction-roman-empire { @apply bg-[hsl(var(--imperial))]; }
   .faction-bagaudae-gaul { @apply bg-[hsl(var(--bagaudae))]; }
   .faction-bagaudae-hispania { @apply bg-[hsl(var(--bagaudae))]; }

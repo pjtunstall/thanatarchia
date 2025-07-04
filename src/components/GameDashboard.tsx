@@ -45,6 +45,8 @@ const GameDashboard = () => {
             territories={gameState.territories}
             selectedTerritory={gameState.selectedTerritory}
             currentTurn={gameState.currentTurn}
+            playerFactionName={gameState.selectedFaction.displayName}
+            playerFactionColor={gameState.selectedFaction.color}
             onTerritoryClick={gameState.handleTerritoryClick}
           />
         </div>
