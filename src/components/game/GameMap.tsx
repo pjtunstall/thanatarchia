@@ -16,7 +16,7 @@ interface GameMapProps {
   currentTurn: number;
   playerFactionName: string;
   playerFactionColor: string;
-  selectedFaction: { name: string; color: string; displayName: string };
+  selectedFaction: { name: string; color: string };
   playerCharacter: {
     name: string;
     gender: "male" | "female";
@@ -56,7 +56,7 @@ const GameMap: React.FC<GameMapProps> = ({
       ) {
         lookup[faction.name] = {
           color: faction.color,
-          name: faction.displayName,
+          name: faction.name,
         };
       }
     });

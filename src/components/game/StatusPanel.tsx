@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Coins, Users } from "lucide-react";
+import { Sword, Eye, Coins, Users, MapPin } from "lucide-react";
 import { Faction, Territory, CharacterPortrait } from "@/types/GameTypes";
 import { getHeresyColor } from "@/data/GameData";
 
@@ -93,30 +93,51 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
             </div>
 
             {selectedTerritory && (
-              <div className="border-t pt-4">
+              <div className="border-t pt-3">
                 <p className="text-sm font-semibold mb-2">Selected Territory</p>
-                <div className="text-xs space-y-1">
-                  {(() => {
-                    const territory = territories.find(
-                      (t) => t.name === selectedTerritory
-                    );
-                    return territory ? (
-                      <>
-                        <p>
-                          <strong>{territory.name}</strong>
-                        </p>
-                        <p>
-                          Owner:{" "}
-                          {territory.owner === playerFaction.name
-                            ? "You"
-                            : territory.owner}
-                        </p>
-                        <p>Terrain: {territory.terrain}</p>
-                        <p>Troops: {territory.troops}</p>
-                      </>
-                    ) : null;
-                  })()}
-                </div>
+                {(() => {
+                  const territory = territories.find(
+                    (t) => t.name === selectedTerritory
+                  );
+                  if (!territory) return null;
+
+                  const isPlayerTerritory =
+                    territory.owner === playerFaction.name;
+                  const troopCount =
+                    territory.troops || territory.estimatedTroops || 0;
+
+                  return (
+                    <div className="bg-muted/30 rounded p-2">
+                      <div className="flex items-center justify-between text-sm">
+                        <div className="flex items-center gap-2">
+                          <MapPin className="w-4 h-4 text-muted-foreground" />
+                          <span className="font-medium">{territory.name}</span>
+                          <Badge
+                            variant={
+                              isPlayerTerritory ? "default" : "secondary"
+                            }
+                            className="text-xs"
+                          >
+                            {territory.owner}
+                          </Badge>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Users className="w-4 h-4 text-muted-foreground" />
+                          <span className="font-medium">
+                            {isPlayerTerritory
+                              ? troopCount
+                              : territory.spiedOn
+                              ? troopCount
+                              : "?"}
+                          </span>
+                          {!isPlayerTerritory && !territory.spiedOn && (
+                            <Eye className="w-3 h-3 text-muted-foreground/60" />
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
               </div>
             )}
           </div>

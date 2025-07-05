@@ -1,4 +1,3 @@
-// TODO: Remove ?s as this type is sorted out.
 export interface Faction {
   id?: string;
   name: string;

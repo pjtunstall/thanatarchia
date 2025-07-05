@@ -45,7 +45,7 @@ const FactionDetails: React.FC<FactionDetailsProps> = ({
           <div className="flex-1">
             <CardTitle className="text-lg flex items-center gap-2">
               {isPlayerFaction && <Crown className="w-4 h-4 text-yellow-500" />}
-              {faction.displayName}
+              {faction.name}
             </CardTitle>
             <p className="text-sm text-muted-foreground font-medium">
               {leader.name}
