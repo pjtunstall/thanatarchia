@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { HistoricalFaction, CharacterPortrait } from "@/types/GameTypes";
 import { Crown, Users, Church } from "lucide-react";
+import { getHeresyColor } from "@/data/GameData";
 
 interface FactionDetailsProps {
   faction: HistoricalFaction;
@@ -26,24 +27,6 @@ const FactionDetails: React.FC<FactionDetailsProps> = ({
           portrait: playerCharacter.image,
         }
       : faction.leader;
-  const getHeresyColor = (heresy: string) => {
-    switch (heresy) {
-      case "Orthodox":
-        return "bg-blue-100 text-blue-800 border-blue-200";
-      case "Arian":
-        return "bg-red-100 text-red-800 border-red-200";
-      case "Filioque":
-        return "bg-purple-100 text-purple-800 border-purple-200";
-      case "Heathen":
-        return "bg-amber-100 text-amber-800 border-amber-200";
-      case "Manichean":
-        return "bg-green-100 text-green-800 border-green-200";
-      case "Pelagian":
-        return "bg-pink-100 text-pink-800 border-pink-200";
-      default:
-        return "bg-gray-100 text-gray-800 border-gray-200";
-    }
-  };
 
   return (
     <Card className="w-80 parchment-texture">

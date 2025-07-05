@@ -9,6 +9,26 @@ export interface Faction {
   treasure: number;
 }
 
+export interface HistoricalFaction {
+  name: string;
+  type: "imperial" | "barbarian" | "bagaudae";
+  color: string;
+  displayName: string;
+  leader: {
+    name: string;
+    gender: "male" | "female";
+    portrait: string;
+  };
+  heresy:
+    | "Orthodox"
+    | "Arian"
+    | "Heathen"
+    | "Manichean"
+    | "Pelagian"
+    | "Miaphysite";
+  relatives: string[];
+}
+
 export interface Territory {
   name: string;
   x: number;
@@ -28,26 +48,6 @@ export interface Chronicle {
   bias: "friendly" | "hostile";
   entry: string;
   turn: number;
-}
-
-export interface HistoricalFaction {
-  name: string;
-  type: "imperial" | "barbarian" | "bagaudae";
-  color: string;
-  displayName: string;
-  leader: {
-    name: string;
-    gender: "male" | "female";
-    portrait: string;
-  };
-  heresy:
-    | "Orthodox"
-    | "Arian"
-    | "Filioque"
-    | "Heathen"
-    | "Manichean"
-    | "Pelagian";
-  relatives: string[];
 }
 
 export interface CharacterPortrait {
