@@ -4,18 +4,18 @@ export interface Faction {
   name: string;
   type: "imperial" | "barbarian" | "bagaudae";
   color: string;
-  territories?: number;
+  territories: number;
   relatives: string[];
-  troops?: number;
-  treasure?: number;
+  troops: number;
+  treasure: number;
 
-  displayName?: string;
-  leader?: {
+  displayName: string;
+  leader: {
     name: string;
     gender: "male" | "female";
     portrait: string;
   };
-  heresy?:
+  heresy:
     | "Orthodox"
     | "Arian"
     | "Heathen"

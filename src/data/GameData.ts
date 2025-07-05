@@ -33,6 +33,8 @@ export const getHeresyColor = (heresy: string) => {
   }
 };
 
+// Type '{ name: string; type: "imperial"; color: string; displayName: string; leader: { name: string; gender: "male"; portrait: string; }; heresy: "Orthodox"; relatives: string[]; }' is missing the following properties from type 'Faction': territories, troops, treasure
+
 export const factions: Faction[] = [
   {
     name: "Roman Empire",
@@ -46,6 +48,9 @@ export const factions: Faction[] = [
     },
     heresy: "Orthodox",
     relatives: ["Princess Flavia", "Duke Marcus", "General Maximus"],
+    territories: 1,
+    troops: 1000,
+    treasure: 100,
   },
   {
     name: "Bagaudae of Gallia",
@@ -59,6 +64,9 @@ export const factions: Faction[] = [
     },
     heresy: "Manichean",
     relatives: ["Comrade Spartaca", "Comrade Caractacus", "Comrade Amandus"],
+    territories: 1,
+    troops: 1000,
+    treasure: 100,
   },
   {
     name: "Bagaudae of Hispania",
@@ -72,6 +80,9 @@ export const factions: Faction[] = [
     },
     heresy: "Pelagian",
     relatives: ["Comrade Spartaca", "Comrade Amandus"],
+    territories: 1,
+    troops: 1000,
+    treasure: 100,
   },
   {
     name: "Ostrogothic Kingdom",
@@ -85,6 +96,9 @@ export const factions: Faction[] = [
     },
     heresy: "Arian",
     relatives: ["Princess Amalasuntha", "Prince Athalaric", "Nephew Eutharic"],
+    territories: 1,
+    troops: 1000,
+    treasure: 100,
   },
   {
     name: "Visigothic Kingdom",
@@ -98,6 +112,9 @@ export const factions: Faction[] = [
     },
     heresy: "Arian",
     relatives: ["Prince Sigismund", "Lady Galswintha", "Duke Recared"],
+    territories: 1,
+    troops: 1000,
+    treasure: 100,
   },
   {
     name: "Vandal Kingdom",
@@ -111,6 +128,9 @@ export const factions: Faction[] = [
     },
     heresy: "Arian",
     relatives: ["Princess Eudocia", "Brother Gunthamund"],
+    territories: 1,
+    troops: 1000,
+    treasure: 100,
   },
   {
     name: "Burgundian Kingdom",
@@ -124,6 +144,9 @@ export const factions: Faction[] = [
     },
     heresy: "Arian",
     relatives: ["Daughter Clotilde", "Son Sigismund", "Nephew Godomar"],
+    territories: 1,
+    troops: 1000,
+    treasure: 100,
   },
   {
     name: "Kingdom of the Franks",
@@ -137,6 +160,9 @@ export const factions: Faction[] = [
     },
     heresy: "Miaphysite",
     relatives: ["Queen Clotilde", "Prince Clothar", "Princess Clotilde"],
+    territories: 1,
+    troops: 1000,
+    treasure: 100,
   },
   {
     name: "Gepid Kingdom",
@@ -150,6 +176,9 @@ export const factions: Faction[] = [
     },
     heresy: "Arian",
     relatives: ["Son Gunderit", "Daughter Rosamunda"],
+    territories: 1,
+    troops: 1000,
+    treasure: 100,
   },
   {
     name: "Heruli",
@@ -163,6 +192,9 @@ export const factions: Faction[] = [
     },
     heresy: "Arian",
     relatives: ["Brother Hunulf", "General Pierius"],
+    territories: 1,
+    troops: 1000,
+    treasure: 100,
   },
   {
     name: "Suebian Confederation",
@@ -176,6 +208,9 @@ export const factions: Faction[] = [
     },
     heresy: "Heathen",
     relatives: ["Son Rechila", "Daughter Ingunde"],
+    territories: 1,
+    troops: 1000,
+    treasure: 100,
   },
   {
     name: "Alans",
@@ -188,7 +223,10 @@ export const factions: Faction[] = [
       portrait: barbarianKing,
     },
     heresy: "Heathen",
-    relatives: ["Son Goar", "War-Chief Addac (Son)", "Shaman Sangiban"],
+    relatives: ["Son Goar", "Son Addac", "Cousin Sangiban"],
+    territories: 1,
+    troops: 1000,
+    treasure: 100,
   },
   {
     name: "Hunnic Empire",
@@ -202,6 +240,9 @@ export const factions: Faction[] = [
     },
     heresy: "Heathen",
     relatives: ["Brother Ernakh", "Sister Kreka", "Nephew Mundo"],
+    territories: 1,
+    troops: 1000,
+    treasure: 100,
   },
 ];
 
