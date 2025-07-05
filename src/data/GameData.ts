@@ -281,6 +281,15 @@ export const initialTerritories: Territory[] = [
     terrain: "mountains",
   },
   {
+    id: "mauretania",
+    name: "Mauretania",
+    x: 15,
+    y: 75,
+    owner: "Bagaudae of Hispania",
+    troops: 1000,
+    terrain: "plains",
+  },
+  {
     id: "germania",
     name: "Germania",
     x: 35,
@@ -327,7 +336,7 @@ export const initialTerritories: Territory[] = [
   },
   {
     id: "africa",
-    name: "Africa Proconsularis",
+    name: "Africa",
     x: 40,
     y: 80,
     owner: "Vandal Kingdom",
