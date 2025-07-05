@@ -8,7 +8,6 @@ export interface Faction {
   relatives: string[];
   troops: number;
   treasure: number;
-  displayName: string;
   leader: {
     name: string;
     gender: "male" | "female";

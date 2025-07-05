@@ -33,14 +33,11 @@ export const getHeresyColor = (heresy: string) => {
   }
 };
 
-// Type '{ name: string; type: "imperial"; color: string; displayName: string; leader: { name: string; gender: "male"; portrait: string; }; heresy: "Orthodox"; relatives: string[]; }' is missing the following properties from type 'Faction': territories, troops, treasure
-
 export const factions: Faction[] = [
   {
     name: "Roman Empire",
     type: "imperial",
     color: "hsl(var(--imperial))",
-    displayName: "Roman Empire",
     leader: {
       name: "Romulus Augustulus",
       gender: "male",
@@ -56,7 +53,6 @@ export const factions: Faction[] = [
     name: "Bagaudae of Gallia",
     type: "bagaudae",
     color: "hsl(var(--bagaudae))",
-    displayName: "Bagaudae of Gallia",
     leader: {
       name: "Tibatto the Rebel",
       gender: "male",
@@ -72,7 +68,6 @@ export const factions: Faction[] = [
     name: "Bagaudae of Hispania",
     type: "bagaudae",
     color: "hsl(var(--bagaudae))",
-    displayName: "Bagaudae of Hispania",
     leader: {
       name: "Bold Basiliscus",
       gender: "male",
@@ -88,7 +83,6 @@ export const factions: Faction[] = [
     name: "Ostrogothic Kingdom",
     type: "barbarian",
     color: "hsl(var(--ostrogothic))",
-    displayName: "Ostrogothic Kingdom",
     leader: {
       name: "Theodoric the Great",
       gender: "male",
@@ -104,7 +98,6 @@ export const factions: Faction[] = [
     name: "Visigothic Kingdom",
     type: "barbarian",
     color: "hsl(var(--visigothic))",
-    displayName: "Visigothic Kingdom",
     leader: {
       name: "Queen Brunhild",
       gender: "female",
@@ -120,7 +113,6 @@ export const factions: Faction[] = [
     name: "Vandal Kingdom",
     type: "barbarian",
     color: "hsl(var(--vandal))",
-    displayName: "Vandal Kingdom",
     leader: {
       name: "Huneric the Cruel",
       gender: "male",
@@ -136,7 +128,6 @@ export const factions: Faction[] = [
     name: "Burgundian Kingdom",
     type: "barbarian",
     color: "hsl(var(--burgundian))",
-    displayName: "Burgundian Kingdom",
     leader: {
       name: "Gundobad the Wise",
       gender: "male",
@@ -152,7 +143,6 @@ export const factions: Faction[] = [
     name: "Kingdom of the Franks",
     type: "barbarian",
     color: "hsl(var(--frankish))",
-    displayName: "Kingdom of the Franks",
     leader: {
       name: "Clovis the Conqueror",
       gender: "male",
@@ -168,7 +158,6 @@ export const factions: Faction[] = [
     name: "Gepid Kingdom",
     type: "barbarian",
     color: "hsl(var(--gepid))",
-    displayName: "Gepid Kingdom",
     leader: {
       name: "Ardaric the Faithful",
       gender: "male",
@@ -184,7 +173,6 @@ export const factions: Faction[] = [
     name: "Heruli",
     type: "barbarian",
     color: "hsl(var(--heruli))",
-    displayName: "Heruli",
     leader: {
       name: "Odoacer the King-Maker",
       gender: "male",
@@ -200,7 +188,6 @@ export const factions: Faction[] = [
     name: "Suebian Confederation",
     type: "barbarian",
     color: "hsl(var(--suebian))",
-    displayName: "Suebian Confederation",
     leader: {
       name: "Hermeric the Elder",
       gender: "male",
@@ -216,7 +203,6 @@ export const factions: Faction[] = [
     name: "Alans",
     type: "barbarian",
     color: "hsl(var(--alans))",
-    displayName: "Alans",
     leader: {
       name: "Respendial the Horseman",
       gender: "male",
@@ -232,7 +218,6 @@ export const factions: Faction[] = [
     name: "Hunnic Empire",
     type: "barbarian",
     color: "hsl(var(--hunnic))",
-    displayName: "Hunnic Empire",
     leader: {
       name: "Dengizich the Fierce",
       gender: "male",
@@ -322,7 +307,7 @@ export const initialTerritories: Territory[] = [
     name: "Mauretania",
     x: 15,
     y: 75,
-    owner: "Bagaudae of Hispania",
+    owner: "Vandal Kingdom",
     troops: 1000,
     terrain: "plains",
   },

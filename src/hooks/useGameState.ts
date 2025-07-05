@@ -134,7 +134,6 @@ export const useGameState = () => {
       id: "player",
       name: selectedFaction.name,
       leader: playerCharacter,
-      displayName: selectedFaction.displayName,
       heresy: selectedFaction.heresy,
       type: selectedFaction.type,
       color: selectedFaction.color,
@@ -477,7 +476,6 @@ export const useGameState = () => {
     setPlayerFaction({
       id: "player",
       name: selectedFaction.name,
-      displayName: selectedFaction.displayName,
       type: selectedFaction.type,
       leader: selectedFaction.leader,
       heresy: selectedFaction.heresy,
