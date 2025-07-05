@@ -15,7 +15,7 @@ export interface Faction {
   heresy:
     | "Orthodox"
     | "Arian"
-    | "Heathen"
+    | "Pagan"
     | "Manichean"
     | "Pelagian"
     | "Miaphysite";

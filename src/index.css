@@ -49,6 +49,7 @@ All colors MUST be HSL.
     --vandal: 30 80% 50%;
     --burgundian: 180 60% 40%;
     --frankish: 260 55% 45%;
+    --saxon: 195 100% 75%;
     --gepid: 25 60% 35%;
     --heruli: 320 65% 50%;
     --suebian: 200 70% 35%;
@@ -406,10 +407,7 @@ All colors MUST be HSL.
   .faction-roman-empire {
     @apply bg-[hsl(var(--imperial))];
   }
-  .faction-bagaudae-Gallia {
-    @apply bg-[hsl(var(--bagaudae))];
-  }
-  .faction-bagaudae-hispania {
+  .faction-bagaudae {
     @apply bg-[hsl(var(--bagaudae))];
   }
   .faction-ostrogothic {
@@ -441,6 +439,9 @@ All colors MUST be HSL.
   }
   .faction-hunnic {
     @apply bg-[hsl(var(--hunnic))];
+  }
+  .faction-saxon {
+    @apply bg-[hsl(var(--saxon))];
   }
 }
 

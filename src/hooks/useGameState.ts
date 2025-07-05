@@ -45,16 +45,9 @@ export const useGameState = () => {
         male: { name: "Romulus Augustulus", image: romanEmperor },
         female: { name: "Augusta Valentina", image: byzantineQueen },
       },
-      "Bagaudae of Gallia": {
+      Bagaudae: {
         male: { name: "Tibatto the Rebel", image: bagaudaeMaleRebel },
         female: { name: "Comrade Brigit", image: bagaudaeFemaleRebel },
-      },
-      "Bagaudae of Hispania": {
-        male: { name: "Bold Basiliscus", image: bagaudaeMaleRebel },
-        female: {
-          name: "Spartaca the Indomitable",
-          image: bagaudaeFemaleRebel,
-        },
       },
       "Ostrogothic Kingdom": {
         male: { name: "Theodoric the Great", image: barbarianKing },
@@ -512,6 +505,7 @@ export const useGameState = () => {
       "favorable omens",
       "tactical advantage",
       "harsh weather",
+      "bad omens",
     ];
     const condition = conditions[Math.floor(Math.random() * conditions.length)];
     const isPositive = Math.random() > 0.5;

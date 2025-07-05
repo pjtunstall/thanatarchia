@@ -3,6 +3,7 @@ import byzantineQueen from "@/assets/byzantine-queen-portrait.jpg";
 import byzantineChief from "@/assets/byzantine-chief-portrait.jpg";
 import romanEmperor from "@/assets/roman-emperor-portrait.jpg";
 import barbarianKing from "@/assets/barbarian-king-portrait.jpg";
+import barbarianQueen from "@/assets/barbarian-queen.jpg";
 import visigothicQueen from "@/assets/visigothic-queen-portrait.jpg";
 import vandalChief from "@/assets/vandal-chief-portrait.jpg";
 import hunnicWarlord from "@/assets/hunnic-warlord-portrait.jpg";
@@ -22,7 +23,7 @@ export const getHeresyColor = (heresy: string) => {
       return "bg-red-100 text-red-800 border-red-200";
     case "Miaphysite":
       return "bg-purple-100 text-purple-800 border-purple-200";
-    case "Heathen":
+    case "Pagan":
       return "bg-amber-100 text-amber-800 border-amber-200";
     case "Manichean":
       return "bg-green-100 text-green-800 border-green-200";
@@ -50,7 +51,7 @@ export const factions: Faction[] = [
     treasure: 100,
   },
   {
-    name: "Bagaudae of Gallia",
+    name: "Bagaudae",
     type: "bagaudae",
     color: "hsl(var(--bagaudae))",
     leader: {
@@ -60,21 +61,6 @@ export const factions: Faction[] = [
     },
     heresy: "Manichean",
     relatives: ["Comrade Spartaca", "Comrade Caractacus", "Comrade Amandus"],
-    territories: 1,
-    troops: 1000,
-    treasure: 100,
-  },
-  {
-    name: "Bagaudae of Hispania",
-    type: "bagaudae",
-    color: "hsl(var(--bagaudae))",
-    leader: {
-      name: "Bold Basiliscus",
-      gender: "male",
-      image: bagaudaeMaleRebel,
-    },
-    heresy: "Pelagian",
-    relatives: ["Comrade Spartaca", "Comrade Amandus"],
     territories: 1,
     troops: 1000,
     treasure: 100,
@@ -155,6 +141,21 @@ export const factions: Faction[] = [
     treasure: 100,
   },
   {
+    name: "Saxon Confederation",
+    type: "barbarian",
+    color: "hsl(var(--saxon))",
+    leader: {
+      name: "Hasela",
+      gender: "female",
+      image: barbarianQueen,
+    },
+    heresy: "Pagan",
+    relatives: ["Brother Widukind", "Brother Abbio"],
+    territories: 1,
+    troops: 1000,
+    treasure: 100,
+  },
+  {
     name: "Gepid Kingdom",
     type: "barbarian",
     color: "hsl(var(--gepid))",
@@ -193,7 +194,7 @@ export const factions: Faction[] = [
       gender: "male",
       image: barbarianKing,
     },
-    heresy: "Heathen",
+    heresy: "Pagan",
     relatives: ["Son Rechila", "Daughter Ingunde"],
     territories: 1,
     troops: 1000,
@@ -208,7 +209,7 @@ export const factions: Faction[] = [
       gender: "male",
       image: barbarianKing,
     },
-    heresy: "Heathen",
+    heresy: "Pagan",
     relatives: ["Son Goar", "Son Addac", "Cousin Sangiban"],
     territories: 1,
     troops: 1000,
@@ -223,7 +224,7 @@ export const factions: Faction[] = [
       gender: "male",
       image: hunnicWarlord,
     },
-    heresy: "Heathen",
+    heresy: "Pagan",
     relatives: ["Brother Ernakh", "Sister Kreka", "Nephew Mundo"],
     territories: 1,
     troops: 1000,
@@ -270,6 +271,17 @@ export const chroniclers: Chronicler[] = [
   },
 ];
 
+const randomTribe = () => {
+  const names = [
+    "Heruli",
+    "Suebian Confederation",
+    "Alans",
+    "Saxon Confederation",
+    "Burgundian Kingdom",
+  ];
+  return names[Math.floor(Math.random() * names.length)];
+};
+
 export const initialTerritories: Territory[] = [
   {
     name: "Britannia",
@@ -299,7 +311,7 @@ export const initialTerritories: Territory[] = [
     name: "Hispania",
     x: 8,
     y: 52,
-    owner: "Bagaudae of Hispania",
+    owner: "Visigothic Kingdom",
     troops: 800,
     terrain: "mountains",
   },
@@ -315,7 +327,7 @@ export const initialTerritories: Territory[] = [
     name: "Germania",
     x: 35,
     y: 20,
-    owner: "Kingdom of the Franks",
+    owner: randomTribe(),
     troops: 1500,
     terrain: "forest",
   },
@@ -379,7 +391,7 @@ export const initialTerritories: Territory[] = [
     name: "Armorica",
     x: 15,
     y: 30,
-    owner: "Bagaudae of Gallia",
+    owner: "Bagaudae",
     troops: 1000,
     terrain: "forest",
   },
