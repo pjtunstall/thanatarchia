@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Faction, Territory, Chronicle, GameStatus } from "@/types/GameTypes";
 import {
   factions,
-  characterPortraits,
   chroniclers,
   initialTerritories,
   adjacentTerritories,
@@ -46,13 +45,16 @@ export const useGameState = () => {
         male: { name: "Romulus Augustulus", portrait: romanEmperor },
         female: { name: "Augusta Valentina", portrait: byzantineQueen },
       },
-      "Bagaudae of Gaul": {
+      "Bagaudae of Gallia": {
         male: { name: "Tibatto the Rebel", portrait: bagaudaeMaleRebel },
-        female: { name: "Brigit the Fierce", portrait: bagaudaeFemaleRebel },
+        female: { name: "Comrade Brigit", portrait: bagaudaeFemaleRebel },
       },
       "Bagaudae of Hispania": {
-        male: { name: "Basiliscus the Free", portrait: bagaudaeMaleRebel },
-        female: { name: "Spartaca the Defiant", portrait: bagaudaeFemaleRebel },
+        male: { name: "Bold Basiliscus", portrait: bagaudaeMaleRebel },
+        female: {
+          name: "Spartaca the Indomitable",
+          portrait: bagaudaeFemaleRebel,
+        },
       },
       "Ostrogothic Kingdom": {
         male: { name: "Theodoric the Great", portrait: barbarianKing },
@@ -499,7 +501,7 @@ export const useGameState = () => {
     // Generate random condition that affects combat
     const conditions = [
       "plague outbreak",
-      "religious disputes over doctrine",
+      "religious disputes",
       "supply shortages",
       "low morale",
       "veteran reinforcements",

@@ -53,21 +53,17 @@ export const factions: Faction[] = [
     relatives: ["Princess Flavia", "Duke Marcus", "General Maximus"],
   },
   {
-    name: "Bagaudae of Gaul",
+    name: "Bagaudae of Gallia",
     type: "bagaudae",
     color: "hsl(var(--bagaudae))",
-    displayName: "Bagaudae of Gaul",
+    displayName: "Bagaudae of Gallia",
     leader: {
       name: "Tibatto the Rebel",
       gender: "male",
       portrait: bagaudaeMaleRebel,
     },
-    heresy: "Pelagian",
-    relatives: [
-      "Comrade Brigit",
-      "Comrade Caractacus",
-      "Comrade Imogen the Stern",
-    ],
+    heresy: "Manichean",
+    relatives: ["Comrade Spartaca", "Comrade Caractacus", "Comrade Amandus"],
   },
   {
     name: "Bagaudae of Hispania",
@@ -75,11 +71,11 @@ export const factions: Faction[] = [
     color: "hsl(var(--bagaudae))",
     displayName: "Bagaudae of Hispania",
     leader: {
-      name: "Basiliscus the Defiant",
+      name: "Bold Basiliscus",
       gender: "male",
       portrait: bagaudaeMaleRebel,
     },
-    heresy: "Manichean",
+    heresy: "Pelagian",
     relatives: ["Comrade Spartaca", "Comrade Amandus"],
   },
   {
@@ -211,19 +207,6 @@ export const factions: Faction[] = [
     },
     heresy: "Heathen",
     relatives: ["Brother Ernakh", "Sister Kreka", "Nephew Mundo"],
-  },
-];
-
-export const characterPortraits: CharacterPortrait[] = [
-  {
-    name: "Brunhild the Fierce",
-    gender: "female",
-    image: byzantineQueen,
-  },
-  {
-    name: "Theodoric the Bold",
-    gender: "male",
-    image: byzantineChief,
   },
 ];
 
@@ -375,7 +358,7 @@ export const initialTerritories: Territory[] = [
     name: "Armorica",
     x: 15,
     y: 30,
-    owner: "Bagaudae of Gaul",
+    owner: "Bagaudae of Gallia",
     troops: 1000,
     terrain: "forest",
   },
@@ -383,17 +366,17 @@ export const initialTerritories: Territory[] = [
 
 export const adjacentTerritories: Record<string, string[]> = {
   Britannia: ["Gallia", "Armorica"],
-  Gallia: ["Britannia", "Aquitania", "Germania", "Hispania", "Armorica"],
-  Aquitania: ["Gallia", "Hispania", "Mauretania"],
-  Hispania: ["Gallia", "Aquitania", "Africa", "Mauretania"],
-  germania: ["Gallia", "Pannonia", "Dacia"],
+  Gallia: ["Britannia", "Aquitania", "Germania", "Armorica"],
+  Aquitania: ["Gallia", "Armorica", "Hispania", "Mauretania", "Italia"],
+  Hispania: ["Aquitania", "Mauretania"],
+  Germania: ["Gallia", "Pannonia", "Dacia"],
   Pannonia: ["Germania", "Dacia", "Thracia", "Italia"],
-  Dacia: ["germania", "Pannonia", "Thracia"],
+  Dacia: ["Germania", "Pannonia", "Thracia"],
   Thracia: ["Pannonia", "Dacia", "Italia", "Syria"],
-  Italia: ["Pannonia", "Thracia", "Africa"],
-  Africa: ["Hispania", "Italia", "Aegyptus"],
+  Italia: ["Pannonia", "Thracia", "Africa", "Aquitania", "Mauretania"],
+  Africa: ["Italia", "Aegyptus", "Mauretania"],
   Aegyptus: ["Africa", "Syria"],
   Syria: ["Thracia", "Aegyptus"],
   Armorica: ["Britannia", "Gallia"],
-  Mauretania: ["Aquitania", "Hispania"],
+  Mauretania: ["Aquitania", "Hispania", "Italia", "Africa"],
 };

@@ -42,7 +42,7 @@ All colors MUST be HSL.
     --barbarian: 120 40% 35%;
     --bagaudae: 60 50% 40%;
     --chronicle: 30 15% 85%;
-    
+
     /* Specific faction colors */
     --ostrogothic: 280 60% 50%;
     --visigothic: 210 70% 45%;
@@ -109,7 +109,7 @@ All colors MUST be HSL.
     --barbarian: 120 40% 45%;
     --bagaudae: 60 50% 50%;
     --chronicle: 30 10% 25%;
-    
+
     /* Specific faction colors - dark mode */
     --ostrogothic: 280 60% 60%;
     --visigothic: 210 70% 55%;
@@ -135,40 +135,49 @@ All colors MUST be HSL.
 /* Ancient Map Styling */
 @layer components {
   .ancient-map-container {
-    background: 
-      linear-gradient(135deg, #f4f1e8 0%, #e6dcc3 100%);
+    background: linear-gradient(135deg, #f4f1e8 0%, #e6dcc3 100%);
     position: relative;
     overflow: hidden;
   }
-  
+
   /* Manuscript-style background with hills and trees */
   .ancient-map-container::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background-image: 
-      /* Small hills scattered around */
-      radial-gradient(ellipse 20px 8px at 15% 70%, #c4a373 40%, transparent 40%),
-      radial-gradient(ellipse 25px 10px at 25% 75%, #b8986a 40%, transparent 40%),
+      /* Small hills scattered around */ radial-gradient(
+        ellipse 20px 8px at 15% 70%,
+        #c4a373 40%,
+        transparent 40%
+      ),
+      radial-gradient(
+        ellipse 25px 10px at 25% 75%,
+        #b8986a 40%,
+        transparent 40%
+      ),
       radial-gradient(ellipse 18px 7px at 45% 80%, #c4a373 40%, transparent 40%),
       radial-gradient(ellipse 22px 9px at 65% 73%, #b8986a 40%, transparent 40%),
       radial-gradient(ellipse 19px 8px at 80% 78%, #c4a373 40%, transparent 40%),
-      
       /* Forest areas - small tree clusters */
-      radial-gradient(circle 3px at 20% 40%, #8b7355 50%, transparent 50%),
+        radial-gradient(circle 3px at 20% 40%, #8b7355 50%, transparent 50%),
       radial-gradient(circle 2px at 22% 38%, #8b7355 50%, transparent 50%),
       radial-gradient(circle 3px at 40% 35%, #8b7355 50%, transparent 50%),
       radial-gradient(circle 2px at 42% 33%, #8b7355 50%, transparent 50%),
       radial-gradient(circle 3px at 70% 45%, #8b7355 50%, transparent 50%),
       radial-gradient(circle 2px at 72% 43%, #8b7355 50%, transparent 50%),
-      
       /* Rivers - winding lines */
-      linear-gradient(135deg, transparent 48%, #a8c8d8 49%, #a8c8d8 51%, transparent 52%);
-    background-size: 
-      100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%,
+        linear-gradient(
+          135deg,
+          transparent 48%,
+          #a8c8d8 49%,
+          #a8c8d8 51%,
+          transparent 52%
+        );
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%,
       100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%,
       200px 200px;
     opacity: 0.6;
@@ -196,7 +205,7 @@ All colors MUST be HSL.
   }
 
   .city-building::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -8px;
     left: 2px;
@@ -208,7 +217,7 @@ All colors MUST be HSL.
   }
 
   .city-building::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -4px;
     left: 8px;
@@ -292,8 +301,17 @@ All colors MUST be HSL.
     right: 20px;
     width: 60px;
     height: 60px;
-    background: 
-      conic-gradient(from 0deg, #8b7047, #6b5537, #8b7047, #6b5537, #8b7047, #6b5537, #8b7047, #6b5537);
+    background: conic-gradient(
+      from 0deg,
+      #8b7047,
+      #6b5537,
+      #8b7047,
+      #6b5537,
+      #8b7047,
+      #6b5537,
+      #8b7047,
+      #6b5537
+    );
     border-radius: 50%;
     border: 3px solid #6b5537;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -301,7 +319,7 @@ All colors MUST be HSL.
   }
 
   .compass-rose::before {
-    content: 'N';
+    content: "N";
     position: absolute;
     top: -8px;
     left: 50%;
@@ -313,7 +331,7 @@ All colors MUST be HSL.
   }
 
   .compass-rose::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     left: 50%;
@@ -332,7 +350,7 @@ All colors MUST be HSL.
   }
 
   .map-decorative-border::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -8px;
     left: -8px;
@@ -351,37 +369,79 @@ All colors MUST be HSL.
   }
 
   .ancient-title::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -4px;
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, transparent, hsl(var(--primary)), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--primary)),
+      transparent
+    );
     opacity: 0.5;
   }
 
   .parchment-texture {
-    background: 
-      radial-gradient(circle at 25% 25%, rgba(139, 108, 71, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, rgba(139, 108, 71, 0.08) 0%, transparent 50%),
-      linear-gradient(135deg, hsl(var(--parchment)) 0%, hsl(var(--parchment) / 0.95) 100%);
+    background: radial-gradient(
+        circle at 25% 25%,
+        rgba(139, 108, 71, 0.1) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 75% 75%,
+        rgba(139, 108, 71, 0.08) 0%,
+        transparent 50%
+      ),
+      linear-gradient(
+        135deg,
+        hsl(var(--parchment)) 0%,
+        hsl(var(--parchment) / 0.95) 100%
+      );
   }
 
   /* Faction territory colors */
-  .faction-roman-empire { @apply bg-[hsl(var(--imperial))]; }
-  .faction-bagaudae-gaul { @apply bg-[hsl(var(--bagaudae))]; }
-  .faction-bagaudae-hispania { @apply bg-[hsl(var(--bagaudae))]; }
-  .faction-ostrogothic { @apply bg-[hsl(var(--ostrogothic))]; }
-  .faction-visigothic { @apply bg-[hsl(var(--visigothic))]; }
-  .faction-vandal { @apply bg-[hsl(var(--vandal))]; }
-  .faction-burgundian { @apply bg-[hsl(var(--burgundian))]; }
-  .faction-frankish { @apply bg-[hsl(var(--frankish))]; }
-  .faction-gepid { @apply bg-[hsl(var(--gepid))]; }
-  .faction-heruli { @apply bg-[hsl(var(--heruli))]; }
-  .faction-suebian { @apply bg-[hsl(var(--suebian))]; }
-  .faction-alans { @apply bg-[hsl(var(--alans))]; }
-  .faction-hunnic { @apply bg-[hsl(var(--hunnic))]; }
+  .faction-roman-empire {
+    @apply bg-[hsl(var(--imperial))];
+  }
+  .faction-bagaudae-Gallia {
+    @apply bg-[hsl(var(--bagaudae))];
+  }
+  .faction-bagaudae-hispania {
+    @apply bg-[hsl(var(--bagaudae))];
+  }
+  .faction-ostrogothic {
+    @apply bg-[hsl(var(--ostrogothic))];
+  }
+  .faction-visigothic {
+    @apply bg-[hsl(var(--visigothic))];
+  }
+  .faction-vandal {
+    @apply bg-[hsl(var(--vandal))];
+  }
+  .faction-burgundian {
+    @apply bg-[hsl(var(--burgundian))];
+  }
+  .faction-frankish {
+    @apply bg-[hsl(var(--frankish))];
+  }
+  .faction-gepid {
+    @apply bg-[hsl(var(--gepid))];
+  }
+  .faction-heruli {
+    @apply bg-[hsl(var(--heruli))];
+  }
+  .faction-suebian {
+    @apply bg-[hsl(var(--suebian))];
+  }
+  .faction-alans {
+    @apply bg-[hsl(var(--alans))];
+  }
+  .faction-hunnic {
+    @apply bg-[hsl(var(--hunnic))];
+  }
 }
 
 @layer base {
