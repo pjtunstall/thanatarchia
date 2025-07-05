@@ -176,7 +176,7 @@ export const useGameState = () => {
       chronicler: "Priscilla of Byzantium",
       bias: "hostile",
       entry:
-        "I never know the old Ravenna before the Gothic War. Constantinople suited me better . . .",
+        "I never know the old Ravenna before the Gothic Wars. Constantinople suited me better . . .",
       // "How tedious it is to observe these western provinces squabble like children, when true civilization still flourishes in the blessed capital of Constantinople.",
       turn: 1,
     },

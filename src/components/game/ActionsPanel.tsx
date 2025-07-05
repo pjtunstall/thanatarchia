@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Sword, Eye, Coins, Users, MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Faction, Territory } from "@/types/GameTypes";
+import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
 
 interface ActionsPanelProps {
   playerFaction: Faction;
@@ -137,52 +138,12 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
             </div>
           )}
 
-          {/* Selected Territory Info */}
           {selectedTerritory && (
-            <div className="border-t pt-3">
-              <p className="text-sm font-semibold mb-2">Selected Territory</p>
-              {(() => {
-                const territory = territories.find(
-                  (t) => t.name === selectedTerritory
-                );
-                if (!territory) return null;
-
-                const isPlayerTerritory =
-                  territory.owner === selectedFaction.name;
-                const troopCount =
-                  territory.troops || territory.estimatedTroops || 0;
-
-                return (
-                  <div className="bg-muted/30 rounded p-2">
-                    <div className="flex items-center justify-between text-sm">
-                      <div className="flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-muted-foreground" />
-                        <span className="font-medium">{territory.name}</span>
-                        <Badge
-                          variant={isPlayerTerritory ? "default" : "secondary"}
-                          className="text-xs"
-                        >
-                          {territory.owner}
-                        </Badge>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Users className="w-4 h-4 text-muted-foreground" />
-                        <span className="font-medium">
-                          {isPlayerTerritory
-                            ? troopCount
-                            : territory.spiedOn
-                            ? troopCount
-                            : "?"}
-                        </span>
-                        {!isPlayerTerritory && !territory.spiedOn && (
-                          <Eye className="w-3 h-3 text-muted-foreground/60" />
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })()}
-            </div>
+            <SelectedTerritoryInfo
+              territories={territories}
+              selectedTerritory={selectedTerritory}
+              selectedFaction={playerFaction}
+            />
           )}
         </div>
       </CardContent>
