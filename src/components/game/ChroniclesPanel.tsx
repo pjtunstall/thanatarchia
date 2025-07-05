@@ -1,21 +1,31 @@
-import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Chronicle, Chronicler } from '@/types/GameTypes';
+import React, { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Chronicle, Chronicler } from "@/types/GameTypes";
 
 interface ChroniclesPanelProps {
   chronicles: Chronicle[];
   chroniclers: Chronicler[];
 }
 
-const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({ chronicles, chroniclers }) => {
-  const [selectedChronicler, setSelectedChronicler] = useState<Chronicler | null>(null);
+const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
+  chronicles,
+  chroniclers,
+}) => {
+  const [selectedChronicler, setSelectedChronicler] =
+    useState<Chronicler | null>(null);
 
   const getChroniclerInfo = (chroniclerName: string) => {
-    return chroniclers.find(c => c.name === chroniclerName);
+    return chroniclers.find((c) => c.name === chroniclerName);
   };
 
   return (
@@ -29,14 +39,17 @@ const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({ chronicles, chronicle
             {chronicles.map((chronicle) => {
               const chroniclerInfo = getChroniclerInfo(chronicle.chronicler);
               return (
-                <div key={chronicle.id} className="border-l-4 border-primary pl-4 py-2">
+                <div
+                  key={chronicle.id}
+                  className="border-l-4 border-primary pl-4 py-2"
+                >
                   <div className="flex items-center gap-3 mb-2">
                     {chroniclerInfo && (
                       <Dialog>
                         <DialogTrigger asChild>
                           <Avatar className="w-8 h-8 transition-transform duration-200 hover:scale-150 hover:z-10 relative cursor-pointer">
-                            <AvatarImage 
-                              src={chroniclerInfo.portrait} 
+                            <AvatarImage
+                              src={chroniclerInfo.portrait}
                               alt={chroniclerInfo.name}
                               className="object-cover"
                             />
@@ -49,8 +62,8 @@ const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({ chronicles, chronicle
                           <DialogHeader>
                             <DialogTitle className="flex items-center gap-3">
                               <Avatar className="w-12 h-12">
-                                <AvatarImage 
-                                  src={chroniclerInfo.portrait} 
+                                <AvatarImage
+                                  src={chroniclerInfo.portrait}
                                   alt={chroniclerInfo.name}
                                   className="object-cover"
                                 />
@@ -63,7 +76,13 @@ const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({ chronicles, chronicle
                           </DialogHeader>
                           <div className="space-y-4">
                             <div className="flex items-center gap-2">
-                              <Badge variant={chroniclerInfo.bias === 'friendly' ? 'secondary' : 'destructive'}>
+                              <Badge
+                                variant={
+                                  chroniclerInfo.bias === "friendly"
+                                    ? "secondary"
+                                    : "outline"
+                                }
+                              >
                                 {chroniclerInfo.bias}
                               </Badge>
                               <Badge variant="outline">
@@ -78,10 +97,18 @@ const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({ chronicles, chronicle
                       </Dialog>
                     )}
                     <div className="flex items-center gap-2">
-                      <Badge variant={chronicle.bias === 'friendly' ? 'secondary' : 'destructive'}>
+                      <Badge
+                        variant={
+                          chronicle.bias === "friendly"
+                            ? "secondary"
+                            : "outline"
+                        }
+                      >
                         {chronicle.chronicler}
                       </Badge>
-                      <span className="text-xs text-muted-foreground">Turn {chronicle.turn}</span>
+                      <span className="text-xs text-muted-foreground">
+                        Turn {chronicle.turn}
+                      </span>
                     </div>
                   </div>
                   <p className="text-sm italic font-serif leading-relaxed">

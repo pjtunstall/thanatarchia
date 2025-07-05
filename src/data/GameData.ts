@@ -1,5 +1,5 @@
 import {
-  HistoricalFaction,
+  Faction,
   CharacterPortrait,
   Chronicler,
   Territory,
@@ -38,7 +38,7 @@ export const getHeresyColor = (heresy: string) => {
   }
 };
 
-export const historicalFactions: HistoricalFaction[] = [
+export const factions: Faction[] = [
   {
     name: "Roman Empire",
     type: "imperial",

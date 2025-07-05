@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Faction, Territory, Chronicle, GameStatus } from "@/types/GameTypes";
 import {
-  historicalFactions,
+  factions,
   characterPortraits,
   chroniclers,
   initialTerritories,
@@ -28,7 +28,7 @@ export const useGameState = () => {
   // Initialize random faction and character
   const [selectedFaction] = useState(() => {
     // Only select factions that have territories
-    const factionsWithTerritories = historicalFactions.filter((faction) =>
+    const factionsWithTerritories = factions.filter((faction) =>
       initialTerritories.some((territory) => territory.owner === faction.name)
     );
     const randomIndex = Math.floor(

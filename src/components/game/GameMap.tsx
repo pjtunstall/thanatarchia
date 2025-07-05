@@ -6,7 +6,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Territory } from "@/types/GameTypes";
-import { historicalFactions } from "@/data/GameData";
+import { factions } from "@/data/GameData";
 import FactionDetails from "./FactionDetails";
 import romanEmpireMap from "@/assets/roman-empire-map-clean.jpg";
 
@@ -45,7 +45,7 @@ const GameMap: React.FC<GameMapProps> = ({
     };
 
     // Add other active factions
-    historicalFactions.forEach((faction) => {
+    factions.forEach((faction) => {
       if (
         activeFactions.has(faction.name) &&
         faction.name !== selectedFaction.name
@@ -91,12 +91,12 @@ const GameMap: React.FC<GameMapProps> = ({
 
   return (
     <Card className="h-full parchment-texture">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold ancient-title">
+      <CardHeader className="pb-0">
+        <CardTitle className="text-2xl font-bold ancient-title text-center">
           Thanatarchia
         </CardTitle>
-        <p className="text-muted-foreground italic">
-          Imperium Romanum, Anno Domini {475 + currentTurn}
+        <p className="text-muted-foreground italic text-lg text-center">
+          Imperium Romanum, anno domini {475 + currentTurn}
         </p>
       </CardHeader>
       <CardContent className="h-full p-6">
@@ -204,9 +204,7 @@ const GameMap: React.FC<GameMapProps> = ({
         <div className="mt-4 p-3 bg-muted/30 rounded-lg">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
             {Object.entries(factionLookup).map(([key, factionInfo]) => {
-              const fullFaction = historicalFactions.find(
-                (f) => f.name === key
-              );
+              const fullFaction = factions.find((f) => f.name === key);
               if (!fullFaction) return null;
 
               return (

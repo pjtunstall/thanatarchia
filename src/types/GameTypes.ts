@@ -1,32 +1,27 @@
+// TODO: Remove ?s as this type is sorted out.
 export interface Faction {
-  id: string;
+  id?: string;
   name: string;
   type: "imperial" | "barbarian" | "bagaudae";
   color: string;
-  territories: number;
+  territories?: number;
   relatives: string[];
-  troops: number;
-  treasure: number;
-}
+  troops?: number;
+  treasure?: number;
 
-export interface HistoricalFaction {
-  name: string;
-  type: "imperial" | "barbarian" | "bagaudae";
-  color: string;
-  displayName: string;
-  leader: {
+  displayName?: string;
+  leader?: {
     name: string;
     gender: "male" | "female";
     portrait: string;
   };
-  heresy:
+  heresy?:
     | "Orthodox"
     | "Arian"
     | "Heathen"
     | "Manichean"
     | "Pelagian"
     | "Miaphysite";
-  relatives: string[];
 }
 
 export interface Territory {

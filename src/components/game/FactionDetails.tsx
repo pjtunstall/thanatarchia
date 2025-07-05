@@ -3,12 +3,12 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { HistoricalFaction, CharacterPortrait } from "@/types/GameTypes";
+import { Faction, CharacterPortrait } from "@/types/GameTypes";
 import { Crown, Users, Church } from "lucide-react";
 import { getHeresyColor } from "@/data/GameData";
 
 interface FactionDetailsProps {
-  faction: HistoricalFaction;
+  faction: Faction;
   isPlayerFaction?: boolean;
   playerCharacter?: CharacterPortrait;
 }
