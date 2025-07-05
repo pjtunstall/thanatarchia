@@ -63,7 +63,11 @@ export const factions: Faction[] = [
       portrait: bagaudaeMaleRebel,
     },
     heresy: "Pelagian",
-    relatives: ["Brigit the Fierce", "Young Caractacus", "Imogen"],
+    relatives: [
+      "Comrade Brigit",
+      "Comrade Caractacus",
+      "Comrade Imogen the Stern",
+    ],
   },
   {
     name: "Bagaudae of Hispania",
@@ -71,12 +75,12 @@ export const factions: Faction[] = [
     color: "hsl(var(--bagaudae))",
     displayName: "Bagaudae of Hispania",
     leader: {
-      name: "Basiliscus the Free",
+      name: "Basiliscus the Defiant",
       gender: "male",
       portrait: bagaudaeMaleRebel,
     },
     heresy: "Manichean",
-    relatives: ["Sister Spartaca", "Cousin Rodrigo"],
+    relatives: ["Comrade Spartaca", "Comrade Amandus"],
   },
   {
     name: "Ostrogothic Kingdom",
