@@ -11,7 +11,6 @@ interface StatusPanelProps {
   playerCharacter: CharacterPortrait;
   territories: Territory[];
   selectedTerritory: string | null;
-  selectedFaction: { name: string; heresy: string };
 }
 
 const StatusPanel: React.FC<StatusPanelProps> = ({
@@ -19,11 +18,10 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
   playerCharacter,
   territories,
   selectedTerritory,
-  selectedFaction,
 }) => {
   // Calculate actual total troops from player-owned territories
   const playerTerritories = territories.filter(
-    (t) => t.owner === selectedFaction.name
+    (t) => t.owner === playerFaction.name
   );
   const totalTroops = playerTerritories.reduce(
     (sum, territory) => sum + (territory.troops || 0),
@@ -74,7 +72,7 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
               <div className="flex items-center gap-2">
                 <span className="text-sm font-semibold">Faith:</span>
                 <Badge variant="outline" className="text-xs">
-                  {selectedFaction.heresy}
+                  {playerFaction.heresy}
                 </Badge>
               </div>
               <p className="text-sm">Territories: {playerTerritories.length}</p>
@@ -105,7 +103,7 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
                         </p>
                         <p>
                           Owner:{" "}
-                          {territory.owner === selectedFaction.name
+                          {territory.owner === playerFaction.name
                             ? "You"
                             : territory.owner}
                         </p>

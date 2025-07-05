@@ -44,7 +44,7 @@ export const factions: Faction[] = [
     leader: {
       name: "Romulus Augustulus",
       gender: "male",
-      portrait: romanEmperor,
+      image: romanEmperor,
     },
     heresy: "Orthodox",
     relatives: ["Princess Flavia", "Duke Marcus", "General Maximus"],
@@ -60,7 +60,7 @@ export const factions: Faction[] = [
     leader: {
       name: "Tibatto the Rebel",
       gender: "male",
-      portrait: bagaudaeMaleRebel,
+      image: bagaudaeMaleRebel,
     },
     heresy: "Manichean",
     relatives: ["Comrade Spartaca", "Comrade Caractacus", "Comrade Amandus"],
@@ -76,7 +76,7 @@ export const factions: Faction[] = [
     leader: {
       name: "Bold Basiliscus",
       gender: "male",
-      portrait: bagaudaeMaleRebel,
+      image: bagaudaeMaleRebel,
     },
     heresy: "Pelagian",
     relatives: ["Comrade Spartaca", "Comrade Amandus"],
@@ -92,7 +92,7 @@ export const factions: Faction[] = [
     leader: {
       name: "Theodoric the Great",
       gender: "male",
-      portrait: barbarianKing,
+      image: barbarianKing,
     },
     heresy: "Arian",
     relatives: ["Princess Amalasuntha", "Prince Athalaric", "Nephew Eutharic"],
@@ -108,7 +108,7 @@ export const factions: Faction[] = [
     leader: {
       name: "Queen Brunhild",
       gender: "female",
-      portrait: visigothicQueen,
+      image: visigothicQueen,
     },
     heresy: "Arian",
     relatives: ["Prince Sigismund", "Lady Galswintha", "Duke Recared"],
@@ -124,7 +124,7 @@ export const factions: Faction[] = [
     leader: {
       name: "Huneric the Cruel",
       gender: "male",
-      portrait: vandalChief,
+      image: vandalChief,
     },
     heresy: "Arian",
     relatives: ["Princess Eudocia", "Brother Gunthamund"],
@@ -140,7 +140,7 @@ export const factions: Faction[] = [
     leader: {
       name: "Gundobad the Wise",
       gender: "male",
-      portrait: barbarianKing,
+      image: barbarianKing,
     },
     heresy: "Arian",
     relatives: ["Daughter Clotilde", "Son Sigismund", "Nephew Godomar"],
@@ -156,7 +156,7 @@ export const factions: Faction[] = [
     leader: {
       name: "Clovis the Conqueror",
       gender: "male",
-      portrait: frankishKing,
+      image: frankishKing,
     },
     heresy: "Miaphysite",
     relatives: ["Queen Clotilde", "Prince Clothar", "Princess Clotilde"],
@@ -172,7 +172,7 @@ export const factions: Faction[] = [
     leader: {
       name: "Ardaric the Faithful",
       gender: "male",
-      portrait: barbarianKing,
+      image: barbarianKing,
     },
     heresy: "Arian",
     relatives: ["Son Gunderit", "Daughter Rosamunda"],
@@ -188,7 +188,7 @@ export const factions: Faction[] = [
     leader: {
       name: "Odoacer the King-Maker",
       gender: "male",
-      portrait: barbarianKing,
+      image: barbarianKing,
     },
     heresy: "Arian",
     relatives: ["Brother Hunulf", "General Pierius"],
@@ -204,7 +204,7 @@ export const factions: Faction[] = [
     leader: {
       name: "Hermeric the Elder",
       gender: "male",
-      portrait: barbarianKing,
+      image: barbarianKing,
     },
     heresy: "Heathen",
     relatives: ["Son Rechila", "Daughter Ingunde"],
@@ -220,7 +220,7 @@ export const factions: Faction[] = [
     leader: {
       name: "Respendial the Horseman",
       gender: "male",
-      portrait: barbarianKing,
+      image: barbarianKing,
     },
     heresy: "Heathen",
     relatives: ["Son Goar", "Son Addac", "Cousin Sangiban"],
@@ -236,7 +236,7 @@ export const factions: Faction[] = [
     leader: {
       name: "Dengizich the Fierce",
       gender: "male",
-      portrait: hunnicWarlord,
+      image: hunnicWarlord,
     },
     heresy: "Heathen",
     relatives: ["Brother Ernakh", "Sister Kreka", "Nephew Mundo"],

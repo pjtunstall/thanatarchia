@@ -24,7 +24,7 @@ const FactionDetails: React.FC<FactionDetailsProps> = ({
       ? {
           name: playerCharacter.name,
           gender: playerCharacter.gender,
-          portrait: playerCharacter.image,
+          image: playerCharacter.image,
         }
       : faction.leader;
 
@@ -34,7 +34,7 @@ const FactionDetails: React.FC<FactionDetailsProps> = ({
         <div className="flex items-center gap-3">
           <Avatar className="w-16 h-16 border-2 border-primary/20 transition-transform duration-200 hover:scale-125 hover:z-10 relative cursor-pointer">
             <AvatarImage
-              src={leader.portrait}
+              src={leader.image}
               alt={`${leader.name} portrait`}
               className="object-cover"
             />

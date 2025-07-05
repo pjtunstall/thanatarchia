@@ -39,62 +39,62 @@ export const useGameState = () => {
     const randomGender: "male" | "female" =
       Math.random() > 0.5 ? "female" : "male";
 
-    // Gender-appropriate names and portraits by faction type
+    // Gender-appropriate names and images by faction type
     const genderVariants = {
       "Roman Empire": {
-        male: { name: "Romulus Augustulus", portrait: romanEmperor },
-        female: { name: "Augusta Valentina", portrait: byzantineQueen },
+        male: { name: "Romulus Augustulus", image: romanEmperor },
+        female: { name: "Augusta Valentina", image: byzantineQueen },
       },
       "Bagaudae of Gallia": {
-        male: { name: "Tibatto the Rebel", portrait: bagaudaeMaleRebel },
-        female: { name: "Comrade Brigit", portrait: bagaudaeFemaleRebel },
+        male: { name: "Tibatto the Rebel", image: bagaudaeMaleRebel },
+        female: { name: "Comrade Brigit", image: bagaudaeFemaleRebel },
       },
       "Bagaudae of Hispania": {
-        male: { name: "Bold Basiliscus", portrait: bagaudaeMaleRebel },
+        male: { name: "Bold Basiliscus", image: bagaudaeMaleRebel },
         female: {
           name: "Spartaca the Indomitable",
-          portrait: bagaudaeFemaleRebel,
+          image: bagaudaeFemaleRebel,
         },
       },
       "Ostrogothic Kingdom": {
-        male: { name: "Theodoric the Great", portrait: barbarianKing },
-        female: { name: "Amalasuntha the Wise", portrait: visigothicQueen },
+        male: { name: "Theodoric the Great", image: barbarianKing },
+        female: { name: "Amalasuntha the Wise", image: visigothicQueen },
       },
       "Visigothic Kingdom": {
-        male: { name: "Alaric the Conqueror", portrait: barbarianKing },
-        female: { name: "Queen Brunhild", portrait: visigothicQueen },
+        male: { name: "Alaric the Conqueror", image: barbarianKing },
+        female: { name: "Queen Brunhild", image: visigothicQueen },
       },
       "Vandal Kingdom": {
-        male: { name: "Huneric the Cruel", portrait: vandalChief },
-        female: { name: "Eudocia the Sharp", portrait: visigothicQueen },
+        male: { name: "Huneric the Cruel", image: vandalChief },
+        female: { name: "Eudocia the Sharp", image: visigothicQueen },
       },
       "Burgundian Kingdom": {
-        male: { name: "Gundobad the Wise", portrait: barbarianKing },
-        female: { name: "Clotilde the Faithful", portrait: visigothicQueen },
+        male: { name: "Gundobad the Wise", image: barbarianKing },
+        female: { name: "Clotilde the Faithful", image: visigothicQueen },
       },
       "Kingdom of the Franks": {
-        male: { name: "Clovis the Conqueror", portrait: frankishKing },
-        female: { name: "Clotilde the Great", portrait: visigothicQueen },
+        male: { name: "Clovis the Conqueror", image: frankishKing },
+        female: { name: "Clotilde the Great", image: visigothicQueen },
       },
       "Gepid Kingdom": {
-        male: { name: "Ardaric the Faithful", portrait: barbarianKing },
-        female: { name: "Rosamunda the Fair", portrait: visigothicQueen },
+        male: { name: "Ardaric the Faithful", image: barbarianKing },
+        female: { name: "Rosamunda the Fair", image: visigothicQueen },
       },
       Heruli: {
-        male: { name: "Odoacer the King-Maker", portrait: barbarianKing },
-        female: { name: "Hunilda the Ruthless", portrait: visigothicQueen },
+        male: { name: "Odoacer the King-Maker", image: barbarianKing },
+        female: { name: "Hunilda the Ruthless", image: visigothicQueen },
       },
       "Suebian Confederation": {
-        male: { name: "Hermeric the Elder", portrait: barbarianKing },
-        female: { name: "Ingunde the Wise", portrait: visigothicQueen },
+        male: { name: "Hermeric the Elder", image: barbarianKing },
+        female: { name: "Ingunde the Wise", image: visigothicQueen },
       },
       Alans: {
-        male: { name: "Respendial the Horseman", portrait: barbarianKing },
-        female: { name: "Kreka the Swift", portrait: visigothicQueen },
+        male: { name: "Respendial the Horseman", image: barbarianKing },
+        female: { name: "Kreka the Swift", image: visigothicQueen },
       },
       "Hunnic Empire": {
-        male: { name: "Dengizich the Fierce", portrait: hunnicWarlord },
-        female: { name: "Kreka the Terrible", portrait: visigothicQueen },
+        male: { name: "Dengizich the Fierce", image: hunnicWarlord },
+        female: { name: "Kreka the Terrible", image: visigothicQueen },
       },
     };
 
@@ -102,7 +102,7 @@ export const useGameState = () => {
       baseFaction.name as keyof typeof genderVariants
     ]?.[randomGender] || {
       name: baseFaction.leader.name,
-      portrait: baseFaction.leader.portrait,
+      image: baseFaction.leader.image,
     };
 
     return {
@@ -110,7 +110,7 @@ export const useGameState = () => {
       leader: {
         name: leaderInfo.name,
         gender: randomGender,
-        portrait: leaderInfo.portrait,
+        image: leaderInfo.image,
       },
     };
   });
@@ -120,7 +120,7 @@ export const useGameState = () => {
     return {
       name: selectedFaction.leader.name,
       gender: selectedFaction.leader.gender,
-      image: selectedFaction.leader.portrait,
+      image: selectedFaction.leader.image,
     };
   });
 
@@ -133,6 +133,9 @@ export const useGameState = () => {
     return {
       id: "player",
       name: selectedFaction.name,
+      leader: playerCharacter,
+      displayName: selectedFaction.displayName,
+      heresy: selectedFaction.heresy,
       type: selectedFaction.type,
       color: selectedFaction.color,
       territories: playerTerritoryCount,
@@ -474,7 +477,10 @@ export const useGameState = () => {
     setPlayerFaction({
       id: "player",
       name: selectedFaction.name,
+      displayName: selectedFaction.displayName,
       type: selectedFaction.type,
+      leader: selectedFaction.leader,
+      heresy: selectedFaction.heresy,
       color: selectedFaction.color,
       territories: playerTerritoryCount,
       relatives: selectedFaction.relatives,

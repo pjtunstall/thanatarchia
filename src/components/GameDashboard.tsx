@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useGameState } from '@/hooks/useGameState';
-import GameMap from '@/components/game/GameMap';
-import StatusPanel from '@/components/game/StatusPanel';
-import ChroniclesPanel from '@/components/game/ChroniclesPanel';
-import ActionsPanel from '@/components/game/ActionsPanel';
-import GameOverlay from '@/components/game/GameOverlay';
+import React, { useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useGameState } from "@/hooks/useGameState";
+import GameMap from "@/components/game/GameMap";
+import StatusPanel from "@/components/game/StatusPanel";
+import ChroniclesPanel from "@/components/game/ChroniclesPanel";
+import ActionsPanel from "@/components/game/ActionsPanel";
+import GameOverlay from "@/components/game/GameOverlay";
 
 const GameDashboard = () => {
-  const [activeTab, setActiveTab] = useState('status');
-  
+  const [activeTab, setActiveTab] = useState("status");
+
   const gameState = useGameState();
 
   const handleTabKeyDown = (e: React.KeyboardEvent) => {
-    const tabs = ['chronicles', 'status', 'actions'];
+    const tabs = ["chronicles", "status", "actions"];
     const currentIndex = tabs.indexOf(activeTab);
-    
+
     switch (e.key) {
-      case 'ArrowLeft':
+      case "ArrowLeft":
         e.preventDefault();
         const prevIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
         setActiveTab(tabs[prevIndex]);
         break;
-      case 'ArrowRight':
+      case "ArrowRight":
         e.preventDefault();
         const nextIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
         setActiveTab(tabs[nextIndex]);
@@ -32,12 +32,12 @@ const GameDashboard = () => {
 
   return (
     <div className="min-h-screen bg-background p-4">
-      <GameOverlay 
-        gameStatus={gameState.gameStatus} 
+      <GameOverlay
+        gameStatus={gameState.gameStatus}
         finalChronicles={gameState.finalChronicles}
-        onResetGame={gameState.resetGame} 
+        onResetGame={gameState.resetGame}
       />
-      
+
       <div className="grid grid-cols-12 gap-4 h-screen">
         {/* Map Panel */}
         <div className="col-span-7">
@@ -55,22 +55,23 @@ const GameDashboard = () => {
 
         {/* Right Panel - Tabbed Interface */}
         <div className="col-span-5">
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="h-full">
-            <TabsList className="grid w-full grid-cols-3" onKeyDown={handleTabKeyDown}>
-              <TabsTrigger value="chronicles">
-                Chronicles
-              </TabsTrigger>
-              <TabsTrigger value="status">
-                Status
-              </TabsTrigger>
-              <TabsTrigger value="actions">
-                Actions
-              </TabsTrigger>
+          <Tabs
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className="h-full"
+          >
+            <TabsList
+              className="grid w-full grid-cols-3"
+              onKeyDown={handleTabKeyDown}
+            >
+              <TabsTrigger value="chronicles">Chronicles</TabsTrigger>
+              <TabsTrigger value="status">Status</TabsTrigger>
+              <TabsTrigger value="actions">Actions</TabsTrigger>
             </TabsList>
-            
+
             <TabsContent value="chronicles" className="mt-4">
-              <ChroniclesPanel 
-                chronicles={gameState.chronicles} 
+              <ChroniclesPanel
+                chronicles={gameState.chronicles}
                 chroniclers={gameState.chroniclers}
               />
             </TabsContent>
@@ -81,7 +82,6 @@ const GameDashboard = () => {
                 playerCharacter={gameState.playerCharacter}
                 territories={gameState.territories}
                 selectedTerritory={gameState.selectedTerritory}
-                selectedFaction={gameState.selectedFaction}
               />
             </TabsContent>
 

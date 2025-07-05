@@ -17,7 +17,11 @@ interface GameMapProps {
   playerFactionName: string;
   playerFactionColor: string;
   selectedFaction: { name: string; color: string; displayName: string };
-  playerCharacter: { name: string; gender: "male" | "female"; image: string };
+  playerCharacter: {
+    name: string;
+    gender: "male" | "female";
+    image: string;
+  };
   onTerritoryClick: (territoryId: string) => void;
 }
 
