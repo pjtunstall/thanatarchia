@@ -1,10 +1,10 @@
-import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Coins, Users } from 'lucide-react';
-import { Faction, Territory, CharacterPortrait } from '@/types/GameTypes';
+import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Coins, Users } from "lucide-react";
+import { Faction, Territory, CharacterPortrait } from "@/types/GameTypes";
 
 interface StatusPanelProps {
   playerFaction: Faction;
@@ -19,18 +19,24 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
   playerCharacter,
   territories,
   selectedTerritory,
-  selectedFaction
+  selectedFaction,
 }) => {
   // Calculate actual total troops from player-owned territories
-  const playerTerritories = territories.filter(t => t.owner === selectedFaction.name);
-  const totalTroops = playerTerritories.reduce((sum, territory) => sum + (territory.troops || 0), 0);
+  const playerTerritories = territories.filter(
+    (t) => t.owner === selectedFaction.name
+  );
+  const totalTroops = playerTerritories.reduce(
+    (sum, territory) => sum + (territory.troops || 0),
+    0
+  );
 
   return (
     <Card className="h-full flex flex-col">
       <CardHeader>
         <CardTitle className="text-lg">{playerFaction.name}</CardTitle>
         <Badge style={{ backgroundColor: playerFaction.color }}>
-          {playerFaction.type.charAt(0).toUpperCase() + playerFaction.type.slice(1)}
+          {playerFaction.type.charAt(0).toUpperCase() +
+            playerFaction.type.slice(1)}
         </Badge>
       </CardHeader>
       <CardContent className="flex-1 overflow-hidden">
@@ -39,11 +45,18 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
             {/* Player Character Portrait */}
             <div className="flex items-center space-x-4 p-4 bg-muted/30 rounded-lg">
               <Avatar className="w-16 h-16 transition-transform duration-200 hover:scale-125 hover:z-10 relative cursor-pointer">
-                <AvatarImage src={playerCharacter.image} alt={playerCharacter.name} />
-                <AvatarFallback>{playerCharacter.name.charAt(0)}</AvatarFallback>
+                <AvatarImage
+                  src={playerCharacter.image}
+                  alt={playerCharacter.name}
+                />
+                <AvatarFallback>
+                  {playerCharacter.name.charAt(0)}
+                </AvatarFallback>
               </Avatar>
               <div className="flex-1">
-                <h3 className="font-semibold text-lg">{playerCharacter.name}</h3>
+                <h3 className="font-semibold text-lg">
+                  {playerCharacter.name}
+                </h3>
               </div>
             </div>
 
@@ -60,11 +73,15 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-sm font-semibold">Faith:</span>
-                <Badge variant="outline" className="text-xs">{selectedFaction.heresy}</Badge>
+                <Badge variant="outline" className="text-xs">
+                  {selectedFaction.heresy}
+                </Badge>
               </div>
               <p className="text-sm">Territories: {playerTerritories.length}</p>
               <div>
-                <p className="text-sm font-semibold mb-1">Available for Marriage:</p>
+                <p className="text-sm font-semibold mb-1">
+                  Available for Marriage:
+                </p>
                 {playerFaction.relatives.map((relative, index) => (
                   <Badge key={index} variant="outline" className="mr-1 mb-1">
                     {relative}
@@ -78,11 +95,20 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
                 <p className="text-sm font-semibold mb-2">Selected Territory</p>
                 <div className="text-xs space-y-1">
                   {(() => {
-                    const territory = territories.find(t => t.id === selectedTerritory);
+                    const territory = territories.find(
+                      (t) => t.name === selectedTerritory
+                    );
                     return territory ? (
                       <>
-                        <p><strong>{territory.name}</strong></p>
-                        <p>Owner: {territory.owner === selectedFaction.name ? 'You' : territory.owner}</p>
+                        <p>
+                          <strong>{territory.name}</strong>
+                        </p>
+                        <p>
+                          Owner:{" "}
+                          {territory.owner === selectedFaction.name
+                            ? "You"
+                            : territory.owner}
+                        </p>
                         <p>Terrain: {territory.terrain}</p>
                         <p>Troops: {territory.troops}</p>
                       </>

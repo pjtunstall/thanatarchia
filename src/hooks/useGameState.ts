@@ -52,7 +52,7 @@ export const useGameState = () => {
       },
       "Bagaudae of Hispania": {
         male: { name: "Basiliscus the Free", portrait: bagaudaeMaleRebel },
-        female: { name: "Spartaca the Bold", portrait: bagaudaeFemaleRebel },
+        female: { name: "Spartaca the Defiant", portrait: bagaudaeFemaleRebel },
       },
       "Ostrogothic Kingdom": {
         male: { name: "Theodoric the Great", portrait: barbarianKing },
@@ -273,8 +273,8 @@ export const useGameState = () => {
   };
 
   const handleAttack = (fromTerritoryId: string, toTerritoryId: string) => {
-    const fromTerritory = territories.find((t) => t.id === fromTerritoryId);
-    const toTerritory = territories.find((t) => t.id === toTerritoryId);
+    const fromTerritory = territories.find((t) => t.name === fromTerritoryId);
+    const toTerritory = territories.find((t) => t.name === toTerritoryId);
 
     if (
       !fromTerritory ||
@@ -286,13 +286,14 @@ export const useGameState = () => {
     if (!adjacentTerritories[fromTerritoryId]?.includes(toTerritoryId)) return;
     if (toTerritory.owner === selectedFaction.name) return;
 
-    setActionsThisTurn(prev => prev + 1);
+    setActionsThisTurn((prev) => prev + 1);
 
     const attackForce = Math.floor(fromTerritory.troops! * 0.8);
     const defenseForce = toTerritory.troops!;
 
     const attackStrength = attackForce + Math.random() * 500;
-    const defenseStrength = defenseForce + Math.random() * 500 + (toTerritory.conditionModifier || 0);
+    const defenseStrength =
+      defenseForce + Math.random() * 500 + (toTerritory.conditionModifier || 0);
 
     const victory = attackStrength > defenseStrength;
 
@@ -300,10 +301,10 @@ export const useGameState = () => {
       const survivingTroops = Math.floor(attackForce * 0.7);
       setTerritories((prev) =>
         prev.map((t) => {
-          if (t.id === fromTerritoryId) {
+          if (t.name === fromTerritoryId) {
             return { ...t, troops: t.troops! - attackForce };
           }
-          if (t.id === toTerritoryId) {
+          if (t.name === toTerritoryId) {
             return {
               ...t,
               owner: selectedFaction.name,
@@ -326,7 +327,7 @@ export const useGameState = () => {
       const casualties = Math.floor(Math.random() * 300 + 200);
       setTerritories((prev) =>
         prev.map((t) =>
-          t.id === fromTerritoryId
+          t.name === fromTerritoryId
             ? { ...t, troops: Math.max(100, t.troops! - casualties) }
             : t
         )
@@ -346,8 +347,8 @@ export const useGameState = () => {
 
     aiTerritories.forEach((aiTerritory) => {
       const adjacentPlayerTerritories =
-        adjacentTerritories[aiTerritory.id]
-          ?.map((id) => territories.find((t) => t.id === id))
+        adjacentTerritories[aiTerritory.name]
+          ?.map((id) => territories.find((t) => t.name === id))
           .filter((t) => t && t.owner === selectedFaction.name) || [];
 
       if (adjacentPlayerTerritories.length > 0 && aiTerritory.troops! > 500) {
@@ -357,14 +358,14 @@ export const useGameState = () => {
         );
 
         if (weakestTarget && Math.random() > 0.7) {
-          executeAIAttack(aiTerritory.id, weakestTarget.id);
+          executeAIAttack(aiTerritory.name, weakestTarget.name);
         }
       }
 
       if (Math.random() > 0.6) {
         setTerritories((prev) =>
           prev.map((t) =>
-            t.id === aiTerritory.id ? { ...t, troops: t.troops! + 300 } : t
+            t.name === aiTerritory.name ? { ...t, troops: t.troops! + 300 } : t
           )
         );
       }
@@ -372,8 +373,8 @@ export const useGameState = () => {
   };
 
   const executeAIAttack = (fromId: string, toId: string) => {
-    const fromTerritory = territories.find((t) => t.id === fromId);
-    const toTerritory = territories.find((t) => t.id === toId);
+    const fromTerritory = territories.find((t) => t.name === fromId);
+    const toTerritory = territories.find((t) => t.name === toId);
 
     if (!fromTerritory || !toTerritory) return;
 
@@ -388,10 +389,10 @@ export const useGameState = () => {
     if (victory) {
       setTerritories((prev) =>
         prev.map((t) => {
-          if (t.id === fromId) {
+          if (t.name === fromId) {
             return { ...t, troops: t.troops! - attackForce };
           }
-          if (t.id === toId) {
+          if (t.name === toId) {
             return {
               ...t,
               owner: fromTerritory.owner,
@@ -413,7 +414,7 @@ export const useGameState = () => {
     } else {
       setTerritories((prev) =>
         prev.map((t) =>
-          t.id === fromId
+          t.name === fromId
             ? {
                 ...t,
                 troops: Math.max(
@@ -451,7 +452,7 @@ export const useGameState = () => {
   const getValidAttackTargets = (fromTerritoryId: string) => {
     return (
       adjacentTerritories[fromTerritoryId]
-        ?.map((id) => territories.find((t) => t.id === id))
+        ?.map((id) => territories.find((t) => t.name === id))
         .filter((t) => t && t.owner !== selectedFaction.name) || []
     );
   };
@@ -488,33 +489,38 @@ export const useGameState = () => {
   };
 
   const handleSpy = (territoryId: string) => {
-    const territory = territories.find((t) => t.id === territoryId);
-    if (!territory || playerFaction.treasure < 25 || actionsThisTurn >= 4) return;
+    const territory = territories.find((t) => t.name === territoryId);
+    if (!territory || playerFaction.treasure < 25 || actionsThisTurn >= 4)
+      return;
 
     setPlayerFaction((prev) => ({ ...prev, treasure: prev.treasure - 25 }));
-    setActionsThisTurn(prev => prev + 1);
+    setActionsThisTurn((prev) => prev + 1);
 
     // Generate random condition that affects combat
     const conditions = [
       "plague outbreak",
-      "religious disputes over doctrine", 
+      "religious disputes over doctrine",
       "supply shortages",
       "low morale",
       "veteran reinforcements",
       "favorable omens",
       "tactical advantage",
-      "harsh weather"
+      "harsh weather",
     ];
     const condition = conditions[Math.floor(Math.random() * conditions.length)];
     const isPositive = Math.random() > 0.5;
-    
+
     setTerritories((prev) =>
-      prev.map((t) => (t.id === territoryId ? { 
-        ...t, 
-        spiedOn: true,
-        condition: condition,
-        conditionModifier: isPositive ? 200 : -200
-      } : t))
+      prev.map((t) =>
+        t.name === territoryId
+          ? {
+              ...t,
+              spiedOn: true,
+              condition: condition,
+              conditionModifier: isPositive ? 200 : -200,
+            }
+          : t
+      )
     );
 
     const newEntry: Chronicle = {
@@ -522,7 +528,11 @@ export const useGameState = () => {
       chronicler:
         chroniclers[Math.floor(Math.random() * chroniclers.length)].name,
       bias: Math.random() > 0.5 ? "hostile" : "friendly",
-      entry: `Intelligence reveals that ${territory.name} suffers from ${condition}, which ${isPositive ? 'strengthens' : 'weakens'} their military capacity.`,
+      entry: `Intelligence reveals that ${
+        territory.name
+      } suffers from ${condition}, which ${
+        isPositive ? "strengthens" : "weakens"
+      } their military capacity.`,
       turn: currentTurn,
     };
     setChronicles([...chronicles, newEntry]);
@@ -536,7 +546,7 @@ export const useGameState = () => {
       treasure: prev.treasure - 50,
       troops: prev.troops + 500,
     }));
-    setActionsThisTurn(prev => prev + 1);
+    setActionsThisTurn((prev) => prev + 1);
 
     const newEntry: Chronicle = {
       id: String(chronicles.length + 1),
@@ -555,7 +565,7 @@ export const useGameState = () => {
   const handleAction = (action: string) => {
     if (actionsThisTurn >= 4) return;
 
-    setActionsThisTurn(prev => prev + 1);
+    setActionsThisTurn((prev) => prev + 1);
 
     const entries: Record<string, { friendly: string; hostile: string }> = {
       raid: {
@@ -579,23 +589,23 @@ export const useGameState = () => {
     };
 
     const actionEntries = entries[action];
-    
+
     // Handle raiding - gamble troops for treasure
-    if (action === 'raid') {
+    if (action === "raid") {
       const troopsRisked = Math.floor(Math.random() * 300 + 200);
       const success = Math.random() > 0.4;
-      
+
       if (success) {
         const treasureGained = Math.floor(Math.random() * 100 + 50);
-        setPlayerFaction(prev => ({
+        setPlayerFaction((prev) => ({
           ...prev,
           treasure: prev.treasure + treasureGained,
-          troops: Math.max(100, prev.troops - Math.floor(troopsRisked * 0.3))
+          troops: Math.max(100, prev.troops - Math.floor(troopsRisked * 0.3)),
         }));
       } else {
-        setPlayerFaction(prev => ({
+        setPlayerFaction((prev) => ({
           ...prev,
-          troops: Math.max(100, prev.troops - troopsRisked)
+          troops: Math.max(100, prev.troops - troopsRisked),
         }));
       }
     }

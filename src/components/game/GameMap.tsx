@@ -114,9 +114,9 @@ const GameMap: React.FC<GameMapProps> = ({
           {/* Territories */}
           {territories.map((territory) => (
             <div
-              key={territory.id}
+              key={territory.name}
               className={`absolute cursor-pointer ${
-                selectedTerritory === territory.id
+                selectedTerritory === territory.name
                   ? "ring-2 ring-yellow-400 ring-offset-1"
                   : ""
               }`}
@@ -125,7 +125,7 @@ const GameMap: React.FC<GameMapProps> = ({
                 top: `${territory.y}%`,
                 transform: "translate(-50%, -50%)",
               }}
-              onClick={() => onTerritoryClick(territory.id)}
+              onClick={() => onTerritoryClick(territory.name)}
             >
               {/* Territory marker */}
               <div

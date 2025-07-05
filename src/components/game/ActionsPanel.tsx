@@ -1,9 +1,9 @@
-import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Sword, Eye, Coins, Users, MapPin } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Faction, Territory } from '@/types/GameTypes';
+import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Sword, Eye, Coins, Users, MapPin } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Faction, Territory } from "@/types/GameTypes";
 
 interface ActionsPanelProps {
   playerFaction: Faction;
@@ -30,7 +30,7 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
   onRecruitTroops,
   onSpy,
   onAttack,
-  getValidAttackTargets
+  getValidAttackTargets,
 }) => {
   return (
     <Card className="h-[calc(100vh-200px)]">
@@ -43,26 +43,26 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
       <CardContent>
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-2">
-            <Button 
-              onClick={() => onAction('raid')} 
-              variant="destructive" 
+            <Button
+              onClick={() => onAction("raid")}
+              variant="destructive"
               size="sm"
               disabled={actionsRemaining <= 0}
             >
               <Sword className="w-3 h-3 mr-1" />
               Raid Territory
             </Button>
-            <Button 
-              onClick={() => onAction('marry')} 
-              variant="secondary" 
+            <Button
+              onClick={() => onAction("marry")}
+              variant="secondary"
               size="sm"
               disabled={actionsRemaining <= 0}
             >
               Arrange Marriage
             </Button>
-            <Button 
-              onClick={() => onAction('negotiate')} 
-              variant="outline" 
+            <Button
+              onClick={() => onAction("negotiate")}
+              variant="outline"
               size="sm"
               disabled={actionsRemaining <= 0}
             >
@@ -72,49 +72,60 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
               End Turn
             </Button>
           </div>
-          
+
           <div className="border-t pt-3">
             <p className="text-sm font-semibold mb-2">Treasury Actions</p>
             <div className="grid grid-cols-2 gap-2">
-              <Button 
-                onClick={onRecruitTroops} 
-                variant="outline" 
+              <Button
+                onClick={onRecruitTroops}
+                variant="outline"
                 size="sm"
                 disabled={playerFaction.treasure < 50 || actionsRemaining <= 0}
               >
                 <Users className="w-3 h-3 mr-1" />
                 Recruit (50 solidi)
               </Button>
-              <Button 
-                onClick={() => selectedTerritory && onSpy(selectedTerritory)} 
-                variant="outline" 
+              <Button
+                onClick={() => selectedTerritory && onSpy(selectedTerritory)}
+                variant="outline"
                 size="sm"
-                disabled={!selectedTerritory || playerFaction.treasure < 25 || actionsRemaining <= 0}
+                disabled={
+                  !selectedTerritory ||
+                  playerFaction.treasure < 25 ||
+                  actionsRemaining <= 0
+                }
               >
                 <Eye className="w-3 h-3 mr-1" />
                 Spy (25 solidi)
               </Button>
             </div>
           </div>
-          
+
           {selectedTerritory && (
             <div className="border-t pt-3">
               <p className="text-sm font-semibold mb-2">Territory Actions</p>
               {(() => {
-                const territory = territories.find(t => t.id === selectedTerritory);
-                const validTargets = territory?.owner === selectedFaction.name ? getValidAttackTargets(selectedTerritory) : [];
-                
+                const territory = territories.find(
+                  (t) => t.name === selectedTerritory
+                );
+                const validTargets =
+                  territory?.owner === selectedFaction.name
+                    ? getValidAttackTargets(selectedTerritory)
+                    : [];
+
                 return territory && validTargets.length > 0 ? (
                   <div className="space-y-1">
                     <p className="text-xs font-semibold">Attack Targets:</p>
                     {validTargets.map((target) => (
                       <Button
-                        key={target.id}
-                        onClick={() => onAttack(selectedTerritory, target.id)}
+                        key={target.name}
+                        onClick={() => onAttack(selectedTerritory, target.name)}
                         variant="destructive"
                         size="sm"
                         className="w-full text-xs"
-                        disabled={territory.troops! < 200 || actionsRemaining <= 0}
+                        disabled={
+                          territory.troops! < 200 || actionsRemaining <= 0
+                        }
                       >
                         <Sword className="w-2 h-2 mr-1" />
                         Attack {target.name} ({target.troops})
@@ -125,32 +136,43 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
               })()}
             </div>
           )}
-          
+
           {/* Selected Territory Info */}
           {selectedTerritory && (
             <div className="border-t pt-3">
               <p className="text-sm font-semibold mb-2">Selected Territory</p>
               {(() => {
-                const territory = territories.find(t => t.id === selectedTerritory);
+                const territory = territories.find(
+                  (t) => t.name === selectedTerritory
+                );
                 if (!territory) return null;
-                
-                const isPlayerTerritory = territory.owner === selectedFaction.name;
-                const troopCount = territory.troops || territory.estimatedTroops || 0;
-                
+
+                const isPlayerTerritory =
+                  territory.owner === selectedFaction.name;
+                const troopCount =
+                  territory.troops || territory.estimatedTroops || 0;
+
                 return (
                   <div className="bg-muted/30 rounded p-2">
                     <div className="flex items-center justify-between text-sm">
                       <div className="flex items-center gap-2">
                         <MapPin className="w-4 h-4 text-muted-foreground" />
                         <span className="font-medium">{territory.name}</span>
-                        <Badge variant={isPlayerTerritory ? "default" : "secondary"} className="text-xs">
+                        <Badge
+                          variant={isPlayerTerritory ? "default" : "secondary"}
+                          className="text-xs"
+                        >
                           {territory.owner}
                         </Badge>
                       </div>
                       <div className="flex items-center gap-2">
                         <Users className="w-4 h-4 text-muted-foreground" />
                         <span className="font-medium">
-                          {isPlayerTerritory ? troopCount : (territory.spiedOn ? troopCount : '?')}
+                          {isPlayerTerritory
+                            ? troopCount
+                            : territory.spiedOn
+                            ? troopCount
+                            : "?"}
                         </span>
                         {!isPlayerTerritory && !territory.spiedOn && (
                           <Eye className="w-3 h-3 text-muted-foreground/60" />

@@ -245,7 +245,6 @@ export const chroniclers: Chronicler[] = [
 
 export const initialTerritories: Territory[] = [
   {
-    id: "britannia",
     name: "Britannia",
     x: 15,
     y: 15,
@@ -254,7 +253,6 @@ export const initialTerritories: Territory[] = [
     terrain: "plains",
   },
   {
-    id: "gallia",
     name: "Gallia",
     x: 25,
     y: 30,
@@ -263,7 +261,6 @@ export const initialTerritories: Territory[] = [
     terrain: "forest",
   },
   {
-    id: "aquitania",
     name: "Aquitania",
     x: 20,
     y: 43,
@@ -272,7 +269,6 @@ export const initialTerritories: Territory[] = [
     terrain: "plains",
   },
   {
-    id: "hispania",
     name: "Hispania",
     x: 8,
     y: 52,
@@ -281,7 +277,6 @@ export const initialTerritories: Territory[] = [
     terrain: "mountains",
   },
   {
-    id: "mauretania",
     name: "Mauretania",
     x: 15,
     y: 75,
@@ -290,7 +285,6 @@ export const initialTerritories: Territory[] = [
     terrain: "plains",
   },
   {
-    id: "germania",
     name: "Germania",
     x: 35,
     y: 20,
@@ -299,7 +293,6 @@ export const initialTerritories: Territory[] = [
     terrain: "forest",
   },
   {
-    id: "pannonia",
     name: "Pannonia",
     x: 40,
     y: 35,
@@ -308,7 +301,6 @@ export const initialTerritories: Territory[] = [
     terrain: "plains",
   },
   {
-    id: "dacia",
     name: "Dacia",
     x: 50,
     y: 35,
@@ -317,7 +309,6 @@ export const initialTerritories: Territory[] = [
     terrain: "mountains",
   },
   {
-    id: "thracia",
     name: "Thracia",
     x: 55,
     y: 50,
@@ -326,7 +317,6 @@ export const initialTerritories: Territory[] = [
     terrain: "plains",
   },
   {
-    id: "italia",
     name: "Italia",
     x: 35,
     y: 50,
@@ -335,7 +325,6 @@ export const initialTerritories: Territory[] = [
     terrain: "plains",
   },
   {
-    id: "africa",
     name: "Africa",
     x: 40,
     y: 80,
@@ -344,7 +333,6 @@ export const initialTerritories: Territory[] = [
     terrain: "plains",
   },
   {
-    id: "aegyptus",
     name: "Aegyptus",
     x: 60,
     y: 80,
@@ -353,7 +341,6 @@ export const initialTerritories: Territory[] = [
     terrain: "river",
   },
   {
-    id: "syria",
     name: "Syria",
     x: 80,
     y: 70,
@@ -362,7 +349,6 @@ export const initialTerritories: Territory[] = [
     terrain: "plains",
   },
   {
-    id: "bagaudae_gaul",
     name: "Armorica",
     x: 15,
     y: 30,
@@ -373,18 +359,18 @@ export const initialTerritories: Territory[] = [
 ];
 
 export const adjacentTerritories: Record<string, string[]> = {
-  britannia: ["gallia", "bagaudae_gaul"],
-  gallia: ["britannia", "aquitania", "germania", "hispania", "bagaudae_gaul"],
-  aquitania: ["gallia", "hispania", "bagaudae_hispania"],
-  hispania: ["gallia", "aquitania", "africa", "bagaudae_hispania"],
-  germania: ["gallia", "pannonia", "dacia"],
-  pannonia: ["germania", "dacia", "thracia", "italia"],
-  dacia: ["germania", "pannonia", "thracia"],
-  thracia: ["pannonia", "dacia", "italia", "syria"],
-  italia: ["pannonia", "thracia", "africa"],
-  africa: ["hispania", "italia", "aegyptus"],
-  aegyptus: ["africa", "syria"],
-  syria: ["thracia", "aegyptus"],
-  bagaudae_gaul: ["britannia", "gallia"],
-  bagaudae_hispania: ["aquitania", "hispania"],
+  Britannia: ["Gallia", "Armorica"],
+  Gallia: ["Britannia", "Aquitania", "Germania", "Hispania", "Armorica"],
+  Aquitania: ["Gallia", "Hispania", "Mauretania"],
+  Hispania: ["Gallia", "Aquitania", "Africa", "Mauretania"],
+  germania: ["Gallia", "Pannonia", "Dacia"],
+  Pannonia: ["Germania", "Dacia", "Thracia", "Italia"],
+  Dacia: ["germania", "Pannonia", "Thracia"],
+  Thracia: ["Pannonia", "Dacia", "Italia", "Syria"],
+  Italia: ["Pannonia", "Thracia", "Africa"],
+  Africa: ["Hispania", "Italia", "Aegyptus"],
+  Aegyptus: ["Africa", "Syria"],
+  Syria: ["Thracia", "Aegyptus"],
+  Armorica: ["Britannia", "Gallia"],
+  Mauretania: ["Aquitania", "Hispania"],
 };

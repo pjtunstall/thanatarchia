@@ -10,7 +10,6 @@ export interface Faction {
 }
 
 export interface Territory {
-  id: string;
   name: string;
   x: number;
   y: number;
