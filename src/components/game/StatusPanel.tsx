@@ -5,6 +5,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Coins, Users } from "lucide-react";
 import { Faction, Territory, CharacterPortrait } from "@/types/GameTypes";
+import { getHeresyColor } from "@/data/GameData";
 
 interface StatusPanelProps {
   playerFaction: Faction;
@@ -71,7 +72,10 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-sm font-semibold">Faith:</span>
-                <Badge variant="outline" className="text-xs">
+                <Badge
+                  variant="outline"
+                  className={`${getHeresyColor(playerFaction.heresy)} text-xs`}
+                >
                   {playerFaction.heresy}
                 </Badge>
               </div>
