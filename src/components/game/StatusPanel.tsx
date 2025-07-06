@@ -102,7 +102,6 @@ const PlayerCharacterProfile: React.FC<PlayerCharacterProps> = ({
 }) => {
   return (
     <>
-      {/* Player Character Portrait */}
       <div className="flex items-center space-x-4 p-4 bg-muted/30 rounded-lg">
         <Avatar className="w-16 h-16 transition-transform duration-200 hover:scale-125 hover:z-10 relative cursor-pointer">
           <AvatarImage src={playerCharacter.image} alt={playerCharacter.name} />
