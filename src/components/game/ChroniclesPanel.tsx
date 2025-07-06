@@ -11,6 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Chronicle, Chronicler } from "@/types/GameTypes";
+import { getDate } from "@/data/GameData";
 
 interface ChroniclesPanelProps {
   chronicles: Chronicle[];
@@ -29,7 +30,7 @@ const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
   };
 
   return (
-    <Card className="h-full bg-[hsl(var(--chronicle))]">
+    <Card className="h-full">
       <CardHeader>
         <CardTitle className="text-xl">Chronicles</CardTitle>
       </CardHeader>
@@ -97,17 +98,11 @@ const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
                       </Dialog>
                     )}
                     <div className="flex items-center gap-2">
-                      <Badge
-                        variant={
-                          chronicle.bias === "friendly"
-                            ? "secondary"
-                            : "outline"
-                        }
-                      >
+                      <Badge variant={"secondary"}>
                         {chronicle.chronicler}
                       </Badge>
                       <span className="text-xs text-muted-foreground">
-                        Turn {chronicle.turn}
+                        {getDate(chronicle.turn)}
                       </span>
                     </div>
                   </div>

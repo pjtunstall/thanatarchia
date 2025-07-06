@@ -90,7 +90,7 @@ export const useGameState = () => {
     },
     {
       id: "2",
-      chronicler: "Eudaemonia of Thebes",
+      chronicler: "Eudaemonia of Rheims",
       bias: "hostile",
       entry:
         "The barbarous Alamanni continue their senseless raids, pillaging what civilized men have built with crude savagery.",
@@ -131,7 +131,7 @@ export const useGameState = () => {
           "Though darkness has fallen upon us, the chronicle of our leader's virtue shall be a beacon of hope for all who follow in their blessed footsteps!",
         ],
       },
-      "Eudaemonia of Thebes": {
+      "Eudaemonia of Rheims": {
         victory: [
           "So ends the tale of these upstart warlords, who through sheer brutality have trampled the ancient ways. The old gods must laugh at such crude 'victory.'",
           "These northern savages style themselves conquerors, yet they know nothing of true honor or the warrior's code - mere raiders grown fat on plunder.",

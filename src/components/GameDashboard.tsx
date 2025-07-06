@@ -44,7 +44,7 @@ const GameDashboard = () => {
 
           <div className="grid grid-cols-12 gap-4 h-screen">
             {/* Map Panel */}
-            <div className="col-span-7">
+            <div className="col-span-7 h-full">
               <GameMap
                 territories={gameState.territories}
                 selectedTerritory={gameState.selectedTerritory}
@@ -58,7 +58,7 @@ const GameDashboard = () => {
             </div>
 
             {/* Right Panel - Tabbed Interface */}
-            <div className="col-span-5">
+            <div className="col-span-5 h-full flex flex-col">
               <Tabs
                 value={activeTab}
                 onValueChange={setActiveTab}

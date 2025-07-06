@@ -18,18 +18,21 @@ import bagaudaeFemaleRebel from "@/assets/bagaudae-female-rebel.jpg";
 import mauriMaleLeader from "@/assets/mauri-male.jpg";
 import mauriFemaleLeader from "@/assets/mauri-female.jpg";
 
+export const getDate = (turn: number): string => {
+  const year = getYear(turn);
+  const season = getSeason(turn);
+  return `${season} ${year}`;
+};
+
 export const getSeason = (turn: number): Season => {
   return seasons[(turn - 1) % 4];
 };
 type Season = "autumn" | "winter" | "spring" | "summer";
 const seasons: Season[] = ["spring", "summer", "autumn", "winter"];
 
-// export const seasonClassMap = {
-//   spring: "bg-green-100 text-green-800 border-green-200",
-//   summer: "bg-yellow-100 text-yellow-800 border-yellow-200",
-//   autumn: "bg-orange-100 text-orange-800 border-orange-200",
-//   winter: "bg-blue-100 text-blue-800 border-blue-200",
-// };
+export const getYear = (turn: number): number => {
+  return 476 + Math.floor((turn - 1) / 4);
+};
 
 export const getHeresyColor = (heresy: string) => {
   switch (heresy) {
@@ -329,23 +332,23 @@ export const chroniclers: Chronicler[] = [
     bias: "friendly",
     style: "sycophantic",
     gender: "male",
-    portrait: chroniclerMonk,
+    portrait: chroniclerScribe,
     biography:
       "A devout monk who fled to Ravenna after accidentally setting fire to his monastery's library while 'improving' ancient texts. Known for his excessive flattery and tendency to describe even the most mundane events in epic terms. Claims to have once blessed a loaf of bread that fed an entire village, though witnesses say it was just very large bread.",
   },
   {
-    name: "Eudaemonia of Thebes",
+    name: "Eudaemonia of Rheims",
     bias: "hostile",
     style: "disdainful",
     gender: "female",
     portrait: chroniclerMosaic,
     biography:
-      "A former Vandal court scribe who was exiled for 'creative differences' with his king's version of events. Bitter about losing her position, he now chronicles with the enthusiasm of a man forced to eat bitter herbs. Her quill is perpetually stained with both ink and tears of frustration.",
+      "A former Vandal court scribe who was exiled for 'creative differences' with the king's version of events. Bitter about losing her position, she now chronicles with the enthusiasm of a woman forced to eat bitter herbs. Her quill is perpetually stained with both ink and tears of frustration.",
   },
   {
     name: "Hieronymus of Alexandria",
     bias: "hostile",
-    style: "scholarly condescension",
+    style: "condescending",
     gender: "male",
     portrait: chroniclerScholar,
     biography:
@@ -354,7 +357,7 @@ export const chroniclers: Chronicler[] = [
   {
     name: "Priscilla of Byzantium",
     bias: "hostile",
-    style: "imperial superiority",
+    style: "supercilious",
     gender: "female",
     portrait: chroniclerNun,
     biography:

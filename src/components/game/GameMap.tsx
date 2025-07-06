@@ -6,7 +6,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Territory } from "@/types/GameTypes";
-import { factions, getSeason } from "@/data/GameData";
+import { factions, getDate } from "@/data/GameData";
 import FactionDetails from "./FactionDetails";
 import romanEmpireMap from "@/assets/roman-empire-map-clean.jpg";
 
@@ -94,16 +94,14 @@ const GameMap: React.FC<GameMapProps> = ({
     return factionClassMap[owner] || "";
   };
 
-  const season = getSeason(currentTurn);
-
   return (
-    <Card className="h-full parchment-texture">
+    <Card className="h-full">
       <CardHeader className="pb-0">
         <CardTitle className="text-2xl font-bold ancient-title text-center">
           ☠ Thanatarchia
         </CardTitle>
         <p className="text-muted-foreground italic text-lg text-center">
-          Imperium Romanum, {season} {476 + Math.floor((currentTurn - 1) / 4)}
+          Imperium Romanum, {getDate(currentTurn)}
         </p>
       </CardHeader>
       <CardContent className="h-full p-6">
@@ -152,59 +150,6 @@ const GameMap: React.FC<GameMapProps> = ({
               </div>
             </div>
           ))}
-
-          {/* Roads - decorative ancient paths */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-50">
-            <defs>
-              <pattern
-                id="roadPattern"
-                x="0"
-                y="0"
-                width="8"
-                height="4"
-                patternUnits="userSpaceOnUse"
-              >
-                <rect width="8" height="4" fill="none" />
-                <rect x="0" y="1" width="6" height="2" fill="#8B4513" />
-              </pattern>
-            </defs>
-            <path
-              d="M 25% 45% Q 30% 40% 35% 35%"
-              stroke="url(#roadPattern)"
-              strokeWidth="3"
-              fill="none"
-            />
-            <path
-              d="M 35% 35% Q 40% 30% 45% 25%"
-              stroke="url(#roadPattern)"
-              strokeWidth="3"
-              fill="none"
-            />
-            <path
-              d="M 35% 35% Q 45% 42% 55% 50%"
-              stroke="url(#roadPattern)"
-              strokeWidth="3"
-              fill="none"
-            />
-            <path
-              d="M 25% 45% Q 17% 57% 10% 70%"
-              stroke="url(#roadPattern)"
-              strokeWidth="3"
-              fill="none"
-            />
-            <path
-              d="M 55% 50% Q 50% 57% 45% 65%"
-              stroke="url(#roadPattern)"
-              strokeWidth="3"
-              fill="none"
-            />
-            <path
-              d="M 45% 65% Q 42% 75% 40% 85%"
-              stroke="url(#roadPattern)"
-              strokeWidth="3"
-              fill="none"
-            />
-          </svg>
         </div>
 
         {/* Faction Legend */}
