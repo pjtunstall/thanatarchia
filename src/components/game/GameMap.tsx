@@ -85,7 +85,7 @@ const GameMap: React.FC<GameMapProps> = ({
       "Burgundian Kingdom": "faction-burgundian",
       "Kingdom of the Franks": "faction-frankish",
       "Gepid Kingdom": "faction-gepid",
-      Heruli: "faction-heruli",
+      "Langobard Kingdom": "faction-langobard",
       "Suebian Confederation": "faction-suebian",
       Alans: "faction-alans",
       "Hunnic Empire": "faction-hunnic",

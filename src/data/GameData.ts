@@ -36,6 +36,61 @@ export const getHeresyColor = (heresy: string) => {
   }
 };
 
+export const genderVariants = {
+  "Roman Empire": {
+    male: { name: "Romulus Augustulus", image: romanEmperor },
+    female: { name: "Augusta Valentina", image: byzantineQueen },
+  },
+  "Kingdomm of the Mauri": {
+    male: { name: "Masuna the Great", image: mauriMaleLeader },
+    female: { name: "Kahina the Great", image: mauriFemaleLeader },
+  },
+  Bagaudae: {
+    male: { name: "Tibatto the Rebel", image: bagaudaeMaleRebel },
+    female: { name: "Comrade Brigit", image: bagaudaeFemaleRebel },
+  },
+  "Ostrogothic Kingdom": {
+    male: { name: "Theodoric the Great", image: barbarianKing },
+    female: { name: "Amalasuntha the Wise", image: visigothicQueen },
+  },
+  "Visigothic Kingdom": {
+    male: { name: "Alaric the Conqueror", image: barbarianKing },
+    female: { name: "Queen Brunhild", image: visigothicQueen },
+  },
+  "Vandal Kingdom": {
+    male: { name: "Huneric the Cruel", image: vandalChief },
+    female: { name: "Eudocia the Sharp", image: visigothicQueen },
+  },
+  "Burgundian Kingdom": {
+    male: { name: "Gundobad the Wise", image: barbarianKing },
+    female: { name: "Clotilde the Faithful", image: visigothicQueen },
+  },
+  "Kingdom of the Franks": {
+    male: { name: "Clovis the Conqueror", image: frankishKing },
+    female: { name: "Clotilde the Great", image: visigothicQueen },
+  },
+  "Gepid Kingdom": {
+    male: { name: "Ardaric the Faithful", image: barbarianKing },
+    female: { name: "Rosamunda the Fair", image: visigothicQueen },
+  },
+  "Langobard Kingdom": {
+    male: { name: "Wacho the King-Maker", image: barbarianKing },
+    female: { name: "Rodelinda the Ruthless", image: visigothicQueen },
+  },
+  "Suebian Confederation": {
+    male: { name: "Hermeric the Elder", image: barbarianKing },
+    female: { name: "Ingunde the Wise", image: visigothicQueen },
+  },
+  Alans: {
+    male: { name: "Respendial the Horseman", image: barbarianKing },
+    female: { name: "Kreka the Swift", image: visigothicQueen },
+  },
+  "Hunnic Empire": {
+    male: { name: "Dengizich the Fierce", image: hunnicWarlord },
+    female: { name: "Kreka the Terrible", image: visigothicQueen },
+  },
+};
+
 export const factions: Faction[] = [
   {
     name: "Roman Empire",
@@ -92,7 +147,7 @@ export const factions: Faction[] = [
       image: barbarianKing,
     },
     heresy: "Arian",
-    relatives: ["Princess Amalasuntha", "Prince Athalaric", "Nephew Eutharic"],
+    relatives: ["Daughter Amalasuntha", "Nephew Athalaric", "Nephew Eutharic"],
     territories: 1,
     troops: 1000,
     treasure: 100,
@@ -107,7 +162,7 @@ export const factions: Faction[] = [
       image: visigothicQueen,
     },
     heresy: "Arian",
-    relatives: ["Prince Sigismund", "Lady Galswintha", "Duke Recared"],
+    relatives: ["Son Sigismund", "Daughter Galsuintha", "Cousin Recared"],
     territories: 1,
     troops: 1000,
     treasure: 100,
@@ -188,16 +243,21 @@ export const factions: Faction[] = [
     treasure: 100,
   },
   {
-    name: "Heruli",
+    name: "Langobard Kingdom",
     type: "barbarian",
-    color: "hsl(var(--heruli))",
+    color: "hsl(var(--langobard))",
     leader: {
-      name: "Odoacer the King-Maker",
+      name: "Wacho the King-Maker",
       gender: "male",
       image: barbarianKing,
     },
-    heresy: "Arian",
-    relatives: ["Brother Hunulf", "General Pierius"],
+    heresy: "Pagan",
+    relatives: [
+      "Son Alboin",
+      "Daughter Albsuinda",
+      "Son Cleph",
+      "Niece Rosamund",
+    ],
     territories: 1,
     troops: 1000,
     treasure: 100,
@@ -290,7 +350,7 @@ export const chroniclers: Chronicler[] = [
 
 const randomTribe = () => {
   const names = [
-    "Heruli",
+    "Langobard Kingdom",
     "Suebian Confederation",
     "Alans",
     "Saxon Confederation",

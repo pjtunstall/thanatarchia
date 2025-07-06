@@ -2,21 +2,11 @@ import { useState } from "react";
 import { Faction, Territory, Chronicle, GameStatus } from "@/types/GameTypes";
 import {
   factions,
+  genderVariants,
   chroniclers,
   initialTerritories,
   adjacentTerritories,
 } from "@/data/GameData";
-import byzantineQueen from "@/assets/byzantine-queen-portrait.jpg";
-import romanEmperor from "@/assets/roman-emperor-portrait.jpg";
-import barbarianKing from "@/assets/barbarian-king-portrait.jpg";
-import visigothicQueen from "@/assets/visigothic-queen-portrait.jpg";
-import vandalChief from "@/assets/vandal-chief-portrait.jpg";
-import frankishKing from "@/assets/frankish-king-portrait.jpg";
-import hunnicWarlord from "@/assets/hunnic-warlord-portrait.jpg";
-import bagaudaeMaleRebel from "@/assets/bagaudae-male-rebel.jpg";
-import bagaudaeFemaleRebel from "@/assets/bagaudae-female-rebel.jpg";
-import mauriMaleLeader from "@/assets/mauri-male.jpg";
-import mauriFemaleLeader from "@/assets/mauri-female.jpg";
 
 export const useGameState = () => {
   const [currentTurn, setCurrentTurn] = useState(1);
@@ -40,62 +30,6 @@ export const useGameState = () => {
     // Randomly assign gender
     const randomGender: "male" | "female" =
       Math.random() > 0.5 ? "female" : "male";
-
-    // Gender-appropriate names and images by faction type
-    const genderVariants = {
-      "Roman Empire": {
-        male: { name: "Romulus Augustulus", image: romanEmperor },
-        female: { name: "Augusta Valentina", image: byzantineQueen },
-      },
-      "Kingdomm of the Mauri": {
-        male: { name: "Masuna the Great", image: mauriMaleLeader },
-        female: { name: "Kahina the Great", image: mauriFemaleLeader },
-      },
-      Bagaudae: {
-        male: { name: "Tibatto the Rebel", image: bagaudaeMaleRebel },
-        female: { name: "Comrade Brigit", image: bagaudaeFemaleRebel },
-      },
-      "Ostrogothic Kingdom": {
-        male: { name: "Theodoric the Great", image: barbarianKing },
-        female: { name: "Amalasuntha the Wise", image: visigothicQueen },
-      },
-      "Visigothic Kingdom": {
-        male: { name: "Alaric the Conqueror", image: barbarianKing },
-        female: { name: "Queen Brunhild", image: visigothicQueen },
-      },
-      "Vandal Kingdom": {
-        male: { name: "Huneric the Cruel", image: vandalChief },
-        female: { name: "Eudocia the Sharp", image: visigothicQueen },
-      },
-      "Burgundian Kingdom": {
-        male: { name: "Gundobad the Wise", image: barbarianKing },
-        female: { name: "Clotilde the Faithful", image: visigothicQueen },
-      },
-      "Kingdom of the Franks": {
-        male: { name: "Clovis the Conqueror", image: frankishKing },
-        female: { name: "Clotilde the Great", image: visigothicQueen },
-      },
-      "Gepid Kingdom": {
-        male: { name: "Ardaric the Faithful", image: barbarianKing },
-        female: { name: "Rosamunda the Fair", image: visigothicQueen },
-      },
-      Heruli: {
-        male: { name: "Odoacer the King-Maker", image: barbarianKing },
-        female: { name: "Hunilda the Ruthless", image: visigothicQueen },
-      },
-      "Suebian Confederation": {
-        male: { name: "Hermeric the Elder", image: barbarianKing },
-        female: { name: "Ingunde the Wise", image: visigothicQueen },
-      },
-      Alans: {
-        male: { name: "Respendial the Horseman", image: barbarianKing },
-        female: { name: "Kreka the Swift", image: visigothicQueen },
-      },
-      "Hunnic Empire": {
-        male: { name: "Dengizich the Fierce", image: hunnicWarlord },
-        female: { name: "Kreka the Terrible", image: visigothicQueen },
-      },
-    };
 
     const leaderInfo = genderVariants[
       baseFaction.name as keyof typeof genderVariants

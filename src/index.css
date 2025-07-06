@@ -55,7 +55,7 @@ body {
     --frankish: 260 55% 45%;
     --saxon: 195 100% 75%;
     --gepid: 25 60% 35%;
-    --heruli: 320 65% 50%;
+    --langobard: 320 65% 50%;
     --suebian: 200 70% 35%;
     --alans: 10 70% 50%;
     --hunnic: 40 70% 45%;
@@ -123,7 +123,7 @@ body {
     --burgundian: 180 60% 50%;
     --frankish: 260 55% 55%;
     --gepid: 25 60% 45%;
-    --heruli: 320 65% 60%;
+    --langobard: 320 65% 60%;
     --suebian: 200 70% 45%;
     --saxon: 195 100% 75%;
     --alans: 10 70% 60%;
@@ -438,8 +438,8 @@ body {
   .faction-gepid {
     @apply bg-[hsl(var(--gepid))];
   }
-  .faction-heruli {
-    @apply bg-[hsl(var(--heruli))];
+  .faction-langobard {
+    @apply bg-[hsl(var(--langobard))];
   }
   .faction-suebian {
     @apply bg-[hsl(var(--suebian))];
