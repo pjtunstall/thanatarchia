@@ -350,7 +350,7 @@ export const chroniclers: Chronicler[] = [
     bias: "friendly",
     style: "sycophantic",
     gender: "male",
-    portrait: chroniclerScribe,
+    image: chroniclerScribe,
     biography:
       "A devout monk who fled to Ravenna after accidentally setting fire to his monastery's library while 'improving' ancient texts. Known for his excessive flattery and tendency to describe even the most mundane events in epic terms. Claims to have once blessed a loaf of bread that fed an entire village, though witnesses say it was just very large bread.",
   },
@@ -359,7 +359,7 @@ export const chroniclers: Chronicler[] = [
     bias: "hostile",
     style: "disdainful",
     gender: "female",
-    portrait: chroniclerMosaic,
+    image: chroniclerMosaic,
     biography:
       "A former Vandal court scribe who was exiled for 'creative differences' with the king's version of events. Bitter about losing her position, she now chronicles with the enthusiasm of a woman forced to eat bitter herbs. Her quill is perpetually stained with both ink and tears of frustration.",
   },
@@ -368,7 +368,7 @@ export const chroniclers: Chronicler[] = [
     bias: "hostile",
     style: "condescending",
     gender: "male",
-    portrait: chroniclerScholar,
+    image: chroniclerScholar,
     biography:
       "A self-proclaimed 'Master of All Knowledge' who was kicked out of the Great Library for rearranging scrolls by his own peculiar system. Believes everyone else is intellectually inferior and isn't shy about mentioning it. Has never actually been to most of the places he writes about with such authority.",
   },
@@ -377,7 +377,7 @@ export const chroniclers: Chronicler[] = [
     bias: "hostile",
     style: "supercilious",
     gender: "female",
-    portrait: chroniclerNun,
+    image: chroniclerNun,
     biography:
       "A former imperial court lady turned nun after a scandal involving the Emperor's favorite horse and a misunderstanding about inheritance laws. Maintains that everything was better 'in Constantinople' and views all current events through the lens of Byzantine superiority, despite having fled the city in disgrace.",
   },
@@ -518,4 +518,17 @@ export const adjacentTerritories: Record<string, string[]> = {
   Syria: ["Thracia", "Aegyptus"],
   Armorica: ["Britannia", "Gallia"],
   Mauretania: ["Aquitania", "Hispania", "Italia", "Africa"],
+};
+
+export const initialReport = (adviserName: string): string => {
+  switch (adviserName) {
+    case "Marcellus of Ravenna":
+      return '"Our forces are, as yet, unprepared to face the enemy. We must bide our time and prepare for battle."';
+    case "Priscilla of Byzantium":
+      return '"Sire, we must be Byzantine in our attitude. Strategy is the way to victory."';
+    case "Eudaemonia of Rheims":
+      return '"We are surrounded by enemies. We must be as the snake, cunning and swift to strike when the time is right."';
+    default:
+      return '"Our defences are weak, my liege, and our forces unprepared. I advise patence."';
+  }
 };

@@ -47,6 +47,7 @@ export interface CharacterPortrait {
   name: string;
   gender: "male" | "female";
   image: string;
+  adviser?: Chronicler;
 }
 
 export interface Chronicler {
@@ -54,7 +55,7 @@ export interface Chronicler {
   bias: "friendly" | "hostile";
   style: string;
   gender: "male" | "female";
-  portrait: string;
+  image: string;
   biography: string;
 }
 

@@ -75,14 +75,14 @@ function ChronicleItem({
   );
 }
 
-function ChroniclerDialog({ chronicler }: { chronicler: Chronicler }) {
+export function ChroniclerDialog({ chronicler }: { chronicler: Chronicler }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Avatar className="w-16 h-16 relative cursor-pointer">
-          <AvatarImage src={chronicler.portrait} alt={chronicler.name} />
+          <AvatarImage src={chronicler.image} alt={chronicler.name} />
           <AvatarFallback className="text-xs">
-            {chronicler.name.charAt(0)}
+            {chronicler?.name?.charAt(0)}
           </AvatarFallback>
         </Avatar>
       </DialogTrigger>
@@ -90,23 +90,25 @@ function ChroniclerDialog({ chronicler }: { chronicler: Chronicler }) {
         <DialogHeader>
           <DialogTitle className="flex items-center gap-3">
             <Avatar className="w-20 h-20">
-              <AvatarImage src={chronicler.portrait} alt={chronicler.name} />
-              <AvatarFallback>{chronicler.name.charAt(0)}</AvatarFallback>
+              <AvatarImage src={chronicler?.image} alt={chronicler.name} />
+              <AvatarFallback>{chronicler?.name?.charAt(0)}</AvatarFallback>
             </Avatar>
-            {chronicler.name}
+            {chronicler?.name}
           </DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <Badge
-              variant={chronicler.bias === "friendly" ? "secondary" : "outline"}
+              variant={
+                chronicler?.bias === "friendly" ? "secondary" : "outline"
+              }
             >
-              {chronicler.bias}
+              {chronicler?.bias}
             </Badge>
-            <Badge variant="outline">{chronicler.style}</Badge>
+            <Badge variant="outline">{chronicler?.style}</Badge>
           </div>
           <p className="text-sm leading-relaxed italic">
-            {chronicler.biography}
+            {chronicler?.biography}
           </p>
         </div>
       </DialogContent>

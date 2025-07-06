@@ -54,6 +54,7 @@ export const useGameState = () => {
       name: selectedFaction.leader.name,
       gender: selectedFaction.leader.gender,
       image: selectedFaction.leader.image,
+      adviser: chroniclers[Math.floor(Math.random() * chroniclers.length)],
     };
   });
 
