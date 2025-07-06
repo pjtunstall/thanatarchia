@@ -15,6 +15,8 @@ import frankishKing from "@/assets/frankish-king-portrait.jpg";
 import hunnicWarlord from "@/assets/hunnic-warlord-portrait.jpg";
 import bagaudaeMaleRebel from "@/assets/bagaudae-male-rebel.jpg";
 import bagaudaeFemaleRebel from "@/assets/bagaudae-female-rebel.jpg";
+import mauriMaleLeader from "@/assets/mauri-male.jpg";
+import mauriFemaleLeader from "@/assets/mauri-female.jpg";
 
 export const useGameState = () => {
   const [currentTurn, setCurrentTurn] = useState(1);
@@ -44,6 +46,10 @@ export const useGameState = () => {
       "Roman Empire": {
         male: { name: "Romulus Augustulus", image: romanEmperor },
         female: { name: "Augusta Valentina", image: byzantineQueen },
+      },
+      "Kingdomm of the Mauri": {
+        male: { name: "Masuna the Great", image: mauriMaleLeader },
+        female: { name: "Kahina the Great", image: mauriFemaleLeader },
       },
       Bagaudae: {
         male: { name: "Tibatto the Rebel", image: bagaudaeMaleRebel },

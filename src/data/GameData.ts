@@ -14,6 +14,8 @@ import chroniclerScholar from "@/assets/chronicler-scholar-male.jpg";
 import chroniclerNun from "@/assets/chronicler-nun-female.jpg";
 import bagaudaeMaleRebel from "@/assets/bagaudae-male-rebel.jpg";
 import bagaudaeFemaleRebel from "@/assets/bagaudae-female-rebel.jpg";
+import mauriMaleLeader from "@/assets/mauri-male.jpg";
+import mauriFemaleLeader from "@/assets/mauri-female.jpg";
 
 export const getHeresyColor = (heresy: string) => {
   switch (heresy) {
@@ -46,6 +48,21 @@ export const factions: Faction[] = [
     },
     heresy: "Orthodox",
     relatives: ["Princess Flavia", "Duke Marcus", "General Maximus"],
+    territories: 1,
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Kingdom of the Mauri",
+    type: "barbarian",
+    color: "hsl(var(--mauri))",
+    leader: {
+      name: "Masuna",
+      gender: "male",
+      image: mauriMaleLeader,
+    },
+    heresy: "Pelagian",
+    relatives: ["Son Masties", "Son Masgiven", "Cousin Garmul"],
     territories: 1,
     troops: 1000,
     treasure: 100,
@@ -319,7 +336,7 @@ export const initialTerritories: Territory[] = [
     name: "Mauretania",
     x: 15,
     y: 75,
-    owner: "Vandal Kingdom",
+    owner: "Kingdom of the Mauri",
     troops: 1000,
     terrain: "plains",
   },

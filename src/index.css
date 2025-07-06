@@ -6,6 +6,10 @@
 All colors MUST be HSL.
 */
 
+body {
+  @apply dark;
+}
+
 @layer base {
   :root {
     --background: 45 20% 96%;
@@ -55,6 +59,7 @@ All colors MUST be HSL.
     --suebian: 200 70% 35%;
     --alans: 10 70% 50%;
     --hunnic: 40 70% 45%;
+    --mauri: 90 25% 25%;
 
     --radius: 0.5rem;
 
@@ -120,8 +125,10 @@ All colors MUST be HSL.
     --gepid: 25 60% 45%;
     --heruli: 320 65% 60%;
     --suebian: 200 70% 45%;
+    --saxon: 195 100% 75%;
     --alans: 10 70% 60%;
     --hunnic: 40 70% 55%;
+    --mauri: 90 25% 25%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -406,6 +413,9 @@ All colors MUST be HSL.
   /* Faction territory colors */
   .faction-roman-empire {
     @apply bg-[hsl(var(--imperial))];
+  }
+  .faction-mauri {
+    @apply bg-[hsl(var(--mauri))];
   }
   .faction-bagaudae {
     @apply bg-[hsl(var(--bagaudae))];

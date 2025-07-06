@@ -77,6 +77,7 @@ const GameMap: React.FC<GameMapProps> = ({
 
     const factionClassMap: Record<string, string> = {
       "Roman Empire": "faction-roman-empire",
+      "Kingdom of the Mauri": "faction-mauri",
       Bagaudae: "faction-bagaudae",
       "Ostrogothic Kingdom": "faction-ostrogothic",
       "Visigothic Kingdom": "faction-visigothic",
