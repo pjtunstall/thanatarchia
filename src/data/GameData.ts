@@ -36,7 +36,7 @@ export const getYear = (turn: number): number => {
 
 export const getHeresyColor = (heresy: string) => {
   switch (heresy) {
-    case "Orthodox":
+    case "Chalcedonian":
       return "bg-blue-100 text-blue-800 border-blue-200";
     case "Arian":
       return "bg-red-100 text-red-800 border-red-200";
@@ -54,11 +54,11 @@ export const getHeresyColor = (heresy: string) => {
 };
 
 export const genderVariants = {
-  "Roman Empire": {
+  Romans: {
     male: { name: "Romulus Augustulus", image: romanEmperor },
     female: { name: "Augusta Valentina", image: byzantineQueen },
   },
-  "Kingdomm of the Mauri": {
+  Moors: {
     male: { name: "Masuna the Great", image: mauriMaleLeader },
     female: { name: "Kahina the Great", image: mauriFemaleLeader },
   },
@@ -66,43 +66,47 @@ export const genderVariants = {
     male: { name: "Tibatto the Rebel", image: bagaudaeMaleRebel },
     female: { name: "Comrade Brigit", image: bagaudaeFemaleRebel },
   },
-  "Ostrogothic Kingdom": {
+  Ostrogoths: {
     male: { name: "Theodoric the Great", image: barbarianKing },
     female: { name: "Amalasuntha the Wise", image: visigothicQueen },
   },
-  "Visigothic Kingdom": {
+  Visigoths: {
     male: { name: "Alaric the Conqueror", image: barbarianKing },
     female: { name: "Queen Brunhild", image: visigothicQueen },
   },
-  "Vandal Kingdom": {
+  Vandals: {
     male: { name: "Huneric the Cruel", image: vandalChief },
     female: { name: "Eudocia the Sharp", image: visigothicQueen },
   },
-  "Burgundian Kingdom": {
+  Burgundians: {
     male: { name: "Gundobad the Wise", image: barbarianKing },
     female: { name: "Clotilde the Faithful", image: visigothicQueen },
   },
-  "Kingdom of the Franks": {
+  Franks: {
     male: { name: "Clovis the Conqueror", image: frankishKing },
     female: { name: "Clotilde the Great", image: visigothicQueen },
   },
-  "Gepid Kingdom": {
+  Gepids: {
     male: { name: "Ardaric the Faithful", image: barbarianKing },
     female: { name: "Rosamunda the Fair", image: visigothicQueen },
   },
-  "Langobard Kingdom": {
+  Langobards: {
     male: { name: "Wacho the King-Maker", image: barbarianKing },
     female: { name: "Rodelinda the Ruthless", image: visigothicQueen },
   },
-  "Suebian Confederation": {
+  Saxons: {
+    male: { name: "Widukind", image: barbarianKing },
+    female: { name: "Hasela", image: barbarianQueen },
+  },
+  Suebi: {
     male: { name: "Hermeric the Elder", image: barbarianKing },
     female: { name: "Ingunde the Wise", image: visigothicQueen },
   },
   Alans: {
-    male: { name: "Respendial the Horseman", image: barbarianKing },
+    male: { name: "Respendial the Horseman", image: byzantineChief },
     female: { name: "Kreka the Swift", image: visigothicQueen },
   },
-  "Hunnic Empire": {
+  Huns: {
     male: { name: "Dengizich the Fierce", image: hunnicWarlord },
     female: { name: "Kreka the Terrible", image: visigothicQueen },
   },
@@ -110,7 +114,8 @@ export const genderVariants = {
 
 export const factions: Faction[] = [
   {
-    name: "Roman Empire",
+    name: "Romans",
+    formalName: "Roman Empire",
     type: "imperial",
     color: "hsl(var(--imperial))",
     leader: {
@@ -118,14 +123,15 @@ export const factions: Faction[] = [
       gender: "male",
       image: romanEmperor,
     },
-    heresy: "Orthodox",
+    heresy: "Chalcedonian",
     relatives: ["Princess Flavia", "Duke Marcus", "General Maximus"],
     territories: 1,
     troops: 1000,
     treasure: 100,
   },
   {
-    name: "Kingdom of the Mauri",
+    name: "Moors",
+    formalName: "Kingdom of the Moors and Romans",
     type: "barbarian",
     color: "hsl(var(--mauri))",
     leader: {
@@ -141,6 +147,7 @@ export const factions: Faction[] = [
   },
   {
     name: "Bagaudae",
+    formalName: "Free Folk of Armorica",
     type: "bagaudae",
     color: "hsl(var(--bagaudae))",
     leader: {
@@ -155,7 +162,8 @@ export const factions: Faction[] = [
     treasure: 100,
   },
   {
-    name: "Ostrogothic Kingdom",
+    name: "Ostrogoths",
+    formalName: "Kingdom of the Ostrogoths",
     type: "barbarian",
     color: "hsl(var(--ostrogothic))",
     leader: {
@@ -170,7 +178,8 @@ export const factions: Faction[] = [
     treasure: 100,
   },
   {
-    name: "Visigothic Kingdom",
+    name: "Visigoths",
+    formalName: "Kingdom of the Visigoths",
     type: "barbarian",
     color: "hsl(var(--visigothic))",
     leader: {
@@ -185,7 +194,8 @@ export const factions: Faction[] = [
     treasure: 100,
   },
   {
-    name: "Vandal Kingdom",
+    name: "Vandals",
+    formalName: "Kingdom of the Vandals and Alans",
     type: "barbarian",
     color: "hsl(var(--vandal))",
     leader: {
@@ -200,7 +210,8 @@ export const factions: Faction[] = [
     treasure: 100,
   },
   {
-    name: "Burgundian Kingdom",
+    name: "Burgundians",
+    formalName: "Kingdom of the Burgundians",
     type: "barbarian",
     color: "hsl(var(--burgundian))",
     leader: {
@@ -215,7 +226,8 @@ export const factions: Faction[] = [
     treasure: 100,
   },
   {
-    name: "Kingdom of the Franks",
+    name: "Franks",
+    formalName: "Kingdom of the Franks",
     type: "barbarian",
     color: "hsl(var(--frankish))",
     leader: {
@@ -230,7 +242,8 @@ export const factions: Faction[] = [
     treasure: 100,
   },
   {
-    name: "Saxon Confederation",
+    name: "Saxons",
+    formalName: "Saxon Confederation",
     type: "barbarian",
     color: "hsl(var(--saxon))",
     leader: {
@@ -239,13 +252,14 @@ export const factions: Faction[] = [
       image: barbarianQueen,
     },
     heresy: "Pagan",
-    relatives: ["Brother Widukind", "Brother Abbio"],
+    relatives: ["Brother Abbio"],
     territories: 1,
     troops: 1000,
     treasure: 100,
   },
   {
-    name: "Gepid Kingdom",
+    name: "Gepids",
+    formalName: "Kingdom of the Gepids",
     type: "barbarian",
     color: "hsl(var(--gepid))",
     leader: {
@@ -260,7 +274,8 @@ export const factions: Faction[] = [
     treasure: 100,
   },
   {
-    name: "Langobard Kingdom",
+    name: "Langobards",
+    formalName: "Kingdom of the Langobards",
     type: "barbarian",
     color: "hsl(var(--langobard))",
     leader: {
@@ -280,7 +295,8 @@ export const factions: Faction[] = [
     treasure: 100,
   },
   {
-    name: "Suebian Confederation",
+    name: "Suebi",
+    formalName: "Suebian Confederation",
     type: "barbarian",
     color: "hsl(var(--suebian))",
     leader: {
@@ -296,21 +312,23 @@ export const factions: Faction[] = [
   },
   {
     name: "Alans",
+    formalName: "Kingdom of the Alans",
     type: "barbarian",
     color: "hsl(var(--alans))",
     leader: {
       name: "Respendial the Horseman",
       gender: "male",
-      image: barbarianKing,
+      image: byzantineChief,
     },
     heresy: "Pagan",
-    relatives: ["Son Goar", "Son Addac", "Cousin Sangiban"],
+    relatives: ["Son Goar", "Son Addac", "Cousin Sangiban", "Cousin Safrac"],
     territories: 1,
     troops: 1000,
     treasure: 100,
   },
   {
-    name: "Hunnic Empire",
+    name: "Huns",
+    formalName: "Hunnic Horde",
     type: "barbarian",
     color: "hsl(var(--hunnic))",
     leader: {
@@ -366,13 +384,7 @@ export const chroniclers: Chronicler[] = [
 ];
 
 const randomTribe = () => {
-  const names = [
-    "Langobard Kingdom",
-    "Suebian Confederation",
-    "Alans",
-    "Saxon Confederation",
-    "Burgundian Kingdom",
-  ];
+  const names = ["Langobards", "Alans", "Saxons", "Burgundians"];
   return names[Math.floor(Math.random() * names.length)];
 };
 
@@ -381,7 +393,7 @@ export const initialTerritories: Territory[] = [
     name: "Britannia",
     x: 15,
     y: 15,
-    owner: "Roman Empire",
+    owner: "Romans",
     troops: 900,
     terrain: "plains",
   },
@@ -389,7 +401,7 @@ export const initialTerritories: Territory[] = [
     name: "Gallia",
     x: 25,
     y: 30,
-    owner: "Kingdom of the Franks",
+    owner: "Franks",
     troops: 1200,
     terrain: "forest",
   },
@@ -397,7 +409,7 @@ export const initialTerritories: Territory[] = [
     name: "Aquitania",
     x: 20,
     y: 43,
-    owner: "Visigothic Kingdom",
+    owner: "Visigoths",
     troops: 800,
     terrain: "plains",
   },
@@ -405,7 +417,7 @@ export const initialTerritories: Territory[] = [
     name: "Hispania",
     x: 8,
     y: 52,
-    owner: "Visigothic Kingdom",
+    owner: "Suebi",
     troops: 800,
     terrain: "mountains",
   },
@@ -413,7 +425,7 @@ export const initialTerritories: Territory[] = [
     name: "Mauretania",
     x: 15,
     y: 75,
-    owner: "Kingdom of the Mauri",
+    owner: "Moors",
     troops: 1000,
     terrain: "plains",
   },
@@ -429,7 +441,7 @@ export const initialTerritories: Territory[] = [
     name: "Pannonia",
     x: 40,
     y: 35,
-    owner: "Ostrogothic Kingdom",
+    owner: "Ostrogoths",
     troops: 1800,
     terrain: "plains",
   },
@@ -437,7 +449,7 @@ export const initialTerritories: Territory[] = [
     name: "Dacia",
     x: 50,
     y: 35,
-    owner: "Gepid Kingdom",
+    owner: "Gepids",
     troops: 1300,
     terrain: "mountains",
   },
@@ -445,7 +457,7 @@ export const initialTerritories: Territory[] = [
     name: "Thracia",
     x: 55,
     y: 50,
-    owner: "Hunnic Empire",
+    owner: "Huns",
     troops: 1600,
     terrain: "plains",
   },
@@ -453,7 +465,7 @@ export const initialTerritories: Territory[] = [
     name: "Italia",
     x: 35,
     y: 50,
-    owner: "Roman Empire",
+    owner: "Romans",
     troops: 2200,
     terrain: "plains",
   },
@@ -461,7 +473,7 @@ export const initialTerritories: Territory[] = [
     name: "Africa",
     x: 40,
     y: 80,
-    owner: "Vandal Kingdom",
+    owner: "Vandals",
     troops: 1000,
     terrain: "plains",
   },
@@ -469,7 +481,7 @@ export const initialTerritories: Territory[] = [
     name: "Aegyptus",
     x: 60,
     y: 80,
-    owner: "Roman Empire",
+    owner: "Romans",
     troops: 1400,
     terrain: "river",
   },
@@ -477,7 +489,7 @@ export const initialTerritories: Territory[] = [
     name: "Syria",
     x: 80,
     y: 70,
-    owner: "Roman Empire",
+    owner: "Romans",
     troops: 1700,
     terrain: "plains",
   },

@@ -151,7 +151,7 @@ export const useGameState = () => {
         ],
         defeat: [
           "As anticipated by any student of Aristotelian logic, these barbarians' theological deficiencies have manifested in their inevitable strategic failures - heresy begets defeat.",
-          "Most predictable! Their rejection of orthodox Christology naturally led to flawed reasoning in matters military - how can one expect victory from Arian sympathizers?",
+          "Most predictable! Their rejection of Chalcedonian Christology naturally led to flawed reasoning in matters military - how can one expect victory from Arian sympathizers?",
           "The scholarly consensus proves correct once again: those who embrace the Miaphysite controversy and other doctrinal errors cannot hope to govern effectively.",
         ],
       },
@@ -159,7 +159,7 @@ export const useGameState = () => {
         victory: [
           "How remarkable that these western barbarians, despite their crude Arian blasphemies and rejection of proper iconoclastic doctrine, have stumbled into success through sheer barbarous persistence!",
           "Most amusing! These Latin heretics, who stubbornly cling to their papal supremacy delusions and reject the Emperor's divine authority, have somehow prevailed through brute force alone.",
-          "Truly the Lord works in mysterious ways, granting victory even to these schismatic Goths who refuse the true Orthodox faith and persist in their Miaphysite abominations!",
+          "Truly the Lord works in mysterious ways, granting victory even to these schismatic Goths who refuse the true Chalcedonian faith and persist in their Miaphysite abominations!",
         ],
         defeat: [
           "Justice at last! These western heretics, with their barbarous rejection of proper Chalcedonian doctrine and their pope-worshipping superstitions, have received their due punishment!",

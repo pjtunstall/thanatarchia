@@ -1,6 +1,7 @@
 export interface Faction {
   id?: string;
   name: string;
+  formalName: string;
   type: "imperial" | "barbarian" | "bagaudae";
   color: string;
   territories: number;
@@ -13,7 +14,7 @@ export interface Faction {
     image: string;
   };
   heresy:
-    | "Orthodox"
+    | "Chalcedonian"
     | "Arian"
     | "Pagan"
     | "Manichean"

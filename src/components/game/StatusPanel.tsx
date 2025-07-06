@@ -33,7 +33,7 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
   return (
     <Card className="h-full flex flex-col">
       <CardHeader>
-        <CardTitle className="text-lg">{playerFaction.name}</CardTitle>
+        <CardTitle className="text-lg">{playerFaction.formalName}</CardTitle>
         <Badge style={{ backgroundColor: playerFaction.color }}>
           {playerFaction.type.charAt(0).toUpperCase() +
             playerFaction.type.slice(1)}
