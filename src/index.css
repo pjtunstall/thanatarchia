@@ -44,7 +44,7 @@ body {
     --parchment: 45 25% 90%;
     --imperial: 340 70% 45%;
     --barbarian: 120 40% 35%;
-    --bagaudae: 60 50% 40%;
+    --bagaudae: 60 50% 50%;
     --chronicle: 30 15% 85%;
 
     /* Specific faction colors */
@@ -59,7 +59,7 @@ body {
     --suebian: 200 70% 35%;
     --alans: 10 70% 50%;
     --hunnic: 40 70% 45%;
-    --mauri: 90 25% 25%;
+    --mauri: 90 35% 25%;
 
     --radius: 0.5rem;
 
@@ -113,7 +113,7 @@ body {
     --parchment: 30 15% 15%;
     --imperial: 340 70% 55%;
     --barbarian: 120 40% 45%;
-    --bagaudae: 60 50% 50%;
+    --bagaudae: 60 50% 60%;
     --chronicle: 30 10% 25%;
 
     /* Specific faction colors - dark mode */
@@ -128,7 +128,7 @@ body {
     --saxon: 195 100% 75%;
     --alans: 10 70% 60%;
     --hunnic: 40 70% 55%;
-    --mauri: 90 25% 25%;
+    --mauri: 90 35% 35%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
