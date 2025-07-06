@@ -42,23 +42,9 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
       <CardContent className="flex-1 overflow-hidden">
         <ScrollArea className="h-full">
           <div className="space-y-4">
-            {/* Player Character Portrait */}
-            <div className="flex items-center space-x-4 p-4 bg-muted/30 rounded-lg">
-              <Avatar className="w-16 h-16 transition-transform duration-200 hover:scale-125 hover:z-10 relative cursor-pointer">
-                <AvatarImage
-                  src={playerCharacter.image}
-                  alt={playerCharacter.name}
-                />
-                <AvatarFallback>
-                  {playerCharacter.name.charAt(0)}
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex-1">
-                <h3 className="font-semibold text-lg">
-                  {playerCharacter.name}
-                </h3>
-              </div>
-            </div>
+            <PlayerCharacterProfile
+              playerCharacter={playerCharacter}
+            ></PlayerCharacterProfile>
 
             <div className="space-y-3">
               <div className="flex items-center gap-2">
@@ -104,6 +90,29 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
         </ScrollArea>
       </CardContent>
     </Card>
+  );
+};
+
+interface PlayerCharacterProps {
+  playerCharacter: CharacterPortrait;
+}
+
+const PlayerCharacterProfile: React.FC<PlayerCharacterProps> = ({
+  playerCharacter,
+}) => {
+  return (
+    <>
+      {/* Player Character Portrait */}
+      <div className="flex items-center space-x-4 p-4 bg-muted/30 rounded-lg">
+        <Avatar className="w-16 h-16 transition-transform duration-200 hover:scale-125 hover:z-10 relative cursor-pointer">
+          <AvatarImage src={playerCharacter.image} alt={playerCharacter.name} />
+          <AvatarFallback>{playerCharacter.name.charAt(0)}</AvatarFallback>
+        </Avatar>
+        <div className="flex-1">
+          <h3 className="font-semibold text-lg">{playerCharacter.name}</h3>
+        </div>
+      </div>
+    </>
   );
 };
 

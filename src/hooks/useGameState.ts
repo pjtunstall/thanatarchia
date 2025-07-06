@@ -66,6 +66,7 @@ export const useGameState = () => {
     return {
       id: "player",
       name: selectedFaction.name,
+      formalName: selectedFaction.formalName,
       leader: playerCharacter,
       heresy: selectedFaction.heresy,
       type: selectedFaction.type,
@@ -409,6 +410,7 @@ export const useGameState = () => {
     setPlayerFaction({
       id: "player",
       name: selectedFaction.name,
+      formalName: selectedFaction.formalName,
       type: selectedFaction.type,
       leader: selectedFaction.leader,
       heresy: selectedFaction.heresy,
