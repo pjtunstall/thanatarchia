@@ -6,7 +6,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Territory } from "@/types/GameTypes";
-import { factions } from "@/data/GameData";
+import { factions, getSeason } from "@/data/GameData";
 import FactionDetails from "./FactionDetails";
 import romanEmpireMap from "@/assets/roman-empire-map-clean.jpg";
 
@@ -94,6 +94,8 @@ const GameMap: React.FC<GameMapProps> = ({
     return factionClassMap[owner] || "";
   };
 
+  const season = getSeason(currentTurn);
+
   return (
     <Card className="h-full parchment-texture">
       <CardHeader className="pb-0">
@@ -101,7 +103,7 @@ const GameMap: React.FC<GameMapProps> = ({
           ☠ Thanatarchia
         </CardTitle>
         <p className="text-muted-foreground italic text-lg text-center">
-          Imperium Romanum, anno domini {475 + currentTurn}
+          Imperium Romanum, {season} {476 + Math.floor((currentTurn - 1) / 4)}
         </p>
       </CardHeader>
       <CardContent className="h-full p-6">

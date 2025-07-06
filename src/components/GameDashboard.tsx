@@ -6,6 +6,7 @@ import StatusPanel from "@/components/game/StatusPanel";
 import ChroniclesPanel from "@/components/game/ChroniclesPanel";
 import ActionsPanel from "@/components/game/ActionsPanel";
 import GameOverlay from "@/components/game/GameOverlay";
+import ThemeManager from "./ThemeManager";
 
 const GameDashboard = () => {
   const [activeTab, setActiveTab] = useState("status");
@@ -31,79 +32,84 @@ const GameDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4">
-      <GameOverlay
-        gameStatus={gameState.gameStatus}
-        finalChronicles={gameState.finalChronicles}
-        onResetGame={gameState.resetGame}
-      />
-
-      <div className="grid grid-cols-12 gap-4 h-screen">
-        {/* Map Panel */}
-        <div className="col-span-7">
-          <GameMap
-            territories={gameState.territories}
-            selectedTerritory={gameState.selectedTerritory}
-            currentTurn={gameState.currentTurn}
-            playerFactionName={gameState.selectedFaction.name}
-            playerFactionColor={gameState.selectedFaction.color}
-            selectedFaction={gameState.selectedFaction}
-            playerCharacter={gameState.playerCharacter}
-            onTerritoryClick={gameState.handleTerritoryClick}
+    <>
+      <ThemeManager currentTurn={gameState.currentTurn}></ThemeManager>
+      <>
+        <div className="min-h-screen bg-background p-4">
+          <GameOverlay
+            gameStatus={gameState.gameStatus}
+            finalChronicles={gameState.finalChronicles}
+            onResetGame={gameState.resetGame}
           />
-        </div>
 
-        {/* Right Panel - Tabbed Interface */}
-        <div className="col-span-5">
-          <Tabs
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="h-full"
-          >
-            <TabsList
-              className="grid w-full grid-cols-3"
-              onKeyDown={handleTabKeyDown}
-            >
-              <TabsTrigger value="chronicles">Chronicles</TabsTrigger>
-              <TabsTrigger value="status">Status</TabsTrigger>
-              <TabsTrigger value="actions">Actions</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="chronicles" className="mt-4">
-              <ChroniclesPanel
-                chronicles={gameState.chronicles}
-                chroniclers={gameState.chroniclers}
-              />
-            </TabsContent>
-
-            <TabsContent value="status" className="mt-4">
-              <StatusPanel
-                playerFaction={gameState.playerFaction}
-                playerCharacter={gameState.playerCharacter}
+          <div className="grid grid-cols-12 gap-4 h-screen">
+            {/* Map Panel */}
+            <div className="col-span-7">
+              <GameMap
                 territories={gameState.territories}
                 selectedTerritory={gameState.selectedTerritory}
-              />
-            </TabsContent>
-
-            <TabsContent value="actions" className="mt-4">
-              <ActionsPanel
-                playerFaction={gameState.playerFaction}
-                territories={gameState.territories}
-                selectedTerritory={gameState.selectedTerritory}
+                currentTurn={gameState.currentTurn}
+                playerFactionName={gameState.selectedFaction.name}
+                playerFactionColor={gameState.selectedFaction.color}
                 selectedFaction={gameState.selectedFaction}
-                actionsRemaining={4 - gameState.actionsThisTurn}
-                onAction={gameState.handleAction}
-                onEndTurn={gameState.handleEndTurn}
-                onRecruitTroops={gameState.handleRecruitTroops}
-                onSpy={gameState.handleSpy}
-                onAttack={gameState.handleAttack}
-                getValidAttackTargets={gameState.getValidAttackTargets}
+                playerCharacter={gameState.playerCharacter}
+                onTerritoryClick={gameState.handleTerritoryClick}
               />
-            </TabsContent>
-          </Tabs>
+            </div>
+
+            {/* Right Panel - Tabbed Interface */}
+            <div className="col-span-5">
+              <Tabs
+                value={activeTab}
+                onValueChange={setActiveTab}
+                className="h-full"
+              >
+                <TabsList
+                  className="grid w-full grid-cols-3"
+                  onKeyDown={handleTabKeyDown}
+                >
+                  <TabsTrigger value="chronicles">Chronicles</TabsTrigger>
+                  <TabsTrigger value="status">Status</TabsTrigger>
+                  <TabsTrigger value="actions">Actions</TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="chronicles" className="mt-4">
+                  <ChroniclesPanel
+                    chronicles={gameState.chronicles}
+                    chroniclers={gameState.chroniclers}
+                  />
+                </TabsContent>
+
+                <TabsContent value="status" className="mt-4">
+                  <StatusPanel
+                    playerFaction={gameState.playerFaction}
+                    playerCharacter={gameState.playerCharacter}
+                    territories={gameState.territories}
+                    selectedTerritory={gameState.selectedTerritory}
+                  />
+                </TabsContent>
+
+                <TabsContent value="actions" className="mt-4">
+                  <ActionsPanel
+                    playerFaction={gameState.playerFaction}
+                    territories={gameState.territories}
+                    selectedTerritory={gameState.selectedTerritory}
+                    selectedFaction={gameState.selectedFaction}
+                    actionsRemaining={4 - gameState.actionsThisTurn}
+                    onAction={gameState.handleAction}
+                    onEndTurn={gameState.handleEndTurn}
+                    onRecruitTroops={gameState.handleRecruitTroops}
+                    onSpy={gameState.handleSpy}
+                    onAttack={gameState.handleAttack}
+                    getValidAttackTargets={gameState.getValidAttackTargets}
+                  />
+                </TabsContent>
+              </Tabs>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </>
+    </>
   );
 };
 

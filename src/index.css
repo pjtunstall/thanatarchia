@@ -6,11 +6,15 @@
 All colors MUST be HSL.
 */
 
-body {
-  @apply dark;
-}
-
 @layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
   :root {
     --background: 45 20% 96%;
     --foreground: 30 25% 15%;
@@ -192,117 +196,6 @@ body {
     pointer-events: none;
   }
 
-  /* Tabula Peutingeriana style cities */
-  .ancient-city {
-    position: relative;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .ancient-city:hover {
-    transform: scale(1.1);
-  }
-
-  .city-building {
-    width: 24px;
-    height: 20px;
-    background: linear-gradient(135deg, #8b7355 0%, #6b5537 100%);
-    position: relative;
-    border-radius: 2px 2px 0 0;
-    border: 1px solid #5a4429;
-  }
-
-  .city-building::before {
-    content: "";
-    position: absolute;
-    top: -8px;
-    left: 2px;
-    right: 2px;
-    height: 8px;
-    background: linear-gradient(135deg, #a67c5a 0%, #8b7355 100%);
-    border-radius: 8px 8px 0 0;
-    border: 1px solid #5a4429;
-  }
-
-  .city-building::after {
-    content: "";
-    position: absolute;
-    top: -4px;
-    left: 8px;
-    right: 8px;
-    height: 2px;
-    background: #5a4429;
-  }
-
-  .city-flag {
-    position: absolute;
-    top: -18px;
-    right: -8px;
-    width: 0;
-    height: 0;
-    border-style: solid;
-  }
-
-  .flag-player {
-    border-left: 8px solid hsl(var(--barbarian));
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
-  }
-
-  .flag-imperial {
-    border-left: 8px solid hsl(var(--imperial));
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
-  }
-
-  .flag-bagaudae {
-    border-left: 8px solid hsl(var(--bagaudae));
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
-  }
-
-  .flag-barbarian {
-    border-left: 8px solid #b45309;
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
-  }
-
-  .flag-neutral {
-    border-left: 8px solid #94a3b8;
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
-  }
-
-  .city-name {
-    position: absolute;
-    top: 22px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 9px;
-    font-weight: bold;
-    text-align: center;
-    color: #3c2915;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
-    white-space: nowrap;
-    max-width: 60px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .city-troops {
-    position: absolute;
-    top: 32px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 8px;
-    font-weight: bold;
-    color: #5a4429;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 8px;
-    padding: 1px 4px;
-    border: 1px solid #8b7355;
-  }
-
   .compass-rose {
     position: absolute;
     top: 20px;
@@ -455,12 +348,74 @@ body {
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
+.theme-spring {
+  --background: 90 40% 96%;
+  --foreground: 130 20% 20%;
 
-  body {
-    @apply bg-background text-foreground;
-  }
+  --primary: 120 40% 40%;
+  --accent: 150 60% 45%;
+
+  --card: 90 30% 92%;
+  --card-foreground: 130 20% 20%;
+
+  --muted: 90 20% 85%;
+  --muted-foreground: 130 15% 40%;
+
+  --border: 90 20% 80%;
+  --input: 90 20% 80%;
+  --ring: 120 40% 40%;
+}
+
+.theme-summer {
+  --background: 50 90% 95%;
+  --foreground: 40 30% 20%;
+
+  --primary: 35 85% 45%;
+  --accent: 200 90% 50%;
+
+  --card: 50 80% 90%;
+  --card-foreground: 40 30% 20%;
+
+  --muted: 45 50% 80%;
+  --muted-foreground: 40 30% 35%;
+
+  --border: 45 40% 75%;
+  --input: 45 40% 75%;
+  --ring: 35 85% 45%;
+}
+
+.theme-autumn {
+  --background: 30 40% 90%;
+  --foreground: 25 30% 15%;
+
+  --primary: 20 70% 40%;
+  --accent: 15 60% 45%;
+
+  --card: 30 30% 88%;
+  --card-foreground: 25 30% 15%;
+
+  --muted: 30 20% 80%;
+  --muted-foreground: 25 15% 40%;
+
+  --border: 30 20% 75%;
+  --input: 30 20% 75%;
+  --ring: 20 70% 40%;
+}
+
+.theme-winter {
+  --background: 220 30% 96%;
+  --foreground: 230 25% 20%;
+
+  --primary: 210 60% 45%;
+  --accent: 200 80% 55%;
+
+  --card: 220 20% 92%;
+  --card-foreground: 230 25% 20%;
+
+  --muted: 220 15% 85%;
+  --muted-foreground: 230 15% 45%;
+
+  --border: 220 20% 80%;
+  --input: 220 20% 80%;
+  --ring: 210 60% 45%;
 }
