@@ -29,12 +29,12 @@ const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
   };
 
   return (
-    <Card className="h-[calc(100vh-200px)] bg-[hsl(var(--chronicle))]">
+    <Card className="h-full bg-[hsl(var(--chronicle))]">
       <CardHeader>
         <CardTitle className="text-xl">Chronicles</CardTitle>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-[calc(100vh-300px)]">
+        <ScrollArea className="h-[calc(100vh)]">
           <div className="space-y-4">
             {chronicles.map((chronicle) => {
               const chroniclerInfo = getChroniclerInfo(chronicle.chronicler);

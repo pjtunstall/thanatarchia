@@ -34,7 +34,7 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
   getValidAttackTargets,
 }) => {
   return (
-    <Card className="h-[calc(100vh-200px)]">
+    <Card className="max-h-full overflow-auto">
       <CardHeader>
         <CardTitle className="text-lg">Actions</CardTitle>
         <p className="text-sm text-muted-foreground">
@@ -100,51 +100,53 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
                 Spy (25 solidi)
               </Button>
             </div>
+
+            {selectedTerritory && (
+              <div className="border-t pt-3">
+                {/* <p className="text-sm font-semibold mb-2">Territory Actions</p> */}
+                {(() => {
+                  const territory = territories.find(
+                    (t) => t.name === selectedTerritory
+                  );
+                  const validTargets =
+                    territory?.owner === selectedFaction.name
+                      ? getValidAttackTargets(selectedTerritory)
+                      : [];
+
+                  return territory && validTargets.length > 0 ? (
+                    <div className="space-y-1">
+                      <p className="text-xs font-semibold">Attack Targets:</p>
+                      {validTargets.map((target) => (
+                        <Button
+                          key={target.name}
+                          onClick={() =>
+                            onAttack(selectedTerritory, target.name)
+                          }
+                          variant="destructive"
+                          size="sm"
+                          className="w-full text-xs"
+                          disabled={
+                            territory.troops! < 200 || actionsRemaining <= 0
+                          }
+                        >
+                          <Sword className="w-2 h-2 mr-1" />
+                          Attack {target.name} ({target.troops})
+                        </Button>
+                      ))}
+                    </div>
+                  ) : null;
+                })()}
+              </div>
+            )}
+
+            {selectedTerritory && (
+              <SelectedTerritoryInfo
+                territories={territories}
+                selectedTerritory={selectedTerritory}
+                selectedFaction={playerFaction}
+              />
+            )}
           </div>
-
-          {selectedTerritory && (
-            <div className="border-t pt-3">
-              <p className="text-sm font-semibold mb-2">Territory Actions</p>
-              {(() => {
-                const territory = territories.find(
-                  (t) => t.name === selectedTerritory
-                );
-                const validTargets =
-                  territory?.owner === selectedFaction.name
-                    ? getValidAttackTargets(selectedTerritory)
-                    : [];
-
-                return territory && validTargets.length > 0 ? (
-                  <div className="space-y-1">
-                    <p className="text-xs font-semibold">Attack Targets:</p>
-                    {validTargets.map((target) => (
-                      <Button
-                        key={target.name}
-                        onClick={() => onAttack(selectedTerritory, target.name)}
-                        variant="destructive"
-                        size="sm"
-                        className="w-full text-xs"
-                        disabled={
-                          territory.troops! < 200 || actionsRemaining <= 0
-                        }
-                      >
-                        <Sword className="w-2 h-2 mr-1" />
-                        Attack {target.name} ({target.troops})
-                      </Button>
-                    ))}
-                  </div>
-                ) : null;
-              })()}
-            </div>
-          )}
-
-          {selectedTerritory && (
-            <SelectedTerritoryInfo
-              territories={territories}
-              selectedTerritory={selectedTerritory}
-              selectedFaction={playerFaction}
-            />
-          )}
         </div>
       </CardContent>
     </Card>

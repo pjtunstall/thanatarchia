@@ -10,6 +10,7 @@ import hunnicWarlord from "@/assets/hunnic-warlord-portrait.jpg";
 import frankishKing from "@/assets/frankish-king-portrait.jpg";
 import chroniclerMonk from "@/assets/chronicler-monk-male.jpg";
 import chroniclerScribe from "@/assets/chronicler-scribe-male.jpg";
+import chroniclerMosaic from "@/assets/chronicler-mosaic-female.jpg";
 import chroniclerScholar from "@/assets/chronicler-scholar-male.jpg";
 import chroniclerNun from "@/assets/chronicler-nun-female.jpg";
 import bagaudaeMaleRebel from "@/assets/bagaudae-male-rebel.jpg";
@@ -333,13 +334,13 @@ export const chroniclers: Chronicler[] = [
       "A devout monk who fled to Ravenna after accidentally setting fire to his monastery's library while 'improving' ancient texts. Known for his excessive flattery and tendency to describe even the most mundane events in epic terms. Claims to have once blessed a loaf of bread that fed an entire village, though witnesses say it was just very large bread.",
   },
   {
-    name: "Theodoric the Scribe",
+    name: "Eudaemonia of Thebes",
     bias: "hostile",
-    style: "Germanic disdain",
-    gender: "male",
-    portrait: chroniclerScribe,
+    style: "disdainful",
+    gender: "female",
+    portrait: chroniclerMosaic,
     biography:
-      "A former Gothic court scribe who was exiled for 'creative differences' with his king's version of events. Bitter about losing his position, he now chronicles with the enthusiasm of a man forced to eat bitter herbs. His quill is perpetually stained with both ink and tears of frustration.",
+      "A former Vandal court scribe who was exiled for 'creative differences' with his king's version of events. Bitter about losing her position, he now chronicles with the enthusiasm of a man forced to eat bitter herbs. Her quill is perpetually stained with both ink and tears of frustration.",
   },
   {
     name: "Hieronymus of Alexandria",

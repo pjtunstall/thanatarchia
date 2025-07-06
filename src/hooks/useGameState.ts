@@ -90,7 +90,7 @@ export const useGameState = () => {
     },
     {
       id: "2",
-      chronicler: "Theodoric the Scribe",
+      chronicler: "Eudaemonia of Thebes",
       bias: "hostile",
       entry:
         "The barbarous Alamanni continue their senseless raids, pillaging what civilized men have built with crude savagery.",
@@ -101,7 +101,7 @@ export const useGameState = () => {
       chronicler: "Hieronymus of Alexandria",
       bias: "hostile",
       entry:
-        "These northern tribes, lacking in both letters and manners, persist in their primitive territorial disputes, as is their wont.",
+        "These uncouth tribes, lacking in both letters and manners, persist in their primitive territorial disputes, as is their wont.",
       turn: 1,
     },
     {
@@ -109,7 +109,7 @@ export const useGameState = () => {
       chronicler: "Priscilla of Byzantium",
       bias: "hostile",
       entry:
-        "I never know the old Ravenna before the Gothic Wars. Constantinople suited me better . . .",
+        "I never know the old Ravenna before the Gothic War. Constantinople suited me better...",
       // "How tedious it is to observe these western provinces squabble like children, when true civilization still flourishes in the blessed capital of Constantinople.",
       turn: 1,
     },
@@ -131,11 +131,11 @@ export const useGameState = () => {
           "Though darkness has fallen upon us, the chronicle of our leader's virtue shall be a beacon of hope for all who follow in their blessed footsteps!",
         ],
       },
-      "Theodoric the Scribe": {
+      "Eudaemonia of Thebes": {
         victory: [
           "So ends the tale of these upstart warlords, who through sheer brutality have trampled the ancient ways. The old gods must laugh at such crude 'victory.'",
           "These northern savages style themselves conquerors, yet they know nothing of true honor or the warrior's code - mere raiders grown fat on plunder.",
-          "Aye, they have won through treachery and numbers, but what glory is there in defeating soft Romans and their heretical priests who deny the old ways?",
+          "Aye, they have won through treachery and numbers, but what glory is there in defeating soft Romans and their heretical priests?",
         ],
         defeat: [
           "The ravens feast well today! These pretenders have met their doom as all oath-breakers must - the ancient laws are satisfied once more.",
