@@ -525,10 +525,10 @@ export const initialReport = (adviserName: string): string => {
     case "Marcellus of Ravenna":
       return '"Our forces are, as yet, unprepared to face the enemy. We must bide our time and prepare for battle."';
     case "Priscilla of Byzantium":
-      return '"Sire, we must be Byzantine in our attitude. Strategy is the way to victory."';
+      return '"Sire, we must be Byzantine in cunning. Strategy is the way to victory."';
     case "Eudaemonia of Rheims":
-      return '"We are surrounded by enemies. We must be as the snake, cunning and swift to strike when the time is right."';
+      return '"Foes surround us. We must be sly as the fox and swift as the snake to strike when the time is right."';
     default:
-      return '"Our defences are weak, my liege, and our forces unprepared. I advise patence."';
+      return '"Our defences are weak, my liege, and our forces unprepared. I advise patience."';
   }
 };
