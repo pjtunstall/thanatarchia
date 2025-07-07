@@ -42,6 +42,8 @@ export const getHeresyColor = (heresy: string) => {
       return "bg-red-100 text-red-800 border-red-200";
     case "Miaphysite":
       return "bg-purple-100 text-purple-800 border-purple-200";
+    case "Dyophysite":
+      return "bg-orange-100 text-orange-800 border-orange-200";
     case "Pagan":
       return "bg-amber-100 text-amber-800 border-amber-200";
     case "Manichean":
@@ -290,7 +292,7 @@ export const factions: Faction[] = [
       gender: "male",
       image: barbarianKing,
     },
-    heresy: "Pagan",
+    heresy: "Dyophysite",
     relatives: [
       "Son Alboin",
       "Daughter Albsuinda",

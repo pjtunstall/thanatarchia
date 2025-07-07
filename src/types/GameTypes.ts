@@ -20,6 +20,7 @@ export interface Faction {
     | "Manichean"
     | "Pelagian"
     | "Miaphysite"
+    | "Dyophysite"
     | "Nestorian";
 }
 
