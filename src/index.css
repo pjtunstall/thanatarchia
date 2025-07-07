@@ -50,22 +50,23 @@ All colors MUST be HSL.
     --parchment: 45 25% 90%;
     --imperial: 340 70% 45%;
     --barbarian: 120 40% 35%;
-    --bagaudae: 60 50% 50%;
+    --bagaudae: 60 80% 40%;
     --chronicle: 30 15% 85%;
 
     /* Specific faction colors */
-    --ostrogothic: 280 60% 50%;
-    --visigothic: 210 70% 45%;
-    --vandal: 30 80% 50%;
-    --burgundian: 180 60% 40%;
-    --frankish: 260 55% 45%;
-    --saxon: 195 100% 75%;
-    --gepid: 25 60% 35%;
-    --langobard: 320 65% 50%;
-    --suebian: 200 70% 35%;
+    --ostrogoths: 360 35% 40%;
+    --visigoths: 360 35% 15%;
+    --vandals: 30 80% 50%;
+    --burgundians: 180 60% 40%;
+    --franks: 250 35% 35%;
+    --saxons: 130 45% 60%;
+    --gepids: 25 60% 35%;
+    --langobards: 60 30% 45%;
+    --suebians: 200 70% 35%;
     --alans: 10 70% 50%;
-    --hunnic: 40 70% 45%;
-    --mauri: 90 35% 25%;
+    --huns: 40 70% 45%;
+    --moors: 90 35% 25%;
+    --britons: 20 90% 65%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -114,18 +115,19 @@ All colors MUST be HSL.
     --chronicle: 30 10% 25%;
 
     /* Specific faction colors - dark mode */
-    --ostrogothic: 280 60% 60%;
-    --visigothic: 210 70% 55%;
-    --vandal: 30 80% 60%;
-    --burgundian: 180 60% 50%;
-    --frankish: 260 55% 55%;
-    --gepid: 25 60% 45%;
-    --langobard: 320 65% 60%;
-    --suebian: 200 70% 45%;
-    --saxon: 195 100% 75%;
-    --alans: 10 70% 60%;
-    --hunnic: 40 70% 55%;
-    --mauri: 90 35% 35%;
+    --ostrogoths: 360 35% 40%;
+    --visigoths: 360 35% 15%;
+    --vandals: 30 80% 50%;
+    --burgundians: 180 60% 40%;
+    --franks: 250 35% 35%;
+    --saxons: 130 45% 60%;
+    --gepids: 25 60% 35%;
+    --langobards: 60 30% 45%;
+    --suebians: 200 70% 35%;
+    --alans: 10 70% 50%;
+    --huns: 40 70% 45%;
+    --moors: 90 35% 25%;
+    --britons: 20 90% 65%;
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -286,7 +288,8 @@ All colors MUST be HSL.
   --ring: 35 85% 45%;
 }
 
-.theme-autumn {
+/* actually the dark theme */
+/* .theme-autumn {
   --background: 30 15% 8%;
   --foreground: 45 20% 92%;
 
@@ -314,9 +317,9 @@ All colors MUST be HSL.
   --border: 30 15% 20%;
   --input: 30 15% 20%;
   --ring: 15 60% 55%;
-}
+} */
 
-/* .theme-autumn {
+.theme-autumn {
   --background: 30 40% 90%;
   --foreground: 25 30% 15%;
 
@@ -332,7 +335,7 @@ All colors MUST be HSL.
   --border: 30 20% 75%;
   --input: 30 20% 75%;
   --ring: 20 70% 40%;
-} */
+}
 
 .theme-winter {
   --background: 220 30% 96%;

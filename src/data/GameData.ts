@@ -63,8 +63,8 @@ export const genderVariants = {
     female: { name: "Augusta Valentina", image: byzantineQueen },
   },
   Britons: {
-    male: { name: "Cymbeline", image: romanEmperor },
-    female: { name: "Baddo", image: byzantineQueen },
+    male: { name: "Cymbeline the Wise", image: romanEmperor },
+    female: { name: "Baddo the Proud", image: byzantineQueen },
   },
   Moors: {
     male: { name: "Masuna the Great", image: mauriMaleLeader },
@@ -103,8 +103,8 @@ export const genderVariants = {
     female: { name: "Rodelinda the Ruthless", image: visigothicQueen },
   },
   Saxons: {
-    male: { name: "Widukind the Defiant", image: barbarianKing },
-    female: { name: "Hasela", image: barbarianQueen },
+    male: { name: "Widukind the Proud", image: barbarianKing },
+    female: { name: "Giesela the Defiant", image: barbarianQueen },
   },
   Suebi: {
     male: { name: "Hermeric the Elder", image: barbarianKing },
@@ -146,7 +146,7 @@ export const factions: Faction[] = [
     name: "Britons",
     formalName: "Kindom of the Britons",
     type: "imperial",
-    color: "hsl(var(--imperial))",
+    color: "hsl(var(--britons))",
     leader: {
       name: "Cymbeline",
       gender: "male",
@@ -162,7 +162,7 @@ export const factions: Faction[] = [
     name: "Moors",
     formalName: "Kingdom of the Moors",
     type: "barbarian",
-    color: "hsl(var(--mauri))",
+    color: "hsl(var(--moors))",
     leader: {
       name: "Masuna",
       gender: "male",
@@ -194,7 +194,7 @@ export const factions: Faction[] = [
     name: "Ostrogoths",
     formalName: "Kingdom of the Ostrogoths",
     type: "barbarian",
-    color: "hsl(var(--ostrogothic))",
+    color: "hsl(var(--ostrogoths))",
     leader: {
       name: "Theodoric the Great",
       gender: "male",
@@ -210,7 +210,7 @@ export const factions: Faction[] = [
     name: "Visigoths",
     formalName: "Kingdom of the Visigoths",
     type: "barbarian",
-    color: "hsl(var(--visigothic))",
+    color: "hsl(var(--visigoths))",
     leader: {
       name: "Queen Brunhild",
       gender: "female",
@@ -226,7 +226,7 @@ export const factions: Faction[] = [
     name: "Vandals",
     formalName: "Kingdom of the Vandals",
     type: "barbarian",
-    color: "hsl(var(--vandal))",
+    color: "hsl(var(--vandals))",
     leader: {
       name: "Huneric the Cruel",
       gender: "male",
@@ -242,7 +242,7 @@ export const factions: Faction[] = [
     name: "Burgundians",
     formalName: "Kingdom of the Burgundians",
     type: "barbarian",
-    color: "hsl(var(--burgundian))",
+    color: "hsl(var(--burgundians))",
     leader: {
       name: "Gundobad the Wise",
       gender: "male",
@@ -258,7 +258,7 @@ export const factions: Faction[] = [
     name: "Franks",
     formalName: "Kingdom of the Franks",
     type: "barbarian",
-    color: "hsl(var(--frankish))",
+    color: "hsl(var(--franks))",
     leader: {
       name: "Clovis the Conqueror",
       gender: "male",
@@ -274,9 +274,9 @@ export const factions: Faction[] = [
     name: "Saxons",
     formalName: "Saxon Confederation",
     type: "barbarian",
-    color: "hsl(var(--saxon))",
+    color: "hsl(var(--saxons))",
     leader: {
-      name: "Hasela",
+      name: "Giesela",
       gender: "female",
       image: barbarianQueen,
     },
@@ -290,7 +290,7 @@ export const factions: Faction[] = [
     name: "Gepids",
     formalName: "Kingdom of the Gepids",
     type: "barbarian",
-    color: "hsl(var(--gepid))",
+    color: "hsl(var(--gepids))",
     leader: {
       name: "Ardaric the Faithful",
       gender: "male",
@@ -306,9 +306,9 @@ export const factions: Faction[] = [
     name: "Langobards",
     formalName: "Kingdom of the Langobards",
     type: "barbarian",
-    color: "hsl(var(--langobard))",
+    color: "hsl(var(--langobards))",
     leader: {
-      name: "Wacho the King-Maker",
+      name: "Wacho the Ferocious",
       gender: "male",
       image: barbarianKing,
     },
@@ -324,10 +324,10 @@ export const factions: Faction[] = [
     treasure: 100,
   },
   {
-    name: "Suebi",
+    name: "Suebians",
     formalName: "Suebian Confederation",
     type: "barbarian",
-    color: "hsl(var(--suebian))",
+    color: "hsl(var(--suebians))",
     leader: {
       name: "Hermeric the Elder",
       gender: "male",
@@ -359,7 +359,7 @@ export const factions: Faction[] = [
     name: "Huns",
     formalName: "Hunnic Horde",
     type: "barbarian",
-    color: "hsl(var(--hunnic))",
+    color: "hsl(var(--huns))",
     leader: {
       name: "Dengizich the Fierce",
       gender: "male",
@@ -449,7 +449,7 @@ export const initialTerritories: Territory[] = [
     name: "Hispania",
     x: 8,
     y: 52,
-    owner: "Suebi",
+    owner: "Suebians",
     troops: 800,
     terrain: "mountains",
   },
