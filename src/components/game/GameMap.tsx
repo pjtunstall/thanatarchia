@@ -176,7 +176,7 @@ const GameMap: React.FC<GameMapProps> = ({
                           key === selectedFaction.name ? "font-semibold" : ""
                         }
                       >
-                        {factionInfo.name}
+                        {fullFaction.formalName}
                       </span>
                     </div>
                   </PopoverTrigger>

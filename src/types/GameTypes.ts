@@ -19,7 +19,8 @@ export interface Faction {
     | "Pagan"
     | "Manichean"
     | "Pelagian"
-    | "Miaphysite";
+    | "Miaphysite"
+    | "Nestorian";
 }
 
 export interface Territory {

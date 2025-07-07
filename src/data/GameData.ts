@@ -48,6 +48,8 @@ export const getHeresyColor = (heresy: string) => {
       return "bg-green-100 text-green-800 border-green-200";
     case "Pelagian":
       return "bg-pink-100 text-pink-800 border-pink-200";
+    case "Nestorian":
+      return "bg-yellow-100 text-yellow-800 border-yellow-200";
     default:
       return "bg-gray-100 text-gray-800 border-gray-200";
   }
@@ -64,7 +66,7 @@ export const genderVariants = {
   },
   Bagaudae: {
     male: { name: "Tibatto the Rebel", image: bagaudaeMaleRebel },
-    female: { name: "Comrade Brigit", image: bagaudaeFemaleRebel },
+    female: { name: "Brigit the Bold", image: bagaudaeFemaleRebel },
   },
   Ostrogoths: {
     male: { name: "Theodoric the Great", image: barbarianKing },
@@ -91,11 +93,11 @@ export const genderVariants = {
     female: { name: "Rosamunda the Fair", image: visigothicQueen },
   },
   Langobards: {
-    male: { name: "Wacho the King-Maker", image: barbarianKing },
+    male: { name: "Wacho the Ferocious", image: barbarianKing },
     female: { name: "Rodelinda the Ruthless", image: visigothicQueen },
   },
   Saxons: {
-    male: { name: "Widukind", image: barbarianKing },
+    male: { name: "Widukind the Defiant", image: barbarianKing },
     female: { name: "Hasela", image: barbarianQueen },
   },
   Suebi: {
@@ -124,14 +126,19 @@ export const factions: Faction[] = [
       image: romanEmperor,
     },
     heresy: "Chalcedonian",
-    relatives: ["Princess Flavia", "Duke Marcus", "General Maximus"],
+    relatives: [
+      "Son Anastasius",
+      "Daughter Eudoxia",
+      "Daughter Flavia",
+      "Son Zeno",
+    ],
     territories: 1,
     troops: 1000,
     treasure: 100,
   },
   {
     name: "Moors",
-    formalName: "Kingdom of the Moors and Romans",
+    formalName: "Kingdom of the Moors",
     type: "barbarian",
     color: "hsl(var(--mauri))",
     leader: {
@@ -147,7 +154,7 @@ export const factions: Faction[] = [
   },
   {
     name: "Bagaudae",
-    formalName: "Free Folk of Armorica",
+    formalName: "Bagaudae",
     type: "bagaudae",
     color: "hsl(var(--bagaudae))",
     leader: {
@@ -156,7 +163,7 @@ export const factions: Faction[] = [
       image: bagaudaeMaleRebel,
     },
     heresy: "Manichean",
-    relatives: ["Comrade Spartaca", "Comrade Caractacus", "Comrade Amandus"],
+    relatives: ["Sister Spartaca", "Brother Amandus"],
     territories: 1,
     troops: 1000,
     treasure: 100,
@@ -195,7 +202,7 @@ export const factions: Faction[] = [
   },
   {
     name: "Vandals",
-    formalName: "Kingdom of the Vandals and Alans",
+    formalName: "Kingdom of the Vandals",
     type: "barbarian",
     color: "hsl(var(--vandal))",
     leader: {
@@ -204,7 +211,7 @@ export const factions: Faction[] = [
       image: vandalChief,
     },
     heresy: "Arian",
-    relatives: ["Princess Eudocia", "Brother Gunthamund"],
+    relatives: ["Daughter Guitifida", "Brother Unthank"],
     territories: 1,
     troops: 1000,
     treasure: 100,
@@ -320,7 +327,7 @@ export const factions: Faction[] = [
       gender: "male",
       image: byzantineChief,
     },
-    heresy: "Pagan",
+    heresy: "Nestorian",
     relatives: ["Son Goar", "Son Addac", "Cousin Sangiban", "Cousin Safrac"],
     territories: 1,
     troops: 1000,
