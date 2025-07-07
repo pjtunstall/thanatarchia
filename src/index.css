@@ -16,6 +16,8 @@ All colors MUST be HSL.
   }
 
   :root {
+    --radius: 0.5rem;
+
     --background: 45 20% 96%;
     --foreground: 30 25% 15%;
 
@@ -65,22 +67,13 @@ All colors MUST be HSL.
     --hunnic: 40 70% 45%;
     --mauri: 90 35% 25%;
 
-    --radius: 0.5rem;
-
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -133,6 +126,7 @@ All colors MUST be HSL.
     --alans: 10 70% 60%;
     --hunnic: 40 70% 55%;
     --mauri: 90 35% 35%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -253,50 +247,6 @@ All colors MUST be HSL.
         hsl(var(--parchment)) 0%,
         hsl(var(--parchment) / 0.95) 100%
       );
-  }
-
-  /* Faction territory colors */
-  .faction-roman-empire {
-    @apply bg-[hsl(var(--imperial))];
-  }
-  .faction-mauri {
-    @apply bg-[hsl(var(--mauri))];
-  }
-  .faction-bagaudae {
-    @apply bg-[hsl(var(--bagaudae))];
-  }
-  .faction-ostrogothic {
-    @apply bg-[hsl(var(--ostrogothic))];
-  }
-  .faction-visigothic {
-    @apply bg-[hsl(var(--visigothic))];
-  }
-  .faction-vandal {
-    @apply bg-[hsl(var(--vandal))];
-  }
-  .faction-burgundian {
-    @apply bg-[hsl(var(--burgundian))];
-  }
-  .faction-frankish {
-    @apply bg-[hsl(var(--frankish))];
-  }
-  .faction-gepid {
-    @apply bg-[hsl(var(--gepid))];
-  }
-  .faction-langobard {
-    @apply bg-[hsl(var(--langobard))];
-  }
-  .faction-suebian {
-    @apply bg-[hsl(var(--suebian))];
-  }
-  .faction-alans {
-    @apply bg-[hsl(var(--alans))];
-  }
-  .faction-hunnic {
-    @apply bg-[hsl(var(--hunnic))];
-  }
-  .faction-saxon {
-    @apply bg-[hsl(var(--saxon))];
   }
 }
 

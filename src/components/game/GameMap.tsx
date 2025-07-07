@@ -69,31 +69,6 @@ const GameMap: React.FC<GameMapProps> = ({
     territories,
   ]);
 
-  const getTerritoryColor = (owner: string) => {
-    // For player territories, use dynamic color
-    if (owner === selectedFaction.name) {
-      return "";
-    }
-
-    const factionClassMap: Record<string, string> = {
-      Romans: "faction-roman-empire",
-      Moors: "faction-mauri",
-      Bagaudae: "faction-bagaudae",
-      Ostrogoths: "faction-ostrogothic",
-      Visigoths: "faction-visigothic",
-      Vandals: "faction-vandal",
-      Burgundians: "faction-burgundian",
-      Franks: "faction-frankish",
-      Gepids: "faction-gepid",
-      Langobards: "faction-langobard",
-      Suebi: "faction-suebian",
-      Alans: "faction-alans",
-      Huns: "faction-hunnic",
-      Saxons: "faction-saxon",
-    };
-    return factionClassMap[owner] || "";
-  };
-
   return (
     <Card className="h-full">
       <CardHeader className="pb-0">
@@ -132,15 +107,12 @@ const GameMap: React.FC<GameMapProps> = ({
             >
               {/* Territory marker */}
               <div
-                className={`w-6 h-6 rounded-full border-2 border-white shadow-lg ${getTerritoryColor(
-                  territory.owner
-                )}`}
-                style={
-                  territory.owner === selectedFaction.name
-                    ? { backgroundColor: playerFactionColor }
-                    : {}
-                }
-              ></div>
+                className="w-6 h-6 rounded-full border-2 border-white shadow-lg"
+                style={{
+                  backgroundColor:
+                    factionLookup[territory.owner]?.color ?? "gray",
+                }}
+              />
 
               {/* Territory name */}
               <div className="absolute top-7 left-1/2 transform -translate-x-1/2 bg-black/70 text-white text-xs px-2 py-1 rounded whitespace-nowrap">

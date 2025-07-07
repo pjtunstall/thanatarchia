@@ -29,8 +29,8 @@ const FactionDetails: React.FC<FactionDetailsProps> = ({
       : faction.leader;
 
   return (
-    <Card className="w-80 parchment-texture">
-      <CardHeader className="pb-3">
+    <Card className="w-80">
+      <CardHeader className="pb-3 bg-muted/30">
         <div className="flex items-center gap-3">
           <Avatar className="w-16 h-16 border-2 border-primary/20 transition-transform duration-200 hover:scale-125 hover:z-10 relative cursor-pointer">
             <AvatarImage
@@ -54,7 +54,7 @@ const FactionDetails: React.FC<FactionDetailsProps> = ({
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 bg-muted/30">
         {/* Heresy/Religion */}
         <div className="flex items-center gap-2">
           <Church className="w-4 h-4 text-muted-foreground" />
