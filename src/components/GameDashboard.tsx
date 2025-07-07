@@ -36,11 +36,11 @@ const GameDashboard = () => {
     <>
       <ThemeManager currentTurn={gameState.currentTurn}></ThemeManager>
       <>
-        <div
+        <div className="min-h-screen bg-background p-4">
+          {/* Alternatively:
           className={`theme-${getSeason(
             gameState.currentTurn
-          )} min-h-screen bg-background p-4`}
-        >
+          )} min-h-screen bg-background p-4`} */}
           <GameOverlay
             gameStatus={gameState.gameStatus}
             finalChronicles={gameState.finalChronicles}

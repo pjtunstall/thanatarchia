@@ -4,7 +4,7 @@ export interface Faction {
   formalName: string;
   type: "imperial" | "barbarian" | "bagaudae";
   color: string;
-  territories: number;
+  territories: string[];
   relatives: string[];
   troops: number;
   treasure: number;

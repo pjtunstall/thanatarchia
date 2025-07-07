@@ -59,10 +59,9 @@ export const useGameState = () => {
   });
 
   const [playerFaction, setPlayerFaction] = useState<Faction>(() => {
-    // Count territories that belong to the player's faction
-    const playerTerritoryCount = initialTerritories.filter(
+    const playerTerritories = initialTerritories.filter(
       (territory) => territory.owner === selectedFaction.name
-    ).length;
+    );
 
     return {
       id: "player",
@@ -72,7 +71,7 @@ export const useGameState = () => {
       heresy: selectedFaction.heresy,
       type: selectedFaction.type,
       color: selectedFaction.color,
-      territories: playerTerritoryCount,
+      territories: playerTerritories.map((t) => t.name),
       relatives: selectedFaction.relatives,
       troops: 2500,
       treasure: 150,
@@ -256,7 +255,7 @@ export const useGameState = () => {
 
       setPlayerFaction((prev) => ({
         ...prev,
-        territories: prev.territories + 1,
+        territories: [toTerritory.name, ...prev.territories],
       }));
       addChronicleEntry(
         `Our brave warriors have conquered ${toTerritory.name} in glorious battle!`,
@@ -344,7 +343,7 @@ export const useGameState = () => {
 
       setPlayerFaction((prev) => ({
         ...prev,
-        territories: prev.territories - 1,
+        territories: prev.territories.filter((t) => t !== toId),
       }));
       addChronicleEntry(
         `The barbarians have lost ${toTerritory.name} to enemy forces!`,
@@ -403,11 +402,6 @@ export const useGameState = () => {
     setSelectedTerritory(null);
     setFinalChronicles([]);
 
-    // Count player territories for reset
-    const playerTerritoryCount = initialTerritories.filter(
-      (t) => t.owner === selectedFaction.name
-    ).length;
-
     setPlayerFaction({
       id: "player",
       name: selectedFaction.name,
@@ -416,7 +410,7 @@ export const useGameState = () => {
       leader: selectedFaction.leader,
       heresy: selectedFaction.heresy,
       color: selectedFaction.color,
-      territories: playerTerritoryCount,
+      territories: [...selectedFaction.territories],
       relatives: selectedFaction.relatives,
       troops: 2000,
       treasure: 100,
@@ -483,13 +477,32 @@ export const useGameState = () => {
 
   const handleRecruitTroops = () => {
     if (playerFaction.treasure < 50 || actionsThisTurn >= 4) return;
+    setActionsThisTurn((prevActions) => prevActions + 1);
 
-    setPlayerFaction((prev) => ({
-      ...prev,
-      treasure: prev.treasure - 50,
-      troops: prev.troops + 500,
-    }));
-    setActionsThisTurn((prev) => prev + 1);
+    setTerritories((prevTerritories) => {
+      const factionName = playerFaction.name;
+      const controlledTerritories = prevTerritories.filter(
+        (t) => t.owner === factionName
+      );
+      const recruitAmount = Math.round(500 / controlledTerritories.length);
+
+      let totalRecruits = 0;
+      const updated = prevTerritories.map((t) => {
+        if (t.owner === factionName) {
+          totalRecruits += recruitAmount;
+          return { ...t, troops: t.troops! + recruitAmount };
+        }
+        return t;
+      });
+
+      setPlayerFaction((prevFaction) => ({
+        ...prevFaction,
+        treasure: prevFaction.treasure - 50,
+        troops: prevFaction.troops + totalRecruits,
+      }));
+
+      return updated;
+    });
 
     const newEntry: Chronicle = {
       id: String(chronicles.length + 1),
