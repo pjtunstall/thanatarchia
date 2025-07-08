@@ -396,7 +396,7 @@ export const chroniclers: Chronicler[] = [
     gender: "female",
     image: chroniclerMosaic,
     biography:
-      "World-weary poet, Eudeamonia 'the Jackdaw' of Rheims, casts a jaded eye over this twilight of civilization. She puts her classical education to good use, penning ransom notes for local tyrants. They're always in impeccable hexameters, although she fears the allusions to Cicero may me lost on some warlords.",
+      "World-weary poet, Eudaemonia 'the Jackdaw' of Rheims, casts a jaded eye over this twilight of civilization. She puts her classical education to good use, penning ransom notes for local tyrants. They're always in impeccable hexameters, although she fears the allusions to Cicero may me lost on some warlords.",
   },
   {
     name: "Athaloc of Smyrna",
