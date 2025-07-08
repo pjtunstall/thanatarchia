@@ -99,7 +99,7 @@ export const useGameState = () => {
     },
     {
       id: "3",
-      chronicler: "Hieronymus of Alexandria",
+      chronicler: "Athaloc of Smyrna",
       bias: "hostile",
       entry:
         "These uncouth tribes, lacking in both letters and manners, persist in their primitive territorial disputes, as is their wont.",
@@ -110,7 +110,7 @@ export const useGameState = () => {
       chronicler: "Priscilla of Byzantium",
       bias: "hostile",
       entry:
-        "I never know the old Ravenna before the Gothic War. Constantinople suited me better...",
+        "I never knew the old Ravenna before the Gothic War. Constantinople suited me better...",
       // "How tedious it is to observe these western provinces squabble like children, when true civilization still flourishes in the blessed capital of Constantinople.",
       turn: 1,
     },
@@ -144,7 +144,7 @@ export const useGameState = () => {
           "Good riddance to these upstarts! Now perhaps true warriors can restore the proper order, where strength of arm matters more than counting coins.",
         ],
       },
-      "Hieronymus of Alexandria": {
+      "Athaloc of Smyrna": {
         victory: [
           "Most curious! These barbarian chieftains, despite their obvious theological ignorances regarding the homoousios, have demonstrated remarkable strategic acumen in their conquests.",
           "One must note, with scholarly detachment, that while these rulers clearly embrace the Arian heresy, their military successes suggest divine providence works in mysterious ways.",

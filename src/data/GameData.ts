@@ -76,11 +76,11 @@ export const genderVariants = {
   },
   Ostrogoths: {
     male: { name: "Theodoric the Great", image: barbarianKing },
-    female: { name: "Amalasuntha the Wise", image: visigothicQueen },
+    female: { name: "Amalasuintha the Wise", image: visigothicQueen },
   },
   Visigoths: {
     male: { name: "Alaric the Conqueror", image: barbarianKing },
-    female: { name: "Queen Brunhild", image: visigothicQueen },
+    female: { name: "Brunhild the Implacable", image: visigothicQueen },
   },
   Vandals: {
     male: { name: "Huneric the Cruel", image: vandalChief },
@@ -92,7 +92,7 @@ export const genderVariants = {
   },
   Franks: {
     male: { name: "Clovis the Conqueror", image: frankishKing },
-    female: { name: "Clotilde the Great", image: visigothicQueen },
+    female: { name: "Fredegund the Sly", image: visigothicQueen },
   },
   Gepids: {
     male: { name: "Ardaric the Faithful", image: barbarianKing },
@@ -148,7 +148,7 @@ export const factions: Faction[] = [
     type: "imperial",
     color: "hsl(var(--britons))",
     leader: {
-      name: "Cymbeline",
+      name: "Cymbeline the Wise",
       gender: "male",
       image: bagaudaeMaleRebel,
     },
@@ -164,7 +164,7 @@ export const factions: Faction[] = [
     type: "barbarian",
     color: "hsl(var(--moors))",
     leader: {
-      name: "Masuna",
+      name: "Masuna the Great",
       gender: "male",
       image: mauriMaleLeader,
     },
@@ -201,7 +201,7 @@ export const factions: Faction[] = [
       image: barbarianKing,
     },
     heresy: "Arian",
-    relatives: ["Daughter Amalasuntha", "Nephew Athalaric", "Nephew Eutharic"],
+    relatives: ["Daughter Amalasuintha", "Nephew Athalaric", "Nephew Eutharic"],
     territories: ["Italy"],
     troops: 1000,
     treasure: 100,
@@ -212,7 +212,7 @@ export const factions: Faction[] = [
     type: "barbarian",
     color: "hsl(var(--visigoths))",
     leader: {
-      name: "Queen Brunhild",
+      name: "Brunhild the Implacable",
       gender: "female",
       image: visigothicQueen,
     },
@@ -249,7 +249,13 @@ export const factions: Faction[] = [
       image: barbarianKing,
     },
     heresy: "Arian",
-    relatives: ["Daughter Clotilde", "Son Sigismund", "Nephew Godomar"],
+    relatives: [
+      "Son Gundahar",
+      "Son Gunderic",
+      "Sun Gundioc",
+      "Daughter Chroma",
+      "Daughter Clotilde",
+    ],
     territories: ["Septimania"],
     troops: 1000,
     treasure: 100,
@@ -265,7 +271,7 @@ export const factions: Faction[] = [
       image: frankishKing,
     },
     heresy: "Miaphysite",
-    relatives: ["Queen Clotilde", "Prince Clothar", "Princess Clotilde"],
+    relatives: ["Daughter Clotilde", "Daughter Ermengarde", "Son Clothar"],
     territories: ["Gallia"],
     troops: 1000,
     treasure: 100,
@@ -377,11 +383,11 @@ export const chroniclers: Chronicler[] = [
   {
     name: "John of Colchis",
     bias: "friendly",
-    style: "sycophantic",
+    style: "credulous",
     gender: "male",
     image: chroniclerScribe,
     biography:
-      "A devout ascetic, who seeks martyrdom at every opportunity, John has escaped death on multiple occasions only through the timely intervention of his disciples. He takes the Bible literally, but considers life largely allegorical. When not too delirious from fasting, John's hobbies are exegesis and speaking in voices. (He does a good Attila.) He has written hundreds of sermons condemning his favorite heresies. Rumor has it that he once accidentally excommunicated himself in an 'excess of piety' and was only brought back into the fold by special decree of the Pope.",
+      "A devout ascetic, who seeks martyrdom at every opportunity, John has escaped death on multiple occasions only through the timely intervention of his disciples. He takes the Bible literally, but considers life largely allegorical. When not too delirious from fasting, John's hobbies are exegesis and speaking in voices. (He does a good Attila.) Rumor has it that he once accidentally excommunicated himself in an 'excess of piety' and was only brought back into the fold by special decree of the Pope.",
   },
   {
     name: "Eudaemonia of Rheims",
@@ -393,13 +399,13 @@ export const chroniclers: Chronicler[] = [
       "World-weary poet, Eudeamonia 'the Jackdaw' of Rheims, casts a jaded eye over this twilight of civilization. She puts her classical education to good use, penning ransom notes for local tyrants. They're always in impeccable hexameters, although she fears the allusions to Cicero may me lost on some warlords.",
   },
   {
-    name: "Hieronymus of Alexandria",
+    name: "Athaloc of Smyrna",
     bias: "hostile",
     style: "condescending",
     gender: "male",
     image: chroniclerScholar,
     biography:
-      "A self-proclaimed 'Master of All Knowledge' who was kicked out of the Great Library for rearranging scrolls by his own peculiar system. Believes everyone else is intellectually inferior and isn't shy about mentioning it. Has never actually been to most of the places he writes about with such authority.",
+      "Tireless denouncer of those fools who proclaim that Christ is of two natures, Divine and Human, combined distinctly in one Being, of one being with the Father and yet also the Son--rather than acceptng the obvious truth of His Divine being being one Being with two natures distinct, Human and Divine, yet distinctly combined in one being, the Son and yet also the Father. Preposterous! And don't even get him started on the Holy Spirit.",
   },
   {
     name: "Priscilla of Byzantium",
