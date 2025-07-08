@@ -72,8 +72,10 @@ const GameMap: React.FC<GameMapProps> = ({
   return (
     <Card className="h-full">
       <CardHeader className="pb-0">
-        <CardTitle className="text-2xl font-bold ancient-title text-center">
-          ☠ Thanatarchia
+        <CardTitle className="text-3xl font-bold ancient-title text-center">
+          <span className="initial">☠</span>
+          <span className="uncial">~Thanatarchia~</span>
+          <span className="initial">☠</span>
         </CardTitle>
         <p className="text-muted-foreground italic text-lg text-center">
           Imperium Romanum, {getDate(currentTurn)}
@@ -123,7 +125,7 @@ const GameMap: React.FC<GameMapProps> = ({
         </div>
 
         {/* Faction Legend */}
-        <div className="mt-4 p-3 bg-muted/30 rounded-lg">
+        <div className="mt-4 p-3 bg-muted/60 rounded-lg">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
             {Object.entries(factionLookup).map(([key, factionInfo]) => {
               const fullFaction = factions.find((f) => f.name === key);
@@ -148,7 +150,7 @@ const GameMap: React.FC<GameMapProps> = ({
                           key === selectedFaction.name ? "font-semibold" : ""
                         }
                       >
-                        {fullFaction.formalName}
+                        {fullFaction.name}
                       </span>
                     </div>
                   </PopoverTrigger>

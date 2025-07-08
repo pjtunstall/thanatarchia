@@ -115,7 +115,7 @@ export const genderVariants = {
     female: { name: "Kreka the Swift", image: visigothicQueen },
   },
   Huns: {
-    male: { name: "Dengizich the Fierce", image: hunnicWarlord },
+    male: { name: "Dengizich the Dire", image: hunnicWarlord },
     female: { name: "Kreka the Terrible", image: visigothicQueen },
   },
 };
@@ -361,7 +361,7 @@ export const factions: Faction[] = [
     type: "barbarian",
     color: "hsl(var(--huns))",
     leader: {
-      name: "Dengizich the Fierce",
+      name: "Dengizich the Dire",
       gender: "male",
       image: hunnicWarlord,
     },
@@ -375,13 +375,13 @@ export const factions: Faction[] = [
 
 export const chroniclers: Chronicler[] = [
   {
-    name: "Marcellus of Ravenna",
+    name: "John of Colchis",
     bias: "friendly",
     style: "sycophantic",
     gender: "male",
     image: chroniclerScribe,
     biography:
-      "A devout monk who fled to Ravenna after accidentally setting fire to his monastery's library while 'improving' ancient texts. Known for his excessive flattery and tendency to describe even the most mundane events in epic terms. Claims to have once blessed a loaf of bread that fed an entire village, though witnesses say it was just very large bread.",
+      "A devout ascetic, who seeks martyrdom at every opportunity, John has escaped death on multiple occasions only through the timely intervention of his disciples. He takes the Bible literally, but considers life largely allegorical. When not too delirious from fasting, John's hobbies are exegesis and speaking in voices. (He does a good Attila.) He has written hundreds of sermons condemning his favorite heresies. Rumor has it that he once accidentally excommunicated himself in an 'excess of piety' and was only brought back into the fold by special decree of the Pope.",
   },
   {
     name: "Eudaemonia of Rheims",
@@ -390,7 +390,7 @@ export const chroniclers: Chronicler[] = [
     gender: "female",
     image: chroniclerMosaic,
     biography:
-      "A former Vandal court scribe who was exiled for 'creative differences' with the king's version of events. Bitter about losing her position, she now chronicles with the enthusiasm of a woman forced to eat bitter herbs. Her quill is perpetually stained with both ink and tears of frustration.",
+      "World-weary poet, Eudeamonia 'the Jackdaw' of Rheims, casts a jaded eye over this twilight of civilization. She puts her classical education to good use, penning ransom notes for local tyrants. They're always in impeccable hexameters, although she fears the allusions to Cicero may me lost on some warlords.",
   },
   {
     name: "Hieronymus of Alexandria",
@@ -408,7 +408,7 @@ export const chroniclers: Chronicler[] = [
     gender: "female",
     image: chroniclerNun,
     biography:
-      "A former imperial court lady turned nun after a scandal involving the Emperor's favorite horse and a misunderstanding about inheritance laws. Maintains that everything was better 'in Constantinople' and views all current events through the lens of Byzantine superiority, despite having fled the city in disgrace.",
+      "A former imperial court lady turned nun after a scandal involving the Emperor's favorite horse and a misunderstanding about inheritance laws. Maintains that everything was better 'in Constantinople', despite having fled the city in disgrace.",
   },
 ];
 
@@ -597,13 +597,13 @@ export const adjacentTerritories: Record<string, string[]> = {
 
 export const initialReport = (adviserName: string): string => {
   switch (adviserName) {
-    case "Marcellus of Ravenna":
-      return '"Our forces are, as yet, unprepared to face the enemy. We must bide our time and prepare for battle."';
+    case "John of Colchis":
+      return '"The heretics outnumber us, my Lord. Let us die now opposing them!"';
     case "Priscilla of Byzantium":
       return '"Sire, we must be Byzantine in cunning. Strategy is the way to victory."';
     case "Eudaemonia of Rheims":
-      return '"Foes surround us. We must be sly as the fox and swift as the snake to strike when the time is right."';
+      return '"No virtue is so great that it can endure danger, unless it is also joined by great prudence."';
     default:
-      return '"Our defences are weak, my liege, and our forces unprepared. I advise patience."';
+      return '"Our forces are weak, my liege. I advise patience."';
   }
 };

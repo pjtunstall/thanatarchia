@@ -83,7 +83,7 @@ export const useGameState = () => {
   const [chronicles, setChronicles] = useState<Chronicle[]>([
     {
       id: "1",
-      chronicler: "Marcellus of Ravenna",
+      chronicler: "John of Colchis",
       bias: "friendly",
       entry:
         "Our most glorious and wise leader has graciously expanded our blessed territories, bringing civilization to the grateful lands beyond the Rhine.",
@@ -120,7 +120,7 @@ export const useGameState = () => {
 
   const generateFinalChronicles = (status: "victory" | "defeat") => {
     const chroniclerEntries = {
-      "Marcellus of Ravenna": {
+      "John of Colchis": {
         victory: [
           "Thus concludes the most glorious chronicle of our divine sovereign, whose wisdom surpasses Solomon and whose valor eclipses that of great Caesar himself! The very angels rejoice at this triumph!",
           "Behold! Our most blessed leader, guided by Providence itself, has united the world under one righteous banner - surely this is the work of the Almighty through His chosen vessel!",

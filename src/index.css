@@ -13,72 +13,26 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    /* font-family: serif; */
   }
+
+  @font-face {
+    font-family: "Uncial Antiqua";
+    src: url("/fonts/Uncial_Antiqua./UncialAntiqua-Regular.ttf")
+      format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .uncial {
+    font-family: "Uncial Antiqua", serif;
+  }
+
+  /* .initial {
+    font-family: "Times New Roman", Times, serif;
+  } */
 
   :root {
-    --radius: 0.5rem;
-
-    --background: 45 20% 96%;
-    --foreground: 30 25% 15%;
-
-    --card: 40 30% 92%;
-    --card-foreground: 30 25% 15%;
-
-    --popover: 40 30% 92%;
-    --popover-foreground: 30 25% 15%;
-
-    --primary: 15 60% 35%;
-    --primary-foreground: 45 20% 96%;
-
-    --secondary: 35 25% 75%;
-    --secondary-foreground: 30 25% 15%;
-
-    --muted: 35 15% 85%;
-    --muted-foreground: 30 15% 45%;
-
-    --accent: 200 80% 45%;
-    --accent-foreground: 45 20% 96%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 45 20% 96%;
-
-    --border: 35 20% 80%;
-    --input: 35 20% 80%;
-    --ring: 15 60% 35%;
-
-    /* Ancient theme colors */
-    --parchment: 45 25% 90%;
-    --imperial: 340 70% 45%;
-    --barbarian: 120 40% 35%;
-    --bagaudae: 60 80% 40%;
-    --chronicle: 30 15% 85%;
-
-    /* Specific faction colors */
-    --ostrogoths: 360 35% 40%;
-    --visigoths: 360 35% 15%;
-    --vandals: 30 80% 50%;
-    --burgundians: 180 60% 40%;
-    --franks: 250 35% 35%;
-    --saxons: 130 45% 60%;
-    --gepids: 25 60% 35%;
-    --langobards: 60 30% 45%;
-    --suebians: 200 70% 35%;
-    --alans: 10 70% 50%;
-    --huns: 40 70% 45%;
-    --moors: 90 35% 25%;
-    --britons: 20 90% 65%;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
     --background: 30 15% 8%;
     --foreground: 45 20% 92%;
 
@@ -148,50 +102,6 @@ All colors MUST be HSL.
     overflow: hidden;
   }
 
-  /* Manuscript-style background with hills and trees */
-  .ancient-map-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-      /* Small hills scattered around */ radial-gradient(
-        ellipse 20px 8px at 15% 70%,
-        #c4a373 40%,
-        transparent 40%
-      ),
-      radial-gradient(
-        ellipse 25px 10px at 25% 75%,
-        #b8986a 40%,
-        transparent 40%
-      ),
-      radial-gradient(ellipse 18px 7px at 45% 80%, #c4a373 40%, transparent 40%),
-      radial-gradient(ellipse 22px 9px at 65% 73%, #b8986a 40%, transparent 40%),
-      radial-gradient(ellipse 19px 8px at 80% 78%, #c4a373 40%, transparent 40%),
-      /* Forest areas - small tree clusters */
-        radial-gradient(circle 3px at 20% 40%, #8b7355 50%, transparent 50%),
-      radial-gradient(circle 2px at 22% 38%, #8b7355 50%, transparent 50%),
-      radial-gradient(circle 3px at 40% 35%, #8b7355 50%, transparent 50%),
-      radial-gradient(circle 2px at 42% 33%, #8b7355 50%, transparent 50%),
-      radial-gradient(circle 3px at 70% 45%, #8b7355 50%, transparent 50%),
-      radial-gradient(circle 2px at 72% 43%, #8b7355 50%, transparent 50%),
-      /* Rivers - winding lines */
-        linear-gradient(
-          135deg,
-          transparent 48%,
-          #a8c8d8 49%,
-          #a8c8d8 51%,
-          transparent 52%
-        );
-    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%,
-      100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%,
-      200px 200px;
-    opacity: 0.6;
-    pointer-events: none;
-  }
-
   .map-decorative-border {
     border: 4px solid;
     border-image: linear-gradient(45deg, #8b7047, #6b5537, #8b7047, #6b5537) 1;
@@ -211,7 +121,6 @@ All colors MUST be HSL.
   }
 
   .ancient-title {
-    font-family: serif;
     color: hsl(var(--foreground));
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     position: relative;
@@ -232,125 +141,4 @@ All colors MUST be HSL.
     );
     opacity: 0.5;
   }
-
-  .parchment-texture {
-    background: radial-gradient(
-        circle at 25% 25%,
-        rgba(139, 108, 71, 0.1) 0%,
-        transparent 50%
-      ),
-      radial-gradient(
-        circle at 75% 75%,
-        rgba(139, 108, 71, 0.08) 0%,
-        transparent 50%
-      ),
-      linear-gradient(
-        135deg,
-        hsl(var(--parchment)) 0%,
-        hsl(var(--parchment) / 0.95) 100%
-      );
-  }
-}
-
-.theme-spring {
-  --background: 90 40% 96%;
-  --foreground: 130 20% 20%;
-
-  --primary: 120 40% 40%;
-  --accent: 150 60% 45%;
-
-  --card: 90 30% 92%;
-  --card-foreground: 130 20% 20%;
-
-  --muted: 90 20% 85%;
-  --muted-foreground: 130 15% 40%;
-
-  --border: 90 20% 80%;
-  --input: 90 20% 80%;
-  --ring: 120 40% 40%;
-}
-
-.theme-summer {
-  --background: 50 90% 95%;
-  --foreground: 40 30% 20%;
-
-  --primary: 35 85% 45%;
-  --accent: 200 90% 50%;
-
-  --card: 50 80% 90%;
-  --card-foreground: 40 30% 20%;
-
-  --muted: 45 50% 80%;
-  --muted-foreground: 40 30% 35%;
-
-  --border: 45 40% 75%;
-  --input: 45 40% 75%;
-  --ring: 35 85% 45%;
-}
-
-/* actually the dark theme */
-/* .theme-autumn {
-  --background: 30 15% 8%;
-  --foreground: 45 20% 92%;
-
-  --card: 30 15% 12%;
-  --card-foreground: 45 20% 92%;
-
-  --popover: 30 15% 12%;
-  --popover-foreground: 45 20% 92%;
-
-  --primary: 15 60% 55%;
-  --primary-foreground: 30 15% 8%;
-
-  --secondary: 30 15% 20%;
-  --secondary-foreground: 45 20% 92%;
-
-  --muted: 30 15% 20%;
-  --muted-foreground: 45 10% 65%;
-
-  --accent: 200 80% 55%;
-  --accent-foreground: 30 15% 8%;
-
-  --destructive: 0 62% 50%;
-  --destructive-foreground: 45 20% 92%;
-
-  --border: 30 15% 20%;
-  --input: 30 15% 20%;
-  --ring: 15 60% 55%;
-} */
-
-.theme-autumn {
-  --background: 30 40% 90%;
-  --foreground: 25 30% 15%;
-
-  --primary: 20 70% 40%;
-  --accent: 15 60% 45%;
-
-  --card: 30 30% 88%;
-  --card-foreground: 25 30% 15%;
-
-  --muted: 30 20% 80%;
-  --muted-foreground: 25 15% 40%;
-
-  --border: 30 20% 75%;
-  --input: 30 20% 75%;
-  --ring: 20 70% 40%;
-}
-
-.theme-winter {
-  --background: 220 30% 96%;
-  --foreground: 230 25% 20%;
-
-  --primary: 210 60% 45%;
-  --accent: 200 80% 55%;
-
-  --card: 220 20% 92%;
-  --card-foreground: 230 25% 20%;
-
-  --muted: 220 15% 85%;
-  --muted-foreground: 230 15% 45%;
-
-  --border: 220 20% 80%;
-  --input: 220 20% 80%;
-  --ring: 210 60% 45%;
 }

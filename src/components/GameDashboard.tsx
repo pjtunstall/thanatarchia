@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useGameState } from "@/hooks/useGameState";
-import { getSeason } from "@/data/GameData";
 import GameMap from "@/components/game/GameMap";
 import StatusPanel from "@/components/game/StatusPanel";
 import ChroniclesPanel from "@/components/game/ChroniclesPanel";
 import ActionsPanel from "@/components/game/ActionsPanel";
 import GameOverlay from "@/components/game/GameOverlay";
-import ThemeManager from "./ThemeManager";
 
 const GameDashboard = () => {
   const [activeTab, setActiveTab] = useState("status");
@@ -34,13 +32,8 @@ const GameDashboard = () => {
 
   return (
     <>
-      <ThemeManager currentTurn={gameState.currentTurn}></ThemeManager>
       <>
         <div className="min-h-screen bg-background p-4">
-          {/* Alternatively:
-          className={`theme-${getSeason(
-            gameState.currentTurn
-          )} min-h-screen bg-background p-4`} */}
           <GameOverlay
             gameStatus={gameState.gameStatus}
             finalChronicles={gameState.finalChronicles}
