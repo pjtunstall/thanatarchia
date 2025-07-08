@@ -106,7 +106,7 @@ export const genderVariants = {
     male: { name: "Widukind the Defiant", image: barbarianKing },
     female: { name: "Giesela the Defiant", image: barbarianQueen },
   },
-  Suebi: {
+  Suebians: {
     male: { name: "Hermeric the Elder", image: barbarianKing },
     female: { name: "Ingunde the Wise", image: visigothicQueen },
   },
@@ -604,11 +604,13 @@ export const adjacentTerritories: Record<string, string[]> = {
 export const initialReport = (adviserName: string): string => {
   switch (adviserName) {
     case "John of Colchis":
-      return '"The heretics outnumber us, my Lord. Let us die now opposing them!"';
+      return '"The enemies of God outnumber us, my Lord. Let us die now opposing them and gain the martyr\'s crown!"';
     case "Priscilla of Byzantium":
       return '"Sire, we must be Byzantine in cunning. Strategy is the way to victory."';
     case "Eudaemonia of Rheims":
       return '"No virtue is so great that it can endure danger, unless it is also joined by great prudence."';
+    case "Athaloc of Smyrna":
+      return '"The heretics outnumber us, Sire. God, in His infinite wisom, has made made them strong for now. I urge caution."';
     default:
       return '"Our forces are weak, my liege. I advise patience."';
   }
