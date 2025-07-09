@@ -418,11 +418,12 @@ export const chroniclers: Chronicler[] = [
   },
 ];
 
+// For SVG connecting arrows to be visible, neighboring territories must differ in both coordinate.
 export const initialTerritories: Territory[] = [
   {
     name: "Britannia",
     x: 14,
-    y: 15,
+    y: 10,
     owner: "Britons",
     troops: 900,
     terrain: "forest",
@@ -516,6 +517,14 @@ export const initialTerritories: Territory[] = [
     terrain: "plains",
   },
   {
+    name: "Sicilia",
+    x: 41,
+    y: 61,
+    owner: "Ostrogoths",
+    troops: 900,
+    terrain: "plains",
+  },
+  {
     name: "Africa",
     x: 40,
     y: 81,
@@ -557,8 +566,8 @@ export const initialTerritories: Territory[] = [
   },
   {
     name: "Armorica",
-    x: 15,
-    y: 30,
+    x: 13,
+    y: 28,
     owner: "Bagaudae",
     troops: 1000,
     terrain: "forest",
@@ -566,31 +575,25 @@ export const initialTerritories: Territory[] = [
 ];
 
 export const adjacentTerritories: Record<string, string[]> = {
-  Britannia: ["Gallia", "Armorica", "Germania"],
-  Gallia: ["Britannia", "Aquitania", "Germania", "Armorica", "Septimania"],
-  Septimania: ["Gallia", "Aquitania", "Italia", "Pannonia"],
-  Aquitania: ["Gallia", "Armorica", "Hispania", "Italia"],
+  Aegyptus: ["Africa", "Galatia", "Syria"],
+  Africa: ["Aegyptus", "Mauretania", "Sicilia"],
+  Aquitania: ["Armorica", "Gallia", "Hispania", "Septimania"],
+  Armorica: ["Aquitania", "Britannia", "Gallia"],
+  Britannia: ["Armorica", "Gallia", "Germania"],
+  Dacia: ["Dalmatia", "Germania", "Pannonia", "Scythia", "Thracia"],
+  Dalmatia: ["Dacia", "Italia", "Pannonia", "Thracia"],
+  Gallia: ["Aquitania", "Armorica", "Britannia", "Germania", "Septimania"],
+  Galatia: ["Aegyptus", "Syria", "Thracia"],
+  Germania: ["Britannia", "Dacia", "Gallia", "Pannonia"],
   Hispania: ["Aquitania", "Mauretania"],
-  Germania: ["Gallia", "Pannonia", "Dacia", "Britannia"],
-  Pannonia: ["Germania", "Dacia", "Italia", "Dalmatia", "Septimania"],
-  Dacia: ["Germania", "Pannonia", "Thracia", "Scythia", "Dalmatia"],
-  Thracia: ["Dacia", "Italia", "Galatia", "Dalmatia"],
-  Italia: [
-    "Pannonia",
-    "Thracia",
-    "Africa",
-    "Aquitania",
-    "Dalmatia",
-    "Septimania",
-  ],
-  Africa: ["Italia", "Aegyptus", "Mauretania"],
-  Aegyptus: ["Africa", "Syria", "Galatia"],
-  Syria: ["Aegyptus", "Galatia"],
-  Armorica: ["Britannia", "Gallia", "Aquitania"],
-  Mauretania: ["Hispania", "Africa"],
-  Galatia: ["Thracia", "Syria", "Aegyptus"],
+  Italia: ["Dalmatia", "Pannonia", "Septimania", "Sicilia", "Thracia"],
+  Mauretania: ["Africa", "Hispania"],
+  Pannonia: ["Dalmatia", "Dacia", "Germania", "Italia", "Septimania"],
   Scythia: ["Dacia"],
-  Dalmatia: ["Italia", "Pannonia", "Dacia", "Thracia"],
+  Septimania: ["Aquitania", "Gallia", "Italia", "Pannonia"],
+  Sicilia: ["Africa", "Italia"],
+  Syria: ["Aegyptus", "Galatia"],
+  Thracia: ["Dacia", "Dalmatia", "Galatia", "Italia"],
 };
 
 export const initialReport = (adviserName: string): string => {
