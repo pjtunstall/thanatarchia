@@ -80,6 +80,7 @@ export const useGameState = () => {
 
   const [territories, setTerritories] =
     useState<Territory[]>(initialTerritories);
+
   const [chronicles, setChronicles] = useState<Chronicle[]>([
     {
       id: "1",
@@ -421,7 +422,7 @@ export const useGameState = () => {
   };
 
   const handleTerritoryClick = (territoryId: string) => {
-    setSelectedTerritory(territoryId);
+    setSelectedTerritory((prev) => (prev === territoryId ? null : territoryId));
   };
 
   const handleSpy = (territoryId: string) => {
