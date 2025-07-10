@@ -98,6 +98,10 @@ export const genderVariants = {
     male: { name: "Ardaric the Faithful", image: barbarianKing },
     female: { name: "Rosamunda the Fair", image: visigothicQueen },
   },
+  Rugians: {
+    male: { name: "Eraric the Peace-Maker", image: barbarianKing },
+    female: { name: "Gisa the Shrewd", image: barbarianQueen },
+  },
   Langobards: {
     male: { name: "Wacho the Ferocious", image: barbarianKing },
     female: { name: "Rodelinda the Ruthless", image: visigothicQueen },
@@ -313,6 +317,22 @@ export const factions: Faction[] = [
     treasure: 100,
   },
   {
+    name: "Rugians",
+    formalName: "Kingdom of the Rugians",
+    type: "barbarian",
+    color: "hsl(var(--rugians))",
+    leader: {
+      name: "Eraric the Peace-Maker",
+      gender: "male",
+      image: barbarianKing,
+    },
+    heresy: "Arian",
+    relatives: ["Son Felatheus", "Sun Flaccitheus"],
+    territories: ["Scandza"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
     name: "Gepids",
     formalName: "Kingdom of the Gepids",
     type: "barbarian",
@@ -497,6 +517,14 @@ export const initialTerritories: Territory[] = [
     terrain: "forest",
   },
   {
+    name: "Scandza",
+    x: 32,
+    y: 5,
+    owner: "Rugians",
+    troops: 1000,
+    terrain: "forest",
+  },
+  {
     name: "Pannonia",
     x: 40,
     y: 35,
@@ -603,16 +631,17 @@ export const initialTerritories: Territory[] = [
 ];
 
 export const adjacentTerritories: Record<string, string[]> = {
-  Aegyptus: ["Africa", "Isauria", "Syria"],
+  Aegyptus: ["Africa", "Syria"],
   Africa: ["Aegyptus", "Mauretania", "Sicilia"],
   Aquitania: ["Armorica", "Gallia", "Hispania", "Septimania"],
   Armorica: ["Aquitania", "Britannia", "Gallia"],
-  Britannia: ["Armorica", "Gallia", "Germania"],
-  Dacia: ["Dalmatia", "Germania", "Pannonia", "Scythia", "Thracia"],
+  Britannia: ["Armorica", "Gallia", "Germania", "Scandza"],
+  Cappadocia: ["Isauria", "Syria"],
+  Dacia: ["Dalmatia", "Pannonia", "Scythia", "Thracia"],
   Dalmatia: ["Dacia", "Italia", "Pannonia", "Thracia"],
   Gallia: ["Aquitania", "Armorica", "Britannia", "Germania", "Septimania"],
-  Isauria: ["Aegyptus", "Syria", "Thracia", "Cappadocia"],
-  Germania: ["Britannia", "Dacia", "Gallia", "Pannonia"],
+  Isauria: ["Syria", "Thracia", "Cappadocia"],
+  Germania: ["Britannia", "Gallia", "Pannonia", "Scandza"],
   Hispania: ["Aquitania", "Mauretania"],
   Italia: ["Dalmatia", "Pannonia", "Septimania", "Sicilia", "Thracia"],
   Mauretania: ["Africa", "Hispania"],
@@ -622,7 +651,7 @@ export const adjacentTerritories: Record<string, string[]> = {
   Sicilia: ["Africa", "Italia"],
   Syria: ["Aegyptus", "Isauria", "Cappadocia"],
   Thracia: ["Dacia", "Dalmatia", "Isauria", "Italia"],
-  Cappadocia: ["Isauria", "Syria"],
+  Scandza: ["Britannia", "Germania"],
 };
 
 export const initialReport = (adviserName: string): string => {
