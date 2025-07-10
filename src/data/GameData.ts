@@ -100,7 +100,7 @@ export const genderVariants = {
   },
   Rugians: {
     male: { name: "Eraric the Wry", image: barbarianKing },
-    female: { name: "Gisa the Wry", image: barbarianQueen },
+    female: { name: "Gisa the Grim", image: barbarianQueen },
   },
   Langobards: {
     male: { name: "Wacho the Ferocious", image: barbarianKing },
@@ -327,7 +327,7 @@ export const factions: Faction[] = [
       image: barbarianKing,
     },
     faith: "Arian",
-    relatives: ["Son Felatheus", "Son Flaccitheus"],
+    relatives: ["Son Felatheus", "Son Flaccitheus", "Son Frideric"],
     territories: ["Scandza"],
     troops: 1000,
     treasure: 100,
@@ -452,7 +452,7 @@ export const chroniclers: Chronicler[] = [
     gender: "male",
     image: chroniclerScholar,
     biography:
-      "Tireless denouncer of those fools who proclaim that Christ is of two natures, Divine and Human, combined distinctly in one Being, of one being with the Father and yet also the Son--rather than acceptng the obvious truth of His Divine being being one Being with two natures distinct, Human and Divine, yet distinctly combined in one being, the Son and yet also the Father. Preposterous! And don't even get him started on the Holy Spirit.",
+      "Tireless denouncer of those fools who proclaim that Christ is of two natures but not in two natures, when clearly He is in but not of. Preposterous! And the Holy Spirit? Don't even go there...",
   },
   {
     name: "Priscilla of Byzantium",
