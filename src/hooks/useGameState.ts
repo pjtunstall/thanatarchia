@@ -505,17 +505,18 @@ export const useGameState = () => {
   };
 
   const handleRecruitTroops = () => {
-    if (playerFaction.treasure < 50 || actionsThisTurn >= 4) return;
-    const recruits = 500;
+    if (playerFaction.treasure < 50) return;
+    const recruitsPerTerritory = Math.round(
+      500 / playerFaction.territories.length
+    );
+    const totalRecruits =
+      recruitsPerTerritory * playerFaction.territories.length;
 
     setTerritories((prevTerritories) => {
       const factionName = playerFaction.name;
       const updated = prevTerritories.map((t) => {
-        if (
-          t.owner === factionName &&
-          t.name === playerFaction.territories[0]
-        ) {
-          return { ...t, troops: t.troops! + recruits };
+        if (t.owner === factionName) {
+          return { ...t, troops: t.troops! + recruitsPerTerritory };
         }
         return t;
       });
@@ -523,7 +524,7 @@ export const useGameState = () => {
       setPlayerFaction((prevFaction) => ({
         ...prevFaction,
         treasure: prevFaction.treasure - 50,
-        troops: prevFaction.troops + recruits,
+        troops: prevFaction.troops + totalRecruits,
       }));
 
       return updated;
