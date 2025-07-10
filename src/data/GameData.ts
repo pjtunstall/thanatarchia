@@ -99,8 +99,8 @@ export const genderVariants = {
     female: { name: "Rosamunda the Fair", image: visigothicQueen },
   },
   Rugians: {
-    male: { name: "Eraric the Peace-Maker", image: barbarianKing },
-    female: { name: "Gisa the Shrewd", image: barbarianQueen },
+    male: { name: "Eraric the Wry", image: barbarianKing },
+    female: { name: "Gisa the Wry", image: barbarianQueen },
   },
   Langobards: {
     male: { name: "Wacho the Ferocious", image: barbarianKing },
@@ -119,8 +119,8 @@ export const genderVariants = {
     female: { name: "Kreka the Swift", image: visigothicQueen },
   },
   Isaurians: {
-    male: { name: "Tarasicodissa", image: byzantineChief },
-    female: { name: "Zena", image: byzantineQueen },
+    male: { name: "Tarasicodissa the Unrelenting", image: byzantineChief },
+    female: { name: "Zena the Apostate", image: byzantineQueen },
   },
   Huns: {
     male: { name: "Dengizich the Dire", image: hunnicWarlord },
@@ -146,7 +146,7 @@ export const factions: Faction[] = [
       "Daughter Flavia",
       "Son Zeno",
     ],
-    territories: ["Thracia", "Isauria", "Aegyptus", "Syria"],
+    territories: ["Thracia", "Aegyptus", "Syria"],
     troops: 1000,
     treasure: 100,
   },
@@ -204,7 +204,7 @@ export const factions: Faction[] = [
     type: "barbarian",
     color: "hsl(var(--isaurians))",
     leader: {
-      name: "Tarasicodissa",
+      name: "Tarasicodissa the Unrelenting",
       gender: "male",
       image: byzantineChief,
     },
@@ -322,7 +322,7 @@ export const factions: Faction[] = [
     type: "barbarian",
     color: "hsl(var(--rugians))",
     leader: {
-      name: "Eraric the Peace-Maker",
+      name: "Eraric the Wry",
       gender: "male",
       image: barbarianKing,
     },
@@ -657,7 +657,7 @@ export const adjacentTerritories: Record<string, string[]> = {
 export const initialReport = (adviserName: string): string => {
   switch (adviserName) {
     case "John of Colchis":
-      return '"The enemies of God outnumber us, my Lord. Let us die now opposing them and gain the martyr\'s crown!"';
+      return '"The enemies of God outnumber us, my Lord. Let us die now opposing them and gain the martyr\'s reward!"';
     case "Priscilla of Byzantium":
       return '"Sire, we must be Byzantine in cunning. Strategy is the way to victory."';
     case "Eudaemonia of Rheims":

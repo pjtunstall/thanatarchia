@@ -55,7 +55,7 @@ function ChronicleItem({
   chronicler,
 }: {
   chronicle: Chronicle;
-  chronicler?: Chronicler;
+  chronicler: Chronicler;
 }) {
   return (
     <div className="border-l-4 border-primary pl-4 py-2">
