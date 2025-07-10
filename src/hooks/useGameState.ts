@@ -404,7 +404,6 @@ export const useGameState = () => {
     setFinalChronicles([]);
 
     setPlayerFaction({
-      id: "player",
       name: selectedFaction.name,
       formalName: selectedFaction.formalName,
       type: selectedFaction.type,

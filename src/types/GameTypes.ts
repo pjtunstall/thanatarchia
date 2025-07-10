@@ -1,5 +1,4 @@
 export interface Faction {
-  id?: string;
   name: string;
   formalName: string;
   type: "imperial" | "barbarian" | "bagaudae";
@@ -32,7 +31,7 @@ export interface Territory {
   troops?: number;
   estimatedTroops?: number;
   spiedOn?: boolean;
-  terrain?: "plains" | "forest" | "mountains" | "river";
+  terrain: "plains" | "forest" | "mountains" | "river";
   condition?: string;
   conditionModifier?: number;
 }

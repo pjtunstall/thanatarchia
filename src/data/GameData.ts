@@ -277,8 +277,8 @@ export const factions: Faction[] = [
       "Son Gundahar",
       "Son Gunderic",
       "Sun Gundioc",
-      "Daughter Chroma",
-      "Daughter Clotilde",
+      "Daughter Gundihild",
+      "Daughter Ingunde",
     ],
     territories: ["Septimania"],
     troops: 1000,
@@ -432,7 +432,7 @@ export const chroniclers: Chronicler[] = [
   {
     name: "Eudaemonia of Rheims",
     bias: "hostile",
-    style: "disdainful",
+    style: "jaded",
     gender: "female",
     image: chroniclerMosaic,
     biography:
@@ -441,7 +441,7 @@ export const chroniclers: Chronicler[] = [
   {
     name: "Athaloc of Smyrna",
     bias: "hostile",
-    style: "condescending",
+    style: "scholastic",
     gender: "male",
     image: chroniclerScholar,
     biography:
@@ -450,7 +450,7 @@ export const chroniclers: Chronicler[] = [
   {
     name: "Priscilla of Byzantium",
     bias: "hostile",
-    style: "supercilious",
+    style: "disdainful",
     gender: "female",
     image: chroniclerNun,
     biography:
