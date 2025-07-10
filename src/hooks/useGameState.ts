@@ -223,8 +223,7 @@ export const useGameState = () => {
       !toTerritory ||
       fromTerritory.owner !== selectedFaction.name ||
       toTerritory.owner !== selectedFaction.name ||
-      !adjacentTerritories[fromTerritoryName]?.includes(toTerritoryName) ||
-      actionsThisTurn >= 4
+      !adjacentTerritories[fromTerritoryName]?.includes(toTerritoryName)
     )
       return;
 
@@ -241,8 +240,6 @@ export const useGameState = () => {
         return t;
       })
     );
-
-    setActionsThisTurn((prev) => prev + 1);
   };
 
   const handleAttack = (fromTerritoryName: string, toTerritoryName: string) => {
@@ -252,13 +249,10 @@ export const useGameState = () => {
     if (
       fromTerritory?.owner !== selectedFaction.name ||
       toTerritory?.owner === selectedFaction.name ||
-      !adjacentTerritories[fromTerritoryName]?.includes(toTerritoryName) ||
-      actionsThisTurn >= 4
+      !adjacentTerritories[fromTerritoryName]?.includes(toTerritoryName)
     ) {
       return;
     }
-
-    setActionsThisTurn((prev) => prev + 1);
 
     const attackForce = Math.floor(fromTerritory.troops! * 0.8);
     const defenseForce = toTerritory.troops!;
@@ -310,6 +304,8 @@ export const useGameState = () => {
         "hostile"
       );
     }
+
+    handleEndTurn();
   };
 
   const executeAITurn = () => {
@@ -421,10 +417,10 @@ export const useGameState = () => {
     setTimeout(checkGameStatus, 100);
   };
 
-  const getValidAttackTargets = (fromTerritoryId: string) => {
+  const getValidAttackTargets = (fromTerritoryName: string) => {
     return (
-      adjacentTerritories[fromTerritoryId]
-        ?.map((id) => territories.find((t) => t.name === id))
+      adjacentTerritories[fromTerritoryName]
+        ?.map((name) => territories.find((t) => t.name === name))
         .filter((t) => t && t.owner !== selectedFaction.name) || []
     );
   };
@@ -510,7 +506,6 @@ export const useGameState = () => {
 
   const handleRecruitTroops = () => {
     if (playerFaction.treasure < 50 || actionsThisTurn >= 4) return;
-    setActionsThisTurn((prevActions) => prevActions + 1);
     const recruits = 500;
 
     setTerritories((prevTerritories) => {
