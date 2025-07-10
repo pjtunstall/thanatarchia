@@ -327,7 +327,7 @@ export const factions: Faction[] = [
       image: barbarianKing,
     },
     faith: "Arian",
-    relatives: ["Son Felatheus", "Sun Flaccitheus"],
+    relatives: ["Son Felatheus", "Son Flaccitheus"],
     territories: ["Scandza"],
     troops: 1000,
     treasure: 100,
