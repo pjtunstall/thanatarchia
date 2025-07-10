@@ -177,7 +177,7 @@ const GameMap: React.FC<GameMapProps> = ({
               />
 
               {/* Territory name */}
-              <div className="absolute top-7 left-1/2 transform -translate-x-1/2 bg-black/70 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
+              <div className="absolute top-7 left-1/2 transform -translate-x-1/2 bg-black/50 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
                 {territory.name}
               </div>
             </div>

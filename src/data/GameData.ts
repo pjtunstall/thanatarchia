@@ -114,6 +114,10 @@ export const genderVariants = {
     male: { name: "Respendial the Horseman", image: byzantineChief },
     female: { name: "Kreka the Swift", image: visigothicQueen },
   },
+  Isaurians: {
+    male: { name: "Tarasicodissa", image: byzantineChief },
+    female: { name: "Zena", image: byzantineQueen },
+  },
   Huns: {
     male: { name: "Dengizich the Dire", image: hunnicWarlord },
     female: { name: "Kreka the Terrible", image: visigothicQueen },
@@ -138,7 +142,7 @@ export const factions: Faction[] = [
       "Daughter Flavia",
       "Son Zeno",
     ],
-    territories: ["Thracia", "Galatia", "Aegyptus", "Syria"],
+    territories: ["Thracia", "Isauria", "Aegyptus", "Syria"],
     troops: 1000,
     treasure: 100,
   },
@@ -150,7 +154,7 @@ export const factions: Faction[] = [
     leader: {
       name: "Cymbeline the Wise",
       gender: "male",
-      image: bagaudaeMaleRebel,
+      image: romanEmperor,
     },
     heresy: "Pelagian",
     relatives: ["Daughter Imogen", "Son Vortigern", "Son Constantine"],
@@ -176,7 +180,7 @@ export const factions: Faction[] = [
   },
   {
     name: "Bagaudae",
-    formalName: "Bagaudae",
+    formalName: "Bagaudae of Armorica",
     type: "bagaudae",
     color: "hsl(var(--bagaudae))",
     leader: {
@@ -187,6 +191,22 @@ export const factions: Faction[] = [
     heresy: "Manichean",
     relatives: ["Sister Spartaca", "Brother Amandus"],
     territories: ["Armorica"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Isaurians",
+    formalName: "Kingom of the Isaurians",
+    type: "barbarian",
+    color: "hsl(var(--isaurians))",
+    leader: {
+      name: "Tarasicodissa",
+      gender: "male",
+      image: byzantineChief,
+    },
+    heresy: "Manichean",
+    relatives: ["Son Trocundes", "Son Longinus"],
+    territories: ["Isauria"],
     troops: 1000,
     treasure: 100,
   },
@@ -549,11 +569,19 @@ export const initialTerritories: Territory[] = [
     terrain: "plains",
   },
   {
-    name: "Galatia",
+    name: "Isauria",
     x: 70,
     y: 60,
-    owner: "Romans",
+    owner: "Isaurians",
     troops: 800,
+    terrain: "mountains",
+  },
+  {
+    name: "Cappadocia",
+    x: 82,
+    y: 52,
+    owner: "Romans",
+    troops: 500,
     terrain: "mountains",
   },
   {
@@ -575,7 +603,7 @@ export const initialTerritories: Territory[] = [
 ];
 
 export const adjacentTerritories: Record<string, string[]> = {
-  Aegyptus: ["Africa", "Galatia", "Syria"],
+  Aegyptus: ["Africa", "Isauria", "Syria"],
   Africa: ["Aegyptus", "Mauretania", "Sicilia"],
   Aquitania: ["Armorica", "Gallia", "Hispania", "Septimania"],
   Armorica: ["Aquitania", "Britannia", "Gallia"],
@@ -583,7 +611,7 @@ export const adjacentTerritories: Record<string, string[]> = {
   Dacia: ["Dalmatia", "Germania", "Pannonia", "Scythia", "Thracia"],
   Dalmatia: ["Dacia", "Italia", "Pannonia", "Thracia"],
   Gallia: ["Aquitania", "Armorica", "Britannia", "Germania", "Septimania"],
-  Galatia: ["Aegyptus", "Syria", "Thracia"],
+  Isauria: ["Aegyptus", "Syria", "Thracia", "Cappadocia"],
   Germania: ["Britannia", "Dacia", "Gallia", "Pannonia"],
   Hispania: ["Aquitania", "Mauretania"],
   Italia: ["Dalmatia", "Pannonia", "Septimania", "Sicilia", "Thracia"],
@@ -592,8 +620,9 @@ export const adjacentTerritories: Record<string, string[]> = {
   Scythia: ["Dacia"],
   Septimania: ["Aquitania", "Gallia", "Italia", "Pannonia"],
   Sicilia: ["Africa", "Italia"],
-  Syria: ["Aegyptus", "Galatia"],
-  Thracia: ["Dacia", "Dalmatia", "Galatia", "Italia"],
+  Syria: ["Aegyptus", "Isauria", "Cappadocia"],
+  Thracia: ["Dacia", "Dalmatia", "Isauria", "Italia"],
+  Cappadocia: ["Isauria", "Syria"],
 };
 
 export const initialReport = (adviserName: string): string => {
