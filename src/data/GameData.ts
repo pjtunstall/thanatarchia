@@ -116,7 +116,7 @@ export const genderVariants = {
   },
   Alans: {
     male: { name: "Respendial the Horseman", image: byzantineChief },
-    female: { name: "Kreka the Swift", image: visigothicQueen },
+    female: { name: "Sagdukht the Archer", image: visigothicQueen },
   },
   Isaurians: {
     male: { name: "Tarasicodissa the Unrelenting", image: byzantineChief },
@@ -396,7 +396,14 @@ export const factions: Faction[] = [
       image: byzantineChief,
     },
     faith: "Nestorian",
-    relatives: ["Son Goar", "Son Addac", "Son Sangiban", "Nephew Safrac"],
+    relatives: [
+      "Son Goar",
+      "Daughter Borena",
+      "Daughter Zarinaea",
+      "Son Addac",
+      "Son Sangiban",
+      "Son Safrac",
+    ],
     territories: ["Dalmatia"],
     troops: 1000,
     treasure: 100,
