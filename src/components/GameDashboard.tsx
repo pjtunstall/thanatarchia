@@ -93,7 +93,6 @@ const GameDashboard = () => {
                     territories={gameState.territories}
                     selectedTerritory={gameState.selectedTerritory}
                     selectedFaction={gameState.selectedFaction}
-                    actionsRemaining={4 - gameState.actionsThisTurn}
                     onAction={gameState.handleAction}
                     onEndTurn={gameState.handleEndTurn}
                     onRecruitTroops={gameState.handleRecruitTroops}

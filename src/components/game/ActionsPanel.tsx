@@ -11,7 +11,6 @@ interface ActionsPanelProps {
   territories: Territory[];
   selectedTerritory: string | null;
   selectedFaction: { name: string };
-  actionsRemaining: number;
   onAction: (action: string) => void;
   onEndTurn: () => void;
   onRecruitTroops: () => void;
@@ -26,7 +25,6 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
   territories,
   selectedTerritory,
   selectedFaction,
-  actionsRemaining,
   onAction,
   onEndTurn,
   onRecruitTroops,
@@ -39,9 +37,6 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
     <Card className="max-h-full overflow-auto">
       <CardHeader>
         <CardTitle className="text-lg">Actions</CardTitle>
-        <p className="text-sm text-muted-foreground">
-          Actions remaining: {actionsRemaining}/4
-        </p>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
@@ -50,7 +45,6 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
               onClick={() => onAction("raid")}
               variant="destructive"
               size="sm"
-              disabled={actionsRemaining <= 0}
             >
               <Sword className="w-3 h-3 mr-1" />
               Raid Territory
@@ -59,7 +53,6 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
               onClick={() => onAction("marry")}
               variant="secondary"
               size="sm"
-              disabled={actionsRemaining <= 0}
             >
               Arrange Marriage
             </Button>
@@ -67,7 +60,6 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
               onClick={() => onAction("negotiate")}
               variant="outline"
               size="sm"
-              disabled={actionsRemaining <= 0}
             >
               Send Envoy
             </Button>
@@ -83,7 +75,7 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
                 onClick={onRecruitTroops}
                 variant="outline"
                 size="sm"
-                disabled={playerFaction.treasure < 50 || actionsRemaining <= 0}
+                disabled={playerFaction.treasure < 50}
               >
                 <Users className="w-3 h-3 mr-1" />
                 Recruit (50 solidi)
@@ -92,11 +84,7 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
                 onClick={() => selectedTerritory && onSpy(selectedTerritory)}
                 variant="outline"
                 size="sm"
-                disabled={
-                  !selectedTerritory ||
-                  playerFaction.treasure < 25 ||
-                  actionsRemaining <= 0
-                }
+                disabled={!selectedTerritory || playerFaction.treasure < 25}
               >
                 <Eye className="w-3 h-3 mr-1" />
                 Spy (25 solidi)
@@ -143,9 +131,7 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
                               variant="destructive"
                               size="sm"
                               className="w-full text-xs"
-                              disabled={
-                                territory.troops! < 200 || actionsRemaining <= 0
-                              }
+                              disabled={territory.troops! < 200}
                             >
                               <Sword className="w-2 h-2 mr-1" />
                               Attack {target.name} ({target.troops})
@@ -168,9 +154,7 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
                               variant="default"
                               size="sm"
                               className="w-full text-xs bg-green-500 hover:bg-green-600 text-white"
-                              disabled={
-                                territory.troops! < 100 || actionsRemaining <= 0
-                              }
+                              disabled={territory.troops! < 100}
                             >
                               <ShieldPlus className="w-2 h-2 mr-1" />
                               Reinforce {target.name} ({target.troops})

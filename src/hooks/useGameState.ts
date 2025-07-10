@@ -190,7 +190,7 @@ export const useGameState = () => {
     const playerTerritories = territories.filter(
       (t) => t.owner === selectedFaction.name
     ).length;
-    if (playerTerritories >= 5) {
+    if (playerTerritories >= 9) {
       generateFinalChronicles("victory");
       setGameStatus("victory");
     } else if (playerTerritories === 0) {
