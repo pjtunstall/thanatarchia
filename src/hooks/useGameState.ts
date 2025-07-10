@@ -211,19 +211,52 @@ export const useGameState = () => {
     setChronicles((prev) => [...prev, newEntry]);
   };
 
-  const handleAttack = (fromTerritoryId: string, toTerritoryId: string) => {
-    const fromTerritory = territories.find((t) => t.name === fromTerritoryId);
-    const toTerritory = territories.find((t) => t.name === toTerritoryId);
+  const handleReinforce = (
+    fromTerritoryName: string,
+    toTerritoryName: string
+  ) => {
+    const fromTerritory = territories.find((t) => t.name === fromTerritoryName);
+    const toTerritory = territories.find((t) => t.name === toTerritoryName);
 
     if (
       !fromTerritory ||
       !toTerritory ||
       fromTerritory.owner !== selectedFaction.name ||
+      toTerritory.owner !== selectedFaction.name ||
+      !adjacentTerritories[fromTerritoryName]?.includes(toTerritoryName) ||
       actionsThisTurn >= 4
     )
       return;
-    if (!adjacentTerritories[fromTerritoryId]?.includes(toTerritoryId)) return;
-    if (toTerritory.owner === selectedFaction.name) return;
+
+    const reinforcements = Math.min(500, fromTerritory.troops);
+
+    setTerritories((prev) =>
+      prev.map((t) => {
+        if (t.name === fromTerritoryName) {
+          return { ...t, troops: t.troops - reinforcements };
+        }
+        if (t.name === toTerritoryName) {
+          return { ...t, troops: t.troops + reinforcements };
+        }
+        return t;
+      })
+    );
+
+    setActionsThisTurn((prev) => prev + 1);
+  };
+
+  const handleAttack = (fromTerritoryName: string, toTerritoryName: string) => {
+    const fromTerritory = territories.find((t) => t.name === fromTerritoryName);
+    const toTerritory = territories.find((t) => t.name === toTerritoryName);
+
+    if (
+      fromTerritory?.owner !== selectedFaction.name ||
+      toTerritory?.owner === selectedFaction.name ||
+      !adjacentTerritories[fromTerritoryName]?.includes(toTerritoryName) ||
+      actionsThisTurn >= 4
+    ) {
+      return;
+    }
 
     setActionsThisTurn((prev) => prev + 1);
 
@@ -240,10 +273,10 @@ export const useGameState = () => {
       const survivingTroops = Math.floor(attackForce * 0.7);
       setTerritories((prev) =>
         prev.map((t) => {
-          if (t.name === fromTerritoryId) {
+          if (t.name === fromTerritoryName) {
             return { ...t, troops: t.troops! - attackForce };
           }
-          if (t.name === toTerritoryId) {
+          if (t.name === toTerritoryName) {
             return {
               ...t,
               owner: selectedFaction.name,
@@ -266,7 +299,7 @@ export const useGameState = () => {
       const casualties = Math.floor(Math.random() * 300 + 200);
       setTerritories((prev) =>
         prev.map((t) =>
-          t.name === fromTerritoryId
+          t.name === fromTerritoryName
             ? { ...t, troops: Math.max(100, t.troops! - casualties) }
             : t
         )
@@ -478,19 +511,16 @@ export const useGameState = () => {
   const handleRecruitTroops = () => {
     if (playerFaction.treasure < 50 || actionsThisTurn >= 4) return;
     setActionsThisTurn((prevActions) => prevActions + 1);
+    const recruits = 500;
 
     setTerritories((prevTerritories) => {
       const factionName = playerFaction.name;
-      const controlledTerritories = prevTerritories.filter(
-        (t) => t.owner === factionName
-      );
-      const recruitAmount = Math.round(500 / controlledTerritories.length);
-
-      let totalRecruits = 0;
       const updated = prevTerritories.map((t) => {
-        if (t.owner === factionName) {
-          totalRecruits += recruitAmount;
-          return { ...t, troops: t.troops! + recruitAmount };
+        if (
+          t.owner === factionName &&
+          t.name === playerFaction.territories[0]
+        ) {
+          return { ...t, troops: t.troops! + recruits };
         }
         return t;
       });
@@ -498,7 +528,7 @@ export const useGameState = () => {
       setPlayerFaction((prevFaction) => ({
         ...prevFaction,
         treasure: prevFaction.treasure - 50,
-        troops: prevFaction.troops + totalRecruits,
+        troops: prevFaction.troops + recruits,
       }));
 
       return updated;
@@ -600,6 +630,7 @@ export const useGameState = () => {
 
     // Actions
     handleAttack,
+    handleReinforce,
     handleEndTurn,
     handleTerritoryClick,
     handleSpy,

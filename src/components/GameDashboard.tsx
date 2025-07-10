@@ -99,6 +99,7 @@ const GameDashboard = () => {
                     onRecruitTroops={gameState.handleRecruitTroops}
                     onSpy={gameState.handleSpy}
                     onAttack={gameState.handleAttack}
+                    onReinforce={gameState.handleReinforce}
                     getValidAttackTargets={gameState.getValidAttackTargets}
                   />
                 </TabsContent>
