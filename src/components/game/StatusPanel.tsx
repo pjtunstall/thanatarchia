@@ -10,7 +10,7 @@ import {
   CharacterPortrait,
   Chronicler,
 } from "@/types/GameTypes";
-import { getHeresyColor, initialReport } from "@/data/GameData";
+import { getFaithColor, initialReport } from "@/data/GameData";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
 import { CharacterDialog } from "@/components/game/CharacterDialog";
 
@@ -67,9 +67,9 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
                 <span className="text-sm font-semibold">Faith:</span>
                 <Badge
                   variant="outline"
-                  className={`${getHeresyColor(playerFaction.heresy)} text-xs`}
+                  className={`${getFaithColor(playerFaction.faith)} text-xs`}
                 >
-                  {playerFaction.heresy}
+                  {playerFaction.faith}
                 </Badge>
               </div>
               <p className="text-sm">Territories: {playerTerritories.length}</p>

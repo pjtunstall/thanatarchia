@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Faction, CharacterPortrait } from "@/types/GameTypes";
 import { Crown, Users, Church } from "lucide-react";
-import { getHeresyColor } from "@/data/GameData";
+import { getFaithColor } from "@/data/GameData";
 
 interface FactionDetailsProps {
   faction: Faction;
@@ -55,15 +55,15 @@ const FactionDetails: React.FC<FactionDetailsProps> = ({
       </CardHeader>
 
       <CardContent className="space-y-4 bg-muted/30">
-        {/* Heresy/Religion */}
+        {/* Faith */}
         <div className="flex items-center gap-2">
           <Church className="w-4 h-4 text-muted-foreground" />
           <span className="text-sm font-medium">Faith:</span>
           <Badge
             variant="outline"
-            className={`${getHeresyColor(faction.heresy)} text-xs`}
+            className={`${getFaithColor(faction.faith)} text-xs`}
           >
-            {faction.heresy}
+            {faction.faith}
           </Badge>
         </div>
 

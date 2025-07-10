@@ -13,7 +13,7 @@ export interface Faction {
     gender: "male" | "female";
     image: string;
   };
-  heresy:
+  faith:
     | "Chalcedonian"
     | "Arian"
     | "Pagan"
