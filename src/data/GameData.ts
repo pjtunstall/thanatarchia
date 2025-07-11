@@ -176,7 +176,7 @@ export const factions: Faction[] = [
       gender: "male",
       image: mauriMaleLeader,
     },
-    faith: "Pelagian",
+    faith: "Donatist",
     relatives: ["Son Masties", "Son Masgiven", "Cousin Garmul"],
     territories: ["Mauretania"],
     troops: 1000,

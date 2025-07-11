@@ -20,7 +20,8 @@ export interface Faction {
     | "Pelagian"
     | "Miaphysite"
     | "Dyophysite"
-    | "Nestorian";
+    | "Nestorian"
+    | "Donatist";
 }
 
 export interface Territory {
