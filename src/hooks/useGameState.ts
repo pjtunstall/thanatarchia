@@ -214,9 +214,10 @@ export const useGameState = () => {
     const victory = attackStrength > defenseStrength;
 
     if (victory) {
-      const survivingTroops = Math.floor(
-        attackForce * 0.7 + defenseForce * 0.3
-      );
+      const survivingTroops =
+        defenseForce === 0
+          ? attackForce
+          : Math.floor(attackForce - defenseForce * 0.6);
       setTerritories((prev) =>
         prev.map((t) => {
           if (t.name === fromTerritoryName) {
@@ -237,13 +238,6 @@ export const useGameState = () => {
         ...prev,
         territories: [toTerritory.name, ...prev.territories],
       }));
-
-      // setFactions((prev) =>
-      //   prev.map((f) => {
-      //     if (f.name = toTerritory.owner) {
-
-      //     }
-      // })
 
       addChronicleEntry(
         `Our brave warriors have conquered ${toTerritory.name} in glorious battle!`,
