@@ -678,7 +678,7 @@ export const adjacentTerritories: Record<string, string[]> = {
   Galatia: ["Syria", "Thracia", "Cappadocia"],
   Germania: ["Gallia", "Pannonia", "Scandia", "Vistula"],
   Hispania: ["Aquitania", "Mauretania"],
-  Italia: ["Pannonia", "Septimania", "Sicilia", "Thracia"],
+  Italia: ["Pannonia", "Septimania", "Sicilia"],
   Mauretania: ["Africa", "Hispania"],
   Pannonia: ["Dalmatia", "Dacia", "Germania", "Italia", "Septimania"],
   Scandia: ["Britannia", "Germania", "Vistula"],
@@ -686,7 +686,7 @@ export const adjacentTerritories: Record<string, string[]> = {
   Septimania: ["Aquitania", "Gallia", "Italia", "Pannonia"],
   Sicilia: ["Africa", "Italia"],
   Syria: ["Aegyptus", "Galatia", "Cappadocia"],
-  Thracia: ["Dacia", "Dalmatia", "Galatia", "Italia"],
+  Thracia: ["Dacia", "Dalmatia", "Galatia"],
   Vistula: ["Germania", "Scandia", "Scythia"],
 };
 

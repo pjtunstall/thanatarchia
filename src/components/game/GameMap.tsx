@@ -191,13 +191,15 @@ const GameMap: React.FC<GameMapProps> = ({
               const fullFaction = factions.find((f) => f.name === key);
               if (!fullFaction) return null;
 
+              const isSelected = key === selectedFaction.name;
+
               return (
                 <Popover key={key}>
                   <PopoverTrigger asChild>
                     <div
-                      className={`flex items-center gap-2 px-2 py-1 rounded cursor-pointer hover:bg-muted/50 transition-colors ${
-                        key === selectedFaction.name
-                          ? "bg-primary/20 border border-primary/30"
+                      className={`group flex items-center gap-2 px-2 py-1 rounded cursor-pointer hover:bg-primary/30 transition-colors ${
+                        isSelected
+                          ? "bg-primary/10 border border-primary/30"
                           : ""
                       }`}
                     >
@@ -206,9 +208,11 @@ const GameMap: React.FC<GameMapProps> = ({
                         style={{ backgroundColor: factionInfo.color }}
                       ></div>
                       <span
-                        className={
-                          key === selectedFaction.name ? "font-semibold" : ""
-                        }
+                        className={`transition-colors ${
+                          isSelected
+                            ? "font-semibold text-white"
+                            : "text-muted-foreground group-hover:text-white"
+                        }`}
                       >
                         {fullFaction.name}
                       </span>
@@ -217,12 +221,8 @@ const GameMap: React.FC<GameMapProps> = ({
                   <PopoverContent side="top" align="start" className="p-0">
                     <FactionDetails
                       faction={fullFaction}
-                      isPlayerFaction={key === selectedFaction.name}
-                      playerCharacter={
-                        key === selectedFaction.name
-                          ? playerCharacter
-                          : undefined
-                      }
+                      isPlayerFaction={isSelected}
+                      playerCharacter={isSelected ? playerCharacter : undefined}
                     />
                   </PopoverContent>
                 </Popover>
