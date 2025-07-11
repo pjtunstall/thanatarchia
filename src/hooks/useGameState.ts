@@ -64,17 +64,10 @@ export const useGameState = () => {
     );
 
     return {
+      ...selectedFaction,
       id: "player",
-      name: selectedFaction.name,
-      formalName: selectedFaction.formalName,
       leader: playerCharacter,
-      faith: selectedFaction.faith,
-      type: selectedFaction.type,
-      color: selectedFaction.color,
       territories: playerTerritories.map((t) => t.name),
-      relatives: selectedFaction.relatives,
-      troops: 2500,
-      treasure: 150,
     };
   });
 
@@ -264,7 +257,9 @@ export const useGameState = () => {
     const victory = attackStrength > defenseStrength;
 
     if (victory) {
-      const survivingTroops = Math.floor(attackForce * 0.7);
+      const survivingTroops = Math.floor(
+        attackForce * 0.7 + defenseForce * 0.3
+      );
       setTerritories((prev) =>
         prev.map((t) => {
           if (t.name === fromTerritoryName) {
@@ -285,6 +280,14 @@ export const useGameState = () => {
         ...prev,
         territories: [toTerritory.name, ...prev.territories],
       }));
+
+      // setFactions((prev) =>
+      //   prev.map((f) => {
+      //     if (f.name = toTerritory.owner) {
+
+      //     }
+      // })
+
       addChronicleEntry(
         `Our brave warriors have conquered ${toTerritory.name} in glorious battle!`,
         "friendly"
