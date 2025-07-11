@@ -85,8 +85,6 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
               </div>
             </div>
 
-            <Advice playerCharacter={playerCharacter} />
-
             {selectedTerritory && (
               <SelectedTerritoryInfo
                 territories={territories}
@@ -94,6 +92,8 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
                 selectedFaction={playerFaction}
               />
             )}
+
+            <Advice playerCharacter={playerCharacter} />
           </div>
         </ScrollArea>
       </CardContent>

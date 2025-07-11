@@ -92,88 +92,90 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({
             </div>
 
             {selectedTerritory && (
-              <div className="border-t pt-3 space-y-2">
-                {(() => {
-                  const territory = territories.find(
-                    (t) => t.name === selectedTerritory
-                  );
+              <>
+                <SelectedTerritoryInfo
+                  territories={territories}
+                  selectedTerritory={selectedTerritory}
+                  selectedFaction={playerFaction}
+                />
 
-                  const validAttackTargets =
-                    territory?.owner === selectedFaction.name
-                      ? getValidAttackTargets(selectedTerritory)
-                      : [];
+                <div className="border-t pt-3 space-y-2">
+                  {(() => {
+                    const territory = territories.find(
+                      (t) => t.name === selectedTerritory
+                    );
 
-                  const validReinforceTargets =
-                    territory?.owner === selectedFaction.name
-                      ? adjacentTerritories[selectedTerritory]
-                          .map((adj) => territories.find((t) => t.name === adj))
-                          .filter(
-                            (t): t is Territory =>
-                              !!t &&
-                              t.owner === selectedFaction.name &&
-                              t.name !== selectedTerritory
-                          )
-                      : [];
+                    const validAttackTargets =
+                      territory?.owner === selectedFaction.name
+                        ? getValidAttackTargets(selectedTerritory)
+                        : [];
 
-                  return (
-                    <>
-                      {validAttackTargets.length > 0 && (
-                        <div className="space-y-1">
-                          <p className="text-xs font-semibold">
-                            Attack Targets:
-                          </p>
-                          {validAttackTargets.map((target) => (
-                            <Button
-                              key={`attack-${target.name}`}
-                              onClick={() =>
-                                onAttack(selectedTerritory, target.name)
-                              }
-                              variant="destructive"
-                              size="sm"
-                              className="w-full text-xs"
-                              disabled={territory.troops! < 200}
-                            >
-                              <Sword className="w-2 h-2 mr-1" />
-                              Attack {target.name} ({target.troops})
-                            </Button>
-                          ))}
-                        </div>
-                      )}
+                    const validReinforceTargets =
+                      territory?.owner === selectedFaction.name
+                        ? adjacentTerritories[selectedTerritory]
+                            .map((adj) =>
+                              territories.find((t) => t.name === adj)
+                            )
+                            .filter(
+                              (t): t is Territory =>
+                                !!t &&
+                                t.owner === selectedFaction.name &&
+                                t.name !== selectedTerritory
+                            )
+                        : [];
 
-                      {validReinforceTargets.length > 0 && (
-                        <div className="space-y-1">
-                          <p className="text-xs font-semibold">
-                            Reinforce Targets:
-                          </p>
-                          {validReinforceTargets.map((target) => (
-                            <Button
-                              key={`reinforce-${target.name}`}
-                              onClick={() =>
-                                onReinforce(selectedTerritory, target.name)
-                              }
-                              variant="default"
-                              size="sm"
-                              className="w-full text-xs bg-green-500 hover:bg-green-600 text-white"
-                              disabled={territory.troops! < 100}
-                            >
-                              <ShieldPlus className="w-2 h-2 mr-1" />
-                              Reinforce {target.name} ({target.troops})
-                            </Button>
-                          ))}
-                        </div>
-                      )}
-                    </>
-                  );
-                })()}
-              </div>
-            )}
+                    return (
+                      <>
+                        {validAttackTargets.length > 0 && (
+                          <div className="space-y-1">
+                            <p className="text-xs font-semibold">
+                              Attack Targets:
+                            </p>
+                            {validAttackTargets.map((target) => (
+                              <Button
+                                key={`attack-${target.name}`}
+                                onClick={() =>
+                                  onAttack(selectedTerritory, target.name)
+                                }
+                                variant="destructive"
+                                size="sm"
+                                className="w-full text-xs"
+                                disabled={territory.troops! < 200}
+                              >
+                                <Sword className="w-2 h-2 mr-1" />
+                                Attack {target.name} ({target.troops})
+                              </Button>
+                            ))}
+                          </div>
+                        )}
 
-            {selectedTerritory && (
-              <SelectedTerritoryInfo
-                territories={territories}
-                selectedTerritory={selectedTerritory}
-                selectedFaction={playerFaction}
-              />
+                        {validReinforceTargets.length > 0 && (
+                          <div className="space-y-1">
+                            <p className="text-xs font-semibold">
+                              Reinforce Targets:
+                            </p>
+                            {validReinforceTargets.map((target) => (
+                              <Button
+                                key={`reinforce-${target.name}`}
+                                onClick={() =>
+                                  onReinforce(selectedTerritory, target.name)
+                                }
+                                variant="default"
+                                size="sm"
+                                className="w-full text-xs bg-green-500 hover:bg-green-600 text-white"
+                                disabled={territory.troops! < 100}
+                              >
+                                <ShieldPlus className="w-2 h-2 mr-1" />
+                                Reinforce {target.name} ({target.troops})
+                              </Button>
+                            ))}
+                          </div>
+                        )}
+                      </>
+                    );
+                  })()}
+                </div>
+              </>
             )}
           </div>
         </div>
