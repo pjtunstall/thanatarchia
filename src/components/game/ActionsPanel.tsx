@@ -12,7 +12,6 @@ interface ActionsPanelProps {
   playerFaction: Faction;
   territories: Territory[];
   selectedTerritory: string | null;
-  selectedFaction: { name: string };
   onAction: (action: string) => void;
   onEndTurn: () => void;
   onRecruitTroops: () => void;
@@ -27,7 +26,6 @@ const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
     playerFaction,
     selectedTerritory,
     territories,
-    selectedFaction,
     getValidAttackTargets,
   } = props;
 
@@ -36,18 +34,18 @@ const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
     : null;
 
   const validAttackTargets =
-    selected?.owner === selectedFaction.name && selectedTerritory
+    selected?.owner === playerFaction.name && selectedTerritory
       ? getValidAttackTargets(selectedTerritory)
       : [];
 
   const validReinforceTargets =
-    selected?.owner === selectedFaction.name && selectedTerritory
+    selected?.owner === playerFaction.name && selectedTerritory
       ? adjacentTerritories[selectedTerritory]
           .map((adj) => territories.find((t) => t.name === adj))
           .filter(
             (t): t is Territory =>
               !!t &&
-              t.owner === selectedFaction.name &&
+              t.owner === playerFaction.name &&
               t.name !== selectedTerritory
           )
       : [];

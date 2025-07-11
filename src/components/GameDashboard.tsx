@@ -47,9 +47,8 @@ const GameDashboard = () => {
                 territories={gameState.territories}
                 selectedTerritory={gameState.selectedTerritory}
                 currentTurn={gameState.currentTurn}
-                playerFactionName={gameState.selectedFaction.name}
-                playerFactionColor={gameState.selectedFaction.color}
-                selectedFaction={gameState.selectedFaction}
+                playerFactionName={gameState.playerFaction.name}
+                playerFactionColor={gameState.playerFaction.color}
                 playerCharacter={gameState.playerCharacter}
                 onTerritoryClick={gameState.handleTerritoryClick}
               />
@@ -92,7 +91,6 @@ const GameDashboard = () => {
                     playerFaction={gameState.playerFaction}
                     territories={gameState.territories}
                     selectedTerritory={gameState.selectedTerritory}
-                    selectedFaction={gameState.selectedFaction}
                     onAction={gameState.handleAction}
                     onEndTurn={gameState.handleEndTurn}
                     onRecruitTroops={gameState.handleRecruitTroops}

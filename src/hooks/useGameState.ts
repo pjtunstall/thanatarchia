@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Faction, Territory, Chronicle, GameStatus } from "@/types/GameTypes";
+import {
+  Faction,
+  Territory,
+  Chronicle,
+  GameStatus,
+  CharacterPortrait,
+  GenderVariants,
+  Chronicler,
+} from "@/types/GameTypes";
 import {
   factions,
   genderVariants,
@@ -15,59 +23,10 @@ export const useGameState = () => {
   );
   const [gameStatus, setGameStatus] = useState<GameStatus>("playing");
 
-  // Initialize random faction and character
-  const [selectedFaction] = useState(() => {
-    const factionsWithTerritories = factions.filter((faction) =>
-      initialTerritories.some((territory) => territory.owner === faction.name)
-    );
-    const randomIndex = Math.floor(
-      Math.random() * factionsWithTerritories.length
-    );
-    const baseFaction = factionsWithTerritories[randomIndex];
-
-    // Randomly assign gender
-    const randomGender: "male" | "female" =
-      Math.random() > 0.5 ? "female" : "male";
-
-    const leaderInfo = genderVariants[
-      baseFaction.name as keyof typeof genderVariants
-    ]?.[randomGender] || {
-      name: baseFaction.leader.name,
-      image: baseFaction.leader.image,
-    };
-
-    return {
-      ...baseFaction,
-      leader: {
-        name: leaderInfo.name,
-        gender: randomGender,
-        image: leaderInfo.image,
-      },
-    };
-  });
-
-  const [playerCharacter] = useState(() => {
-    // Use the selected faction's leader as the player character
-    return {
-      name: selectedFaction.leader.name,
-      gender: selectedFaction.leader.gender,
-      image: selectedFaction.leader.image,
-      adviser: chroniclers[Math.floor(Math.random() * chroniclers.length)],
-    };
-  });
-
-  const [playerFaction, setPlayerFaction] = useState<Faction>(() => {
-    const playerTerritories = initialTerritories.filter(
-      (territory) => territory.owner === selectedFaction.name
-    );
-
-    return {
-      ...selectedFaction,
-      id: "player",
-      leader: playerCharacter,
-      territories: playerTerritories.map((t) => t.name),
-    };
-  });
+  const { character: initialCharacter, faction: initialFaction } =
+    initializePlayer(factions, initialTerritories, genderVariants, chroniclers);
+  const [playerCharacter] = useState(initialCharacter);
+  const [playerFaction, setPlayerFaction] = useState<Faction>(initialFaction);
 
   const [territories, setTerritories] =
     useState<Territory[]>(initialTerritories);
@@ -179,7 +138,7 @@ export const useGameState = () => {
 
   const checkGameStatus = () => {
     const playerTerritories = territories.filter(
-      (t) => t.owner === selectedFaction.name
+      (t) => t.owner === playerFaction.name
     ).length;
     if (playerTerritories >= 9) {
       generateFinalChronicles("victory");
@@ -212,8 +171,8 @@ export const useGameState = () => {
     if (
       !fromTerritory ||
       !toTerritory ||
-      fromTerritory.owner !== selectedFaction.name ||
-      toTerritory.owner !== selectedFaction.name ||
+      fromTerritory.owner !== playerFaction.name ||
+      toTerritory.owner !== playerFaction.name ||
       !adjacentTerritories[fromTerritoryName]?.includes(toTerritoryName)
     )
       return;
@@ -238,8 +197,8 @@ export const useGameState = () => {
     const toTerritory = territories.find((t) => t.name === toTerritoryName);
 
     if (
-      fromTerritory?.owner !== selectedFaction.name ||
-      toTerritory?.owner === selectedFaction.name ||
+      fromTerritory?.owner !== playerFaction.name ||
+      toTerritory?.owner === playerFaction.name ||
       !adjacentTerritories[fromTerritoryName]?.includes(toTerritoryName)
     ) {
       return;
@@ -266,7 +225,7 @@ export const useGameState = () => {
           if (t.name === toTerritoryName) {
             return {
               ...t,
-              owner: selectedFaction.name,
+              owner: playerFaction.name,
               troops: survivingTroops,
             };
           }
@@ -311,14 +270,14 @@ export const useGameState = () => {
 
   const executeAITurn = () => {
     const aiTerritories = territories.filter(
-      (t) => t.owner !== selectedFaction.name
+      (t) => t.owner !== playerFaction.name
     );
 
     aiTerritories.forEach((aiTerritory) => {
       const adjacentPlayerTerritories =
         adjacentTerritories[aiTerritory.name]
           ?.map((id) => territories.find((t) => t.name === id))
-          .filter((t) => t && t.owner === selectedFaction.name) || [];
+          .filter((t) => t && t.owner === playerFaction.name) || [];
 
       if (adjacentPlayerTerritories.length > 0 && aiTerritory.troops! > 500) {
         const weakestTarget = adjacentPlayerTerritories.reduce(
@@ -399,7 +358,7 @@ export const useGameState = () => {
 
   const generateResources = () => {
     const playerTerritoryCount = territories.filter(
-      (t) => t.owner === selectedFaction.name
+      (t) => t.owner === playerFaction.name
     ).length;
     const income = playerTerritoryCount * 20;
 
@@ -421,7 +380,7 @@ export const useGameState = () => {
     return (
       adjacentTerritories[fromTerritoryName]
         ?.map((name) => territories.find((t) => t.name === name))
-        .filter((t) => t && t.owner !== selectedFaction.name) || []
+        .filter((t) => t && t.owner !== playerFaction.name) || []
     );
   };
 
@@ -432,14 +391,14 @@ export const useGameState = () => {
     setFinalChronicles([]);
 
     setPlayerFaction({
-      name: selectedFaction.name,
-      formalName: selectedFaction.formalName,
-      type: selectedFaction.type,
-      leader: selectedFaction.leader,
-      faith: selectedFaction.faith,
-      color: selectedFaction.color,
-      territories: [...selectedFaction.territories],
-      relatives: selectedFaction.relatives,
+      name: playerFaction.name,
+      formalName: playerFaction.formalName,
+      type: playerFaction.type,
+      leader: playerFaction.leader,
+      faith: playerFaction.faith,
+      color: playerFaction.color,
+      territories: [...playerFaction.territories],
+      relatives: playerFaction.relatives,
       troops: 2000,
       treasure: 100,
     });
@@ -614,7 +573,6 @@ export const useGameState = () => {
     chronicles,
     chroniclers,
     finalChronicles,
-    selectedFaction,
 
     // Actions
     handleAttack,
@@ -627,4 +585,48 @@ export const useGameState = () => {
     resetGame,
     getValidAttackTargets,
   };
+};
+
+const initializePlayer = (
+  factions: Faction[],
+  initialTerritories: Territory[],
+  genderVariants: GenderVariants,
+  chroniclers: Chronicler[]
+): { character: CharacterPortrait; faction: Faction } => {
+  const factionsWithTerritories = factions.filter((faction) =>
+    initialTerritories.some((territory) => territory.owner === faction.name)
+  );
+  const randomIndex = Math.floor(
+    Math.random() * factionsWithTerritories.length
+  );
+  const baseFaction = factionsWithTerritories[randomIndex];
+
+  const randomGender: "male" | "female" =
+    Math.random() > 0.5 ? "female" : "male";
+
+  const leaderInfo = genderVariants[
+    baseFaction.name as keyof typeof genderVariants
+  ]?.[randomGender] || {
+    name: baseFaction.leader.name,
+    image: baseFaction.leader.image,
+  };
+
+  const character = {
+    name: leaderInfo.name,
+    gender: randomGender,
+    image: leaderInfo.image,
+    adviser: chroniclers[Math.floor(Math.random() * chroniclers.length)],
+  };
+
+  const playerTerritories = initialTerritories.filter(
+    (territory) => territory.owner === baseFaction.name
+  );
+
+  const faction: Faction = {
+    ...baseFaction,
+    leader: character,
+    territories: playerTerritories.map((t) => t.name),
+  };
+
+  return { character, faction };
 };

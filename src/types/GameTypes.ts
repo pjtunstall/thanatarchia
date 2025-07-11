@@ -62,3 +62,16 @@ export interface Chronicler {
 }
 
 export type GameStatus = "playing" | "victory" | "defeat";
+
+type Gender = "male" | "female";
+
+type LeaderInfo = {
+  name: string;
+  image: string;
+};
+
+export type GenderVariants = {
+  [factionName: string]: {
+    [gender in Gender]: LeaderInfo;
+  };
+};

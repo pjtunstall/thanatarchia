@@ -16,7 +16,6 @@ interface GameMapProps {
   currentTurn: number;
   playerFactionName: string;
   playerFactionColor: string;
-  selectedFaction: { name: string; color: string };
   playerCharacter: {
     name: string;
     gender: "male" | "female";
@@ -31,7 +30,6 @@ const GameMap: React.FC<GameMapProps> = ({
   currentTurn,
   playerFactionName,
   playerFactionColor,
-  selectedFaction,
   playerCharacter,
   onTerritoryClick,
 }) => {
@@ -43,7 +41,7 @@ const GameMap: React.FC<GameMapProps> = ({
     const activeFactions = new Set(territories.map((t) => t.owner));
 
     // Add player faction (always show)
-    lookup[selectedFaction.name] = {
+    lookup[playerFactionName] = {
       color: playerFactionColor,
       name: playerFactionName,
     };
@@ -52,7 +50,7 @@ const GameMap: React.FC<GameMapProps> = ({
     factions.forEach((faction) => {
       if (
         activeFactions.has(faction.name) &&
-        faction.name !== selectedFaction.name
+        faction.name !== playerFactionName
       ) {
         lookup[faction.name] = {
           color: faction.color,
@@ -62,12 +60,7 @@ const GameMap: React.FC<GameMapProps> = ({
     });
 
     return lookup;
-  }, [
-    playerFactionName,
-    playerFactionColor,
-    selectedFaction.name,
-    territories,
-  ]);
+  }, [playerFactionName, playerFactionColor, territories]);
 
   return (
     <Card className="h-full">
@@ -191,7 +184,7 @@ const GameMap: React.FC<GameMapProps> = ({
               const fullFaction = factions.find((f) => f.name === key);
               if (!fullFaction) return null;
 
-              const isSelected = key === selectedFaction.name;
+              const isSelected = key === playerFactionName;
 
               return (
                 <Popover key={key}>
