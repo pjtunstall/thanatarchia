@@ -10,7 +10,6 @@ import {
 
 export const useGameState = () => {
   const [currentTurn, setCurrentTurn] = useState(1);
-  const [actionsThisTurn, setActionsThisTurn] = useState(0);
   const [selectedTerritory, setSelectedTerritory] = useState<string | null>(
     null
   );
@@ -18,7 +17,6 @@ export const useGameState = () => {
 
   // Initialize random faction and character
   const [selectedFaction] = useState(() => {
-    // Only select factions that have territories
     const factionsWithTerritories = factions.filter((faction) =>
       initialTerritories.some((territory) => territory.owner === faction.name)
     );
@@ -416,7 +414,6 @@ export const useGameState = () => {
     generateResources();
     executeAITurn();
     setCurrentTurn((prev) => prev + 1);
-    setActionsThisTurn(0);
     setTimeout(checkGameStatus, 100);
   };
 
@@ -431,7 +428,6 @@ export const useGameState = () => {
   const resetGame = () => {
     setGameStatus("playing");
     setCurrentTurn(1);
-    setActionsThisTurn(0);
     setSelectedTerritory(null);
     setFinalChronicles([]);
 
@@ -458,11 +454,9 @@ export const useGameState = () => {
 
   const handleSpy = (territoryId: string) => {
     const territory = territories.find((t) => t.name === territoryId);
-    if (!territory || playerFaction.treasure < 25 || actionsThisTurn >= 4)
-      return;
+    if (!territory || playerFaction.treasure < 25) return;
 
     setPlayerFaction((prev) => ({ ...prev, treasure: prev.treasure - 25 }));
-    setActionsThisTurn((prev) => prev + 1);
 
     // Generate random condition that affects combat
     const conditions = [
@@ -548,10 +542,6 @@ export const useGameState = () => {
   };
 
   const handleAction = (action: string) => {
-    if (actionsThisTurn >= 4) return;
-
-    setActionsThisTurn((prev) => prev + 1);
-
     const entries: Record<string, { friendly: string; hostile: string }> = {
       raid: {
         friendly:
@@ -616,7 +606,6 @@ export const useGameState = () => {
   return {
     // State
     currentTurn,
-    actionsThisTurn,
     selectedTerritory,
     gameStatus,
     playerFaction,
