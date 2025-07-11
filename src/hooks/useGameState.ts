@@ -25,7 +25,7 @@ export const useGameState = () => {
 
   const { character: initialCharacter, faction: initialFaction } =
     initializePlayer(factions, initialTerritories, genderVariants, chroniclers);
-  const [playerCharacter] = useState(initialCharacter);
+  const [playerCharacter, setPlayerCharacter] = useState(initialCharacter);
   const [playerFaction, setPlayerFaction] = useState<Faction>(initialFaction);
 
   const [territories, setTerritories] =
@@ -237,6 +237,7 @@ export const useGameState = () => {
       setPlayerFaction((prev) => ({
         ...prev,
         territories: [toTerritory.name, ...prev.territories],
+        relatives: [...prev.relatives],
       }));
 
       addChronicleEntry(
@@ -328,6 +329,7 @@ export const useGameState = () => {
       setPlayerFaction((prev) => ({
         ...prev,
         territories: prev.territories.filter((t) => t !== toId),
+        relatives: [...prev.relatives],
       }));
       addChronicleEntry(
         `The barbarians have lost ${toTerritory.name} to enemy forces!`,
@@ -356,7 +358,12 @@ export const useGameState = () => {
     ).length;
     const income = playerTerritoryCount * 20;
 
-    setPlayerFaction((prev) => ({ ...prev, treasure: prev.treasure + income }));
+    setPlayerFaction((prev) => ({
+      ...prev,
+      treasure: prev.treasure + income,
+      territories: [...prev.territories],
+      relatives: [...prev.relatives],
+    }));
     addChronicleEntry(
       `Our territories have generated ${income} solidi in tribute and taxes.`,
       "friendly"
@@ -384,17 +391,26 @@ export const useGameState = () => {
     setSelectedTerritory(null);
     setFinalChronicles([]);
 
+    const { character: initialCharacter, faction: initialFaction } =
+      initializePlayer(
+        factions,
+        initialTerritories,
+        genderVariants,
+        chroniclers
+      );
+    setPlayerCharacter(initialCharacter);
+
     setPlayerFaction({
-      name: playerFaction.name,
-      formalName: playerFaction.formalName,
-      type: playerFaction.type,
-      leader: playerFaction.leader,
-      faith: playerFaction.faith,
-      color: playerFaction.color,
-      territories: [...playerFaction.territories],
-      relatives: playerFaction.relatives,
-      troops: 2000,
-      treasure: 100,
+      name: initialFaction.name,
+      formalName: initialFaction.formalName,
+      type: initialFaction.type,
+      leader: playerCharacter,
+      faith: initialFaction.faith,
+      color: initialFaction.color,
+      territories: [...initialFaction.territories],
+      relatives: [...initialFaction.relatives],
+      troops: initialFaction.troops,
+      treasure: initialFaction.treasure,
     });
 
     setTerritories(initialTerritories);
@@ -409,7 +425,12 @@ export const useGameState = () => {
     const territory = territories.find((t) => t.name === territoryId);
     if (!territory || playerFaction.treasure < 25) return;
 
-    setPlayerFaction((prev) => ({ ...prev, treasure: prev.treasure - 25 }));
+    setPlayerFaction((prev) => ({
+      ...prev,
+      treasure: prev.treasure - 25,
+      territories: [...prev.territories],
+      relatives: [...prev.relatives],
+    }));
 
     // Generate random condition that affects combat
     const conditions = [
@@ -475,6 +496,8 @@ export const useGameState = () => {
         ...prevFaction,
         treasure: prevFaction.treasure - 50,
         troops: prevFaction.troops + totalRecruits,
+        relatives: [...prevFaction.relatives],
+        territories: [...prevFaction.territories],
       }));
 
       return updated;
@@ -529,11 +552,15 @@ export const useGameState = () => {
           ...prev,
           treasure: prev.treasure + treasureGained,
           troops: Math.max(100, prev.troops - Math.floor(troopsRisked * 0.3)),
+          territories: [...prev.territories],
+          relatives: [...prev.relatives],
         }));
       } else {
         setPlayerFaction((prev) => ({
           ...prev,
           troops: Math.max(100, prev.troops - troopsRisked),
+          territories: [...prev.territories],
+          relatives: [...prev.relatives],
         }));
       }
     }
