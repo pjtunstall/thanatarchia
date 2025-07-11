@@ -102,6 +102,10 @@ export const genderVariants = {
     male: { name: "Eraric the Wry", image: barbarianKing },
     female: { name: "Gisa the Grim", image: barbarianQueen },
   },
+  Herulians: {
+    male: { name: "Rodulph the Bold", image: barbarianKing },
+    female: { name: "Rodehild the Fierce", image: barbarianQueen },
+  },
   Langobards: {
     male: { name: "Wacho the Ferocious", image: barbarianKing },
     female: { name: "Rodelinda the Ruthless", image: visigothicQueen },
@@ -328,7 +332,7 @@ export const factions: Faction[] = [
     },
     faith: "Arian",
     relatives: ["Son Felatheus", "Son Flaccitheus", "Son Frideric"],
-    territories: ["Scandza"],
+    territories: ["Scandia", "Vistula"],
     troops: 1000,
     treasure: 100,
   },
@@ -382,6 +386,22 @@ export const factions: Faction[] = [
     faith: "Pagan",
     relatives: ["Son Rechila", "Daughter Ingunde"],
     territories: ["Hispania"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Herulians",
+    formalName: "Kingdom of the Herulians",
+    type: "barbarian",
+    color: "hsl(var(--herulians))",
+    leader: {
+      name: "Rodulph the Bold",
+      gender: "male",
+      image: barbarianKing,
+    },
+    faith: "Pagan",
+    relatives: ["Son Aruth"],
+    territories: ["Vistula"],
     troops: 1000,
     treasure: 100,
   },
@@ -465,7 +485,7 @@ export const chroniclers: Chronicler[] = [
   },
 ];
 
-// For SVG connecting arrows to be visible, neighboring territories must differ in both coordinate.
+// It seems that for SVG connecting arrows to be visible, neighboring territories must differ in both coordinates.
 export const initialTerritories: Territory[] = [
   {
     name: "Britannia",
@@ -524,7 +544,15 @@ export const initialTerritories: Territory[] = [
     terrain: "forest",
   },
   {
-    name: "Scandza",
+    name: "Vistula",
+    x: 45,
+    y: 15,
+    owner: "Herulians",
+    troops: 1000,
+    terrain: "river",
+  },
+  {
+    name: "Scandia",
     x: 32,
     y: 5,
     owner: "Rugians",
@@ -604,7 +632,7 @@ export const initialTerritories: Territory[] = [
     terrain: "plains",
   },
   {
-    name: "Isauria",
+    name: "Galatia",
     x: 70,
     y: 60,
     owner: "Isaurians",
@@ -642,23 +670,24 @@ export const adjacentTerritories: Record<string, string[]> = {
   Africa: ["Aegyptus", "Mauretania", "Sicilia"],
   Aquitania: ["Armorica", "Gallia", "Hispania", "Septimania"],
   Armorica: ["Aquitania", "Britannia", "Gallia"],
-  Britannia: ["Armorica", "Gallia", "Germania", "Scandza"],
-  Cappadocia: ["Isauria", "Syria"],
+  Britannia: ["Armorica", "Gallia", "Scandia"],
+  Cappadocia: ["Galatia", "Syria"],
   Dacia: ["Dalmatia", "Pannonia", "Scythia", "Thracia"],
   Dalmatia: ["Dacia", "Italia", "Pannonia", "Thracia"],
   Gallia: ["Aquitania", "Armorica", "Britannia", "Germania", "Septimania"],
-  Isauria: ["Syria", "Thracia", "Cappadocia"],
-  Germania: ["Britannia", "Gallia", "Pannonia", "Scandza"],
+  Galatia: ["Syria", "Thracia", "Cappadocia"],
+  Germania: ["Gallia", "Pannonia", "Scandia", "Vistula"],
   Hispania: ["Aquitania", "Mauretania"],
   Italia: ["Dalmatia", "Pannonia", "Septimania", "Sicilia", "Thracia"],
   Mauretania: ["Africa", "Hispania"],
   Pannonia: ["Dalmatia", "Dacia", "Germania", "Italia", "Septimania"],
-  Scythia: ["Dacia"],
+  Scandia: ["Britannia", "Germania", "Vistula"],
+  Scythia: ["Dacia", "Vistula"],
   Septimania: ["Aquitania", "Gallia", "Italia", "Pannonia"],
   Sicilia: ["Africa", "Italia"],
-  Syria: ["Aegyptus", "Isauria", "Cappadocia"],
-  Thracia: ["Dacia", "Dalmatia", "Isauria", "Italia"],
-  Scandza: ["Britannia", "Germania"],
+  Syria: ["Aegyptus", "Galatia", "Cappadocia"],
+  Thracia: ["Dacia", "Dalmatia", "Galatia", "Italia"],
+  Vistula: ["Germania", "Scandia", "Scythia"],
 };
 
 export const initialReport = (adviserName: string): string => {
