@@ -20,10 +20,10 @@ const NotFound = () => {
           Vae mihi! Pagina non inventa est
         </p>
         <p className="text-xl text-red-600 mb-4">
-          Οὐαί μοι! Ὁ τόπος οὐχ εὑρέθη
+          Οὐαί μοι! Ἡ σελίς οὐχ εὑρέθη
         </p>
         <p className="text-xl text-yellow-600 mb-4">
-          𐍅𐌰𐌹 𐌼𐌹𐍃! 𐍃𐍄𐌰𐌸 𐌽𐌹 𐌱𐌹𐌲𐌹𐍄𐌰𐌽𐍃 𐍅𐌰𐍂𐌸
+          𐍅𐌰𐌹 𐌼𐌹𐍃! 𐌻𐌰𐌿𐍆𐍃 𐌽𐌹 𐌱𐌹𐌲𐌹𐍄𐌰𐌽𐍃 𐍅𐌰𐍂𐌸
         </p>
         <a
           href="/"

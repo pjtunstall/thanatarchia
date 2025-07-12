@@ -5,7 +5,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Territory } from "@/types/GameTypes";
+import { CharacterPortrait, Territory } from "@/types/GameTypes";
 import { factions, getDate, adjacentTerritories } from "@/data/GameData";
 import FactionDetails from "./FactionDetails";
 import romanEmpireMap from "@/assets/roman-empire-map-clean.jpg";
@@ -14,6 +14,7 @@ interface GameMapProps {
   territories: Territory[];
   selectedTerritory: string | null;
   currentTurn: number;
+  factionLeaders: CharacterPortrait[];
   playerFactionName: string;
   playerFactionColor: string;
   playerCharacter: {
@@ -28,6 +29,7 @@ const GameMap: React.FC<GameMapProps> = ({
   territories,
   selectedTerritory,
   currentTurn,
+  factionLeaders,
   playerFactionName,
   playerFactionColor,
   playerCharacter,
@@ -214,8 +216,8 @@ const GameMap: React.FC<GameMapProps> = ({
                   <PopoverContent side="top" align="start" className="p-0">
                     <FactionDetails
                       faction={fullFaction}
+                      leader={factionLeaders[factions.indexOf(fullFaction)]}
                       isPlayerFaction={isSelected}
-                      playerCharacter={isSelected ? playerCharacter : undefined}
                     />
                   </PopoverContent>
                 </Popover>

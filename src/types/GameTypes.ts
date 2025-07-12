@@ -8,9 +8,8 @@ export interface Faction {
   troops: number;
   treasure: number;
   leader: {
-    name: string;
-    gender: "male" | "female";
-    image: string;
+    male: CharacterPortrait;
+    female: CharacterPortrait;
   };
   faith:
     | "Chalcedonian"
@@ -21,7 +20,8 @@ export interface Faction {
     | "Miaphysite"
     | "Dyophysite"
     | "Nestorian"
-    | "Donatist";
+    | "Donatist"
+    | "Gnostic";
 }
 
 export interface Territory {

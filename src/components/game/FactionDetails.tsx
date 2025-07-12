@@ -3,31 +3,21 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Faction, CharacterPortrait } from "@/types/GameTypes";
+import { Faction, CharacterPortrait, GenderVariants } from "@/types/GameTypes";
 import { Crown, Users, Church } from "lucide-react";
 import { getFaithColor } from "@/data/GameData";
 
 interface FactionDetailsProps {
   faction: Faction;
+  leader: CharacterPortrait;
   isPlayerFaction?: boolean;
-  playerCharacter?: CharacterPortrait;
 }
 
 const FactionDetails: React.FC<FactionDetailsProps> = ({
   faction,
+  leader,
   isPlayerFaction = false,
-  playerCharacter,
 }) => {
-  // Use player character if this is the player faction, otherwise use faction leader
-  const leader =
-    isPlayerFaction && playerCharacter
-      ? {
-          name: playerCharacter.name,
-          gender: playerCharacter.gender,
-          image: playerCharacter.image,
-        }
-      : faction.leader;
-
   return (
     <Card className="w-80">
       <CardHeader className="pb-3 bg-muted/30">

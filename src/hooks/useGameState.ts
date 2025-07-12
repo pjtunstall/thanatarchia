@@ -5,12 +5,10 @@ import {
   Chronicle,
   GameStatus,
   CharacterPortrait,
-  GenderVariants,
   Chronicler,
 } from "@/types/GameTypes";
 import {
   factions,
-  genderVariants,
   chroniclers,
   initialTerritories,
   adjacentTerritories,
@@ -23,16 +21,21 @@ export const useGameState = () => {
   );
   const [gameStatus, setGameStatus] = useState<GameStatus>("playing");
 
+  const [factionLeaders, setFactionLeaders] = useState(() =>
+    initializeLeaders(factions)
+  );
+
   const {
     character: initialCharacter,
     faction: initialFaction,
     adviserIndex: initialAdviser,
   } = initializePlayer(
     factions,
+    factionLeaders,
     initialTerritories,
-    genderVariants,
     chroniclers
   );
+
   const [playerCharacter, setPlayerCharacter] = useState(initialCharacter);
   const [playerFaction, setPlayerFaction] = useState<Faction>(initialFaction);
   const [adviserIndex, setAdviserIndex] = useState(initialAdviser);
@@ -400,30 +403,33 @@ export const useGameState = () => {
     setSelectedTerritory(null);
     setFinalChronicles([]);
 
+    setFactionLeaders(initializeLeaders(factions));
+
     const {
-      character: initialCharacter,
-      faction: initialFaction,
-      adviserIndex,
+      character: newCharacter,
+      faction: newFaction,
+      adviserIndex: newAdviserIndex,
     } = initializePlayer(
       factions,
+      factionLeaders,
       initialTerritories,
-      genderVariants,
       chroniclers
     );
-    setPlayerCharacter(initialCharacter);
-    setAdviserIndex(adviserIndex);
+
+    setPlayerCharacter(newCharacter);
+    setAdviserIndex(newAdviserIndex);
 
     setPlayerFaction({
-      name: initialFaction.name,
-      formalName: initialFaction.formalName,
-      type: initialFaction.type,
-      leader: playerCharacter,
-      faith: initialFaction.faith,
-      color: initialFaction.color,
-      territories: [...initialFaction.territories],
-      relatives: [...initialFaction.relatives],
-      troops: initialFaction.troops,
-      treasure: initialFaction.treasure,
+      name: newFaction.name,
+      formalName: newFaction.formalName,
+      type: newFaction.type,
+      faith: newFaction.faith,
+      color: newFaction.color,
+      leader: newFaction.leader,
+      territories: [...newFaction.territories],
+      relatives: [...newFaction.relatives],
+      troops: newFaction.troops,
+      treasure: newFaction.treasure,
     });
 
     setTerritories(initialTerritories);
@@ -602,6 +608,7 @@ export const useGameState = () => {
     currentTurn,
     selectedTerritory,
     gameStatus,
+    factionLeaders,
     playerFaction,
     playerCharacter,
     territories,
@@ -624,8 +631,8 @@ export const useGameState = () => {
 
 const initializePlayer = (
   factions: Faction[],
+  factionLeaders: CharacterPortrait[],
   initialTerritories: Territory[],
-  genderVariants: GenderVariants,
   chroniclers: Chronicler[]
 ): { character: CharacterPortrait; faction: Faction; adviserIndex: number } => {
   const factionsWithTerritories = factions.filter((faction) =>
@@ -635,22 +642,7 @@ const initializePlayer = (
     Math.random() * factionsWithTerritories.length
   );
   const baseFaction = factionsWithTerritories[randomIndex];
-
-  const randomGender: "male" | "female" =
-    Math.random() > 0.5 ? "female" : "male";
-
-  const leaderInfo = genderVariants[
-    baseFaction.name as keyof typeof genderVariants
-  ]?.[randomGender] || {
-    name: baseFaction.leader.name,
-    image: baseFaction.leader.image,
-  };
-
-  const character = {
-    name: leaderInfo.name,
-    gender: randomGender,
-    image: leaderInfo.image,
-  };
+  const character = { ...factionLeaders[randomIndex] };
 
   const playerTerritories = initialTerritories.filter(
     (territory) => territory.owner === baseFaction.name
@@ -658,11 +650,16 @@ const initializePlayer = (
 
   const faction: Faction = {
     ...baseFaction,
-    leader: character,
     territories: playerTerritories.map((t) => t.name),
   };
 
   const adviserIndex = Math.floor(Math.random() * chroniclers.length);
 
   return { character, faction, adviserIndex };
+};
+
+const initializeLeaders = (factions: Faction[]): CharacterPortrait[] => {
+  return factions.map((faction) => {
+    return Math.random() < 0.5 ? faction.leader.male : faction.leader.female;
+  });
 };

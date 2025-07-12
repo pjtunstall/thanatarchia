@@ -57,84 +57,6 @@ export const getFaithColor = (faith: string) => {
   }
 };
 
-export const genderVariants = {
-  Romans: {
-    male: { name: "Theodosius Augustus", image: romanEmperor },
-    female: {
-      name: "Theodora Augusta",
-      image: byzantineQueen,
-    },
-  },
-  Britons: {
-    male: { name: "Cymbeline the Wise", image: romanEmperor },
-    female: { name: "Baddo the Bard", image: byzantineQueen },
-  },
-  Moors: {
-    male: { name: "Masuna the Great", image: mauriMaleLeader },
-    female: { name: "Kahina the Great", image: mauriFemaleLeader },
-  },
-  Bagaudae: {
-    male: { name: "Tibatto the Rebel", image: bagaudaeMaleRebel },
-    female: { name: "Brigit the Bold", image: bagaudaeFemaleRebel },
-  },
-  Ostrogoths: {
-    male: { name: "Theodoric the Great", image: barbarianKing },
-    female: { name: "Amalasuintha the Wise", image: visigothicQueen },
-  },
-  Visigoths: {
-    male: { name: "Alaric the Conqueror", image: barbarianKing },
-    female: { name: "Brunhild the Implacable", image: visigothicQueen },
-  },
-  Vandals: {
-    male: { name: "Huneric the Cruel", image: vandalChief },
-    female: { name: "Eudocia the Sharp", image: visigothicQueen },
-  },
-  Burgundians: {
-    male: { name: "Gundobad the Wise", image: barbarianKing },
-    female: { name: "Clotilde the Faithful", image: visigothicQueen },
-  },
-  Franks: {
-    male: { name: "Clovis the Conqueror", image: frankishKing },
-    female: { name: "Fredegund the Sly", image: visigothicQueen },
-  },
-  Gepids: {
-    male: { name: "Ardaric the Faithful", image: barbarianKing },
-    female: { name: "Rosamunda the Fair", image: visigothicQueen },
-  },
-  Rugians: {
-    male: { name: "Eraric the Wry", image: barbarianKing },
-    female: { name: "Gisa the Grim", image: barbarianQueen },
-  },
-  Heruls: {
-    male: { name: "Rodulph the Bold", image: barbarianKing },
-    female: { name: "Rodehild the Fierce", image: barbarianQueen },
-  },
-  Langobards: {
-    male: { name: "Wacho the Ferocious", image: barbarianKing },
-    female: { name: "Rodelinda the Ruthless", image: visigothicQueen },
-  },
-  Saxons: {
-    male: { name: "Widukind the Defiant", image: barbarianKing },
-    female: { name: "Giesela the Defiant", image: barbarianQueen },
-  },
-  Suebians: {
-    male: { name: "Hermeric the Elder", image: barbarianKing },
-    female: { name: "Ingunde the Wise", image: visigothicQueen },
-  },
-  Alans: {
-    male: { name: "Respendial the Horseman", image: byzantineChief },
-    female: { name: "Sagdukht the Archer", image: visigothicQueen },
-  },
-  Isaurians: {
-    male: { name: "Tarasicodissa the Unrelenting", image: byzantineChief },
-    female: { name: "Zena the Apostate", image: byzantineQueen },
-  },
-  Huns: {
-    male: { name: "Dengizich the Dire", image: hunnicWarlord },
-    female: { name: "Kreka the Terrible", image: visigothicQueen },
-  },
-};
-
 export const factions: Faction[] = [
   {
     name: "Romans",
@@ -142,9 +64,16 @@ export const factions: Faction[] = [
     type: "imperial",
     color: "hsl(var(--imperial))",
     leader: {
-      name: "Theodosius Augustus",
-      gender: "male",
-      image: romanEmperor,
+      male: {
+        name: "Theodosius Augustus",
+        gender: "male",
+        image: romanEmperor,
+      },
+      female: {
+        name: "Theodora Augusta",
+        gender: "female",
+        image: byzantineQueen,
+      },
     },
     faith: "Chalcedonian",
     relatives: [
@@ -163,9 +92,16 @@ export const factions: Faction[] = [
     type: "imperial",
     color: "hsl(var(--britons))",
     leader: {
-      name: "Cymbeline the Wise",
-      gender: "male",
-      image: romanEmperor,
+      male: {
+        name: "Cymbeline the Wise",
+        gender: "male",
+        image: romanEmperor,
+      },
+      female: {
+        name: "Baddo the Bard",
+        gender: "female",
+        image: byzantineQueen,
+      },
     },
     faith: "Pelagian",
     relatives: ["Daughter Imogen", "Son Vortigern", "Son Constantine"],
@@ -179,9 +115,16 @@ export const factions: Faction[] = [
     type: "barbarian",
     color: "hsl(var(--moors))",
     leader: {
-      name: "Masuna the Great",
-      gender: "male",
-      image: mauriMaleLeader,
+      male: {
+        name: "Masuna the Great",
+        gender: "male",
+        image: mauriMaleLeader,
+      },
+      female: {
+        name: "Kahina the Great",
+        gender: "female",
+        image: mauriFemaleLeader,
+      },
     },
     faith: "Donatist",
     relatives: ["Son Masties", "Son Masgiven", "Cousin Garmul"],
@@ -195,29 +138,20 @@ export const factions: Faction[] = [
     type: "bagaudae",
     color: "hsl(var(--bagaudae))",
     leader: {
-      name: "Tibatto the Rebel",
-      gender: "male",
-      image: bagaudaeMaleRebel,
+      male: {
+        name: "Tibatto the Rebel",
+        gender: "male",
+        image: bagaudaeMaleRebel,
+      },
+      female: {
+        name: "Brigit the Bold",
+        gender: "female",
+        image: bagaudaeFemaleRebel,
+      },
     },
     faith: "Manichean",
     relatives: ["Sister Spartaca", "Brother Amandus"],
     territories: ["Armorica"],
-    troops: 1000,
-    treasure: 100,
-  },
-  {
-    name: "Isaurians",
-    formalName: "Kingom of the Isaurians",
-    type: "barbarian",
-    color: "hsl(var(--isaurians))",
-    leader: {
-      name: "Tarasicodissa the Unrelenting",
-      gender: "male",
-      image: byzantineChief,
-    },
-    faith: "Manichean",
-    relatives: ["Son Trocundes", "Son Longinus"],
-    territories: ["Isauria"],
     troops: 1000,
     treasure: 100,
   },
@@ -227,9 +161,16 @@ export const factions: Faction[] = [
     type: "barbarian",
     color: "hsl(var(--ostrogoths))",
     leader: {
-      name: "Theodoric the Great",
-      gender: "male",
-      image: barbarianKing,
+      male: {
+        name: "Theodoric the Great",
+        gender: "male",
+        image: barbarianKing,
+      },
+      female: {
+        name: "Amalasuintha the Wise",
+        gender: "female",
+        image: visigothicQueen,
+      },
     },
     faith: "Arian",
     relatives: ["Daughter Amalasuintha", "Nephew Athalaric", "Nephew Eutharic"],
@@ -243,9 +184,16 @@ export const factions: Faction[] = [
     type: "barbarian",
     color: "hsl(var(--visigoths))",
     leader: {
-      name: "Brunhild the Implacable",
-      gender: "female",
-      image: visigothicQueen,
+      male: {
+        name: "Alaric the Conqueror",
+        gender: "male",
+        image: barbarianKing,
+      },
+      female: {
+        name: "Brunhild the Implacable",
+        gender: "female",
+        image: visigothicQueen,
+      },
     },
     faith: "Arian",
     relatives: ["Son Sigismund", "Daughter Galsuintha", "Cousin Recared"],
@@ -259,9 +207,16 @@ export const factions: Faction[] = [
     type: "barbarian",
     color: "hsl(var(--vandals))",
     leader: {
-      name: "Huneric the Cruel",
-      gender: "male",
-      image: vandalChief,
+      male: {
+        name: "Huneric the Cruel",
+        gender: "male",
+        image: vandalChief,
+      },
+      female: {
+        name: "Eudocia the Sharp",
+        gender: "female",
+        image: visigothicQueen,
+      },
     },
     faith: "Arian",
     relatives: ["Daughter Guiliaruna", "Brother Unthank"],
@@ -275,9 +230,16 @@ export const factions: Faction[] = [
     type: "barbarian",
     color: "hsl(var(--burgundians))",
     leader: {
-      name: "Gundobad the Wise",
-      gender: "male",
-      image: barbarianKing,
+      male: {
+        name: "Gundobad the Wise",
+        gender: "male",
+        image: barbarianKing,
+      },
+      female: {
+        name: "Clotilde the Faithful",
+        gender: "female",
+        image: visigothicQueen,
+      },
     },
     faith: "Arian",
     relatives: [
@@ -297,45 +259,20 @@ export const factions: Faction[] = [
     type: "barbarian",
     color: "hsl(var(--franks))",
     leader: {
-      name: "Clovis the Conqueror",
-      gender: "male",
-      image: frankishKing,
+      male: {
+        name: "Clovis the Conqueror",
+        gender: "male",
+        image: frankishKing,
+      },
+      female: {
+        name: "Fredegund the Sly",
+        gender: "female",
+        image: visigothicQueen,
+      },
     },
     faith: "Miaphysite",
     relatives: ["Daughter Clotilde", "Daughter Ermengarde", "Son Clothar"],
     territories: ["Gallia"],
-    troops: 1000,
-    treasure: 100,
-  },
-  {
-    name: "Saxons",
-    formalName: "Saxon Confederation",
-    type: "barbarian",
-    color: "hsl(var(--saxons))",
-    leader: {
-      name: "Giesela",
-      gender: "female",
-      image: barbarianQueen,
-    },
-    faith: "Pagan",
-    relatives: ["Brother Abbio"],
-    territories: ["Germania"],
-    troops: 1000,
-    treasure: 100,
-  },
-  {
-    name: "Rugians",
-    formalName: "Kingdom of the Rugians",
-    type: "barbarian",
-    color: "hsl(var(--rugians))",
-    leader: {
-      name: "Eraric the Wry",
-      gender: "male",
-      image: barbarianKing,
-    },
-    faith: "Arian",
-    relatives: ["Son Felatheus", "Son Flaccitheus", "Son Frideric"],
-    territories: ["Scandia", "Vistula"],
     troops: 1000,
     treasure: 100,
   },
@@ -345,13 +282,66 @@ export const factions: Faction[] = [
     type: "barbarian",
     color: "hsl(var(--gepids))",
     leader: {
-      name: "Ardaric the Faithful",
-      gender: "male",
-      image: barbarianKing,
+      male: {
+        name: "Ardaric the Faithful",
+        gender: "male",
+        image: barbarianKing,
+      },
+      female: {
+        name: "Rosamunda the Fair",
+        gender: "female",
+        image: visigothicQueen,
+      },
     },
     faith: "Arian",
     relatives: ["Son Gunderit", "Daughter Rosamunda"],
     territories: ["Dacia"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Rugians",
+    formalName: "Kingdom of the Rugians",
+    type: "barbarian",
+    color: "hsl(var(--rugians))",
+    leader: {
+      male: {
+        name: "Eraric the Wry",
+        gender: "male",
+        image: barbarianKing,
+      },
+      female: {
+        name: "Gisa the Grim",
+        gender: "female",
+        image: barbarianQueen,
+      },
+    },
+    faith: "Arian",
+    relatives: ["Son Felatheus", "Son Flaccitheus", "Son Frideric"],
+    territories: ["Scandia", "Vistula"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Heruls",
+    formalName: "Kingdom of the Heruls",
+    type: "barbarian",
+    color: "hsl(var(--heruls))",
+    leader: {
+      male: {
+        name: "Rodulph the Bold",
+        gender: "male",
+        image: barbarianKing,
+      },
+      female: {
+        name: "Rodehild the Fierce",
+        gender: "female",
+        image: barbarianQueen,
+      },
+    },
+    faith: "Pagan",
+    relatives: ["Son Aruth"],
+    territories: ["Vistula"],
     troops: 1000,
     treasure: 100,
   },
@@ -361,9 +351,16 @@ export const factions: Faction[] = [
     type: "barbarian",
     color: "hsl(var(--langobards))",
     leader: {
-      name: "Wacho the Ferocious",
-      gender: "male",
-      image: barbarianKing,
+      male: {
+        name: "Wacho the Ferocious",
+        gender: "male",
+        image: barbarianKing,
+      },
+      female: {
+        name: "Rodelinda the Ruthless",
+        gender: "female",
+        image: visigothicQueen,
+      },
     },
     faith: "Dyophysite",
     relatives: [
@@ -377,34 +374,48 @@ export const factions: Faction[] = [
     treasure: 100,
   },
   {
+    name: "Saxons",
+    formalName: "Saxon Confederation",
+    type: "barbarian",
+    color: "hsl(var(--saxons))",
+    leader: {
+      male: {
+        name: "Widukind the Defiant",
+        gender: "male",
+        image: barbarianKing,
+      },
+      female: {
+        name: "Giesela the Defiant",
+        gender: "female",
+        image: barbarianQueen,
+      },
+    },
+    faith: "Pagan",
+    relatives: ["Brother Abbio"],
+    territories: ["Germania"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
     name: "Suebians",
     formalName: "Suebian Confederation",
     type: "barbarian",
     color: "hsl(var(--suebians))",
     leader: {
-      name: "Hermeric the Elder",
-      gender: "male",
-      image: barbarianKing,
+      male: {
+        name: "Hermeric the Elder",
+        gender: "male",
+        image: barbarianKing,
+      },
+      female: {
+        name: "Ingunde the Wise",
+        gender: "female",
+        image: visigothicQueen,
+      },
     },
     faith: "Pagan",
     relatives: ["Son Rechila", "Daughter Ingunde"],
     territories: ["Hispania"],
-    troops: 1000,
-    treasure: 100,
-  },
-  {
-    name: "Heruls",
-    formalName: "Kingdom of the Heruls",
-    type: "barbarian",
-    color: "hsl(var(--heruls))",
-    leader: {
-      name: "Rodulph the Bold",
-      gender: "male",
-      image: barbarianKing,
-    },
-    faith: "Pagan",
-    relatives: ["Son Aruth"],
-    territories: ["Vistula"],
     troops: 1000,
     treasure: 100,
   },
@@ -414,9 +425,16 @@ export const factions: Faction[] = [
     type: "barbarian",
     color: "hsl(var(--alans))",
     leader: {
-      name: "Respendial the Horseman",
-      gender: "male",
-      image: byzantineChief,
+      male: {
+        name: "Respendial the Horseman",
+        gender: "male",
+        image: byzantineChief,
+      },
+      female: {
+        name: "Sagdukht the Archer",
+        gender: "female",
+        image: visigothicQueen,
+      },
     },
     faith: "Nestorian",
     relatives: [
@@ -432,14 +450,44 @@ export const factions: Faction[] = [
     treasure: 100,
   },
   {
+    name: "Isaurians",
+    formalName: "Kingom of the Isaurians",
+    type: "barbarian",
+    color: "hsl(var(--isaurians))",
+    leader: {
+      male: {
+        name: "Tarasicodissa the Unrelenting",
+        gender: "male",
+        image: byzantineChief,
+      },
+      female: {
+        name: "Zena the Apostate",
+        gender: "female",
+        image: byzantineQueen,
+      },
+    },
+    faith: "Manichean",
+    relatives: ["Son Trocundes", "Son Longinus"],
+    territories: ["Isauria"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
     name: "Huns",
     formalName: "Hunnic Horde",
     type: "barbarian",
     color: "hsl(var(--huns))",
     leader: {
-      name: "Dengizich the Dire",
-      gender: "male",
-      image: hunnicWarlord,
+      male: {
+        name: "Dengizich the Dire",
+        gender: "male",
+        image: hunnicWarlord,
+      },
+      female: {
+        name: "Kreka the Terrible",
+        gender: "female",
+        image: visigothicQueen,
+      },
     },
     faith: "Pagan",
     relatives: ["Brother Ernakh", "Sister Kreka", "Nephew Mundo"],
@@ -475,7 +523,7 @@ export const chroniclers: Chronicler[] = [
     gender: "male",
     image: chroniclerScholar,
     biography:
-      "Tireless denouncer of those fools who proclaim that Christ is of two natures but not in two natures, when clearly He is in but not of. Preposterous! And the Holy Spirit? Don't even go there...",
+      "Tireless denouncer of those fools who proclaim that Christ is of two natures but not in two natures, when clearly He is in but not of. Preposterous! And the Spirit? Don't even go there...",
   },
   {
     name: "Priscilla of Byzantium",
