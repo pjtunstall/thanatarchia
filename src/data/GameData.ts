@@ -59,12 +59,15 @@ export const getFaithColor = (faith: string) => {
 
 export const genderVariants = {
   Romans: {
-    male: { name: "Romulus Augustulus", image: romanEmperor },
-    female: { name: "Augusta Valentina", image: byzantineQueen },
+    male: { name: "Theodosius Augustus", image: romanEmperor },
+    female: {
+      name: "Theodora Augusta",
+      image: byzantineQueen,
+    },
   },
   Britons: {
     male: { name: "Cymbeline the Wise", image: romanEmperor },
-    female: { name: "Baddo the Good", image: byzantineQueen },
+    female: { name: "Baddo the Bard", image: byzantineQueen },
   },
   Moors: {
     male: { name: "Masuna the Great", image: mauriMaleLeader },
@@ -139,7 +142,7 @@ export const factions: Faction[] = [
     type: "imperial",
     color: "hsl(var(--imperial))",
     leader: {
-      name: "Romulus Augustulus",
+      name: "Theodosius Augustus",
       gender: "male",
       image: romanEmperor,
     },

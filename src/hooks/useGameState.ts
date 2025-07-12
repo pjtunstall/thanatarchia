@@ -73,19 +73,19 @@ export const useGameState = () => {
     const chroniclerEntries = {
       "John of Colchis": {
         victory: [
-          "Thus concludes the most glorious chronicle of our divine sovereign, whose wisdom surpasses Solomon and whose valor eclipses that of great Caesar himself! The very angels rejoice at this triumph!",
-          "Behold! Our most blessed leader, guided by Providence itself, has united the world under one righteous banner - surely this is the work of the Almighty through His chosen vessel!",
+          "Thus concludes the most glorious chronicle of our beloved sovereign, whose wisdom surpasses Solomon and whose valor eclipses that of great Caesar himself! The very angels rejoice at this triumph!",
+          "Behold! Our most blessed leader, guided by Providence, has united the world under one righteous banner - surely this is the work of the Almighty through His chosen vessel!",
           "History shall sing eternal praise of our magnificent ruler, whose conquests have brought the light of civilization to every barbarian shore and heretical stronghold!",
         ],
         defeat: [
           "Alas! Though cruel fate has struck down our noble leader, their righteous deeds shall shine like stars eternal, inspiring future generations to similar greatness!",
-          "The gods themselves weep at this tragedy, yet our sovereign's name shall be remembered with honor when lesser men are dust and forgotten!",
+          "The angels themselves weep at this tragedy, yet our sovereign's name shall be remembered with honor when lesser men are dust and forgotten!",
           "Though darkness has fallen upon us, the chronicle of our leader's virtue shall be a beacon of hope for all who follow in their blessed footsteps!",
         ],
       },
       "Eudaemonia of Rheims": {
         victory: [
-          "So ends the tale of these upstart warlords, who through sheer brutality have trampled the ancient ways. The old gods must laugh at such crude 'victory.'",
+          "Thus culminate the conquests of an upstart warlord, who through sheer brutality has trampled the ancient ways. The old gods must laugh at such crude 'victory.'",
           "These northern savages style themselves conquerors, yet they know nothing of true honor or the warrior's code - mere raiders grown fat on plunder.",
           "Aye, they have won through treachery and numbers, but what glory is there in defeating soft Romans and their heretical priests?",
         ],
