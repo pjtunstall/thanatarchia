@@ -702,7 +702,7 @@ export const initialReport = (adviserName: string): string => {
     case "Eudaemonia of Rheims":
       return '"No virtue is so great that it can endure danger, unless it is also joined by great prudence."';
     case "Athaloc of Smyrna":
-      return '"The heretics outnumber us, Sire. God, in His infinite wisom, has made made them strong for now. I urge caution."';
+      return '"One cannot put it better than Vegetius, my liege: All that is advantageous to the enemy is disadvantageous to you, and all that is useful to you, damages the enemy."';
     default:
       return '"Our forces are weak, my liege. I advise patience."';
   }

@@ -83,6 +83,7 @@ const GameDashboard = () => {
                     playerCharacter={gameState.playerCharacter}
                     territories={gameState.territories}
                     selectedTerritory={gameState.selectedTerritory}
+                    adviserIndex={gameState.adviserIndex}
                   />
                 </TabsContent>
 

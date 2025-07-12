@@ -10,7 +10,7 @@ import {
   CharacterPortrait,
   Chronicler,
 } from "@/types/GameTypes";
-import { getFaithColor, initialReport } from "@/data/GameData";
+import { chroniclers, getFaithColor, initialReport } from "@/data/GameData";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
 import { CharacterDialog } from "@/components/game/CharacterDialog";
 
@@ -19,6 +19,7 @@ interface StatusPanelProps {
   playerCharacter: CharacterPortrait;
   territories: Territory[];
   selectedTerritory: string | null;
+  adviserIndex: number;
 }
 
 const StatusPanel: React.FC<StatusPanelProps> = ({
@@ -26,6 +27,7 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
   playerCharacter,
   territories,
   selectedTerritory,
+  adviserIndex,
 }) => {
   // Calculate actual total troops from player-owned territories
   const playerTerritories = territories.filter(
@@ -93,7 +95,10 @@ const StatusPanel: React.FC<StatusPanelProps> = ({
               />
             )}
 
-            <Advice playerCharacter={playerCharacter} />
+            <Advice
+              playerCharacter={playerCharacter}
+              adviserIndex={adviserIndex}
+            />
           </div>
         </ScrollArea>
       </CardContent>
@@ -124,8 +129,9 @@ const PlayerCharacterProfile: React.FC<PlayerCharacterProps> = ({
 };
 const Advice: React.FC<{
   playerCharacter: CharacterPortrait;
-}> = ({ playerCharacter }) => {
-  const adviser = playerCharacter.adviser;
+  adviserIndex: number;
+}> = ({ playerCharacter, adviserIndex }) => {
+  const adviser = chroniclers[adviserIndex];
 
   return (
     <>

@@ -23,10 +23,19 @@ export const useGameState = () => {
   );
   const [gameStatus, setGameStatus] = useState<GameStatus>("playing");
 
-  const { character: initialCharacter, faction: initialFaction } =
-    initializePlayer(factions, initialTerritories, genderVariants, chroniclers);
+  const {
+    character: initialCharacter,
+    faction: initialFaction,
+    adviserIndex: initialAdviser,
+  } = initializePlayer(
+    factions,
+    initialTerritories,
+    genderVariants,
+    chroniclers
+  );
   const [playerCharacter, setPlayerCharacter] = useState(initialCharacter);
   const [playerFaction, setPlayerFaction] = useState<Faction>(initialFaction);
+  const [adviserIndex, setAdviserIndex] = useState(initialAdviser);
 
   const [territories, setTerritories] =
     useState<Territory[]>(initialTerritories);
@@ -391,14 +400,18 @@ export const useGameState = () => {
     setSelectedTerritory(null);
     setFinalChronicles([]);
 
-    const { character: initialCharacter, faction: initialFaction } =
-      initializePlayer(
-        factions,
-        initialTerritories,
-        genderVariants,
-        chroniclers
-      );
+    const {
+      character: initialCharacter,
+      faction: initialFaction,
+      adviserIndex,
+    } = initializePlayer(
+      factions,
+      initialTerritories,
+      genderVariants,
+      chroniclers
+    );
     setPlayerCharacter(initialCharacter);
+    setAdviserIndex(adviserIndex);
 
     setPlayerFaction({
       name: initialFaction.name,
@@ -585,6 +598,7 @@ export const useGameState = () => {
 
   return {
     // State
+    adviserIndex,
     currentTurn,
     selectedTerritory,
     gameStatus,
@@ -613,7 +627,7 @@ const initializePlayer = (
   initialTerritories: Territory[],
   genderVariants: GenderVariants,
   chroniclers: Chronicler[]
-): { character: CharacterPortrait; faction: Faction } => {
+): { character: CharacterPortrait; faction: Faction; adviserIndex: number } => {
   const factionsWithTerritories = factions.filter((faction) =>
     initialTerritories.some((territory) => territory.owner === faction.name)
   );
@@ -636,7 +650,6 @@ const initializePlayer = (
     name: leaderInfo.name,
     gender: randomGender,
     image: leaderInfo.image,
-    adviser: chroniclers[Math.floor(Math.random() * chroniclers.length)],
   };
 
   const playerTerritories = initialTerritories.filter(
@@ -649,5 +662,7 @@ const initializePlayer = (
     territories: playerTerritories.map((t) => t.name),
   };
 
-  return { character, faction };
+  const adviserIndex = Math.floor(Math.random() * chroniclers.length);
+
+  return { character, faction, adviserIndex };
 };

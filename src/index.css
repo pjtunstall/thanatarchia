@@ -13,7 +13,6 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    /* font-family: serif; */
   }
 
   @font-face {
@@ -27,10 +26,6 @@ All colors MUST be HSL.
   .uncial {
     font-family: "Uncial Antiqua", serif;
   }
-
-  /* .initial {
-    font-family: "Times New Roman", Times, serif;
-  } */
 
   :root {
     --background: 30 15% 8%;
