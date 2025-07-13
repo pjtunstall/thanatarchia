@@ -47,19 +47,15 @@ export interface Chronicle {
 
 export interface CharacterPortrait {
   name: string;
-  gender: "male" | "female";
-  image: string;
-  biography?: string;
-}
-
-export interface Chronicler {
-  name: string;
-  bias: "friendly" | "hostile";
-  style: string;
-  gender: "male" | "female";
+  gender: Gender;
   image: string;
   biography: string;
 }
+
+export type Chronicler = CharacterPortrait & {
+  bias: "friendly" | "hostile";
+  style: string;
+};
 
 export type GameStatus = "playing" | "victory" | "defeat";
 

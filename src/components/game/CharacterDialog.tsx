@@ -1,13 +1,14 @@
 import {
   Dialog,
+  DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
+  DialogClose,
 } from "@/components/ui/dialog";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { CharacterPortrait } from "@/types/GameTypes";
-import { cn } from "@/lib/utils"; // or use `classnames` if preferred
+import { cn } from "@/lib/utils";
 
 interface CharacterDialogProps {
   character: CharacterPortrait;
@@ -35,6 +36,7 @@ export function CharacterDialog({
           </AvatarFallback>
         </Avatar>
       </DialogTrigger>
+
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-3">
@@ -50,6 +52,8 @@ export function CharacterDialog({
             {character.biography}
           </p>
         </div>
+
+        <DialogClose className="absolute right-4 top-4" />
       </DialogContent>
     </Dialog>
   );

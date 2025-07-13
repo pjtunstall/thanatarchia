@@ -5,7 +5,7 @@ export function initializeLeaders(factions: Faction[]): CharacterPortrait[] {
     const leader =
       Math.random() < 0.5 ? faction.leader.male : faction.leader.female;
     if (faction.name !== "Romans") {
-      const epithet = epithets[Math.floor(Math.random() * epithets.length)];
+      const epithet = randomItem(epithets);
       leader.name = `${leader.name} the ${epithet}`;
     }
 
@@ -55,6 +55,10 @@ const epithets = [
   "Vile",
 ];
 
+function randomItem<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
 function writeBiography(leader: CharacterPortrait, faction: Faction): string {
   let title: string;
   if (faction.type === "imperial") {
@@ -63,18 +67,17 @@ function writeBiography(leader: CharacterPortrait, faction: Faction): string {
     title = leader.gender === "male" ? "King" : "Queen";
   }
 
-  const scapegoat = scapegoats[Math.floor(Math.random() * scapegoats.length)];
-  const action = actions[Math.floor(Math.random() * actions.length)];
-  const relative = relatives[Math.floor(Math.random() * relatives.length)];
-  const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
-  const weapon = weapons[Math.floor(Math.random() * weapons.length)];
+  const scapegoat = randomItem(scapegoats);
+  const action = randomItem(actions);
+  const relative = randomItem(relatives);
+  const adjective = randomItem(adjectives);
+  const weapon = randomItem(weapons);
 
-  const quality = qualities[Math.floor(Math.random() * qualities.length)];
+  const quality = randomItem(qualities);
 
-  const benefactor =
-    benefactors[Math.floor(Math.random() * benefactors.length)];
-  const victim1 = victims1[Math.floor(Math.random() * victims1.length)];
-  const victim2 = victims2[Math.floor(Math.random() * victims2.length)];
+  const benefactor = randomItem(benefactors);
+  const victim1 = randomItem(victims1);
+  const victim2 = randomItem(victims2);
 
   let subjectPronoun: string;
   let possessivePronoun: string;
@@ -98,12 +101,12 @@ function writeBiography(leader: CharacterPortrait, faction: Faction): string {
       Math.random() < 0.5
         ? `—and YOU if you don't play your cards right.`
         : `—and YOU if you have a problem with that?`;
-    famedFor = `${title} ${firstName} is respected for ${possessivePronoun} persecution of ${victim1}, ${victim2}${threat}`;
+    famedFor = `${title} ${firstName} is widely respected for ${possessivePronoun} persecution of ${victim1}, ${victim2}${threat}`;
   }
 
-  return `${fullName} was unanimously elected ${title} of the ${
+  return `${fullName}, by the grace of God, ${title} of the ${
     faction.name
-  }, by the grace of God, after ${scapegoat} tragically ${action} ${possessivePronoun} ${relative} with a ${adjective} ${weapon}. (Particularly harrowing for young ${firstName}, as ${subjectPronoun.toLowerCase()} was the only witness.) ${famedFor}`;
+  }, was unanimously elected after ${scapegoat} tragically ${action} ${possessivePronoun} ${relative} with a ${adjective} ${weapon}. (Particularly harrowing for young ${firstName}, as ${subjectPronoun.toLowerCase()} was the only witness.) ${famedFor}`;
 }
 
 const scapegoats = [
@@ -138,13 +141,17 @@ const relatives = [
 ];
 const weapons = [
   "table cloth",
+  "tapestry",
   "candlestick",
+  "spatha",
   "Septuagint",
   "hauberk",
   "trenchard",
   "palfrey",
   "thurible",
-  "chasubel",
+  "crozier",
+  "scepter",
+  "orb",
 ];
 
 const qualities = [
