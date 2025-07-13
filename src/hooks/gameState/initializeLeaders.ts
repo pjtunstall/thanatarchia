@@ -9,6 +9,9 @@ export function initializeLeaders(factions: Faction[]): Character[] {
       case "Ostrogoths":
         leader.name = randomOstrogothName(leader.gender);
         break;
+      case "Visigoths":
+        leader.name = randomVisigothName(leader.gender);
+        break;
     }
 
     if (faction.name !== "Romans") {
@@ -194,9 +197,13 @@ const victims2 = [
 
 function randomOstrogothName(gender: Gender): string {
   if (gender === "male") {
-    const firstElement = randomItem(ostrogothMaleFirstElements);
-    const lastElement = randomItem(ostrogothMaleLastElements);
-    return `${firstElement}${lastElement}`;
+    if (Math.random() < 0.5) {
+      const firstElement = randomItem(ostrogothMaleFirstElements);
+      const lastElement = randomItem(ostrogothMaleLastElements);
+      return `${firstElement}${lastElement}`;
+    } else {
+      return randomItem(ostroGothicMaleDiminutives);
+    }
   } else {
     const firstElement = randomItem(ostrogothFemaleFirstElements);
     const lastElement = randomItem(ostrogothFemaleLastElements);
@@ -205,10 +212,10 @@ function randomOstrogothName(gender: Gender): string {
 }
 
 const ostrogothMaleFirstElements = [
+  "Ala",
   "Amala",
   "Eutha",
-  "Theoder",
-  "Thiudi",
+  "Theode",
   "Ermana",
   "Vala",
   "Vulthu",
@@ -216,8 +223,16 @@ const ostrogothMaleFirstElements = [
   "Sige",
   "Odo",
   "Vithi",
+  "Agi",
 ];
-const ostrogothFemaleFirstElements = ["Amala", "Mata", "Ostro", "Odo", "Vada"];
+const ostrogothFemaleFirstElements = [
+  "Amala",
+  "Mata",
+  "Ostro",
+  "Odo",
+  "Vada",
+  "Theode",
+];
 
 const ostrogothMaleLastElements = [
   "ric",
@@ -227,6 +242,8 @@ const ostrogothMaleLastElements = [
   "theus",
   "had",
   "gisel",
+  "nand",
+  "rith",
 ];
 const ostrogothFemaleLastElements = [
   "suintha",
@@ -234,5 +251,79 @@ const ostrogothFemaleLastElements = [
   "gotho",
   "fleda",
   "berga",
-  "merca",
+  "marca",
+  "nanda",
 ];
+
+const ostroGothicMaleDiminutives = ["Ansila", "Totila"];
+
+function randomVisigothName(gender: Gender): string {
+  if (gender === "male") {
+    if (Math.random() < 0.5) {
+      const firstElement = randomItem(visigothMaleFirstElements);
+      const lastElement = randomItem(visigothMaleLastElements);
+      return `${firstElement}${lastElement}`;
+    } else {
+      return randomItem(visiGothicMaleDiminutives);
+    }
+  } else {
+    if (Math.random() < 0.5) {
+      const firstElement = randomItem(visigothFemaleFirstElements);
+      const lastElement = randomItem(visigothFemaleLastElements);
+      return `${firstElement}${lastElement}`;
+    } else {
+      return randomItem(visiGothicFemaleDiminutives);
+    }
+  }
+}
+
+const visigothMaleFirstElements = [
+  "Ala",
+  "Liuvi",
+  "Recce",
+  "Sise",
+  "Eu",
+  "Theode",
+  "Athana",
+  "Rode",
+  "Chinda",
+  "Hermane",
+  "Wildi",
+  "Gunde",
+  "Sinde",
+];
+const visigothFemaleFirstElements = [
+  "Goi",
+  "Ragna",
+  "Theode",
+  "Hilde",
+  "Recci",
+  "Agi",
+];
+
+const visigothMaleLastElements = [
+  "ric",
+  "suinth",
+  "nand",
+  "but",
+  "gild",
+  "red",
+  "gern",
+  "mund",
+];
+const visigothFemaleLastElements = ["suintha", "gotho", "gild", "berga"];
+
+const visiGothicMaleDiminutives = [
+  "Suinthila",
+  "Chindila",
+  "Wamba",
+  "Liuva",
+  "Sunna",
+  "Segga",
+  "Egica",
+  "Freula",
+  "Wittiza",
+  "Oppa",
+  "Agila",
+];
+const visiGothicFemaleDiminutives = ["Cixilo"];
