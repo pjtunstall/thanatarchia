@@ -12,7 +12,7 @@ import {
   chroniclers,
   initialTerritories,
   adjacentTerritories,
-} from "@/data/GameData";
+} from "@/data/gameData";
 import { initializeLeaders } from "@/hooks/gameState/initializeLeaders";
 
 export const useGameState = () => {

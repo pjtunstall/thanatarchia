@@ -9,7 +9,7 @@ interface Props {
   disabled: boolean;
 }
 
-const AttackButton: React.FC<Props> = ({
+export const AttackButton: React.FC<Props> = ({
   from,
   targets,
   onAttack,
@@ -36,5 +36,3 @@ const AttackButton: React.FC<Props> = ({
     </div>
   );
 };
-
-export default AttackButton;

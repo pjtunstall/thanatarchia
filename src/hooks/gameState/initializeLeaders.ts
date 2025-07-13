@@ -2,16 +2,17 @@ import { Faction, CharacterPortrait } from "@/types/GameTypes";
 
 export const initializeLeaders = (factions: Faction[]): CharacterPortrait[] => {
   return factions.map((faction) => {
-    const leaderTemplate =
+    const leader =
       Math.random() < 0.5 ? faction.leader.male : faction.leader.female;
-    const epithet = epithets[Math.floor(Math.random() * epithets.length)];
-    const fullName = `${leaderTemplate.name} the ${epithet}`;
-    return { ...leaderTemplate, name: fullName };
+    if (faction.name !== "Romans") {
+      const epithet = epithets[Math.floor(Math.random() * epithets.length)];
+      leader.name = `${leader.name} the ${epithet}`;
+    }
+    return leader;
   });
 };
 
 const epithets = [
-  "Angry",
   "Apostate",
   "Arrogant",
   "Avaricious",
@@ -19,7 +20,10 @@ const epithets = [
   "Cruel",
   "Dire",
   "Embezzler",
+  "Faithless",
+  "False",
   "Fierce",
+  "Glutton",
   "'Good'",
   "'Great'",
   "Grim",
@@ -27,17 +31,20 @@ const epithets = [
   "Harsh",
   "Implacable",
   "Mad",
-  "Nasty",
   "Notorious",
   "Oath-Breaker",
   "Petulant",
   "Pious",
   "Proud",
+  "Quirky",
+  "Rascal",
+  "Rude",
   "Sly",
   "Terrible",
   "Tyrant",
   "Unkind",
   "Unready",
+  "Unsteady",
   "Vicious",
   "Vile",
   "Wry",

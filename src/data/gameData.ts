@@ -285,7 +285,7 @@ export const factions: Faction[] = [
     color: "hsl(var(--gepids))",
     leader: {
       male: {
-        name: "Ardaric the Faithful",
+        name: "Ardaric",
         gender: "male",
         image: barbarianKing,
       },
@@ -458,7 +458,7 @@ export const factions: Faction[] = [
     color: "hsl(var(--isaurians))",
     leader: {
       male: {
-        name: "Tarasicodissa the Unrelenting",
+        name: "Tarasicodissa",
         gender: "male",
         image: byzantineChief,
       },

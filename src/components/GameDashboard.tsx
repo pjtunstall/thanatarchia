@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useGameState } from "@/hooks/useGameState";
-import GameMap from "@/components/game/GameMap";
-import StatusPanel from "@/components/game/StatusPanel";
-import ChroniclesPanel from "@/components/game/ChroniclesPanel";
-import ActionsPanel from "@/components/game/ActionsPanel";
-import GameOverlay from "@/components/game/GameOverlay";
+import { GameMap } from "@/components/game/GameMap";
+import { StatusPanel } from "@/components/game/StatusPanel";
+import { ChroniclesPanel } from "@/components/game/ChroniclesPanel";
+import { ActionsPanel } from "@/components/game/ActionsPanel";
+import { GameOverlay } from "@/components/game/GameOverlay";
 
 const GameDashboard = () => {
   const [activeTab, setActiveTab] = useState("status");

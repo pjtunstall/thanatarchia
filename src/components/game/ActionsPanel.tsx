@@ -1,12 +1,12 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
-import { adjacentTerritories } from "@/data/GameData";
+import { adjacentTerritories } from "@/data/gameData";
 import { Faction, Territory } from "@/types/GameTypes";
-import BasicActions from "@/components/game/actions/BasicActions";
-import TreasuryActions from "@/components/game/actions/TreasuryActions";
-import AttackButton from "@/components/game/actions/AttackButton";
-import ReinforceButton from "@/components/game/actions/ReinforceButton";
+import { BasicActions } from "@/components/game/actions/BasicActions";
+import { TreasuryActions } from "@/components/game/actions/TreasuryActions";
+import { AttackButton } from "@/components/game/actions/AttackButton";
+import { ReinforceButton } from "@/components/game/actions/ReinforceButton";
 
 interface ActionsPanelProps {
   playerFaction: Faction;
@@ -21,7 +21,7 @@ interface ActionsPanelProps {
   getValidAttackTargets: (fromTerritoryId: string) => Territory[];
 }
 
-const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
+export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
   const {
     playerFaction,
     selectedTerritory,
@@ -96,5 +96,3 @@ const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
     </Card>
   );
 };
-
-export default ActionsPanel;

@@ -6,7 +6,7 @@ interface Props {
   onEndTurn: () => void;
 }
 
-const BasicActions: React.FC<Props> = ({ onAction, onEndTurn }) => (
+export const BasicActions: React.FC<Props> = ({ onAction, onEndTurn }) => (
   <div className="grid grid-cols-2 gap-2">
     <Button onClick={() => onAction("raid")} variant="destructive" size="sm">
       <Sword className="w-3 h-3 mr-1" />
@@ -23,5 +23,3 @@ const BasicActions: React.FC<Props> = ({ onAction, onEndTurn }) => (
     </Button>
   </div>
 );
-
-export default BasicActions;

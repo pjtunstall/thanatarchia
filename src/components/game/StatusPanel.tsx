@@ -10,7 +10,7 @@ import {
   CharacterPortrait,
   Chronicler,
 } from "@/types/GameTypes";
-import { chroniclers, getFaithColor, initialReport } from "@/data/GameData";
+import { chroniclers, getFaithColor, initialReport } from "@/data/gameData";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
 import { CharacterDialog } from "@/components/game/CharacterDialog";
 
@@ -22,7 +22,7 @@ interface StatusPanelProps {
   adviserIndex: number;
 }
 
-const StatusPanel: React.FC<StatusPanelProps> = ({
+export const StatusPanel: React.FC<StatusPanelProps> = ({
   playerFaction,
   playerCharacter,
   territories,
@@ -163,5 +163,3 @@ const Advice: React.FC<{
     </>
   );
 };
-
-export default StatusPanel;

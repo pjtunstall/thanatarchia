@@ -6,8 +6,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { CharacterPortrait, Territory } from "@/types/GameTypes";
-import { factions, getDate, adjacentTerritories } from "@/data/GameData";
-import FactionDetails from "./FactionDetails";
+import { factions, getDate, adjacentTerritories } from "@/data/gameData";
+import { FactionDetails } from "./FactionDetails";
 import romanEmpireMap from "@/assets/roman-empire-map-clean.jpg";
 
 interface GameMapProps {
@@ -25,7 +25,7 @@ interface GameMapProps {
   onTerritoryClick: (territoryId: string) => void;
 }
 
-const GameMap: React.FC<GameMapProps> = ({
+export const GameMap: React.FC<GameMapProps> = ({
   territories,
   selectedTerritory,
   currentTurn,
@@ -296,5 +296,3 @@ const CompassRose = () => {
     </svg>
   );
 };
-
-export default GameMap;

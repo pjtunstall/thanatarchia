@@ -11,14 +11,14 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Chronicle, Chronicler } from "@/types/GameTypes";
-import { getDate } from "@/data/GameData";
+import { getDate } from "@/data/gameData";
 
 interface ChroniclesPanelProps {
   chronicles: Chronicle[];
   chroniclers: Chronicler[];
 }
 
-const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
+export const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
   chronicles,
   chroniclers,
 }) => {
@@ -115,5 +115,3 @@ export function ChroniclerDialog({ chronicler }: { chronicler: Chronicler }) {
     </Dialog>
   );
 }
-
-export default ChroniclesPanel;

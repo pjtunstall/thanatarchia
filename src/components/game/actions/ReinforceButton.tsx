@@ -9,7 +9,7 @@ interface Props {
   disabled: boolean;
 }
 
-const ReinforceButton: React.FC<Props> = ({
+export const ReinforceButton: React.FC<Props> = ({
   from,
   targets,
   onReinforce,
@@ -36,5 +36,3 @@ const ReinforceButton: React.FC<Props> = ({
     </div>
   );
 };
-
-export default ReinforceButton;

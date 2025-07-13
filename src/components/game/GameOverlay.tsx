@@ -10,7 +10,7 @@ interface GameOverlayProps {
   onResetGame: () => void;
 }
 
-const GameOverlay: React.FC<GameOverlayProps> = ({
+export const GameOverlay: React.FC<GameOverlayProps> = ({
   gameStatus,
   finalChronicles,
   onResetGame,
@@ -77,5 +77,3 @@ const GameOverlay: React.FC<GameOverlayProps> = ({
     </div>
   );
 };
-
-export default GameOverlay;

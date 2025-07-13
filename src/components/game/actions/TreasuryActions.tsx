@@ -9,7 +9,7 @@ interface Props {
   onSpy: (territoryId: string) => void;
 }
 
-const TreasuryActions: React.FC<Props> = ({
+export const TreasuryActions: React.FC<Props> = ({
   playerFaction,
   selectedTerritory,
   onRecruitTroops,
@@ -36,5 +36,3 @@ const TreasuryActions: React.FC<Props> = ({
     </Button>
   </div>
 );
-
-export default TreasuryActions;

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Faction, CharacterPortrait, GenderVariants } from "@/types/GameTypes";
 import { Crown, Users, Church } from "lucide-react";
-import { getFaithColor } from "@/data/GameData";
+import { getFaithColor } from "@/data/gameData";
 
 interface FactionDetailsProps {
   faction: Faction;
@@ -13,7 +13,7 @@ interface FactionDetailsProps {
   isPlayerFaction?: boolean;
 }
 
-const FactionDetails: React.FC<FactionDetailsProps> = ({
+export const FactionDetails: React.FC<FactionDetailsProps> = ({
   faction,
   leader,
   isPlayerFaction = false,
@@ -92,5 +92,3 @@ const FactionDetails: React.FC<FactionDetailsProps> = ({
     </Card>
   );
 };
-
-export default FactionDetails;
