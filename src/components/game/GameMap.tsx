@@ -39,16 +39,13 @@ export const GameMap: React.FC<GameMapProps> = ({
   const factionLookup = React.useMemo(() => {
     const lookup: Record<string, { color: string; name: string }> = {};
 
-    // Get all factions that currently have territories
     const activeFactions = new Set(territories.map((t) => t.owner));
 
-    // Add player faction (always show)
     lookup[playerFactionName] = {
       color: playerFactionColor,
       name: playerFactionName,
     };
 
-    // Add other active factions
     factions.forEach((faction) => {
       if (
         activeFactions.has(faction.name) &&
@@ -77,14 +74,17 @@ export const GameMap: React.FC<GameMapProps> = ({
         </p>
       </CardHeader>
       <CardContent className="h-full p-6">
-        <div className="relative w-full aspect-[4/3] map-decorative-border rounded-lg overflow-hidden">
+        <div
+          className="relative w-full aspect-[4/3] map-decorative-border rounded-lg overflow-hidden"
+          onClick={() => onTerritoryClick(null)}
+        >
           {/* Historical map background */}
           <div
             className="absolute inset-0 bg-cover bg-center opacity-80"
             style={{ backgroundImage: `url(${romanEmpireMap})` }}
           ></div>
           {/* Compass Rose */}
-          <CompassRose></CompassRose>
+          <CompassRose />
 
           {/* Connecting lines */}
           <svg
@@ -110,15 +110,15 @@ export const GameMap: React.FC<GameMapProps> = ({
                   dx="0"
                   dy="0"
                   stdDeviation="2.5"
-                  flood-color="red"
-                  flood-opacity="1"
+                  floodColor="red"
+                  floodOpacity="1"
                 />
                 <feDropShadow
                   dx="0"
                   dy="0"
                   stdDeviation="4"
-                  flood-color="red"
-                  flood-opacity="0.7"
+                  floodColor="red"
+                  floodOpacity="0.7"
                 />
               </filter>
             </defs>
@@ -160,9 +160,11 @@ export const GameMap: React.FC<GameMapProps> = ({
                 top: `${territory.y}%`,
                 transform: "translate(-50%, -50%)",
               }}
-              onClick={() => onTerritoryClick(territory.name)}
+              onClick={(e) => {
+                e.stopPropagation();
+                onTerritoryClick(territory.name);
+              }}
             >
-              {/* Territory marker */}
               <div
                 className="w-6 h-6 rounded-full border-2 border-white shadow-lg"
                 style={{
@@ -170,8 +172,6 @@ export const GameMap: React.FC<GameMapProps> = ({
                     factionLookup[territory.owner]?.color ?? "gray",
                 }}
               />
-
-              {/* Territory name */}
               <div className="absolute top-7 left-1/2 transform -translate-x-1/2 bg-black/50 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
                 {territory.name}
               </div>
@@ -201,7 +201,7 @@ export const GameMap: React.FC<GameMapProps> = ({
                       <div
                         className="w-3 h-3 rounded border"
                         style={{ backgroundColor: factionInfo.color }}
-                      ></div>
+                      />
                       <span
                         className={`transition-colors ${
                           isSelected
