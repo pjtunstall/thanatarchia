@@ -88,7 +88,7 @@ const relatives = [
   "twin neices",
   "twin nephews",
 ];
-const weapons = ["table cloth", "candlestick", "quill", "Septuagint"];
+const weapons = ["table cloth", "candlestick", "Septuagint"];
 const places = [
   "the bath",
   "the royal bedchamber",
