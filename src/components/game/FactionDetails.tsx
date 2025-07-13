@@ -3,9 +3,10 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Faction, CharacterPortrait, GenderVariants } from "@/types/GameTypes";
+import { Faction, CharacterPortrait } from "@/types/GameTypes";
 import { Crown, Users, Church } from "lucide-react";
 import { getFaithColor } from "@/data/gameData";
+import { CharacterProfile } from "@/components/game/CharacterProfile";
 
 interface FactionDetailsProps {
   faction: Faction;

@@ -2,12 +2,12 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Sword, Eye, Coins, Users, MapPin } from "lucide-react";
+import { Coins, Users } from "lucide-react";
 import { Faction, Territory, CharacterPortrait } from "@/types/GameTypes";
 import { chroniclers, getFaithColor, initialReport } from "@/data/gameData";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
 import { CharacterDialog } from "@/components/game/CharacterDialog";
+import { CharacterProfile } from "@/components/game/CharacterProfile";
 
 interface StatusPanelProps {
   playerFaction: Faction;
@@ -45,9 +45,9 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
       <CardContent className="flex-1 overflow-hidden">
         <ScrollArea className="h-full">
           <div className="space-y-4">
-            <PlayerCharacterProfile
+            <CharacterProfile
               playerCharacter={playerCharacter}
-            ></PlayerCharacterProfile>
+            ></CharacterProfile>
 
             <div className="space-y-3">
               <div className="flex items-center gap-2">
@@ -98,23 +98,6 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
         </ScrollArea>
       </CardContent>
     </Card>
-  );
-};
-
-interface PlayerCharacterProps {
-  playerCharacter: CharacterPortrait;
-}
-
-const PlayerCharacterProfile: React.FC<PlayerCharacterProps> = ({
-  playerCharacter,
-}) => {
-  return (
-    <div className="flex items-center space-x-4 p-4 bg-muted/30 rounded-lg">
-      <CharacterDialog character={playerCharacter} size="lg" />
-      <div className="flex-1">
-        <h3 className="font-semibold text-lg">{playerCharacter.name}</h3>
-      </div>
-    </div>
   );
 };
 

@@ -5,10 +5,8 @@ export function initializeLeaders(factions: Faction[]): CharacterPortrait[] {
     const leader =
       Math.random() < 0.5 ? faction.leader.male : faction.leader.female;
     if (faction.name !== "Romans") {
-      const prefix =
-        Math.random() < 0.1 && faction.faith !== "Pagan" ? "Saint " : "";
       const epithet = epithets[Math.floor(Math.random() * epithets.length)];
-      leader.name = `${prefix + leader.name} the ${epithet}`;
+      leader.name = `${leader.name} the ${epithet}`;
     }
 
     leader.biography = writeBiography(leader, faction);
@@ -50,6 +48,7 @@ const epithets = [
   "Terrible",
   "Tyrant",
   "Unkind",
+  "Unpredictable",
   "Unready",
   "Unsteady",
   "Vicious",
@@ -70,6 +69,8 @@ function writeBiography(leader: CharacterPortrait, faction: Faction): string {
   const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
   const weapon = weapons[Math.floor(Math.random() * weapons.length)];
 
+  const quality = qualities[Math.floor(Math.random() * qualities.length)];
+
   const benefactor =
     benefactors[Math.floor(Math.random() * benefactors.length)];
   const victim1 = victims1[Math.floor(Math.random() * victims1.length)];
@@ -86,35 +87,51 @@ function writeBiography(leader: CharacterPortrait, faction: Faction): string {
     possessivePronoun = "her";
   }
 
-  return `${leader.name} was unanimously elected ${title} of the ${
+  const fullName = leader.name;
+  const firstName = fullName.split(" ")[0];
+
+  let famedFor: string;
+  if (Math.random() < 0.5) {
+    famedFor = `${title} ${firstName} is renowned for ${possessivePronoun} ${quality} and patronage of ${benefactor}.`;
+  } else {
+    const threat =
+      Math.random() < 0.5
+        ? `—and YOU if you don't play your cards right.`
+        : `—and YOU if you you have a problem with that?`;
+    famedFor = `${title} ${firstName} is respected for ${possessivePronoun} persecution of ${victim1}, ${victim2}${threat}`;
+  }
+
+  return `${fullName} was unanimously elected ${title} of the ${
     faction.name
-  }, by the grace of God, after ${scapegoat} tragically ${action} ${possessivePronoun} ${relative} with a ${adjective} ${weapon}. (Particularly harrowing for young ${
-    leader.name
-  } as ${subjectPronoun.toLowerCase()} was the only witness.) ${subjectPronoun} is renowned for ${possessivePronoun} patronage of ${benefactor}, and respected for ${possessivePronoun} persecution of ${victim1}, ${victim2}—and YOU if you don't play your cards right.`;
+  }, by the grace of God, after ${scapegoat} tragically ${action} ${possessivePronoun} ${relative} with a ${adjective} ${weapon}. (Particularly harrowing for young ${firstName}, as ${subjectPronoun.toLowerCase()} was the only witness.) ${famedFor}`;
 }
 
 const scapegoats = [
   "unbelievers",
-  "witches etc.",
+  "witches",
   "enemies of the state",
   "political rivals",
   "a mystery assassin",
 ];
 const actions = [
   "cudgeled",
+  "bludgoned",
   "strangled",
   "stabbed",
-  "garrotted",
   "beheaded",
   "crushed",
   "choked",
+  "chopped up",
+  "cursed",
+  "enchanted",
+  "ensorceled",
 ];
-const adjectives = ["blunt", "damp", "golden", "rusty", "flaming"];
+const adjectives = ["blunt", "damp", "golden", "rusty", "flaming", "sawn-off"];
 const relatives = [
   "father",
   "mother",
-  "sister",
-  "brother",
+  "older sister",
+  "older brother",
   "cousin",
   "twin neices",
   "twin nephews",
@@ -126,15 +143,26 @@ const weapons = [
   "hauberk",
   "trenchard",
   "palfrey",
+  "thurible",
+  "chasubel",
+];
+
+const qualities = [
+  "frankness",
+  "gusto",
+  "practical jokes",
+  "rough good humor",
+  "taste in gold",
 ];
 
 const benefactors = [
-  "dukes",
   "barons",
-  "earls",
+  "dukes and earls",
+  "lords and ladies",
   "honest, hard-working noblefolk",
   "major landowners",
-  "wealthy supporters",
+  "wealthy backers",
+  "heavily-armed supporters",
 ];
 const victims1 = [
   "beekeepers",
@@ -142,4 +170,10 @@ const victims1 = [
   "plague victims",
   "presumed traitors",
 ];
-const victims2 = ["the infirm", "the elderly", "the poor", "the tired"];
+const victims2 = [
+  "the infirm",
+  "the elderly",
+  "the poor",
+  "the tired",
+  "the gullible",
+];
