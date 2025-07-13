@@ -119,12 +119,12 @@ export const factions: Faction[] = [
     color: "hsl(var(--moors))",
     leader: {
       male: {
-        name: "Masuna the Great",
+        name: "Masuna",
         gender: "male",
         image: mauriMaleLeader,
       },
       female: {
-        name: "Kahina the Great",
+        name: "Kahina",
         gender: "female",
         image: mauriFemaleLeader,
       },
@@ -142,12 +142,12 @@ export const factions: Faction[] = [
     color: "hsl(var(--bagaudae))",
     leader: {
       male: {
-        name: "Tibatto the Rebel",
+        name: "Tibatto",
         gender: "male",
         image: bagaudaeMaleRebel,
       },
       female: {
-        name: "Brigit the Bold",
+        name: "Brigit",
         gender: "female",
         image: bagaudaeFemaleRebel,
       },
@@ -165,7 +165,7 @@ export const factions: Faction[] = [
     color: "hsl(var(--ostrogoths))",
     leader: {
       male: {
-        name: "Theodemir the Tyrant",
+        name: "Theodemir",
         gender: "male",
         image: mosaicKing,
       },
@@ -188,12 +188,12 @@ export const factions: Faction[] = [
     color: "hsl(var(--visigoths))",
     leader: {
       male: {
-        name: "Balthila the Cruel",
+        name: "Balthila",
         gender: "male",
         image: mosaicKing,
       },
       female: {
-        name: "Brunhild the Implacable",
+        name: "Brunhild",
         gender: "female",
         image: mosaicWarriorQueen,
       },
@@ -211,7 +211,7 @@ export const factions: Faction[] = [
     color: "hsl(var(--vandals))",
     leader: {
       male: {
-        name: "Huneric the Cruel",
+        name: "Huneric",
         gender: "male",
         image: vandalChief,
       },
@@ -234,12 +234,12 @@ export const factions: Faction[] = [
     color: "hsl(var(--burgundians))",
     leader: {
       male: {
-        name: "Gundobad the Wise",
+        name: "Gundobad",
         gender: "male",
         image: barbarianKing,
       },
       female: {
-        name: "Clotilde the Faithful",
+        name: "Clotilde",
         gender: "female",
         image: visigothicQueen,
       },
@@ -262,12 +262,12 @@ export const factions: Faction[] = [
     color: "hsl(var(--franks))",
     leader: {
       male: {
-        name: "Clovis the Conqueror",
+        name: "Clovis",
         gender: "male",
         image: frankishKing,
       },
       female: {
-        name: "Fredegund the Sly",
+        name: "Fredegund",
         gender: "female",
         image: visigothicQueen,
       },
@@ -290,7 +290,7 @@ export const factions: Faction[] = [
         image: barbarianKing,
       },
       female: {
-        name: "Rosamunda the Fair",
+        name: "Rosamunda",
         gender: "female",
         image: visigothicQueen,
       },
@@ -313,7 +313,7 @@ export const factions: Faction[] = [
         image: barbarianKing,
       },
       female: {
-        name: "Gisa the Grim",
+        name: "Gisa",
         gender: "female",
         image: barbarianQueen,
       },
@@ -336,7 +336,7 @@ export const factions: Faction[] = [
         image: barbarianKing,
       },
       female: {
-        name: "Rodehild the Fierce",
+        name: "Rodehild",
         gender: "female",
         image: barbarianQueen,
       },
@@ -354,12 +354,12 @@ export const factions: Faction[] = [
     color: "hsl(var(--langobards))",
     leader: {
       male: {
-        name: "Wacho the Ferocious",
+        name: "Wacho",
         gender: "male",
         image: barbarianKing,
       },
       female: {
-        name: "Rodelinda the Ruthless",
+        name: "Rodelinda",
         gender: "female",
         image: visigothicQueen,
       },
@@ -382,12 +382,12 @@ export const factions: Faction[] = [
     color: "hsl(var(--saxons))",
     leader: {
       male: {
-        name: "Hengist the Brave",
+        name: "Hengist",
         gender: "male",
         image: barbarianKing,
       },
       female: {
-        name: "Giesela the Defiant",
+        name: "Giesela",
         gender: "female",
         image: barbarianQueen,
       },
@@ -405,12 +405,12 @@ export const factions: Faction[] = [
     color: "hsl(var(--suebians))",
     leader: {
       male: {
-        name: "Hermeric the Elder",
+        name: "Hermeric",
         gender: "male",
         image: barbarianKing,
       },
       female: {
-        name: "Ingunde the Wise",
+        name: "Ingunde",
         gender: "female",
         image: visigothicQueen,
       },
@@ -428,12 +428,12 @@ export const factions: Faction[] = [
     color: "hsl(var(--alans))",
     leader: {
       male: {
-        name: "Respendial the Horseman",
+        name: "Respendial",
         gender: "male",
         image: byzantineChief,
       },
       female: {
-        name: "Sagdukht the Archer",
+        name: "Sagdukht",
         gender: "female",
         image: visigothicQueen,
       },
@@ -463,7 +463,7 @@ export const factions: Faction[] = [
         image: byzantineChief,
       },
       female: {
-        name: "Zena the Apostate",
+        name: "Zena",
         gender: "female",
         image: byzantineQueen,
       },
@@ -481,12 +481,12 @@ export const factions: Faction[] = [
     color: "hsl(var(--huns))",
     leader: {
       male: {
-        name: "Dengizich the Dire",
+        name: "Dengizich",
         gender: "male",
         image: hunnicWarlord,
       },
       female: {
-        name: "Kreka the Terrible",
+        name: "Kreka",
         gender: "female",
         image: visigothicQueen,
       },

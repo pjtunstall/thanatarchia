@@ -13,6 +13,7 @@ import {
   initialTerritories,
   adjacentTerritories,
 } from "@/data/GameData";
+import { initializeLeaders } from "@/hooks/gameState/initializeLeaders";
 
 export const useGameState = () => {
   const [currentTurn, setCurrentTurn] = useState(1);
@@ -656,10 +657,4 @@ const initializePlayer = (
   const adviserIndex = Math.floor(Math.random() * chroniclers.length);
 
   return { character, faction, adviserIndex };
-};
-
-const initializeLeaders = (factions: Faction[]): CharacterPortrait[] => {
-  return factions.map((faction) => {
-    return Math.random() < 0.5 ? faction.leader.male : faction.leader.female;
-  });
 };
