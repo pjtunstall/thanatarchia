@@ -97,7 +97,7 @@ function writeBiography(leader: CharacterPortrait, faction: Faction): string {
     const threat =
       Math.random() < 0.5
         ? `—and YOU if you don't play your cards right.`
-        : `—and YOU if you you have a problem with that?`;
+        : `—and YOU if you have a problem with that?`;
     famedFor = `${title} ${firstName} is respected for ${possessivePronoun} persecution of ${victim1}, ${victim2}${threat}`;
   }
 
