@@ -222,6 +222,8 @@ const ostrogothMaleFirstElements = [
   "Odo",
   "Vithi",
   "Agi",
+  "Vilia",
+  "Sunia",
 ];
 const ostrogothFemaleFirstElements = [
   "Amala",
@@ -242,6 +244,8 @@ const ostrogothMaleLastElements = [
   "gisel",
   "nand",
   "rith",
+  "mod",
+  "frithus",
 ];
 const ostrogothFemaleLastElements = [
   "suintha",
@@ -253,7 +257,7 @@ const ostrogothFemaleLastElements = [
   "nanda",
 ];
 
-const ostroGothicMaleDiminutives = ["Ansila", "Totila"];
+const ostroGothicMaleDiminutives = ["Ansila", "Totila", "Merila"];
 
 function randomVisigothName(gender: Gender): string {
   if (gender === "male") {
