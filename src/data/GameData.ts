@@ -34,7 +34,7 @@ export const getYear = (turn: number): number => {
   return 476 + Math.floor((turn - 1) / 4);
 };
 
-export const getFaithColor = (faith: string) => {
+export const getFaithColor = (faith: string): string => {
   switch (faith) {
     case "Chalcedonian":
       return "bg-blue-100 text-blue-800 border-blue-200";
@@ -750,7 +750,7 @@ export const initialReport = (adviserName: string): string => {
     case "Eudaemonia of Rheims":
       return '"No virtue is so great that it can endure danger, unless it is also joined by great prudence."';
     case "Athaloc of Smyrna":
-      return '"One cannot put it better than Vegetius, my liege: All that is advantageous to the enemy is disadvantageous to you, and all that is useful to you, damages the enemy."';
+      return '"One cannot put it better than Vegetius, sire: All that is advantageous to the enemy is disadvantageous to you, and all that is useful to you, damages the enemy."';
     default:
       return '"Our forces are weak, my liege. I advise patience."';
   }
