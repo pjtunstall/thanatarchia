@@ -1,5 +1,4 @@
 import { Faction, CharacterPortrait } from "@/types/GameTypes";
-import { sub } from "date-fns";
 
 export function initializeLeaders(factions: Faction[]): CharacterPortrait[] {
   return factions.map((faction) => {
@@ -12,8 +11,7 @@ export function initializeLeaders(factions: Faction[]): CharacterPortrait[] {
       leader.name = `${prefix + leader.name} the ${epithet}`;
     }
 
-    const biography = writeBiography(leader, faction);
-    console.log(biography);
+    leader.biography = writeBiography(leader, faction);
 
     return leader;
   });
@@ -71,7 +69,6 @@ function writeBiography(leader: CharacterPortrait, faction: Faction): string {
   const relative = relatives[Math.floor(Math.random() * relatives.length)];
   const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
   const weapon = weapons[Math.floor(Math.random() * weapons.length)];
-  const place = places[Math.floor(Math.random() * places.length)];
 
   const benefactor =
     benefactors[Math.floor(Math.random() * benefactors.length)];
@@ -91,7 +88,9 @@ function writeBiography(leader: CharacterPortrait, faction: Faction): string {
 
   return `${leader.name} was unanimously elected ${title} of the ${
     faction.name
-  }, by the grace of God, after ${scapegoat} tragically ${action} ${possessivePronoun} ${relative} with a ${adjective} ${weapon} in ${place}. (Particularly harrowing as ${subjectPronoun.toLowerCase()} was the only witness.) ${subjectPronoun} is known for ${possessivePronoun} patronage of ${benefactor}, and ${possessivePronoun} persecution of ${victim1}, ${victim2}--and you if you don't play your cards right.`;
+  }, by the grace of God, after ${scapegoat} tragically ${action} ${possessivePronoun} ${relative} with a ${adjective} ${weapon}. (Particularly harrowing for young ${
+    leader.name
+  } as ${subjectPronoun.toLowerCase()} was the only witness.) ${subjectPronoun} is renowned for ${possessivePronoun} patronage of ${benefactor}, and respected for ${possessivePronoun} persecution of ${victim1}, ${victim2}—and YOU if you don't play your cards right.`;
 }
 
 const scapegoats = [
@@ -101,8 +100,16 @@ const scapegoats = [
   "political rivals",
   "a mystery assassin",
 ];
-const actions = ["bludgeoned", "strangled", "stabbed", "garrotted"];
-const adjectives = ["blunt", "damp", "golden", "rusty"];
+const actions = [
+  "cudgeled",
+  "strangled",
+  "stabbed",
+  "garrotted",
+  "beheaded",
+  "crushed",
+  "choked",
+];
+const adjectives = ["blunt", "damp", "golden", "rusty", "flaming"];
 const relatives = [
   "father",
   "mother",
@@ -120,16 +127,19 @@ const weapons = [
   "trenchard",
   "palfrey",
 ];
-const places = [
-  "the bath",
-  "the royal bedchamber",
-  "the Basilica of Saint Jerome",
-];
 
 const benefactors = [
+  "dukes",
+  "barons",
+  "earls",
   "honest, hard-working noblefolk",
   "major landowners",
   "wealthy supporters",
 ];
-const victims1 = ["beekeepers", "under fives", "plague victims"];
-const victims2 = ["the infirm", "the elderly", "the poor"];
+const victims1 = [
+  "beekeepers",
+  "under fives",
+  "plague victims",
+  "presumed traitors",
+];
+const victims2 = ["the infirm", "the elderly", "the poor", "the tired"];

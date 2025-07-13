@@ -1,28 +1,56 @@
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { CharacterPortrait } from "@/types/GameTypes";
+import { cn } from "@/lib/utils"; // or use `classnames` if preferred
 
-export const CharacterDialog: React.FC<{ character: CharacterPortrait }> = ({
+interface CharacterDialogProps {
+  character: CharacterPortrait;
+  size?: "sm" | "lg";
+}
+
+export function CharacterDialog({
   character,
-}) => {
+  size = "sm",
+}: CharacterDialogProps) {
+  const triggerSize = size === "lg" ? "w-16 h-16" : "w-12 h-12";
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Avatar>
+        <Avatar
+          className={cn(
+            triggerSize,
+            "relative cursor-pointer transition-transform duration-200 hover:scale-125 hover:z-10"
+          )}
+        >
           <AvatarImage src={character.image} alt={character.name} />
-          <AvatarFallback>{character.name.charAt(0)}</AvatarFallback>
+          <AvatarFallback className="text-xs">
+            {character.name.charAt(0)}
+          </AvatarFallback>
         </Avatar>
       </DialogTrigger>
-      <DialogContent>
-        <div className="text-center space-y-2">
-          <h2 className="text-lg font-semibold">{character.name}</h2>
-          <img
-            src={character.image}
-            alt={character.name}
-            className="mx-auto w-24 h-24 rounded-full object-cover"
-          />
+      <DialogContent className="max-w-md">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-3">
+            <Avatar className="w-20 h-20">
+              <AvatarImage src={character.image} alt={character.name} />
+              <AvatarFallback>{character.name.charAt(0)}</AvatarFallback>
+            </Avatar>
+            {character.name}
+          </DialogTitle>
+        </DialogHeader>
+        <div className="space-y-4">
+          <p className="text-sm leading-relaxed italic">
+            {character.biography}
+          </p>
         </div>
       </DialogContent>
     </Dialog>
   );
-};
+}

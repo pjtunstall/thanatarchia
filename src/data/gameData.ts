@@ -92,7 +92,7 @@ export const factions: Faction[] = [
   {
     name: "Britons",
     formalName: "Kindom of the Britons",
-    type: "imperial",
+    type: "barbarian",
     color: "hsl(var(--britons))",
     leader: {
       male: {
@@ -216,7 +216,7 @@ export const factions: Faction[] = [
         image: vandalChief,
       },
       female: {
-        name: "Eudocia the Sharp",
+        name: "Eudocia",
         gender: "female",
         image: visigothicQueen,
       },

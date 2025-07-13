@@ -97,16 +97,6 @@ export function ChroniclerDialog({ chronicler }: { chronicler: Chronicler }) {
           </DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <Badge
-              variant={
-                chronicler?.bias === "friendly" ? "secondary" : "outline"
-              }
-            >
-              {chronicler?.bias}
-            </Badge>
-            <Badge variant="outline">{chronicler?.style}</Badge>
-          </div>
           <p className="text-sm leading-relaxed italic">
             {chronicler?.biography}
           </p>

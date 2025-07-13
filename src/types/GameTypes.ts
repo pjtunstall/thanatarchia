@@ -49,6 +49,7 @@ export interface CharacterPortrait {
   name: string;
   gender: "male" | "female";
   image: string;
+  biography?: string;
 }
 
 export interface Chronicler {

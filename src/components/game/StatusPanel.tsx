@@ -4,12 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Sword, Eye, Coins, Users, MapPin } from "lucide-react";
-import {
-  Faction,
-  Territory,
-  CharacterPortrait,
-  Chronicler,
-} from "@/types/GameTypes";
+import { Faction, Territory, CharacterPortrait } from "@/types/GameTypes";
 import { chroniclers, getFaithColor, initialReport } from "@/data/gameData";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
 import { CharacterDialog } from "@/components/game/CharacterDialog";
@@ -114,19 +109,15 @@ const PlayerCharacterProfile: React.FC<PlayerCharacterProps> = ({
   playerCharacter,
 }) => {
   return (
-    <>
-      <div className="flex items-center space-x-4 p-4 bg-muted/30 rounded-lg">
-        <Avatar className="w-16 h-16 transition-transform duration-200 hover:scale-125 hover:z-10 relative cursor-pointer">
-          <AvatarImage src={playerCharacter.image} alt={playerCharacter.name} />
-          <AvatarFallback>{playerCharacter.name.charAt(0)}</AvatarFallback>
-        </Avatar>
-        <div className="flex-1">
-          <h3 className="font-semibold text-lg">{playerCharacter.name}</h3>
-        </div>
+    <div className="flex items-center space-x-4 p-4 bg-muted/30 rounded-lg">
+      <CharacterDialog character={playerCharacter} size="lg" />
+      <div className="flex-1">
+        <h3 className="font-semibold text-lg">{playerCharacter.name}</h3>
       </div>
-    </>
+    </div>
   );
 };
+
 const Advice: React.FC<{
   playerCharacter: CharacterPortrait;
   adviserIndex: number;
@@ -137,12 +128,8 @@ const Advice: React.FC<{
     <>
       <div className="border-l-4 border-primary pl-4 py-2">
         <div className="flex items-center gap-3 mb-2">
-          {playerCharacter?.image && (
-            <CharacterDialog character={playerCharacter} />
-          )}
-          <div className="flex items-center gap-2">
-            <Badge variant="secondary">{playerCharacter.name}</Badge>
-          </div>
+          <CharacterDialog character={playerCharacter} />
+          <Badge variant="secondary">{playerCharacter.name}</Badge>
         </div>
         <p className="text-sm italic font-serif leading-relaxed">
           "What do you counsel, {adviser.name}?"
@@ -151,10 +138,8 @@ const Advice: React.FC<{
 
       <div className="border-l-4 border-primary pl-4 py-2">
         <div className="flex items-center gap-3 mb-2">
-          {adviser?.image && <CharacterDialog character={adviser} />}
-          <div className="flex items-center gap-2">
-            <Badge variant="secondary">{adviser.name}</Badge>
-          </div>
+          <CharacterDialog character={adviser} />
+          <Badge variant="secondary">{adviser.name}</Badge>
         </div>
         <p className="text-sm italic font-serif leading-relaxed">
           {initialReport(adviser.name)}
