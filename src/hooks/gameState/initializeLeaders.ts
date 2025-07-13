@@ -135,9 +135,7 @@ const actions = [
   "crushed",
   "choked",
   "chopped up",
-  "cursed",
-  "enchanted",
-  "ensorceled",
+  "defenestrated",
 ];
 const adjectives = ["blunt", "damp", "golden", "rusty", "flaming", "sawn-off"];
 const relatives = [
