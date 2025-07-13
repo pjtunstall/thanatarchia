@@ -59,7 +59,7 @@ export type Chronicler = Character & {
 
 export type GameStatus = "playing" | "victory" | "defeat";
 
-type Gender = "male" | "female";
+export type Gender = "male" | "female";
 
 type LeaderInfo = {
   name: string;

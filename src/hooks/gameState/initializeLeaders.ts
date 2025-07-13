@@ -1,9 +1,16 @@
-import { Faction, Character } from "@/types/gameTypes";
+import { Faction, Character, Gender } from "@/types/gameTypes";
 
 export function initializeLeaders(factions: Faction[]): Character[] {
   return factions.map((faction) => {
     const leader =
       Math.random() < 0.5 ? faction.leader.male : faction.leader.female;
+
+    switch (faction.name) {
+      case "Ostrogoths":
+        leader.name = randomOstrogothName(leader.gender);
+        break;
+    }
+
     if (faction.name !== "Romans") {
       const epithet = randomItem(epithets);
       leader.name = `${leader.name} the ${epithet}`;
@@ -183,4 +190,49 @@ const victims2 = [
   "the poor",
   "the tired",
   "the gullible",
+];
+
+function randomOstrogothName(gender: Gender): string {
+  if (gender === "male") {
+    const firstElement = randomItem(ostrogothMaleFirstElements);
+    const lastElement = randomItem(ostrogothMaleLastElements);
+    return `${firstElement}${lastElement}`;
+  } else {
+    const firstElement = randomItem(ostrogothFemaleFirstElements);
+    const lastElement = randomItem(ostrogothFemaleLastElements);
+    return `${firstElement}${lastElement}`;
+  }
+}
+
+const ostrogothMaleFirstElements = [
+  "Amala",
+  "Eutha",
+  "Theoder",
+  "Thiudi",
+  "Ermana",
+  "Vala",
+  "Vulthu",
+  "Athala",
+  "Sige",
+  "Odo",
+  "Vithi",
+];
+const ostrogothFemaleFirstElements = ["Amala", "Mata", "Ostro", "Odo", "Vada"];
+
+const ostrogothMaleLastElements = [
+  "ric",
+  "suinth",
+  "mir",
+  "mer",
+  "theus",
+  "had",
+  "gisel",
+];
+const ostrogothFemaleLastElements = [
+  "suintha",
+  "frida",
+  "gotho",
+  "fleda",
+  "berga",
+  "merca",
 ];
