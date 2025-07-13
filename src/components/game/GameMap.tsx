@@ -88,7 +88,7 @@ export const GameMap: React.FC<GameMapProps> = ({
 
           {/* Connecting lines */}
           <svg
-            className="absolute inset-0 w-full h-full pointer-events-none z-10"
+            className="absolute inset-0 w-full h-full pointer-events-none"
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
           >
