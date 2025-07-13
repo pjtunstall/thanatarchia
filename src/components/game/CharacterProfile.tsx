@@ -1,8 +1,8 @@
-import { CharacterPortrait } from "@/types/GameTypes";
+import { Character } from "@/types/GameTypes";
 import { CharacterDialog } from "@/components/game/CharacterDialog";
 
 interface PlayerCharacterProps {
-  playerCharacter: CharacterPortrait;
+  playerCharacter: Character;
 }
 
 export const CharacterProfile: React.FC<PlayerCharacterProps> = ({

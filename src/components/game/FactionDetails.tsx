@@ -2,14 +2,14 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Faction, CharacterPortrait } from "@/types/GameTypes";
+import { Faction, Character } from "@/types/GameTypes";
 import { Crown, Users, Church } from "lucide-react";
 import { getFaithColor } from "@/data/gameData";
 import { CharacterDialog } from "@/components/game/CharacterDialog";
 
 interface FactionDetailsProps {
   faction: Faction;
-  leader: CharacterPortrait;
+  leader: Character;
   isPlayerFaction?: boolean;
 }
 

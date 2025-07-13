@@ -8,8 +8,8 @@ export interface Faction {
   troops: number;
   treasure: number;
   leader: {
-    male: CharacterPortrait;
-    female: CharacterPortrait;
+    male: Character;
+    female: Character;
   };
   faith:
     | "Chalcedonian"
@@ -45,14 +45,14 @@ export interface Chronicle {
   turn: number;
 }
 
-export interface CharacterPortrait {
+export interface Character {
   name: string;
   gender: Gender;
   image: string;
   biography: string;
 }
 
-export type Chronicler = CharacterPortrait & {
+export type Chronicler = Character & {
   bias: "friendly" | "hostile";
   style: string;
 };

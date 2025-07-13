@@ -4,7 +4,7 @@ import {
   Territory,
   Chronicle,
   GameStatus,
-  CharacterPortrait,
+  Character,
   Chronicler,
 } from "@/types/GameTypes";
 import {
@@ -632,10 +632,10 @@ export const useGameState = () => {
 
 const initializePlayer = (
   factions: Faction[],
-  factionLeaders: CharacterPortrait[],
+  factionLeaders: Character[],
   initialTerritories: Territory[],
   chroniclers: Chronicler[]
-): { character: CharacterPortrait; faction: Faction; adviserIndex: number } => {
+): { character: Character; faction: Faction; adviserIndex: number } => {
   const factionsWithTerritories = factions.filter((faction) =>
     initialTerritories.some((territory) => territory.owner === faction.name)
   );

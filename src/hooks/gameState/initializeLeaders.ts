@@ -1,6 +1,6 @@
-import { Faction, CharacterPortrait } from "@/types/GameTypes";
+import { Faction, Character } from "@/types/GameTypes";
 
-export function initializeLeaders(factions: Faction[]): CharacterPortrait[] {
+export function initializeLeaders(factions: Faction[]): Character[] {
   return factions.map((faction) => {
     const leader =
       Math.random() < 0.5 ? faction.leader.male : faction.leader.female;
@@ -59,7 +59,7 @@ function randomItem<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function writeBiography(leader: CharacterPortrait, faction: Faction): string {
+function writeBiography(leader: Character, faction: Faction): string {
   let title: string;
   if (faction.type === "imperial") {
     title = leader.gender === "male" ? "Emperor" : "Empress";
