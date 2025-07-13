@@ -17,6 +17,9 @@ import bagaudaeMaleRebel from "@/assets/bagaudae-male-rebel.jpg";
 import bagaudaeFemaleRebel from "@/assets/bagaudae-female-rebel.jpg";
 import mauriMaleLeader from "@/assets/mauri-male.jpg";
 import mauriFemaleLeader from "@/assets/mauri-female.jpg";
+import mosaicKing from "@/assets/mosaic-king.jpg";
+import mosaicQueen from "@/assets/mosaic-queen.jpg";
+import mosaicWarriorQueen from "@/assets/mosaic-warrior-queen.jpg";
 
 export const getDate = (turn: number): string => {
   const year = getYear(turn);
@@ -93,12 +96,12 @@ export const factions: Faction[] = [
     color: "hsl(var(--britons))",
     leader: {
       male: {
-        name: "Cymbeline the Wise",
+        name: "Cymbeline",
         gender: "male",
         image: romanEmperor,
       },
       female: {
-        name: "Baddo the Bard",
+        name: "Baddo",
         gender: "female",
         image: byzantineQueen,
       },
@@ -162,18 +165,18 @@ export const factions: Faction[] = [
     color: "hsl(var(--ostrogoths))",
     leader: {
       male: {
-        name: "Theodoric the Great",
+        name: "Theodemir the Tyrant",
         gender: "male",
-        image: barbarianKing,
+        image: mosaicKing,
       },
       female: {
-        name: "Amalasuintha the Wise",
+        name: "Amalasuintha",
         gender: "female",
-        image: visigothicQueen,
+        image: mosaicQueen,
       },
     },
     faith: "Arian",
-    relatives: ["Daughter Amalasuintha", "Nephew Athalaric", "Nephew Eutharic"],
+    relatives: ["Daughter Hildesuintha", "Nephew Athalaric", "Nephew Eutharic"],
     territories: ["Italy"],
     troops: 1000,
     treasure: 100,
@@ -185,18 +188,18 @@ export const factions: Faction[] = [
     color: "hsl(var(--visigoths))",
     leader: {
       male: {
-        name: "Alaric the Conqueror",
+        name: "Balthila the Cruel",
         gender: "male",
-        image: barbarianKing,
+        image: mosaicKing,
       },
       female: {
         name: "Brunhild the Implacable",
         gender: "female",
-        image: visigothicQueen,
+        image: mosaicWarriorQueen,
       },
     },
     faith: "Arian",
-    relatives: ["Son Sigismund", "Daughter Galsuintha", "Cousin Recared"],
+    relatives: ["Son Sigismund", "Daughter Galsuintha", "Cousin Reccared"],
     territories: ["Aquitania"],
     troops: 1000,
     treasure: 100,
@@ -245,9 +248,8 @@ export const factions: Faction[] = [
     relatives: [
       "Son Gundahar",
       "Son Gunderic",
-      "Sun Gundioc",
+      "Son Gundioc",
       "Daughter Gundihild",
-      "Daughter Ingunde",
     ],
     territories: ["Septimania"],
     troops: 1000,
@@ -306,7 +308,7 @@ export const factions: Faction[] = [
     color: "hsl(var(--rugians))",
     leader: {
       male: {
-        name: "Eraric the Wry",
+        name: "Eraric",
         gender: "male",
         image: barbarianKing,
       },
@@ -329,7 +331,7 @@ export const factions: Faction[] = [
     color: "hsl(var(--heruls))",
     leader: {
       male: {
-        name: "Rodulph the Bold",
+        name: "Rodulph",
         gender: "male",
         image: barbarianKing,
       },
@@ -380,7 +382,7 @@ export const factions: Faction[] = [
     color: "hsl(var(--saxons))",
     leader: {
       male: {
-        name: "Widukind the Defiant",
+        name: "Hengist the Brave",
         gender: "male",
         image: barbarianKing,
       },
