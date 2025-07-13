@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { CharacterDialog } from "@/components/game/CharacterDialog";
-import { Chronicle, Chronicler } from "@/types/GameTypes";
+import { Chronicle, Chronicler } from "@/types/gameTypes";
 import { getDate } from "@/data/gameData";
 
 interface ChroniclesPanelProps {

@@ -7,7 +7,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Character } from "@/types/GameTypes";
+import { Character } from "@/types/gameTypes";
 import { cn } from "@/lib/utils";
 
 interface CharacterDialogProps {

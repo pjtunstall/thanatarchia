@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Users, Eye } from "lucide-react";
-import { Faction } from "@/types/GameTypes";
+import { Faction } from "@/types/gameTypes";
 
 interface Props {
   playerFaction: Faction;

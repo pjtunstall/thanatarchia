@@ -1,4 +1,4 @@
-import { Character } from "@/types/GameTypes";
+import { Character } from "@/types/gameTypes";
 import { CharacterDialog } from "@/components/game/CharacterDialog";
 
 interface PlayerCharacterProps {

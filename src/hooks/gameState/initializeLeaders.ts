@@ -1,4 +1,4 @@
-import { Faction, Character } from "@/types/GameTypes";
+import { Faction, Character } from "@/types/gameTypes";
 
 export function initializeLeaders(factions: Faction[]): Character[] {
   return factions.map((faction) => {

@@ -5,7 +5,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Character, Territory } from "@/types/GameTypes";
+import { Character, Territory } from "@/types/gameTypes";
 import { factions, getDate, adjacentTerritories } from "@/data/gameData";
 import { FactionDetails } from "./FactionDetails";
 import romanEmpireMap from "@/assets/roman-empire-map-clean.jpg";

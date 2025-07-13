@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Coins, Users } from "lucide-react";
-import { Faction, Territory, Character } from "@/types/GameTypes";
+import { Faction, Territory, Character } from "@/types/gameTypes";
 import { chroniclers, getFaithColor, initialReport } from "@/data/gameData";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
 import { CharacterDialog } from "@/components/game/CharacterDialog";

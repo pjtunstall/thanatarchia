@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ShieldPlus } from "lucide-react";
-import { Territory } from "@/types/GameTypes";
+import { Territory } from "@/types/gameTypes";
 
 interface Props {
   from: string;

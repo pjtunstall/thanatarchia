@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { GameStatus, Chronicle } from "@/types/GameTypes";
+import { GameStatus, Chronicle } from "@/types/gameTypes";
 import { ScrollText } from "lucide-react";
 
 interface GameOverlayProps {

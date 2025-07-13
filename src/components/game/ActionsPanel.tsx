@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
 import { adjacentTerritories } from "@/data/gameData";
-import { Faction, Territory } from "@/types/GameTypes";
+import { Faction, Territory } from "@/types/gameTypes";
 import { BasicActions } from "@/components/game/actions/BasicActions";
 import { TreasuryActions } from "@/components/game/actions/TreasuryActions";
 import { AttackButton } from "@/components/game/actions/AttackButton";

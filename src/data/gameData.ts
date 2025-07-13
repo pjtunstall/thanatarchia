@@ -1,4 +1,4 @@
-import { Faction, Chronicler, Territory } from "@/types/GameTypes";
+import { Faction, Chronicler, Territory } from "@/types/gameTypes";
 import byzantineQueen from "@/assets/byzantine-queen-portrait.jpg";
 import byzantineChief from "@/assets/byzantine-chief-portrait.jpg";
 import romanEmperor from "@/assets/roman-emperor-portrait.jpg";

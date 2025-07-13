@@ -6,7 +6,7 @@ import {
   GameStatus,
   Character,
   Chronicler,
-} from "@/types/GameTypes";
+} from "@/types/gameTypes";
 import {
   factions,
   chroniclers,
