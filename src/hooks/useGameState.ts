@@ -257,6 +257,13 @@ export const useGameState = () => {
           return t;
         })
       );
+      setFactionTerritories(() =>
+        factions.map((faction) =>
+          territories
+            .filter((territory) => territory.owner === faction.name)
+            .map((territory) => territory.name)
+        )
+      );
 
       setPlayerFaction((prev) => ({
         ...prev,
@@ -349,6 +356,13 @@ export const useGameState = () => {
           return t;
         })
       );
+      setFactionTerritories(() =>
+        factions.map((faction) =>
+          territories
+            .filter((territory) => territory.owner === faction.name)
+            .map((territory) => territory.name)
+        )
+      );
 
       setPlayerFaction((prev) => ({
         ...prev,
@@ -398,13 +412,6 @@ export const useGameState = () => {
     generateResources();
     executeAITurn();
     setCurrentTurn((prev) => prev + 1);
-    setFactionTerritories(() =>
-      factions.map((faction) =>
-        territories
-          .filter((territory) => territory.owner === faction.name)
-          .map((territory) => territory.name)
-      )
-    );
     setTimeout(checkGameStatus, 100);
   };
 
