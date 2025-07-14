@@ -398,6 +398,13 @@ export const useGameState = () => {
     generateResources();
     executeAITurn();
     setCurrentTurn((prev) => prev + 1);
+    setFactionTerritories(() =>
+      factions.map((faction) =>
+        territories
+          .filter((territory) => territory.owner === faction.name)
+          .map((territory) => territory.name)
+      )
+    );
     setTimeout(checkGameStatus, 100);
   };
 
