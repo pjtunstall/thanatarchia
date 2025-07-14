@@ -17,8 +17,9 @@ import {
 
 export function initializeLeaders(factions: Faction[]): Character[] {
   return factions.map((faction) => {
-    const leader =
+    const leaderTemplate =
       Math.random() < 0.5 ? faction.leader.male : faction.leader.female;
+    const leader = { ...leaderTemplate };
 
     switch (faction.name) {
       case "Ostrogoths":

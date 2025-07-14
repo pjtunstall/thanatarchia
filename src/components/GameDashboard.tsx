@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+import { factions } from "@/data/gameData.ts";
 import { useGameState } from "@/hooks/useGameState";
 import { GameMap } from "@/components/game/GameMap";
 import { StatusPanel } from "@/components/game/StatusPanel";
@@ -49,8 +50,8 @@ const GameDashboard = () => {
                 selectedTerritory={gameState.selectedTerritory}
                 currentTurn={gameState.currentTurn}
                 factionLeaders={gameState.factionLeaders}
-                playerFactionName={gameState.playerFaction.name}
-                playerFactionColor={gameState.playerFaction.color}
+                playerFactionName={factions[gameState.playerIndex].name}
+                playerFactionColor={factions[gameState.playerIndex].color}
                 onTerritoryClick={gameState.handleTerritoryClick}
               />
             </div>
@@ -80,8 +81,10 @@ const GameDashboard = () => {
 
                 <TabsContent value="status" className="mt-4">
                   <StatusPanel
-                    playerFaction={gameState.playerFaction}
-                    playerCharacter={gameState.playerCharacter}
+                    playerFaction={factions[gameState.playerIndex]}
+                    playerCharacter={
+                      gameState.factionLeaders[gameState.playerIndex]
+                    }
                     territories={gameState.territories}
                     playerTerritories={
                       gameState.factionTerritories[gameState.playerIndex]
@@ -96,7 +99,9 @@ const GameDashboard = () => {
 
                 <TabsContent value="actions" className="mt-4">
                   <ActionsPanel
-                    playerFaction={gameState.playerFaction}
+                    playerFaction={factions[gameState.playerIndex]}
+                    playerIndex={gameState.playerIndex}
+                    factionTreasures={gameState.factionTreasures}
                     territories={gameState.territories}
                     selectedTerritory={gameState.selectedTerritory}
                     onAction={gameState.handleAction}

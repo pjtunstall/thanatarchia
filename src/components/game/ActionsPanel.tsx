@@ -10,6 +10,8 @@ import { ReinforceButton } from "@/components/game/actions/ReinforceButton";
 
 interface ActionsPanelProps {
   playerFaction: Faction;
+  playerIndex: number;
+  factionTreasures: number[];
   territories: Territory[];
   selectedTerritory: string | null;
   onAction: (action: string) => void;
@@ -24,6 +26,8 @@ interface ActionsPanelProps {
 export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
   const {
     playerFaction,
+    playerIndex,
+    factionTreasures,
     selectedTerritory,
     territories,
     getValidAttackTargets,
@@ -61,7 +65,7 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
           <div className="border-t pt-3">
             <p className="text-sm font-semibold mb-2">Treasury Actions</p>
             <TreasuryActions
-              playerFaction={playerFaction}
+              playerTreasure={factionTreasures[playerIndex]}
               selectedTerritory={selectedTerritory}
               onRecruitTroops={props.onRecruitTroops}
               onSpy={props.onSpy}

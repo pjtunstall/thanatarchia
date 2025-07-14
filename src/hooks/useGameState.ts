@@ -1,12 +1,6 @@
-import { useState } from "react";
-import {
-  Faction,
-  Territory,
-  Chronicle,
-  GameStatus,
-  Character,
-  Chronicler,
-} from "@/types/gameTypes";
+import { useState, useEffect } from "react";
+
+import { Territory, Chronicle, GameStatus } from "@/types/gameTypes";
 import {
   factions,
   chroniclers,
@@ -23,46 +17,32 @@ export const useGameState = () => {
     null
   );
   const [gameStatus, setGameStatus] = useState<GameStatus>("playing");
-
-  const [factionLeaders, setFactionLeaders] = useState(() =>
+  const [factionLeaders, setFactionLeaders] = useState(
     initializeLeaders(factions)
   );
-
-  const {
-    character: initialCharacter,
-    faction: initialFaction,
-    playerIndex: initialPlayerIndex,
-    adviserIndex: initialAdviser,
-  } = initializePlayer(
-    factions,
-    factionLeaders,
-    initialTerritories,
-    chroniclers
-  );
-
-  const [playerCharacter, setPlayerCharacter] = useState(initialCharacter);
-  const [playerFaction, setPlayerFaction] = useState<Faction>(initialFaction);
-  const [playerIndex, setPlayerIndex] = useState(initialPlayerIndex);
-  const [adviserIndex, setAdviserIndex] = useState(initialAdviser);
-
   const [territories, setTerritories] =
     useState<Territory[]>(initialTerritories);
   const [factionTerritories, setFactionTerritories] = useState<string[][]>(
-    () => {
-      return factions.map((f) => f.territories);
-    }
+    factions.map((f) => f.territories)
   );
-  const [factionTroops, setFactionTroops] = useState<number[]>(() => {
-    return factions.map((f) =>
+  const [factionTroops, setFactionTroops] = useState<number[]>(
+    factions.map((f) =>
       territories
         .filter((t) => f.territories.includes(t.name))
         .reduce((sum, t) => sum + t.troops, 0)
-    );
-  });
+    )
+  );
+  const [factionTreasures, setFactionTreasure] = useState<number[]>(
+    factions.map((f) => f.treasure)
+  );
 
-  const [factionTreasure, setFactionTreasure] = useState<number[]>(() => {
-    return factions.map((f) => f.treasure);
-  });
+  const [playerIndex, setPlayerIndex] = useState(
+    randomPlayerIndex(factionTerritories)
+  );
+
+  const [adviserIndex, setAdviserIndex] = useState(
+    Math.floor(Math.random() * chroniclers.length)
+  );
 
   const [chronicles, setChronicles] = useState<Chronicle[]>([
     {
@@ -204,6 +184,14 @@ export const useGameState = () => {
         )
       );
 
+      setFactionTerritories(
+        factions.map((faction) =>
+          updated
+            .filter((territory) => territory.owner === faction.name)
+            .map((territory) => territory.name)
+        )
+      );
+
       return updated;
     });
   };
@@ -218,8 +206,8 @@ export const useGameState = () => {
     if (
       !fromTerritory ||
       !toTerritory ||
-      fromTerritory.owner !== playerFaction.name ||
-      toTerritory.owner !== playerFaction.name ||
+      fromTerritory.owner !== factions[playerIndex].name ||
+      toTerritory.owner !== factions[playerIndex].name ||
       !adjacentTerritories[fromTerritoryName]?.includes(toTerritoryName)
     )
       return;
@@ -244,8 +232,8 @@ export const useGameState = () => {
     const toTerritory = territories.find((t) => t.name === toTerritoryName);
 
     if (
-      fromTerritory?.owner !== playerFaction.name ||
-      toTerritory?.owner === playerFaction.name ||
+      fromTerritory.owner !== factions[playerIndex].name ||
+      toTerritory.owner === factions[playerIndex].name ||
       !adjacentTerritories[fromTerritoryName]?.includes(toTerritoryName)
     ) {
       return;
@@ -273,27 +261,13 @@ export const useGameState = () => {
           if (t.name === toTerritoryName) {
             return {
               ...t,
-              owner: playerFaction.name,
+              owner: factions[playerIndex].name,
               troops: survivingTroops,
             };
           }
           return t;
         })
       );
-
-      setFactionTerritories(() =>
-        factions.map((faction) =>
-          territories
-            .filter((territory) => territory.owner === faction.name)
-            .map((territory) => territory.name)
-        )
-      );
-
-      setPlayerFaction((prev) => ({
-        ...prev,
-        territories: [toTerritory.name, ...prev.territories],
-        relatives: [...prev.relatives],
-      }));
 
       addChronicleEntry(
         `Our brave warriors have conquered ${toTerritory.name} in glorious battle!`,
@@ -304,7 +278,7 @@ export const useGameState = () => {
       updateTerritories((prev) =>
         prev.map((t) =>
           t.name === fromTerritoryName
-            ? { ...t, troops: Math.max(100, t.troops! - casualties) }
+            ? { ...t, troops: Math.max(0, t.troops! - casualties) }
             : t
         )
       );
@@ -320,7 +294,7 @@ export const useGameState = () => {
 
   const executeAITurn = () => {
     const aiTerritories = territories.filter(
-      (t) => t.owner !== playerFaction.name
+      (t) => t.owner !== factions[playerIndex].name
     );
 
     aiTerritories.forEach((aiTerritory, i) => {
@@ -329,7 +303,7 @@ export const useGameState = () => {
       const adjacentPlayerTerritories =
         adjacentTerritories[aiTerritory.name]
           ?.map((id) => territories.find((t) => t.name === id))
-          .filter((t) => t && t.owner === playerFaction.name) || [];
+          .filter((t) => t && t.owner === factions[playerIndex].name) || [];
 
       if (adjacentPlayerTerritories.length > 0 && aiTerritory.troops! > 500) {
         const weakestTarget = adjacentPlayerTerritories.reduce(
@@ -345,10 +319,9 @@ export const useGameState = () => {
   };
 
   const aiRecruitTroops = (i: number) => {
-    if (factionTreasure[i] < costOfRecruiting) return;
+    if (factionTreasures[i] < costOfRecruiting) return;
     const recruitsPerTerritory = Math.round(500 / factionTerritories[i].length);
-    const totalRecruits =
-      recruitsPerTerritory * playerFaction.territories.length;
+    const totalRecruits = recruitsPerTerritory * factions[i].territories.length;
 
     setTerritories((prevTerritories) => {
       const factionName = factions[i].name;
@@ -406,19 +379,6 @@ export const useGameState = () => {
         })
       );
 
-      setFactionTerritories(() =>
-        factions.map((faction) =>
-          territories
-            .filter((territory) => territory.owner === faction.name)
-            .map((territory) => territory.name)
-        )
-      );
-
-      setPlayerFaction((prev) => ({
-        ...prev,
-        territories: prev.territories.filter((t) => t !== toId),
-        relatives: [...prev.relatives],
-      }));
       addChronicleEntry(
         `The barbarians have lost ${toTerritory.name} to enemy forces!`,
         "hostile"
@@ -454,13 +414,6 @@ export const useGameState = () => {
       });
       return updated;
     });
-
-    setPlayerFaction((prev) => ({
-      ...prev,
-      treasure: factionTreasure[playerIndex],
-      territories: [...prev.territories],
-      relatives: [...prev.relatives],
-    }));
   };
 
   const handleEndTurn = () => {
@@ -474,55 +427,32 @@ export const useGameState = () => {
     return (
       adjacentTerritories[fromTerritoryName]
         ?.map((name) => territories.find((t) => t.name === name))
-        .filter((t) => t && t.owner !== playerFaction.name) || []
+        .filter((t) => t && t.owner !== factions[playerIndex].name) || []
     );
   };
 
   const resetGame = () => {
+    const freshTerritories = initialTerritories;
+    const freshFactionTerritories = factions.map((f) => f.territories);
+
     setGameStatus("playing");
     setCurrentTurn(1);
     setSelectedTerritory(null);
     setFinalChronicles([]);
-    setFactionTreasure((_prev) => factions.map((f) => f.treasure));
+    setChronicles([]);
+    setFactionTreasure(() => factions.map((f) => f.treasure));
     setFactionLeaders(initializeLeaders(factions));
-    setTerritories(initialTerritories);
-    setFactionTerritories(() => {
-      return factions.map((f) => f.territories);
-    });
-    setFactionTroops(() => {
-      return factions.map((f) =>
-        territories
+    setTerritories(freshTerritories);
+    setFactionTerritories(freshFactionTerritories);
+    setFactionTroops(() =>
+      factions.map((f) =>
+        freshTerritories
           .filter((t) => f.territories.includes(t.name))
           .reduce((sum, t) => sum + t.troops, 0)
-      );
-    });
-
-    const {
-      character: newCharacter,
-      faction: newFaction,
-      playerIndex: newIndex,
-      adviserIndex: newAdviserIndex,
-    } = initializePlayer(factions, factionLeaders, territories, chroniclers);
-
-    setPlayerCharacter(newCharacter);
-    setPlayerIndex(newIndex);
-    setAdviserIndex(newAdviserIndex);
-
-    setPlayerFaction({
-      name: newFaction.name,
-      formalName: newFaction.formalName,
-      type: newFaction.type,
-      faith: newFaction.faith,
-      color: newFaction.color,
-      leader: newFaction.leader,
-      territories: [...newFaction.territories],
-      relatives: [...newFaction.relatives],
-      troops: newFaction.troops,
-      treasure: newFaction.treasure,
-    });
-
-    setTerritories(territories);
-    setChronicles([]);
+      )
+    );
+    setPlayerIndex(randomPlayerIndex(freshFactionTerritories));
+    setAdviserIndex(Math.floor(Math.random() * chroniclers.length));
   };
 
   const handleTerritoryClick = (territoryId: string) => {
@@ -531,14 +461,7 @@ export const useGameState = () => {
 
   const handleSpy = (territoryId: string) => {
     const territory = territories.find((t) => t.name === territoryId);
-    if (!territory || playerFaction.treasure < costOfSpying) return;
-
-    setPlayerFaction((prev) => ({
-      ...prev,
-      treasure: prev.treasure - costOfSpying,
-      territories: [...prev.territories],
-      relatives: [...prev.relatives],
-    }));
+    if (!territory || factions[playerIndex].treasure < costOfSpying) return;
 
     setFactionTreasure((prev) => {
       const updated = [...prev];
@@ -590,29 +513,21 @@ export const useGameState = () => {
   };
 
   const handleRecruitTroops = () => {
-    if (playerFaction.treasure < costOfRecruiting) return;
+    if (factions[playerIndex].treasure < costOfRecruiting) return;
     const recruitsPerTerritory = Math.round(
-      500 / playerFaction.territories.length
+      500 / factions[playerIndex].territories.length
     );
     const totalRecruits =
-      recruitsPerTerritory * playerFaction.territories.length;
+      recruitsPerTerritory * factions[playerIndex].territories.length;
 
     setTerritories((prevTerritories) => {
-      const factionName = playerFaction.name;
+      const factionName = factions[playerIndex].name;
       const updated = prevTerritories.map((t) => {
         if (t.owner === factionName) {
           return { ...t, troops: t.troops! + recruitsPerTerritory };
         }
         return t;
       });
-
-      setPlayerFaction((prevFaction) => ({
-        ...prevFaction,
-        treasure: prevFaction.treasure - costOfRecruiting,
-        troops: prevFaction.troops + totalRecruits,
-        relatives: [...prevFaction.relatives],
-        territories: [...prevFaction.territories],
-      }));
 
       setFactionTreasure((prev) => {
         const updated = [...prev];
@@ -674,20 +589,15 @@ export const useGameState = () => {
 
       if (success) {
         const treasureGained = Math.floor(Math.random() * 100 + 50);
-        setPlayerFaction((prev) => ({
+        setFactionTreasure((prev) => [
           ...prev,
-          treasure: prev.treasure + treasureGained,
-          troops: Math.max(100, prev.troops - Math.floor(troopsRisked * 0.3)),
-          territories: [...prev.territories],
-          relatives: [...prev.relatives],
-        }));
+          factionTreasures[playerIndex] + treasureGained,
+        ]);
       } else {
-        setPlayerFaction((prev) => ({
+        setFactionTroops((prev) => [
           ...prev,
-          troops: Math.max(100, prev.troops - troopsRisked),
-          territories: [...prev.territories],
-          relatives: [...prev.relatives],
-        }));
+          Math.max(100, prev[playerIndex] - troopsRisked),
+        ]);
       }
     }
 
@@ -709,6 +619,24 @@ export const useGameState = () => {
     setChronicles([...chronicles, newEntry]);
   };
 
+  useEffect(() => {
+    const playerTerritories = factionTerritories[playerIndex]?.length;
+    if (playerTerritories >= 9) {
+      generateFinalChronicles("victory");
+      setGameStatus("victory");
+    } else if (playerTerritories === 0) {
+      generateFinalChronicles("defeat");
+      setGameStatus("defeat");
+    }
+  }, [factionTerritories, playerIndex]);
+
+  useEffect(() => {
+    const troopSummary = territories
+      .map((t) => `${t.name}:${t.troops}`)
+      .join(", ");
+    console.log("[DEBUG] Troop state changed:", troopSummary);
+  }, [territories]);
+
   return {
     // State
     adviserIndex,
@@ -718,9 +646,7 @@ export const useGameState = () => {
     factionLeaders,
     factionTerritories,
     factionTroops,
-    factionTreasure,
-    playerFaction,
-    playerCharacter,
+    factionTreasures,
     playerIndex,
     territories,
     chronicles,
@@ -740,36 +666,13 @@ export const useGameState = () => {
   };
 };
 
-const initializePlayer = (
-  factions: Faction[],
-  factionLeaders: Character[],
-  territories: Territory[],
-  chroniclers: Chronicler[]
-): {
-  character: Character;
-  faction: Faction;
-  playerIndex: number;
-  adviserIndex: number;
-} => {
-  const factionsWithTerritories = factions.filter((faction) =>
-    territories.some((territory) => territory.owner === faction.name)
-  );
-  const playerIndex = Math.floor(
-    Math.random() * factionsWithTerritories.length
-  );
-  const baseFaction = factionsWithTerritories[playerIndex];
-  const character = { ...factionLeaders[playerIndex] };
-
-  const playerTerritories = territories.filter(
-    (territory) => territory.owner === baseFaction.name
-  );
-
-  const faction: Faction = {
-    ...baseFaction,
-    territories: playerTerritories.map((t) => t.name),
-  };
-
-  const adviserIndex = Math.floor(Math.random() * chroniclers.length);
-
-  return { character, faction, playerIndex, adviserIndex };
-};
+function randomPlayerIndex(factionTerritories: string[][]): number {
+  for (let i = 0; i < 256; i++) {
+    const r = Math.floor(Math.random() * factionTerritories.length);
+    if (factionTerritories[r].length > 0) {
+      return r;
+    }
+  }
+  console.error("Failed to find any faction with territory");
+  return 0;
+}

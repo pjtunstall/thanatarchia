@@ -24,7 +24,7 @@ export const epithets = [
   "Mad",
   "Nepotist",
   "Notorious",
-  "Oath-Breaker",
+  "Tactical Oath-Breaker",
   "Petulant",
   "'Pious'",
   "Proud",

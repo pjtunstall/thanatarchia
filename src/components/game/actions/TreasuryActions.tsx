@@ -4,14 +4,14 @@ import { Faction } from "@/types/gameTypes";
 import { costOfSpying, costOfRecruiting } from "@/data/gameData";
 
 interface Props {
-  playerFaction: Faction;
+  playerTreasure: number;
   selectedTerritory: string | null;
   onRecruitTroops: () => void;
   onSpy: (territoryId: string) => void;
 }
 
 export const TreasuryActions: React.FC<Props> = ({
-  playerFaction,
+  playerTreasure,
   selectedTerritory,
   onRecruitTroops,
   onSpy,
@@ -21,7 +21,7 @@ export const TreasuryActions: React.FC<Props> = ({
       onClick={onRecruitTroops}
       variant="outline"
       size="sm"
-      disabled={playerFaction.treasure < costOfRecruiting}
+      disabled={playerTreasure < costOfRecruiting}
     >
       <Users className="w-3 h-3 mr-1" />
       Recruit ({costOfRecruiting} solidi)
@@ -30,7 +30,7 @@ export const TreasuryActions: React.FC<Props> = ({
       onClick={() => selectedTerritory && onSpy(selectedTerritory)}
       variant="outline"
       size="sm"
-      disabled={!selectedTerritory || playerFaction.treasure < costOfSpying}
+      disabled={!selectedTerritory || playerTreasure < costOfSpying}
     >
       <Eye className="w-3 h-3 mr-1" />
       Spy ({costOfSpying} solidi)
