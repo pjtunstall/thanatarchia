@@ -1,4 +1,4 @@
-import { Chronicler, Territory } from "@/types/gameTypes";
+import { Chronicler } from "@/types/gameTypes";
 import chroniclerMonk from "@/assets/chronicler-monk-male.jpg";
 import chroniclerScribe from "@/assets/chronicler-scribe-male.jpg";
 import chroniclerMosaic from "@/assets/chronicler-mosaic-female.jpg";
