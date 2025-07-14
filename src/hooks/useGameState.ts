@@ -16,7 +16,6 @@ import {
   adjacentTerritories,
 } from "@/data/gameData";
 import { initializeLeaders } from "@/hooks/gameState/initializeLeaders";
-import { set } from "date-fns";
 
 export const useGameState = () => {
   const [currentTurn, setCurrentTurn] = useState(1);
@@ -486,6 +485,17 @@ export const useGameState = () => {
     setFinalChronicles([]);
     setFactionTreasure((_prev) => factions.map((f) => f.treasure));
     setFactionLeaders(initializeLeaders(factions));
+    setTerritories(initialTerritories);
+    setFactionTerritories(() => {
+      return factions.map((f) => f.territories);
+    });
+    setFactionTroops(() => {
+      return factions.map((f) =>
+        territories
+          .filter((t) => f.territories.includes(t.name))
+          .reduce((sum, t) => sum + t.troops, 0)
+      );
+    });
 
     const {
       character: newCharacter,
