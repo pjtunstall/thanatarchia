@@ -89,6 +89,7 @@ export const useGameCore = () => {
     factionTroops,
 
     // Actions
+    setSelectedTerritory,
     setCurrentTurn,
     setFactionTreasures,
     updateTerritories,
