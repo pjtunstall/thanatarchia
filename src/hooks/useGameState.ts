@@ -293,28 +293,45 @@ export const useGameState = () => {
   };
 
   const executeAITurn = () => {
-    const aiTerritories = territories.filter(
-      (t) => t.owner !== factions[playerIndex].name
-    );
+    // For each AI faction
+    factions.forEach((faction, i) => {
+      if (i === playerIndex) return;
 
-    aiTerritories.forEach((aiTerritory, i) => {
       aiRecruitTroops(i);
 
-      const adjacentPlayerTerritories =
-        adjacentTerritories[aiTerritory.name]
-          ?.map((id) => territories.find((t) => t.name === id))
-          .filter((t) => t && t.owner === factions[playerIndex].name) || [];
+      // Get AI faction's territories from factionTerritories[i]
+      const aiTerritoryNames = factionTerritories[i];
 
-      if (adjacentPlayerTerritories.length > 0 && aiTerritory.troops! > 500) {
-        const weakestTarget = adjacentPlayerTerritories.reduce(
-          (weakest, current) =>
-            (current?.troops || 0) < (weakest?.troops || 0) ? current : weakest
-        );
+      // For each territory owned by this AI faction
+      aiTerritoryNames.forEach((aiTerritoryName) => {
+        const aiTerritory = territories.find((t) => t.name === aiTerritoryName);
+        if (!aiTerritory) return;
 
-        if (weakestTarget && Math.random() > 0.7) {
-          executeAIAttack(aiTerritory.name, weakestTarget.name);
+        // Find adjacent territories to this AI territory by name (from your adjacency map)
+        const adjacentNames = adjacentTerritories[aiTerritoryName] || [];
+
+        // Filter those adjacent territories owned by the player
+        const adjacentPlayerTerritories = adjacentNames
+          .map((name) => territories.find((t) => t.name === name))
+          .filter((t) => t && t.owner === factions[playerIndex].name);
+
+        if (adjacentPlayerTerritories.length === 0) return;
+
+        // Only consider attacking if AI territory has enough troops
+        if (aiTerritory.troops && aiTerritory.troops > 500) {
+          // Find weakest adjacent player territory to attack
+          const weakestTarget = adjacentPlayerTerritories.reduce(
+            (weakest, current) =>
+              (current!.troops ?? Infinity) < (weakest!.troops ?? Infinity)
+                ? current
+                : weakest
+          );
+
+          if (weakestTarget && Math.random() > 0.7) {
+            executeAIAttack(aiTerritoryName, weakestTarget.name);
+          }
         }
-      }
+      });
     });
   };
 
@@ -620,7 +637,7 @@ export const useGameState = () => {
   };
 
   useEffect(() => {
-    const playerTerritories = factionTerritories[playerIndex]?.length;
+    const playerTerritories = factionTerritories[playerIndex].length;
     if (playerTerritories >= 9) {
       generateFinalChronicles("victory");
       setGameStatus("victory");
