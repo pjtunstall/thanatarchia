@@ -1,3 +1,125 @@
+// import { useCallback, useState } from "react";
+
+// import { initializeLeaders } from "@/hooks/gameState/initializeLeaders";
+// import { factions } from "@/data/gameData";
+// import { useGameCore } from "@/hooks/gameState/useGameCore";
+// import { useCombat } from "@/hooks/gameState/useCombat";
+// import { useChronicles } from "@/hooks/gameState/useChronicles";
+
+// export const useGameState = () => {
+//   const gameCore = useGameCore();
+//   const chronicles = useChronicles(gameCore.currentTurn);
+//   const combat = useCombat({
+//     territories: gameCore.territories,
+//     playerIndex: gameCore.playerIndex,
+//     updateTerritories: gameCore.updateTerritories,
+//     addChronicleEntry: chronicles.addChronicleEntry,
+//     onTurnEnd: () => {
+//       // Handle turn end logic
+//       generateResources();
+//       executeAITurn();
+//       gameCore.setCurrentTurn((prev) => prev + 1);
+
+//       // Check game status after state updates
+//       setTimeout(() => {
+//         const status = gameCore.checkGameStatus();
+//         if (status !== "playing") {
+//           chronicles.generateFinalChronicles(status);
+//         }
+//       }, 0);
+//     },
+//   });
+
+//   // Initialize faction leaders
+//   const [factionLeaders, setFactionLeaders] = useState(
+//     initializeLeaders(factions)
+//   );
+
+//   // Resource generation
+//   const generateResources = useCallback(() => {
+//     gameCore.setFactionTreasures((prev) => {
+//       const updated = prev.map((t, i) => {
+//         const income = gameCore.factionTerritories[i].length * 20;
+//         if (i === gameCore.playerIndex) {
+//           chronicles.addChronicleEntry(
+//             `Our territories have generated ${income} solidi in tribute and taxes.`,
+//             "friendly"
+//           );
+//         }
+//         return t + income;
+//       });
+//       return updated;
+//     });
+//   }, [
+//     gameCore.factionTerritories,
+//     gameCore.playerIndex,
+//     chronicles.addChronicleEntry,
+//   ]);
+
+//   // AI turn logic would go here...
+//   const executeAITurn = useCallback(() => {
+//     () => {
+//       // // For each AI faction
+//       // factions.forEach((faction, i) => {
+//       //   if (i === playerIndex) return;
+//       //   aiRecruitTroops(i);
+//       //   // Get AI faction's territories from factionTerritories[i]
+//       //   const aiTerritoryNames = factionTerritories[i];
+//       //   // For each territory owned by this AI faction
+//       //   aiTerritoryNames.forEach((aiTerritoryName) => {
+//       //     const aiTerritory = territories.find(
+//       //       (t) => t.name === aiTerritoryName
+//       //     );
+//       //     if (!aiTerritory) return;
+//       //     // Find adjacent territories to this AI territory by name (from your adjacency map)
+//       //     const adjacentNames = adjacentTerritories[aiTerritoryName] || [];
+//       //     // Filter those adjacent territories owned by the player
+//       //     const adjacentPlayerTerritories = adjacentNames
+//       //       .map((name) => territories.find((t) => t.name === name))
+//       //       .filter((t) => t && t.owner === factions[playerIndex].name);
+//       //     if (adjacentPlayerTerritories.length === 0) return;
+//       //     // Only consider attacking if AI territory has enough troops
+//       //     if (aiTerritory.troops && aiTerritory.troops > 500) {
+//       //       // Find weakest adjacent player territory to attack
+//       //       const weakestTarget = adjacentPlayerTerritories.reduce(
+//       //         (weakest, current) =>
+//       //           (current!.troops ?? Infinity) < (weakest!.troops ?? Infinity)
+//       //             ? current
+//       //             : weakest
+//       //       );
+//       //       if (weakestTarget && Math.random() > 0.7) {
+//       //         executeAIAttack(aiTerritoryName, weakestTarget.name);
+//       //       }
+//       //     }
+//       //   });
+//       // });
+//     };
+//   }, []);
+
+//   // Reset game
+//   const resetGame = useCallback(() => {
+//     gameCore.resetGame();
+//     chronicles.resetChronicles();
+//     setFactionLeaders(initializeLeaders(factions));
+//   }, [gameCore.resetGame, chronicles.resetChronicles]);
+
+//   return {
+//     // Core state
+//     ...gameCore,
+//     factionLeaders,
+
+//     // Chronicles
+//     ...chronicles,
+
+//     // Combat
+//     ...combat,
+
+//     // Actions
+//     resetGame,
+//     // ... other actions
+//   };
+// };
+
 import { useState, useEffect } from "react";
 
 import { Territory, Chronicle, GameStatus } from "@/types/gameTypes";
