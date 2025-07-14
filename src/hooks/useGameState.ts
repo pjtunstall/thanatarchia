@@ -10,7 +10,7 @@ import {
 import {
   factions,
   chroniclers,
-  initialTerritories,
+  territories as initialTerritories,
   adjacentTerritories,
 } from "@/data/gameData";
 import { initializeLeaders } from "@/hooks/gameState/initializeLeaders";
@@ -410,12 +410,7 @@ export const useGameState = () => {
       character: newCharacter,
       faction: newFaction,
       adviserIndex: newAdviserIndex,
-    } = initializePlayer(
-      factions,
-      factionLeaders,
-      initialTerritories,
-      chroniclers
-    );
+    } = initializePlayer(factions, factionLeaders, territories, chroniclers);
 
     setPlayerCharacter(newCharacter);
     setAdviserIndex(newAdviserIndex);
@@ -433,7 +428,7 @@ export const useGameState = () => {
       treasure: newFaction.treasure,
     });
 
-    setTerritories(initialTerritories);
+    setTerritories(territories);
     setChronicles([]);
   };
 
@@ -633,11 +628,11 @@ export const useGameState = () => {
 const initializePlayer = (
   factions: Faction[],
   factionLeaders: Character[],
-  initialTerritories: Territory[],
+  territories: Territory[],
   chroniclers: Chronicler[]
 ): { character: Character; faction: Faction; adviserIndex: number } => {
   const factionsWithTerritories = factions.filter((faction) =>
-    initialTerritories.some((territory) => territory.owner === faction.name)
+    territories.some((territory) => territory.owner === faction.name)
   );
   const randomIndex = Math.floor(
     Math.random() * factionsWithTerritories.length
@@ -645,7 +640,7 @@ const initializePlayer = (
   const baseFaction = factionsWithTerritories[randomIndex];
   const character = { ...factionLeaders[randomIndex] };
 
-  const playerTerritories = initialTerritories.filter(
+  const playerTerritories = territories.filter(
     (territory) => territory.owner === baseFaction.name
   );
 

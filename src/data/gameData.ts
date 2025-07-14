@@ -6,10 +6,13 @@ import chroniclerScholar from "@/assets/chronicler-scholar-male.jpg";
 import chroniclerNun from "@/assets/chronicler-nun-female.jpg";
 
 import { factions as initialFactions } from "@/data/factions.ts";
-import { territories, neighbors } from "@/data/territories.ts";
+import {
+  territories as initialTerritories,
+  neighbors,
+} from "@/data/territories.ts";
 
 export const factions = initialFactions;
-export const initialTerritories = territories;
+export const territories = initialTerritories;
 export const adjacentTerritories = neighbors;
 
 export function randomItem<T>(arr: T[]): T {
