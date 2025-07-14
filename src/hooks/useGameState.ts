@@ -581,6 +581,12 @@ export const useGameState = () => {
         return updated;
       });
 
+      setFactionTroops((prev) => {
+        const updated = [...prev];
+        updated[playerIndex] += totalRecruits;
+        return updated;
+      });
+
       return updated;
     });
 
