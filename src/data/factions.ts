@@ -1,0 +1,493 @@
+import { Faction } from "@/types/gameTypes";
+
+import bagaudaeMaleRebel from "@/assets/bagaudae-male-rebel.jpg";
+import bagaudaeFemaleRebel from "@/assets/bagaudae-female-rebel.jpg";
+import mauriMaleLeader from "@/assets/mauri-male.jpg";
+import mauriFemaleLeader from "@/assets/mauri-female.jpg";
+import mosaicKing from "@/assets/mosaic-king.jpg";
+import mosaicQueen from "@/assets/mosaic-queen.jpg";
+import mosaicWarriorQueen from "@/assets/mosaic-warrior-queen.jpg";
+import byzantineQueen from "@/assets/byzantine-queen-portrait.jpg";
+import byzantineChief from "@/assets/byzantine-chief-portrait.jpg";
+import romanEmperor from "@/assets/roman-emperor-portrait.jpg";
+import barbarianKing from "@/assets/barbarian-king-portrait.jpg";
+import barbarianQueen from "@/assets/barbarian-queen.jpg";
+import visigothicQueen from "@/assets/visigothic-queen-portrait.jpg";
+import vandalChief from "@/assets/vandal-chief-portrait.jpg";
+import hunnicWarlord from "@/assets/hunnic-warlord-portrait.jpg";
+import frankishKing from "@/assets/frankish-king-portrait.jpg";
+
+export const factions: Faction[] = [
+  {
+    name: "Romans",
+    formalName: "Roman Empire",
+    type: "imperial",
+    color: "hsl(var(--imperial))",
+    leader: {
+      male: {
+        name: "Theodosius Augustus",
+        gender: "male",
+        image: romanEmperor,
+        biography: "",
+      },
+      female: {
+        name: "Theodora Augusta",
+        gender: "female",
+        image: byzantineQueen,
+        biography: "",
+      },
+    },
+    faith: "Chalcedonian",
+    relatives: [
+      "Son Anastasius",
+      "Daughter Eudoxia",
+      "Daughter Flavia",
+      "Son Zeno",
+    ],
+    territories: ["Thracia", "Aegyptus", "Syria"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Britons",
+    formalName: "Kindom of the Britons",
+    type: "barbarian",
+    color: "hsl(var(--britons))",
+    leader: {
+      male: {
+        name: "Cymbeline",
+        gender: "male",
+        image: romanEmperor,
+        biography: "",
+      },
+      female: {
+        name: "Elaine",
+        gender: "female",
+        image: byzantineQueen,
+        biography: "",
+      },
+    },
+    faith: "Pelagian",
+    relatives: ["Daughter Guinevere", "Son Vortigern", "Son Constantine"],
+    territories: ["Britannia"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Moors",
+    formalName: "Kingdom of the Moors",
+    type: "barbarian",
+    color: "hsl(var(--moors))",
+    leader: {
+      male: {
+        name: "Masuna",
+        gender: "male",
+        image: mauriMaleLeader,
+        biography: "",
+      },
+      female: {
+        name: "Kahina",
+        gender: "female",
+        image: mauriFemaleLeader,
+        biography: "",
+      },
+    },
+    faith: "Donatist",
+    relatives: ["Son Masties", "Son Masgiven", "Cousin Garmul"],
+    territories: ["Mauretania"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Bagaudae",
+    formalName: "Bagaudae of Armorica",
+    type: "bagaudae",
+    color: "hsl(var(--bagaudae))",
+    leader: {
+      male: {
+        name: "Tibatto",
+        gender: "male",
+        image: bagaudaeMaleRebel,
+        biography: "",
+      },
+      female: {
+        name: "Brigit",
+        gender: "female",
+        image: bagaudaeFemaleRebel,
+        biography: "",
+      },
+    },
+    faith: "Manichean",
+    relatives: ["Sister Spartaca", "Brother Amandus"],
+    territories: ["Armorica"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Ostrogoths",
+    formalName: "Kingdom of the Ostrogoths",
+    type: "barbarian",
+    color: "hsl(var(--ostrogoths))",
+    leader: {
+      male: {
+        name: "Theodemir",
+        gender: "male",
+        image: mosaicKing,
+        biography: "",
+      },
+      female: {
+        name: "Amalasuintha",
+        gender: "female",
+        image: mosaicQueen,
+        biography: "",
+      },
+    },
+    faith: "Arian",
+    relatives: ["Daughter Hildesuintha", "Nephew Athalaric", "Nephew Eutharic"],
+    territories: ["Italy"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Visigoths",
+    formalName: "Kingdom of the Visigoths",
+    type: "barbarian",
+    color: "hsl(var(--visigoths))",
+    leader: {
+      male: {
+        name: "Balthila",
+        gender: "male",
+        image: mosaicKing,
+        biography: "",
+      },
+      female: {
+        name: "Brunhild",
+        gender: "female",
+        image: mosaicWarriorQueen,
+        biography: "",
+      },
+    },
+    faith: "Arian",
+    relatives: ["Son Sigismund", "Daughter Galsuintha", "Cousin Reccared"],
+    territories: ["Aquitania"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Vandals",
+    formalName: "Kingdom of the Vandals",
+    type: "barbarian",
+    color: "hsl(var(--vandals))",
+    leader: {
+      male: {
+        name: "Huneric",
+        gender: "male",
+        image: vandalChief,
+        biography: "",
+      },
+      female: {
+        name: "Eudocia",
+        gender: "female",
+        image: visigothicQueen,
+        biography: "",
+      },
+    },
+    faith: "Arian",
+    relatives: ["Daughter Guiliaruna", "Brother Unthank"],
+    territories: ["Africa"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Burgundians",
+    formalName: "Kingdom of the Burgundians",
+    type: "barbarian",
+    color: "hsl(var(--burgundians))",
+    leader: {
+      male: {
+        name: "Gundobad",
+        gender: "male",
+        image: barbarianKing,
+        biography: "",
+      },
+      female: {
+        name: "Clotilde",
+        gender: "female",
+        image: visigothicQueen,
+        biography: "",
+      },
+    },
+    faith: "Arian",
+    relatives: [
+      "Son Gundahar",
+      "Son Gunderic",
+      "Son Gundioc",
+      "Daughter Gundihild",
+    ],
+    territories: ["Septimania"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Franks",
+    formalName: "Kingdom of the Franks",
+    type: "barbarian",
+    color: "hsl(var(--franks))",
+    leader: {
+      male: {
+        name: "Clovis",
+        gender: "male",
+        image: frankishKing,
+        biography: "",
+      },
+      female: {
+        name: "Fredegund",
+        gender: "female",
+        image: visigothicQueen,
+        biography: "",
+      },
+    },
+    faith: "Miaphysite",
+    relatives: ["Daughter Clotilde", "Daughter Ermengarde", "Son Clothar"],
+    territories: ["Gallia"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Gepids",
+    formalName: "Kingdom of the Gepids",
+    type: "barbarian",
+    color: "hsl(var(--gepids))",
+    leader: {
+      male: {
+        name: "Ardaric",
+        gender: "male",
+        image: barbarianKing,
+        biography: "",
+      },
+      female: {
+        name: "Rosamunda",
+        gender: "female",
+        image: visigothicQueen,
+        biography: "",
+      },
+    },
+    faith: "Arian",
+    relatives: ["Son Gunderit", "Daughter Rosamunda"],
+    territories: ["Dacia"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Rugians",
+    formalName: "Kingdom of the Rugians",
+    type: "barbarian",
+    color: "hsl(var(--rugians))",
+    leader: {
+      male: {
+        name: "Eraric",
+        gender: "male",
+        image: barbarianKing,
+        biography: "",
+      },
+      female: {
+        name: "Gisa",
+        gender: "female",
+        image: barbarianQueen,
+        biography: "",
+      },
+    },
+    faith: "Arian",
+    relatives: ["Son Felatheus", "Son Flaccitheus", "Son Frideric"],
+    territories: ["Scandia", "Vistula"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Heruls",
+    formalName: "Kingdom of the Heruls",
+    type: "barbarian",
+    color: "hsl(var(--heruls))",
+    leader: {
+      male: {
+        name: "Rodulph",
+        gender: "male",
+        image: barbarianKing,
+        biography: "",
+      },
+      female: {
+        name: "Rodehild",
+        gender: "female",
+        image: barbarianQueen,
+        biography: "",
+      },
+    },
+    faith: "Pagan",
+    relatives: ["Son Aruth"],
+    territories: ["Vistula"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Langobards",
+    formalName: "Kingdom of the Langobards",
+    type: "barbarian",
+    color: "hsl(var(--langobards))",
+    leader: {
+      male: {
+        name: "Wacho",
+        gender: "male",
+        image: barbarianKing,
+        biography: "",
+      },
+      female: {
+        name: "Rodelinda",
+        gender: "female",
+        image: visigothicQueen,
+        biography: "",
+      },
+    },
+    faith: "Dyophysite",
+    relatives: [
+      "Son Alboin",
+      "Daughter Albsuinda",
+      "Son Cleph",
+      "Niece Rosamund",
+    ],
+    territories: ["Pannonia"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Saxons",
+    formalName: "Saxon Confederation",
+    type: "barbarian",
+    color: "hsl(var(--saxons))",
+    leader: {
+      male: {
+        name: "Hengist",
+        gender: "male",
+        image: barbarianKing,
+        biography: "",
+      },
+      female: {
+        name: "Giesela",
+        gender: "female",
+        image: barbarianQueen,
+        biography: "",
+      },
+    },
+    faith: "Pagan",
+    relatives: ["Brother Abbio"],
+    territories: ["Germania"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Suebians",
+    formalName: "Suebian Confederation",
+    type: "barbarian",
+    color: "hsl(var(--suebians))",
+    leader: {
+      male: {
+        name: "Hermeric",
+        gender: "male",
+        image: barbarianKing,
+        biography: "",
+      },
+      female: {
+        name: "Ingunde",
+        gender: "female",
+        image: visigothicQueen,
+        biography: "",
+      },
+    },
+    faith: "Pagan",
+    relatives: ["Son Rechila", "Daughter Ingunde"],
+    territories: ["Hispania"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Alans",
+    formalName: "Kingdom of the Alans",
+    type: "barbarian",
+    color: "hsl(var(--alans))",
+    leader: {
+      male: {
+        name: "Respendial",
+        gender: "male",
+        image: byzantineChief,
+        biography: "",
+      },
+      female: {
+        name: "Sagdukht",
+        gender: "female",
+        image: visigothicQueen,
+        biography: "",
+      },
+    },
+    faith: "Nestorian",
+    relatives: [
+      "Son Goar",
+      "Daughter Borena",
+      "Daughter Zarinaea",
+      "Son Addac",
+      "Son Sangiban",
+      "Son Safrac",
+    ],
+    territories: ["Dalmatia"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Isaurians",
+    formalName: "Kingom of the Isaurians",
+    type: "barbarian",
+    color: "hsl(var(--isaurians))",
+    leader: {
+      male: {
+        name: "Tarasicodissa",
+        gender: "male",
+        image: byzantineChief,
+        biography: "",
+      },
+      female: {
+        name: "Zena",
+        gender: "female",
+        image: byzantineQueen,
+        biography: "",
+      },
+    },
+    faith: "Manichean",
+    relatives: ["Son Trocundes", "Son Longinus"],
+    territories: ["Isauria"],
+    troops: 1000,
+    treasure: 100,
+  },
+  {
+    name: "Huns",
+    formalName: "Hunnic Horde",
+    type: "barbarian",
+    color: "hsl(var(--huns))",
+    leader: {
+      male: {
+        name: "Dengizich",
+        gender: "male",
+        image: hunnicWarlord,
+        biography: "",
+      },
+      female: {
+        name: "Kreka",
+        gender: "female",
+        image: visigothicQueen,
+        biography: "",
+      },
+    },
+    faith: "Pagan",
+    relatives: ["Brother Ernakh", "Sister Kreka", "Nephew Mundo"],
+    territories: ["Scythia"],
+    troops: 1000,
+    treasure: 100,
+  },
+];
