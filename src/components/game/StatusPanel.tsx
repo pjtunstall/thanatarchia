@@ -13,6 +13,8 @@ interface StatusPanelProps {
   playerFaction: Faction;
   playerCharacter: Character;
   territories: Territory[];
+  playerTerritories: string[];
+  playerTroops: number;
   selectedTerritory: string | null;
   adviserIndex: number;
 }
@@ -21,18 +23,11 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
   playerFaction,
   playerCharacter,
   territories,
+  playerTerritories,
+  playerTroops,
   selectedTerritory,
   adviserIndex,
 }) => {
-  // Calculate actual total troops from player-owned territories
-  const playerTerritories = territories.filter(
-    (t) => t.owner === playerFaction.name
-  );
-  const totalTroops = playerTerritories.reduce(
-    (sum, territory) => sum + (territory.troops || 0),
-    0
-  );
-
   return (
     <Card className="h-full flex flex-col">
       <CardHeader>
@@ -58,7 +53,7 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4 text-blue-600" />
                 <span className="text-sm font-semibold">Total Troops:</span>
-                <span className="text-sm">{totalTroops}</span>
+                <span className="text-sm">{playerTroops}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-sm font-semibold">Faith:</span>
@@ -69,7 +64,9 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
                   {playerFaction.faith}
                 </Badge>
               </div>
-              <p className="text-sm">Territories: {playerTerritories.length}</p>
+              <p className="text-sm">
+                Territories: {playerTerritories.join(", ").replace(/, $/, "")}
+              </p>
               <div>
                 <p className="text-sm font-semibold mb-1">
                   Available for Marriage:

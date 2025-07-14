@@ -29,6 +29,7 @@ export const useGameState = () => {
   const {
     character: initialCharacter,
     faction: initialFaction,
+    playerIndex: initialPlayerIndex,
     adviserIndex: initialAdviser,
   } = initializePlayer(
     factions,
@@ -39,6 +40,7 @@ export const useGameState = () => {
 
   const [playerCharacter, setPlayerCharacter] = useState(initialCharacter);
   const [playerFaction, setPlayerFaction] = useState<Faction>(initialFaction);
+  const [playerIndex, setPlayerIndex] = useState(initialPlayerIndex);
   const [adviserIndex, setAdviserIndex] = useState(initialAdviser);
 
   const [territories, setTerritories] =
@@ -49,8 +51,13 @@ export const useGameState = () => {
     }
   );
   const [factionTroops, setFactionTroops] = useState<number[]>(() => {
-    return factions.map((f) => f.troops);
+    return factions.map((f) =>
+      territories
+        .filter((t) => f.territories.includes(t.name))
+        .reduce((sum, t) => sum + t.troops, 0)
+    );
   });
+
   const [factionTreasure, setFactionTreasure] = useState<number[]>(() => {
     return factions.map((f) => f.treasure);
   });
@@ -185,6 +192,22 @@ export const useGameState = () => {
     setChronicles((prev) => [...prev, newEntry]);
   };
 
+  const updateTerritories = (updater: (prev: Territory[]) => Territory[]) => {
+    setTerritories((prev) => {
+      const updated = updater(prev);
+
+      setFactionTroops(
+        factions.map((faction) =>
+          updated
+            .filter((t) => t.owner === faction.name)
+            .reduce((sum, t) => sum + (t.troops || 0), 0)
+        )
+      );
+
+      return updated;
+    });
+  };
+
   const handleReinforce = (
     fromTerritoryName: string,
     toTerritoryName: string
@@ -203,7 +226,7 @@ export const useGameState = () => {
 
     const reinforcements = Math.min(500, fromTerritory.troops);
 
-    setTerritories((prev) =>
+    updateTerritories((prev) =>
       prev.map((t) => {
         if (t.name === fromTerritoryName) {
           return { ...t, troops: t.troops - reinforcements };
@@ -242,7 +265,7 @@ export const useGameState = () => {
         defenseForce === 0
           ? attackForce
           : Math.floor(attackForce - defenseForce * 0.6);
-      setTerritories((prev) =>
+      updateTerritories((prev) =>
         prev.map((t) => {
           if (t.name === fromTerritoryName) {
             return { ...t, troops: t.troops! - attackForce };
@@ -257,6 +280,7 @@ export const useGameState = () => {
           return t;
         })
       );
+
       setFactionTerritories(() =>
         factions.map((faction) =>
           territories
@@ -277,7 +301,7 @@ export const useGameState = () => {
       );
     } else {
       const casualties = Math.floor(Math.random() * 300 + 200);
-      setTerritories((prev) =>
+      updateTerritories((prev) =>
         prev.map((t) =>
           t.name === fromTerritoryName
             ? { ...t, troops: Math.max(100, t.troops! - casualties) }
@@ -317,7 +341,7 @@ export const useGameState = () => {
       }
 
       if (Math.random() > 0.6) {
-        setTerritories((prev) =>
+        updateTerritories((prev) =>
           prev.map((t) =>
             t.name === aiTerritory.name ? { ...t, troops: t.troops! + 300 } : t
           )
@@ -341,7 +365,7 @@ export const useGameState = () => {
     const victory = attackStrength > defenseStrength;
 
     if (victory) {
-      setTerritories((prev) =>
+      updateTerritories((prev) =>
         prev.map((t) => {
           if (t.name === fromId) {
             return { ...t, troops: t.troops! - attackForce };
@@ -356,6 +380,7 @@ export const useGameState = () => {
           return t;
         })
       );
+
       setFactionTerritories(() =>
         factions.map((faction) =>
           territories
@@ -374,7 +399,7 @@ export const useGameState = () => {
         "hostile"
       );
     } else {
-      setTerritories((prev) =>
+      updateTerritories((prev) =>
         prev.map((t) =>
           t.name === fromId
             ? {
@@ -434,10 +459,12 @@ export const useGameState = () => {
     const {
       character: newCharacter,
       faction: newFaction,
+      playerIndex: newIndex,
       adviserIndex: newAdviserIndex,
     } = initializePlayer(factions, factionLeaders, territories, chroniclers);
 
     setPlayerCharacter(newCharacter);
+    setPlayerIndex(newIndex);
     setAdviserIndex(newAdviserIndex);
 
     setPlayerFaction({
@@ -630,8 +657,12 @@ export const useGameState = () => {
     selectedTerritory,
     gameStatus,
     factionLeaders,
+    factionTerritories,
+    factionTroops,
+    factionTreasure,
     playerFaction,
     playerCharacter,
+    playerIndex,
     territories,
     chronicles,
     chroniclers,
@@ -655,15 +686,20 @@ const initializePlayer = (
   factionLeaders: Character[],
   territories: Territory[],
   chroniclers: Chronicler[]
-): { character: Character; faction: Faction; adviserIndex: number } => {
+): {
+  character: Character;
+  faction: Faction;
+  playerIndex: number;
+  adviserIndex: number;
+} => {
   const factionsWithTerritories = factions.filter((faction) =>
     territories.some((territory) => territory.owner === faction.name)
   );
-  const randomIndex = Math.floor(
+  const playerIndex = Math.floor(
     Math.random() * factionsWithTerritories.length
   );
-  const baseFaction = factionsWithTerritories[randomIndex];
-  const character = { ...factionLeaders[randomIndex] };
+  const baseFaction = factionsWithTerritories[playerIndex];
+  const character = { ...factionLeaders[playerIndex] };
 
   const playerTerritories = territories.filter(
     (territory) => territory.owner === baseFaction.name
@@ -676,5 +712,5 @@ const initializePlayer = (
 
   const adviserIndex = Math.floor(Math.random() * chroniclers.length);
 
-  return { character, faction, adviserIndex };
+  return { character, faction, playerIndex, adviserIndex };
 };
