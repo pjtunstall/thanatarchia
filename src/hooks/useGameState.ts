@@ -16,6 +16,7 @@ import {
   adjacentTerritories,
 } from "@/data/gameData";
 import { initializeLeaders } from "@/hooks/gameState/initializeLeaders";
+import { set } from "date-fns";
 
 export const useGameState = () => {
   const [currentTurn, setCurrentTurn] = useState(1);
@@ -170,9 +171,7 @@ export const useGameState = () => {
   };
 
   const checkGameStatus = () => {
-    const playerTerritories = territories.filter(
-      (t) => t.owner === playerFaction.name
-    ).length;
+    const playerTerritories = factionTerritories[playerIndex].length;
     if (playerTerritories >= 9) {
       generateFinalChronicles("victory");
       setGameStatus("victory");
@@ -325,7 +324,9 @@ export const useGameState = () => {
       (t) => t.owner !== playerFaction.name
     );
 
-    aiTerritories.forEach((aiTerritory) => {
+    aiTerritories.forEach((aiTerritory, i) => {
+      aiRecruitTroops(i);
+
       const adjacentPlayerTerritories =
         adjacentTerritories[aiTerritory.name]
           ?.map((id) => territories.find((t) => t.name === id))
@@ -341,14 +342,37 @@ export const useGameState = () => {
           executeAIAttack(aiTerritory.name, weakestTarget.name);
         }
       }
+    });
+  };
 
-      if (Math.random() > 0.6) {
-        updateTerritories((prev) =>
-          prev.map((t) =>
-            t.name === aiTerritory.name ? { ...t, troops: t.troops! + 300 } : t
-          )
-        );
-      }
+  const aiRecruitTroops = (i: number) => {
+    if (factionTreasure[i] < costOfRecruiting) return;
+    const recruitsPerTerritory = Math.round(500 / factionTerritories[i].length);
+    const totalRecruits =
+      recruitsPerTerritory * playerFaction.territories.length;
+
+    setTerritories((prevTerritories) => {
+      const factionName = factions[i].name;
+      const updated = prevTerritories.map((t) => {
+        if (t.owner === factionName) {
+          return { ...t, troops: t.troops! + recruitsPerTerritory };
+        }
+        return t;
+      });
+
+      setFactionTreasure((prev) => {
+        const updated = [...prev];
+        updated[i] -= costOfRecruiting;
+        return updated;
+      });
+
+      setFactionTroops((prev) => {
+        const updated = [...prev];
+        updated[i] += totalRecruits;
+        return updated;
+      });
+
+      return updated;
     });
   };
 
@@ -418,21 +442,26 @@ export const useGameState = () => {
   };
 
   const generateResources = () => {
-    const playerTerritoryCount = territories.filter(
-      (t) => t.owner === playerFaction.name
-    ).length;
-    const income = playerTerritoryCount * 20;
+    setFactionTreasure((prev) => {
+      const updated = prev.map((t, i) => {
+        const income = factionTerritories[i].length * 20;
+        if (i === playerIndex) {
+          addChronicleEntry(
+            `Our territories have generated ${income} solidi in tribute and taxes.`,
+            "friendly"
+          );
+        }
+        return t + income;
+      });
+      return updated;
+    });
 
     setPlayerFaction((prev) => ({
       ...prev,
-      treasure: prev.treasure + income,
+      treasure: factionTreasure[playerIndex],
       territories: [...prev.territories],
       relatives: [...prev.relatives],
     }));
-    addChronicleEntry(
-      `Our territories have generated ${income} solidi in tribute and taxes.`,
-      "friendly"
-    );
   };
 
   const handleEndTurn = () => {
