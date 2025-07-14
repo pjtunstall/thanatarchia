@@ -19,6 +19,9 @@ export function randomItem<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+export const costOfSpying = 25;
+export const costOfRecruiting = 50;
+
 export const getDate = (turn: number): string => {
   const year = getYear(turn);
   const season = getSeason(turn);

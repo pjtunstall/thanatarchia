@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Users, Eye } from "lucide-react";
 import { Faction } from "@/types/gameTypes";
+import { costOfSpying, costOfRecruiting } from "@/data/gameData";
 
 interface Props {
   playerFaction: Faction;
@@ -20,19 +21,19 @@ export const TreasuryActions: React.FC<Props> = ({
       onClick={onRecruitTroops}
       variant="outline"
       size="sm"
-      disabled={playerFaction.treasure < 50}
+      disabled={playerFaction.treasure < costOfRecruiting}
     >
       <Users className="w-3 h-3 mr-1" />
-      Recruit (50 solidi)
+      Recruit ({costOfRecruiting} solidi)
     </Button>
     <Button
       onClick={() => selectedTerritory && onSpy(selectedTerritory)}
       variant="outline"
       size="sm"
-      disabled={!selectedTerritory || playerFaction.treasure < 25}
+      disabled={!selectedTerritory || playerFaction.treasure < costOfSpying}
     >
       <Eye className="w-3 h-3 mr-1" />
-      Spy (25 solidi)
+      Spy ({costOfSpying} solidi)
     </Button>
   </div>
 );

@@ -10,6 +10,8 @@ import {
 import {
   factions,
   chroniclers,
+  costOfSpying,
+  costOfRecruiting,
   territories as initialTerritories,
   adjacentTerritories,
 } from "@/data/gameData";
@@ -453,7 +455,7 @@ export const useGameState = () => {
     setCurrentTurn(1);
     setSelectedTerritory(null);
     setFinalChronicles([]);
-
+    setFactionTreasure((_prev) => factions.map((f) => f.treasure));
     setFactionLeaders(initializeLeaders(factions));
 
     const {
@@ -490,14 +492,20 @@ export const useGameState = () => {
 
   const handleSpy = (territoryId: string) => {
     const territory = territories.find((t) => t.name === territoryId);
-    if (!territory || playerFaction.treasure < 25) return;
+    if (!territory || playerFaction.treasure < costOfSpying) return;
 
     setPlayerFaction((prev) => ({
       ...prev,
-      treasure: prev.treasure - 25,
+      treasure: prev.treasure - costOfSpying,
       territories: [...prev.territories],
       relatives: [...prev.relatives],
     }));
+
+    setFactionTreasure((prev) => {
+      const updated = [...prev];
+      updated[playerIndex] -= costOfSpying;
+      return updated;
+    });
 
     // Generate random condition that affects combat
     const conditions = [
@@ -532,9 +540,9 @@ export const useGameState = () => {
       chronicler:
         chroniclers[Math.floor(Math.random() * chroniclers.length)].name,
       bias: Math.random() > 0.5 ? "hostile" : "friendly",
-      entry: `Intelligence reveals that ${
-        territory.name
-      } suffers from ${condition}, which ${
+      entry: `Intelligence reveals that ${territory.name} ${
+        isPositive ? "benefits" : "suffers"
+      } from ${condition}, which ${
         isPositive ? "strengthens" : "weakens"
       } their military capacity.`,
       turn: currentTurn,
@@ -543,7 +551,7 @@ export const useGameState = () => {
   };
 
   const handleRecruitTroops = () => {
-    if (playerFaction.treasure < 50) return;
+    if (playerFaction.treasure < costOfRecruiting) return;
     const recruitsPerTerritory = Math.round(
       500 / playerFaction.territories.length
     );
@@ -561,11 +569,17 @@ export const useGameState = () => {
 
       setPlayerFaction((prevFaction) => ({
         ...prevFaction,
-        treasure: prevFaction.treasure - 50,
+        treasure: prevFaction.treasure - costOfRecruiting,
         troops: prevFaction.troops + totalRecruits,
         relatives: [...prevFaction.relatives],
         territories: [...prevFaction.territories],
       }));
+
+      setFactionTreasure((prev) => {
+        const updated = [...prev];
+        updated[playerIndex] -= costOfRecruiting;
+        return updated;
+      });
 
       return updated;
     });
