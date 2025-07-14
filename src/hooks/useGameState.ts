@@ -43,6 +43,17 @@ export const useGameState = () => {
 
   const [territories, setTerritories] =
     useState<Territory[]>(initialTerritories);
+  const [factionTerritories, setFactionTerritories] = useState<string[][]>(
+    () => {
+      return factions.map((f) => f.territories);
+    }
+  );
+  const [factionTroops, setFactionTroops] = useState<number[]>(() => {
+    return factions.map((f) => f.troops);
+  });
+  const [factionTreasure, setFactionTreasure] = useState<number[]>(() => {
+    return factions.map((f) => f.treasure);
+  });
 
   const [chronicles, setChronicles] = useState<Chronicle[]>([
     {
