@@ -17,11 +17,6 @@ interface GameMapProps {
   factionLeaders: Character[];
   playerFactionName: string;
   playerFactionColor: string;
-  playerCharacter: {
-    name: string;
-    gender: "male" | "female";
-    image: string;
-  };
   onTerritoryClick: (territoryId: string) => void;
 }
 
@@ -32,7 +27,6 @@ export const GameMap: React.FC<GameMapProps> = ({
   factionLeaders,
   playerFactionName,
   playerFactionColor,
-  playerCharacter,
   onTerritoryClick,
 }) => {
   // Create faction lookup from centralized data + filter to only show factions with territories

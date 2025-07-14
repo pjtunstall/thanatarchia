@@ -50,7 +50,6 @@ const GameDashboard = () => {
                 factionLeaders={gameState.factionLeaders}
                 playerFactionName={gameState.playerFaction.name}
                 playerFactionColor={gameState.playerFaction.color}
-                playerCharacter={gameState.playerCharacter}
                 onTerritoryClick={gameState.handleTerritoryClick}
               />
             </div>
