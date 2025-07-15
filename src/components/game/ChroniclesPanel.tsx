@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { CharacterDialog } from "@/components/game/CharacterDialog";
 import { Chronicle, Chronicler } from "@/types/gameTypes";
-import { getDate } from "@/data/gameData";
+import { getDate, chroniclers } from "@/data/gameData";
 
 interface ChroniclesPanelProps {
   chronicles: Chronicle[];
@@ -13,7 +13,6 @@ interface ChroniclesPanelProps {
 
 export const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
   chronicles,
-  chroniclers,
 }) => {
   const getChroniclerInfo = (chroniclerName: string) =>
     chroniclers.find((c) => c.name === chroniclerName);

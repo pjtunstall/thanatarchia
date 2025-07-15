@@ -73,10 +73,7 @@ const GameDashboard = () => {
                 </TabsList>
 
                 <TabsContent value="chronicles" className="mt-4">
-                  <ChroniclesPanel
-                    chronicles={gameState.chronicles}
-                    chroniclers={gameState.chroniclers}
-                  />
+                  <ChroniclesPanel chronicles={gameState.chronicles} />
                 </TabsContent>
 
                 <TabsContent value="status" className="mt-4">
@@ -94,6 +91,8 @@ const GameDashboard = () => {
                     }
                     selectedTerritory={gameState.selectedTerritory}
                     adviserIndex={gameState.adviserIndex}
+                    factionTreasures={gameState.factionTreasures}
+                    playerIndex={gameState.playerIndex}
                   />
                 </TabsContent>
 
@@ -106,7 +105,7 @@ const GameDashboard = () => {
                     selectedTerritory={gameState.selectedTerritory}
                     onAction={gameState.handleAction}
                     onEndTurn={gameState.handleEndTurn}
-                    onRecruitTroops={gameState.handleRecruitTroops}
+                    onRecruit={gameState.handleRecruit}
                     onSpy={gameState.handleSpy}
                     onAttack={gameState.handleAttack}
                     onReinforce={gameState.handleReinforce}

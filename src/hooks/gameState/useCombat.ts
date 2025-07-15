@@ -13,7 +13,7 @@ interface UseCombatProps {
   updateTerritories: (updater: (prev: Territory[]) => Territory[]) => void;
   setFactionTreasures: (updater: (prev: number[]) => number[]) => void;
   addChronicleEntry: (entry: string, bias: "friendly" | "hostile") => void;
-  onTurnEnd: () => void;
+  onEndTurn: () => void;
 }
 
 export const useCombat = ({
@@ -26,10 +26,9 @@ export const useCombat = ({
   updateTerritories,
   setFactionTreasures,
   addChronicleEntry,
-  onTurnEnd,
+  onEndTurn,
 }: UseCombatProps) => {
   const handleRecruit = useCallback(() => {
-    const costOfRecruiting = 25;
     const playerTreasury = factionTreasures[playerIndex];
 
     if (playerTreasury < costOfRecruiting) return;
@@ -140,7 +139,7 @@ export const useCombat = ({
         );
       }
 
-      onTurnEnd();
+      onEndTurn();
     },
     [
       territories,
@@ -149,7 +148,7 @@ export const useCombat = ({
       adjacentTerritories,
       updateTerritories,
       addChronicleEntry,
-      onTurnEnd,
+      onEndTurn,
     ]
   );
 
@@ -198,7 +197,7 @@ export const useCombat = ({
   );
 
   // AI recruitment logic
-  const aiRecruitTroops = useCallback(
+  const aiRecruit = useCallback(
     (factionIndex: number) => {
       if (factionTreasures[factionIndex] < costOfRecruiting) return;
 
@@ -294,7 +293,7 @@ export const useCombat = ({
     factions.forEach((faction, i) => {
       if (i === playerIndex) return;
 
-      aiRecruitTroops(i);
+      aiRecruit(i);
 
       // Get AI faction's territories from factionTerritories[i]
       const aiTerritoryNames = factionTerritories[i];
@@ -336,14 +335,14 @@ export const useCombat = ({
     factionTerritories,
     territories,
     adjacentTerritories,
-    aiRecruitTroops,
+    aiRecruit,
     executeAIAttack,
   ]);
 
   return {
+    handleRecruit,
     handleAttack,
     handleReinforce,
-    handleRecruit,
     getValidAttackTargets,
     executeAITurn,
   };

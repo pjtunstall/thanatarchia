@@ -16,7 +16,7 @@ interface ActionsPanelProps {
   selectedTerritory: string | null;
   onAction: (action: string) => void;
   onEndTurn: () => void;
-  onRecruitTroops: () => void;
+  onRecruit: () => void;
   onSpy: (territoryId: string) => void;
   onAttack: (fromTerritoryId: string, toTerritoryId: string) => void;
   onReinforce: (fromTerritoryId: string, toTerritoryId: string) => void;
@@ -67,7 +67,7 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
             <TreasuryActions
               playerTreasure={factionTreasures[playerIndex]}
               selectedTerritory={selectedTerritory}
-              onRecruitTroops={props.onRecruitTroops}
+              onRecruit={props.onRecruit}
               onSpy={props.onSpy}
             />
 

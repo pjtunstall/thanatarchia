@@ -6,19 +6,19 @@ import { costOfSpying, costOfRecruiting } from "@/data/gameData";
 interface Props {
   playerTreasure: number;
   selectedTerritory: string | null;
-  onRecruitTroops: () => void;
+  onRecruit: () => void;
   onSpy: (territoryId: string) => void;
 }
 
 export const TreasuryActions: React.FC<Props> = ({
   playerTreasure,
   selectedTerritory,
-  onRecruitTroops,
+  onRecruit,
   onSpy,
 }) => (
   <div className="grid grid-cols-2 gap-2">
     <Button
-      onClick={onRecruitTroops}
+      onClick={onRecruit}
       variant="outline"
       size="sm"
       disabled={playerTreasure < costOfRecruiting}

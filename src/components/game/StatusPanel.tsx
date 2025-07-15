@@ -17,6 +17,8 @@ interface StatusPanelProps {
   playerTroops: number;
   selectedTerritory: string | null;
   adviserIndex: number;
+  factionTreasures: number[];
+  playerIndex: number;
 }
 
 export const StatusPanel: React.FC<StatusPanelProps> = ({
@@ -27,6 +29,8 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
   playerTroops,
   selectedTerritory,
   adviserIndex,
+  factionTreasures,
+  playerIndex,
 }) => {
   return (
     <Card className="h-full flex flex-col">
@@ -48,7 +52,9 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
               <div className="flex items-center gap-2">
                 <Coins className="w-4 h-4 text-yellow-600" />
                 <span className="text-sm font-semibold">Treasure:</span>
-                <span className="text-sm">{playerFaction.treasure} solidi</span>
+                <span className="text-sm">
+                  {factionTreasures[playerIndex]} solidi
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4 text-blue-600" />
