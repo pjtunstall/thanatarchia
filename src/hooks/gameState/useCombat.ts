@@ -287,23 +287,18 @@ export const useCombat = ({
     [territories, updateTerritories, addChronicleEntry]
   );
 
-  // Main AI turn execution
   const executeAITurn = useCallback(() => {
-    // For each AI faction
     factions.forEach((faction, i) => {
       if (i === playerIndex) return;
 
       aiRecruit(i);
 
-      // Get AI faction's territories from factionTerritories[i]
       const aiTerritoryNames = factionTerritories[i];
 
-      // For each territory owned by this AI faction
       aiTerritoryNames.forEach((aiTerritoryName) => {
         const aiTerritory = territories.find((t) => t.name === aiTerritoryName);
         if (!aiTerritory) return;
 
-        // Find adjacent territories to this AI territory by name (from your adjacency map)
         const adjacentNames = adjacentTerritories[aiTerritoryName] || [];
 
         // Filter those adjacent territories owned by the player

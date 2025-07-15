@@ -7,6 +7,9 @@ import { useCombat } from "@/hooks/gameState/useCombat";
 import { useChronicles } from "@/hooks/gameState/useChronicles";
 
 export const useGameState = () => {
+  const [factionLeaders, setFactionLeaders] = useState(
+    initializeLeaders(factions)
+  );
   const gameCore = useGameCore();
   const chronicles = useChronicles(gameCore.currentTurn);
   const {
@@ -34,12 +37,6 @@ export const useGameState = () => {
     },
   });
 
-  // Initialize faction leaders
-  const [factionLeaders, setFactionLeaders] = useState(
-    initializeLeaders(factions)
-  );
-
-  // Resource generation
   const generateResources = useCallback(() => {
     gameCore.setFactionTreasures((prev) => {
       const updated = prev.map((t, i) => {
@@ -79,7 +76,6 @@ export const useGameState = () => {
     chronicles.generateFinalChronicles,
   ]);
 
-  // Reset game
   const resetGame = useCallback(() => {
     gameCore.resetGame();
     chronicles.resetChronicles();
