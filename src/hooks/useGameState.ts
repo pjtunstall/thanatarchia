@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { initializeLeaders } from "@/hooks/gameState/initializeLeaders";
 import { factions, adjacentTerritories } from "@/data/gameData";
@@ -95,6 +95,10 @@ export const useGameState = () => {
     gameCore.setSelectedTerritory,
     checkGameStatus,
   ]);
+
+  useEffect(() => {
+    checkGameStatus();
+  }, [gameCore.territories]);
 
   return {
     ...gameCore,
