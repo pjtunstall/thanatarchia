@@ -30,7 +30,7 @@ export const useGameState = () => {
       executeAITurn();
       gameCore.setCurrentTurn((prev) => prev + 1);
       gameCore.setSelectedTerritory(null);
-      gameCore.checkGameStatus();
+      checkGameStatus();
     },
   });
 
@@ -60,6 +60,25 @@ export const useGameState = () => {
     chronicles.addChronicleEntry,
   ]);
 
+  const checkGameStatus = useCallback(() => {
+    const playerTerritories =
+      gameCore.factionTerritories[gameCore.playerIndex].length;
+    if (playerTerritories >= 9) {
+      gameCore.setGameStatus("victory");
+      chronicles.generateFinalChronicles("victory");
+      return "victory";
+    } else if (playerTerritories === 0) {
+      gameCore.setGameStatus("defeat");
+      chronicles.generateFinalChronicles("defeat");
+      return "defeat";
+    }
+    return "playing";
+  }, [
+    gameCore.factionTerritories,
+    gameCore.playerIndex,
+    chronicles.generateFinalChronicles,
+  ]);
+
   // Reset game
   const resetGame = useCallback(() => {
     gameCore.resetGame();
@@ -72,13 +91,13 @@ export const useGameState = () => {
     executeAITurn();
     gameCore.setCurrentTurn((prev) => prev + 1);
     gameCore.setSelectedTerritory(null);
-    gameCore.checkGameStatus();
+    checkGameStatus();
   }, [
     generateResources,
     executeAITurn,
     gameCore.setCurrentTurn,
     gameCore.setSelectedTerritory,
-    gameCore.checkGameStatus,
+    checkGameStatus,
   ]);
 
   return {

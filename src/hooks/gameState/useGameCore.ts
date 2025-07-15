@@ -38,19 +38,6 @@ export const useGameCore = () => {
     [territories]
   );
 
-  // Check game status whenever territories change
-  const checkGameStatus = useCallback(() => {
-    const playerTerritories = factionTerritories[playerIndex].length;
-    if (playerTerritories >= 9) {
-      setGameStatus("victory");
-      return "victory";
-    } else if (playerTerritories === 0) {
-      setGameStatus("defeat");
-      return "defeat";
-    }
-    return "playing";
-  }, [factionTerritories, playerIndex]);
-
   const updateTerritories = useCallback(
     (updater: (prev: Territory[]) => Territory[]) => {
       setTerritories(updater);
@@ -93,9 +80,9 @@ export const useGameCore = () => {
     setCurrentTurn,
     setFactionTreasures,
     updateTerritories,
-    checkGameStatus,
     resetGame,
     handleTerritoryClick,
+    setGameStatus,
   };
 };
 
