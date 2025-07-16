@@ -96,10 +96,11 @@ export const useCombat = ({
       }
 
       let success: boolean;
-      let winner;
-      let loser;
+      let winners: string;
+      let losers: string;
       let casualties: number;
       let survivors: number;
+      let stats: string;
       const attackForce = Math.floor(fromTerritory.troops! * 0.8);
       const defenseForce = toTerritory.troops!;
 
@@ -113,12 +114,12 @@ export const useCombat = ({
 
       if (victory) {
         success = true;
-        winner = toTerritory.owner;
-        loser = fromTerritory.owner;
+        winners = fromTerritory.owner;
+        losers = toTerritory.owner;
         const survivors =
           defenseForce === 0
             ? attackForce
-            : Math.floor(attackForce - defenseForce * 0.6);
+            : Math.floor(attackForce - defenseForce * 0.3);
         casualties = attackForce - survivors;
 
         updateTerritories((prev) =>
@@ -142,12 +143,11 @@ export const useCombat = ({
           "friendly"
         );
 
-        const msg = `You conquered ${toTerritory.name} with ${survivors} troops remaining. Casualties: ${casualties}.`;
-        onResult?.(msg);
+        stats = `Initial strength: ${attackForce}. Casualties: ${casualties}.`;
       } else {
         success = false;
-        winner = toTerritory.owner;
-        loser = fromTerritory.owner;
+        winners = toTerritory.owner;
+        losers = fromTerritory.owner;
         casualties = Math.floor(Math.random() * 300 + 200);
         survivors = attackForce - casualties;
         updateTerritories((prev) =>
@@ -163,12 +163,28 @@ export const useCombat = ({
           "hostile"
         );
 
-        let chronicles = chroniclers.map((chronicler) =>
-          battleChronicle(chronicler, success, toTerritory.name, winner, loser)
-        );
-        const msg = `Attack on ${toTerritory.name} failed. Casualties: ${casualties}. Survivors: ${survivors}`;
-        onResult?.(msg);
+        // let chronicles = chroniclers.map((chronicler) =>
+        //   battleChronicle(
+        //     chronicler,
+        //     success,
+        //     toTerritory.name,
+        //     winners,
+        //     losers
+        //   )
+        // );
+
+        stats = `Initial strength: ${attackForce}. Casualties: ${casualties}.`;
       }
+
+      const chronicle = battleChronicle(
+        chroniclers[0],
+        success,
+        winners,
+        losers,
+        toTerritory.name
+      );
+      const msg = chronicle + "\n" + stats;
+      onResult?.(msg);
 
       onEndTurn();
     },

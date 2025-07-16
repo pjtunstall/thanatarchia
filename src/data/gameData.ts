@@ -118,40 +118,50 @@ export const initialReport = (adviserName: string): string => {
 export const battleChronicle = (
   chronicler: Chronicler,
   success: boolean,
-  winner: string,
-  loser: string,
+  winners: string,
+  losers: string,
   territory: string
 ): string => {
+  let playerFaction: string;
+  let enemy: string;
+  if (success) {
+    playerFaction = winners;
+    enemy = losers;
+  } else {
+    enemy = winners;
+    playerFaction = losers;
+  }
+
   switch (chronicler.name) {
     case "John of Colchis":
       if (chronicler.bias === "friendly") {
         if (success) {
-          return `${winner}`;
+          return `"Our Savior has blessed the ${playerFaction} with victory over the ${enemy} in ${territory}."`;
         } else {
-          return "";
+          return `"After a heroic struggle, the ${playerFaction} failed to liberate ${territory} from the ${enemy}"`;
         }
       } else {
         if (success) {
-          return `${winner}`;
+          return `"Like the wolf upon the flock, the ${playerFaction}, have fallen upon the ${enemy} with great slaughter in ${territory}."`;
         } else {
-          return "";
+          return `"At this time, the ${playerFaction} made an unprovoked attack on the ${enemy} in ${territory}, but were driven back with dreadful losses."`;
         }
       }
     case "Priscilla of Byzantium":
       if (chronicler.bias === "friendly") {
-        return `${winner}`;
+        return `${winners}`;
       } else {
         return "";
       }
     case "Eudaemonia of Rheims":
       if (chronicler.bias === "friendly") {
-        return `${winner}`;
+        return `${winners}`;
       } else {
         return "";
       }
     case "Athaloc of Smyrna":
       if (chronicler.bias === "friendly") {
-        return `${winner}`;
+        return ``;
       } else {
         return "";
       }
