@@ -16,6 +16,7 @@ import visigothicQueen from "@/assets/visigothic-queen-portrait.jpg";
 import vandalChief from "@/assets/vandal-chief-portrait.jpg";
 import hunnicWarlord from "@/assets/hunnic-warlord-portrait.jpg";
 import frankishKing from "@/assets/frankish-king-portrait.jpg";
+import manuscriptQueen from "@/assets/manuscript-queen.jpg";
 
 export const factions: Faction[] = [
   {
@@ -169,7 +170,7 @@ export const factions: Faction[] = [
       female: {
         name: "Brunhild",
         gender: "female",
-        image: mosaicWarriorQueen,
+        image: manuscriptQueen,
         biography: "",
       },
     },
@@ -219,7 +220,7 @@ export const factions: Faction[] = [
       female: {
         name: "Clotilde",
         gender: "female",
-        image: visigothicQueen,
+        image: mosaicWarriorQueen,
         biography: "",
       },
     },

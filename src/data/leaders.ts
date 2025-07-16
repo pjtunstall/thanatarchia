@@ -8,6 +8,7 @@ export const epithets = [
   "Bigot",
   "Calm",
   "Cruel",
+  "Stern",
   "Dire",
   "Embezzler",
   "Entitled",
@@ -28,10 +29,10 @@ export const epithets = [
   "Petulant",
   "'Pious'",
   "Proud",
-  "Quirky",
   "Rascal",
   "Rude",
   "Terrible",
+  "Awful",
   "Tyrant",
   "Unkind",
   "Unpredictable",
@@ -105,7 +106,7 @@ const ostrogothFemaleLastElements = [
   "nanda",
 ];
 
-const ostroGothicMaleDiminutives = ["Ansila", "Totila", "Merila"];
+const ostroGothicMaleDiminutives = ["Ansila", "Totila", "Merila", "Frithila"];
 
 export function randomVisigothName(gender: Gender): string {
   if (gender === "male") {
@@ -168,12 +169,13 @@ const visigothMaleLastElements = [
   "thank",
   "lec",
 ];
-const visigothFemaleLastElements = ["suintha", "gotho", "gild", "berga"];
+const visigothFemaleLastElements = ["suintha", "gotho", "berga"];
 
 const visiGothicMaleDiminutives = [
   "Suinthila",
   "Chindila",
   "Wamba",
+  "Wallia",
   "Liuvila",
   "Sunna",
   "Sigila",
@@ -185,7 +187,7 @@ const visiGothicFemaleDiminutives = ["Cixilo", "Baddo"];
 
 export const scapegoats = [
   "unbelievers",
-  "witches",
+  "witches etc.",
   "enemies of the state",
   "political rivals",
   "a mystery assassin",
@@ -259,8 +261,9 @@ export const benefactors = [
 
 export const victims1 = [
   "beekeepers",
+  "musicians",
   "under fives",
-  "plague victims",
+  "lepers",
   "presumed traitors",
 ];
 
@@ -270,4 +273,5 @@ export const victims2 = [
   "the poor",
   "the tired",
   "the gullible",
+  "the arts",
 ];
