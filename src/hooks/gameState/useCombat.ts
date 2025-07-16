@@ -70,7 +70,11 @@ export const useCombat = ({
   ]);
 
   const handleAttack = useCallback(
-    (fromTerritoryName: string, toTerritoryName: string) => {
+    (
+      fromTerritoryName: string,
+      toTerritoryName: string,
+      onResult?: (msg: string) => void
+    ) => {
       const fromTerritory = territories.find(
         (t) => t.name === fromTerritoryName
       );
@@ -86,6 +90,8 @@ export const useCombat = ({
         return;
       }
 
+      let casualties: number;
+      let survivors: number;
       const attackForce = Math.floor(fromTerritory.troops! * 0.8);
       const defenseForce = toTerritory.troops!;
 
@@ -98,10 +104,11 @@ export const useCombat = ({
       const victory = attackStrength > defenseStrength;
 
       if (victory) {
-        const survivingTroops =
+        const survivors =
           defenseForce === 0
             ? attackForce
             : Math.floor(attackForce - defenseForce * 0.6);
+        casualties = attackForce - survivors;
 
         updateTerritories((prev) =>
           prev.map((t) => {
@@ -112,7 +119,7 @@ export const useCombat = ({
               return {
                 ...t,
                 owner: factions[playerIndex].name,
-                troops: survivingTroops,
+                troops: survivors,
               };
             }
             return t;
@@ -123,8 +130,12 @@ export const useCombat = ({
           `Our brave warriors have conquered ${toTerritory.name} in glorious battle!`,
           "friendly"
         );
+
+        const msg = `You conquered ${toTerritory.name} with ${survivors} troops remaining. Casualties: ${casualties}.`;
+        onResult?.(msg);
       } else {
-        const casualties = Math.floor(Math.random() * 300 + 200);
+        casualties = Math.floor(Math.random() * 300 + 200);
+        survivors = attackForce - casualties;
         updateTerritories((prev) =>
           prev.map((t) =>
             t.name === fromTerritoryName
@@ -137,6 +148,9 @@ export const useCombat = ({
           `Our forces were repelled from ${toTerritory.name} with heavy losses.`,
           "hostile"
         );
+
+        const msg = `Attack on ${toTerritory.name} failed. Casualties: ${casualties}. Survivors: ${survivors}`;
+        onResult?.(msg);
       }
 
       onEndTurn();

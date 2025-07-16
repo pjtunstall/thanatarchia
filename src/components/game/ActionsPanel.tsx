@@ -1,12 +1,24 @@
 import React from "react";
+import { useState } from "react";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
-import { adjacentTerritories } from "@/data/gameData";
+import { adjacentTerritories, chroniclers } from "@/data/gameData";
 import { Faction, Territory } from "@/types/gameTypes";
 import { BasicActions } from "@/components/game/actions/BasicActions";
 import { TreasuryActions } from "@/components/game/actions/TreasuryActions";
 import { AttackButton } from "@/components/game/actions/AttackButton";
 import { ReinforceButton } from "@/components/game/actions/ReinforceButton";
+import { CharacterDialog } from "@/components/game/CharacterDialog";
 
 interface ActionsPanelProps {
   playerFaction: Faction;
@@ -18,9 +30,14 @@ interface ActionsPanelProps {
   onEndTurn: () => void;
   onRecruit: () => void;
   onSpy: (territoryId: string) => void;
-  onAttack: (fromTerritoryId: string, toTerritoryId: string) => void;
+  onAttack: (
+    fromTerritoryId: string,
+    toTerritoryId: string,
+    onResult?: (message: string) => void
+  ) => void;
   onReinforce: (fromTerritoryId: string, toTerritoryId: string) => void;
   getValidAttackTargets: (fromTerritoryId: string) => Territory[];
+  adviserIndex: number;
 }
 
 export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
@@ -31,7 +48,10 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
     selectedTerritory,
     territories,
     getValidAttackTargets,
+    adviserIndex,
   } = props;
+
+  const [battleMessage, setBattleMessage] = useState<string | null>(null);
 
   const selected = selectedTerritory
     ? territories.find((t) => t.name === selectedTerritory)
@@ -55,48 +75,101 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
       : [];
 
   return (
-    <Card className="max-h-full overflow-auto">
-      <CardHeader>
-        <CardTitle className="text-lg">Actions</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
-          <BasicActions onAction={props.onAction} onEndTurn={props.onEndTurn} />
-          <div className="border-t pt-3">
-            <p className="text-sm font-semibold mb-2">Treasury Actions</p>
-            <TreasuryActions
-              playerTreasure={factionTreasures[playerIndex]}
-              selectedTerritory={selectedTerritory}
-              onRecruit={props.onRecruit}
-              onSpy={props.onSpy}
+    <>
+      <Card className="max-h-full overflow-auto">
+        <CardHeader>
+          <CardTitle className="text-lg">Actions</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <BasicActions
+              onAction={props.onAction}
+              onEndTurn={props.onEndTurn}
             />
+            <div className="border-t pt-3">
+              <p className="text-sm font-semibold mb-2">Treasury Actions</p>
+              <TreasuryActions
+                playerTreasure={factionTreasures[playerIndex]}
+                selectedTerritory={selectedTerritory}
+                onRecruit={props.onRecruit}
+                onSpy={props.onSpy}
+              />
 
-            {selectedTerritory && (
-              <>
-                <SelectedTerritoryInfo
-                  territories={territories}
-                  selectedTerritory={selectedTerritory}
-                  selectedFaction={playerFaction}
-                />
-                <div className="border-t pt-3 space-y-2">
-                  <AttackButton
-                    from={selectedTerritory}
-                    targets={validAttackTargets}
-                    onAttack={props.onAttack}
-                    disabled={selected?.troops! < 200}
+              {selectedTerritory && (
+                <>
+                  <SelectedTerritoryInfo
+                    territories={territories}
+                    selectedTerritory={selectedTerritory}
+                    selectedFaction={playerFaction}
                   />
-                  <ReinforceButton
-                    from={selectedTerritory}
-                    targets={validReinforceTargets}
-                    onReinforce={props.onReinforce}
-                    disabled={selected?.troops! < 100}
-                  />
-                </div>
-              </>
-            )}
+                  <div className="border-t pt-3 space-y-2">
+                    <AttackButton
+                      from={selectedTerritory}
+                      targets={validAttackTargets}
+                      onAttack={(from, to) => {
+                        props.onAttack(from, to, setBattleMessage);
+                      }}
+                      disabled={selected?.troops! < 200}
+                    />
+                    <ReinforceButton
+                      from={selectedTerritory}
+                      targets={validReinforceTargets}
+                      onReinforce={props.onReinforce}
+                      disabled={selected?.troops! < 100}
+                    />
+                  </div>
+                </>
+              )}
+            </div>
           </div>
+        </CardContent>
+      </Card>
+
+      <Dialog
+        open={!!battleMessage}
+        onOpenChange={(open) => !open && setBattleMessage(null)}
+      >
+        <DialogContent className="max-w-2xl">
+          <div className="flex flex-col md:flex-row gap-6 items-start">
+            <img
+              src="src/assets/battle.jpg"
+              alt="Battle scene"
+              className="w-full md:w-1/2 rounded object-cover max-h-[300px]"
+            />
+            <div className="flex-1 space-y-4">
+              <DialogHeader>
+                <DialogTitle className="text-xl">Battle Result</DialogTitle>
+              </DialogHeader>
+              <BattleReport
+                adviserIndex={adviserIndex}
+                battleMessage={battleMessage!}
+              />
+            </div>
+          </div>
+          <DialogClose className="absolute right-4 top-4" />
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+};
+
+const BattleReport: React.FC<{
+  adviserIndex: number;
+  battleMessage: string;
+}> = ({ adviserIndex, battleMessage }) => {
+  const adviser = chroniclers[adviserIndex];
+
+  return (
+    <>
+      <div className="border-l-4 border-primary pl-4 py-2">
+        <div className="flex items-center gap-3 mb-2">
+          <CharacterDialog character={adviser} />
+          <Badge variant="secondary">{adviser.name}</Badge>
         </div>
-      </CardContent>
-    </Card>
+        <p className="text-sm italic font-serif leading-relaxed">
+          {battleMessage}
+        </p>
+      </div>
+    </>
   );
 };

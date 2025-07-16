@@ -110,6 +110,7 @@ const GameDashboard = () => {
                     onAttack={gameState.handleAttack}
                     onReinforce={gameState.handleReinforce}
                     getValidAttackTargets={gameState.getValidAttackTargets}
+                    adviserIndex={gameState.adviserIndex}
                   />
                 </TabsContent>
               </Tabs>
