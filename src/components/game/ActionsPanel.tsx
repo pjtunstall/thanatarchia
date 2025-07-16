@@ -33,7 +33,8 @@ interface ActionsPanelProps {
   onAttack: (
     fromTerritoryId: string,
     toTerritoryId: string,
-    onResult?: (message: string) => void
+    onResult?: (message: string) => void,
+    adviserIndex?: number
   ) => void;
   onReinforce: (fromTerritoryId: string, toTerritoryId: string) => void;
   getValidAttackTargets: (fromTerritoryId: string) => Territory[];

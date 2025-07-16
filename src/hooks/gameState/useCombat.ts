@@ -1,7 +1,11 @@
 import { useCallback } from "react";
 
 import { Faction, Territory } from "@/types/gameTypes";
-import { costOfRecruiting } from "@/data/gameData";
+import {
+  chroniclers,
+  battleChronicle,
+  costOfRecruiting,
+} from "@/data/gameData";
 
 interface UseCombatProps {
   territories: Territory[];
@@ -73,7 +77,8 @@ export const useCombat = ({
     (
       fromTerritoryName: string,
       toTerritoryName: string,
-      onResult?: (msg: string) => void
+      onResult?: (msg: string) => void,
+      adviserIndex?: number
     ) => {
       const fromTerritory = territories.find(
         (t) => t.name === fromTerritoryName
@@ -90,6 +95,9 @@ export const useCombat = ({
         return;
       }
 
+      let success: boolean;
+      let winner;
+      let loser;
       let casualties: number;
       let survivors: number;
       const attackForce = Math.floor(fromTerritory.troops! * 0.8);
@@ -104,6 +112,9 @@ export const useCombat = ({
       const victory = attackStrength > defenseStrength;
 
       if (victory) {
+        success = true;
+        winner = toTerritory.owner;
+        loser = fromTerritory.owner;
         const survivors =
           defenseForce === 0
             ? attackForce
@@ -134,6 +145,9 @@ export const useCombat = ({
         const msg = `You conquered ${toTerritory.name} with ${survivors} troops remaining. Casualties: ${casualties}.`;
         onResult?.(msg);
       } else {
+        success = false;
+        winner = toTerritory.owner;
+        loser = fromTerritory.owner;
         casualties = Math.floor(Math.random() * 300 + 200);
         survivors = attackForce - casualties;
         updateTerritories((prev) =>
@@ -149,6 +163,9 @@ export const useCombat = ({
           "hostile"
         );
 
+        let chronicles = chroniclers.map((chronicler) =>
+          battleChronicle(chronicler, success, toTerritory.name, winner, loser)
+        );
         const msg = `Attack on ${toTerritory.name} failed. Casualties: ${casualties}. Survivors: ${survivors}`;
         onResult?.(msg);
       }

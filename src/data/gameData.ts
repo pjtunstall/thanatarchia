@@ -114,3 +114,46 @@ export const initialReport = (adviserName: string): string => {
       return '"Our forces are weak, my liege. I advise patience."';
   }
 };
+
+export const battleChronicle = (
+  chronicler: Chronicler,
+  success: boolean,
+  winner: string,
+  loser: string,
+  territory: string
+): string => {
+  switch (chronicler.name) {
+    case "John of Colchis":
+      if (chronicler.bias === "friendly") {
+        if (success) {
+          return `${winner}`;
+        } else {
+          return "";
+        }
+      } else {
+        if (success) {
+          return `${winner}`;
+        } else {
+          return "";
+        }
+      }
+    case "Priscilla of Byzantium":
+      if (chronicler.bias === "friendly") {
+        return `${winner}`;
+      } else {
+        return "";
+      }
+    case "Eudaemonia of Rheims":
+      if (chronicler.bias === "friendly") {
+        return `${winner}`;
+      } else {
+        return "";
+      }
+    case "Athaloc of Smyrna":
+      if (chronicler.bias === "friendly") {
+        return `${winner}`;
+      } else {
+        return "";
+      }
+  }
+};
