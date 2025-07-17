@@ -80,7 +80,12 @@ export const useCombat = ({
       fromTerritoryName: string,
       toTerritoryName: string,
       adviserIndex: number
-    ): { victory: boolean; message: string; chronicler: Chronicler } => {
+    ): {
+      victory: boolean;
+      chronicle: string;
+      stats: string;
+      chronicler: Chronicler;
+    } => {
       const fromTerritory = territories.find(
         (t) => t.name === fromTerritoryName
       );
@@ -173,11 +178,10 @@ export const useCombat = ({
         losers,
         toTerritory.name
       );
-      const message = chronicle + "\n" + stats;
 
       // onEndTurn();
 
-      return { victory, message, chronicler };
+      return { victory, chronicle, stats, chronicler };
     },
     [
       territories,

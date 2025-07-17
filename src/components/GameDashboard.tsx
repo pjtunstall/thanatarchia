@@ -114,6 +114,10 @@ const GameDashboard = () => {
                     setSuccess={gameState.setSuccess}
                     currentChronicler={gameState.currentChronicler}
                     setCurrentChronicler={gameState.setCurrentChronicler}
+                    battleMessage={gameState.battleMessage}
+                    setBattleMessage={gameState.setBattleMessage}
+                    stats={gameState.stats}
+                    setStats={gameState.setStats}
                   />
                 </TabsContent>
               </Tabs>

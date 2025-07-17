@@ -23,6 +23,8 @@ export const useGameCore = () => {
   );
   const [success, setSuccess] = useState<boolean | null>(null);
   const [currentChronicler, setCurrentChronicler] = useState(chroniclers[0]);
+  const [battleMessage, setBattleMessage] = useState<string | null>(null);
+  const [stats, setStats] = useState<string | null>(null);
 
   // Derived state - computed from territories, no separate state needed
   const factionTerritories = useMemo(
@@ -69,6 +71,9 @@ export const useGameCore = () => {
     setSelectedTerritory((prev) => (prev === territoryId ? null : territoryId));
   }, []);
 
+  const handleAction = useCallback((action: string): void => {}, []);
+  const handleSpy = useCallback((targetTerritory: string) => {}, []);
+
   return {
     // State
     currentTurn,
@@ -79,6 +84,8 @@ export const useGameCore = () => {
     playerIndex,
     success,
     currentChronicler,
+    battleMessage,
+    stats,
 
     // Derived state
     factionTerritories,
@@ -91,9 +98,13 @@ export const useGameCore = () => {
     updateTerritories,
     resetGame,
     handleTerritoryClick,
+    handleAction,
+    handleSpy,
     setGameStatus,
     setSuccess,
     setCurrentChronicler,
+    setBattleMessage,
+    setStats,
   };
 };
 

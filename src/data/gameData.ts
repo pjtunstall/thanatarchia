@@ -143,7 +143,7 @@ export const battleChronicle = (
         }
       } else {
         if (success) {
-          return `"Like the wolf upon the flock, the treacherous ${attackers}, have fallen upon the ${defenders} with great slaughter in ${territory}."`;
+          return `"Like a wolf upon the fold, the treacherous ${attackers}, have fallen upon the ${defenders} with great slaughter in ${territory}."`;
         } else {
           return `"At this time, the ${attackers} made an unprovoked attack on the ${defenders} in ${territory}, but were driven back with dreadful losses."`;
         }
@@ -157,7 +157,7 @@ export const battleChronicle = (
         }
       } else {
         if (success) {
-          return `In this year, a great throng of the barbarous ${attackers} descended on ${territory}, overwhelming the ${defenders} there.`;
+          return `In this year, a great throng of the barbarous ${attackers} descended upon ${territory}, overwhelming the ${defenders} there.`;
         } else {
           return `Today, God saw fit to punish the ${attackers} for their impudent assault on the ${defenders} in ${territory}. One senses imperial training at work here.`;
         }
@@ -165,7 +165,7 @@ export const battleChronicle = (
     case "Eudaemonia of Rheims":
       if (bias === "friendly") {
         if (success) {
-          return `They say that the ${attackers} took ${territory} from the ${defenders} today. One feels obliged to offer one's congratulations, though I doubt my contribution will be heard much above the belches of the victory feast, or such 'panegyrics' as their bards declaim.`;
+          return `They say that the ${attackers} took ${territory} from the ${defenders} today. One feels obliged to offer one's congratulations, although I doubt my contribution will be heard much above the belches of the victory feast, or such 'panegyrics' as their bards declaim.`;
         } else {
           return `Another season, another chronicle. Let's get it over with. The such-and-such (${attackers}) failed to gain whatever it's called (${territory}) from the so-and-sos (${defenders}). And the shadows lengthen.`;
         }
@@ -179,7 +179,7 @@ export const battleChronicle = (
     case "Athaloc of Smyrna":
       if (bias === "friendly") {
         if (success) {
-          return `On this day, a tremendous clash of arms that will echo down the years! A small force of ${attackers} utterly routed a force of ${defenders}, easily ten times their number, bringing all ${territory} under their benevolent control.`;
+          return `On this day befell a tremendous clash of arms that will echo down the years. A small band of ${attackers} utterly routed a force of ${defenders}, easily ten times their number, bringing all ${territory} under their benevolent control.`;
         } else {
           return `Little of note happened this season. One gathers that a small band of ${attackers} made a lighning raid on ${territory}, taking the ${defenders} quite by surprise, and escaping before those doctrine-mangling dullards knew what hit them.`;
         }

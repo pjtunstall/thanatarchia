@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 
 import {
   Dialog,
@@ -38,8 +37,9 @@ interface ActionsPanelProps {
     adviserIndex: number
   ) => {
     victory: boolean;
-    message: string;
+    chronicle: string;
     chronicler: Chronicler;
+    stats: string;
   };
   onReinforce: (fromTerritoryId: string, toTerritoryId: string) => void;
   getValidAttackTargets: (fromTerritoryId: string) => Territory[];
@@ -47,6 +47,10 @@ interface ActionsPanelProps {
   setSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
   currentChronicler: Chronicler;
   setCurrentChronicler: React.Dispatch<React.SetStateAction<Chronicler>>;
+  battleMessage: string;
+  setBattleMessage: React.Dispatch<React.SetStateAction<string>>;
+  stats: string;
+  setStats: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
@@ -62,9 +66,11 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
     setSuccess,
     currentChronicler,
     setCurrentChronicler,
+    battleMessage,
+    setBattleMessage,
+    stats,
+    setStats,
   } = props;
-
-  const [battleMessage, setBattleMessage] = useState<string | null>(null);
 
   const selected = selectedTerritory
     ? territories.find((t) => t.name === selectedTerritory)
@@ -90,7 +96,8 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
   const handleAttack = (from: string, to: string): void => {
     const result = props.onAttack(from, to, adviserIndex);
     setSuccess(result.victory);
-    setBattleMessage(result.message);
+    setBattleMessage(result.chronicle);
+    setStats(result.stats);
     setCurrentChronicler(result.chronicler);
   };
 
@@ -152,10 +159,11 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
           }
         }}
       >
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
           <BattleReport
             chronicler={currentChronicler}
-            battleMessage={battleMessage!}
+            chronicle={battleMessage!}
+            stats={stats!}
             success={success}
           />
           <DialogClose className="absolute right-4 top-4" />
@@ -167,9 +175,10 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
 
 const BattleReport: React.FC<{
   chronicler: Chronicler;
-  battleMessage: string;
+  chronicle: string;
+  stats: string;
   success: boolean;
-}> = ({ chronicler, battleMessage, success }) => {
+}> = ({ chronicler, chronicle, stats, success }) => {
   return (
     <div className="flex flex-col md:flex-row gap-6 items-start">
       <img
@@ -177,10 +186,10 @@ const BattleReport: React.FC<{
         alt="Battle scene"
         className="w-full md:w-1/2 rounded object-cover max-h-[300px]"
       />
-      <div className="flex-1 space-y-4">
+      <div className="flex-1 space-y-4 max-h-[300px] overflow-y-auto pr-2">
         <DialogHeader>
           <DialogTitle className="text-xl">
-            {success ? "Victory!" : "Defeat!"}
+            {success ? "Huzzah!" : "Alas!"}
           </DialogTitle>
         </DialogHeader>
         <div className="border-l-4 border-primary pl-4 py-2">
@@ -192,7 +201,14 @@ const BattleReport: React.FC<{
             className="text-sm italic font-serif leading-relaxed"
             style={{ whiteSpace: "pre-wrap" }}
           >
-            {battleMessage}
+            {chronicle}
+          </p>
+          <p className="h-4" />
+          <p
+            className="text-sm font-serif leading-relaxed text-gray-500"
+            style={{ whiteSpace: "pre-wrap" }}
+          >
+            {stats}
           </p>
         </div>
       </div>
