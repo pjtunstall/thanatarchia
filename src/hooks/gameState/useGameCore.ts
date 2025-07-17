@@ -1,6 +1,11 @@
 import { useState, useCallback, useMemo } from "react";
+
 import { Territory, GameStatus } from "@/types/gameTypes";
-import { factions, territories as initialTerritories } from "@/data/gameData";
+import {
+  factions,
+  territories as initialTerritories,
+  chroniclers,
+} from "@/data/gameData";
 
 export const useGameCore = () => {
   const [currentTurn, setCurrentTurn] = useState(1);
@@ -17,6 +22,7 @@ export const useGameCore = () => {
     randomPlayerIndex(factions.map((f) => f.territories))
   );
   const [success, setSuccess] = useState<boolean | null>(null);
+  const [currentChronicler, setCurrentChronicler] = useState(chroniclers[0]);
 
   // Derived state - computed from territories, no separate state needed
   const factionTerritories = useMemo(
@@ -72,6 +78,7 @@ export const useGameCore = () => {
     factionTreasures,
     playerIndex,
     success,
+    currentChronicler,
 
     // Derived state
     factionTerritories,
@@ -86,6 +93,7 @@ export const useGameCore = () => {
     handleTerritoryClick,
     setGameStatus,
     setSuccess,
+    setCurrentChronicler,
   };
 };
 

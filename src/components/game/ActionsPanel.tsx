@@ -11,6 +11,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
+import { Chronicler } from "@/types/gameTypes";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
 import { adjacentTerritories, chroniclers } from "@/data/gameData";
 import { Faction, Territory } from "@/types/gameTypes";
@@ -23,6 +24,7 @@ import { CharacterDialog } from "@/components/game/CharacterDialog";
 interface ActionsPanelProps {
   playerFaction: Faction;
   playerIndex: number;
+  adviserIndex: number;
   factionTreasures: number[];
   territories: Territory[];
   selectedTerritory: string | null;
@@ -37,25 +39,29 @@ interface ActionsPanelProps {
   ) => {
     victory: boolean;
     message: string;
+    chronicler: Chronicler;
   };
-  adviserIndex: number;
   onReinforce: (fromTerritoryId: string, toTerritoryId: string) => void;
   getValidAttackTargets: (fromTerritoryId: string) => Territory[];
   success: boolean | null;
   setSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
+  currentChronicler: Chronicler;
+  setCurrentChronicler: React.Dispatch<React.SetStateAction<Chronicler>>;
 }
 
 export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
   const {
     playerFaction,
     playerIndex,
+    adviserIndex,
     factionTreasures,
     selectedTerritory,
     territories,
     getValidAttackTargets,
-    adviserIndex,
     success,
     setSuccess,
+    currentChronicler,
+    setCurrentChronicler,
   } = props;
 
   const [battleMessage, setBattleMessage] = useState<string | null>(null);
@@ -82,9 +88,10 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
       : [];
 
   const handleAttack = (from: string, to: string): void => {
-    const result = props.onAttack(from, to, props.adviserIndex);
+    const result = props.onAttack(from, to, adviserIndex);
     setSuccess(result.victory);
     setBattleMessage(result.message);
+    setCurrentChronicler(result.chronicler);
   };
 
   return (
@@ -147,7 +154,7 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
       >
         <DialogContent className="max-w-2xl">
           <BattleReport
-            adviserIndex={adviserIndex}
+            chronicler={currentChronicler}
             battleMessage={battleMessage!}
             success={success}
           />
@@ -159,12 +166,10 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
 };
 
 const BattleReport: React.FC<{
-  adviserIndex: number;
+  chronicler: Chronicler;
   battleMessage: string;
   success: boolean;
-}> = ({ adviserIndex, battleMessage, success }) => {
-  const adviser = chroniclers[adviserIndex];
-
+}> = ({ chronicler, battleMessage, success }) => {
   return (
     <div className="flex flex-col md:flex-row gap-6 items-start">
       <img
@@ -180,10 +185,13 @@ const BattleReport: React.FC<{
         </DialogHeader>
         <div className="border-l-4 border-primary pl-4 py-2">
           <div className="flex items-center gap-3 mb-2">
-            <CharacterDialog character={adviser} />
-            <Badge variant="secondary">{adviser.name}</Badge>
+            <CharacterDialog character={chronicler} />
+            <Badge variant="secondary">{chronicler.name}</Badge>
           </div>
-          <p className="text-sm italic font-serif leading-relaxed">
+          <p
+            className="text-sm italic font-serif leading-relaxed"
+            style={{ whiteSpace: "pre-wrap" }}
+          >
             {battleMessage}
           </p>
         </div>

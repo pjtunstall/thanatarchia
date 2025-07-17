@@ -1,6 +1,6 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 
-import { Faction, Territory } from "@/types/gameTypes";
+import { Faction, Territory, Chronicler } from "@/types/gameTypes";
 import {
   chroniclers,
   battleChronicle,
@@ -33,8 +33,6 @@ export const useCombat = ({
   setFactionTreasures,
   addChronicleEntry,
   onEndTurn,
-  success,
-  setSuccess,
 }: UseCombatProps) => {
   const handleRecruit = useCallback(() => {
     const playerTreasury = factionTreasures[playerIndex];
@@ -82,7 +80,7 @@ export const useCombat = ({
       fromTerritoryName: string,
       toTerritoryName: string,
       adviserIndex: number
-    ): { victory: boolean; message: string } => {
+    ): { victory: boolean; message: string; chronicler: Chronicler } => {
       const fromTerritory = territories.find(
         (t) => t.name === fromTerritoryName
       );
@@ -143,8 +141,6 @@ export const useCombat = ({
           `Our brave warriors have conquered ${toTerritory.name} in glorious battle!`,
           "friendly"
         );
-
-        stats = `Initial strength: ${attackForce}. Casualties: ${casualties}.`;
       } else {
         winners = toTerritory.owner;
         losers = fromTerritory.owner;
@@ -162,12 +158,16 @@ export const useCombat = ({
           `Our forces were repelled from ${toTerritory.name} with heavy losses.`,
           "hostile"
         );
-
-        stats = `<p>Initial strength: ${attackForce}.</p><p>Casualties: ${casualties}.</p>`;
       }
 
+      stats = `Initial strength: ${attackForce}.\nCasualties: ${casualties}.`;
+
+      const randomIndex = Math.floor(Math.random() * chroniclers.length);
+      const chronicler = chroniclers[randomIndex];
+      const bias = randomIndex === adviserIndex ? "friendly" : "hostile";
       const chronicle = battleChronicle(
-        chroniclers[adviserIndex],
+        chronicler,
+        bias,
         victory,
         winners,
         losers,
@@ -177,7 +177,7 @@ export const useCombat = ({
 
       // onEndTurn();
 
-      return { victory, message };
+      return { victory, message, chronicler };
     },
     [
       territories,

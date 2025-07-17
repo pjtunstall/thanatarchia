@@ -11,7 +11,6 @@ import { GameOverlay } from "@/components/game/GameOverlay";
 
 const GameDashboard = () => {
   const [activeTab, setActiveTab] = useState("status");
-
   const gameState = useGameState();
 
   const handleTabKeyDown = (e: React.KeyboardEvent) => {
@@ -100,6 +99,7 @@ const GameDashboard = () => {
                   <ActionsPanel
                     playerFaction={factions[gameState.playerIndex]}
                     playerIndex={gameState.playerIndex}
+                    adviserIndex={gameState.adviserIndex}
                     factionTreasures={gameState.factionTreasures}
                     territories={gameState.territories}
                     selectedTerritory={gameState.selectedTerritory}
@@ -110,9 +110,10 @@ const GameDashboard = () => {
                     onAttack={gameState.handleAttack}
                     onReinforce={gameState.handleReinforce}
                     getValidAttackTargets={gameState.getValidAttackTargets}
-                    adviserIndex={gameState.adviserIndex}
                     success={gameState.success}
                     setSuccess={gameState.setSuccess}
+                    currentChronicler={gameState.currentChronicler}
+                    setCurrentChronicler={gameState.setCurrentChronicler}
                   />
                 </TabsContent>
               </Tabs>

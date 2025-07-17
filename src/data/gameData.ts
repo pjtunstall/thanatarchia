@@ -117,6 +117,7 @@ export const initialReport = (adviserName: string): string => {
 
 export const battleChronicle = (
   chronicler: Chronicler,
+  bias: string,
   success: boolean,
   winners: string,
   losers: string,
@@ -134,7 +135,7 @@ export const battleChronicle = (
 
   switch (chronicler.name) {
     case "John of Colchis":
-      if (chronicler.bias === "friendly") {
+      if (bias === "friendly") {
         if (success) {
           return `"Our brave ${attackers} have saved ${territory} from the tyrany of the ${defenders}."`;
         } else {
@@ -148,7 +149,7 @@ export const battleChronicle = (
         }
       }
     case "Priscilla of Byzantium":
-      if (chronicler.bias === "friendly") {
+      if (bias === "friendly") {
         if (success) {
           return `A plucky band of ${attackers}, masterfully led, as if by Constantine himself reborn, have seized ${territory} from the ${defenders}.`;
         } else {
@@ -162,7 +163,7 @@ export const battleChronicle = (
         }
       }
     case "Eudaemonia of Rheims":
-      if (chronicler.bias === "friendly") {
+      if (bias === "friendly") {
         if (success) {
           return `They say that the ${attackers} took ${territory} from the ${defenders} today. One feels obliged to offer one's congratulations, though I doubt my contribution will be heard much above the belches of the victory feast, or such 'panegyrics' as their bards declaim.`;
         } else {
@@ -176,7 +177,7 @@ export const battleChronicle = (
         }
       }
     case "Athaloc of Smyrna":
-      if (chronicler.bias === "friendly") {
+      if (bias === "friendly") {
         if (success) {
           return `On this day, a tremendous clash of arms that will echo down the years! A small force of ${attackers} utterly routed a force of ${defenders}, easily ten times their number, bringing all ${territory} under their benevolent control.`;
         } else {
