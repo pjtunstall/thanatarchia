@@ -81,9 +81,8 @@ export const useCombat = ({
     (
       fromTerritoryName: string,
       toTerritoryName: string,
-      onResult?: (success: boolean, msg: string) => void,
-      adviserIndex?: number
-    ) => {
+      adviserIndex: number
+    ): { victory: boolean; message: string } => {
       const fromTerritory = territories.find(
         (t) => t.name === fromTerritoryName
       );
@@ -164,31 +163,21 @@ export const useCombat = ({
           "hostile"
         );
 
-        // let chronicles = chroniclers.map((chronicler) =>
-        //   battleChronicle(
-        //     chronicler,
-        //     success,
-        //     toTerritory.name,
-        //     winners,
-        //     losers
-        //   )
-        // );
-
-        stats = `Initial strength: ${attackForce}. Casualties: ${casualties}.`;
+        stats = `<p>Initial strength: ${attackForce}.</p><p>Casualties: ${casualties}.</p>`;
       }
 
-      setSuccess(victory);
       const chronicle = battleChronicle(
-        chroniclers[0],
+        chroniclers[adviserIndex],
         victory,
         winners,
         losers,
         toTerritory.name
       );
-      const msg = chronicle + "\n" + stats;
-      onResult?.(victory, msg);
+      const message = chronicle + "\n" + stats;
 
-      onEndTurn();
+      // onEndTurn();
+
+      return { victory, message };
     },
     [
       territories,

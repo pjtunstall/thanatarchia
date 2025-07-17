@@ -122,48 +122,72 @@ export const battleChronicle = (
   losers: string,
   territory: string
 ): string => {
-  let playerFaction: string;
-  let enemy: string;
+  let attackers: string;
+  let defenders: string;
   if (success) {
-    playerFaction = winners;
-    enemy = losers;
+    attackers = winners;
+    defenders = losers;
   } else {
-    enemy = winners;
-    playerFaction = losers;
+    defenders = winners;
+    attackers = losers;
   }
 
   switch (chronicler.name) {
     case "John of Colchis":
       if (chronicler.bias === "friendly") {
         if (success) {
-          return `"The ${playerFaction} have saved ${territory} from the tyrany of the ${enemy}."`;
+          return `"Our brave ${attackers} have saved ${territory} from the tyrany of the ${defenders}."`;
         } else {
-          return `"After a heroic struggle, the ${playerFaction} have failed to liberate ${territory} from the ${enemy}"`;
+          return `"After a heroic struggle, our gallant ${attackers} have failed to liberate ${territory} from the ${defenders}"`;
         }
       } else {
         if (success) {
-          return `"Like the wolf upon the flock, the ${playerFaction}, have fallen upon the ${enemy} with great slaughter in ${territory}."`;
+          return `"Like the wolf upon the flock, the treacherous ${attackers}, have fallen upon the ${defenders} with great slaughter in ${territory}."`;
         } else {
-          return `"At this time, the ${playerFaction} made an unprovoked attack on the ${enemy} in ${territory}, but were driven back with dreadful losses."`;
+          return `"At this time, the ${attackers} made an unprovoked attack on the ${defenders} in ${territory}, but were driven back with dreadful losses."`;
         }
       }
     case "Priscilla of Byzantium":
       if (chronicler.bias === "friendly") {
-        return `${winners}`;
+        if (success) {
+          return `A plucky band of ${attackers}, masterfully led, as if by Constantine himself reborn, have seized ${territory} from the ${defenders}.`;
+        } else {
+          return `Alas, though they took the fight to the enemy time and again, the ${attackers} have failed to take ${territory} from the ${defenders}.`;
+        }
       } else {
-        return "";
+        if (success) {
+          return `In this year, a great throng of the barbarous ${attackers} descended on ${territory}, overwhelming the ${defenders} there.`;
+        } else {
+          return `Today, God saw fit to punish the ${attackers} for their impudent assault on the ${defenders} in ${territory}. One senses imperial training at work here.`;
+        }
       }
     case "Eudaemonia of Rheims":
       if (chronicler.bias === "friendly") {
-        return `${winners}`;
+        if (success) {
+          return `They say that the ${attackers} took ${territory} from the ${defenders} today. One feels obliged to offer one's congratulations, though I doubt my contribution will be heard much above the belches of the victory feast, or such 'panegyrics' as their bards declaim.`;
+        } else {
+          return `Another season, another chronicle. Let's get it over with. The such-and-such (${attackers}) failed to gain whatever it's called (${territory}) from the so-and-sos (${defenders}). And the shadows lengthen.`;
+        }
       } else {
-        return "";
+        if (success) {
+          return `How tedious! The names of these uncouth tribes flow on like endless rain: their meaningless triumphs and defeats of equal insignificance. I run my finger over the parchment's roughness as the setting sunbeams briefly catch the page. I suppose we must do our duty and record here that the ${attackers} took ${territory} from the ${defenders}.`;
+        } else {
+          return `The glimmer of a smile almost touches one's face. News reached us today that the ${attackers} failed to wrest ${territory} from the ${defenders}. But it is a cheap pleasure. I might swap the names or swap them back, for all the difference it would make to history.`;
+        }
       }
     case "Athaloc of Smyrna":
       if (chronicler.bias === "friendly") {
-        return ``;
+        if (success) {
+          return `On this day, a tremendous clash of arms that will echo down the years! A small force of ${attackers} utterly routed a force of ${defenders}, easily ten times their number, bringing all ${territory} under their benevolent control.`;
+        } else {
+          return `Little of note happened this season. One gathers that a small band of ${attackers} made a lighning raid on ${territory}, taking the ${defenders} quite by surprise, and escaping before those doctrine-mangling dullards knew what hit them.`;
+        }
       } else {
-        return "";
+        if (success) {
+          return `Inconceivable! Though it strains credulity, we must note the reports coming out of ${territory} of an engagement in which those perfidious knaves, the ${attackers}, routed the ${defenders}.`;
+        } else {
+          return `A reckless incursion of the ${attackers} in ${territory} has been repulsed by the ${defenders}. Indeed lack of faith begets folly: the dull wits of the sinner finding their natural counterpart in the doltish strategems of a heretic lord.`;
+        }
       }
   }
 };

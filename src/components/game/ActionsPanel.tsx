@@ -33,12 +33,14 @@ interface ActionsPanelProps {
   onAttack: (
     fromTerritoryId: string,
     toTerritoryId: string,
-    onResult?: (boolean, message: string) => void,
-    adviserIndex?: number
-  ) => void;
+    adviserIndex: number
+  ) => {
+    victory: boolean;
+    message: string;
+  };
+  adviserIndex: number;
   onReinforce: (fromTerritoryId: string, toTerritoryId: string) => void;
   getValidAttackTargets: (fromTerritoryId: string) => Territory[];
-  adviserIndex: number;
   success: boolean | null;
   setSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
 }
@@ -79,6 +81,12 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
           )
       : [];
 
+  const handleAttack = (from: string, to: string): void => {
+    const result = props.onAttack(from, to, props.adviserIndex);
+    setSuccess(result.victory);
+    setBattleMessage(result.message);
+  };
+
   return (
     <>
       <Card className="max-h-full overflow-auto">
@@ -111,12 +119,7 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
                     <AttackButton
                       from={selectedTerritory}
                       targets={validAttackTargets}
-                      onAttack={(from, to) => {
-                        props.onAttack(from, to, (success, message) => {
-                          setSuccess(success);
-                          setBattleMessage(message);
-                        });
-                      }}
+                      onAttack={handleAttack}
                       disabled={selected?.troops! < 200}
                     />
                     <ReinforceButton
@@ -135,7 +138,12 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
 
       <Dialog
         open={!!battleMessage}
-        onOpenChange={(open) => !open && setBattleMessage(null)}
+        onOpenChange={(open) => {
+          if (!open) {
+            setBattleMessage(null);
+            setSuccess(null);
+          }
+        }}
       >
         <DialogContent className="max-w-2xl">
           <BattleReport
