@@ -16,6 +16,7 @@ export const useGameCore = () => {
   const [playerIndex, setPlayerIndex] = useState(() =>
     randomPlayerIndex(factions.map((f) => f.territories))
   );
+  const [success, setSuccess] = useState<boolean | null>(null);
 
   // Derived state - computed from territories, no separate state needed
   const factionTerritories = useMemo(
@@ -70,6 +71,7 @@ export const useGameCore = () => {
     territories,
     factionTreasures,
     playerIndex,
+    success,
 
     // Derived state
     factionTerritories,
@@ -83,6 +85,7 @@ export const useGameCore = () => {
     resetGame,
     handleTerritoryClick,
     setGameStatus,
+    setSuccess,
   };
 };
 

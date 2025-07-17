@@ -28,6 +28,8 @@ export const useGameState = () => {
     updateTerritories: gameCore.updateTerritories,
     setFactionTreasures: gameCore.setFactionTreasures,
     addChronicleEntry: chronicles.addChronicleEntry,
+    success: gameCore.success,
+    setSuccess: gameCore.setSuccess,
     onEndTurn: () => {
       generateResources();
       executeAITurn();

@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 import { Faction, Territory } from "@/types/gameTypes";
 import {
@@ -18,6 +18,8 @@ interface UseCombatProps {
   setFactionTreasures: (updater: (prev: number[]) => number[]) => void;
   addChronicleEntry: (entry: string, bias: "friendly" | "hostile") => void;
   onEndTurn: () => void;
+  success: boolean | null;
+  setSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
 }
 
 export const useCombat = ({
@@ -31,6 +33,8 @@ export const useCombat = ({
   setFactionTreasures,
   addChronicleEntry,
   onEndTurn,
+  success,
+  setSuccess,
 }: UseCombatProps) => {
   const handleRecruit = useCallback(() => {
     const playerTreasury = factionTreasures[playerIndex];
@@ -77,7 +81,7 @@ export const useCombat = ({
     (
       fromTerritoryName: string,
       toTerritoryName: string,
-      onResult?: (msg: string) => void,
+      onResult?: (success: boolean, msg: string) => void,
       adviserIndex?: number
     ) => {
       const fromTerritory = territories.find(
@@ -95,7 +99,6 @@ export const useCombat = ({
         return;
       }
 
-      let success: boolean;
       let winners: string;
       let losers: string;
       let casualties: number;
@@ -113,7 +116,6 @@ export const useCombat = ({
       const victory = attackStrength > defenseStrength;
 
       if (victory) {
-        success = true;
         winners = fromTerritory.owner;
         losers = toTerritory.owner;
         const survivors =
@@ -145,7 +147,6 @@ export const useCombat = ({
 
         stats = `Initial strength: ${attackForce}. Casualties: ${casualties}.`;
       } else {
-        success = false;
         winners = toTerritory.owner;
         losers = fromTerritory.owner;
         casualties = Math.floor(Math.random() * 300 + 200);
@@ -176,15 +177,16 @@ export const useCombat = ({
         stats = `Initial strength: ${attackForce}. Casualties: ${casualties}.`;
       }
 
+      setSuccess(victory);
       const chronicle = battleChronicle(
         chroniclers[0],
-        success,
+        victory,
         winners,
         losers,
         toTerritory.name
       );
       const msg = chronicle + "\n" + stats;
-      onResult?.(msg);
+      onResult?.(victory, msg);
 
       onEndTurn();
     },

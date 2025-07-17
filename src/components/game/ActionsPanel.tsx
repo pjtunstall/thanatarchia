@@ -33,12 +33,14 @@ interface ActionsPanelProps {
   onAttack: (
     fromTerritoryId: string,
     toTerritoryId: string,
-    onResult?: (message: string) => void,
+    onResult?: (boolean, message: string) => void,
     adviserIndex?: number
   ) => void;
   onReinforce: (fromTerritoryId: string, toTerritoryId: string) => void;
   getValidAttackTargets: (fromTerritoryId: string) => Territory[];
   adviserIndex: number;
+  success: boolean | null;
+  setSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
 }
 
 export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
@@ -50,6 +52,8 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
     territories,
     getValidAttackTargets,
     adviserIndex,
+    success,
+    setSuccess,
   } = props;
 
   const [battleMessage, setBattleMessage] = useState<string | null>(null);
@@ -108,7 +112,10 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
                       from={selectedTerritory}
                       targets={validAttackTargets}
                       onAttack={(from, to) => {
-                        props.onAttack(from, to, setBattleMessage);
+                        props.onAttack(from, to, (success, message) => {
+                          setSuccess(success);
+                          setBattleMessage(message);
+                        });
                       }}
                       disabled={selected?.troops! < 200}
                     />
@@ -131,22 +138,11 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
         onOpenChange={(open) => !open && setBattleMessage(null)}
       >
         <DialogContent className="max-w-2xl">
-          <div className="flex flex-col md:flex-row gap-6 items-start">
-            <img
-              src="src/assets/battle.jpg"
-              alt="Battle scene"
-              className="w-full md:w-1/2 rounded object-cover max-h-[300px]"
-            />
-            <div className="flex-1 space-y-4">
-              <DialogHeader>
-                <DialogTitle className="text-xl">Battle Result</DialogTitle>
-              </DialogHeader>
-              <BattleReport
-                adviserIndex={adviserIndex}
-                battleMessage={battleMessage!}
-              />
-            </div>
-          </div>
+          <BattleReport
+            adviserIndex={adviserIndex}
+            battleMessage={battleMessage!}
+            success={success}
+          />
           <DialogClose className="absolute right-4 top-4" />
         </DialogContent>
       </Dialog>
@@ -157,20 +153,33 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
 const BattleReport: React.FC<{
   adviserIndex: number;
   battleMessage: string;
-}> = ({ adviserIndex, battleMessage }) => {
+  success: boolean;
+}> = ({ adviserIndex, battleMessage, success }) => {
   const adviser = chroniclers[adviserIndex];
 
   return (
-    <>
-      <div className="border-l-4 border-primary pl-4 py-2">
-        <div className="flex items-center gap-3 mb-2">
-          <CharacterDialog character={adviser} />
-          <Badge variant="secondary">{adviser.name}</Badge>
+    <div className="flex flex-col md:flex-row gap-6 items-start">
+      <img
+        src="src/assets/battle.jpg"
+        alt="Battle scene"
+        className="w-full md:w-1/2 rounded object-cover max-h-[300px]"
+      />
+      <div className="flex-1 space-y-4">
+        <DialogHeader>
+          <DialogTitle className="text-xl">
+            {success ? "Victory!" : "Defeat!"}
+          </DialogTitle>
+        </DialogHeader>
+        <div className="border-l-4 border-primary pl-4 py-2">
+          <div className="flex items-center gap-3 mb-2">
+            <CharacterDialog character={adviser} />
+            <Badge variant="secondary">{adviser.name}</Badge>
+          </div>
+          <p className="text-sm italic font-serif leading-relaxed">
+            {battleMessage}
+          </p>
         </div>
-        <p className="text-sm italic font-serif leading-relaxed">
-          {battleMessage}
-        </p>
       </div>
-    </>
+    </div>
   );
 };

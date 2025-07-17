@@ -136,9 +136,9 @@ export const battleChronicle = (
     case "John of Colchis":
       if (chronicler.bias === "friendly") {
         if (success) {
-          return `"Our Savior has blessed the ${playerFaction} with victory over the ${enemy} in ${territory}."`;
+          return `"The ${playerFaction} have saved ${territory} from the tyrany of the ${enemy}."`;
         } else {
-          return `"After a heroic struggle, the ${playerFaction} failed to liberate ${territory} from the ${enemy}"`;
+          return `"After a heroic struggle, the ${playerFaction} have failed to liberate ${territory} from the ${enemy}"`;
         }
       } else {
         if (success) {

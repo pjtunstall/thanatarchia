@@ -8,7 +8,6 @@ import { getDate, chroniclers } from "@/data/gameData";
 
 interface ChroniclesPanelProps {
   chronicles: Chronicle[];
-  chroniclers: Chronicler[];
 }
 
 export const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
