@@ -112,10 +112,13 @@ export const useChronicles = (currentTurn: number) => {
         },
       };
 
-      const finalEntries = chroniclers.map((chronicler) => ({
+      const finalEntries = chroniclers.map((chronicler, i) => ({
         id: `final-${chronicler.name}`,
         chronicler: chronicler.name,
-        bias: chronicler.bias,
+        bias:
+          i === adviserIndex
+            ? "friendly"
+            : ("hostile" as "friendly" | "hostile"),
         entry:
           chroniclerEntries[
             chronicler.name as keyof typeof chroniclerEntries

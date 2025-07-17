@@ -3,6 +3,7 @@ export interface Faction {
   formalName: string;
   type: "imperial" | "barbarian" | "bagaudae";
   color: string;
+  symbol: string;
   territories: string[];
   relatives: string[];
   troops: number;
@@ -53,7 +54,6 @@ export interface Character {
 }
 
 export type Chronicler = Character & {
-  bias: "friendly" | "hostile";
   style: string;
 };
 

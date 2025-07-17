@@ -64,7 +64,6 @@ export const getFaithColor = (faith: string): string => {
 export const chroniclers: Chronicler[] = [
   {
     name: "John of Colchis",
-    bias: "friendly",
     style: "credulous",
     gender: "male",
     image: chroniclerScribe,
@@ -73,7 +72,6 @@ export const chroniclers: Chronicler[] = [
   },
   {
     name: "Eudaemonia of Rheims",
-    bias: "hostile",
     style: "jaded",
     gender: "female",
     image: chroniclerMosaic,
@@ -82,7 +80,6 @@ export const chroniclers: Chronicler[] = [
   },
   {
     name: "Athaloc of Smyrna",
-    bias: "hostile",
     style: "scholastic",
     gender: "male",
     image: chroniclerScholar,
@@ -91,7 +88,6 @@ export const chroniclers: Chronicler[] = [
   },
   {
     name: "Priscilla of Byzantium",
-    bias: "hostile",
     style: "disdainful",
     gender: "female",
     image: chroniclerNun,
@@ -103,7 +99,7 @@ export const chroniclers: Chronicler[] = [
 export const initialReport = (adviserName: string): string => {
   switch (adviserName) {
     case "John of Colchis":
-      return '"The enemies of God outnumber us, my Lord. Let us die now opposing them and gain the martyr\'s reward!"';
+      return '"Our foes outnumber us, my liege. Let us die now opposing them and gain the martyr\'s reward!"';
     case "Priscilla of Byzantium":
       return '"Sire, we must be Byzantine in cunning. Strategy is the way to victory."';
     case "Eudaemonia of Rheims":

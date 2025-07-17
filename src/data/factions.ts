@@ -24,6 +24,7 @@ export const factions: Faction[] = [
     formalName: "Roman Empire",
     type: "imperial",
     color: "hsl(var(--imperial))",
+    symbol: "⳩",
     leader: {
       male: {
         name: "Theodosius Augustus",
@@ -54,6 +55,7 @@ export const factions: Faction[] = [
     formalName: "Kindom of the Britons",
     type: "barbarian",
     color: "hsl(var(--britons))",
+    symbol: "🜨",
     leader: {
       male: {
         name: "Cymbeline",
@@ -85,6 +87,7 @@ export const factions: Faction[] = [
     formalName: "Kingdom of the Moors",
     type: "barbarian",
     color: "hsl(var(--moors))",
+    symbol: "ⵣ",
     leader: {
       male: {
         name: "Masuna",
@@ -110,6 +113,7 @@ export const factions: Faction[] = [
     formalName: "Bagaudae of Armorica",
     type: "bagaudae",
     color: "hsl(var(--bagaudae))",
+    symbol: "⚒",
     leader: {
       male: {
         name: "Tibatto",
@@ -135,6 +139,7 @@ export const factions: Faction[] = [
     formalName: "Kingdom of the Ostrogoths",
     type: "barbarian",
     color: "hsl(var(--ostrogoths))",
+    symbol: "𐌸",
     leader: {
       male: {
         name: "Theodemir",
@@ -160,6 +165,7 @@ export const factions: Faction[] = [
     formalName: "Kingdom of the Visigoths",
     type: "barbarian",
     color: "hsl(var(--visigoths))",
+    symbol: "🜲",
     leader: {
       male: {
         name: "Balthila",
@@ -185,6 +191,7 @@ export const factions: Faction[] = [
     formalName: "Kingdom of the Vandals",
     type: "barbarian",
     color: "hsl(var(--vandals))",
+    symbol: "🜊",
     leader: {
       male: {
         name: "Huneric",
@@ -210,6 +217,7 @@ export const factions: Faction[] = [
     formalName: "Kingdom of the Burgundians",
     type: "barbarian",
     color: "hsl(var(--burgundians))",
+    symbol: "✖",
     leader: {
       male: {
         name: "Gundobad",
@@ -240,6 +248,7 @@ export const factions: Faction[] = [
     formalName: "Kingdom of the Franks",
     type: "barbarian",
     color: "hsl(var(--franks))",
+    symbol: "🪓",
     leader: {
       male: {
         name: "Clovis",
@@ -265,6 +274,7 @@ export const factions: Faction[] = [
     formalName: "Kingdom of the Gepids",
     type: "barbarian",
     color: "hsl(var(--gepids))",
+    symbol: "⚓",
     leader: {
       male: {
         name: "Ardaric",
@@ -290,6 +300,7 @@ export const factions: Faction[] = [
     formalName: "Kingdom of the Rugians",
     type: "barbarian",
     color: "hsl(var(--rugians))",
+    symbol: "⚘",
     leader: {
       male: {
         name: "Eraric",
@@ -315,6 +326,7 @@ export const factions: Faction[] = [
     formalName: "Kingdom of the Heruls",
     type: "barbarian",
     color: "hsl(var(--heruls))",
+    symbol: "◎",
     leader: {
       male: {
         name: "Rodulph",
@@ -336,10 +348,11 @@ export const factions: Faction[] = [
     treasure: 100,
   },
   {
-    name: "Langobards",
-    formalName: "Kingdom of the Langobards",
+    name: "Lombards",
+    formalName: "Kingdom of the Lombards",
     type: "barbarian",
     color: "hsl(var(--langobards))",
+    symbol: "✤",
     leader: {
       male: {
         name: "Wacho",
@@ -370,6 +383,7 @@ export const factions: Faction[] = [
     formalName: "Saxon Confederation",
     type: "barbarian",
     color: "hsl(var(--saxons))",
+    symbol: "ᛟ",
     leader: {
       male: {
         name: "Hengist",
@@ -395,6 +409,7 @@ export const factions: Faction[] = [
     formalName: "Suebian Confederation",
     type: "barbarian",
     color: "hsl(var(--suebians))",
+    symbol: "ᛉ",
     leader: {
       male: {
         name: "Hermeric",
@@ -420,6 +435,7 @@ export const factions: Faction[] = [
     formalName: "Kingdom of the Alans",
     type: "barbarian",
     color: "hsl(var(--alans))",
+    symbol: "☀",
     leader: {
       male: {
         name: "Respendial",
@@ -452,6 +468,7 @@ export const factions: Faction[] = [
     formalName: "Kingom of the Isaurians",
     type: "barbarian",
     color: "hsl(var(--isaurians))",
+    symbol: "⨻",
     leader: {
       male: {
         name: "Tarasicodissa",
@@ -477,6 +494,7 @@ export const factions: Faction[] = [
     formalName: "Hunnic Horde",
     type: "barbarian",
     color: "hsl(var(--huns))",
+    symbol: "➹",
     leader: {
       male: {
         name: "Dengizich",

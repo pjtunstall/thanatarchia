@@ -73,6 +73,9 @@ const ostrogothMaleFirstElements = [
   "Agi",
   "Vilia",
   "Sunia",
+  "Witi",
+  "Era",
+  "Hildi",
 ];
 const ostrogothFemaleFirstElements = [
   "Amala",
@@ -84,12 +87,14 @@ const ostrogothFemaleFirstElements = [
 ];
 
 const ostrogothMaleLastElements = [
+  "bad",
   "ric",
   "suinth",
   "mir",
   "mer",
   "theus",
   "had",
+  "ges",
   "gisel",
   "nand",
   "rith",
@@ -205,6 +210,7 @@ export const actions = [
   "defenestrated",
   "disemboweled",
   "skewered",
+  "smothered",
 ];
 
 export const adjectives = [

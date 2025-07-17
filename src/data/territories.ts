@@ -78,7 +78,7 @@ export const territories: Territory[] = [
     name: "Pannonia",
     x: 40,
     y: 35,
-    owner: "Langobards",
+    owner: "Lombards",
     troops: 1800,
     terrain: "plains",
   },

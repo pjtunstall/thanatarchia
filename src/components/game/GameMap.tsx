@@ -1,11 +1,13 @@
 import React from "react";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Character, Territory } from "@/types/gameTypes";
+
+import { Character, Faction, Territory } from "@/types/gameTypes";
 import { factions, getDate, adjacentTerritories } from "@/data/gameData";
 import { FactionDetails } from "./FactionDetails";
 import romanEmpireMap from "@/assets/roman-empire-map-clean.jpg";
@@ -14,9 +16,11 @@ interface GameMapProps {
   territories: Territory[];
   selectedTerritory: string | null;
   currentTurn: number;
+  factions: Faction[];
   factionLeaders: Character[];
   playerFactionName: string;
   playerFactionColor: string;
+  playerFactionSymbol: string;
   onTerritoryClick: (territoryId: string) => void;
 }
 
@@ -24,20 +28,26 @@ export const GameMap: React.FC<GameMapProps> = ({
   territories,
   selectedTerritory,
   currentTurn,
+  factions,
   factionLeaders,
   playerFactionName,
   playerFactionColor,
+  playerFactionSymbol,
   onTerritoryClick,
 }) => {
   // Create faction lookup from centralized data + filter to only show factions with territories
   const factionLookup = React.useMemo(() => {
-    const lookup: Record<string, { color: string; name: string }> = {};
+    const lookup: Record<
+      string,
+      { color: string; name: string; symbol: string }
+    > = {};
 
     const activeFactions = new Set(territories.map((t) => t.owner));
 
     lookup[playerFactionName] = {
       color: playerFactionColor,
       name: playerFactionName,
+      symbol: playerFactionSymbol,
     };
 
     factions.forEach((faction) => {
@@ -48,6 +58,7 @@ export const GameMap: React.FC<GameMapProps> = ({
         lookup[faction.name] = {
           color: faction.color,
           name: faction.name,
+          symbol: faction.symbol,
         };
       }
     });
@@ -63,10 +74,13 @@ export const GameMap: React.FC<GameMapProps> = ({
           <span className="uncial">~Thanatarchia~</span>
           <span className="initial">☠</span>
         </CardTitle>
+        <p className="h-4" />
         <p className="text-muted-foreground italic text-lg text-center">
-          Imperium Romanum, {getDate(currentTurn)}
+          "House against house, town against town, if you see a man—knock him
+          down!"
         </p>
       </CardHeader>
+
       <CardContent className="h-full p-6">
         <div
           className="relative w-full aspect-[4/3] map-decorative-border rounded-lg overflow-hidden"
@@ -77,6 +91,7 @@ export const GameMap: React.FC<GameMapProps> = ({
             className="absolute inset-0 bg-cover bg-center opacity-80"
             style={{ backgroundImage: `url(${romanEmpireMap})` }}
           ></div>
+
           {/* Compass Rose */}
           <CompassRose />
 
@@ -116,6 +131,7 @@ export const GameMap: React.FC<GameMapProps> = ({
                 />
               </filter>
             </defs>
+
             {selectedTerritory &&
               adjacentTerritories[selectedTerritory]?.map((adj) => {
                 const from = territories.find(
@@ -144,7 +160,7 @@ export const GameMap: React.FC<GameMapProps> = ({
           {territories.map((territory) => (
             <div
               key={territory.name}
-              className={`absolute cursor-pointer ${
+              className={`absolute cursor-pointer transition-transform duration-200 ${
                 selectedTerritory === territory.name
                   ? "ring-2 ring-yellow-400 ring-offset-1"
                   : ""
@@ -160,12 +176,22 @@ export const GameMap: React.FC<GameMapProps> = ({
               }}
             >
               <div
-                className="w-6 h-6 rounded-full border-2 border-white shadow-lg"
+                className={`w-6 h-6 rounded-full border-2 shadow-lg flex items-center justify-center text-white text-sm font-bold
+                transition-transform duration-200 hover:scale-110
+                ${
+                  territory.owner === playerFactionName
+                    ? "ring-2 ring-white animate-slowpulse"
+                    : ""
+                }
+                }
+              `}
                 style={{
                   backgroundColor:
                     factionLookup[territory.owner]?.color ?? "gray",
                 }}
-              />
+              >
+                {factionLookup[territory.owner]?.symbol ?? "⚔"}
+              </div>
               <div className="absolute top-7 left-1/2 transform -translate-x-1/2 bg-black/50 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
                 {territory.name}
               </div>
