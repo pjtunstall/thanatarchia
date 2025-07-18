@@ -29,6 +29,7 @@ type ActionsPanelProps = {
   territories: Territory[];
   selectedTerritory: string | null;
   scheduledAttacks: AttackOrder[];
+  setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
   onAction: (action: string) => void;
   onEndTurn: () => void;
   onRecruit: () => void;
@@ -63,6 +64,7 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
     factionTreasures,
     selectedTerritory,
     scheduledAttacks,
+    setScheduledAttacks,
     territories,
     getValidAttackTargets,
     success,
@@ -132,6 +134,7 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
                     selectedTerritory={selectedTerritory}
                     playerFactionName={factions[playerIndex].name}
                     scheduledAttacks={scheduledAttacks}
+                    setScheduledAttacks={setScheduledAttacks}
                   />
                   <div className="border-t pt-3 space-y-2">
                     <AttackButton

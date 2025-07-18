@@ -5,35 +5,67 @@ import { Button } from "@/components/ui/button";
 import { AttackOrder, Territory } from "@/types/gameTypes";
 import { neighbors } from "@/data/territories";
 
-// type Territory = {
-//   name: string;
-//   owner: string;
-//   troops?: number;
-//   estimatedTroops?: number;
-//   spiedOn?: boolean;
-//   adjacentNames: string[];
-// };
-
 type SelectedTerritoryInfoProps = {
   territories: Territory[];
   selectedTerritory: string;
   playerFactionName: string;
   scheduledAttacks: AttackOrder[];
-  // adjustTroops?: (
-  //   from: string,
-  //   to: string,
-  //   delta: number,
-  //   type: "attack" | "reinforce"
-  // ) => void;
+  setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
 };
+
+function getAvailableTroops(
+  scheduledAttacks: AttackOrder[],
+  selectedTerritory: Territory
+): number {
+  let availableTroops = selectedTerritory.troops;
+  scheduledAttacks.forEach((attack) => {
+    if (attack.from === selectedTerritory.name) {
+      availableTroops -= attack.troops;
+    }
+  });
+  return availableTroops;
+}
+
+function adjustTroops(
+  selectedTerritory: Territory,
+  from: string,
+  to: string,
+  delta: number,
+  scheduledAttacks: AttackOrder[],
+  setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>
+) {
+  setScheduledAttacks((prev) => {
+    const available = getAvailableTroops(scheduledAttacks, selectedTerritory);
+    const existing = prev.find((a) => a.from === from && a.to === to);
+
+    const clampedDelta =
+      delta > 0
+        ? Math.min(delta, available) // don't over-assign
+        : delta; // allow subtraction without constraint
+
+    if (existing) {
+      const newTroops = Math.max(0, existing.troops + clampedDelta);
+      if (newTroops === 0) {
+        return prev.filter((a) => a !== existing);
+      } else {
+        return prev.map((a) =>
+          a === existing ? { ...a, troops: newTroops } : a
+        );
+      }
+    } else if (clampedDelta > 0) {
+      return [...prev, { from, to, troops: clampedDelta }];
+    }
+    return prev;
+  });
+}
 
 export function SelectedTerritoryInfo({
   territories,
   selectedTerritory,
   playerFactionName,
   scheduledAttacks,
-}: // adjustTroops,
-SelectedTerritoryInfoProps) {
+  setScheduledAttacks,
+}: SelectedTerritoryInfoProps) {
   const territory = territories.find((t) => t.name === selectedTerritory);
   if (!territory) return null;
 
@@ -49,16 +81,18 @@ SelectedTerritoryInfoProps) {
       <Button
         size="icon"
         variant="ghost"
+        className="h-3 w-3 p-3"
         // onClick={() => adjustTroops?.(territory.name, to, 1, type)}
       >
-        <ChevronUp className="w-4 h-4" />
+        <ChevronUp />
       </Button>
       <Button
         size="icon"
         variant="ghost"
+        className="h-3 w-3 p-3"
         // onClick={() => adjustTroops?.(territory.name, to, -1, type)}
       >
-        <ChevronDown className="w-4 h-4" />
+        <ChevronDown />
       </Button>
     </div>
   );
@@ -95,7 +129,7 @@ SelectedTerritoryInfoProps) {
       </div>
 
       {isPlayerTerritory && (
-        <div className="space-y-2 text-sm">
+        <div className="flex flex-col gap-2 text-sm leading-none">
           <p className="font-medium">Troops available: {troopCount}</p>
 
           {neighbors[selectedTerritory]?.map((adjacentTerritoryName) => {
@@ -112,10 +146,13 @@ SelectedTerritoryInfoProps) {
             const count = current?.troops ?? 0;
 
             return (
-              <div key={adj.name} className="flex items-center justify-between">
+              <div
+                key={adj.name}
+                className="flex items-center justify-between -mt-1"
+              >
                 <span>
                   {type === "attack"
-                    ? `Attacking ${adj.name}: ${count}`
+                    ? `Prepare to attack ${adj.name}: ${count}`
                     : `Reinforce ${adj.name}: ${count}`}
                 </span>
                 {renderTroopControls(adj.name, type, count)}

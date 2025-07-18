@@ -21,6 +21,7 @@ type StatusPanelProps = {
   playerTroops: number;
   selectedTerritory: string | null;
   scheduledAttacks: AttackOrder[];
+  setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
   adviserIndex: number;
   factionTreasures: number[];
   playerIndex: number;
@@ -37,6 +38,7 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
   factionTreasures,
   playerIndex,
   scheduledAttacks,
+  setScheduledAttacks,
 }) => {
   return (
     <Card className="h-full flex flex-col">
@@ -97,6 +99,7 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
                 selectedTerritory={selectedTerritory}
                 playerFactionName={playerFaction.name}
                 scheduledAttacks={scheduledAttacks}
+                setScheduledAttacks={setScheduledAttacks}
               />
             )}
 

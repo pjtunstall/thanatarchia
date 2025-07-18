@@ -92,6 +92,7 @@ const GameDashboard = () => {
                     }
                     selectedTerritory={gameState.selectedTerritory}
                     scheduledAttacks={gameState.scheduledAttacks}
+                    setScheduledAttacks={gameState.setScheduledAttacks}
                     adviserIndex={gameState.adviserIndex}
                     factionTreasures={gameState.factionTreasures}
                     playerIndex={gameState.playerIndex}
@@ -107,6 +108,7 @@ const GameDashboard = () => {
                     territories={gameState.territories}
                     selectedTerritory={gameState.selectedTerritory}
                     scheduledAttacks={gameState.scheduledAttacks}
+                    setScheduledAttacks={gameState.setScheduledAttacks}
                     onAction={gameState.handleAction}
                     onEndTurn={gameState.handleEndTurn}
                     onRecruit={gameState.handleRecruit}
