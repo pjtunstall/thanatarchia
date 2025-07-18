@@ -191,7 +191,7 @@ export const factions: Faction[] = [
     formalName: "Kingdom of the Vandals",
     type: "barbarian",
     color: "hsl(var(--vandals))",
-    symbol: "🜊",
+    symbol: "♰",
     leader: {
       male: {
         name: "Huneric",
@@ -468,7 +468,7 @@ export const factions: Faction[] = [
     formalName: "Kingom of the Isaurians",
     type: "barbarian",
     color: "hsl(var(--isaurians))",
-    symbol: "⨻",
+    symbol: "⳩",
     leader: {
       male: {
         name: "Tarasicodissa",
