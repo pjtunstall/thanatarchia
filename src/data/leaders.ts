@@ -22,6 +22,7 @@ export const epithets = [
   "Happy",
   "Harsh",
   "Implacable",
+  "'Just'",
   "Mad",
   "Nepotist",
   "Notorious",

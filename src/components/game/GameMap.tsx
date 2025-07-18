@@ -75,9 +75,12 @@ export const GameMap: React.FC<GameMapProps> = ({
           <span className="initial">☠</span>
         </CardTitle>
         <p className="h-4" />
-        <p className="text-muted-foreground italic text-lg text-center">
+        {/* <p className="text-muted-foreground italic text-lg text-center">
           "House against house, town against town, if you see a man—knock him
           down!"
+        </p> */}
+        <p className="uncial text-center">
+          Imperium Romanum, {getDate(currentTurn)}
         </p>
       </CardHeader>
 
