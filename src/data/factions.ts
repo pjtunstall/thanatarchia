@@ -55,7 +55,7 @@ export const factions: Faction[] = [
     formalName: "Kindom of the Britons",
     type: "barbarian",
     color: "hsl(var(--britons))",
-    symbol: "࿋",
+    symbol: "𐃏",
     leader: {
       male: {
         name: "Cymbeline",
@@ -383,7 +383,7 @@ export const factions: Faction[] = [
     formalName: "Saxon Confederation",
     type: "barbarian",
     color: "hsl(var(--saxons))",
-    symbol: "ᛟ",
+    symbol: "ᛳ",
     leader: {
       male: {
         name: "Hengist",
@@ -409,7 +409,7 @@ export const factions: Faction[] = [
     formalName: "Suebian Confederation",
     type: "barbarian",
     color: "hsl(var(--suebians))",
-    symbol: "ᛉ",
+    symbol: "⌘",
     leader: {
       male: {
         name: "Hermeric",
