@@ -95,7 +95,8 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
               <SelectedTerritoryInfo
                 territories={territories}
                 selectedTerritory={selectedTerritory}
-                selectedFaction={playerFaction}
+                playerFactionName={playerFaction.name}
+                scheduledAttacks={scheduledAttacks}
               />
             )}
 

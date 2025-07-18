@@ -19,6 +19,7 @@ import { TreasuryActions } from "@/components/game/actions/TreasuryActions";
 import { AttackButton } from "@/components/game/actions/AttackButton";
 import { ReinforceButton } from "@/components/game/actions/ReinforceButton";
 import { CharacterDialog } from "@/components/game/CharacterProfile";
+import { factions } from "@/data/factions";
 
 type ActionsPanelProps = {
   playerFaction: Faction;
@@ -129,7 +130,8 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
                   <SelectedTerritoryInfo
                     territories={territories}
                     selectedTerritory={selectedTerritory}
-                    selectedFaction={playerFaction}
+                    playerFactionName={factions[playerIndex].name}
+                    scheduledAttacks={scheduledAttacks}
                   />
                   <div className="border-t pt-3 space-y-2">
                     <AttackButton
