@@ -1,4 +1,4 @@
-export interface Faction {
+export type Faction = {
   name: string;
   formalName: string;
   type: "imperial" | "barbarian" | "bagaudae";
@@ -23,9 +23,9 @@ export interface Faction {
     | "Nestorian"
     | "Donatist"
     | "Gnostic";
-}
+};
 
-export interface Territory {
+export type Territory = {
   name: string;
   x: number;
   y: number;
@@ -36,22 +36,22 @@ export interface Territory {
   terrain: "plains" | "forest" | "mountains" | "river";
   condition?: string;
   conditionModifier?: number;
-}
+};
 
-export interface Chronicle {
+export type Chronicle = {
   id: string;
   chronicler: string;
   bias: "friendly" | "hostile";
   entry: string;
   turn: number;
-}
+};
 
-export interface Character {
+export type Character = {
   name: string;
   gender: Gender;
   image: string;
   biography: string;
-}
+};
 
 export type Chronicler = Character & {
   style: string;
@@ -61,7 +61,7 @@ export type GameStatus = "playing" | "victory" | "defeat";
 
 export type Gender = "male" | "female";
 
-type LeaderInfo = {
+export type LeaderInfo = {
   name: string;
   image: string;
 };
@@ -70,4 +70,10 @@ export type GenderVariants = {
   [factionName: string]: {
     [gender in Gender]: LeaderInfo;
   };
+};
+
+export type AttackOrder = {
+  from: string;
+  to: string;
+  troops: number;
 };
