@@ -134,13 +134,13 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
                       from={selectedTerritory}
                       targets={validAttackTargets}
                       onAttack={handleAttack}
-                      disabled={selected?.troops! < 200}
+                      disabled={selected?.troops! < 1}
                     />
                     <ReinforceButton
                       from={selectedTerritory}
                       targets={validReinforceTargets}
                       onReinforce={props.onReinforce}
-                      disabled={selected?.troops! < 100}
+                      disabled={selected?.troops! < 1}
                     />
                   </div>
                 </>

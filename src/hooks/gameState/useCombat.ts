@@ -210,7 +210,10 @@ export const useCombat = ({
       )
         return;
 
-      const reinforcements = Math.min(500, fromTerritory.troops);
+      const reinforcements =
+        fromTerritory.troops > 500
+          ? Math.min(500, fromTerritory.troops)
+          : fromTerritory.troops;
 
       updateTerritories((prev) =>
         prev.map((t) => {
