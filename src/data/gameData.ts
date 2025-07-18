@@ -163,11 +163,11 @@ export const battleChronicle = (
         if (success) {
           return `They say that the ${attackers} took ${territory} from the ${defenders} today. One feels obliged to offer one's congratulations, although I doubt my contribution will be heard much above the belches of the victory feast, or such 'panegyrics' as their bards declaim.`;
         } else {
-          return `Another season, another chronicle. Let's get it over with. The such-and-such (${attackers}) failed to gain whatever it's called (${territory}) from the so-and-sos (${defenders}). And the shadows lengthen.`;
+          return `Another season, another chronicle. Let's get it over with. The such-and-such (${attackers})--sorry, our beloved protectors, the ${attackers}...--failed to gain whatever it's called (${territory}) from the so-and-sos (${defenders}). And the shadows lengthen.`;
         }
       } else {
         if (success) {
-          return `How tedious! The names of these uncouth tribes flow on like endless rain: their meaningless triumphs and defeats of equal insignificance. I run my finger over the parchment's roughness as the setting sunbeams briefly catch the page. I suppose we must do our duty and record here that the ${attackers} took ${territory} from the ${defenders}.`;
+          return `How tedious! The names of these uncouth tribes flow on like endless rain: their meaningless triumphs and defeats of equal insignificance. I run my finger over the parchment's roughness as the dying light briefly catches the page. I suppose we must do our duty and record here that the ${attackers} took ${territory} from the ${defenders}.`;
         } else {
           return `The glimmer of a smile almost touches one's face. News reached us today that the ${attackers} failed to wrest ${territory} from the ${defenders}. But it is a cheap pleasure. I might swap the names or swap them back, for all the difference it would make to history.`;
         }

@@ -18,7 +18,7 @@ import { BasicActions } from "@/components/game/actions/BasicActions";
 import { TreasuryActions } from "@/components/game/actions/TreasuryActions";
 import { AttackButton } from "@/components/game/actions/AttackButton";
 import { ReinforceButton } from "@/components/game/actions/ReinforceButton";
-import { CharacterDialog } from "@/components/game/CharacterDialog";
+import { CharacterDialog } from "@/components/game/CharacterProfile";
 
 interface ActionsPanelProps {
   playerFaction: Faction;

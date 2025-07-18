@@ -6,8 +6,10 @@ import { Coins, Users } from "lucide-react";
 import { Faction, Territory, Character } from "@/types/gameTypes";
 import { chroniclers, getFaithColor, initialReport } from "@/data/gameData";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
-import { CharacterDialog } from "@/components/game/CharacterDialog";
-import { CharacterProfile } from "@/components/game/CharacterProfile";
+import {
+  CharacterProfile,
+  CharacterDialog,
+} from "@/components/game/CharacterProfile";
 
 interface StatusPanelProps {
   playerFaction: Faction;

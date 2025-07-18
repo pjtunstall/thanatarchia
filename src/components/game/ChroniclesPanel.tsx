@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { CharacterDialog } from "@/components/game/CharacterDialog";
+import { CharacterDialog } from "@/components/game/CharacterProfile";
 import { Chronicle, Chronicler } from "@/types/gameTypes";
 import { getDate, chroniclers } from "@/data/gameData";
 

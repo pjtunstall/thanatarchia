@@ -64,8 +64,8 @@ All colors MUST be HSL.
     --chronicle: 30 10% 25%;
 
     /* Specific faction colors - dark mode */
-    --ostrogoths: 360 35% 40%;
-    --visigoths: 360 35% 15%;
+    --ostrogoths: 360 35% 50%;
+    --visigoths: 360 35% 25%;
     --vandals: 30 80% 50%;
     --burgundians: 180 60% 40%;
     --franks: 250 35% 35%;

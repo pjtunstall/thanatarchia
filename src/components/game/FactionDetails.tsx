@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { Faction, Character } from "@/types/gameTypes";
 import { Crown, Users, Church } from "lucide-react";
 import { getFaithColor } from "@/data/gameData";
-import { CharacterDialog } from "@/components/game/CharacterDialog";
+import { CharacterDialog } from "@/components/game/CharacterProfile";
 
 interface FactionDetailsProps {
   faction: Faction;

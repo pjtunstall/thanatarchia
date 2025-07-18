@@ -55,7 +55,7 @@ export const factions: Faction[] = [
     formalName: "Kindom of the Britons",
     type: "barbarian",
     color: "hsl(var(--britons))",
-    symbol: "🜨",
+    symbol: "࿋",
     leader: {
       male: {
         name: "Cymbeline",
