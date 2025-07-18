@@ -7,11 +7,11 @@ import { Crown, Users, Church } from "lucide-react";
 import { getFaithColor } from "@/data/gameData";
 import { CharacterDialog } from "@/components/game/CharacterProfile";
 
-interface FactionDetailsProps {
+type FactionDetailsProps = {
   faction: Faction;
   leader: Character;
   isPlayerFaction?: boolean;
-}
+};
 
 export const FactionDetails: React.FC<FactionDetailsProps> = ({
   faction,

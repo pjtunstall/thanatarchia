@@ -1,9 +1,11 @@
 import React from "react";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Coins, Users } from "lucide-react";
-import { Faction, Territory, Character } from "@/types/gameTypes";
+
+import { Faction, Territory, Character, AttackOrder } from "@/types/gameTypes";
 import { chroniclers, getFaithColor, initialReport } from "@/data/gameData";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
 import {
@@ -11,17 +13,18 @@ import {
   CharacterDialog,
 } from "@/components/game/CharacterProfile";
 
-interface StatusPanelProps {
+type StatusPanelProps = {
   playerFaction: Faction;
   playerCharacter: Character;
   territories: Territory[];
   playerTerritories: string[];
   playerTroops: number;
   selectedTerritory: string | null;
+  scheduledAttacks: AttackOrder[];
   adviserIndex: number;
   factionTreasures: number[];
   playerIndex: number;
-}
+};
 
 export const StatusPanel: React.FC<StatusPanelProps> = ({
   playerFaction,
@@ -33,6 +36,7 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
   adviserIndex,
   factionTreasures,
   playerIndex,
+  scheduledAttacks,
 }) => {
   return (
     <Card className="h-full flex flex-col">

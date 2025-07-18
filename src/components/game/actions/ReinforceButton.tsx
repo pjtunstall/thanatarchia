@@ -2,14 +2,14 @@ import { Button } from "@/components/ui/button";
 import { ShieldPlus } from "lucide-react";
 import { Territory } from "@/types/gameTypes";
 
-interface Props {
+type ReinforceButtonProps = {
   from: string;
   targets: Territory[];
   onReinforce: (from: string, to: string) => void;
   disabled: boolean;
-}
+};
 
-export const ReinforceButton: React.FC<Props> = ({
+export const ReinforceButton: React.FC<ReinforceButtonProps> = ({
   from,
   targets,
   onReinforce,

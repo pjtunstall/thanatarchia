@@ -1,12 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Sword } from "lucide-react";
 
-interface Props {
+type BasicActionsProps = {
   onAction: (action: string) => void;
   onEndTurn: () => void;
-}
+};
 
-export const BasicActions: React.FC<Props> = ({ onAction, onEndTurn }) => (
+export const BasicActions: React.FC<BasicActionsProps> = ({
+  onAction,
+  onEndTurn,
+}) => (
   <div className="grid grid-cols-2 gap-2">
     <Button onClick={() => onAction("raid")} variant="destructive" size="sm">
       <Sword className="w-3 h-3 mr-1" />

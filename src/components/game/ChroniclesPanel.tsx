@@ -6,9 +6,9 @@ import { CharacterDialog } from "@/components/game/CharacterProfile";
 import { Chronicle, Chronicler } from "@/types/gameTypes";
 import { getDate, chroniclers } from "@/data/gameData";
 
-interface ChroniclesPanelProps {
+type ChroniclesPanelProps = {
   chronicles: Chronicle[];
-}
+};
 
 export const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
   chronicles,

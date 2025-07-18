@@ -10,7 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { Chronicler } from "@/types/gameTypes";
+import { Chronicler, AttackOrder } from "@/types/gameTypes";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
 import { adjacentTerritories, chroniclers } from "@/data/gameData";
 import { Faction, Territory } from "@/types/gameTypes";
@@ -20,13 +20,14 @@ import { AttackButton } from "@/components/game/actions/AttackButton";
 import { ReinforceButton } from "@/components/game/actions/ReinforceButton";
 import { CharacterDialog } from "@/components/game/CharacterProfile";
 
-interface ActionsPanelProps {
+type ActionsPanelProps = {
   playerFaction: Faction;
   playerIndex: number;
   adviserIndex: number;
   factionTreasures: number[];
   territories: Territory[];
   selectedTerritory: string | null;
+  scheduledAttacks: AttackOrder[];
   onAction: (action: string) => void;
   onEndTurn: () => void;
   onRecruit: () => void;
@@ -51,7 +52,7 @@ interface ActionsPanelProps {
   setBattleMessage: React.Dispatch<React.SetStateAction<string>>;
   stats: string;
   setStats: React.Dispatch<React.SetStateAction<string>>;
-}
+};
 
 export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
   const {
@@ -60,6 +61,7 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
     adviserIndex,
     factionTreasures,
     selectedTerritory,
+    scheduledAttacks,
     territories,
     getValidAttackTargets,
     success,

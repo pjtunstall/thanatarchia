@@ -5,11 +5,11 @@ import { ScrollText } from "lucide-react";
 
 import { GameStatus, Chronicle } from "@/types/gameTypes";
 
-interface GameOverlayProps {
+type GameOverlayProps = {
   gameStatus: GameStatus;
   finalChronicles: Chronicle[];
   onResetGame: () => void;
-}
+};
 
 export const GameOverlay: React.FC<GameOverlayProps> = ({
   gameStatus,

@@ -2,14 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Sword } from "lucide-react";
 import { Territory } from "@/types/gameTypes";
 
-interface Props {
+type AttackButtonProps = {
   from: string;
   targets: Territory[];
   onAttack: (from: string, to: string) => void;
   disabled: boolean;
-}
+};
 
-export const AttackButton: React.FC<Props> = ({
+export const AttackButton: React.FC<AttackButtonProps> = ({
   from,
   targets,
   onAttack,

@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from "react";
 
-import { Territory, GameStatus } from "@/types/gameTypes";
+import { Territory, GameStatus, AttackOrder } from "@/types/gameTypes";
 import {
   factions,
   territories as initialTerritories,
@@ -25,6 +25,7 @@ export const useGameCore = () => {
   const [currentChronicler, setCurrentChronicler] = useState(chroniclers[0]);
   const [battleMessage, setBattleMessage] = useState<string | null>(null);
   const [stats, setStats] = useState<string | null>(null);
+  const [scheduledAttacks, setScheduledAttacks] = useState<AttackOrder[]>([]);
 
   // Derived state - computed from territories, no separate state needed
   const factionTerritories = useMemo(
@@ -86,6 +87,7 @@ export const useGameCore = () => {
     currentChronicler,
     battleMessage,
     stats,
+    scheduledAttacks,
 
     // Derived state
     factionTerritories,
@@ -105,6 +107,7 @@ export const useGameCore = () => {
     setCurrentChronicler,
     setBattleMessage,
     setStats,
+    setScheduledAttacks,
   };
 };
 

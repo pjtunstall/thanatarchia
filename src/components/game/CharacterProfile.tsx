@@ -11,9 +11,9 @@ import { cn } from "@/lib/utils";
 
 import { Character } from "@/types/gameTypes";
 
-interface PlayerCharacterProps {
+type PlayerCharacterProps = {
   playerCharacter: Character;
-}
+};
 
 export const CharacterProfile: React.FC<PlayerCharacterProps> = ({
   playerCharacter,

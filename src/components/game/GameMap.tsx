@@ -12,7 +12,7 @@ import { factions, getDate, adjacentTerritories } from "@/data/gameData";
 import { FactionDetails } from "./FactionDetails";
 import romanEmpireMap from "@/assets/roman-empire-map-clean.jpg";
 
-interface GameMapProps {
+type GameMapProps = {
   territories: Territory[];
   selectedTerritory: string | null;
   currentTurn: number;
@@ -22,7 +22,7 @@ interface GameMapProps {
   playerFactionColor: string;
   playerFactionSymbol: string;
   onTerritoryClick: (territoryId: string) => void;
-}
+};
 
 export const GameMap: React.FC<GameMapProps> = ({
   territories,

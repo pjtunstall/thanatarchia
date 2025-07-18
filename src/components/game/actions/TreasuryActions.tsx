@@ -1,16 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Users, Eye } from "lucide-react";
-import { Faction } from "@/types/gameTypes";
+
 import { costOfSpying, costOfRecruiting } from "@/data/gameData";
 
-interface Props {
+type TreasuryActionsProps = {
   playerTreasure: number;
   selectedTerritory: string | null;
   onRecruit: () => void;
   onSpy: (territoryId: string) => void;
-}
+};
 
-export const TreasuryActions: React.FC<Props> = ({
+export const TreasuryActions: React.FC<TreasuryActionsProps> = ({
   playerTreasure,
   selectedTerritory,
   onRecruit,
