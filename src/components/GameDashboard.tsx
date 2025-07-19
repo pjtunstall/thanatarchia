@@ -104,6 +104,8 @@ export const GameDashboard = () => {
                   adviserIndex={gameState.adviserIndex}
                   factionTreasures={gameState.factionTreasures}
                   playerIndex={gameState.playerIndex}
+                  onReinforce={gameState.handleReinforce}
+                  onUndoReinforce={gameState.handleUndoReinforce}
                 />
               </TabsContent>
 
@@ -132,6 +134,7 @@ export const GameDashboard = () => {
                   setBattleMessage={gameState.setBattleMessage}
                   stats={gameState.stats}
                   setStats={gameState.setStats}
+                  onUndoReinforce={gameState.handleUndoReinforce}
                 />
               </TabsContent>
             </Tabs>

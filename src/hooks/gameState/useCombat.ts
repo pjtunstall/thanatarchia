@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { Faction, Territory, Chronicler } from "@/types/gameTypes";
+import { Faction, Territory, Chronicler, AttackOrder } from "@/types/gameTypes";
 import {
   chroniclers,
   battleChronicle,
@@ -20,6 +20,7 @@ interface UseCombatProps {
   onEndTurn: () => void;
   success: boolean | null;
   setSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
+  scheduledAttacks: AttackOrder[];
 }
 
 export const useCombat = ({
@@ -33,6 +34,7 @@ export const useCombat = ({
   setFactionTreasures,
   addChronicleEntry,
   onEndTurn,
+  scheduledAttacks,
 }: UseCombatProps) => {
   const handleRecruit = useCallback(() => {
     const playerTreasury = factionTreasures[playerIndex];
@@ -210,10 +212,17 @@ export const useCombat = ({
       )
         return;
 
-      const reinforcements =
-        fromTerritory.troops > 500
-          ? Math.min(500, fromTerritory.troops)
-          : fromTerritory.troops;
+      // Calculate troops already assigned for attack from this territory...
+      const troopsAssignedToAttack = scheduledAttacks
+        .filter((a) => a.from === fromTerritoryName)
+        .reduce((sum, a) => sum + a.troops, 0);
+
+      const availableTroops = fromTerritory.troops - troopsAssignedToAttack;
+
+      // ...and abort reinforcement if all troops are assigned
+      if (availableTroops < 1) return;
+
+      const reinforcements = Math.min(500, availableTroops);
 
       updateTerritories((prev) =>
         prev.map((t) => {
@@ -222,6 +231,48 @@ export const useCombat = ({
           }
           if (t.name === toTerritoryName) {
             return { ...t, troops: t.troops + reinforcements };
+          }
+          return t;
+        })
+      );
+    },
+    [
+      territories,
+      playerIndex,
+      factions,
+      adjacentTerritories,
+      scheduledAttacks,
+      updateTerritories,
+    ]
+  );
+
+  const handleUndoReinforce = useCallback(
+    (fromTerritoryName: string, toTerritoryName: string) => {
+      const fromTerritory = territories.find(
+        (t) => t.name === fromTerritoryName
+      );
+      const toTerritory = territories.find((t) => t.name === toTerritoryName);
+
+      if (
+        !fromTerritory ||
+        !toTerritory ||
+        fromTerritory.owner !== factions[playerIndex].name ||
+        toTerritory.owner !== factions[playerIndex].name ||
+        !adjacentTerritories[fromTerritoryName]?.includes(toTerritoryName)
+      )
+        return;
+
+      const troopsToMoveBack = Math.min(500, fromTerritory.troops);
+
+      if (troopsToMoveBack < 1) return;
+
+      updateTerritories((prev) =>
+        prev.map((t) => {
+          if (t.name === fromTerritoryName) {
+            return { ...t, troops: t.troops - troopsToMoveBack };
+          }
+          if (t.name === toTerritoryName) {
+            return { ...t, troops: t.troops + troopsToMoveBack };
           }
           return t;
         })
@@ -383,6 +434,7 @@ export const useCombat = ({
     handleRecruit,
     handleAttack,
     handleReinforce,
+    handleUndoReinforce,
     getValidAttackTargets,
     executeAITurn,
   };

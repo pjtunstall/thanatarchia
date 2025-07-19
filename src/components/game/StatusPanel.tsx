@@ -25,6 +25,8 @@ type StatusPanelProps = {
   adviserIndex: number;
   factionTreasures: number[];
   playerIndex: number;
+  onReinforce: (from: string, to: string) => void;
+  onUndoReinforce: (from: string, to: string) => void;
 };
 
 export const StatusPanel: React.FC<StatusPanelProps> = ({
@@ -39,6 +41,8 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
   playerIndex,
   scheduledAttacks,
   setScheduledAttacks,
+  onReinforce,
+  onUndoReinforce,
 }) => {
   return (
     <Card className="h-full flex flex-col">
@@ -103,12 +107,15 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
                 playerFactionName={playerFaction.name}
                 scheduledAttacks={scheduledAttacks}
                 setScheduledAttacks={setScheduledAttacks}
+                onReinforce={onReinforce}
+                onUndoReinforce={onUndoReinforce}
               />
             )}
 
             <Advice
               playerCharacter={playerCharacter}
               adviserIndex={adviserIndex}
+              playerFaction={playerFaction}
             />
           </div>
         </ScrollArea>
@@ -117,10 +124,13 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
   );
 };
 
-const Advice: React.FC<{
+type AdviceProps = {
   playerCharacter: Character;
+  playerFaction: Faction;
   adviserIndex: number;
-}> = ({ playerCharacter, adviserIndex }) => {
+};
+
+function Advice({ playerCharacter, adviserIndex, playerFaction }: AdviceProps) {
   const adviser = chroniclers[adviserIndex];
 
   return (
@@ -144,6 +154,41 @@ const Advice: React.FC<{
           {initialReport(adviser.name)}
         </p>
       </div>
+
+      <div className="border-l-4 border-primary pl-4 py-2">
+        <div className="flex items-center gap-3 mb-2">
+          <CharacterDialog character={playerCharacter} />
+          <Badge variant="secondary">{playerCharacter.name}</Badge>
+        </div>
+        <p className="text-sm italic font-serif leading-relaxed">
+          {randomRejoinder(adviser.name, playerFaction)}
+        </p>
+      </div>
     </>
   );
-};
+}
+
+function randomRejoinder(adviserName: string, playerFaction: Faction): string {
+  const r = Math.random();
+  if (r < 0.1) {
+    return `Thanks for that, ${adviserName}. I'll bear it in mind.`;
+  } else if (r < 0.2) {
+    return "I see.";
+  } else if (r < 0.3) {
+    return "Wise...";
+  } else if (r < 0.4) {
+    return `Interesting take, ${adviserName}.`;
+  } else if (r < 0.5) {
+    return `Sometimes, ${adviserName}, I wonder whose side you're really on.`;
+  } else if (r < 0.6) {
+    return `Be that as it may, ${adviserName}, we ${playerFaction.name} will prevail.`;
+  } else if (r < 0.7) {
+    return `Come on, ${adviserName}, you can do better than that.`;
+  } else if (r < 0.8) {
+    return `What would I do without you, ${adviserName}?`;
+  } else if (r < 0.9) {
+    return "What will be, will be.";
+  } else {
+    return `Is that so, ${adviserName}?`;
+  }
+}

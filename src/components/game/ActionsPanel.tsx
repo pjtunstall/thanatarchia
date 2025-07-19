@@ -36,6 +36,7 @@ type ActionsPanelProps = {
     stats: string;
   };
   onReinforce: (fromTerritoryId: string, toTerritoryId: string) => void;
+  onUndoReinforce: (fromTerritoryName: string, toTerritoryName: string) => void;
   getValidAttackTargets: (fromTerritoryId: string) => Territory[];
   success: boolean | null;
   setSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
@@ -66,6 +67,8 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
     setBattleMessage,
     stats,
     setStats,
+    onReinforce,
+    onUndoReinforce,
   } = props;
 
   const selected = selectedTerritory
@@ -126,6 +129,8 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
                     playerFactionName={factions[playerIndex].name}
                     scheduledAttacks={scheduledAttacks}
                     setScheduledAttacks={setScheduledAttacks}
+                    onReinforce={onReinforce}
+                    onUndoReinforce={onUndoReinforce}
                   />
                   <div className="border-t pt-3 space-y-2">
                     <AttackButton

@@ -17,6 +17,7 @@ export const useGameState = () => {
     executeAITurn,
     handleAttack,
     handleReinforce,
+    handleUndoReinforce,
     ...otherCombat
   } = useCombat({
     territories: gameCore.territories,
@@ -37,6 +38,7 @@ export const useGameState = () => {
       gameCore.setSelectedTerritory(null);
       checkGameStatus();
     },
+    scheduledAttacks: gameCore.scheduledAttacks,
   });
 
   const generateResources = useCallback(() => {
@@ -111,6 +113,7 @@ export const useGameState = () => {
     handleRecruit,
     handleAttack,
     handleReinforce,
+    handleUndoReinforce,
     handleEndTurn,
   };
 };
