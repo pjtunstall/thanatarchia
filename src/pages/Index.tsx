@@ -1,7 +1,5 @@
-import GameDashboard from '@/components/GameDashboard';
+import { GameDashboard } from "@/components/GameDashboard";
 
-const Index = () => {
+export const Index = () => {
   return <GameDashboard />;
 };
-
-export default Index;
