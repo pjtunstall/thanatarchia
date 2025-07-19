@@ -13,55 +13,13 @@ type SelectedTerritoryInfoProps = {
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
 };
 
-function getAvailableTroops(
-  scheduledAttacks: AttackOrder[],
-  selectedTerritory: Territory
-): number {
-  let availableTroops = selectedTerritory.troops;
-  scheduledAttacks.forEach((attack) => {
-    if (attack.from === selectedTerritory.name) {
-      availableTroops -= attack.troops;
-    }
-  });
-  return availableTroops;
-}
-
-function shouldDisableUnassignButton(
-  from: string,
-  to: string,
-  scheduledAttacks: AttackOrder[]
-): boolean {
-  const attack = scheduledAttacks.find((a) => a.from === from && a.to === to);
-  return !attack || attack.troops < 1;
-}
-
-function adjustTroops(
-  selectedTerritory: Territory,
-  from: string,
-  to: string,
-  delta: number,
-  scheduledAttacks: AttackOrder[],
-  setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>
-): void {
-  setScheduledAttacks((prev) => {
-    const available = getAvailableTroops(scheduledAttacks, selectedTerritory);
-    const attack = prev.find((a) => a.from === from && a.to === to);
-
-    if (!attack) {
-      if (delta < 1) return [...prev]; // Trying to unassign from non-existent
-      const troops = Math.min(available, 500);
-      return [...prev, { from, to, troops }];
-    } else {
-      let troops =
-        delta < 0
-          ? attack.troops - Math.min(attack.troops, 500)
-          : attack.troops + Math.min(available, 500);
-
-      const filtered = prev.filter((a) => !(a.from === from && a.to === to));
-      return troops < 1 ? filtered : [...filtered, { from, to, troops }];
-    }
-  });
-}
+type TroopControlsProps = {
+  to: string;
+  territory: Territory;
+  selectedTerritory: string;
+  scheduledAttacks: AttackOrder[];
+  setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
+};
 
 export function SelectedTerritoryInfo({
   territories,
@@ -75,55 +33,6 @@ export function SelectedTerritoryInfo({
 
   const isPlayerTerritory = territory.owner === playerFactionName;
   const troopCount = territory.troops ?? territory.estimatedTroops ?? 0;
-
-  const renderTroopControls = (
-    to: string,
-    type: "attack" | "reinforce",
-    currentAmount: number
-  ) => (
-    <div className="flex gap-1 ml-auto">
-      <Button
-        size="icon"
-        variant="ghost"
-        className="h-3 w-3 p-3"
-        onClick={() =>
-          adjustTroops(
-            territory,
-            territory.name,
-            to,
-            1,
-            scheduledAttacks,
-            setScheduledAttacks
-          )
-        }
-        disabled={getAvailableTroops(scheduledAttacks, territory) < 1}
-      >
-        <ChevronUp />
-      </Button>
-      <Button
-        size="icon"
-        variant="ghost"
-        className="h-3 w-3 p-3"
-        onClick={() =>
-          adjustTroops(
-            territory,
-            territory.name,
-            to,
-            -1,
-            scheduledAttacks,
-            setScheduledAttacks
-          )
-        }
-        disabled={shouldDisableUnassignButton(
-          selectedTerritory,
-          to,
-          scheduledAttacks
-        )}
-      >
-        <ChevronDown />
-      </Button>
-    </div>
-  );
 
   return (
     <div className="border-t pt-3">
@@ -184,7 +93,13 @@ export function SelectedTerritoryInfo({
                     ? `Prepare to attack ${adj.name}: ${count}`
                     : `Reinforce ${adj.name}: ${count}`}
                 </span>
-                {renderTroopControls(adj.name, type, count)}
+                <TroopControls
+                  to={adj.name}
+                  territory={territory}
+                  selectedTerritory={selectedTerritory}
+                  scheduledAttacks={scheduledAttacks}
+                  setScheduledAttacks={setScheduledAttacks}
+                ></TroopControls>
               </div>
             );
           })}
@@ -192,4 +107,107 @@ export function SelectedTerritoryInfo({
       )}
     </div>
   );
+}
+
+function TroopControls({
+  to,
+  territory,
+  scheduledAttacks,
+  setScheduledAttacks,
+  selectedTerritory,
+}: TroopControlsProps) {
+  return (
+    <div className="flex gap-1 ml-auto">
+      <Button
+        size="icon"
+        variant="ghost"
+        className="h-3 w-3 p-3"
+        onClick={() =>
+          adjustAttacks(
+            territory,
+            territory.name,
+            to,
+            1,
+            scheduledAttacks,
+            setScheduledAttacks
+          )
+        }
+        disabled={getAvailableTroops(scheduledAttacks, territory) < 1}
+      >
+        <ChevronUp />
+      </Button>
+      <Button
+        size="icon"
+        variant="ghost"
+        className="h-3 w-3 p-3"
+        onClick={() =>
+          adjustAttacks(
+            territory,
+            territory.name,
+            to,
+            -1,
+            scheduledAttacks,
+            setScheduledAttacks
+          )
+        }
+        disabled={shouldDisableUnassignButton(
+          selectedTerritory,
+          to,
+          scheduledAttacks
+        )}
+      >
+        <ChevronDown />
+      </Button>
+    </div>
+  );
+}
+
+function getAvailableTroops(
+  scheduledAttacks: AttackOrder[],
+  selectedTerritory: Territory
+): number {
+  let availableTroops = selectedTerritory.troops;
+  scheduledAttacks.forEach((attack) => {
+    if (attack.from === selectedTerritory.name) {
+      availableTroops -= attack.troops;
+    }
+  });
+  return availableTroops;
+}
+
+function shouldDisableUnassignButton(
+  from: string,
+  to: string,
+  scheduledAttacks: AttackOrder[]
+): boolean {
+  const attack = scheduledAttacks.find((a) => a.from === from && a.to === to);
+  return !attack || attack.troops < 1;
+}
+
+function adjustAttacks(
+  selectedTerritory: Territory,
+  from: string,
+  to: string,
+  delta: number,
+  scheduledAttacks: AttackOrder[],
+  setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>
+): void {
+  setScheduledAttacks((prev) => {
+    const available = getAvailableTroops(scheduledAttacks, selectedTerritory);
+    const attack = prev.find((a) => a.from === from && a.to === to);
+
+    if (!attack) {
+      if (delta < 1) return [...prev]; // Trying to unassign from non-existent
+      const troops = Math.min(available, 500);
+      return [...prev, { from, to, troops }];
+    } else {
+      let troops =
+        delta < 0
+          ? attack.troops - Math.min(attack.troops, 500)
+          : attack.troops + Math.min(available, 500);
+
+      const filtered = prev.filter((a) => !(a.from === from && a.to === to));
+      return troops < 1 ? filtered : [...filtered, { from, to, troops }];
+    }
+  });
 }

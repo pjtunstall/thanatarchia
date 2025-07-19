@@ -202,7 +202,8 @@ const BattleReport: React.FC<{
         alt="Battle scene"
         className="w-full md:w-1/2 rounded object-cover max-h-[300px]"
       />
-      <div className="flex-1 space-y-4 max-h-[300px] overflow-y-auto pr-2">
+      {/* <div className="flex-1 space-y-4 max-h-[300px] overflow-y-auto pr-2"> */}
+      <div className="flex-1 space-y-4 max-h-[300px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
         <DialogHeader>
           <DialogTitle className="text-xl">
             {success ? "Huzzah!" : "Alas!"}
