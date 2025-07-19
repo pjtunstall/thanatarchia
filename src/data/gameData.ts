@@ -135,11 +135,14 @@ export const battleChronicle = (
         if (success) {
           return `"Our brave ${attackers} have saved ${territory} from the tyrany of the ${defenders}."`;
         } else {
-          return `"After a heroic struggle, our gallant ${attackers} have failed to liberate ${territory} from the ${defenders}"`;
+          return `"In spite of a heroic struggle, our gallant ${attackers} yet to free ${territory} from ${defenders.slice(
+            0,
+            -1
+          )} occupation."`;
         }
       } else {
         if (success) {
-          return `"Like a wolf upon the fold, the treacherous ${attackers}, have fallen upon the ${defenders} with great slaughter in ${territory}."`;
+          return `"Like the wolf upon the fold, the treacherous ${attackers}, have fallen upon the ${defenders} with great slaughter in ${territory}."`;
         } else {
           return `"At this time, the ${attackers} made an unprovoked attack on the ${defenders} in ${territory}, but were driven back with dreadful losses."`;
         }
@@ -163,7 +166,7 @@ export const battleChronicle = (
         if (success) {
           return `They say that the ${attackers} took ${territory} from the ${defenders} today. One feels obliged to offer one's congratulations, although I doubt my contribution will be heard much above the belches of the victory feast, or such 'panegyrics' as their bards declaim.`;
         } else {
-          return `Another season, another chronicle. Let's get it over with. The such-and-such (${attackers})--sorry, our beloved protectors, the ${attackers}...--failed to gain whatever it's called (${territory}) from the so-and-sos (${defenders}). And the shadows lengthen.`;
+          return `Another season, another chronicle. Let's get it over with. The such-and-such (${attackers})--ahem, our beloved protectors, the ${attackers}...--failed to gain whatever it's called (${territory}) from the so-and-sos (${defenders}). And the shadows lengthen.`;
         }
       } else {
         if (success) {
@@ -183,7 +186,10 @@ export const battleChronicle = (
         if (success) {
           return `Inconceivable! Though it strains credulity, we must note the reports coming out of ${territory} of an engagement in which those perfidious knaves, the ${attackers}, routed the ${defenders}.`;
         } else {
-          return `A reckless incursion of the ${attackers} in ${territory} has been repulsed by the ${defenders}. Indeed lack of faith begets folly: the dull wits of the sinner finding their natural counterpart in the doltish strategems of a heretic lord.`;
+          return `A reckless ${attackers.slice(
+            0,
+            -1
+          )} incursion into ${territory} has been repulsed by the ${defenders}. Indeed lack of faith begets folly: the dull wits of the sinners finding a natural counterpart in their doltish strategems.`;
         }
       }
   }
