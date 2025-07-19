@@ -79,7 +79,10 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
                 </Badge>
               </div>
               <p className="text-sm">
-                Territories: {playerTerritories.join(", ").replace(/, $/, "")}
+                Territories:{" "}
+                {playerTerritories.length === 0
+                  ? "none"
+                  : playerTerritories.join(", ").replace(/, $/, "")}
               </p>
               <div>
                 <p className="text-sm font-semibold mb-1">

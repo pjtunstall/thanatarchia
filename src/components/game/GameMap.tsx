@@ -181,11 +181,7 @@ export const GameMap: React.FC<GameMapProps> = ({
               <div
                 className={`w-6 h-6 rounded-full border-2 shadow-lg flex items-center justify-center text-white text-l font-bold
     transition-transform duration-200 hover:scale-125
-    ${
-      territory.owner === playerFactionName
-        ? "ring-2 ring-white animate-pulse"
-        : ""
-    }
+    ${territory.owner === playerFactionName ? "ring-white animate-pulse" : ""}
   `}
                 style={{
                   backgroundColor:

@@ -165,7 +165,7 @@ export const factions: Faction[] = [
     formalName: "Kingdom of the Visigoths",
     type: "barbarian",
     color: "hsl(var(--visigoths))",
-    symbol: "🜲",
+    symbol: "𐌸",
     leader: {
       male: {
         name: "Balthila",
@@ -248,7 +248,7 @@ export const factions: Faction[] = [
     formalName: "Kingdom of the Franks",
     type: "barbarian",
     color: "hsl(var(--franks))",
-    symbol: "🪓",
+    symbol: "⚜",
     leader: {
       male: {
         name: "Clovis",
@@ -300,7 +300,7 @@ export const factions: Faction[] = [
     formalName: "Kingdom of the Rugians",
     type: "barbarian",
     color: "hsl(var(--rugians))",
-    symbol: "⚘",
+    symbol: "♛",
     leader: {
       male: {
         name: "Eraric",
