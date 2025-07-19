@@ -26,6 +26,15 @@ function getAvailableTroops(
   return availableTroops;
 }
 
+function shouldDisableUnassignButton(
+  from: string,
+  to: string,
+  scheduledAttacks: AttackOrder[]
+): boolean {
+  const attack = scheduledAttacks.find((a) => a.from === from && a.to === to);
+  return !attack || attack.troops < 1;
+}
+
 function adjustTroops(
   selectedTerritory: Territory,
   from: string,
@@ -33,29 +42,24 @@ function adjustTroops(
   delta: number,
   scheduledAttacks: AttackOrder[],
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>
-) {
+): void {
   setScheduledAttacks((prev) => {
     const available = getAvailableTroops(scheduledAttacks, selectedTerritory);
-    const existing = prev.find((a) => a.from === from && a.to === to);
+    const attack = prev.find((a) => a.from === from && a.to === to);
 
-    const clampedDelta =
-      delta > 0
-        ? Math.min(delta, available) // don't over-assign
-        : delta; // allow subtraction without constraint
+    if (!attack) {
+      if (delta < 1) return [...prev]; // Trying to unassign from non-existent
+      const troops = Math.min(available, 500);
+      return [...prev, { from, to, troops }];
+    } else {
+      let troops =
+        delta < 0
+          ? attack.troops - Math.min(attack.troops, 500)
+          : attack.troops + Math.min(available, 500);
 
-    if (existing) {
-      const newTroops = Math.max(0, existing.troops + clampedDelta);
-      if (newTroops === 0) {
-        return prev.filter((a) => a !== existing);
-      } else {
-        return prev.map((a) =>
-          a === existing ? { ...a, troops: newTroops } : a
-        );
-      }
-    } else if (clampedDelta > 0) {
-      return [...prev, { from, to, troops: clampedDelta }];
+      const filtered = prev.filter((a) => !(a.from === from && a.to === to));
+      return troops < 1 ? filtered : [...filtered, { from, to, troops }];
     }
-    return prev;
   });
 }
 
@@ -82,7 +86,17 @@ export function SelectedTerritoryInfo({
         size="icon"
         variant="ghost"
         className="h-3 w-3 p-3"
-        // onClick={() => adjustTroops?.(territory.name, to, 1, type)}
+        onClick={() =>
+          adjustTroops(
+            territory,
+            territory.name,
+            to,
+            1,
+            scheduledAttacks,
+            setScheduledAttacks
+          )
+        }
+        disabled={getAvailableTroops(scheduledAttacks, territory) < 1}
       >
         <ChevronUp />
       </Button>
@@ -90,7 +104,21 @@ export function SelectedTerritoryInfo({
         size="icon"
         variant="ghost"
         className="h-3 w-3 p-3"
-        // onClick={() => adjustTroops?.(territory.name, to, -1, type)}
+        onClick={() =>
+          adjustTroops(
+            territory,
+            territory.name,
+            to,
+            -1,
+            scheduledAttacks,
+            setScheduledAttacks
+          )
+        }
+        disabled={shouldDisableUnassignButton(
+          selectedTerritory,
+          to,
+          scheduledAttacks
+        )}
       >
         <ChevronDown />
       </Button>
@@ -129,8 +157,12 @@ export function SelectedTerritoryInfo({
       </div>
 
       {isPlayerTerritory && (
-        <div className="flex flex-col gap-2 text-sm leading-none">
-          <p className="font-medium">Troops available: {troopCount}</p>
+        <div className="flex flex-col gap-2 text-sm">
+          <div className="flex items-center justify-between">
+            <span className="font-medium">
+              Defend: {getAvailableTroops(scheduledAttacks, territory)}
+            </span>
+          </div>
 
           {neighbors[selectedTerritory]?.map((adjacentTerritoryName) => {
             const adj = territories.find(
@@ -146,10 +178,7 @@ export function SelectedTerritoryInfo({
             const count = current?.troops ?? 0;
 
             return (
-              <div
-                key={adj.name}
-                className="flex items-center justify-between -mt-1"
-              >
+              <div key={adj.name} className="flex items-center justify-between">
                 <span>
                   {type === "attack"
                     ? `Prepare to attack ${adj.name}: ${count}`
