@@ -18,6 +18,7 @@ export const useGameState = () => {
     handleAttack,
     handleReinforce,
     handleUndoReinforce,
+    handleScheduledAttacks,
     ...otherCombat
   } = useCombat({
     territories: gameCore.territories,
@@ -39,6 +40,7 @@ export const useGameState = () => {
       checkGameStatus();
     },
     scheduledAttacks: gameCore.scheduledAttacks,
+    setScheduledAttacks: gameCore.setScheduledAttacks,
   });
 
   const generateResources = useCallback(() => {
@@ -87,12 +89,13 @@ export const useGameState = () => {
   }, [gameCore.resetGame, chronicles.resetChronicles]);
 
   const handleEndTurn = useCallback(() => {
-    generateResources();
+    handleScheduledAttacks(chronicles.adviserIndex), generateResources();
     executeAITurn();
     gameCore.setCurrentTurn((prev) => prev + 1);
     gameCore.setSelectedTerritory(null);
     checkGameStatus();
   }, [
+    handleScheduledAttacks,
     generateResources,
     executeAITurn,
     gameCore.setCurrentTurn,

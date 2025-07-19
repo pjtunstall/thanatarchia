@@ -21,6 +21,7 @@ interface UseCombatProps {
   success: boolean | null;
   setSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
   scheduledAttacks: AttackOrder[];
+  setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
 }
 
 export const useCombat = ({
@@ -35,6 +36,7 @@ export const useCombat = ({
   addChronicleEntry,
   onEndTurn,
   scheduledAttacks,
+  setScheduledAttacks,
 }: UseCombatProps) => {
   const handleRecruit = useCallback(() => {
     const playerTreasury = factionTreasures[playerIndex];
@@ -76,6 +78,113 @@ export const useCombat = ({
     setFactionTreasures,
     addChronicleEntry,
   ]);
+
+  const handleScheduledAttacks = useCallback(
+    (adviserIndex: number) => {
+      const groupedAttacks = groupScheduledAttacks(scheduledAttacks);
+
+      groupedAttacks.forEach(({ to, from, totalTroops, sources }) => {
+        const toTerritory = territories.find((t) => t.name === to);
+        if (!toTerritory) return;
+
+        const isEnemy = toTerritory.owner !== factions[playerIndex].name;
+        if (!isEnemy) return;
+
+        const attackStrength = totalTroops + Math.random() * 500;
+        const defenseStrength =
+          (toTerritory.troops ?? 0) +
+          Math.random() * 500 +
+          (toTerritory.conditionModifier || 0);
+
+        const victory = attackStrength > defenseStrength;
+
+        if (victory) {
+          const survivors = Math.max(
+            0,
+            toTerritory.troops === 0
+              ? totalTroops
+              : Math.floor(totalTroops - toTerritory.troops * 0.3)
+          );
+          const casualties = totalTroops - survivors;
+
+          updateTerritories((prev) =>
+            prev.map((t) => {
+              if (sources.some((s) => s.from === t.name)) {
+                const sent = sources.find((s) => s.from === t.name)!.troops;
+                return {
+                  ...t,
+                  troops: Math.max(0, t.troops! - sent),
+                };
+              }
+              if (t.name === to) {
+                return {
+                  ...t,
+                  owner: factions[playerIndex].name,
+                  troops: survivors,
+                };
+              }
+              return t;
+            })
+          );
+
+          addChronicleEntry(
+            `Our combined forces have conquered ${to} with ${casualties} casualties.`,
+            "friendly"
+          );
+        } else {
+          const casualties = Math.floor(Math.random() * 300 + 200);
+          updateTerritories((prev) =>
+            prev.map((t) => {
+              const match = sources.find((s) => s.from === t.name);
+              if (match) {
+                return {
+                  ...t,
+                  troops: Math.max(
+                    0,
+                    t.troops! - Math.floor(casualties / sources.length)
+                  ),
+                };
+              }
+              return t;
+            })
+          );
+
+          addChronicleEntry(
+            `Our attack on ${to} failed. ${casualties} troops were lost.`,
+            "hostile"
+          );
+        }
+
+        const randomIndex = Math.floor(Math.random() * chroniclers.length);
+        const chronicler = chroniclers[randomIndex];
+        const bias = randomIndex === adviserIndex ? "friendly" : "hostile";
+        const winners = victory
+          ? factions[playerIndex].name
+          : toTerritory.owner;
+        const losers = victory ? toTerritory.owner : factions[playerIndex].name;
+        const chronicle = battleChronicle(
+          chronicler,
+          bias,
+          victory,
+          winners,
+          losers,
+          to
+        );
+        // optionally display chronicle
+      });
+
+      setScheduledAttacks([]);
+    },
+    [
+      scheduledAttacks,
+      territories,
+      factions,
+      playerIndex,
+      updateTerritories,
+      addChronicleEntry,
+      setScheduledAttacks,
+    ]
+  );
 
   const handleAttack = useCallback(
     (
@@ -433,9 +542,41 @@ export const useCombat = ({
   return {
     handleRecruit,
     handleAttack,
+    handleScheduledAttacks,
     handleReinforce,
     handleUndoReinforce,
     getValidAttackTargets,
     executeAITurn,
   };
 };
+
+type AttackGroup = {
+  to: string;
+  from: string[]; // All attackers
+  totalTroops: number;
+  sources: { from: string; troops: number }[];
+};
+
+function groupScheduledAttacks(scheduledAttacks: AttackOrder[]): AttackGroup[] {
+  const grouped: { [key: string]: AttackGroup } = {};
+
+  for (const attack of scheduledAttacks) {
+    if (!grouped[attack.to]) {
+      grouped[attack.to] = {
+        to: attack.to,
+        from: [attack.from],
+        totalTroops: attack.troops,
+        sources: [{ from: attack.from, troops: attack.troops }],
+      };
+    } else {
+      grouped[attack.to].from.push(attack.from);
+      grouped[attack.to].totalTroops += attack.troops;
+      grouped[attack.to].sources.push({
+        from: attack.from,
+        troops: attack.troops,
+      });
+    }
+  }
+
+  return Object.values(grouped);
+}
