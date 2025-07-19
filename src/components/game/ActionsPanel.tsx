@@ -2,7 +2,7 @@ import React from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { Chronicler, AttackOrder } from "@/types/gameTypes";
+import { Chronicler, AttackOrder, ChronicleEntry } from "@/types/gameTypes";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
 import { adjacentTerritories, chroniclers } from "@/data/gameData";
 import { Faction, Territory } from "@/types/gameTypes";
@@ -25,16 +25,16 @@ type ActionsPanelProps = {
   onEndTurn: () => void;
   onRecruit: () => void;
   onSpy: (territoryId: string) => void;
-  onAttack: (
-    fromTerritoryId: string,
-    toTerritoryId: string,
-    adviserIndex: number
-  ) => {
-    victory: boolean;
-    chronicle: string;
-    chronicler: Chronicler;
-    stats: string;
-  };
+  // onAttack: (
+  //   fromTerritoryId: string,
+  //   toTerritoryId: string,
+  //   adviserIndex: number
+  // ) => {
+  //   victory: boolean;
+  //   chronicle: string;
+  //   chronicler: Chronicler;
+  //   stats: string;
+  // };
   onReinforce: (fromTerritoryId: string, toTerritoryId: string) => void;
   onUndoReinforce: (fromTerritoryName: string, toTerritoryName: string) => void;
   getValidAttackTargets: (fromTerritoryId: string) => Territory[];
@@ -42,8 +42,8 @@ type ActionsPanelProps = {
   setSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
   currentChronicler: Chronicler;
   setCurrentChronicler: React.Dispatch<React.SetStateAction<Chronicler>>;
-  battleMessage: string;
-  setBattleMessage: React.Dispatch<React.SetStateAction<string>>;
+  // battleMessage: string;
+  // setBattleMessage: React.Dispatch<React.SetStateAction<ChronicleEntry>>;
   stats: string;
   setStats: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -63,8 +63,8 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
     setSuccess,
     currentChronicler,
     setCurrentChronicler,
-    battleMessage,
-    setBattleMessage,
+    // battleMessage,
+    // setBattleMessage,
     stats,
     setStats,
     onReinforce,
@@ -92,13 +92,13 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
           )
       : [];
 
-  const handleAttack = (from: string, to: string): void => {
-    const result = props.onAttack(from, to, adviserIndex);
-    setSuccess(result.victory);
-    setBattleMessage(result.chronicle);
-    setStats(result.stats);
-    setCurrentChronicler(result.chronicler);
-  };
+  // const handleAttack = (from: string, to: string): void => {
+  //   const result = props.onAttack(from, to, adviserIndex);
+  //   setSuccess(result.victory);
+  //   setBattleMessage(result.chronicle);
+  //   setStats(result.stats);
+  //   setCurrentChronicler(result.chronicler);
+  // };
 
   return (
     <>
@@ -132,7 +132,7 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
                     onReinforce={onReinforce}
                     onUndoReinforce={onUndoReinforce}
                   />
-                  <div className="border-t pt-3 space-y-2">
+                  {/* <div className="border-t pt-3 space-y-2">
                     <AttackButton
                       from={selectedTerritory}
                       targets={validAttackTargets}
@@ -145,7 +145,7 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
                       onReinforce={props.onReinforce}
                       disabled={selected?.troops! < 1}
                     />
-                  </div>
+                  </div> */}
                 </>
               )}
             </div>

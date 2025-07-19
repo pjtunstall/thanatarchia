@@ -15,7 +15,7 @@ export const useGameState = () => {
   const {
     handleRecruit,
     executeAITurn,
-    handleAttack,
+    // handleAttack,
     handleReinforce,
     handleUndoReinforce,
     handleScheduledAttacks,
@@ -41,6 +41,7 @@ export const useGameState = () => {
     },
     scheduledAttacks: gameCore.scheduledAttacks,
     setScheduledAttacks: gameCore.setScheduledAttacks,
+    enqueueBattleMessage: chronicles.enqueueBattleMessage,
   });
 
   const generateResources = useCallback(() => {
@@ -114,7 +115,7 @@ export const useGameState = () => {
     ...otherCombat,
     resetGame,
     handleRecruit,
-    handleAttack,
+    // handleAttack,
     handleReinforce,
     handleUndoReinforce,
     handleEndTurn,

@@ -1,5 +1,5 @@
-import { useState, useCallback } from "react";
-import { Chronicle } from "@/types/gameTypes";
+import { useState, useCallback, useEffect } from "react";
+import { Chronicle, ChronicleEntry } from "@/types/gameTypes";
 import { chroniclers } from "@/data/gameData";
 
 const initialChronicles: Chronicle[] = [
@@ -43,6 +43,17 @@ export const useChronicles = (currentTurn: number) => {
   const [adviserIndex, setAdviserIndex] = useState(
     Math.floor(Math.random() * chroniclers.length)
   );
+
+  const [battleMessageQueue, setBattleMessageQueue] = useState<
+    ChronicleEntry[]
+  >([]);
+  const battleMessage = battleMessageQueue[0] ?? null;
+  const enqueueBattleMessage = (entry: ChronicleEntry) => {
+    setBattleMessageQueue((prev) => [...prev, entry]);
+  };
+  const dequeueBattleMessage = () => {
+    setBattleMessageQueue((prev) => prev.slice(1));
+  };
 
   const addChronicleEntry = useCallback(
     (entry: string, bias: "friendly" | "hostile") => {
@@ -142,6 +153,10 @@ export const useChronicles = (currentTurn: number) => {
     chronicles,
     finalChronicles,
     adviserIndex,
+    battleMessage,
+    battleMessageQueue,
+    enqueueBattleMessage,
+    dequeueBattleMessage,
     addChronicleEntry,
     generateFinalChronicles,
     resetChronicles,

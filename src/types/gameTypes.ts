@@ -38,6 +38,13 @@ export type Territory = {
   conditionModifier?: number;
 };
 
+export type ChronicleEntry = {
+  message: string;
+  chronicler: Chronicler;
+  success: boolean;
+  stats: string;
+};
+
 export type Chronicle = {
   id: string;
   chronicler: string;

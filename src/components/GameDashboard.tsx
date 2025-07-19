@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 
-import { Chronicler } from "@/types/gameTypes";
+import { Chronicler, ChronicleEntry } from "@/types/gameTypes";
 import { factions } from "@/data/gameData.ts";
 import { useGameState } from "@/hooks/useGameState";
 import { GameMap } from "@/components/game/GameMap";
@@ -123,15 +123,15 @@ export const GameDashboard = () => {
                   onEndTurn={gameState.handleEndTurn}
                   onRecruit={gameState.handleRecruit}
                   onSpy={gameState.handleSpy}
-                  onAttack={gameState.handleAttack}
+                  // onAttack={gameState.handleAttack}
                   onReinforce={gameState.handleReinforce}
                   getValidAttackTargets={gameState.getValidAttackTargets}
                   success={gameState.success}
                   setSuccess={gameState.setSuccess}
                   currentChronicler={gameState.currentChronicler}
                   setCurrentChronicler={gameState.setCurrentChronicler}
-                  battleMessage={gameState.battleMessage}
-                  setBattleMessage={gameState.setBattleMessage}
+                  // battleMessage={gameState.battleMessage}
+                  // setBattleMessage={gameState.setBattleMessage}
                   stats={gameState.stats}
                   setStats={gameState.setStats}
                   onUndoReinforce={gameState.handleUndoReinforce}
@@ -143,50 +143,34 @@ export const GameDashboard = () => {
       </div>
 
       <BattleReportDialog
-        chronicler={gameState.currentChronicler}
-        battleMessage={gameState.battleMessage}
-        stats={gameState.stats}
-        success={gameState.success}
-        setSuccess={gameState.setSuccess}
-        setBattleMessage={gameState.setBattleMessage}
-      ></BattleReportDialog>
+        battleMessage={gameState.battleMessageQueue[0] ?? null}
+        dequeueBattleMessage={gameState.dequeueBattleMessage}
+      />
     </>
   );
 };
 
 const BattleReportDialog: React.FC<{
-  chronicler: Chronicler;
-  battleMessage: string | null;
-  setBattleMessage: React.Dispatch<React.SetStateAction<string | null>>;
-  stats: string;
-  success: boolean | null;
-  setSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
-}> = ({
-  chronicler,
-  battleMessage,
-  setBattleMessage,
-  stats,
-  success,
-  setSuccess,
-}) => {
+  battleMessage: ChronicleEntry | null;
+  dequeueBattleMessage: () => void;
+}> = ({ battleMessage, dequeueBattleMessage }) => {
+  if (!battleMessage) return null;
+
   return (
     <Dialog
-      open={!!battleMessage}
+      open={true}
       onOpenChange={(open) => {
-        if (!open) {
-          setBattleMessage(null);
-          setSuccess(null);
-        }
+        if (!open) dequeueBattleMessage();
       }}
     >
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+      <DialogContent>
         <BattleReport
-          chronicler={chronicler}
-          chronicle={battleMessage!}
-          stats={stats!}
-          success={success}
+          chronicler={battleMessage.chronicler}
+          chronicle={battleMessage.message}
+          stats={battleMessage.stats}
+          success={battleMessage.success}
         />
-        <DialogClose className="absolute right-4 top-4" />
+        <DialogClose />
       </DialogContent>
     </Dialog>
   );
@@ -205,7 +189,6 @@ const BattleReport: React.FC<{
         alt="Battle scene"
         className="w-full md:w-1/2 rounded object-cover max-h-[300px]"
       />
-      {/* <div className="flex-1 space-y-4 max-h-[300px] overflow-y-auto pr-2"> */}
       <div className="flex-1 space-y-4 max-h-[300px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
         <DialogHeader>
           <DialogTitle className="text-xl">
