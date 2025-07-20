@@ -7,8 +7,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-import { Character, Faction, Territory } from "@/types/gameTypes";
-import { factions, getDate, adjacentTerritories } from "@/data/gameData";
+import { Character, Faction, Territory, AttackOrder } from "@/types/gameTypes";
+import { getDate, adjacentTerritories } from "@/data/gameData";
 import { FactionDetails } from "./FactionDetails";
 import romanEmpireMap from "@/assets/roman-empire-map-clean.jpg";
 
@@ -21,10 +21,11 @@ type GameMapProps = {
   playerFactionName: string;
   playerFactionColor: string;
   playerFactionSymbol: string;
+  scheduledAttacks: AttackOrder[];
   onTerritoryClick: (territoryId: string) => void;
 };
 
-export const GameMap: React.FC<GameMapProps> = ({
+export function GameMap({
   territories,
   selectedTerritory,
   currentTurn,
@@ -33,8 +34,9 @@ export const GameMap: React.FC<GameMapProps> = ({
   playerFactionName,
   playerFactionColor,
   playerFactionSymbol,
+  scheduledAttacks,
   onTerritoryClick,
-}) => {
+}: GameMapProps) {
   // Create faction lookup from centralized data + filter to only show factions with territories
   const factionLookup = React.useMemo(() => {
     const lookup: Record<
@@ -181,7 +183,11 @@ export const GameMap: React.FC<GameMapProps> = ({
               <div
                 className={`w-6 h-6 rounded-full border-2 shadow-lg flex items-center justify-center text-white text-l font-bold
     transition-transform duration-200 hover:scale-125
-    ${territory.owner === playerFactionName ? "ring-white animate-pulse" : ""}
+    ${
+      isUnderAttack(territory, scheduledAttacks)
+        ? "ring-white animate-pulse"
+        : ""
+    }
   `}
                 style={{
                   backgroundColor:
@@ -249,7 +255,7 @@ export const GameMap: React.FC<GameMapProps> = ({
       </CardContent>
     </Card>
   );
-};
+}
 
 const CompassRose = () => {
   return (
@@ -317,3 +323,10 @@ const CompassRose = () => {
     </svg>
   );
 };
+
+function isUnderAttack(
+  territory: Territory,
+  scheduledAttacks: AttackOrder[]
+): boolean {
+  return scheduledAttacks.some((attack) => attack.to === territory.name);
+}

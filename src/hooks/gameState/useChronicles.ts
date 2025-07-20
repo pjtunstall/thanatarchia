@@ -17,6 +17,7 @@ const initialChronicles: Chronicle[] = [
     bias: "hostile",
     entry:
       "The barbarous Alamanni continue their senseless raids, pillaging what civilized men have built with crude savagery.",
+    // "These uncouth peoples, lacking in both letters and manners, persist in their primitive territorial disputes, as is their wont.",
     turn: 1,
   },
   {
@@ -24,7 +25,7 @@ const initialChronicles: Chronicle[] = [
     chronicler: "Athaloc of Smyrna",
     bias: "hostile",
     entry:
-      "These uncouth tribes, lacking in both letters and manners, persist in their primitive territorial disputes, as is their wont.",
+      "The latter days are surely upon us when the heretic and apostate, little better than the pagan, establish realms amidst the ruins.",
     turn: 1,
   },
   {

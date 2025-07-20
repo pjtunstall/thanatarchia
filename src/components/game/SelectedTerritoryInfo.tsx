@@ -140,7 +140,7 @@ export function SelectedTerritoryInfo({
             ) : (
               <ChevronRight className="w-4 h-4 text-red-600" />
             )}
-            <p className="text-xs font-semibold text-red-700">Attack Targets</p>
+            <p className="text-xs font-semibold text-red-700">Attack</p>
           </div>
           {attackExpanded && attackRows.length > 0 && (
             <div className="space-y-1">{attackRows}</div>
@@ -155,9 +155,7 @@ export function SelectedTerritoryInfo({
             ) : (
               <ChevronRight className="w-4 h-4 text-green-600" />
             )}
-            <p className="text-xs font-semibold text-green-700">
-              Reinforcement Targets
-            </p>
+            <p className="text-xs font-semibold text-green-700">Reinforce</p>
           </div>
           {reinforceExpanded && reinforceRows.length > 0 && (
             <div className="space-y-1">{reinforceRows}</div>

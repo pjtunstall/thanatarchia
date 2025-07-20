@@ -63,6 +63,7 @@ export const GameDashboard = () => {
               playerFactionName={factions[gameState.playerIndex].name}
               playerFactionColor={factions[gameState.playerIndex].color}
               playerFactionSymbol={factions[gameState.playerIndex].symbol}
+              scheduledAttacks={gameState.scheduledAttacks}
               onTerritoryClick={gameState.handleTerritoryClick}
             />
           </div>
@@ -93,19 +94,15 @@ export const GameDashboard = () => {
                   playerCharacter={
                     gameState.factionLeaders[gameState.playerIndex]
                   }
-                  territories={gameState.territories}
                   playerTerritories={
                     gameState.factionTerritories[gameState.playerIndex]
                   }
                   playerTroops={gameState.factionTroops[gameState.playerIndex]}
                   selectedTerritory={gameState.selectedTerritory}
                   scheduledAttacks={gameState.scheduledAttacks}
-                  setScheduledAttacks={gameState.setScheduledAttacks}
                   adviserIndex={gameState.adviserIndex}
                   factionTreasures={gameState.factionTreasures}
                   playerIndex={gameState.playerIndex}
-                  onReinforce={gameState.handleReinforce}
-                  onUndoReinforce={gameState.handleUndoReinforce}
                 />
               </TabsContent>
 
