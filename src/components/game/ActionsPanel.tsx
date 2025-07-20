@@ -6,7 +6,6 @@ import { Chronicler, AttackOrder } from "@/types/gameTypes";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
 import { Faction, Territory } from "@/types/gameTypes";
 import { BasicActions } from "@/components/game/actions/BasicActions";
-import { TreasuryActions } from "@/components/game/actions/TreasuryActions";
 import { factions } from "@/data/factions";
 
 type ActionsPanelProps = {
@@ -43,6 +42,8 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
     territories,
     onReinforce,
     onUndoReinforce,
+    onRecruit,
+    onSpy,
   } = props;
 
   return (
@@ -59,22 +60,17 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
             />
 
             <div className="border-t pt-3">
-              <p className="text-sm font-semibold mb-2">Treasury Actions</p>
-              <TreasuryActions
-                playerTreasure={factionTreasures[playerIndex]}
-                selectedTerritory={selectedTerritory}
-                onRecruit={props.onRecruit}
-                onSpy={props.onSpy}
-              />
-
               {selectedTerritory && (
                 <>
                   <SelectedTerritoryInfo
                     territories={territories}
                     selectedTerritory={selectedTerritory}
                     playerFactionName={factions[playerIndex].name}
+                    playerTreasure={factionTreasures[playerIndex]}
                     scheduledAttacks={scheduledAttacks}
                     setScheduledAttacks={setScheduledAttacks}
+                    onRecruit={onRecruit}
+                    onSpy={onSpy}
                     onReinforce={onReinforce}
                     onUndoReinforce={onUndoReinforce}
                   />

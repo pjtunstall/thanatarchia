@@ -11,9 +11,9 @@ export const BasicActions: React.FC<BasicActionsProps> = ({
   onEndTurn,
 }) => (
   <div className="grid grid-cols-2 gap-2">
-    <Button onClick={() => onAction("raid")} variant="destructive" size="sm">
-      <Sword className="w-3 h-3 mr-1" />
-      Raid Territory
+    <Button onClick={() => onAction("raid")} variant="default" size="sm">
+      {/* <Sword className="w-3 h-3 mr-1" /> */}
+      Contemplate
     </Button>
     {/* <Button onClick={() => onAction("marry")} variant="secondary" size="sm">
       Arrange Marriage

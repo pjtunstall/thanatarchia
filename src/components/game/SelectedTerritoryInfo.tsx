@@ -14,13 +14,17 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 import { AttackOrder, Territory } from "@/types/gameTypes";
+import { costOfRecruiting, costOfSpying } from "@/data/gameData";
 import { neighbors } from "@/data/territories";
 
 type SelectedTerritoryInfoProps = {
   territories: Territory[];
   selectedTerritory: string;
   playerFactionName: string;
+  playerTreasure: number;
   scheduledAttacks: AttackOrder[];
+  onRecruit: () => void;
+  onSpy: (string) => void;
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
   onReinforce: (from: string, to: string) => void;
   onUndoReinforce: (from: string, to: string) => void;
@@ -30,7 +34,10 @@ export function SelectedTerritoryInfo({
   territories,
   selectedTerritory,
   playerFactionName,
+  playerTreasure,
   scheduledAttacks,
+  onRecruit,
+  onSpy,
   setScheduledAttacks,
   onReinforce,
   onUndoReinforce,
@@ -47,6 +54,8 @@ export function SelectedTerritoryInfo({
   const attackRows: JSX.Element[] = [];
   const reinforceRows: JSX.Element[] = [];
 
+  const available = getAvailableTroops(scheduledAttacks, territory);
+
   if (isPlayerTerritory) {
     neighbors[selectedTerritory]?.forEach((adjacentTerritoryName) => {
       const adj = territories.find((t) => t.name === adjacentTerritoryName);
@@ -58,23 +67,31 @@ export function SelectedTerritoryInfo({
       );
       const count = current?.troops ?? 0;
 
+      let rowTextClass: string;
+      let rowBackgroundClass: string;
+      let rowSymbol: JSX.Element;
+      let rowArray: JSX.Element[];
+      if (type === "attack") {
+        rowBackgroundClass = "bg-red-900/20 text-muted-foreground";
+        rowTextClass = "flex items-center gap-1 text-sm text-red-200";
+        rowSymbol = <Sword className="w-3 h-3" />;
+        rowArray = attackRows;
+      } else {
+        rowBackgroundClass = "bg-green-900/20 text-muted-foreground";
+        rowTextClass = "flex items-center gap-1 text-sm text-green-200";
+        rowSymbol = <ShieldPlus className="w-3 h-3" />;
+        rowArray = reinforceRows;
+      }
+
       const row = (
         <div
           key={adj.name}
-          className={`flex items-center justify-between rounded px-2 py-1 ${
-            type === "attack"
-              ? "bg-red-100 text-red-800"
-              : "bg-green-100 text-green-800"
-          }`}
+          className={`flex items-center justify-between rounded px-2 py-1 ${rowBackgroundClass}`}
         >
-          <span className="flex items-center gap-1 text-sm text-gray-700">
-            {type === "attack" ? (
-              <Sword className="w-3 h-3" />
-            ) : (
-              <ShieldPlus className="w-3 h-3" />
-            )}
+          <span className={rowTextClass}>
+            {rowSymbol}
             {type === "attack"
-              ? `Attack ${adj.name}: ${count}`
+              ? `Prepare to attack ${adj.name}: ${count}`
               : `Reinforce ${adj.name}: ${adj.troops}`}
           </span>
           <TroopControls
@@ -86,21 +103,20 @@ export function SelectedTerritoryInfo({
             type={type}
             onReinforce={onReinforce}
             onUndoReinforce={onUndoReinforce}
+            available={available}
           />
         </div>
       );
 
-      if (type === "attack") {
-        attackRows.push(row);
-      } else {
-        reinforceRows.push(row);
-      }
+      rowArray.push(row);
     });
   }
 
   return (
     <div className="border-t pt-3">
       <p className="text-sm font-semibold mb-2">Selected Territory</p>
+
+      {/* Title Row */}
       <div className="bg-muted/30 rounded p-2 mb-2">
         <div className="flex items-center justify-between text-sm">
           <div className="flex items-center gap-2">
@@ -113,24 +129,54 @@ export function SelectedTerritoryInfo({
               {territory.owner}
             </Badge>
           </div>
-          <div className="flex items-center gap-2">
-            <Users className="w-4 h-4 text-muted-foreground" />
-            <span className="font-medium">
-              {isPlayerTerritory
-                ? troopCount
-                : territory.spiedOn
-                ? troopCount
-                : "?"}
+        </div>
+      </div>
+
+      {/* Troop Info Row */}
+      <div className="border border-muted rounded p-2 mb-3 bg-muted/20 text-sm flex items-center gap-4">
+        <Users className="w-4 h-4 text-muted-foreground" />
+        <span className="font-semibold">Troops</span>
+        <div className="flex-1 flex justify-center">
+          {isPlayerTerritory && (
+            <span className="text-muted-foreground">
+              Available: <span className="font-medium">{available}</span>
             </span>
-            {!isPlayerTerritory && !territory.spiedOn && (
-              <Eye className="w-3 h-3 text-muted-foreground/60" />
-            )}
-          </div>
+          )}
+        </div>
+        <div className="flex items-center gap-1">
+          <span className="text-muted-foreground">Total:</span>
+          <span className="font-medium">
+            {isPlayerTerritory || territory.spiedOn ? troopCount : "?"}
+          </span>
+          {!isPlayerTerritory && !territory.spiedOn && (
+            <Eye className="w-3 h-3 text-muted-foreground/60" />
+          )}
         </div>
       </div>
 
       {isPlayerTerritory && (
         <div className="flex flex-col gap-3 text-sm">
+          <div className="grid grid-cols-2 gap-2">
+            <Button
+              onClick={onRecruit}
+              variant="outline"
+              size="sm"
+              disabled={playerTreasure < costOfRecruiting}
+            >
+              <Users className="w-3 h-3 mr-1" />
+              Recruit ({costOfRecruiting} solidi)
+            </Button>
+            <Button
+              onClick={() => selectedTerritory && onSpy(selectedTerritory)}
+              variant="outline"
+              size="sm"
+              disabled={!selectedTerritory || playerTreasure < costOfSpying}
+            >
+              <Eye className="w-3 h-3 mr-1" />
+              Spy ({costOfSpying} solidi)
+            </Button>
+          </div>
+
           <div
             className="cursor-pointer select-none flex items-center gap-1"
             onClick={() => setAttackExpanded(!attackExpanded)}
@@ -175,6 +221,7 @@ type TroopControlsProps = {
   onReinforce?: (from: string, to: string) => void;
   onUndoReinforce?: (from: string, to: string) => void;
   territories: Territory[];
+  available: number;
 };
 
 function TroopControls({
@@ -186,8 +233,8 @@ function TroopControls({
   onReinforce,
   onUndoReinforce,
   territories,
+  available,
 }: TroopControlsProps) {
-  const available = getAvailableTroops(scheduledAttacks, territory);
   const reinforcedTerritory = territories.find((t) => t.name === to);
 
   const handleDelta = (delta: number) => {
@@ -277,7 +324,7 @@ function adjustAttacks(
     const attack = prev.find((a) => a.from === from && a.to === to);
 
     if (!attack) {
-      if (delta < 1) return [...prev]; // Trying to unassign from non-existent
+      if (delta < 1) return [...prev]; // Trying to unassign from a non-existent attack
       const troops = Math.min(available, 500);
       return [...prev, { from, to, troops }];
     } else {

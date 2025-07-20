@@ -16,7 +16,7 @@ const initialChronicles: Chronicle[] = [
     chronicler: "Athaloc of Smyrna",
     bias: "hostile",
     entry:
-      "The latter days are surely upon us when the heretic and apostate, little better than the pagan, establish realms amidst the ruins.",
+      "The latter days are surely upon us when the heretic and the apostate, little better than the pagan, establish realms amidst the ruins.",
     turn: 1,
   },
   {

@@ -23,7 +23,6 @@ type UseCombatProps = {
   updateTerritories: (updater: (prev: Territory[]) => Territory[]) => void;
   setFactionTreasures: (updater: (prev: number[]) => number[]) => void;
   addChronicleEntry: (entry: string, bias: "friendly" | "hostile") => void;
-  onEndTurn: () => void;
   success: boolean | null;
   setSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
   scheduledAttacks: AttackOrder[];
@@ -41,7 +40,6 @@ export const useCombat = ({
   updateTerritories,
   setFactionTreasures,
   addChronicleEntry,
-  onEndTurn,
   scheduledAttacks,
   setScheduledAttacks,
   enqueueBattleMessage,
@@ -194,123 +192,6 @@ export const useCombat = ({
       enqueueBattleMessage,
     ]
   );
-
-  // const handleAttack = useCallback(
-  //   (
-  //     fromTerritoryName: string,
-  //     toTerritoryName: string,
-  //     adviserIndex: number
-  //   ): {
-  //     victory: boolean;
-  //     chronicle: string;
-  //     stats: string;
-  //     chronicler: Chronicler;
-  //   } => {
-  //     const fromTerritory = territories.find(
-  //       (t) => t.name === fromTerritoryName
-  //     );
-  //     const toTerritory = territories.find((t) => t.name === toTerritoryName);
-
-  //     if (
-  //       !fromTerritory ||
-  //       !toTerritory ||
-  //       fromTerritory.owner !== factions[playerIndex].name ||
-  //       toTerritory.owner === factions[playerIndex].name ||
-  //       !adjacentTerritories[fromTerritoryName]?.includes(toTerritoryName)
-  //     ) {
-  //       return;
-  //     }
-
-  //     let winners: string;
-  //     let losers: string;
-  //     let casualties: number;
-  //     let survivors: number;
-  //     let stats: string;
-  //     const attackForce = Math.floor(fromTerritory.troops! * 0.8);
-  //     const defenseForce = toTerritory.troops!;
-
-  //     const attackStrength = attackForce + Math.random() * 500;
-  //     const defenseStrength =
-  //       defenseForce +
-  //       Math.random() * 500 +
-  //       (toTerritory.conditionModifier || 0);
-
-  //     const victory = attackStrength > defenseStrength;
-
-  //     if (victory) {
-  //       winners = fromTerritory.owner;
-  //       losers = toTerritory.owner;
-  //       const survivors =
-  //         defenseForce === 0
-  //           ? attackForce
-  //           : Math.floor(attackForce - defenseForce * 0.3);
-  //       casualties = attackForce - survivors;
-
-  //       updateTerritories((prev) =>
-  //         prev.map((t) => {
-  //           if (t.name === fromTerritoryName) {
-  //             return { ...t, troops: t.troops! - attackForce };
-  //           }
-  //           if (t.name === toTerritoryName) {
-  //             return {
-  //               ...t,
-  //               owner: factions[playerIndex].name,
-  //               troops: survivors,
-  //             };
-  //           }
-  //           return t;
-  //         })
-  //       );
-
-  //       addChronicleEntry(
-  //         `Our brave warriors have conquered ${toTerritory.name} in glorious battle!`,
-  //         "friendly"
-  //       );
-  //     } else {
-  //       winners = toTerritory.owner;
-  //       losers = fromTerritory.owner;
-  //       casualties = Math.floor(Math.random() * 300 + 200);
-  //       survivors = attackForce - casualties;
-  //       updateTerritories((prev) =>
-  //         prev.map((t) =>
-  //           t.name === fromTerritoryName
-  //             ? { ...t, troops: Math.max(0, t.troops! - casualties) }
-  //             : t
-  //         )
-  //       );
-
-  //       addChronicleEntry(
-  //         `Our forces were repelled from ${toTerritory.name} with heavy losses.`,
-  //         "hostile"
-  //       );
-  //     }
-
-  //     stats = `Initial strength: ${attackForce}.\nCasualties: ${casualties}.`;
-
-  //     const randomIndex = Math.floor(Math.random() * chroniclers.length);
-  //     const chronicler = chroniclers[randomIndex];
-  //     const bias = randomIndex === adviserIndex ? "friendly" : "hostile";
-  //     const chronicle = battleChronicle(
-  //       chronicler,
-  //       bias,
-  //       victory,
-  //       winners,
-  //       losers,
-  //       toTerritory.name
-  //     );
-
-  //     return { victory, chronicle, stats, chronicler };
-  //   },
-  //   [
-  //     territories,
-  //     playerIndex,
-  //     factions,
-  //     adjacentTerritories,
-  //     updateTerritories,
-  //     addChronicleEntry,
-  //     onEndTurn,
-  //   ]
-  // );
 
   const handleReinforce = useCallback(
     (fromTerritoryName: string, toTerritoryName: string) => {
@@ -548,7 +429,6 @@ export const useCombat = ({
 
   return {
     handleRecruit,
-    // handleAttack,
     handleScheduledAttacks,
     handleReinforce,
     handleUndoReinforce,

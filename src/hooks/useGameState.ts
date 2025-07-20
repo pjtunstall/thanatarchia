@@ -15,7 +15,6 @@ export const useGameState = () => {
   const {
     handleRecruit,
     executeAITurn,
-    // handleAttack,
     handleReinforce,
     handleUndoReinforce,
     handleScheduledAttacks,
@@ -32,13 +31,6 @@ export const useGameState = () => {
     addChronicleEntry: chronicles.addChronicleEntry,
     success: gameCore.success,
     setSuccess: gameCore.setSuccess,
-    onEndTurn: () => {
-      generateResources();
-      executeAITurn();
-      gameCore.setCurrentTurn((prev) => prev + 1);
-      gameCore.setSelectedTerritory(null);
-      checkGameStatus();
-    },
     scheduledAttacks: gameCore.scheduledAttacks,
     setScheduledAttacks: gameCore.setScheduledAttacks,
     enqueueBattleMessage: chronicles.enqueueBattleMessage,
@@ -90,7 +82,8 @@ export const useGameState = () => {
   }, [gameCore.resetGame, chronicles.resetChronicles]);
 
   const handleEndTurn = useCallback(() => {
-    handleScheduledAttacks(chronicles.adviserIndex), generateResources();
+    handleScheduledAttacks(chronicles.adviserIndex);
+    generateResources();
     executeAITurn();
     gameCore.setCurrentTurn((prev) => prev + 1);
     gameCore.setSelectedTerritory(null);
@@ -115,7 +108,6 @@ export const useGameState = () => {
     ...otherCombat,
     resetGame,
     handleRecruit,
-    // handleAttack,
     handleReinforce,
     handleUndoReinforce,
     handleEndTurn,
