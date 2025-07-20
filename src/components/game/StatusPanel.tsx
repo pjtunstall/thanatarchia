@@ -6,12 +6,10 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Coins, Users } from "lucide-react";
 
 import { Faction, Territory, Character, AttackOrder } from "@/types/gameTypes";
-import { chroniclers, getFaithColor, initialReport } from "@/data/gameData";
+import { getFaithColor } from "@/data/gameData";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
-import {
-  CharacterProfile,
-  CharacterDialog,
-} from "@/components/game/CharacterProfile";
+import { CharacterProfile } from "@/components/game/CharacterProfile";
+import { Advice } from "@/components/game/status/Advice";
 
 type StatusPanelProps = {
   playerFaction: Faction;
@@ -29,7 +27,7 @@ type StatusPanelProps = {
   onUndoReinforce: (from: string, to: string) => void;
 };
 
-export const StatusPanel: React.FC<StatusPanelProps> = ({
+export function StatusPanel({
   playerFaction,
   playerCharacter,
   territories,
@@ -43,7 +41,7 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
   setScheduledAttacks,
   onReinforce,
   onUndoReinforce,
-}) => {
+}: StatusPanelProps) {
   return (
     <Card className="h-full flex flex-col">
       <CardHeader>
@@ -122,73 +120,4 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({
       </CardContent>
     </Card>
   );
-};
-
-type AdviceProps = {
-  playerCharacter: Character;
-  playerFaction: Faction;
-  adviserIndex: number;
-};
-
-function Advice({ playerCharacter, adviserIndex, playerFaction }: AdviceProps) {
-  const adviser = chroniclers[adviserIndex];
-
-  return (
-    <>
-      <div className="border-l-4 border-primary pl-4 py-2">
-        <div className="flex items-center gap-3 mb-2">
-          <CharacterDialog character={playerCharacter} />
-          <Badge variant="secondary">{playerCharacter.name}</Badge>
-        </div>
-        <p className="text-sm italic font-serif leading-relaxed">
-          "What do you counsel, {adviser.name}?"
-        </p>
-      </div>
-
-      <div className="border-l-4 border-primary pl-4 py-2">
-        <div className="flex items-center gap-3 mb-2">
-          <CharacterDialog character={adviser} />
-          <Badge variant="secondary">{adviser.name}</Badge>
-        </div>
-        <p className="text-sm italic font-serif leading-relaxed">
-          {initialReport(adviser.name)}
-        </p>
-      </div>
-
-      <div className="border-l-4 border-primary pl-4 py-2">
-        <div className="flex items-center gap-3 mb-2">
-          <CharacterDialog character={playerCharacter} />
-          <Badge variant="secondary">{playerCharacter.name}</Badge>
-        </div>
-        <p className="text-sm italic font-serif leading-relaxed">
-          {randomRejoinder(adviser.name, playerFaction)}
-        </p>
-      </div>
-    </>
-  );
-}
-
-function randomRejoinder(adviserName: string, playerFaction: Faction): string {
-  const r = Math.random();
-  if (r < 0.1) {
-    return `Thanks for that, ${adviserName}. I'll bear it in mind.`;
-  } else if (r < 0.2) {
-    return "I see.";
-  } else if (r < 0.3) {
-    return "Wise...";
-  } else if (r < 0.4) {
-    return `Interesting take, ${adviserName}.`;
-  } else if (r < 0.5) {
-    return `Sometimes, ${adviserName}, I wonder whose side you're really on.`;
-  } else if (r < 0.6) {
-    return `Be that as it may, ${adviserName}, we ${playerFaction.name} will prevail.`;
-  } else if (r < 0.7) {
-    return `Come on, ${adviserName}, you can do better than that.`;
-  } else if (r < 0.8) {
-    return `What would I do without you, ${adviserName}?`;
-  } else if (r < 0.9) {
-    return "What will be, will be.";
-  } else {
-    return `Is that so, ${adviserName}?`;
-  }
 }
