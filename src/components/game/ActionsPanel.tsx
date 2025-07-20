@@ -2,7 +2,7 @@ import React from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { Chronicler, AttackOrder } from "@/types/gameTypes";
+import { Chronicler, AttackOrder, Character } from "@/types/gameTypes";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
 import { Faction, Territory } from "@/types/gameTypes";
 import { BasicActions } from "@/components/game/actions/BasicActions";
@@ -13,6 +13,7 @@ type ActionsPanelProps = {
   playerIndex: number;
   adviserIndex: number;
   factionTreasures: number[];
+  factionLeaders: Character[];
   territories: Territory[];
   selectedTerritory: string | null;
   scheduledAttacks: AttackOrder[];
@@ -36,6 +37,7 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
   const {
     playerIndex,
     factionTreasures,
+    factionLeaders,
     selectedTerritory,
     scheduledAttacks,
     setScheduledAttacks,
@@ -65,6 +67,7 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
                   <SelectedTerritoryInfo
                     territories={territories}
                     selectedTerritory={selectedTerritory}
+                    factionLeaders={factionLeaders}
                     playerFactionName={factions[playerIndex].name}
                     playerTreasure={factionTreasures[playerIndex]}
                     scheduledAttacks={scheduledAttacks}

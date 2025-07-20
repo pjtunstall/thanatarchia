@@ -112,6 +112,7 @@ export const GameDashboard = () => {
                   playerIndex={gameState.playerIndex}
                   adviserIndex={gameState.adviserIndex}
                   factionTreasures={gameState.factionTreasures}
+                  factionLeaders={gameState.factionLeaders}
                   territories={gameState.territories}
                   selectedTerritory={gameState.selectedTerritory}
                   scheduledAttacks={gameState.scheduledAttacks}
@@ -120,7 +121,6 @@ export const GameDashboard = () => {
                   onEndTurn={gameState.handleEndTurn}
                   onRecruit={gameState.handleRecruit}
                   onSpy={gameState.handleSpy}
-                  // onAttack={gameState.handleAttack}
                   onReinforce={gameState.handleReinforce}
                   getValidAttackTargets={gameState.getValidAttackTargets}
                   success={gameState.success}

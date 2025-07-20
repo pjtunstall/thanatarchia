@@ -10,12 +10,14 @@ import {
   ShieldPlus,
 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
-import { AttackOrder, Territory } from "@/types/gameTypes";
-import { costOfRecruiting, costOfSpying } from "@/data/gameData";
+import { AttackOrder, Territory, Character } from "@/types/gameTypes";
+import { costOfRecruiting, costOfSpying, factions } from "@/data/gameData";
 import { neighbors } from "@/data/territories";
+import { FactionDetails } from "./FactionDetails";
 
 type SelectedTerritoryInfoProps = {
   territories: Territory[];
@@ -23,6 +25,7 @@ type SelectedTerritoryInfoProps = {
   playerFactionName: string;
   playerTreasure: number;
   scheduledAttacks: AttackOrder[];
+  factionLeaders: Character[];
   onRecruit: () => void;
   onSpy: (string) => void;
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
@@ -36,6 +39,7 @@ export function SelectedTerritoryInfo({
   playerFactionName,
   playerTreasure,
   scheduledAttacks,
+  factionLeaders,
   onRecruit,
   onSpy,
   setScheduledAttacks,
@@ -112,6 +116,8 @@ export function SelectedTerritoryInfo({
     });
   }
 
+  const faction = factions.find((f) => f.name === territory.owner);
+
   return (
     <div className="border-t pt-3">
       <p className="text-sm font-semibold mb-2">Selected Territory</p>
@@ -122,12 +128,25 @@ export function SelectedTerritoryInfo({
           <div className="flex items-center gap-2">
             <MapPin className="w-4 h-4 text-muted-foreground" />
             <span className="font-medium">{territory.name}</span>
-            <Badge
-              variant={isPlayerTerritory ? "default" : "secondary"}
-              className="text-xs"
-            >
-              {territory.owner}
-            </Badge>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Badge
+                  variant={isPlayerTerritory ? "default" : "secondary"}
+                  className="text-xs cursor-pointer"
+                  style={{ backgroundColor: faction.color }}
+                >
+                  {territory.owner}
+                </Badge>
+              </DialogTrigger>
+
+              <DialogContent className="p-0 w-[20rem] max-w-[90vw] max-h-[90vh] overflow-auto">
+                <FactionDetails
+                  faction={faction}
+                  leader={factionLeaders[factions.indexOf(faction)]}
+                  isPlayerFaction={faction.name === playerFactionName}
+                />
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </div>
@@ -337,4 +356,19 @@ function adjustAttacks(
       return troops < 1 ? filtered : [...filtered, { from, to, troops }];
     }
   });
+}
+
+function darkenColor(color: string, amount: number) {
+  try {
+    const num = parseInt(color.replace("#", ""), 16);
+    let r = (num >> 16) - amount * 255;
+    let g = ((num >> 8) & 0x00ff) - amount * 255;
+    let b = (num & 0x0000ff) - amount * 255;
+    r = Math.max(0, Math.min(255, r));
+    g = Math.max(0, Math.min(255, g));
+    b = Math.max(0, Math.min(255, b));
+    return `rgb(${r}, ${g}, ${b})`;
+  } catch {
+    return color; // fallback
+  }
 }
