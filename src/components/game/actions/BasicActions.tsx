@@ -15,12 +15,12 @@ export const BasicActions: React.FC<BasicActionsProps> = ({
       <Sword className="w-3 h-3 mr-1" />
       Raid Territory
     </Button>
-    <Button onClick={() => onAction("marry")} variant="secondary" size="sm">
+    {/* <Button onClick={() => onAction("marry")} variant="secondary" size="sm">
       Arrange Marriage
     </Button>
     <Button onClick={() => onAction("negotiate")} variant="outline" size="sm">
       Send Envoy
-    </Button>
+    </Button> */}
     <Button onClick={onEndTurn} variant="default" size="sm">
       End Turn
     </Button>
