@@ -91,6 +91,7 @@ export const useCombat = ({
     (adviserIndex: number) => {
       const groupedAttacks = groupScheduledAttacks(scheduledAttacks);
       const entries: ChronicleEntry[] = [];
+      let losses = 0;
 
       groupedAttacks.forEach(({ to, from, totalTroops, sources }) => {
         const toTerritory = territories.find((t) => t.name === to);
@@ -101,7 +102,7 @@ export const useCombat = ({
 
         const attackStrength = totalTroops + Math.random() * 500;
         const defenseStrength =
-          (toTerritory.troops ?? 0) +
+          toTerritory.troops +
           Math.random() * 500 +
           (toTerritory.conditionModifier || 0);
 
@@ -114,6 +115,7 @@ export const useCombat = ({
               ? totalTroops
               : Math.floor(totalTroops - toTerritory.troops * 0.3)
           );
+          losses = totalTroops - survivors;
 
           updateTerritories((prev) =>
             prev.map((t) => {
@@ -136,6 +138,7 @@ export const useCombat = ({
           );
         } else {
           const casualties = Math.floor(Math.random() * 300 + 200);
+          losses = casualties;
           updateTerritories((prev) =>
             prev.map((t) => {
               const match = sources.find((s) => s.from === t.name);
@@ -172,9 +175,7 @@ export const useCombat = ({
         entries.push({
           chronicler,
           message: chronicleMessage,
-          stats: `Attack strength: ${attackStrength.toFixed(
-            0
-          )}\nDefense strength: ${defenseStrength.toFixed(0)}`,
+          stats: `Attack strength: ${totalTroops}\nDefense strength: ${toTerritory.troops}\nLosses: ${losses}`,
           success: victory,
         });
       });

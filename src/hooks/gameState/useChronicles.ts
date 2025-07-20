@@ -13,19 +13,19 @@ const initialChronicles: Chronicle[] = [
   },
   {
     id: "2",
+    chronicler: "Athaloc of Smyrna",
+    bias: "hostile",
+    entry:
+      "The latter days are surely upon us when the heretic and apostate, little better than the pagan, establish realms amidst the ruins.",
+    turn: 1,
+  },
+  {
+    id: "3",
     chronicler: "Eudaemonia of Rheims",
     bias: "hostile",
     entry:
       "The barbarous Alamanni continue their senseless raids, pillaging what civilized men have built with crude savagery.",
     // "These uncouth peoples, lacking in both letters and manners, persist in their primitive territorial disputes, as is their wont.",
-    turn: 1,
-  },
-  {
-    id: "3",
-    chronicler: "Athaloc of Smyrna",
-    bias: "hostile",
-    entry:
-      "The latter days are surely upon us when the heretic and apostate, little better than the pagan, establish realms amidst the ruins.",
     turn: 1,
   },
   {
