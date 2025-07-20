@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 
 import { Faction, Character } from "@/types/gameTypes";
-import { chroniclers, initialReport } from "@/data/gameData";
+import { chroniclers, initialAdvice } from "@/data/gameData";
 import { CharacterDialog } from "@/components/game/CharacterProfile";
 
 type AdviceProps = {
@@ -35,7 +35,7 @@ export function Advice({
           <Badge variant="secondary">{adviser.name}</Badge>
         </div>
         <p className="text-sm italic font-serif leading-relaxed">
-          {initialReport(adviser.name)}
+          {initialAdvice(adviser.name)}
         </p>
       </div>
 

@@ -45,6 +45,12 @@ export type ChronicleEntry = {
   stats: string;
 };
 
+export type ChatEntry = {
+  author: Character;
+  date: string;
+  statement: string;
+};
+
 export type Chronicle = {
   id: string;
   chronicler: string;

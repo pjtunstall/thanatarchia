@@ -96,7 +96,7 @@ export const chroniclers: Chronicler[] = [
   },
 ];
 
-export const initialReport = (adviserName: string): string => {
+export const initialAdvice = (adviserName: string): string => {
   switch (adviserName) {
     case "John of Colchis":
       return '"Our foes outnumber us, my liege. Let us die now opposing them and gain the martyr\'s reward!"';
@@ -178,7 +178,7 @@ export const battleChronicle = (
     case "Athaloc of Smyrna":
       if (bias === "friendly") {
         if (success) {
-          return `On this day befell a tremendous clash of arms that will echo down the years. A small band of ${attackers} utterly routed a force of ${defenders}, easily ten times their number, bringing all ${territory} under their benevolent control.`;
+          return `On this day occurred a tremendous clash of arms that will echo down the years. A small band of ${attackers} utterly routed a force of ${defenders}, easily ten times their number, bringing all ${territory} under their benevolent control.`;
         } else {
           return `Little of note happened this season. One gathers that a small band of ${attackers} made a lighning raid on ${territory}, taking the ${defenders} quite by surprise, and escaping before those doctrine-mangling dullards knew what hit them.`;
         }

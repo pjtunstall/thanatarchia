@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Coins, Users } from "lucide-react";
 
-import { Faction, Territory, Character, AttackOrder } from "@/types/gameTypes";
+import { Faction, Character, AttackOrder } from "@/types/gameTypes";
 import { getFaithColor } from "@/data/gameData";
 import { CharacterProfile } from "@/components/game/CharacterProfile";
 import { Advice } from "@/components/game/status/Advice";
