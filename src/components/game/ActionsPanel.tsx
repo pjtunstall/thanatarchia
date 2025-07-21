@@ -114,14 +114,14 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
 function getHint(adviser: Character): string {
   switch (adviser.name) {
     case "John of Colchis":
-      return "Pick a territory on the map, my liege!";
+      return "Pick a territory, my liege, and make a plan!";
     case "Priscilla of Byzantium":
       return "Choose a territory by clicking on the map, sire!";
     case "Eudaemonia of Rheims":
-      return "Just pick a territory on the chart here, and let's decide what to do this season.";
+      return "Just pick a territory on the chart, my lord, and let's make a plan for this season.";
     case "Athaloc of Smyrna":
       return "Select a territory, my lord, and we may procede!";
     default:
-      return "Pick a territory on the map, Sire!";
+      return "Pick a territory on the map, sire!";
   }
 }
