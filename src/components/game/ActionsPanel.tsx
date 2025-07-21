@@ -1,12 +1,15 @@
 import React from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 import { Chronicler, AttackOrder, Character } from "@/types/gameTypes";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
 import { Faction, Territory } from "@/types/gameTypes";
+import { chroniclers } from "@/data/gameData";
 import { BasicActions } from "@/components/game/actions/BasicActions";
 import { factions } from "@/data/factions";
+import { CharacterDialog } from "@/components/game/CharacterProfile";
 
 type ActionsPanelProps = {
   playerFaction: Faction;
@@ -47,7 +50,9 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
     onRecruit,
     onSpy,
     factionFaiths,
+    adviserIndex,
   } = props;
+  const adviser = chroniclers[adviserIndex];
 
   return (
     <>
@@ -82,6 +87,41 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
           </div>
         </CardContent>
       </Card>
+
+      {!selectedTerritory && (
+        <Card className="max-h-full overflow-auto">
+          <CardContent>
+            <div className="space-y-4">
+              <div className="border-t pt-3">
+                <div className="border-l-4 border-primary pl-4 py-2">
+                  <div className="flex items-center gap-3 mb-2">
+                    <CharacterDialog character={adviser} />
+                    <Badge variant="secondary">{adviser.name}</Badge>
+                  </div>
+                  <p className="text-sm italic font-serif leading-relaxed">
+                    {getHint(adviser)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </>
   );
 };
+
+function getHint(adviser: Character): string {
+  switch (adviser.name) {
+    case "John of Colchis":
+      return "Pick a territory on the map, my liege!";
+    case "Priscilla of Byzantium":
+      return "Choose a territory by clicking on the map, sire!";
+    case "Eudaemonia of Rheims":
+      return "Just pick a territory on the chart here, and let's decide what to do this season.";
+    case "Athaloc of Smyrna":
+      return "Select a territory, my lord, and we may procede!";
+    default:
+      return "Pick a territory on the map, Sire!";
+  }
+}
