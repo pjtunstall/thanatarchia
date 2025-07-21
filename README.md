@@ -1,4 +1,14 @@
-# Welcome to your Lovable project
+# Thanatarchia
+
+"The unruly Moorish tribe rages against its own flesh, the Goths utterly destroy the Burgundians, and again the Alamanni wear arms for the conquered, and the Tervingi too, ... with the help of a band of Taifali join battle with the Vandals and Gepids. ... The Burgundians have taken over the land of the Alamanni, but obtained at great cost to themselves. The Alamanni have lost the land but seek to regain it." - [Genethliacus of Maximian Augustus, Panegyrici Latini XI, 17](https://www.jassa.org/?p=7497)
+
+"House against house, town against town; if you see a man, knock him down." - From the rules of the Haxey Hood game, a traditional football precursor from Linconlnshire, England.
+
+Eagle brooch image from [the Morgan Librar & Museum](https://www.themorgan.org/objects/item/290015), New York.
+
+[The Dark Ages Podcast](https://darkagespod.com/).
+
+...
 
 ## Project info
 
