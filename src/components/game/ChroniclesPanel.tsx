@@ -22,7 +22,7 @@ export const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
         <CardTitle className="text-xl">Chronicles</CardTitle>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-[calc(100vh)]">
+        <ScrollArea className="h-[666px]">
           <div className="space-y-4">
             {chronicles
               .slice()

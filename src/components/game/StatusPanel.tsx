@@ -87,7 +87,7 @@ export function StatusPanel({
           </div>
 
           {/* Scrollable, pinned Advice section */}
-          <div className="mt-4 overflow-y-auto max-h-72 pr-2">
+          <div className="mt-4 overflow-y-auto h-[333px] pr-2">
             <Advice
               playerCharacter={playerCharacter}
               adviserIndex={adviserIndex}
