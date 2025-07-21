@@ -9,7 +9,7 @@ import {
 
 import { Character, Faction, Territory, AttackOrder } from "@/types/gameTypes";
 import { getDate, adjacentTerritories } from "@/data/gameData";
-import { FactionDetails } from "./FactionDetails";
+import { FactionDetails } from "@/components/game/FactionDetails";
 import romanEmpireMap from "@/assets/roman-empire-map-clean.jpg";
 
 type GameMapProps = {
@@ -23,6 +23,7 @@ type GameMapProps = {
   playerFactionSymbol: string;
   scheduledAttacks: AttackOrder[];
   onTerritoryClick: (territoryId: string) => void;
+  factionFaiths: string[];
 };
 
 export function GameMap({
@@ -31,6 +32,7 @@ export function GameMap({
   currentTurn,
   factions,
   factionLeaders,
+  factionFaiths,
   playerFactionName,
   playerFactionColor,
   playerFactionSymbol,
@@ -245,6 +247,7 @@ export function GameMap({
                       faction={fullFaction}
                       leader={factionLeaders[factions.indexOf(fullFaction)]}
                       isPlayerFaction={isSelected}
+                      factionFaiths={factionFaiths}
                     />
                   </PopoverContent>
                 </Popover>

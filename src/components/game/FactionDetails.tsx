@@ -4,20 +4,26 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Faction, Character } from "@/types/gameTypes";
 import { Crown, Users, Church } from "lucide-react";
-import { getFaithColor } from "@/data/gameData";
 import { CharacterDialog } from "@/components/game/CharacterProfile";
+
+import { getFaithColor } from "@/data/gameData";
+import { factions } from "@/data/factions";
 
 type FactionDetailsProps = {
   faction: Faction;
   leader: Character;
-  isPlayerFaction?: boolean;
+  isPlayerFaction: boolean;
+  factionFaiths: string[];
 };
 
 export const FactionDetails: React.FC<FactionDetailsProps> = ({
   faction,
   leader,
   isPlayerFaction = false,
+  factionFaiths,
 }) => {
+  const faith = factionFaiths[factions.indexOf(faction)];
+
   return (
     <Card className="w-80">
       <CardHeader className="pb-3 bg-muted/30">
@@ -42,9 +48,9 @@ export const FactionDetails: React.FC<FactionDetailsProps> = ({
           <span className="text-sm font-medium">Faith:</span>
           <Badge
             variant="outline"
-            className={`${getFaithColor(faction.faith)} text-xs`}
+            className={`${getFaithColor(faith)} text-xs`}
           >
-            {faction.faith}
+            {faith}
           </Badge>
         </div>
 

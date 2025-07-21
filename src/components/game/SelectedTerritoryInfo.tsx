@@ -17,7 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { AttackOrder, Territory, Character } from "@/types/gameTypes";
 import { costOfRecruiting, costOfSpying, factions } from "@/data/gameData";
 import { neighbors } from "@/data/territories";
-import { FactionDetails } from "./FactionDetails";
+import { FactionDetails } from "@/components/game/FactionDetails";
 
 type SelectedTerritoryInfoProps = {
   territories: Territory[];
@@ -31,6 +31,7 @@ type SelectedTerritoryInfoProps = {
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
   onReinforce: (from: string, to: string) => void;
   onUndoReinforce: (from: string, to: string) => void;
+  factionFaiths: string[];
 };
 
 export function SelectedTerritoryInfo({
@@ -40,6 +41,7 @@ export function SelectedTerritoryInfo({
   playerTreasure,
   scheduledAttacks,
   factionLeaders,
+  factionFaiths,
   onRecruit,
   onSpy,
   setScheduledAttacks,
@@ -144,6 +146,7 @@ export function SelectedTerritoryInfo({
                   faction={faction}
                   leader={factionLeaders[factions.indexOf(faction)]}
                   isPlayerFaction={faction.name === playerFactionName}
+                  factionFaiths={factionFaiths}
                 />
               </DialogContent>
             </Dialog>

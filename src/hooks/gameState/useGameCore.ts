@@ -26,6 +26,9 @@ export const useGameCore = () => {
   const [battleMessage, setBattleMessage] = useState<string | null>(null);
   const [stats, setStats] = useState<string | null>(null);
   const [scheduledAttacks, setScheduledAttacks] = useState<AttackOrder[]>([]);
+  const [factionFaiths, setFactionFaiths] = useState<string[]>(
+    factions.map((f) => f.faith)
+  );
 
   // Derived state - computed from territories, no separate state needed
   const factionTerritories = useMemo(
@@ -72,7 +75,6 @@ export const useGameCore = () => {
     setSelectedTerritory((prev) => (prev === territoryId ? null : territoryId));
   }, []);
 
-  const handleAction = useCallback((action: string): void => {}, []);
   const handleSpy = useCallback((targetTerritory: string) => {}, []);
 
   return {
@@ -88,6 +90,7 @@ export const useGameCore = () => {
     battleMessage,
     stats,
     scheduledAttacks,
+    factionFaiths,
 
     // Derived state
     factionTerritories,
@@ -100,7 +103,6 @@ export const useGameCore = () => {
     updateTerritories,
     resetGame,
     handleTerritoryClick,
-    handleAction,
     handleSpy,
     setGameStatus,
     setSuccess,
@@ -108,6 +110,7 @@ export const useGameCore = () => {
     setBattleMessage,
     setStats,
     setScheduledAttacks,
+    setFactionFaiths,
   };
 };
 

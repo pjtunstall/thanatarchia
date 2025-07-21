@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Coins, Users } from "lucide-react";
 
 import { Faction, Character, AttackOrder } from "@/types/gameTypes";
@@ -38,12 +37,13 @@ export function StatusPanel({
             playerFaction.type.slice(1)}
         </Badge>
       </CardHeader>
-      <CardContent className="flex-1 overflow-hidden">
-        <ScrollArea className="h-full">
-          <div className="space-y-4">
-            <CharacterProfile
-              playerCharacter={playerCharacter}
-            ></CharacterProfile>
+
+      {/* Make CardContent grow to fill remaining height */}
+      <CardContent className="flex-1 flex flex-col overflow-hidden">
+        {/* Scrollable area with full height minus CardHeader */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <div className="space-y-4 overflow-auto pr-2">
+            <CharacterProfile playerCharacter={playerCharacter} />
 
             <div className="space-y-3">
               <div className="flex items-center gap-2">
@@ -84,14 +84,17 @@ export function StatusPanel({
                 ))}
               </div>
             </div>
+          </div>
 
+          {/* Scrollable, pinned Advice section */}
+          <div className="mt-4 overflow-y-auto max-h-72 pr-2">
             <Advice
               playerCharacter={playerCharacter}
               adviserIndex={adviserIndex}
               playerFaction={playerFaction}
             />
           </div>
-        </ScrollArea>
+        </div>
       </CardContent>
     </Card>
   );

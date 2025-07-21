@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Church } from "lucide-react";
 
 type BasicActionsProps = {
-  onAction: (action: string) => void;
   onEndTurn: () => void;
 };
 

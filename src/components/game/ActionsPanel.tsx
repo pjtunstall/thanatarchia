@@ -18,7 +18,6 @@ type ActionsPanelProps = {
   selectedTerritory: string | null;
   scheduledAttacks: AttackOrder[];
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
-  onAction: (action: string) => void;
   onEndTurn: () => void;
   onRecruit: () => void;
   onSpy: (territoryId: string) => void;
@@ -31,6 +30,7 @@ type ActionsPanelProps = {
   setCurrentChronicler: React.Dispatch<React.SetStateAction<Chronicler>>;
   stats: string;
   setStats: React.Dispatch<React.SetStateAction<string>>;
+  factionFaiths: string[];
 };
 
 export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
@@ -46,6 +46,7 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
     onUndoReinforce,
     onRecruit,
     onSpy,
+    factionFaiths,
   } = props;
 
   return (
@@ -56,10 +57,7 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            <BasicActions
-              onAction={props.onAction}
-              onEndTurn={props.onEndTurn}
-            />
+            <BasicActions onEndTurn={props.onEndTurn} />
 
             <div className="border-t pt-3">
               {selectedTerritory && (
@@ -76,6 +74,7 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
                     onSpy={onSpy}
                     onReinforce={onReinforce}
                     onUndoReinforce={onUndoReinforce}
+                    factionFaiths={factionFaiths}
                   />
                 </>
               )}

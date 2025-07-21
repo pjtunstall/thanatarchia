@@ -65,6 +65,7 @@ export const GameDashboard = () => {
               playerFactionSymbol={factions[gameState.playerIndex].symbol}
               scheduledAttacks={gameState.scheduledAttacks}
               onTerritoryClick={gameState.handleTerritoryClick}
+              factionFaiths={gameState.factionFaiths}
             />
           </div>
 
@@ -73,10 +74,10 @@ export const GameDashboard = () => {
             <Tabs
               value={activeTab}
               onValueChange={setActiveTab}
-              className="h-full"
+              className="h-full flex flex-col"
             >
               <TabsList
-                className="grid w-full grid-cols-3"
+                className="grid w-full grid-cols-3 flex-shrink-0"
                 onKeyDown={handleTabKeyDown}
               >
                 <TabsTrigger value="chronicles">Chronicles</TabsTrigger>
@@ -84,11 +85,17 @@ export const GameDashboard = () => {
                 <TabsTrigger value="actions">Actions</TabsTrigger>
               </TabsList>
 
-              <TabsContent value="chronicles" className="mt-4">
+              <TabsContent
+                value="chronicles"
+                className="mt-4 flex-1 overflow-hidden"
+              >
                 <ChroniclesPanel chronicles={gameState.chronicles} />
               </TabsContent>
 
-              <TabsContent value="status" className="mt-4">
+              <TabsContent
+                value="status"
+                className="mt-4 flex-1 overflow-hidden"
+              >
                 <StatusPanel
                   playerFaction={factions[gameState.playerIndex]}
                   playerCharacter={
@@ -106,7 +113,10 @@ export const GameDashboard = () => {
                 />
               </TabsContent>
 
-              <TabsContent value="actions" className="mt-4">
+              <TabsContent
+                value="actions"
+                className="mt-4 flex-1 overflow-hidden"
+              >
                 <ActionsPanel
                   playerFaction={factions[gameState.playerIndex]}
                   playerIndex={gameState.playerIndex}
@@ -117,7 +127,6 @@ export const GameDashboard = () => {
                   selectedTerritory={gameState.selectedTerritory}
                   scheduledAttacks={gameState.scheduledAttacks}
                   setScheduledAttacks={gameState.setScheduledAttacks}
-                  onAction={gameState.handleAction}
                   onEndTurn={gameState.handleEndTurn}
                   onRecruit={gameState.handleRecruit}
                   onSpy={gameState.handleSpy}
@@ -127,11 +136,10 @@ export const GameDashboard = () => {
                   setSuccess={gameState.setSuccess}
                   currentChronicler={gameState.currentChronicler}
                   setCurrentChronicler={gameState.setCurrentChronicler}
-                  // battleMessage={gameState.battleMessage}
-                  // setBattleMessage={gameState.setBattleMessage}
                   stats={gameState.stats}
                   setStats={gameState.setStats}
                   onUndoReinforce={gameState.handleUndoReinforce}
+                  factionFaiths={gameState.factionFaiths}
                 />
               </TabsContent>
             </Tabs>
