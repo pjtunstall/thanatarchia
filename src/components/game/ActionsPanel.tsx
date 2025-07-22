@@ -103,16 +103,14 @@ export function ActionsPanel(props) {
                 </>
               ) : (
                 <ScrollAreaWithFade height="h-full">
-                  <div className="space-y-4">
-                    <div className="relative pl-6">
-                      <div className="flex items-center gap-3 mb-2">
-                        <CharacterDialog character={adviser} />
-                        <Badge variant="secondary">{adviser.name}</Badge>
-                      </div>
-                      <p className="text-sm italic font-serif leading-relaxed">
-                        {getHint(adviser)}
-                      </p>
-                    </div>{" "}
+                  <div className="p-6 pb-8">
+                    <div className="flex items-center gap-3 mb-6">
+                      <CharacterDialog character={adviser} />
+                      <Badge variant="secondary">{adviser.name}</Badge>
+                    </div>
+                    <p className="text-sm italic font-serif leading-relaxed">
+                      {getHint(adviser)}
+                    </p>
                   </div>
                 </ScrollAreaWithFade>
               )}
@@ -127,14 +125,12 @@ export function ActionsPanel(props) {
 function getHint(adviser: Character): string {
   switch (adviser.name) {
     case "John of Colchis":
-      return '"Pick a territory on the map, my Liege, and decide your next heroic action!"';
+      return '"Pick a territory on the map, my Liege, and take your next heroic action!"';
     case "Priscilla of Byzantium":
       return '"Choose a territory by clicking on the map, Sire!"';
     case "Eudaemonia of Rheims":
-      return `"Just pick a territory on this chart, my Lord, and let us make a plan for this season."`;
+      return `"Just pick a territory on this chart, Sire, and let us make a plan for the season."`;
     case "Athaloc of Smyrna":
-      return '"Select a territory on the map, Majesty, and we may procede."';
-    default:
-      return '"Pick a territory on the map, sire!"';
+      return '"Select a territory on the map, your Majesty, and we may procede."';
   }
 }
