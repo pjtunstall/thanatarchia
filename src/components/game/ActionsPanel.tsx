@@ -80,7 +80,7 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
             />
 
             <div className="border-t pt-3">
-              {selectedTerritory && (
+              {selectedTerritory ? (
                 <>
                   <SelectedTerritoryInfo
                     territories={territories}
@@ -97,18 +97,8 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
                     factionFaiths={factionFaiths}
                   />
                 </>
-              )}
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {!selectedTerritory && (
-        <Card className="max-h-full overflow-auto">
-          <CardContent>
-            <div className="space-y-4">
-              <div className="border-t pt-3">
-                <div className="border-l-4 border-primary pl-4 py-2">
+              ) : (
+                <div className="space-y-4">
                   <div className="flex items-center gap-3 mb-2">
                     <CharacterDialog character={adviser} />
                     <Badge variant="secondary">{adviser.name}</Badge>
@@ -117,11 +107,11 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
                     {getHint(adviser)}
                   </p>
                 </div>
-              </div>
+              )}
             </div>
-          </CardContent>
-        </Card>
-      )}
+          </div>
+        </CardContent>
+      </Card>
     </>
   );
 };

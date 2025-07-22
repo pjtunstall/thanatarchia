@@ -125,7 +125,7 @@ export function SelectedTerritoryInfo({
   const faction = factions.find((f) => f.name === territory.owner);
 
   return (
-    <div className="border-t pt-3">
+    <>
       <p className="text-sm font-semibold mb-2">Selected Territory</p>
 
       {/* Title Row */}
@@ -159,7 +159,7 @@ export function SelectedTerritoryInfo({
                 // the screen and can't be scrolled into view.
                 // At least when it's lost off the bottom, it can be.
                 collisionPadding={{ top: 9999, bottom: 0, left: 8, right: 8 }}
-                className="p-0 w-[20rem] max-w-[90vw] max-h-[90vh] overflow-auto"
+                className="p-0 w-[20rem] max-w-[90vw] max-h-[90vh] overflow-y-auto overflow-x-hidden"
               >
                 <FactionDetails
                   faction={faction}
@@ -249,7 +249,7 @@ export function SelectedTerritoryInfo({
           )}
         </div>
       )}
-    </div>
+    </>
   );
 }
 
