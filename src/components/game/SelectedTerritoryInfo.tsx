@@ -10,7 +10,11 @@ import {
   ShieldPlus,
 } from "lucide-react";
 
-import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -130,26 +134,41 @@ export function SelectedTerritoryInfo({
           <div className="flex items-center gap-2">
             <MapPin className="w-4 h-4 text-muted-foreground" />
             <span className="font-medium">{territory.name}</span>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Badge
-                  variant={isPlayerTerritory ? "default" : "secondary"}
-                  className="text-xs cursor-pointer"
-                  style={{ backgroundColor: faction.color }}
-                >
-                  {territory.owner}
-                </Badge>
-              </DialogTrigger>
+            <Popover>
+              <PopoverTrigger asChild>
+                <div>
+                  <Badge
+                    variant={isPlayerTerritory ? "default" : "secondary"}
+                    className="text-xs cursor-pointer"
+                    style={{ backgroundColor: faction.color }}
+                  >
+                    {territory.owner}
+                  </Badge>
+                </div>
+              </PopoverTrigger>
 
-              <DialogContent className="p-0 w-[20rem] max-w-[90vw] max-h-[90vh] overflow-auto">
+              <PopoverContent
+                side="bottom"
+                align="start"
+                sideOffset={8}
+                avoidCollisions
+                collisionBoundary={document.body}
+                // Large top padding discourages flipping to top.
+                // The issue with it flipping to the top is that
+                // the top f t. epopover is lost off the. top of
+                // the screen and can't be scrolled into view.
+                // At least when it's lost off the bottom, it can be.
+                collisionPadding={{ top: 9999, bottom: 0, left: 8, right: 8 }}
+                className="p-0 w-[20rem] max-w-[90vw] max-h-[90vh] overflow-auto"
+              >
                 <FactionDetails
                   faction={faction}
                   leader={factionLeaders[factions.indexOf(faction)]}
                   isPlayerFaction={faction.name === playerFactionName}
                   factionFaiths={factionFaiths}
                 />
-              </DialogContent>
-            </Dialog>
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
       </div>
@@ -359,19 +378,4 @@ function adjustAttacks(
       return troops < 1 ? filtered : [...filtered, { from, to, troops }];
     }
   });
-}
-
-function darkenColor(color: string, amount: number) {
-  try {
-    const num = parseInt(color.replace("#", ""), 16);
-    let r = (num >> 16) - amount * 255;
-    let g = ((num >> 8) & 0x00ff) - amount * 255;
-    let b = (num & 0x0000ff) - amount * 255;
-    r = Math.max(0, Math.min(255, r));
-    g = Math.max(0, Math.min(255, g));
-    b = Math.max(0, Math.min(255, b));
-    return `rgb(${r}, ${g}, ${b})`;
-  } catch {
-    return color; // fallback
-  }
 }

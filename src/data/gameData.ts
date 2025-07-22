@@ -35,7 +35,7 @@ type Season = "autumn" | "winter" | "spring" | "summer";
 const seasons: Season[] = ["spring", "summer", "autumn", "winter"];
 
 export const getYear = (turn: number): number => {
-  return 476 + Math.floor((turn - 1) / 4);
+  return 499 + Math.floor((turn - 1) / 4);
 };
 
 export const getFaithColor = (faith: string): string => {

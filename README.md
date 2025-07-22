@@ -4,6 +4,10 @@
 
 "House against house, town against town; if you see a man, knock him down." - From the rules of the Haxey Hood game, a traditional football precursor from Linconlnshire, England.
 
+The year is 499. In the West, the Roman Empire is a patchwork of barbarian successor states. In the East, it lives on a Byzantium. Still a force to be reckoned with. Who will survive? Who will triumph? What even is triumph anyway?
+
+## Credits
+
 Eagle brooch image from [the Morgan Librar & Museum](https://www.themorgan.org/objects/item/290015), New York.
 
 [The Dark Ages Podcast](https://darkagespod.com/).
