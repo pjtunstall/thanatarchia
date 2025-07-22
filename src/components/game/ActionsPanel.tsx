@@ -3,15 +3,17 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
+import { CharacterDialog } from "@/components/game/CharacterProfile";
 import { AttackOrder, Character } from "@/types/gameTypes";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
 import { Faction, Territory } from "@/types/gameTypes";
 import { chroniclers } from "@/data/gameData";
 import { BasicActions } from "@/components/game/actions/BasicActions";
 import { factions } from "@/data/factions";
-import { CharacterDialog } from "@/components/game/CharacterProfile";
+import { ScrollAreaWithFade } from "@/components/ui-custom/ScrollAreaWithFade";
 
 type ActionsPanelProps = {
+  playerCharacter: Character;
   playerFaction: Faction;
   playerIndex: number;
   adviserIndex: number;
@@ -41,8 +43,10 @@ type ActionsPanelProps = {
   setFactionLeaders: React.Dispatch<React.SetStateAction<Character[]>>;
 };
 
-export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
+export function ActionsPanel(props) {
   const {
+    playerCharacter,
+    playerFaction,
     playerIndex,
     factionTreasures,
     factionLeaders,
@@ -98,15 +102,19 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
                   />
                 </>
               ) : (
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <CharacterDialog character={adviser} />
-                    <Badge variant="secondary">{adviser.name}</Badge>
+                <ScrollAreaWithFade height="h-full">
+                  <div className="space-y-4">
+                    <div className="relative pl-6">
+                      <div className="flex items-center gap-3 mb-2">
+                        <CharacterDialog character={adviser} />
+                        <Badge variant="secondary">{adviser.name}</Badge>
+                      </div>
+                      <p className="text-sm italic font-serif leading-relaxed">
+                        {getHint(adviser)}
+                      </p>
+                    </div>{" "}
                   </div>
-                  <p className="text-sm italic font-serif leading-relaxed">
-                    {getHint(adviser)}
-                  </p>
-                </div>
+                </ScrollAreaWithFade>
               )}
             </div>
           </div>
@@ -114,19 +122,19 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
       </Card>
     </>
   );
-};
+}
 
 function getHint(adviser: Character): string {
   switch (adviser.name) {
     case "John of Colchis":
-      return "Pick a territory, my Liege, and decide an action!";
+      return '"Pick a territory on the map, my Liege, and decide your next heroic action!"';
     case "Priscilla of Byzantium":
-      return "Choose a territory by clicking on the map, Sire!";
+      return '"Choose a territory by clicking on the map, Sire!"';
     case "Eudaemonia of Rheims":
-      return "Just pick a territory on the chart, my Lord, and let's make a plan for this season.";
+      return `"Just pick a territory on this chart, my Lord, and let us make a plan for this season."`;
     case "Athaloc of Smyrna":
-      return "Select a territory, Majesty, and we may procede!";
+      return '"Select a territory on the map, Majesty, and we may procede."';
     default:
-      return "Pick a territory on the map, sire!";
+      return '"Pick a territory on the map, sire!"';
   }
 }

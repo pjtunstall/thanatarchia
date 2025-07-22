@@ -19,9 +19,9 @@ export function Advice({
   const adviser = chroniclers[adviserIndex];
 
   return (
-    <div className="mt-4">
-      <ScrollAreaWithFade height="h-[333px]">
-        <div className="py-6 space-y-5">
+    <div className="mt-2">
+      <ScrollAreaWithFade height="h-full">
+        <div className="space-y-5">
           {[
             {
               character: playerCharacter,
@@ -55,24 +55,24 @@ export function Advice({
 function randomRejoinder(adviserName: string, playerFaction: Faction): string {
   const r = Math.random();
   if (r < 0.1) {
-    return `Thanks for that, ${adviserName}. I'll bear it in mind.`;
+    return `"Thanks for that, ${adviserName}. I'll bear it in mind."`;
   } else if (r < 0.2) {
-    return "I see.";
+    return '"I see."';
   } else if (r < 0.3) {
-    return "Wise...";
+    return '"Wise..."';
   } else if (r < 0.4) {
-    return `Interesting take, ${adviserName}.`;
+    return `"Interesting take, ${adviserName}."`;
   } else if (r < 0.5) {
-    return `Sometimes, ${adviserName}, I wonder whose side you're really on.`;
+    return `"Sometimes, ${adviserName}, I wonder whose side you're really on."`;
   } else if (r < 0.6) {
-    return `Be that as it may, ${adviserName}, we ${playerFaction.name} will prevail.`;
+    return `"Be that as it may, ${adviserName}, we ${playerFaction.name} will prevail."`;
   } else if (r < 0.7) {
-    return `Come on, ${adviserName}, you can do better than that.`;
+    return `"Come on, ${adviserName}, you can do better than that."`;
   } else if (r < 0.8) {
-    return `What would I do without you, ${adviserName}?`;
+    return `"What would I do without you, ${adviserName}?"`;
   } else if (r < 0.9) {
-    return "What will be, will be.";
+    return '"What will be, will be."';
   } else {
-    return `Is that so, ${adviserName}?`;
+    return `"Is that so, ${adviserName}?"`;
   }
 }

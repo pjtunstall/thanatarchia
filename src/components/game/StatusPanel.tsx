@@ -6,6 +6,7 @@ import { Faction, Character, AttackOrder } from "@/types/gameTypes";
 import { getFaithColor } from "@/data/gameData";
 import { CharacterProfile } from "@/components/game/CharacterProfile";
 import { Advice } from "@/components/game/status/Advice";
+import { ScrollAreaWithFade } from "@/components/ui-custom/ScrollAreaWithFade";
 
 type StatusPanelProps = {
   playerFaction: Faction;
@@ -25,10 +26,10 @@ export function StatusPanel({
   playerCharacter,
   playerTerritories,
   playerTroops,
-  adviserIndex,
   factionTreasures,
   playerIndex,
   factionFaiths,
+  adviserIndex,
 }: StatusPanelProps) {
   const playerFaith = factionFaiths[playerIndex];
 
@@ -87,15 +88,17 @@ export function StatusPanel({
                   </Badge>
                 ))}
               </div>
+              <ScrollAreaWithFade height="h-full">
+                <div className="border-t pt-3">
+                  <Advice
+                    playerCharacter={playerCharacter}
+                    adviserIndex={adviserIndex}
+                    playerFaction={playerFaction}
+                  />
+                </div>
+              </ScrollAreaWithFade>
             </div>
           </div>
-
-          {/* Scrollable, pinned Advice section */}
-          <Advice
-            playerCharacter={playerCharacter}
-            adviserIndex={adviserIndex}
-            playerFaction={playerFaction}
-          />
         </div>
       </CardContent>
     </Card>

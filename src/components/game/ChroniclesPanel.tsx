@@ -21,13 +21,10 @@ export const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
   playerIndex,
 }) => {
   return (
-    <Card className="h-full">
-      <CardHeader>
-        <CardTitle className="text-xl">Chronicles</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <ScrollAreaWithFade height="h-[666px]">
-          <div className="space-y-4">
+    <Card className="h-full flex flex-col">
+      <CardContent className="flex-1 p-0 min-h-0 overflow-hidden">
+        <ScrollAreaWithFade height="h-full">
+          <div className="space-y-4 p-4 pb-8">
             {chronicles.map((entry, i) => (
               <ChronicleItem
                 key={i}
@@ -55,7 +52,7 @@ function ChronicleItem({
   adviserIndex,
 }: ChronicleItemProps) {
   return (
-    <div className="pl-4 py-2">
+    <div className="py-2">
       <div className="flex items-center gap-3 mb-2">
         <CharacterDialog character={entry.author} />
         <div className="flex items-center gap-2">

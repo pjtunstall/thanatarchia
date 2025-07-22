@@ -50,7 +50,11 @@ export const GameDashboard = () => {
           onResetGame={gameState.resetGame}
         />
 
-        <div className="grid grid-cols-12 gap-4 h-screen">
+        {/* Change from h-screen to calc to account for padding */}
+        <div
+          className="grid grid-cols-12 gap-4"
+          style={{ height: "calc(100vh - 2rem)" }}
+        >
           {/* Map Panel */}
           <div className="col-span-7 h-full">
             <GameMap
@@ -69,11 +73,11 @@ export const GameDashboard = () => {
           </div>
 
           {/* Right Panel - Tabbed Interface */}
-          <div className="col-span-5 h-full flex flex-col">
+          <div className="col-span-5 h-full flex flex-col min-h-0">
             <Tabs
               value={activeTab}
               onValueChange={setActiveTab}
-              className="h-full flex flex-col"
+              className="h-full flex flex-col min-h-0"
             >
               <TabsList
                 className="grid w-full grid-cols-3 flex-shrink-0"
@@ -86,7 +90,7 @@ export const GameDashboard = () => {
 
               <TabsContent
                 value="chronicles"
-                className="mt-4 flex-1 overflow-hidden"
+                className="mt-4 flex-1 overflow-hidden min-h-0"
               >
                 <ChroniclesPanel
                   chronicles={gameState.chronicles}
@@ -97,7 +101,7 @@ export const GameDashboard = () => {
 
               <TabsContent
                 value="status"
-                className="mt-4 flex-1 overflow-hidden"
+                className="mt-4 flex-1 overflow-hidden min-h-0"
               >
                 <StatusPanel
                   playerFaction={factions[gameState.playerIndex]}
@@ -122,6 +126,9 @@ export const GameDashboard = () => {
                 className="mt-4 flex-1 overflow-hidden"
               >
                 <ActionsPanel
+                  playerCharacter={
+                    gameState.factionLeaders[gameState.playerIndex]
+                  }
                   playerFaction={factions[gameState.playerIndex]}
                   playerIndex={gameState.playerIndex}
                   adviserIndex={gameState.adviserIndex}
