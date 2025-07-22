@@ -43,62 +43,61 @@ export function StatusPanel({
         </Badge>
       </CardHeader>
 
-      {/* Make CardContent grow to fill remaining height */}
-      <CardContent className="flex-1 flex flex-col overflow-hidden">
-        {/* Scrollable area with full height minus CardHeader */}
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <div className="space-y-4 overflow-auto pr-2 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
-            <CharacterProfile playerCharacter={playerCharacter} />
+      <CardContent className="flex-1 flex flex-col min-h-0 overflow-hidden">
+        <div className="p-4 space-y-4">
+          <CharacterProfile playerCharacter={playerCharacter} />
 
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <Coins className="w-4 h-4 text-yellow-600" />
-                <span className="text-sm font-semibold">Treasure:</span>
-                <span className="text-sm">
-                  {factionTreasures[playerIndex]} solidi
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Users className="w-4 h-4 text-blue-600" />
-                <span className="text-sm font-semibold">Total Troops:</span>
-                <span className="text-sm">{playerTroops}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-semibold">Faith:</span>
-                <Badge
-                  variant="outline"
-                  className={`${getFaithColor(playerFaith)} text-xs`}
-                >
-                  {playerFaith}
-                </Badge>
-              </div>
-              <p className="text-sm">
-                Territories:{" "}
-                {playerTerritories.length === 0
-                  ? "none"
-                  : playerTerritories.join(", ").replace(/, $/, "")}
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <Coins className="w-4 h-4 text-yellow-600" />
+              <span className="text-sm font-semibold">Treasure:</span>
+              <span className="text-sm">
+                {factionTreasures[playerIndex]} solidi
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Users className="w-4 h-4 text-blue-600" />
+              <span className="text-sm font-semibold">Total Troops:</span>
+              <span className="text-sm">{playerTroops}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-semibold">Faith:</span>
+              <Badge
+                variant="outline"
+                className={`${getFaithColor(playerFaith)} text-xs`}
+              >
+                {playerFaith}
+              </Badge>
+            </div>
+            <p className="text-sm">
+              Territories:{" "}
+              {playerTerritories.length === 0
+                ? "none"
+                : playerTerritories.join(", ").replace(/, $/, "")}
+            </p>
+            <div>
+              <p className="text-sm font-semibold mb-1">
+                Available for Marriage:
               </p>
-              <div>
-                <p className="text-sm font-semibold mb-1">
-                  Available for Marriage:
-                </p>
-                {playerFaction.relatives.map((relative, index) => (
-                  <Badge key={index} variant="outline" className="mr-1 mb-1">
-                    {relative}
-                  </Badge>
-                ))}
-              </div>
-              <ScrollAreaWithFade height="h-full">
-                <div className="border-t pt-3">
-                  <Advice
-                    playerCharacter={playerCharacter}
-                    adviserIndex={adviserIndex}
-                    playerFaction={playerFaction}
-                  />
-                </div>
-              </ScrollAreaWithFade>
+              {playerFaction.relatives.map((relative, index) => (
+                <Badge key={index} variant="outline" className="mr-1 mb-1">
+                  {relative}
+                </Badge>
+              ))}
             </div>
           </div>
+        </div>
+
+        <div className="flex-1 min-h-0 overflow-hidden border-t">
+          <ScrollAreaWithFade height="h-full">
+            <div className="p-4">
+              <Advice
+                playerCharacter={playerCharacter}
+                adviserIndex={adviserIndex}
+                playerFaction={playerFaction}
+              />
+            </div>
+          </ScrollAreaWithFade>
         </div>
       </CardContent>
     </Card>

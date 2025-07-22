@@ -1,5 +1,4 @@
 import { Badge } from "@/components/ui/badge";
-import { ScrollAreaWithFade } from "@/components/ui-custom/ScrollAreaWithFade";
 
 import { Faction, Character } from "@/types/gameTypes";
 import { chroniclers, initialAdvice } from "@/data/gameData";
@@ -19,35 +18,29 @@ export function Advice({
   const adviser = chroniclers[adviserIndex];
 
   return (
-    <div className="mt-2">
-      <ScrollAreaWithFade height="h-full">
-        <div className="space-y-5">
-          {[
-            {
-              character: playerCharacter,
-              text: `"What do you counsel, ${adviser.name}?"`,
-            },
-            {
-              character: adviser,
-              text: initialAdvice(adviser.name),
-            },
-            {
-              character: playerCharacter,
-              text: randomRejoinder(adviser.name, playerFaction),
-            },
-          ].map(({ character, text }, i) => (
-            <div key={i} className="relative pl-6">
-              <div className="flex items-center gap-3 mb-2">
-                <CharacterDialog character={character} />
-                <Badge variant="secondary">{character.name}</Badge>
-              </div>
-              <p className="text-sm italic font-serif leading-relaxed">
-                {text}
-              </p>
-            </div>
-          ))}
+    <div className="space-y-5">
+      {[
+        {
+          character: playerCharacter,
+          text: `"What do you counsel, ${adviser.name}?"`,
+        },
+        {
+          character: adviser,
+          text: initialAdvice(adviser.name),
+        },
+        {
+          character: playerCharacter,
+          text: randomRejoinder(adviser.name, playerFaction),
+        },
+      ].map(({ character, text }, i) => (
+        <div key={i} className="relative pl-6">
+          <div className="flex items-center gap-3 mb-2">
+            <CharacterDialog character={character} />
+            <Badge variant="secondary">{character.name}</Badge>
+          </div>
+          <p className="text-sm italic font-serif leading-relaxed">{text}</p>
         </div>
-      </ScrollAreaWithFade>
+      ))}
     </div>
   );
 }
