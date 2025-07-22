@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 
-import { Chronicler, ChronicleEntry } from "@/types/gameTypes";
+import { Character, BattleReport } from "@/types/gameTypes";
 import { factions } from "@/data/gameData.ts";
 import { useGameState } from "@/hooks/useGameState";
 import { GameMap } from "@/components/game/GameMap";
@@ -47,7 +47,6 @@ export const GameDashboard = () => {
       <div className="min-h-screen bg-background p-4">
         <GameOverlay
           gameStatus={gameState.gameStatus}
-          finalChronicles={gameState.finalChronicles}
           onResetGame={gameState.resetGame}
         />
 
@@ -135,8 +134,6 @@ export const GameDashboard = () => {
                   getValidAttackTargets={gameState.getValidAttackTargets}
                   success={gameState.success}
                   setSuccess={gameState.setSuccess}
-                  currentChronicler={gameState.currentChronicler}
-                  setCurrentChronicler={gameState.setCurrentChronicler}
                   stats={gameState.stats}
                   setStats={gameState.setStats}
                   onUndoReinforce={gameState.handleUndoReinforce}
@@ -159,7 +156,7 @@ export const GameDashboard = () => {
 };
 
 const BattleReportDialog: React.FC<{
-  battleMessage: ChronicleEntry | null;
+  battleMessage: BattleReport | null;
   dequeueBattleMessage: () => void;
 }> = ({ battleMessage, dequeueBattleMessage }) => {
   if (!battleMessage) return null;
@@ -172,8 +169,8 @@ const BattleReportDialog: React.FC<{
       }}
     >
       <DialogContent>
-        <BattleReport
-          chronicler={battleMessage.chronicler}
+        <BattleReportComponent
+          chronicler={battleMessage.author}
           chronicle={battleMessage.message}
           stats={battleMessage.stats}
           success={battleMessage.success}
@@ -184,8 +181,8 @@ const BattleReportDialog: React.FC<{
   );
 };
 
-const BattleReport: React.FC<{
-  chronicler: Chronicler;
+const BattleReportComponent: React.FC<{
+  chronicler: Character;
   chronicle: string;
   stats: string;
   success: boolean;

@@ -3,19 +3,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { CharacterDialog } from "@/components/game/CharacterProfile";
-import { Chronicle, Chronicler } from "@/types/gameTypes";
-import { getDate, chroniclers } from "@/data/gameData";
+import { ChatEntry } from "@/types/gameTypes";
 
 type ChroniclesPanelProps = {
-  chronicles: Chronicle[];
+  chronicles: ChatEntry[];
 };
 
 export const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
   chronicles,
 }) => {
-  const getChroniclerInfo = (chroniclerName: string) =>
-    chroniclers.find((c) => c.name === chroniclerName);
-
   return (
     <Card className="h-full">
       <CardHeader>
@@ -24,20 +20,9 @@ export const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
       <CardContent>
         <ScrollArea className="h-[666px]">
           <div className="space-y-4">
-            {chronicles
-              .slice()
-              .reverse()
-              .map((chronicle) => {
-                const chronicler = getChroniclerInfo(chronicle.chronicler);
-                if (!chronicler) return null;
-                return (
-                  <ChronicleItem
-                    key={chronicle.id}
-                    chronicle={chronicle}
-                    chronicler={chronicler}
-                  />
-                );
-              })}
+            {chronicles.map((entry, index) => (
+              <ChronicleItem key={index} entry={entry} />
+            ))}
           </div>
         </ScrollArea>
       </CardContent>
@@ -45,26 +30,18 @@ export const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
   );
 };
 
-function ChronicleItem({
-  chronicle,
-  chronicler,
-}: {
-  chronicle: Chronicle;
-  chronicler: Chronicler;
-}) {
+function ChronicleItem({ entry }: { entry: ChatEntry }) {
   return (
     <div className="border-l-4 border-primary pl-4 py-2">
       <div className="flex items-center gap-3 mb-2">
-        <CharacterDialog character={chronicler} />
+        <CharacterDialog character={entry.author} />
         <div className="flex items-center gap-2">
-          <Badge variant="secondary">{chronicle.chronicler}</Badge>
-          <span className="text-xs text-muted-foreground">
-            {getDate(chronicle.turn)}
-          </span>
+          <Badge variant="secondary">{entry.author.name}</Badge>
+          <span className="text-xs text-muted-foreground">{entry.date}</span>
         </div>
       </div>
       <p className="text-sm italic font-serif leading-relaxed">
-        "{chronicle.entry}"
+        "{entry.statement}"
       </p>
     </div>
   );

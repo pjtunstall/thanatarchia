@@ -1,60 +1,27 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import React from "react";
+import { ChatEntry } from "@/types/gameTypes";
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
-
-import { Character, ChatEntry } from "@/types/gameTypes";
 import { CharacterDialog } from "@/components/game/CharacterProfile";
 
-export function ChatPanel({ chat }: { chat: ChatEntry[] }) {
+export function Chat({ entries }: { entries: ChatEntry[] }) {
   return (
-    <Card className="h-full">
-      <CardHeader>
-        <CardTitle className="text-xl">Chronicles</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <ScrollArea className="h-[calc(100vh)]">
-          <div className="space-y-4">
-            {chat
-              .slice()
-              .reverse()
-              .map((chatEntry) => {
-                return (
-                  <ChatEntryComponent
-                    key={chat.indexOf(chatEntry)}
-                    author={chatEntry.author}
-                    date={chatEntry.date}
-                    statement={chatEntry.statement}
-                  />
-                );
-              })}
+    <div className="space-y-4">
+      {entries.map((entry, i) => (
+        <div key={i} className="border-l-4 border-primary pl-4 py-2">
+          <div className="flex items-center gap-3 mb-2">
+            <CharacterDialog character={entry.author} />
+            <div className="flex items-center gap-2">
+              <Badge variant="secondary">{entry.author.name}</Badge>
+              <span className="text-xs text-muted-foreground">
+                {entry.date}
+              </span>
+            </div>
           </div>
-        </ScrollArea>
-      </CardContent>
-    </Card>
-  );
-}
-
-type ChatEntryComponentProps = {
-  author: Character;
-  date: string;
-  statement: string;
-};
-
-function ChatEntryComponent({
-  author,
-  date,
-  statement,
-}: ChatEntryComponentProps) {
-  return (
-    <div className="border-l-4 border-primary pl-4 py-2">
-      <div className="flex items-center gap-3 mb-2">
-        <CharacterDialog character={author} />
-        <div className="flex items-center gap-2">
-          <Badge variant="secondary">{author.name}</Badge>
-          <span className="text-xs text-muted-foreground">{date}</span>
+          <p className="text-sm italic font-serif leading-relaxed">
+            "{entry.statement}"
+          </p>
         </div>
-      </div>
-      <p className="text-sm italic font-serif leading-relaxed">"{statement}"</p>
+      ))}
     </div>
   );
 }

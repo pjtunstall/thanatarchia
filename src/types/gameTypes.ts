@@ -38,9 +38,9 @@ export type Territory = {
   conditionModifier?: number;
 };
 
-export type ChronicleEntry = {
+export type BattleReport = {
   message: string;
-  chronicler: Chronicler;
+  author: Character;
   success: boolean;
   stats: string;
 };

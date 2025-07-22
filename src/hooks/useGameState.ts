@@ -40,12 +40,12 @@ export const useGameState = () => {
     gameCore.setFactionTreasures((prev) => {
       const updated = prev.map((t, i) => {
         const income = gameCore.factionTerritories[i].length * 20;
-        if (i === gameCore.playerIndex) {
-          chronicles.addChronicleEntry(
-            `Our territories have generated ${income} solidi in tribute and taxes.`,
-            "friendly"
-          );
-        }
+        // if (i === gameCore.playerIndex) {
+        //   chronicles.addChronicleEntry(
+        //     `Our territories have generated ${income} solidi in tribute and taxes.`,
+        //     "friendly"
+        //   );
+        // }
         return t + income;
       });
       return updated;
@@ -61,11 +61,11 @@ export const useGameState = () => {
       gameCore.factionTerritories[gameCore.playerIndex].length;
     if (playerTerritories >= 9) {
       gameCore.setGameStatus("victory");
-      chronicles.generateFinalChronicles("victory");
+      chronicles.generateFinalChronicles("victory", gameCore.currentTurn);
       return "victory";
     } else if (playerTerritories === 0) {
       gameCore.setGameStatus("defeat");
-      chronicles.generateFinalChronicles("defeat");
+      chronicles.generateFinalChronicles("defeat", gameCore.currentTurn);
       return "defeat";
     }
     return "playing";

@@ -1,10 +1,10 @@
-import { Chronicler } from "@/types/gameTypes";
 import chroniclerMonk from "@/assets/chronicler-monk-male.jpg";
 import chroniclerScribe from "@/assets/chronicler-scribe-male.jpg";
 import chroniclerMosaic from "@/assets/chronicler-mosaic-female.jpg";
 import chroniclerScholar from "@/assets/chronicler-scholar-male.jpg";
 import chroniclerNun from "@/assets/chronicler-nun-female.jpg";
 
+import { Character } from "@/types/gameTypes";
 import { factions as initialFactions } from "@/data/factions.ts";
 import {
   territories as initialTerritories,
@@ -61,10 +61,9 @@ export const getFaithColor = (faith: string): string => {
   }
 };
 
-export const chroniclers: Chronicler[] = [
+export const chroniclers: Character[] = [
   {
     name: "John of Colchis",
-    style: "credulous",
     gender: "male",
     image: chroniclerScribe,
     biography:
@@ -72,7 +71,6 @@ export const chroniclers: Chronicler[] = [
   },
   {
     name: "Eudaemonia of Rheims",
-    style: "jaded",
     gender: "female",
     image: chroniclerMosaic,
     biography:
@@ -80,7 +78,6 @@ export const chroniclers: Chronicler[] = [
   },
   {
     name: "Athaloc of Smyrna",
-    style: "scholastic",
     gender: "male",
     image: chroniclerScholar,
     biography:
@@ -88,7 +85,6 @@ export const chroniclers: Chronicler[] = [
   },
   {
     name: "Priscilla of Byzantium",
-    style: "disdainful",
     gender: "female",
     image: chroniclerNun,
     biography:
@@ -112,7 +108,7 @@ export const initialAdvice = (adviserName: string): string => {
 };
 
 export const battleChronicle = (
-  chronicler: Chronicler,
+  chronicler: Character,
   bias: string,
   success: boolean,
   winners: string,

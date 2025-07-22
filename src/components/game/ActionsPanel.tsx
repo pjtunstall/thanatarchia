@@ -29,8 +29,6 @@ type ActionsPanelProps = {
   getValidAttackTargets: (fromTerritoryId: string) => Territory[];
   success: boolean | null;
   setSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
-  currentChronicler: Chronicler;
-  setCurrentChronicler: React.Dispatch<React.SetStateAction<Chronicler>>;
   stats: string;
   setStats: React.Dispatch<React.SetStateAction<string>>;
   factionFaiths: string[];

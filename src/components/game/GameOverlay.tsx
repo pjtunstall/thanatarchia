@@ -8,13 +8,11 @@ import { GameStatus, Chronicle } from "@/types/gameTypes";
 
 type GameOverlayProps = {
   gameStatus: GameStatus;
-  finalChronicles: Chronicle[];
   onResetGame: () => void;
 };
 
 export const GameOverlay: React.FC<GameOverlayProps> = ({
   gameStatus,
-  finalChronicles,
   onResetGame,
 }) => {
   if (gameStatus === "playing") return null;
@@ -34,7 +32,7 @@ export const GameOverlay: React.FC<GameOverlayProps> = ({
           </div>
         </CardHeader>
         <CardContent className="space-y-6">
-          {finalChronicles.map((chronicle, index) => (
+          {/* {finalChronicles.map((chronicle, index) => (
             <div
               key={chronicle.id}
               className={`p-4 rounded-lg border-l-4 ${
@@ -67,7 +65,7 @@ export const GameOverlay: React.FC<GameOverlayProps> = ({
                 </div>
               </div>
             </div>
-          ))}
+          ))} */}
 
           <div className="pt-6 border-t border-[hsl(var(--border))] text-center">
             <Button onClick={onResetGame} size="lg" className="px-8">

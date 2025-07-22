@@ -46,7 +46,7 @@ export function StatusPanel({
       <CardContent className="flex-1 flex flex-col overflow-hidden">
         {/* Scrollable area with full height minus CardHeader */}
         <div className="flex-1 flex flex-col overflow-hidden">
-          <div className="space-y-4 overflow-auto pr-2">
+          <div className="space-y-4 overflow-auto pr-2 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
             <CharacterProfile playerCharacter={playerCharacter} />
 
             <div className="space-y-3">

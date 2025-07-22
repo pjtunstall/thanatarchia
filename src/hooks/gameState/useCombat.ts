@@ -3,9 +3,10 @@ import { useCallback } from "react";
 import {
   Faction,
   Territory,
-  Chronicler,
+  Character,
   AttackOrder,
-  ChronicleEntry,
+  ChatEntry,
+  BattleReport,
 } from "@/types/gameTypes";
 import {
   chroniclers,
@@ -22,12 +23,16 @@ type UseCombatProps = {
   factionTreasures: number[];
   updateTerritories: (updater: (prev: Territory[]) => Territory[]) => void;
   setFactionTreasures: (updater: (prev: number[]) => number[]) => void;
-  addChronicleEntry: (entry: string, bias: "friendly" | "hostile") => void;
+  addChronicleEntry: (
+    author: Character,
+    statement: string,
+    date: string
+  ) => void;
   success: boolean | null;
   setSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
   scheduledAttacks: AttackOrder[];
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
-  enqueueBattleMessage: (ChronicleEntry) => void;
+  enqueueBattleMessage: (BattleReport) => void;
 };
 
 export const useCombat = ({
@@ -69,12 +74,12 @@ export const useCombat = ({
       return updated;
     });
 
-    addChronicleEntry(
-      Math.random() > 0.3
-        ? "More savage warriors have been enlisted to bolster the barbarian horde, no doubt lured by promises of plunder."
-        : "Our wise leader has strengthened our noble forces with fresh recruits, ready to defend our sacred homeland.",
-      Math.random() > 0.3 ? "hostile" : "friendly"
-    );
+    // addChatEntry(
+    //   Math.random() > 0.3
+    //     ? "More savage warriors have been enlisted to bolster the barbarian horde, no doubt lured by promises of plunder."
+    //     : "Our wise leader has strengthened our noble forces with fresh recruits, ready to defend our sacred homeland.",
+    //   Math.random() > 0.3 ? "hostile" : "friendly"
+    // );
   }, [
     factionTreasures,
     factionTerritories,
@@ -88,7 +93,7 @@ export const useCombat = ({
   const handleScheduledAttacks = useCallback(
     (adviserIndex: number) => {
       const groupedAttacks = groupScheduledAttacks(scheduledAttacks);
-      const entries: ChronicleEntry[] = [];
+      const entries: BattleReport[] = [];
       let losses = 0;
 
       groupedAttacks.forEach(({ to, from, totalTroops, sources }) => {
@@ -155,14 +160,14 @@ export const useCombat = ({
         }
 
         const randomIndex = Math.floor(Math.random() * chroniclers.length);
-        const chronicler = chroniclers[randomIndex];
+        const author = chroniclers[randomIndex];
         const bias = randomIndex === adviserIndex ? "friendly" : "hostile";
         const winners = victory
           ? factions[playerIndex].name
           : toTerritory.owner;
         const losers = victory ? toTerritory.owner : factions[playerIndex].name;
         const chronicleMessage = battleChronicle(
-          chronicler,
+          author,
           bias,
           victory,
           winners,
@@ -171,7 +176,7 @@ export const useCombat = ({
         );
 
         entries.push({
-          chronicler,
+          author,
           message: chronicleMessage,
           stats: `Attack strength: ${totalTroops}\nDefense strength: ${toTerritory.troops}\nLosses: ${losses}`,
           success: victory,
@@ -357,10 +362,10 @@ export const useCombat = ({
           })
         );
 
-        addChronicleEntry(
-          `The barbarians have lost ${toTerritory.name} to enemy forces!`,
-          "hostile"
-        );
+        // addChatEntry(
+        //   `The barbarians have lost ${toTerritory.name} to enemy forces!`,
+        //   "hostile"
+        // );
       } else {
         updateTerritories((prev) =>
           prev.map((t) =>
@@ -469,8 +474,8 @@ function groupScheduledAttacks(scheduledAttacks: AttackOrder[]): AttackGroup[] {
 }
 
 function showChroniclesSequentially(
-  entries: ChronicleEntry[],
-  enqueueBattleMessage: (message: ChronicleEntry) => void
+  entries: BattleReport[],
+  enqueueBattleMessage: (message: BattleReport) => void
 ) {
   for (const entry of entries) {
     enqueueBattleMessage(entry);
