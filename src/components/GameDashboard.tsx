@@ -110,6 +110,7 @@ export const GameDashboard = () => {
                   adviserIndex={gameState.adviserIndex}
                   factionTreasures={gameState.factionTreasures}
                   playerIndex={gameState.playerIndex}
+                  factionFaiths={gameState.factionFaiths}
                 />
               </TabsContent>
 
@@ -140,6 +141,7 @@ export const GameDashboard = () => {
                   setStats={gameState.setStats}
                   onUndoReinforce={gameState.handleUndoReinforce}
                   factionFaiths={gameState.factionFaiths}
+                  onChangeFaith={gameState.handleChangeFaith}
                 />
               </TabsContent>
             </Tabs>

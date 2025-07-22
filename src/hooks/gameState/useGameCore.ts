@@ -30,6 +30,15 @@ export const useGameCore = () => {
     factions.map((f) => f.faith)
   );
 
+  const handleChangeFaith = useCallback(
+    (index: number, faith: string) => {
+      const newFaiths = [...factionFaiths];
+      newFaiths[index] = faith;
+      setFactionFaiths(newFaiths);
+    },
+    [factionFaiths]
+  );
+
   // Derived state - computed from territories, no separate state needed
   const factionTerritories = useMemo(
     () =>
@@ -111,6 +120,7 @@ export const useGameCore = () => {
     setStats,
     setScheduledAttacks,
     setFactionFaiths,
+    handleChangeFaith,
   };
 };
 

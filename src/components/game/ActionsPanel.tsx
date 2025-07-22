@@ -34,6 +34,7 @@ type ActionsPanelProps = {
   stats: string;
   setStats: React.Dispatch<React.SetStateAction<string>>;
   factionFaiths: string[];
+  onChangeFaith: (index: number, faith: string) => void;
 };
 
 export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
@@ -49,8 +50,10 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
     onUndoReinforce,
     onRecruit,
     onSpy,
+    onEndTurn,
     factionFaiths,
     adviserIndex,
+    onChangeFaith,
   } = props;
   const adviser = chroniclers[adviserIndex];
 
@@ -62,7 +65,11 @@ export const ActionsPanel: React.FC<ActionsPanelProps> = (props) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            <BasicActions onEndTurn={props.onEndTurn} />
+            <BasicActions
+              onEndTurn={onEndTurn}
+              onChangeFaith={onChangeFaith}
+              playerIndex={playerIndex}
+            />
 
             <div className="border-t pt-3">
               {selectedTerritory && (

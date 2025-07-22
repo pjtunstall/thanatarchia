@@ -17,6 +17,7 @@ type StatusPanelProps = {
   adviserIndex: number;
   factionTreasures: number[];
   playerIndex: number;
+  factionFaiths: string[];
 };
 
 export function StatusPanel({
@@ -27,7 +28,10 @@ export function StatusPanel({
   adviserIndex,
   factionTreasures,
   playerIndex,
+  factionFaiths,
 }: StatusPanelProps) {
+  const playerFaith = factionFaiths[playerIndex];
+
   return (
     <Card className="h-full flex flex-col">
       <CardHeader>
@@ -62,9 +66,9 @@ export function StatusPanel({
                 <span className="text-sm font-semibold">Faith:</span>
                 <Badge
                   variant="outline"
-                  className={`${getFaithColor(playerFaction.faith)} text-xs`}
+                  className={`${getFaithColor(playerFaith)} text-xs`}
                 >
-                  {playerFaction.faith}
+                  {playerFaith}
                 </Badge>
               </div>
               <p className="text-sm">
