@@ -4,14 +4,21 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CharacterDialog } from "@/components/game/CharacterProfile";
 import { ChatEntry } from "@/types/gameTypes";
+
 import { ScrollAreaWithFade } from "@/components/ui-custom/ScrollAreaWithFade";
+import { factions } from "@/data/factions";
+import { chroniclers } from "@/data/gameData";
 
 type ChroniclesPanelProps = {
   chronicles: ChatEntry[];
+  adviserIndex: number;
+  playerIndex: number;
 };
 
 export const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
   chronicles,
+  adviserIndex,
+  playerIndex,
 }) => {
   return (
     <Card className="h-full">
@@ -22,7 +29,12 @@ export const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
         <ScrollAreaWithFade height="h-[666px]">
           <div className="space-y-4">
             {chronicles.map((entry, i) => (
-              <ChronicleItem key={i} entry={entry} />
+              <ChronicleItem
+                key={i}
+                entry={entry}
+                playerIndex={playerIndex}
+                adviserIndex={adviserIndex}
+              />
             ))}
           </div>
         </ScrollAreaWithFade>
@@ -31,13 +43,32 @@ export const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
   );
 };
 
-function ChronicleItem({ entry }: { entry: ChatEntry }) {
+type ChronicleItemProps = {
+  entry: ChatEntry;
+  playerIndex: number;
+  adviserIndex: number;
+};
+
+function ChronicleItem({
+  entry,
+  playerIndex,
+  adviserIndex,
+}: ChronicleItemProps) {
   return (
     <div className="pl-4 py-2">
       <div className="flex items-center gap-3 mb-2">
         <CharacterDialog character={entry.author} />
         <div className="flex items-center gap-2">
-          <Badge variant="secondary">{entry.author.name}</Badge>
+          <Badge
+            variant="secondary"
+            style={
+              entry.author.name === chroniclers[adviserIndex].name
+                ? { backgroundColor: factions[playerIndex].color }
+                : undefined
+            }
+          >
+            {entry.author.name}
+          </Badge>
           <span className="text-xs text-muted-foreground">{entry.date}</span>
         </div>
       </div>

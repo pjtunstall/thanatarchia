@@ -88,7 +88,11 @@ export const GameDashboard = () => {
                 value="chronicles"
                 className="mt-4 flex-1 overflow-hidden"
               >
-                <ChroniclesPanel chronicles={gameState.chronicles} />
+                <ChroniclesPanel
+                  chronicles={gameState.chronicles}
+                  playerIndex={gameState.playerIndex}
+                  adviserIndex={gameState.adviserIndex}
+                />
               </TabsContent>
 
               <TabsContent
