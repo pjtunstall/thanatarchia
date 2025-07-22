@@ -5,19 +5,32 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Church } from "lucide-react";
+import { Church, Check } from "lucide-react";
 import { faiths } from "@/data/faiths";
+
+import { Character } from "@/types/gameTypes";
 
 type BasicActionsProps = {
   playerIndex: number;
   onEndTurn: () => void;
-  onChangeFaith: (factionIndex: number, faith: string) => void;
+  onChangeFaith: (
+    factionIndex: number,
+    faith: string,
+    factionLeaders: Character[],
+    setFactionLeaders: React.Dispatch<React.SetStateAction<Character[]>>
+  ) => void;
+  factionFaiths: string[];
+  factionLeaders: Character[];
+  setFactionLeaders: React.Dispatch<React.SetStateAction<Character[]>>;
 };
 
 export const BasicActions: React.FC<BasicActionsProps> = ({
   playerIndex,
   onEndTurn,
   onChangeFaith,
+  factionFaiths,
+  factionLeaders,
+  setFactionLeaders,
 }) => {
   return (
     <div className="grid grid-cols-2 gap-2">
@@ -32,9 +45,19 @@ export const BasicActions: React.FC<BasicActionsProps> = ({
           {faiths.map((faith) => (
             <DropdownMenuItem
               key={faith}
-              onSelect={() => onChangeFaith(playerIndex, faith)}
+              onSelect={() =>
+                onChangeFaith(
+                  playerIndex,
+                  faith,
+                  factionLeaders,
+                  setFactionLeaders
+                )
+              }
             >
               {faith}
+              {faith === factionFaiths[playerIndex] && (
+                <Check className="h-4 w-4 text-muted-foreground" />
+              )}
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>

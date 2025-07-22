@@ -104,6 +104,7 @@ export const useGameState = () => {
   return {
     ...gameCore,
     factionLeaders,
+    setFactionLeaders,
     ...chronicles,
     ...otherCombat,
     resetGame,

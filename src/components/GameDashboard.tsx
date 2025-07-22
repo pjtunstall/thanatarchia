@@ -142,6 +142,7 @@ export const GameDashboard = () => {
                   onUndoReinforce={gameState.handleUndoReinforce}
                   factionFaiths={gameState.factionFaiths}
                   onChangeFaith={gameState.handleChangeFaith}
+                  setFactionLeaders={gameState.setFactionLeaders}
                 />
               </TabsContent>
             </Tabs>

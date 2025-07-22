@@ -2,7 +2,6 @@ import { Gender } from "@/types/gameTypes";
 import { randomItem } from "@/data/gameData";
 
 export const epithets = [
-  "Apostate",
   "Arrogant",
   "Avaricious",
   "Bigot",

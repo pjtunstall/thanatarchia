@@ -99,15 +99,15 @@ export const chroniclers: Chronicler[] = [
 export const initialAdvice = (adviserName: string): string => {
   switch (adviserName) {
     case "John of Colchis":
-      return '"Our foes outnumber us, my liege. Let us die now opposing them and gain the martyr\'s reward!"';
+      return '"Our foes outnumber us, my Liege. Let us die now opposing them and gain the martyr\'s reward!"';
     case "Priscilla of Byzantium":
       return '"Sire, we must be Byzantine in cunning. Strategy is the way to victory."';
     case "Eudaemonia of Rheims":
       return '"No virtue is so great that it can endure danger, unless it is also joined by great prudence."';
     case "Athaloc of Smyrna":
-      return '"One cannot put it better than Vegetius, sire: All that is advantageous to the enemy is disadvantageous to you, and all that is useful to you, damages the enemy."';
+      return '"One cannot put it better than Vegetius, Sire: All that is advantageous to the enemy is disadvantageous to you, and all that is useful to you, damages the enemy."';
     default:
-      return '"Our forces are weak, my liege. I advise patience."';
+      return '"Our forces are weak, my Liege. I advise patience."';
   }
 };
 

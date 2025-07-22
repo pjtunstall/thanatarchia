@@ -1,6 +1,11 @@
 import { useState, useCallback, useMemo } from "react";
 
-import { Territory, GameStatus, AttackOrder } from "@/types/gameTypes";
+import {
+  Territory,
+  GameStatus,
+  AttackOrder,
+  Character,
+} from "@/types/gameTypes";
 import {
   factions,
   territories as initialTerritories,
@@ -31,10 +36,25 @@ export const useGameCore = () => {
   );
 
   const handleChangeFaith = useCallback(
-    (index: number, faith: string) => {
+    (
+      factionIndex: number,
+      faith: string,
+      factionLeaders: Character[],
+      setFactionLeaders: React.Dispatch<React.SetStateAction<Character[]>>
+    ) => {
+      const oldFath = factionFaiths[factionIndex];
       const newFaiths = [...factionFaiths];
-      newFaiths[index] = faith;
+      newFaiths[factionIndex] = faith;
       setFactionFaiths(newFaiths);
+      if (faith === "Pagan" && oldFath !== "Pagan") {
+        const leader = { ...factionLeaders[factionIndex] };
+        leader.name = leader.name.split(" ")[0] + " the Apostate";
+        setFactionLeaders((prevLeaders) => {
+          const newLeaders = [...prevLeaders];
+          newLeaders[factionIndex] = leader;
+          return newLeaders;
+        });
+      }
     },
     [factionFaiths]
   );
