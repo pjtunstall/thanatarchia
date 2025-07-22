@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollAreaWithFade } from "@/components/ui-custom/ScrollAreaWithFade";
 
 import { Faction, Character } from "@/types/gameTypes";
 import { chroniclers, initialAdvice } from "@/data/gameData";
@@ -19,46 +19,35 @@ export function Advice({
   const adviser = chroniclers[adviserIndex];
 
   return (
-    <div className="relative mt-4 h-[333px] [background-color:hsl(var(--card))]">
-      <ScrollArea className="h-full pr-4">
-        <div className="space-y-0 py-6">
-          <div className="border-l-4 border-primary pl-4 py-2">
-            <div className="flex items-center gap-3 mb-2">
-              <CharacterDialog character={playerCharacter} />
-              <Badge variant="secondary">{playerCharacter.name}</Badge>
+    <div className="mt-4">
+      <ScrollAreaWithFade height="h-[333px]">
+        <div className="py-6 space-y-5">
+          {[
+            {
+              character: playerCharacter,
+              text: `"What do you counsel, ${adviser.name}?"`,
+            },
+            {
+              character: adviser,
+              text: initialAdvice(adviser.name),
+            },
+            {
+              character: playerCharacter,
+              text: randomRejoinder(adviser.name, playerFaction),
+            },
+          ].map(({ character, text }, i) => (
+            <div key={i} className="relative pl-6">
+              <div className="flex items-center gap-3 mb-2">
+                <CharacterDialog character={character} />
+                <Badge variant="secondary">{character.name}</Badge>
+              </div>
+              <p className="text-sm italic font-serif leading-relaxed">
+                {text}
+              </p>
             </div>
-            <p className="text-sm italic font-serif leading-relaxed">
-              "What do you counsel, {adviser.name}?"
-            </p>
-          </div>
-
-          <div className="border-l-4 border-primary pl-4 py-2">
-            <div className="flex items-center gap-3 mb-2">
-              <CharacterDialog character={adviser} />
-              <Badge variant="secondary">{adviser.name}</Badge>
-            </div>
-            <p className="text-sm italic font-serif leading-relaxed">
-              {initialAdvice(adviser.name)}
-            </p>
-          </div>
-
-          <div className="border-l-4 border-primary pl-4 py-2">
-            <div className="flex items-center gap-3 mb-2">
-              <CharacterDialog character={playerCharacter} />
-              <Badge variant="secondary">{playerCharacter.name}</Badge>
-            </div>
-            <p className="text-sm italic font-serif leading-relaxed">
-              {randomRejoinder(adviser.name, playerFaction)}
-            </p>
-          </div>
+          ))}
         </div>
-      </ScrollArea>
-
-      {/* Top fade */}
-      <div className="pointer-events-none absolute top-0 left-0 right-0 h-6 z-10 [background:linear-gradient(to_bottom,_hsl(var(--card)),_transparent)]" />
-
-      {/* Bottom fade */}
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-6 z-10 [background:linear-gradient(to_top,_hsl(var(--card)),_transparent)]" />
+      </ScrollAreaWithFade>
     </div>
   );
 }
