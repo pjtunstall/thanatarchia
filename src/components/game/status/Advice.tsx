@@ -18,37 +18,52 @@ export function Advice({
   const adviser = chroniclers[adviserIndex];
 
   return (
-    <>
-      <div className="border-l-4 border-primary pl-4 py-2">
-        <div className="flex items-center gap-3 mb-2">
-          <CharacterDialog character={playerCharacter} />
-          <Badge variant="secondary">{playerCharacter.name}</Badge>
+    <div className="relative mt-4 [background-color:hsl(var(--card))]">
+      <div className="pointer-events-none absolute top-0 left-0 right-0 h-6 z-10 [background:linear-gradient(to_bottom,_hsl(var(--card)),_transparent)]" />
+
+      <div className="overflow-y-auto h-[333px] pr-2 pb-6 relative z-0 [background-color:hsl(var(--card))]">
+        <div
+          className="overflow-y-auto h-[333px] pr-2 relative z-0"
+          style={{ backgroundColor: "hsl(var(--card))" }}
+        >
+          <div className="overflow-y-auto h-[333px] pr-2 relative z-0">
+            <div className="overflow-y-auto h-[333px] pr-2 relative z-0">
+              <div className="border-l-4 border-primary pl-4 py-2">
+                <div className="flex items-center gap-3 mb-2">
+                  <CharacterDialog character={playerCharacter} />
+                  <Badge variant="secondary">{playerCharacter.name}</Badge>
+                </div>
+                <p className="text-sm italic font-serif leading-relaxed">
+                  "What do you counsel, {adviser.name}?"
+                </p>
+              </div>
+
+              <div className="border-l-4 border-primary pl-4 py-2">
+                <div className="flex items-center gap-3 mb-2">
+                  <CharacterDialog character={adviser} />
+                  <Badge variant="secondary">{adviser.name}</Badge>
+                </div>
+                <p className="text-sm italic font-serif leading-relaxed">
+                  {initialAdvice(adviser.name)}
+                </p>
+              </div>
+
+              <div className="border-l-4 border-primary pl-4 py-2">
+                <div className="flex items-center gap-3 mb-2">
+                  <CharacterDialog character={playerCharacter} />
+                  <Badge variant="secondary">{playerCharacter.name}</Badge>
+                </div>
+                <p className="text-sm italic font-serif leading-relaxed">
+                  {randomRejoinder(adviser.name, playerFaction)}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <p className="text-sm italic font-serif leading-relaxed">
-          "What do you counsel, {adviser.name}?"
-        </p>
       </div>
 
-      <div className="border-l-4 border-primary pl-4 py-2">
-        <div className="flex items-center gap-3 mb-2">
-          <CharacterDialog character={adviser} />
-          <Badge variant="secondary">{adviser.name}</Badge>
-        </div>
-        <p className="text-sm italic font-serif leading-relaxed">
-          {initialAdvice(adviser.name)}
-        </p>
-      </div>
-
-      <div className="border-l-4 border-primary pl-4 py-2">
-        <div className="flex items-center gap-3 mb-2">
-          <CharacterDialog character={playerCharacter} />
-          <Badge variant="secondary">{playerCharacter.name}</Badge>
-        </div>
-        <p className="text-sm italic font-serif leading-relaxed">
-          {randomRejoinder(adviser.name, playerFaction)}
-        </p>
-      </div>
-    </>
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-6 z-10 [background:linear-gradient(to_top,_hsl(var(--card)),_transparent)]" />
+    </div>
   );
 }
 

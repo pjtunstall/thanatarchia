@@ -103,6 +103,12 @@ function initialChronicles(): ChatEntry[] {
       statement:
         "Our most glorious and wise leader has graciously expanded our blessed territories, bringing civilization to the grateful lands beyond the Rhine.",
     },
+    {
+      author: getChroniclerByName("Priscilla of Byzantium"),
+      date: getDate(1),
+      statement:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent suscipit purus sit amet sapien placerat tincidunt. Sed pellentesque velit nunc, sit amet consectetur diam sagittis vitae. Aenean quis ullamcorper magna. Vivamus congue risus ac ante vestibulum, et laoreet elit condimentum. Nulla nec ligula metus. Morbi tristique erat vel enim pretium congue. Donec ut velit neque. Morbi gravida rhoncus ornare. Integer quis mi commodo, laoreet ligula a, elementum turpis. Suspendisse sit amet nulla nec arcu porttitor scelerisque id viverra est. Mauris mollis dolor quis lacus laoreet porta. Sed sagittis odio sapien, ut tincidunt erat dignissim nec. Curabitur quam orci, aliquam vitae cursus quis, ultricies a diam. Sed iaculis nulla fermentum, consectetur orci in, vestibulum ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+    },
   ];
 }
 

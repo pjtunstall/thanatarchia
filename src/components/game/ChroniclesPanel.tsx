@@ -18,13 +18,29 @@ export const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
         <CardTitle className="text-xl">Chronicles</CardTitle>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-[666px]">
-          <div className="space-y-4">
-            {chronicles.map((entry, index) => (
-              <ChronicleItem key={index} entry={entry} />
-            ))}
-          </div>
-        </ScrollArea>
+        <div className="relative h-[666px] pr-2 pb-6 [background-color:hsl(var(--card))]">
+          <ScrollArea className="h-full">
+            <div className="space-y-4">
+              {chronicles.map((entry, i) => (
+                <ChronicleItem key={i} entry={entry} />
+              ))}
+            </div>
+          </ScrollArea>
+
+          {/* Fades absolutely positioned over ScrollArea */}
+          <div
+            className="pointer-events-none absolute top-0 left-0 right-0 h-6 z-10"
+            style={{
+              background: `linear-gradient(to bottom, hsl(var(--card)), transparent)`,
+            }}
+          />
+          <div
+            className="pointer-events-none absolute bottom-0 left-0 right-0 h-6 z-10"
+            style={{
+              background: `linear-gradient(to top, hsl(var(--card)), transparent)`,
+            }}
+          />
+        </div>
       </CardContent>
     </Card>
   );
