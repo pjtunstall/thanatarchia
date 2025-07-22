@@ -155,7 +155,7 @@ export function SelectedTerritoryInfo({
                 collisionBoundary={document.body}
                 // Large top padding discourages flipping to top.
                 // The issue with it flipping to the top is that
-                // the top f t. epopover is lost off the. top of
+                // the top of the popover is lost off the top of
                 // the screen and can't be scrolled into view.
                 // At least when it's lost off the bottom, it can be.
                 collisionPadding={{ top: 9999, bottom: 0, left: 8, right: 8 }}
