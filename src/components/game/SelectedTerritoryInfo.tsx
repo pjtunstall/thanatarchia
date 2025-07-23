@@ -195,60 +195,61 @@ export function SelectedTerritoryInfo({
         </div>
       </div>
 
-      {isPlayerTerritory && (
-        <div className="flex flex-col gap-3 text-sm">
-          <div className="grid grid-cols-2 gap-2">
-            <Button
-              onClick={onRecruit}
-              variant="outline"
-              size="sm"
-              disabled={playerTreasure < costOfRecruiting}
-            >
-              <Users className="w-3 h-3 mr-1" />
-              Recruit ({costOfRecruiting} solidi)
-            </Button>
-            <Button
-              onClick={() => selectedTerritory && onSpy(selectedTerritory)}
-              variant="outline"
-              size="sm"
-              disabled={!selectedTerritory || playerTreasure < costOfSpying}
-            >
-              <Eye className="w-3 h-3 mr-1" />
-              Spy ({costOfSpying} solidi)
-            </Button>
-          </div>
-
-          <div
-            className="cursor-pointer select-none flex items-center gap-1"
-            onClick={() => setAttackExpanded(!attackExpanded)}
+      <div className="flex flex-col gap-3 text-sm">
+        <div className="grid grid-cols-2 gap-2">
+          <Button
+            onClick={onRecruit}
+            variant="outline"
+            size="sm"
+            disabled={!isPlayerTerritory || playerTreasure < costOfRecruiting}
           >
-            {attackExpanded ? (
-              <ChevronDown className="w-4 h-4 text-red-600" />
-            ) : (
-              <ChevronRight className="w-4 h-4 text-red-600" />
-            )}
-            <p className="text-xs font-semibold text-red-700">Attack</p>
-          </div>
-          {attackExpanded && attackRows.length > 0 && (
-            <div className="space-y-1">{attackRows}</div>
-          )}
-
-          <div
-            className="cursor-pointer select-none flex items-center gap-1"
-            onClick={() => setReinforceExpanded(!reinforceExpanded)}
+            <Users className="w-3 h-3 mr-1" />
+            Recruit ({costOfRecruiting} solidi)
+          </Button>
+          <Button
+            onClick={() => selectedTerritory && onSpy(selectedTerritory)}
+            variant="outline"
+            size="sm"
+            disabled={isPlayerTerritory || playerTreasure < costOfSpying}
           >
-            {reinforceExpanded ? (
-              <ChevronDown className="w-4 h-4 text-green-600" />
-            ) : (
-              <ChevronRight className="w-4 h-4 text-green-600" />
-            )}
-            <p className="text-xs font-semibold text-green-700">Reinforce</p>
-          </div>
-          {reinforceExpanded && reinforceRows.length > 0 && (
-            <div className="space-y-1">{reinforceRows}</div>
-          )}
+            <Eye className="w-3 h-3 mr-1" />
+            Spy ({costOfSpying} solidi)
+          </Button>
         </div>
-      )}
+        {isPlayerTerritory && (
+          <>
+            <div
+              className="cursor-pointer select-none flex items-center gap-1"
+              onClick={() => setAttackExpanded(!attackExpanded)}
+            >
+              {attackExpanded ? (
+                <ChevronDown className="w-4 h-4 text-red-600" />
+              ) : (
+                <ChevronRight className="w-4 h-4 text-red-600" />
+              )}
+              <p className="text-xs font-semibold text-red-700">Attack</p>
+            </div>
+            {attackExpanded && attackRows.length > 0 && (
+              <div className="space-y-1">{attackRows}</div>
+            )}
+
+            <div
+              className="cursor-pointer select-none flex items-center gap-1"
+              onClick={() => setReinforceExpanded(!reinforceExpanded)}
+            >
+              {reinforceExpanded ? (
+                <ChevronDown className="w-4 h-4 text-green-600" />
+              ) : (
+                <ChevronRight className="w-4 h-4 text-green-600" />
+              )}
+              <p className="text-xs font-semibold text-green-700">Reinforce</p>
+            </div>
+            {reinforceExpanded && reinforceRows.length > 0 && (
+              <div className="space-y-1">{reinforceRows}</div>
+            )}
+          </>
+        )}
+      </div>
     </>
   );
 }
