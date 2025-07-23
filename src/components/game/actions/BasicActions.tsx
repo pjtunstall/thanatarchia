@@ -24,14 +24,14 @@ type BasicActionsProps = {
   setFactionLeaders: React.Dispatch<React.SetStateAction<Character[]>>;
 };
 
-export const BasicActions: React.FC<BasicActionsProps> = ({
+export function BasicActions({
   playerIndex,
   onEndTurn,
   onChangeFaith,
   factionFaiths,
   factionLeaders,
   setFactionLeaders,
-}) => {
+}: BasicActionsProps) {
   return (
     <div className="grid grid-cols-2 gap-2">
       <DropdownMenu>
@@ -69,4 +69,4 @@ export const BasicActions: React.FC<BasicActionsProps> = ({
       </Button>
     </div>
   );
-};
+}

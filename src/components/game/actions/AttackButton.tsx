@@ -9,12 +9,12 @@ type AttackButtonProps = {
   disabled: boolean;
 };
 
-export const AttackButton: React.FC<AttackButtonProps> = ({
+export function AttackButton({
   from,
   targets,
   onAttack,
   disabled,
-}) => {
+}: AttackButtonProps) {
   if (targets.length === 0) return null;
 
   return (
@@ -35,4 +35,4 @@ export const AttackButton: React.FC<AttackButtonProps> = ({
       ))}
     </div>
   );
-};
+}

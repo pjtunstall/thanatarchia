@@ -9,12 +9,12 @@ type ReinforceButtonProps = {
   disabled: boolean;
 };
 
-export const ReinforceButton: React.FC<ReinforceButtonProps> = ({
+export function ReinforceButton({
   from,
   targets,
   onReinforce,
   disabled,
-}) => {
+}: ReinforceButtonProps) {
   if (targets.length === 0) return null;
 
   return (
@@ -35,4 +35,4 @@ export const ReinforceButton: React.FC<ReinforceButtonProps> = ({
       ))}
     </div>
   );
-};
+}

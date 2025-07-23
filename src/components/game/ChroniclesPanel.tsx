@@ -15,11 +15,11 @@ type ChroniclesPanelProps = {
   playerIndex: number;
 };
 
-export const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
+export function ChroniclesPanel({
   chronicles,
   adviserIndex,
   playerIndex,
-}) => {
+}: ChroniclesPanelProps) {
   return (
     <Card className="h-full flex flex-col">
       <CardContent className="flex-1 p-0 min-h-0 overflow-hidden">
@@ -38,7 +38,7 @@ export const ChroniclesPanel: React.FC<ChroniclesPanelProps> = ({
       </CardContent>
     </Card>
   );
-};
+}
 
 type ChronicleItemProps = {
   entry: ChatEntry;

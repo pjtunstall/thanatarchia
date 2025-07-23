@@ -16,12 +16,12 @@ type FactionDetailsProps = {
   factionFaiths: string[];
 };
 
-export const FactionDetails: React.FC<FactionDetailsProps> = ({
+export function FactionDetails({
   faction,
   leader,
   isPlayerFaction = false,
   factionFaiths,
-}) => {
+}: FactionDetailsProps) {
   const faith = factionFaiths[factions.indexOf(faction)];
 
   return (
@@ -88,4 +88,4 @@ export const FactionDetails: React.FC<FactionDetailsProps> = ({
       </CardContent>
     </Card>
   );
-};
+}

@@ -52,27 +52,26 @@ type ActionsPanelProps = {
   setFactionLeaders: React.Dispatch<React.SetStateAction<Character[]>>;
 };
 
-export function ActionsPanel(props) {
-  const {
-    playerCharacter,
-    playerFaction,
-    playerIndex,
-    factionTreasures,
-    factionLeaders,
-    selectedTerritory,
-    scheduledAttacks,
-    setScheduledAttacks,
-    territories,
-    onReinforce,
-    onUndoReinforce,
-    onRecruit,
-    onSpy,
-    onEndTurn,
-    factionFaiths,
-    adviserIndex,
-    onChangeFaith,
-    setFactionLeaders,
-  } = props;
+export function ActionsPanel({
+  playerCharacter,
+  playerFaction,
+  playerIndex,
+  factionTreasures,
+  factionLeaders,
+  selectedTerritory,
+  scheduledAttacks,
+  setScheduledAttacks,
+  territories,
+  onReinforce,
+  onUndoReinforce,
+  onRecruit,
+  onSpy,
+  onEndTurn,
+  factionFaiths,
+  adviserIndex,
+  onChangeFaith,
+  setFactionLeaders,
+}: ActionsPanelProps) {
   const adviser = chroniclers[adviserIndex];
 
   return (

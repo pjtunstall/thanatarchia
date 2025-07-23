@@ -15,9 +15,7 @@ type PlayerCharacterProps = {
   playerCharacter: Character;
 };
 
-export const CharacterProfile: React.FC<PlayerCharacterProps> = ({
-  playerCharacter,
-}) => {
+export function CharacterProfile({ playerCharacter }: PlayerCharacterProps) {
   return (
     <div className="flex items-center space-x-4 p-4 bg-muted/30 rounded-lg">
       <CharacterDialog character={playerCharacter} size="lg" />
@@ -26,12 +24,12 @@ export const CharacterProfile: React.FC<PlayerCharacterProps> = ({
       </div>
     </div>
   );
-};
+}
 
-interface CharacterDialogProps {
+type CharacterDialogProps = {
   character: Character;
   size?: "sm" | "lg";
-}
+};
 
 export function CharacterDialog({
   character,

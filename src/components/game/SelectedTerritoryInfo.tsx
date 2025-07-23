@@ -2,7 +2,6 @@ import { useState } from "react";
 import {
   MapPin,
   Users,
-  Eye,
   ChevronRight,
   ChevronUp,
   ChevronDown,
@@ -19,9 +18,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 import { AttackOrder, Territory, Character } from "@/types/gameTypes";
-import { costOfRecruiting, costOfSpying, factions } from "@/data/gameData";
+import { factions } from "@/data/gameData";
 import { neighbors } from "@/data/territories";
 import { FactionDetails } from "@/components/game/FactionDetails";
+import { TreasuryActions } from "@/components/game/actions/TreasuryActions";
 
 type SelectedTerritoryInfoProps = {
   territories: Territory[];
@@ -192,65 +192,47 @@ export function SelectedTerritoryInfo({
         </div>
       </div>
 
-      <div className="flex flex-col gap-3 text-sm">
-        <div className="grid grid-cols-2 gap-2">
-          <Button
-            onClick={onRecruit}
-            variant="outline"
-            size="sm"
-            disabled={!isPlayerTerritory || playerTreasure < costOfRecruiting}
+      <TreasuryActions
+        territory={territory}
+        selectedTerritory={selectedTerritory}
+        isPlayerTerritory={isPlayerTerritory}
+        playerTreasure={playerTreasure}
+        onRecruit={onRecruit}
+        onSpy={onSpy}
+      ></TreasuryActions>
+      {isPlayerTerritory && (
+        <div className="flex flex-col gap-3 text-sm">
+          <div
+            className="cursor-pointer select-none flex items-center gap-1"
+            onClick={() => setAttackExpanded(!attackExpanded)}
           >
-            <Users className="w-3 h-3 mr-1" />
-            Recruit ({costOfRecruiting} solidi)
-          </Button>
-          <Button
-            onClick={() => selectedTerritory && onSpy(selectedTerritory)}
-            variant="outline"
-            size="sm"
-            disabled={
-              isPlayerTerritory ||
-              playerTreasure < costOfSpying ||
-              territory.spiedOn
-            }
-          >
-            <Eye className="w-3 h-3 mr-1" />
-            Spy ({costOfSpying} solidi)
-          </Button>
-        </div>
-        {isPlayerTerritory && (
-          <>
-            <div
-              className="cursor-pointer select-none flex items-center gap-1"
-              onClick={() => setAttackExpanded(!attackExpanded)}
-            >
-              {attackExpanded ? (
-                <ChevronDown className="w-4 h-4 text-red-600" />
-              ) : (
-                <ChevronRight className="w-4 h-4 text-red-600" />
-              )}
-              <p className="text-xs font-semibold text-red-700">Attack</p>
-            </div>
-            {attackExpanded && attackRows.length > 0 && (
-              <div className="space-y-1">{attackRows}</div>
+            {attackExpanded ? (
+              <ChevronDown className="w-4 h-4 text-red-600" />
+            ) : (
+              <ChevronRight className="w-4 h-4 text-red-600" />
             )}
+            <p className="text-xs font-semibold text-red-700">Attack</p>
+          </div>
+          {attackExpanded && attackRows.length > 0 && (
+            <div className="space-y-1">{attackRows}</div>
+          )}
 
-            <div
-              className="cursor-pointer select-none flex items-center gap-1"
-              onClick={() => setReinforceExpanded(!reinforceExpanded)}
-            >
-              {reinforceExpanded ? (
-                <ChevronDown className="w-4 h-4 text-green-600" />
-              ) : (
-                <ChevronRight className="w-4 h-4 text-green-600" />
-              )}
-              <p className="text-xs font-semibold text-green-700">Reinforce</p>
-            </div>
-            {reinforceExpanded && reinforceRows.length > 0 && (
-              <div className="space-y-1">{reinforceRows}</div>
+          <div
+            className="cursor-pointer select-none flex items-center gap-1"
+            onClick={() => setReinforceExpanded(!reinforceExpanded)}
+          >
+            {reinforceExpanded ? (
+              <ChevronDown className="w-4 h-4 text-green-600" />
+            ) : (
+              <ChevronRight className="w-4 h-4 text-green-600" />
             )}
-          </>
-        )}
-      </div>
+            <p className="text-xs font-semibold text-green-700">Reinforce</p>
+          </div>
+          {reinforceExpanded && reinforceRows.length > 0 && (
+            <div className="space-y-1">{reinforceRows}</div>
+          )}
+        </div>
+      )}
     </>
   );
 }
