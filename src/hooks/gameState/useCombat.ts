@@ -33,6 +33,9 @@ type UseCombatProps = {
   scheduledAttacks: AttackOrder[];
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
   enqueueBattleMessage: (BattleReport) => void;
+  selectedTerritoryName: string | null;
+  adviserIndex: number;
+  turn: number;
 };
 
 export const useCombat = ({
@@ -48,24 +51,25 @@ export const useCombat = ({
   scheduledAttacks,
   setScheduledAttacks,
   enqueueBattleMessage,
+  selectedTerritoryName,
+  adviserIndex,
+  turn,
 }: UseCombatProps) => {
   const handleRecruit = useCallback(() => {
     const playerTreasury = factionTreasures[playerIndex];
-
-    if (playerTreasury < costOfRecruiting) return;
-
+    if (playerTreasury < costOfRecruiting || !selectedTerritoryName) return;
+    const selectedTerritory = territories.find(
+      (t) => t.name === selectedTerritoryName
+    );
+    if (!selectedTerritory) return;
     const factionName = factions[playerIndex].name;
-    const controlledTerritories = factionTerritories[playerIndex];
-
-    const recruitsPerTerritory = Math.round(500 / controlledTerritories.length);
-    const totalRecruits = recruitsPerTerritory * controlledTerritories.length;
-
     updateTerritories((prev) =>
-      prev.map((t) =>
-        t.owner === factionName
-          ? { ...t, troops: (t.troops || 0) + recruitsPerTerritory }
-          : t
-      )
+      prev
+        .filter((t) => t.name !== selectedTerritoryName)
+        .concat({
+          ...selectedTerritory,
+          troops: selectedTerritory.troops + 500,
+        })
     );
 
     setFactionTreasures((prev) => {
@@ -73,6 +77,10 @@ export const useCombat = ({
       updated[playerIndex] -= costOfRecruiting;
       return updated;
     });
+
+    const r = Math.floor(Math.random() * 4);
+    const chronicler = chroniclers[r];
+    const bias = r === adviserIndex ? "friendly" : "hostile";
 
     // addChatEntry(
     //   Math.random() > 0.3

@@ -4,7 +4,7 @@ import { ScrollText } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-import { GameStatus, Chronicle } from "@/types/gameTypes";
+import { GameStatus } from "@/types/gameTypes";
 
 type GameOverlayProps = {
   gameStatus: GameStatus;

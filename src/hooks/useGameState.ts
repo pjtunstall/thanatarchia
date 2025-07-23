@@ -34,6 +34,9 @@ export const useGameState = () => {
     scheduledAttacks: gameCore.scheduledAttacks,
     setScheduledAttacks: gameCore.setScheduledAttacks,
     enqueueBattleMessage: chronicles.enqueueBattleMessage,
+    selectedTerritoryName: gameCore.selectedTerritory,
+    adviserIndex: chronicles.adviserIndex,
+    turn: gameCore.currentTurn,
   });
 
   const generateResources = useCallback(() => {

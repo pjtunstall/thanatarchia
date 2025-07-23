@@ -50,23 +50,11 @@ export type ChatEntry = {
   statement: string;
 };
 
-export type Chronicle = {
-  id: string;
-  chronicler: string;
-  bias: "friendly" | "hostile";
-  entry: string;
-  turn: number;
-};
-
 export type Character = {
   name: string;
   gender: Gender;
   image: string;
   biography: string;
-};
-
-export type Chronicler = Character & {
-  style: string;
 };
 
 export type GameStatus = "playing" | "victory" | "defeat";
