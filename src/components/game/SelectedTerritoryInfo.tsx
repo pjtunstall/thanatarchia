@@ -25,7 +25,7 @@ import { TreasuryActions } from "@/components/game/actions/TreasuryActions";
 
 type SelectedTerritoryInfoProps = {
   territories: Territory[];
-  selectedTerritory: string;
+  territoryName: string;
   playerFactionName: string;
   playerTreasure: number;
   scheduledAttacks: AttackOrder[];
@@ -40,7 +40,7 @@ type SelectedTerritoryInfoProps = {
 
 export function SelectedTerritoryInfo({
   territories,
-  selectedTerritory,
+  territoryName,
   playerFactionName,
   playerTreasure,
   scheduledAttacks,
@@ -52,7 +52,7 @@ export function SelectedTerritoryInfo({
   onReinforce,
   onUndoReinforce,
 }: SelectedTerritoryInfoProps) {
-  const territory = territories.find((t) => t.name === selectedTerritory);
+  const territory = territories.find((t) => t.name === territoryName);
   if (!territory) return null;
 
   const isPlayerTerritory = territory.owner === playerFactionName;
@@ -67,7 +67,7 @@ export function SelectedTerritoryInfo({
   const available = getAvailableTroops(scheduledAttacks, territory);
 
   if (isPlayerTerritory) {
-    neighbors[selectedTerritory]?.forEach((adjacentTerritoryName) => {
+    neighbors[territoryName]?.forEach((adjacentTerritoryName) => {
       const adj = territories.find((t) => t.name === adjacentTerritoryName);
       if (!adj) return;
 
@@ -194,7 +194,7 @@ export function SelectedTerritoryInfo({
 
       <TreasuryActions
         territory={territory}
-        selectedTerritory={selectedTerritory}
+        territoryName={territoryName}
         isPlayerTerritory={isPlayerTerritory}
         playerTreasure={playerTreasure}
         onRecruit={onRecruit}
@@ -316,11 +316,11 @@ function TroopControls({
 
 function getAvailableTroops(
   scheduledAttacks: AttackOrder[],
-  selectedTerritory: Territory
+  territoryName: Territory
 ): number {
-  let availableTroops = selectedTerritory.troops;
+  let availableTroops = territoryName.troops;
   scheduledAttacks.forEach((attack) => {
-    if (attack.from === selectedTerritory.name) {
+    if (attack.from === territoryName.name) {
       availableTroops -= attack.troops;
     }
   });
@@ -337,7 +337,7 @@ function shouldDisableUnassignButton(
 }
 
 function adjustAttacks(
-  selectedTerritory: Territory,
+  territoryName: Territory,
   from: string,
   to: string,
   delta: number,
@@ -345,7 +345,7 @@ function adjustAttacks(
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>
 ): void {
   setScheduledAttacks((prev) => {
-    const available = getAvailableTroops(scheduledAttacks, selectedTerritory);
+    const available = getAvailableTroops(scheduledAttacks, territoryName);
     const attack = prev.find((a) => a.from === from && a.to === to);
 
     if (!attack) {

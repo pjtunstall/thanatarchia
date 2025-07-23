@@ -16,16 +16,11 @@ import { Button } from "@/components/ui/button";
 import { BookOpenText } from "lucide-react";
 import { useState } from "react";
 
-const helpTopics = ["Topic A", "Topic B"];
-const helpContent: Record<string, { image: string; text: string }> = {
-  "Topic A": {
-    image: "/images/topic-a.png",
-    text: "Details about Topic A...",
-  },
-  "Topic B": {
-    image: "/images/topic-b.png",
-    text: "Details about Topic B...",
-  },
+const helpTopics = ["Thanatarchia", "Topic B"];
+const helpContent: Record<string, string> = {
+  Thanatarchia:
+    "The year is 499. In the West, the Roman Empire is a patchwork of barbarian successor states. In the East, it lives on as Byzantium, still a force to be reckoned with. Who will survive? Who will triumph? What even is triumph anyway?",
+  "Topic B": "Details about Topic B...",
 };
 
 export function Help() {
@@ -46,6 +41,7 @@ export function Help() {
             {helpTopics.map((topic) => (
               <DropdownMenuItem
                 key={topic}
+                // Actually give answers in the words of your adviser in the panel in place of the default.
                 onSelect={() => {
                   setSelectedTopic(topic);
                   setOpen(true);
@@ -62,12 +58,7 @@ export function Help() {
             <DialogHeader>
               <DialogTitle>{selectedTopic}</DialogTitle>
               <DialogDescription>
-                <img
-                  src={helpContent[selectedTopic].image}
-                  alt={selectedTopic}
-                  className="mb-4 max-h-48 w-full object-contain"
-                />
-                <p>{helpContent[selectedTopic].text}</p>
+                <p>{helpContent[selectedTopic]}</p>
               </DialogDescription>
             </DialogHeader>
           </DialogContent>

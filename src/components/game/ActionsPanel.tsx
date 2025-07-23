@@ -93,7 +93,7 @@ export function ActionsPanel({
                 <>
                   <SelectedTerritoryInfo
                     territories={territories}
-                    selectedTerritory={selectedTerritory}
+                    territoryName={selectedTerritory}
                     factionLeaders={factionLeaders}
                     playerFactionName={factions[playerIndex].name}
                     playerTreasure={factionTreasures[playerIndex]}

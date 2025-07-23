@@ -8,7 +8,7 @@ type TreasuryActionsProps = {
   territory: Territory;
   isPlayerTerritory: boolean;
   playerTreasure: number;
-  selectedTerritory: string | null;
+  territoryName: string | null;
   onRecruit: () => void;
   onSpy: (territoryId: string) => void;
 };
@@ -17,7 +17,7 @@ export const TreasuryActions: React.FC<TreasuryActionsProps> = ({
   territory,
   isPlayerTerritory,
   playerTreasure,
-  selectedTerritory,
+  territoryName,
   onRecruit,
   onSpy,
 }) => (
@@ -33,7 +33,7 @@ export const TreasuryActions: React.FC<TreasuryActionsProps> = ({
         Recruit ({costOfRecruiting} solidi)
       </Button>
       <Button
-        onClick={() => selectedTerritory && onSpy(selectedTerritory)}
+        onClick={() => territoryName && onSpy(territoryName)}
         variant="outline"
         size="sm"
         disabled={
