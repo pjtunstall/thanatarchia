@@ -189,9 +189,6 @@ export function SelectedTerritoryInfo({
           <span className="font-medium">
             {isPlayerTerritory || territory.spiedOn ? troopCount : "?"}
           </span>
-          {!isPlayerTerritory && !territory.spiedOn && (
-            <Eye className="w-3 h-3 text-muted-foreground/60" />
-          )}
         </div>
       </div>
 
@@ -210,7 +207,11 @@ export function SelectedTerritoryInfo({
             onClick={() => selectedTerritory && onSpy(selectedTerritory)}
             variant="outline"
             size="sm"
-            disabled={isPlayerTerritory || playerTreasure < costOfSpying}
+            disabled={
+              isPlayerTerritory ||
+              playerTreasure < costOfSpying ||
+              territory.spiedOn
+            }
           >
             <Eye className="w-3 h-3 mr-1" />
             Spy ({costOfSpying} solidi)

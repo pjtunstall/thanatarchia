@@ -21,8 +21,7 @@ export type Faction = {
     | "Miaphysite"
     | "Dyophysite"
     | "Nestorian"
-    | "Donatist"
-    | "Gnostic";
+    | "Donatist";
 };
 
 export type Territory = {
