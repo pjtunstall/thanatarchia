@@ -1,7 +1,15 @@
 import React from "react";
+import { Info } from "lucide-react";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 import { CharacterDialog } from "@/components/game/CharacterProfile";
 import { AttackOrder, Character } from "@/types/gameTypes";
@@ -11,6 +19,7 @@ import { chroniclers } from "@/data/gameData";
 import { BasicActions } from "@/components/game/actions/BasicActions";
 import { factions } from "@/data/factions";
 import { ScrollAreaWithFade } from "@/components/ui-custom/ScrollAreaWithFade";
+import { Help } from "@/components/game/Help";
 
 type ActionsPanelProps = {
   playerCharacter: Character;
@@ -99,17 +108,21 @@ export function ActionsPanel(props) {
                   />
                 </>
               ) : (
-                <ScrollAreaWithFade height="h-full">
-                  <div className="p-6 pb-8">
-                    <div className="flex items-center gap-3 mb-6">
-                      <CharacterDialog character={adviser} />
-                      <Badge variant="secondary">{adviser.name}</Badge>
+                <>
+                  <ScrollAreaWithFade height="h-full">
+                    <div className="p-6 pb-8">
+                      <div className="flex items-center gap-3 mb-6">
+                        <CharacterDialog character={adviser} />
+                        <Badge variant="secondary">{adviser.name}</Badge>
+                      </div>
+                      <p className="text-sm italic font-serif leading-relaxed">
+                        {getHint(adviser)}
+                      </p>
                     </div>
-                    <p className="text-sm italic font-serif leading-relaxed">
-                      {getHint(adviser)}
-                    </p>
-                  </div>
-                </ScrollAreaWithFade>
+                  </ScrollAreaWithFade>
+
+                  <Help></Help>
+                </>
               )}
             </div>
           </div>

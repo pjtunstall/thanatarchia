@@ -5,7 +5,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Church, Check } from "lucide-react";
+import { Church, Check, ArrowBigRight } from "lucide-react";
 import { faiths } from "@/data/faiths";
 
 import { Character } from "@/types/gameTypes";
@@ -64,6 +64,7 @@ export const BasicActions: React.FC<BasicActionsProps> = ({
       </DropdownMenu>
 
       <Button onClick={onEndTurn} variant="outline" size="sm">
+        <ArrowBigRight className="w-3 h-3 mr-1" />
         End Turn
       </Button>
     </div>
