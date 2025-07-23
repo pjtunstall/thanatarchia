@@ -69,11 +69,8 @@ export function ActionsPanel(props) {
   return (
     <>
       <Card className="max-h-full overflow-auto">
-        <CardHeader>
-          <CardTitle className="text-lg">Actions</CardTitle>
-        </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className="space-y-4 pt-8">
             <BasicActions
               onEndTurn={onEndTurn}
               onChangeFaith={onChangeFaith}
