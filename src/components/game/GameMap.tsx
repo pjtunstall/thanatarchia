@@ -1,16 +1,12 @@
 import React from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 
 import { Character, Faction, Territory, AttackOrder } from "@/types/gameTypes";
 import { getDate, adjacentTerritories } from "@/data/gameData";
-import { FactionDetails } from "@/components/game/FactionDetails";
 import romanEmpireMap from "@/assets/roman-empire-map-clean.jpg";
+import { Legend } from "@/components/game/map/Legend";
+import { CompassRose } from "@/components/game/map/CompassRose";
 
 type GameMapProps = {
   territories: Territory[];
@@ -79,16 +75,12 @@ export function GameMap({
           <span className="initial">☠</span>
         </CardTitle>
         <p className="h-4" />
-        {/* <p className="text-muted-foreground italic text-lg text-center">
-          "House against house, town against town, if you see a man—knock him
-          down!"
-        </p> */}
         <p className="uncial text-center">
           Imperium Romanum, {getDate(currentTurn)}
         </p>
       </CardHeader>
 
-      <CardContent className="h-full p-6">
+      <CardContent className="h-full p-6 relative">
         <div
           className="relative w-full aspect-[4/3] map-decorative-border rounded-lg overflow-hidden"
           onClick={() => onTerritoryClick(null)}
@@ -209,123 +201,17 @@ export function GameMap({
         </div>
 
         {/* Faction Legend */}
-        <div className="mt-4 p-3 bg-muted/60 rounded-lg">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
-            {Object.entries(factionLookup).map(([key, factionInfo]) => {
-              const fullFaction = factions.find((f) => f.name === key);
-              if (!fullFaction) return null;
-
-              const isSelected = key === playerFactionName;
-
-              return (
-                <Popover key={key}>
-                  <PopoverTrigger asChild>
-                    <div
-                      className={`group flex items-center gap-2 px-2 py-1 rounded cursor-pointer hover:bg-primary/30 transition-colors ${
-                        isSelected
-                          ? "bg-primary/10 border border-primary/30"
-                          : ""
-                      }`}
-                    >
-                      <div
-                        className="w-3 h-3 rounded border"
-                        style={{ backgroundColor: factionInfo.color }}
-                      />
-                      <span
-                        className={`transition-colors ${
-                          isSelected
-                            ? "font-semibold text-white"
-                            : "text-muted-foreground group-hover:text-white"
-                        }`}
-                      >
-                        {fullFaction.name}
-                      </span>
-                    </div>
-                  </PopoverTrigger>
-                  <PopoverContent side="top" align="start" className="p-0">
-                    <FactionDetails
-                      faction={fullFaction}
-                      leader={factionLeaders[factions.indexOf(fullFaction)]}
-                      isPlayerFaction={isSelected}
-                      factionFaiths={factionFaiths}
-                    />
-                  </PopoverContent>
-                </Popover>
-              );
-            })}
-          </div>
-        </div>
+        <Legend
+          factionLookup={factionLookup}
+          factions={factions}
+          playerFactionName={playerFactionName}
+          factionLeaders={factionLeaders}
+          factionFaiths={factionFaiths}
+        ></Legend>
       </CardContent>
     </Card>
   );
 }
-
-const CompassRose = () => {
-  return (
-    <svg
-      width="60"
-      height="60"
-      viewBox="0 0 100 100"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ position: "absolute", top: 20, right: 60, zIndex: 10 }}
-    >
-      <circle
-        cx="50"
-        cy="50"
-        r="48"
-        fill="#d6c2a1"
-        stroke="#6b5537"
-        strokeWidth="4"
-      />
-      <polygon points="50,5 52,50 50,95 48,50" fill="#3c2915" />
-      <polygon
-        points="50,5 58,50 95,50 58,52 50,95 42,52 5,50 42,50"
-        fill="#8b7047"
-      />
-      <circle cx="50" cy="50" r="3" fill="#3c2915" />
-      <text
-        x="50"
-        y="12"
-        textAnchor="middle"
-        fontSize="10"
-        fontWeight="bold"
-        fill="#3c2915"
-      >
-        N
-      </text>
-      <text
-        x="88"
-        y="54"
-        textAnchor="middle"
-        fontSize="10"
-        fontWeight="bold"
-        fill="#3c2915"
-      >
-        E
-      </text>
-      <text
-        x="50"
-        y="97"
-        textAnchor="middle"
-        fontSize="10"
-        fontWeight="bold"
-        fill="#3c2915"
-      >
-        S
-      </text>
-      <text
-        x="12"
-        y="54"
-        textAnchor="middle"
-        fontSize="10"
-        fontWeight="bold"
-        fill="#3c2915"
-      >
-        W
-      </text>
-    </svg>
-  );
-};
 
 function isUnderAttack(
   territory: Territory,
