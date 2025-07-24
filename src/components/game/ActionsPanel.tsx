@@ -138,7 +138,7 @@ function getHint(adviser: Character): string {
     case "Priscilla of Byzantium":
       return '"Choose a territory by clicking on the map, Sire!"';
     case "Eudaemonia of Rheims":
-      return `"Just pick a territory on this chart, Sire, and let us make a plan for the season."`;
+      return `"Just pick a territory on this chart, Sire, and let's make a plan for the season."`;
     case "Athaloc of Smyrna":
       return '"Select a territory on the map, your Majesty, and we may procede."';
   }

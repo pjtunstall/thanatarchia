@@ -1,5 +1,5 @@
 import { ChatEntry } from "@/types/gameTypes";
-import { Chat, renderChatItem } from "@/components/game/Chat";
+import { Chat } from "@/components/game/Chat";
 import { chroniclers } from "@/data/gameData";
 import { factions } from "@/data/factions";
 
@@ -19,12 +19,5 @@ export function ChroniclesPanel({
       ? factions[playerIndex].color
       : undefined;
 
-  return (
-    <Chat
-      items={chronicles}
-      renderItem={(entry, index) =>
-        renderChatItem(entry, index, { getBadgeColor })
-      }
-    />
-  );
+  return <Chat items={chronicles} options={{ getBadgeColor }} />;
 }

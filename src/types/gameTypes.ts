@@ -48,8 +48,8 @@ export type BattleReport = {
 
 export type ChatEntry = {
   author: Character;
-  date: string;
   statement: string;
+  date?: string;
 };
 
 export type Character = {

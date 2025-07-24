@@ -2,23 +2,30 @@ import React from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-
-import { ChatEntry } from "@/types/gameTypes";
 import { ScrollAreaWithFade } from "@/components/game/ScrollAreaWithFade";
 import { CharacterDialog } from "@/components/game/CharacterProfile";
 
-type ChatProps = {
-  items: ChatEntry[];
-  renderItem: (item: ChatEntry, index: number) => React.ReactNode;
+import { ChatEntry } from "@/types/gameTypes";
+
+export type ChatItemRenderingOptions = {
+  getBadgeColor?: (entry: ChatEntry) => string | undefined;
 };
 
-export function Chat({ items, renderItem }: ChatProps) {
+type ChatProps = {
+  items: ChatEntry[];
+  renderItem?: (item: ChatEntry, index: number) => React.ReactNode;
+  options?: ChatItemRenderingOptions;
+};
+
+export function Chat({ items, renderItem, options }: ChatProps) {
   return (
     <Card className="h-full flex flex-col">
       <CardContent className="flex-1 p-0 min-h-0 overflow-hidden">
         <ScrollAreaWithFade height="h-full">
           <div className="space-y-4 p-4 pb-8">
-            {items.map((item, index) => renderItem(item, index))}
+            {items.map((item, index) =>
+              (renderItem ?? defaultRenderChatItem)(item, index, options)
+            )}
           </div>
         </ScrollAreaWithFade>
       </CardContent>
@@ -26,14 +33,10 @@ export function Chat({ items, renderItem }: ChatProps) {
   );
 }
 
-export type ChatItemRenderingOptions = {
-  getBadgeColor?: (entry: ChatEntry) => string | undefined;
-};
-
-export function renderChatItem(
+function defaultRenderChatItem(
   entry: ChatEntry,
   index: number,
-  options: ChatItemRenderingOptions = {}
+  options?: ChatItemRenderingOptions
 ) {
   const badgeColor = options?.getBadgeColor?.(entry);
 
