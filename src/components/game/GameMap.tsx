@@ -9,7 +9,7 @@ import {
   Territory,
   AttackOrder,
 } from "@/types/gameTypes";
-import { getDate } from "@/data/gameData";
+import { getDate } from "@/lib/time";
 import romanEmpireMap from "@/assets/roman-empire-map-clean.jpg";
 import { Legend } from "@/components/game/map/Legend";
 import { CompassRose } from "@/components/game/map/CompassRose";

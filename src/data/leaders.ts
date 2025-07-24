@@ -1,5 +1,5 @@
 import { Gender } from "@/types/gameTypes";
-import { randomItem } from "@/data/gameData";
+import { randomItem } from "@/lib/utils";
 
 export const epithets = [
   "Arrogant",

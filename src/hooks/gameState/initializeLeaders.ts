@@ -1,5 +1,5 @@
 import { Faction, Character } from "@/types/gameTypes";
-import { randomItem } from "@/data/gameData";
+import { randomItem } from "@/lib/utils";
 import {
   actions,
   benefactors,

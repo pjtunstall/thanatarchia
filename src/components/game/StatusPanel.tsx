@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Coins, Users } from "lucide-react";
 
 import { Faction, Character, AttackOrder } from "@/types/gameTypes";
-import { getFaithColor } from "@/data/gameData";
+import { getFaithColor } from "@/data/faiths";
 import { CharacterProfile } from "@/components/game/CharacterProfile";
 
 type StatusPanelProps = {

@@ -6,7 +6,7 @@ import { Faction, Character } from "@/types/gameTypes";
 import { Crown, Users, Church } from "lucide-react";
 import { CharacterDialog } from "@/components/game/CharacterProfile";
 
-import { getFaithColor } from "@/data/gameData";
+import { getFaithColor } from "@/data/faiths";
 import { factions } from "@/data/factions";
 
 type FactionDetailsProps = {
