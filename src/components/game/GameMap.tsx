@@ -3,10 +3,11 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { Character, Faction, Territory, AttackOrder } from "@/types/gameTypes";
-import { getDate, adjacentTerritories } from "@/data/gameData";
+import { getDate } from "@/data/gameData";
 import romanEmpireMap from "@/assets/roman-empire-map-clean.jpg";
 import { Legend } from "@/components/game/map/Legend";
 import { CompassRose } from "@/components/game/map/CompassRose";
+import { ConnectingLines } from "@/components/game/map/ConnectingLines";
 
 type GameMapProps = {
   territories: Territory[];
@@ -85,75 +86,17 @@ export function GameMap({
           className="relative w-full aspect-[4/3] map-decorative-border rounded-lg overflow-hidden"
           onClick={() => onTerritoryClick(null)}
         >
-          {/* Historical map background */}
           <div
             className="absolute inset-0 bg-cover bg-center opacity-80"
             style={{ backgroundImage: `url(${romanEmpireMap})` }}
           ></div>
 
-          {/* Compass Rose */}
           <CompassRose />
 
-          {/* Connecting lines */}
-          <svg
-            className="absolute inset-0 w-full h-full pointer-events-none"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-          >
-            <defs>
-              <marker
-                id="arrow"
-                viewBox="0 0 20 10"
-                refX="20"
-                refY="5"
-                markerWidth="6"
-                markerHeight="6"
-                orient="auto-start-reverse"
-              >
-                <path d="M 0 0 L 20 5 L 0 10 z" fill="red" />
-              </marker>
-
-              <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
-                <feDropShadow
-                  dx="0"
-                  dy="0"
-                  stdDeviation="2.5"
-                  floodColor="red"
-                  floodOpacity="1"
-                />
-                <feDropShadow
-                  dx="0"
-                  dy="0"
-                  stdDeviation="4"
-                  floodColor="red"
-                  floodOpacity="0.7"
-                />
-              </filter>
-            </defs>
-
-            {selectedTerritory &&
-              adjacentTerritories[selectedTerritory]?.map((adj) => {
-                const from = territories.find(
-                  (t) => t.name === selectedTerritory
-                );
-                const to = territories.find((t) => t.name === adj);
-                if (!from || !to) return null;
-
-                return (
-                  <line
-                    key={adj}
-                    x1={from.x}
-                    y1={from.y}
-                    x2={to.x}
-                    y2={to.y}
-                    stroke="red"
-                    strokeWidth="0.8"
-                    markerEnd="url(#arrow)"
-                    filter="url(#glow)"
-                  />
-                );
-              })}
-          </svg>
+          <ConnectingLines
+            selectedTerritory={selectedTerritory}
+            territories={territories}
+          ></ConnectingLines>
 
           {/* Territories */}
           {territories.map((territory) => (
@@ -200,7 +143,6 @@ export function GameMap({
           ))}
         </div>
 
-        {/* Faction Legend */}
         <Legend
           factionLookup={factionLookup}
           factions={factions}
