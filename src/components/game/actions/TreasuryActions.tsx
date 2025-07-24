@@ -21,18 +21,26 @@ export const TreasuryActions: React.FC<TreasuryActionsProps> = ({
   onRecruit,
   onSpy,
 }) => (
-  <>
-    <div className="grid grid-cols-2 gap-2 mb-5">
+  <div className="grid grid-cols-2 gap-2 mb-5">
+    <div className="relative group min-w-0">
       <Button
+        className="w-full"
         onClick={onRecruit}
         variant="outline"
         size="sm"
         disabled={!isPlayerTerritory || playerTreasure < costOfRecruiting}
       >
         <Users className="w-3 h-3 mr-1" />
-        Recruit ({costOfRecruiting} solidi)
+        Recruit
       </Button>
+      <span className="absolute left-1/2 translate-x-1/2 bottom-full mb-1 text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+        ({costOfRecruiting} solidi)
+      </span>
+    </div>
+
+    <div className="relative group min-w-0">
       <Button
+        className="w-full"
         onClick={() => territoryName && onSpy(territoryName)}
         variant="outline"
         size="sm"
@@ -43,8 +51,11 @@ export const TreasuryActions: React.FC<TreasuryActionsProps> = ({
         }
       >
         <Eye className="w-3 h-3 mr-1" />
-        Spy ({costOfSpying} solidi)
+        Spy
       </Button>
+      <span className="absolute left-1/2 translate-x-1/2 bottom-full mb-1 text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+        ({costOfSpying} solidi)
+      </span>
     </div>
-  </>
+  </div>
 );
