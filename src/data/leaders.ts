@@ -210,7 +210,7 @@ export const actions = [
   "chopped up",
   "defenestrated",
   "disemboweled",
-  "skewered",
+  "impaled",
   "smothered",
 ];
 
