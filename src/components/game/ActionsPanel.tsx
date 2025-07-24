@@ -11,8 +11,9 @@ import { Faction, Territory } from "@/types/gameTypes";
 import { chroniclers } from "@/data/gameData";
 import { BasicActions } from "@/components/game/actions/BasicActions";
 import { factions } from "@/data/factions";
-import { Help } from "@/components/game/Help";
 import { Advice } from "@/components/game/status/Advice";
+import { HelpMenu } from "@/components/game/help/HelpMenu";
+import { HelpContent } from "@/components/game/help/HelpContent";
 
 type ActionsPanelProps = {
   playerCharacter: Character;
@@ -65,6 +66,7 @@ export function ActionsPanel({
   onChangeFaith,
   setFactionLeaders,
 }: ActionsPanelProps) {
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
   const adviser = chroniclers[adviserIndex];
 
   return (
@@ -99,15 +101,23 @@ export function ActionsPanel({
             ) : (
               <div className="flex flex-col flex-1 min-h-0 pt-3 space-y-4">
                 <div className="flex-1 min-h-0">
-                  <Advice
-                    playerCharacter={playerCharacter}
-                    adviserIndex={adviserIndex}
-                    playerFaction={playerFaction}
-                  />
+                  {selectedTopic ? (
+                    <HelpContent
+                      topic={selectedTopic}
+                      adviser={adviser}
+                      player={playerCharacter}
+                    />
+                  ) : (
+                    <Advice
+                      player={playerCharacter}
+                      adviser={adviser}
+                      playerFaction={playerFaction}
+                    />
+                  )}
                 </div>
 
                 <div className="flex-shrink-0">
-                  <Help />
+                  <HelpMenu onSelectTopic={setSelectedTopic} />
                 </div>
               </div>
             )}

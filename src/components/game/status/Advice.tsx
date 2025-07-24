@@ -3,29 +3,23 @@ import { Character, Faction, ChatEntry } from "@/types/gameTypes";
 import { chroniclers } from "@/data/gameData";
 
 type AdviceProps = {
-  playerCharacter: Character;
+  player: Character;
   playerFaction: Faction;
-  adviserIndex: number;
+  adviser: Character;
 };
 
-export function Advice({
-  playerCharacter,
-  adviserIndex,
-  playerFaction,
-}: AdviceProps) {
-  const adviser = chroniclers[adviserIndex];
-
+export function Advice({ player, playerFaction, adviser }: AdviceProps) {
   const adviceEntries: ChatEntry[] = [
     {
-      author: playerCharacter,
+      author: player,
       statement: `What do you counsel, ${adviser.name}?`,
     },
     {
       author: adviser,
-      statement: initialAdvice(adviser.name),
+      statement: initialAdvice(adviser),
     },
     {
-      author: playerCharacter,
+      author: player,
       statement: randomRejoinder(adviser.name, playerFaction),
     },
   ];
@@ -33,8 +27,8 @@ export function Advice({
   return <Chat items={adviceEntries} />;
 }
 
-const initialAdvice = (adviserName: string): string => {
-  switch (adviserName) {
+const initialAdvice = (adviser: Character): string => {
+  switch (adviser.name) {
     case "John of Colchis":
       return "Our foes outnumber us, my Liege. Let us die now opposing them and gain the martyr's reward!";
     case "Priscilla of Byzantium":
