@@ -87,18 +87,6 @@ export function StatusPanel({
             </div>
           </div>
         </div>
-
-        <div className="flex-1 min-h-0 overflow-hidden border-t">
-          <ScrollAreaWithFade height="h-full">
-            <div className="p-4">
-              <Advice
-                playerCharacter={playerCharacter}
-                adviserIndex={adviserIndex}
-                playerFaction={playerFaction}
-              />
-            </div>
-          </ScrollAreaWithFade>
-        </div>
       </CardContent>
     </Card>
   );

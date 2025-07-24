@@ -1,7 +1,6 @@
-import { Badge } from "@/components/ui/badge";
-import { Faction, Character } from "@/types/gameTypes";
-import { chroniclers, initialAdvice } from "@/data/gameData";
-import { CharacterDialog } from "@/components/game/CharacterProfile";
+import { Chat } from "@/components/game/Chat";
+import { Character, Faction, ChatEntry } from "@/types/gameTypes";
+import { chroniclers } from "@/data/gameData";
 
 type AdviceProps = {
   playerCharacter: Character;
@@ -16,49 +15,51 @@ export function Advice({
 }: AdviceProps) {
   const adviser = chroniclers[adviserIndex];
 
-  const messages = [
+  const adviceEntries: ChatEntry[] = [
     {
-      character: playerCharacter,
-      text: `"What do you counsel, ${adviser.name}?"`,
+      author: playerCharacter,
+      statement: `What do you counsel, ${adviser.name}?`,
     },
     {
-      character: adviser,
-      text: initialAdvice(adviser.name),
+      author: adviser,
+      statement: initialAdvice(adviser.name),
     },
     {
-      character: playerCharacter,
-      text: randomRejoinder(adviser.name, playerFaction),
+      author: playerCharacter,
+      statement: randomRejoinder(adviser.name, playerFaction),
     },
   ];
 
-  return (
-    <div className="space-y-5">
-      {messages.map(({ character, text }, i) => (
-        <div key={i} className="relative pl-6">
-          <div className="flex items-center gap-3 mb-2">
-            <CharacterDialog character={character} />
-            <Badge>{character.name}</Badge>
-          </div>
-          <p className="text-sm italic font-serif leading-relaxed">{text}</p>
-        </div>
-      ))}
-    </div>
-  );
+  return <Chat items={adviceEntries} />;
 }
+
+const initialAdvice = (adviserName: string): string => {
+  switch (adviserName) {
+    case "John of Colchis":
+      return "Our foes outnumber us, my Liege. Let us die now opposing them and gain the martyr's reward!";
+    case "Priscilla of Byzantium":
+      return "Sire, we must be Byzantine in cunning. Strategy is the way to victory.";
+    case "Eudaemonia of Rheims":
+      return "No virtue is so great that it can endure danger, unless it is also joined by great prudence.";
+    case "Athaloc of Smyrna":
+      return "One cannot put it better than Vegetius, Sire: All that is advantageous to the enemy is disadvantageous to you, and all that is useful to you, damages the enemy.";
+    default:
+      return "Our forces are weak, my Liege. I advise patience.";
+  }
+};
 
 function randomRejoinder(adviserName: string, playerFaction: Faction): string {
   const r = Math.random();
-  if (r < 0.1)
-    return `"Thanks for that, ${adviserName}. I'll bear it in mind."`;
-  if (r < 0.2) return '"I see."';
-  if (r < 0.3) return '"Wise..."';
-  if (r < 0.4) return `"Interesting take, ${adviserName}."`;
+  if (r < 0.1) return `Thanks for that, ${adviserName}. I'll bear it in mind.`;
+  if (r < 0.2) return "I see.";
+  if (r < 0.3) return "Wise...";
+  if (r < 0.4) return `Interesting take, ${adviserName}.`;
   if (r < 0.5)
-    return `"Sometimes, ${adviserName}, I wonder whose side you're really on."`;
+    return `Sometimes, ${adviserName}, I wonder whose side you're really on.`;
   if (r < 0.6)
-    return `"Be that as it may, ${adviserName}, we ${playerFaction.name} will prevail."`;
-  if (r < 0.7) return `"Come on, ${adviserName}, you can do better than that."`;
-  if (r < 0.8) return `"What would I do without you, ${adviserName}?"`;
-  if (r < 0.9) return '"What will be, will be."';
-  return `"Is that so, ${adviserName}?"`;
+    return `Be that as it may, ${adviserName}, we ${playerFaction.name} will prevail.`;
+  if (r < 0.7) return `Come on, ${adviserName}, you can do better than that.`;
+  if (r < 0.8) return `What would I do without you, ${adviserName}?`;
+  if (r < 0.9) return "What will be, will be.";
+  return `Is that a fact, ${adviserName}?`;
 }

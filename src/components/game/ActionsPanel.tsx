@@ -1,25 +1,18 @@
 import React from "react";
-import { Info } from "lucide-react";
+import { useRef, useState, useLayoutEffect } from "react";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 
 import { CharacterDialog } from "@/components/game/CharacterProfile";
-import { AttackOrder, Character } from "@/types/gameTypes";
+import { AttackOrder, Character, ChatEntry } from "@/types/gameTypes";
 import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
 import { Faction, Territory } from "@/types/gameTypes";
 import { chroniclers } from "@/data/gameData";
 import { BasicActions } from "@/components/game/actions/BasicActions";
 import { factions } from "@/data/factions";
-import { ScrollAreaWithFade } from "@/components/game/ScrollAreaWithFade";
 import { Help } from "@/components/game/Help";
+import { Advice } from "@/components/game/status/Advice";
 
 type ActionsPanelProps = {
   playerCharacter: Character;
@@ -76,9 +69,9 @@ export function ActionsPanel({
 
   return (
     <>
-      <Card className="max-h-full overflow-auto">
-        <CardContent>
-          <div className="space-y-4 pt-8">
+      <Card className="h-full flex flex-col">
+        <CardContent className="flex-1 overflow-hidden min-h-0">
+          <div className="space-y-4 pt-8 h-full flex flex-col">
             <BasicActions
               onEndTurn={onEndTurn}
               onChangeFaith={onChangeFaith}
@@ -88,42 +81,36 @@ export function ActionsPanel({
               setFactionLeaders={setFactionLeaders}
             />
 
-            <div className="border-t pt-3">
-              {selectedTerritory ? (
-                <>
-                  <SelectedTerritoryInfo
-                    territories={territories}
-                    territoryName={selectedTerritory}
-                    factionLeaders={factionLeaders}
-                    playerFactionName={factions[playerIndex].name}
-                    playerTreasure={factionTreasures[playerIndex]}
-                    scheduledAttacks={scheduledAttacks}
-                    setScheduledAttacks={setScheduledAttacks}
-                    onRecruit={onRecruit}
-                    onSpy={onSpy}
-                    onReinforce={onReinforce}
-                    onUndoReinforce={onUndoReinforce}
-                    factionFaiths={factionFaiths}
+            {selectedTerritory ? (
+              <SelectedTerritoryInfo
+                territories={territories}
+                territoryName={selectedTerritory}
+                factionLeaders={factionLeaders}
+                playerFactionName={factions[playerIndex].name}
+                playerTreasure={factionTreasures[playerIndex]}
+                scheduledAttacks={scheduledAttacks}
+                setScheduledAttacks={setScheduledAttacks}
+                onRecruit={onRecruit}
+                onSpy={onSpy}
+                onReinforce={onReinforce}
+                onUndoReinforce={onUndoReinforce}
+                factionFaiths={factionFaiths}
+              />
+            ) : (
+              <div className="flex flex-col flex-1 min-h-0 pt-3 space-y-4">
+                <div className="flex-1 min-h-0">
+                  <Advice
+                    playerCharacter={playerCharacter}
+                    adviserIndex={adviserIndex}
+                    playerFaction={playerFaction}
                   />
-                </>
-              ) : (
-                <>
-                  <ScrollAreaWithFade height="h-full">
-                    <div className="p-6 pb-8">
-                      <div className="flex items-center gap-3 mb-6">
-                        <CharacterDialog character={adviser} />
-                        <Badge variant="secondary">{adviser.name}</Badge>
-                      </div>
-                      <p className="text-sm italic font-serif leading-relaxed">
-                        {getHint(adviser)}
-                      </p>
-                    </div>
-                  </ScrollAreaWithFade>
+                </div>
 
-                  <Help></Help>
-                </>
-              )}
-            </div>
+                <div className="flex-shrink-0">
+                  <Help />
+                </div>
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
@@ -131,15 +118,33 @@ export function ActionsPanel({
   );
 }
 
-function getHint(adviser: Character): string {
+function getHint(adviser: Character): ChatEntry[] {
+  let statement: string;
+
   switch (adviser.name) {
     case "John of Colchis":
-      return '"Pick a territory on the map, my Liege, and take your next heroic action!"';
+      statement =
+        '"Pick a territory on the map, my Liege, and take your next heroic action!"';
+      break; // Added missing break
     case "Priscilla of Byzantium":
-      return '"Choose a territory by clicking on the map, Sire!"';
+      statement = '"Choose a territory by clicking on the map, Sire!"';
+      break; // Added missing break
     case "Eudaemonia of Rheims":
-      return `"Just pick a territory on this chart, Sire, and let's make a plan for the season."`;
+      statement = `"Just pick a territory on this chart, Sire, and let's make a plan for the season."`;
+      break; // Added missing break
     case "Athaloc of Smyrna":
-      return '"Select a territory on the map, your Majesty, and we may procede."';
+      statement =
+        '"Select a territory on the map, your Majesty, and we may procede."';
+      break; // Added missing break
+    default:
+      statement = '"Please select a territory to continue."'; // Added default case
+      break;
   }
+
+  return [
+    {
+      author: adviser,
+      statement: statement,
+    },
+  ];
 }

@@ -19,21 +19,24 @@ type ChatProps = {
 
 export function Chat({ items, renderItem, options }: ChatProps) {
   return (
-    <Card className="h-full flex flex-col">
-      <CardContent className="flex-1 p-0 min-h-0 overflow-hidden">
-        <ScrollAreaWithFade height="h-full">
-          <div className="space-y-4 p-4 pb-8">
-            {items.map((item, index) =>
-              (renderItem ?? defaultRenderChatItem)(item, index, options)
-            )}
-          </div>
-        </ScrollAreaWithFade>
-      </CardContent>
-    </Card>
+    <ScrollAreaWithFade height="h-full">
+      <div className="space-y-4 p-4 pb-8">
+        {items.map((item, index) =>
+          (renderItem ?? defaultRenderChatItem)(item, index, options)
+        )}
+      </div>
+    </ScrollAreaWithFade>
   );
 }
 
-function defaultRenderChatItem(
+/*************  ✨ Windsurf Command ⭐  *************/
+/**
+ * The default function for rendering a single chat item.
+ *
+ * This function renders a chat item in the format:
+ *
+ * 
+/*******  fc811535-72ee-47af-8660-60b51b8ffb42  *******/ function defaultRenderChatItem(
   entry: ChatEntry,
   index: number,
   options?: ChatItemRenderingOptions

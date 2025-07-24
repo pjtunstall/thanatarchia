@@ -1,3 +1,5 @@
+import { Card, CardContent } from "@/components/ui/card";
+
 import { ChatEntry } from "@/types/gameTypes";
 import { Chat } from "@/components/game/Chat";
 import { chroniclers } from "@/data/gameData";
@@ -19,5 +21,11 @@ export function ChroniclesPanel({
       ? factions[playerIndex].color
       : undefined;
 
-  return <Chat items={chronicles} options={{ getBadgeColor }} />;
+  return (
+    <Card className="h-full flex flex-col">
+      <CardContent className="flex-1 p-0 min-h-0 overflow-hidden">
+        <Chat items={chronicles} options={{ getBadgeColor }} />
+      </CardContent>
+    </Card>
+  );
 }
