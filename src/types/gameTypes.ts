@@ -24,6 +24,8 @@ export type Faction = {
     | "Donatist";
 };
 
+export type FactionMiniInfo = { color: string; name: string; symbol: string };
+
 export type Territory = {
   name: string;
   x: number;

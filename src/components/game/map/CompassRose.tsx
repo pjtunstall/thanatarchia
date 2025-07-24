@@ -5,7 +5,7 @@ export const CompassRose = () => {
       height="60"
       viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ position: "absolute", top: 32, right: 52, zIndex: 10 }}
+      style={{ position: "absolute", top: 20, right: 60, zIndex: 10 }}
     >
       <circle
         cx="50"
