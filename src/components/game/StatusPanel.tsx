@@ -6,7 +6,7 @@ import { Faction, Character, AttackOrder } from "@/types/gameTypes";
 import { getFaithColor } from "@/data/gameData";
 import { CharacterProfile } from "@/components/game/CharacterProfile";
 import { Advice } from "@/components/game/status/Advice";
-import { ScrollAreaWithFade } from "@/components/ui-custom/ScrollAreaWithFade";
+import { ScrollAreaWithFade } from "@/components/game/ScrollAreaWithFade";
 
 type StatusPanelProps = {
   playerFaction: Faction;

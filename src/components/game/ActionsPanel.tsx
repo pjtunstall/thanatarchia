@@ -18,7 +18,7 @@ import { Faction, Territory } from "@/types/gameTypes";
 import { chroniclers } from "@/data/gameData";
 import { BasicActions } from "@/components/game/actions/BasicActions";
 import { factions } from "@/data/factions";
-import { ScrollAreaWithFade } from "@/components/ui-custom/ScrollAreaWithFade";
+import { ScrollAreaWithFade } from "@/components/game/ScrollAreaWithFade";
 import { Help } from "@/components/game/Help";
 
 type ActionsPanelProps = {
