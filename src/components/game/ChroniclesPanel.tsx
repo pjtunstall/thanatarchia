@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 import { ChatEntry } from "@/types/gameTypes";
 import { Chat } from "@/components/game/Chat";
-import { chroniclers } from "@/data/gameData";
+import { chroniclers } from "@/data/chronicles";
 import { factions } from "@/data/factions";
 
 type ChroniclesPanelProps = {

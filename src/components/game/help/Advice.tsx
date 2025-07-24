@@ -1,6 +1,5 @@
 import { Chat } from "@/components/game/Chat";
 import { Character, Faction, ChatEntry } from "@/types/gameTypes";
-import { chroniclers } from "@/data/gameData";
 
 type AdviceProps = {
   player: Character;

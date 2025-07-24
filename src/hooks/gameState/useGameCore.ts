@@ -6,11 +6,8 @@ import {
   AttackOrder,
   Character,
 } from "@/types/gameTypes";
-import {
-  factions,
-  territories as initialTerritories,
-  chroniclers,
-} from "@/data/gameData";
+import { factions, territories as initialTerritories } from "@/data/gameData";
+import { chroniclers } from "@/data/chronicles";
 
 export const useGameCore = () => {
   const [currentTurn, setCurrentTurn] = useState(1);
@@ -156,6 +153,8 @@ function randomPlayerIndex(factionTerritories: string[][]): number {
       return r;
     }
   }
-  console.error("Failed to find any faction with territory");
+  console.error(
+    "Something is amiss: I failed to find any faction with territory"
+  );
   return 0;
 }

@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 
-import { chroniclers, getDate } from "@/data/gameData";
+import { getDate } from "@/data/gameData";
+import { chroniclers } from "@/data/chronicles";
 import { ChatEntry, Character, BattleReport } from "@/types/gameTypes";
 
 export function useChronicles(currentTurn: number) {

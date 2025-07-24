@@ -5,14 +5,10 @@ import {
   Territory,
   Character,
   AttackOrder,
-  ChatEntry,
   BattleReport,
 } from "@/types/gameTypes";
-import {
-  chroniclers,
-  battleChronicle,
-  costOfRecruiting,
-} from "@/data/gameData";
+import { costOfRecruiting } from "@/data/gameData";
+import { chroniclers, battleChronicle } from "@/data/chronicles";
 
 type UseCombatProps = {
   territories: Territory[];
