@@ -21,7 +21,16 @@ function chat(adviser: Character, player: Character): ChatEntry[] {
         {
           author: adviser,
           statement:
-            "What a perceptive question, my Liege! Thanatarchia is a game, the game we are all put on this earth to play.",
+            "What a perceptive question, my Liege! Thanatarchia is a game.",
+        },
+        {
+          author: player,
+          statement: "Game?",
+        },
+        {
+          author: adviser,
+          statement:
+            "Astute follow-up, my Liege. But I think you know this. It is the game we are all put on this earth to play.",
         },
       ];
     case "Priscilla of Byzantium":
@@ -54,7 +63,7 @@ function chat(adviser: Character, player: Character): ChatEntry[] {
         {
           author: adviser,
           statement:
-            "Hum, Thanatarchia. The word is a Greek word, of course, although hardly an import one, I'll warrant. It is not attested in scripture nor in the writings of the Church Fathers. Indeed it is not even part of my extensive vocabulary.",
+            "Hum, Thanatarchia. The word is a Greek word, of course, although hardly an import one. It is not attested in scripture nor in the writings of the Church Fathers. Indeed it is not even part of my extensive vocabulary.",
         },
         {
           author: player,
@@ -67,7 +76,7 @@ function chat(adviser: Character, player: Character): ChatEntry[] {
         },
         {
           author: player,
-          statement: "And what would that be, Athaloc?",
+          statement: "And what would that be, Athaloc of Smyrna?",
         },
         {
           author: adviser,
