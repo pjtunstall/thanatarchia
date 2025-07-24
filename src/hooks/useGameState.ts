@@ -82,6 +82,7 @@ export const useGameState = () => {
     gameCore.resetGame();
     chronicles.resetChronicles();
     setFactionLeaders(initializeLeaders(factions));
+    gameCore.setIsClickedOnMapYet(false);
   }, [gameCore.resetGame, chronicles.resetChronicles]);
 
   const handleEndTurn = useCallback(() => {

@@ -14,6 +14,7 @@ import { factions } from "@/data/factions";
 import { Advice } from "@/components/game/status/Advice";
 import { HelpMenu } from "@/components/game/help/HelpMenu";
 import { HelpContent } from "@/components/game/help/HelpContent";
+import { Chat } from "./Chat";
 
 type ActionsPanelProps = {
   playerCharacter: Character;
@@ -44,6 +45,7 @@ type ActionsPanelProps = {
     setLeaders: React.Dispatch<React.SetStateAction<Character[]>>
   ) => void;
   setFactionLeaders: React.Dispatch<React.SetStateAction<Character[]>>;
+  isClickedOnMapYet: boolean;
 };
 
 export function ActionsPanel({
@@ -65,6 +67,7 @@ export function ActionsPanel({
   adviserIndex,
   onChangeFaith,
   setFactionLeaders,
+  isClickedOnMapYet,
 }: ActionsPanelProps) {
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
   const adviser = chroniclers[adviserIndex];
@@ -107,12 +110,14 @@ export function ActionsPanel({
                       adviser={adviser}
                       player={playerCharacter}
                     />
-                  ) : (
+                  ) : isClickedOnMapYet ? (
                     <Advice
                       player={playerCharacter}
                       adviser={adviser}
                       playerFaction={playerFaction}
                     />
+                  ) : (
+                    <Chat items={getHint(adviser)} />
                   )}
                 </div>
 
@@ -134,20 +139,18 @@ function getHint(adviser: Character): ChatEntry[] {
   switch (adviser.name) {
     case "John of Colchis":
       statement =
-        '"Pick a territory on the map, my Liege, and take your next heroic action!"';
-      break; // Added missing break
+        "Pick a territory on the map, my Liege, and take your next heroic action!";
+      break;
     case "Priscilla of Byzantium":
-      statement = '"Choose a territory by clicking on the map, Sire!"';
-      break; // Added missing break
+      statement = "Choose a territory by clicking on the map, Sire!";
+      break;
     case "Eudaemonia of Rheims":
-      statement = `"Just pick a territory on this chart, Sire, and let's make a plan for the season."`;
-      break; // Added missing break
+      statement =
+        "Just pick a territory on this chart, Sire, and let's make a plan for the season.";
+      break;
     case "Athaloc of Smyrna":
       statement =
-        '"Select a territory on the map, your Majesty, and we may procede."';
-      break; // Added missing break
-    default:
-      statement = '"Please select a territory to continue."'; // Added default case
+        "Select a territory on the map, your Majesty, and we may procede.";
       break;
   }
 
