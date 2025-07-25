@@ -150,7 +150,6 @@ export const GameDashboard = () => {
                   factionFaiths={gameState.factionFaiths}
                   onChangeFaith={gameState.handleChangeFaith}
                   setFactionLeaders={gameState.setFactionLeaders}
-                  isClickedOnMapYet={gameState.isClickedOnMapYet}
                 />
               </TabsContent>
             </Tabs>

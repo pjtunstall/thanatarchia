@@ -39,7 +39,6 @@ type ActionsPanelProps = {
     setLeaders: React.Dispatch<React.SetStateAction<Character[]>>
   ) => void;
   setFactionLeaders: React.Dispatch<React.SetStateAction<Character[]>>;
-  isClickedOnMapYet: boolean;
 };
 
 export function ActionsPanel({
@@ -53,7 +52,6 @@ export function ActionsPanel({
   factionFaiths,
   adviserIndex,
   territories,
-  isClickedOnMapYet,
   setScheduledAttacks,
   onReinforce,
   onUndoReinforce,
@@ -96,7 +94,6 @@ export function ActionsPanel({
               adviser={chroniclers[adviserIndex]}
               player={playerCharacter}
               playerFaction={playerFaction}
-              isClickedOnMapYet={isClickedOnMapYet}
             ></Help>
           )}
         </div>

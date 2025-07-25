@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import { Character, Faction, ChatEntry } from "@/types/gameTypes";
-import { Advice } from "@/components/game/help/Advice";
 import { HelpMenu } from "@/components/game/help/HelpMenu";
 import { HelpContent } from "@/components/game/help/HelpContent";
 import { Chat } from "./Chat";
@@ -10,25 +9,18 @@ type HelpProps = {
   player: Character;
   playerFaction: Faction;
   adviser: Character;
-  isClickedOnMapYet: boolean;
 };
 
-export function Help({
-  player,
-  playerFaction,
-  adviser,
-  isClickedOnMapYet,
-}: HelpProps) {
+export function Help({ player, playerFaction, adviser }: HelpProps) {
   const [topic, setTopic] = useState<string | null>(null);
   return (
     <div className="flex flex-col flex-1 min-h-0 pt-3 space-y-4">
       <div className="flex-1 min-h-0">
         {topic ? (
-          <HelpContent topic={topic} adviser={adviser} player={player} />
-        ) : isClickedOnMapYet ? (
-          <Advice
-            player={player}
+          <HelpContent
+            topic={topic}
             adviser={adviser}
+            player={player}
             playerFaction={playerFaction}
           />
         ) : (

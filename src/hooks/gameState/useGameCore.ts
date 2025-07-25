@@ -31,7 +31,6 @@ export const useGameCore = () => {
   const [factionFaiths, setFactionFaiths] = useState<string[]>(
     factions.map((f) => f.faith)
   );
-  const [isClickedOnMapYet, setIsClickedOnMapYet] = useState<boolean>(false);
 
   const handleChangeFaith = useCallback(
     (
@@ -98,9 +97,6 @@ export const useGameCore = () => {
   }, []);
 
   const handleTerritoryClick = useCallback((territoryName: string) => {
-    if (territoryName) {
-      setIsClickedOnMapYet(true);
-    }
     setSelectedTerritoryName((prev) =>
       prev === territoryName ? null : territoryName
     );
@@ -134,7 +130,6 @@ export const useGameCore = () => {
     stats,
     scheduledAttacks,
     factionFaiths,
-    isClickedOnMapYet,
 
     // Derived state
     factionTerritories,
@@ -156,7 +151,6 @@ export const useGameCore = () => {
     setScheduledAttacks,
     setFactionFaiths,
     handleChangeFaith,
-    setIsClickedOnMapYet,
   };
 };
 

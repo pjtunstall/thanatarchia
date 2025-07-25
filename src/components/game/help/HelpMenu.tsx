@@ -52,9 +52,4 @@ export function HelpMenu({ onSelectTopic }: HelpMenuProps) {
   );
 }
 
-const helpTopics = ["Thanatarchia", "Topic B"];
-const helpContent: Record<string, string> = {
-  Thanatarchia:
-    "The year is 499. In the West, the Roman Empire is a patchwork of barbarian successor states. In the East, it lives on as Byzantium, still a force to be reckoned with. Who will survive? Who will triumph? What even is triumph anyway?",
-  "Topic B": "Details about Topic B...",
-};
+const helpTopics = ["Thanatarchia", "Advice"];
