@@ -1,10 +1,9 @@
 import React from "react";
 
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+
 import { ScrollAreaWithFade } from "@/components/game/ScrollAreaWithFade";
 import { CharacterDialog } from "@/components/game/CharacterProfile";
-
 import { ChatEntry } from "@/types/gameTypes";
 
 export type ChatItemRenderingOptions = {
@@ -15,11 +14,20 @@ type ChatProps = {
   items: ChatEntry[];
   renderItem?: (item: ChatEntry, index: number) => React.ReactNode;
   options?: ChatItemRenderingOptions;
+  startScrolledToBottom?: boolean;
 };
 
-export function Chat({ items, renderItem, options }: ChatProps) {
+export function Chat({
+  items,
+  renderItem,
+  options,
+  startScrolledToBottom = false,
+}: ChatProps) {
   return (
-    <ScrollAreaWithFade height="h-full">
+    <ScrollAreaWithFade
+      height="h-full"
+      isScrolledToBottom={startScrolledToBottom}
+    >
       <div className="space-y-4 p-4 pb-8">
         {items.map((item, index) =>
           (renderItem ?? defaultRenderChatItem)(item, index, options)
@@ -29,14 +37,7 @@ export function Chat({ items, renderItem, options }: ChatProps) {
   );
 }
 
-/*************  ✨ Windsurf Command ⭐  *************/
-/**
- * The default function for rendering a single chat item.
- *
- * This function renders a chat item in the format:
- *
- * 
-/*******  fc811535-72ee-47af-8660-60b51b8ffb42  *******/ function defaultRenderChatItem(
+function defaultRenderChatItem(
   entry: ChatEntry,
   index: number,
   options?: ChatItemRenderingOptions

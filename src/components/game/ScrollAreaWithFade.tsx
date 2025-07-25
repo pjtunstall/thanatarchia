@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 type ScrollAreaWithFadeProps = {
@@ -6,6 +6,7 @@ type ScrollAreaWithFadeProps = {
   height: string;
   className?: string;
   fadeOffset?: string;
+  isScrolledToBottom?: boolean;
 };
 
 export function ScrollAreaWithFade({
@@ -13,13 +14,23 @@ export function ScrollAreaWithFade({
   height,
   className = "",
   fadeOffset = "16px",
+  isScrolledToBottom = false,
 }: ScrollAreaWithFadeProps) {
   const fadeHeight = "h-6";
   const contentPadding = "py-6";
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isScrolledToBottom && scrollRef.current) {
+      const el = scrollRef.current;
+      el.scrollTop = el.scrollHeight;
+    }
+  }, [isScrolledToBottom, children]);
 
   return (
     <div className={cn(`relative ${height}`, className)}>
       <div
+        ref={scrollRef}
         className="px-4 overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border"
         style={{
           height: `calc(100% - ${fadeOffset})`,
@@ -29,7 +40,6 @@ export function ScrollAreaWithFade({
         <div className={contentPadding}>{children}</div>
       </div>
 
-      {/* Top fade */}
       <div
         className={`pointer-events-none absolute top-0 left-0 right-0 ${fadeHeight} z-10`}
         style={{
@@ -38,7 +48,6 @@ export function ScrollAreaWithFade({
         }}
       />
 
-      {/* Bottom fade */}
       <div
         className={`pointer-events-none absolute left-0 right-0 ${fadeHeight} z-10`}
         style={{
