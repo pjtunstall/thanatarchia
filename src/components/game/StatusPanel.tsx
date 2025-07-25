@@ -32,8 +32,13 @@ export function StatusPanel({
   return (
     <Card className="h-full flex flex-col">
       <CardHeader>
-        <CardTitle className="text-lg">{playerFaction.formalName}</CardTitle>
-        <Badge style={{ backgroundColor: playerFaction.color }}>
+        <CardTitle className="text-lg mb-2">
+          {playerFaction.formalName}
+        </CardTitle>
+        <Badge
+          className="w-fit"
+          style={{ backgroundColor: playerFaction.color }}
+        >
           {playerFaction.type.charAt(0).toUpperCase() +
             playerFaction.type.slice(1)}
         </Badge>

@@ -59,18 +59,18 @@ export const battleChronicle = (
     case "John of Colchis":
       if (bias === "friendly") {
         if (success) {
-          return `"Our brave ${attackers} have saved ${territory} from the tyrany of the ${defenders}."`;
+          return `Our brave ${attackers} have saved ${territory} from the tyrany of the ${defenders}.`;
         } else {
-          return `"In spite of a heroic struggle, our gallant ${attackers} have yet to free ${territory} from ${defenders.slice(
+          return `In spite of a heroic struggle, our gallant ${attackers} have yet to free ${territory} from ${defenders.slice(
             0,
             -1
-          )} occupation."`;
+          )} occupation.`;
         }
       } else {
         if (success) {
-          return `"Like the wolf upon the fold, the treacherous ${attackers}, have fallen upon the ${defenders} with great slaughter in ${territory}."`;
+          return `Like the wolf upon the fold, the treacherous ${attackers}, have fallen upon the ${defenders} with great slaughter in ${territory}.`;
         } else {
-          return `"At this time, the ${attackers} made an unprovoked attack on the ${defenders} in ${territory}, but were driven back with dreadful losses."`;
+          return `At this time, the ${attackers} made an unprovoked attack on the ${defenders} in ${territory}, but were driven back with dreadful losses.`;
         }
       }
     case "Priscilla of Byzantium":
@@ -96,7 +96,7 @@ export const battleChronicle = (
         }
       } else {
         if (success) {
-          return `How tedious! The names of these uncouth tribes flow on like endless rain: their meaningless triumphs and defeats of equal insignificance. I run my finger over the parchment's roughness as the dying light briefly catches the page. I suppose we must do our duty and record here that the ${attackers} took ${territory} from the ${defenders}.`;
+          return `How tedious! The names of these uncouth factions flow on like endless rain: their meaningless triumphs and defeats of equal insignificance. I run my finger over the parchment's roughness as the dying light briefly catches the page. I suppose we must do our duty and record here that the ${attackers} took ${territory} from the ${defenders}.`;
         } else {
           return `The glimmer of a smile almost touches one's face. News reached us today that the ${attackers} failed to wrest ${territory} from the ${defenders}. But it is a cheap pleasure. I might swap the names or swap them back, for all the difference it would make to history.`;
         }
@@ -115,7 +115,7 @@ export const battleChronicle = (
           return `A reckless ${attackers.slice(
             0,
             -1
-          )} incursion into ${territory} has been repulsed by the ${defenders}. Indeed lack of faith begets folly: the dull wits of the sinners finding a natural counterpart in their doltish strategems.`;
+          )} incursion into ${territory} has been repulsed by the ${defenders}. Indeed lack of faith begets folly: the dull wit that begets sin finding a natural counterpart in such doltish strategems.`;
         }
       }
   }

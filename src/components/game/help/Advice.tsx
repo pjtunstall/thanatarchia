@@ -54,5 +54,5 @@ function randomRejoinder(adviserName: string, playerFaction: Faction): string {
   if (r < 0.7) return `Come on, ${adviserName}, you can do better than that.`;
   if (r < 0.8) return `What would I do without you, ${adviserName}?`;
   if (r < 0.9) return "What will be, will be.";
-  return `Is that a fact, ${adviserName}?`;
+  return `Is that so, ${adviserName}?`;
 }
