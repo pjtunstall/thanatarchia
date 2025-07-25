@@ -126,7 +126,7 @@ export function SelectedTerritoryInfo({
 
   return (
     <div className="flex flex-col h-full p-4">
-      {/* Your scrollable content */}
+      {/* Scrollable content: consider putting this in a ScrollAreaWithFade */}
       <div className="flex-1 overflow-auto border border-muted rounded p-2 mb-2 bg-muted/20 text-sm">
         {/* Title Row */}
         <div className="flex items-center justify-between text-sm mb-8 mt-4">
