@@ -86,7 +86,7 @@ export const useGameState = () => {
   }, [gameCore.resetGame, chronicles.resetChronicles]);
 
   const handleEndTurn = useCallback(() => {
-    handleScheduledAttacks(chronicles.adviserIndex);
+    handleScheduledAttacks(chronicles.adviserIndex, gameCore.currentTurn);
     generateResources();
     executeAITurn();
     gameCore.setCurrentTurn((prev) => prev + 1);
@@ -96,6 +96,7 @@ export const useGameState = () => {
     handleScheduledAttacks,
     generateResources,
     executeAITurn,
+    gameCore.currentTurn,
     gameCore.setCurrentTurn,
     gameCore.setSelectedTerritoryName,
     checkGameStatus,

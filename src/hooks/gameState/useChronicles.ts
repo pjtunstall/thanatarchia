@@ -23,7 +23,7 @@ export function useChronicles(currentTurn: number) {
   };
 
   const addChronicleEntry = useCallback(
-    (author: Character, statement: string, turn) => {
+    (author: Character, statement: string, turn: number) => {
       const newEntry: ChatEntry = {
         author,
         date: getDate(turn),
@@ -38,7 +38,6 @@ export function useChronicles(currentTurn: number) {
     (status: "victory" | "defeat", turn: number) => {
       const finalEntries: ChatEntry[] = chroniclers.map((chronicler, i) => {
         const author = chronicler;
-        const tone = i === adviserIndex ? "friendly" : "hostile";
         const options = finalChronicleStatements[author.name]?.[status];
         const statement =
           options?.[Math.floor(Math.random() * options.length)] ??
@@ -46,7 +45,7 @@ export function useChronicles(currentTurn: number) {
 
         return {
           author,
-          date: getDate(turn),
+          date: getDate(currentTurn),
           statement,
         };
       });

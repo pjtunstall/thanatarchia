@@ -32,7 +32,7 @@ export function StatusPanel({
   return (
     <Card className="h-full flex flex-col">
       <CardHeader>
-        <CardTitle className="text-lg mb-2">
+        <CardTitle className="text-lg mb-1">
           {playerFaction.formalName}
         </CardTitle>
         <Badge
@@ -77,7 +77,7 @@ export function StatusPanel({
                 : playerTerritories.join(", ").replace(/, $/, "")}
             </p>
             <div>
-              <p className="text-sm font-semibold mb-1">
+              <p className="text-sm font-semibold mb-2">
                 Available for Marriage:
               </p>
               {playerFaction.relatives.map((relative, index) => (

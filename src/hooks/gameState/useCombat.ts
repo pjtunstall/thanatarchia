@@ -24,7 +24,7 @@ type UseCombatProps = {
   addChronicleEntry: (
     author: Character,
     statement: string,
-    date: string
+    turn: number
   ) => void;
   success: boolean | null;
   setSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
@@ -101,7 +101,7 @@ export const useCombat = ({
   );
 
   const handleScheduledAttacks = useCallback(
-    (adviserIndex: number) => {
+    (adviserIndex: number, turn: number) => {
       const groupedAttacks = groupScheduledAttacks(scheduledAttacks);
       const entries: BattleReport[] = [];
       let losses = 0;
@@ -185,7 +185,7 @@ export const useCombat = ({
             losers,
             to
           );
-          addChronicleEntry(author, chronicleEntryStatement, getDate(turn));
+          addChronicleEntry(author, chronicleEntryStatement, turn);
           if (bias === "friendly") {
             entries.push({
               author,
