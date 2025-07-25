@@ -63,17 +63,6 @@ export type GameStatus = "playing" | "victory" | "defeat";
 
 export type Gender = "male" | "female";
 
-export type LeaderInfo = {
-  name: string;
-  image: string;
-};
-
-export type GenderVariants = {
-  [factionName: string]: {
-    [gender in Gender]: LeaderInfo;
-  };
-};
-
 export type AttackOrder = {
   from: string;
   to: string;

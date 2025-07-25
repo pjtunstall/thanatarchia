@@ -82,6 +82,7 @@ export const useCombat = ({
       const chronicler = chroniclers[r];
       const bias = r === adviserIndex ? "friendly" : "hostile";
 
+      // // Add chronicle entrie sin new style along the lines of:
       // addChatEntry(
       //   Math.random() > 0.3
       //     ? "More savage warriors have been enlisted to bolster the barbarian horde, no doubt lured by promises of plunder."
@@ -373,10 +374,7 @@ export const useCombat = ({
           })
         );
 
-        // addChatEntry(
-        //   `The barbarians have lost ${toTerritory.name} to enemy forces!`,
-        //   "hostile"
-        // );
+        // Add chronicle entries along the lines of `The barbarians have lost ${toTerritory.name} to enemy forces!`.
       } else {
         updateTerritories((prev) =>
           prev.map((t) =>
