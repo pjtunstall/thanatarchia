@@ -218,9 +218,10 @@ const BattleReportComponent: React.FC<{
           <p
             className="text-sm italic font-serif leading-relaxed"
             style={{ whiteSpace: "pre-wrap" }}
-          >
-            {chronicle}
-          </p>
+            dangerouslySetInnerHTML={{
+              __html: `"${chronicle}"`,
+            }}
+          ></p>
           <p className="h-4" />
           <p
             className="text-sm font-serif leading-relaxed text-gray-500"

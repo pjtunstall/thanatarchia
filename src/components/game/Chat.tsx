@@ -26,7 +26,7 @@ export function Chat({
   return (
     <ScrollAreaWithFade
       height="h-full"
-      isScrolledToBottom={startScrolledToBottom}
+      startScrolledToBottom={startScrolledToBottom}
     >
       <div className="space-y-4 p-4 pb-8">
         {items.map((item, index) =>
@@ -60,9 +60,12 @@ function defaultRenderChatItem(
           )}
         </div>
       </div>
-      <p className="text-sm italic font-serif leading-relaxed">
-        "{entry.statement}"
-      </p>
+      <p
+        className="text-sm italic font-serif leading-relaxed"
+        dangerouslySetInnerHTML={{
+          __html: `"${entry.statement}"`,
+        }}
+      />
     </div>
   );
 }

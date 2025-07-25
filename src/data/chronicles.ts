@@ -37,6 +37,11 @@ export const chroniclers: Character[] = [
   },
 ];
 
+// Unitalic bold
+function uninitialBold(text: string) {
+  return `<span style="font-style: normal;"><strong>${text}</strong></span>`;
+}
+
 export const battleChronicle = (
   chronicler: Character,
   bias: string,
@@ -48,11 +53,11 @@ export const battleChronicle = (
   let attackers: string;
   let defenders: string;
   if (success) {
-    attackers = winners;
-    defenders = losers;
+    attackers = uninitialBold(winners);
+    defenders = uninitialBold(losers);
   } else {
-    defenders = winners;
-    attackers = losers;
+    defenders = uninitialBold(winners);
+    attackers = uninitialBold(losers);
   }
 
   switch (chronicler.name) {

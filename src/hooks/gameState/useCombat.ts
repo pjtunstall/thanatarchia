@@ -8,7 +8,6 @@ import {
   BattleReport,
 } from "@/types/gameTypes";
 import { randomItem } from "@/lib/utils";
-import { getDate } from "@/lib/time";
 import { costOfRecruiting, troopUnit } from "@/data/gameData";
 import { chroniclers, battleChronicle } from "@/data/chronicles";
 
