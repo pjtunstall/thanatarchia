@@ -91,6 +91,11 @@ export const useGameState = () => {
     executeAITurn();
     gameCore.setCurrentTurn((prev) => prev + 1);
     gameCore.setSelectedTerritoryName(null);
+    gameCore.updateTerritories((prev) => {
+      return prev.map((t) => {
+        return { ...t, spiedOn: false };
+      });
+    });
     checkGameStatus();
   }, [
     handleScheduledAttacks,
