@@ -62,11 +62,14 @@ export const useGameState = () => {
   const checkGameStatus = useCallback(() => {
     const playerTerritories =
       gameCore.factionTerritories[gameCore.playerIndex].length;
+    const playerTroops = gameCore.factionTroops.reduce(
+      (sum, item) => sum + item
+    );
     if (playerTerritories >= 9) {
       gameCore.setGameStatus("victory");
       chronicles.generateFinalChronicles("victory", gameCore.currentTurn);
       return "victory";
-    } else if (playerTerritories === 0) {
+    } else if (playerTerritories === 0 || playerTroops < 1) {
       gameCore.setGameStatus("defeat");
       chronicles.generateFinalChronicles("defeat", gameCore.currentTurn);
       return "defeat";

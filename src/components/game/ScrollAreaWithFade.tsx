@@ -6,7 +6,7 @@ type ScrollAreaWithFadeProps = {
   height: string;
   className?: string;
   fadeOffset?: string;
-  isScrolledToBottom?: boolean;
+  startScrolledToBottom?: boolean;
 };
 
 export function ScrollAreaWithFade({
@@ -14,18 +14,18 @@ export function ScrollAreaWithFade({
   height,
   className = "",
   fadeOffset = "16px",
-  isScrolledToBottom = false,
+  startScrolledToBottom = false,
 }: ScrollAreaWithFadeProps) {
   const fadeHeight = "h-6";
   const contentPadding = "py-6";
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (isScrolledToBottom && scrollRef.current) {
+    if (startScrolledToBottom && scrollRef.current) {
       const el = scrollRef.current;
       el.scrollTop = el.scrollHeight;
     }
-  }, [isScrolledToBottom, children]);
+  }, [startScrolledToBottom, children]);
 
   return (
     <div className={cn(`relative ${height}`, className)}>
