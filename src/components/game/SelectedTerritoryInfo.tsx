@@ -32,7 +32,7 @@ type SelectedTerritoryInfoProps = {
   scheduledAttacks: AttackOrder[];
   factionLeaders: Character[];
   onRecruit: (territoryName: string) => void;
-  onSpy: (string) => void;
+  onSpy: (territoryName: string) => void;
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
   onReinforce: (from: string, to: string) => void;
   onUndoReinforce: (from: string, to: string) => void;
@@ -128,6 +128,7 @@ export function SelectedTerritoryInfo({
   return (
     <div className="flex flex-col h-full p-4">
       <ScrollAreaWithFade
+        fadeOffset="0px"
         height="h-full"
         className="mb-2 rounded border border-muted bg-muted/30 text-sm"
       >

@@ -10,7 +10,7 @@ type TreasuryActionsProps = {
   playerTreasure: number;
   territoryName: string | null;
   onRecruit: (territoryName: string) => void;
-  onSpy: (territoryId: string) => void;
+  onSpy: (territoryName: string) => void;
 };
 
 export const TreasuryActions: React.FC<TreasuryActionsProps> = ({

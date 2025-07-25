@@ -5,14 +5,15 @@ type ScrollAreaWithFadeProps = {
   children: ReactNode;
   height: string;
   className?: string;
+  fadeOffset?: string;
 };
 
 export function ScrollAreaWithFade({
   children,
   height,
   className = "",
+  fadeOffset = "16px",
 }: ScrollAreaWithFadeProps) {
-  const fadeOffset = "16px";
   const fadeHeight = "h-6";
   const contentPadding = "py-6";
 
@@ -22,7 +23,7 @@ export function ScrollAreaWithFade({
         className="px-4 overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border"
         style={{
           height: `calc(100% - ${fadeOffset})`,
-          overscrollBehavior: "auto", // Enable scroll chaining
+          overscrollBehavior: "auto",
         }}
       >
         <div className={contentPadding}>{children}</div>

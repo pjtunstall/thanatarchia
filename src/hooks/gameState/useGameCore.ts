@@ -97,16 +97,28 @@ export const useGameCore = () => {
     setPlayerIndex(randomPlayerIndex(freshFactionTerritories));
   }, []);
 
-  const handleTerritoryClick = useCallback((territoryId: string) => {
-    if (territoryId) {
+  const handleTerritoryClick = useCallback((territoryName: string) => {
+    if (territoryName) {
       setIsClickedOnMapYet(true);
     }
     setSelectedTerritoryName((prev) =>
-      prev === territoryId ? null : territoryId
+      prev === territoryName ? null : territoryName
     );
   }, []);
 
-  const handleSpy = useCallback((targetTerritory: string) => {}, []);
+  const handleSpy = useCallback(
+    (territoryName: string) => {
+      const territory = territories.find((t) => t.name === territoryName);
+      if (territory) {
+        const newTerritory = { ...territory };
+        newTerritory.spiedOn = true;
+        updateTerritories((prev) =>
+          prev.map((t) => (t.name === territoryName ? newTerritory : t))
+        );
+      }
+    },
+    [territories, updateTerritories]
+  );
 
   return {
     // State
