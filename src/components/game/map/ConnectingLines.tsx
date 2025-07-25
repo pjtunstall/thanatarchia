@@ -3,12 +3,12 @@ import { adjacentTerritories } from "@/data/gameData";
 
 type ConnectingLinesProps = {
   territories: Territory[];
-  selectedTerritory: string;
+  selectedTerritoryName: string;
 };
 
 export function ConnectingLines({
   territories,
-  selectedTerritory,
+  selectedTerritoryName,
 }: ConnectingLinesProps) {
   return (
     <svg
@@ -47,9 +47,11 @@ export function ConnectingLines({
         </filter>
       </defs>
 
-      {selectedTerritory &&
-        adjacentTerritories[selectedTerritory]?.map((adj) => {
-          const from = territories.find((t) => t.name === selectedTerritory);
+      {selectedTerritoryName &&
+        adjacentTerritories[selectedTerritoryName]?.map((adj) => {
+          const from = territories.find(
+            (t) => t.name === selectedTerritoryName
+          );
           const to = territories.find((t) => t.name === adj);
           if (!from || !to) return null;
 

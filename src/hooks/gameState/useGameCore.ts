@@ -11,9 +11,9 @@ import { chroniclers } from "@/data/chronicles";
 
 export const useGameCore = () => {
   const [currentTurn, setCurrentTurn] = useState(1);
-  const [selectedTerritory, setSelectedTerritory] = useState<string | null>(
-    null
-  );
+  const [selectedTerritoryName, setSelectedTerritoryName] = useState<
+    string | null
+  >(null);
   const [gameStatus, setGameStatus] = useState<GameStatus>("playing");
   const [territories, setTerritories] =
     useState<Territory[]>(initialTerritories);
@@ -91,7 +91,7 @@ export const useGameCore = () => {
 
     setGameStatus("playing");
     setCurrentTurn(1);
-    setSelectedTerritory(null);
+    setSelectedTerritoryName(null);
     setFactionTreasures(factions.map((f) => f.treasure));
     setTerritories(freshTerritories);
     setPlayerIndex(randomPlayerIndex(freshFactionTerritories));
@@ -101,7 +101,9 @@ export const useGameCore = () => {
     if (territoryId) {
       setIsClickedOnMapYet(true);
     }
-    setSelectedTerritory((prev) => (prev === territoryId ? null : territoryId));
+    setSelectedTerritoryName((prev) =>
+      prev === territoryId ? null : territoryId
+    );
   }, []);
 
   const handleSpy = useCallback((targetTerritory: string) => {}, []);
@@ -109,7 +111,7 @@ export const useGameCore = () => {
   return {
     // State
     currentTurn,
-    selectedTerritory,
+    selectedTerritoryName,
     gameStatus,
     territories,
     factionTreasures,
@@ -127,7 +129,7 @@ export const useGameCore = () => {
     factionTroops,
 
     // Actions
-    setSelectedTerritory,
+    setSelectedTerritoryName,
     setCurrentTurn,
     setFactionTreasures,
     updateTerritories,

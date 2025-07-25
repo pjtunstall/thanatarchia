@@ -30,7 +30,7 @@ type SelectedTerritoryInfoProps = {
   playerTreasure: number;
   scheduledAttacks: AttackOrder[];
   factionLeaders: Character[];
-  onRecruit: () => void;
+  onRecruit: (territoryName: string) => void;
   onSpy: (string) => void;
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
   onReinforce: (from: string, to: string) => void;

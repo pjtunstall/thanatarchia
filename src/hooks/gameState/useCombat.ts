@@ -7,7 +7,9 @@ import {
   AttackOrder,
   BattleReport,
 } from "@/types/gameTypes";
-import { costOfRecruiting } from "@/data/gameData";
+import { randomItem } from "@/lib/utils";
+import { getDate } from "@/lib/time";
+import { costOfRecruiting, troopUnit } from "@/data/gameData";
 import { chroniclers, battleChronicle } from "@/data/chronicles";
 
 type UseCombatProps = {
@@ -51,48 +53,52 @@ export const useCombat = ({
   adviserIndex,
   turn,
 }: UseCombatProps) => {
-  const handleRecruit = useCallback(() => {
-    const playerTreasury = factionTreasures[playerIndex];
-    if (playerTreasury < costOfRecruiting || !selectedTerritoryName) return;
-    const selectedTerritory = territories.find(
-      (t) => t.name === selectedTerritoryName
-    );
-    if (!selectedTerritory) return;
-    const factionName = factions[playerIndex].name;
-    updateTerritories((prev) =>
-      prev
-        .filter((t) => t.name !== selectedTerritoryName)
-        .concat({
-          ...selectedTerritory,
-          troops: selectedTerritory.troops + 500,
-        })
-    );
+  const handleRecruit = useCallback(
+    (selectedTerritoryName) => {
+      const playerTreasury = factionTreasures[playerIndex];
+      if (playerTreasury < costOfRecruiting) return;
+      const selectedTerritory = territories.find(
+        (t) => t.name === selectedTerritoryName
+      );
+      if (!selectedTerritory) return;
 
-    setFactionTreasures((prev) => {
-      const updated = [...prev];
-      updated[playerIndex] -= costOfRecruiting;
-      return updated;
-    });
+      const factionName = factions[playerIndex].name;
+      updateTerritories((prev) =>
+        prev
+          .filter((t) => t.name !== selectedTerritoryName)
+          .concat({
+            ...selectedTerritory,
+            troops: selectedTerritory.troops + troopUnit,
+          })
+      );
 
-    const r = Math.floor(Math.random() * 4);
-    const chronicler = chroniclers[r];
-    const bias = r === adviserIndex ? "friendly" : "hostile";
+      setFactionTreasures((prev) => {
+        const updated = [...prev];
+        updated[playerIndex] -= costOfRecruiting;
+        return updated;
+      });
 
-    // addChatEntry(
-    //   Math.random() > 0.3
-    //     ? "More savage warriors have been enlisted to bolster the barbarian horde, no doubt lured by promises of plunder."
-    //     : "Our wise leader has strengthened our noble forces with fresh recruits, ready to defend our sacred homeland.",
-    //   Math.random() > 0.3 ? "hostile" : "friendly"
-    // );
-  }, [
-    factionTreasures,
-    factionTerritories,
-    factions,
-    playerIndex,
-    updateTerritories,
-    setFactionTreasures,
-    addChronicleEntry,
-  ]);
+      const r = Math.floor(Math.random() * 4);
+      const chronicler = chroniclers[r];
+      const bias = r === adviserIndex ? "friendly" : "hostile";
+
+      // addChatEntry(
+      //   Math.random() > 0.3
+      //     ? "More savage warriors have been enlisted to bolster the barbarian horde, no doubt lured by promises of plunder."
+      //     : "Our wise leader has strengthened our noble forces with fresh recruits, ready to defend our sacred homeland.",
+      //   Math.random() > 0.3 ? "hostile" : "friendly"
+      // );
+    },
+    [
+      factionTreasures,
+      factionTerritories,
+      factions,
+      playerIndex,
+      updateTerritories,
+      setFactionTreasures,
+      addChronicleEntry,
+    ]
+  );
 
   const handleScheduledAttacks = useCallback(
     (adviserIndex: number) => {
@@ -163,32 +169,36 @@ export const useCombat = ({
           );
         }
 
-        const randomIndex = Math.floor(Math.random() * chroniclers.length);
-        const author = chroniclers[randomIndex];
-        const bias = randomIndex === adviserIndex ? "friendly" : "hostile";
-        const winners = victory
-          ? factions[playerIndex].name
-          : toTerritory.owner;
-        const losers = victory ? toTerritory.owner : factions[playerIndex].name;
-        const chronicleMessage = battleChronicle(
-          author,
-          bias,
-          victory,
-          winners,
-          losers,
-          to
-        );
-
-        entries.push({
-          author,
-          message: chronicleMessage,
-          stats: `Attack strength: ${totalTroops}\nDefense strength: ${toTerritory.troops}\nLosses: ${losses}`,
-          success: victory,
+        chroniclers.forEach((author, index) => {
+          const bias = index === adviserIndex ? "friendly" : "hostile";
+          const winners = victory
+            ? factions[playerIndex].name
+            : toTerritory.owner;
+          const losers = victory
+            ? toTerritory.owner
+            : factions[playerIndex].name;
+          const chronicleEntryStatement = battleChronicle(
+            author,
+            bias,
+            victory,
+            winners,
+            losers,
+            to
+          );
+          addChronicleEntry(author, chronicleEntryStatement, getDate(turn));
+          if (bias === "friendly") {
+            entries.push({
+              author,
+              message: chronicleEntryStatement,
+              stats: `Attack strength: ${totalTroops}\nDefense strength: ${toTerritory.troops}\nLosses: ${losses}`,
+              success: victory,
+            });
+          }
         });
       });
 
       setScheduledAttacks([]);
-      showChroniclesSequentially(entries, enqueueBattleMessage);
+      enqueueBattleReports(entries, enqueueBattleMessage);
     },
     [
       scheduledAttacks,
@@ -228,7 +238,7 @@ export const useCombat = ({
       // ...and abort reinforcement if all troops are assigned
       if (availableTroops < 1) return;
 
-      const reinforcements = Math.min(500, availableTroops);
+      const reinforcements = Math.min(troopUnit, availableTroops);
 
       updateTerritories((prev) =>
         prev.map((t) => {
@@ -268,7 +278,7 @@ export const useCombat = ({
       )
         return;
 
-      const troopsToMoveBack = Math.min(500, fromTerritory.troops);
+      const troopsToMoveBack = Math.min(troopUnit, fromTerritory.troops);
 
       if (troopsToMoveBack < 1) return;
 
@@ -303,15 +313,12 @@ export const useCombat = ({
     (factionIndex: number) => {
       if (factionTreasures[factionIndex] < costOfRecruiting) return;
 
-      const recruitsPerTerritory = Math.round(
-        500 / factionTerritories[factionIndex].length
-      );
+      const randomTerritoryName = randomItem(factionTerritories[factionIndex]);
 
       updateTerritories((prevTerritories) => {
-        const factionName = factions[factionIndex].name;
         return prevTerritories.map((t) => {
-          if (t.owner === factionName) {
-            return { ...t, troops: t.troops! + recruitsPerTerritory };
+          if (t.name === randomTerritoryName) {
+            return { ...t, troops: t.troops! + troopUnit };
           }
           return t;
         });
@@ -477,7 +484,7 @@ function groupScheduledAttacks(scheduledAttacks: AttackOrder[]): AttackGroup[] {
   return Object.values(grouped);
 }
 
-function showChroniclesSequentially(
+function enqueueBattleReports(
   entries: BattleReport[],
   enqueueBattleMessage: (message: BattleReport) => void
 ) {

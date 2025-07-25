@@ -18,11 +18,11 @@ type ActionsPanelProps = {
   factionTreasures: number[];
   factionLeaders: Character[];
   territories: Territory[];
-  selectedTerritory: string | null;
+  selectedTerritoryName: string | null;
   scheduledAttacks: AttackOrder[];
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
   onEndTurn: () => void;
-  onRecruit: () => void;
+  onRecruit: (territoryName: string) => void;
   onSpy: (territoryId: string) => void;
   onReinforce: (fromTerritoryId: string, toTerritoryId: string) => void;
   onUndoReinforce: (fromTerritoryName: string, toTerritoryName: string) => void;
@@ -48,7 +48,7 @@ export function ActionsPanel({
   playerIndex,
   factionTreasures,
   factionLeaders,
-  selectedTerritory,
+  selectedTerritoryName,
   scheduledAttacks,
   factionFaiths,
   adviserIndex,
@@ -76,10 +76,10 @@ export function ActionsPanel({
             setFactionLeaders={setFactionLeaders}
           />
 
-          {selectedTerritory ? (
+          {selectedTerritoryName ? (
             <SelectedTerritoryInfo
               territories={territories}
-              territoryName={selectedTerritory}
+              territoryName={selectedTerritoryName}
               factionLeaders={factionLeaders}
               playerFactionName={factions[playerIndex].name}
               playerTreasure={factionTreasures[playerIndex]}

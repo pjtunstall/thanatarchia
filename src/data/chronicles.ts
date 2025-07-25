@@ -61,7 +61,7 @@ export const battleChronicle = (
         if (success) {
           return `"Our brave ${attackers} have saved ${territory} from the tyrany of the ${defenders}."`;
         } else {
-          return `"In spite of a heroic struggle, our gallant ${attackers} yet to free ${territory} from ${defenders.slice(
+          return `"In spite of a heroic struggle, our gallant ${attackers} have yet to free ${territory} from ${defenders.slice(
             0,
             -1
           )} occupation."`;

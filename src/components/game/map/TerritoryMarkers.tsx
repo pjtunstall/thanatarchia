@@ -1,12 +1,12 @@
 import { Territory } from "@/types/gameTypes";
 
 type TerritoryMarkersProps = {
-  selectedTerritory: string;
+  selectedTerritoryName: string;
   territories: Territory[];
 };
 
 export function TerritoryMarkers({
-  selectedTerritory,
+  selectedTerritoryName,
   territories,
   factionLookup,
   onTerritoryClick,
@@ -19,7 +19,7 @@ export function TerritoryMarkers({
         <div
           key={territory.name}
           className={`absolute cursor-pointer transition-transform duration-200 rounded-full ${
-            selectedTerritory === territory.name
+            selectedTerritoryName === territory.name
               ? "ring-2 ring-red-400 ring-offset-1 drop-shadow-[0_0_6px_rgba(250,204,21,0.7)]"
               : ""
           }`}

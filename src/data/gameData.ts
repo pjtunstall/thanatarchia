@@ -10,3 +10,4 @@ export const adjacentTerritories = neighbors;
 
 export const costOfSpying = 25;
 export const costOfRecruiting = 50;
+export const troopUnit = 500;

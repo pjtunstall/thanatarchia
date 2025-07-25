@@ -59,7 +59,7 @@ export const GameDashboard = () => {
           <div className="col-span-7 h-full">
             <GameMap
               territories={gameState.territories}
-              selectedTerritory={gameState.selectedTerritory}
+              selectedTerritoryName={gameState.selectedTerritoryName}
               currentTurn={gameState.currentTurn}
               factions={factions}
               factionLeaders={gameState.factionLeaders}
@@ -112,7 +112,6 @@ export const GameDashboard = () => {
                     gameState.factionTerritories[gameState.playerIndex]
                   }
                   playerTroops={gameState.factionTroops[gameState.playerIndex]}
-                  selectedTerritory={gameState.selectedTerritory}
                   scheduledAttacks={gameState.scheduledAttacks}
                   adviserIndex={gameState.adviserIndex}
                   factionTreasures={gameState.factionTreasures}
@@ -135,7 +134,7 @@ export const GameDashboard = () => {
                   factionTreasures={gameState.factionTreasures}
                   factionLeaders={gameState.factionLeaders}
                   territories={gameState.territories}
-                  selectedTerritory={gameState.selectedTerritory}
+                  selectedTerritoryName={gameState.selectedTerritoryName}
                   scheduledAttacks={gameState.scheduledAttacks}
                   setScheduledAttacks={gameState.setScheduledAttacks}
                   onEndTurn={gameState.handleEndTurn}

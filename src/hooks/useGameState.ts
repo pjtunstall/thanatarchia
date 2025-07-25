@@ -34,7 +34,7 @@ export const useGameState = () => {
     scheduledAttacks: gameCore.scheduledAttacks,
     setScheduledAttacks: gameCore.setScheduledAttacks,
     enqueueBattleMessage: chronicles.enqueueBattleMessage,
-    selectedTerritoryName: gameCore.selectedTerritory,
+    selectedTerritoryName: gameCore.selectedTerritoryName,
     adviserIndex: chronicles.adviserIndex,
     turn: gameCore.currentTurn,
   });
@@ -90,14 +90,14 @@ export const useGameState = () => {
     generateResources();
     executeAITurn();
     gameCore.setCurrentTurn((prev) => prev + 1);
-    gameCore.setSelectedTerritory(null);
+    gameCore.setSelectedTerritoryName(null);
     checkGameStatus();
   }, [
     handleScheduledAttacks,
     generateResources,
     executeAITurn,
     gameCore.setCurrentTurn,
-    gameCore.setSelectedTerritory,
+    gameCore.setSelectedTerritoryName,
     checkGameStatus,
   ]);
 

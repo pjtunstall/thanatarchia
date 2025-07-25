@@ -9,7 +9,7 @@ type TreasuryActionsProps = {
   isPlayerTerritory: boolean;
   playerTreasure: number;
   territoryName: string | null;
-  onRecruit: () => void;
+  onRecruit: (territoryName: string) => void;
   onSpy: (territoryId: string) => void;
 };
 
@@ -25,7 +25,7 @@ export const TreasuryActions: React.FC<TreasuryActionsProps> = ({
     <div className="relative group min-w-0">
       <Button
         className="w-full"
-        onClick={onRecruit}
+        onClick={() => onRecruit(territoryName)}
         variant="outline"
         size="sm"
         disabled={!isPlayerTerritory || playerTreasure < costOfRecruiting}

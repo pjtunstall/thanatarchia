@@ -11,7 +11,6 @@ type StatusPanelProps = {
   playerCharacter: Character;
   playerTerritories: string[];
   playerTroops: number;
-  selectedTerritory: string | null;
   scheduledAttacks: AttackOrder[];
   adviserIndex: number;
   factionTreasures: number[];
@@ -27,7 +26,6 @@ export function StatusPanel({
   factionTreasures,
   playerIndex,
   factionFaiths,
-  adviserIndex,
 }: StatusPanelProps) {
   const playerFaith = factionFaiths[playerIndex];
 

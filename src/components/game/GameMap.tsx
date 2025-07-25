@@ -18,7 +18,7 @@ import { TerritoryMarkers } from "@/components/game/map/TerritoryMarkers";
 
 type GameMapProps = {
   territories: Territory[];
-  selectedTerritory: string | null;
+  selectedTerritoryName: string | null;
   currentTurn: number;
   factions: Faction[];
   factionLeaders: Character[];
@@ -32,7 +32,7 @@ type GameMapProps = {
 
 export function GameMap({
   territories,
-  selectedTerritory,
+  selectedTerritoryName,
   currentTurn,
   factions,
   factionLeaders,
@@ -98,14 +98,14 @@ export function GameMap({
           <CompassRose />
 
           <ConnectingLines
-            selectedTerritory={selectedTerritory}
+            selectedTerritoryName={selectedTerritoryName}
             territories={territories}
           ></ConnectingLines>
 
           <TerritoryMarkers
             factionLookup={factionLookup}
             territories={territories}
-            selectedTerritory={selectedTerritory}
+            selectedTerritoryName={selectedTerritoryName}
             onTerritoryClick={onTerritoryClick}
             isUnderAttack={isUnderAttack}
             scheduledAttacks={scheduledAttacks}
