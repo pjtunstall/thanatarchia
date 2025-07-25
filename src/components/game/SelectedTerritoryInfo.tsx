@@ -19,6 +19,7 @@ import { Badge } from "@/components/ui/badge";
 
 import { AttackOrder, Territory, Character } from "@/types/gameTypes";
 import { factions } from "@/data/gameData";
+import { ScrollAreaWithFade } from "@/components/game/ScrollAreaWithFade";
 import { neighbors } from "@/data/territories";
 import { FactionDetails } from "@/components/game/FactionDetails";
 import { TreasuryActions } from "@/components/game/actions/TreasuryActions";
@@ -126,8 +127,10 @@ export function SelectedTerritoryInfo({
 
   return (
     <div className="flex flex-col h-full p-4">
-      {/* Scrollable content: consider putting this in a ScrollAreaWithFade */}
-      <div className="flex-1 overflow-auto border border-muted rounded p-2 mb-2 bg-muted/20 text-sm">
+      <ScrollAreaWithFade
+        height="h-full"
+        className="mb-2 rounded border border-muted bg-muted/30 text-sm"
+      >
         {/* Title Row */}
         <div className="flex items-center justify-between text-sm mb-8 mt-4">
           <div className="flex items-center gap-4">
@@ -226,7 +229,7 @@ export function SelectedTerritoryInfo({
             )}
           </div>
         )}
-      </div>
+      </ScrollAreaWithFade>
     </div>
   );
 }

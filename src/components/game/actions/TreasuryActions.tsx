@@ -33,7 +33,7 @@ export const TreasuryActions: React.FC<TreasuryActionsProps> = ({
         <Users className="w-3 h-3 mr-1" />
         Recruit
       </Button>
-      <span className="absolute left-1/2 translate-x-1/2 bottom-full mb-1 text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+      <span className="absolute left-0 bottom-full mb-1 text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
         ({costOfRecruiting} solidi)
       </span>
     </div>
@@ -53,7 +53,7 @@ export const TreasuryActions: React.FC<TreasuryActionsProps> = ({
         <Eye className="w-3 h-3 mr-1" />
         Spy
       </Button>
-      <span className="absolute left-1/2 translate-x-1/2 bottom-full mb-1 text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+      <span className="absolute left-0 bottom-full mb-1 text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
         ({costOfSpying} solidi)
       </span>
     </div>

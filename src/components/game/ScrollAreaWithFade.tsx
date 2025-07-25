@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-interface ScrollAreaWithFadeProps {
+type ScrollAreaWithFadeProps = {
   children: ReactNode;
   height: string;
   className?: string;
-}
+};
 
 export function ScrollAreaWithFade({
   children,
@@ -17,15 +17,9 @@ export function ScrollAreaWithFade({
   const contentPadding = "py-6";
 
   return (
-    <div
-      className={cn(
-        `relative ${height} [background-color:hsl(var(--card))]`,
-        className
-      )}
-    >
-      {/* Native scrollable div instead of ScrollArea */}
+    <div className={cn(`relative ${height}`, className)}>
       <div
-        className="pr-4 overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border"
+        className="px-4 overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border"
         style={{
           height: `calc(100% - ${fadeOffset})`,
           overscrollBehavior: "auto", // Enable scroll chaining
