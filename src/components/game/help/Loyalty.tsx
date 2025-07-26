@@ -70,7 +70,7 @@ function chat(adviser: Character, player: Character): ChatEntry[] {
       return [
         {
           author: adviser,
-          statement: `Certainly, Sire, you've come to the right person to ask about Loyalty. Loyalty is one of the Four Principle Virtues and She also one of the Seven Indomitable Graces. The Loyalty of a ruler to ${
+          statement: `Certainly, Sire, you've come to the right person to ask about Loyalty. Loyalty is one of the Four Indomitable Virtues and She also one of the Seven Unfathomable Graces. The Loyalty of a ruler to ${
             player.gender === "male" ? "his" : "her"
           } people, for example, is spoken of in glowing terms by Saint Agatha, shortly before her self-immolation. And the Blessed Jerome himself...`,
         },
