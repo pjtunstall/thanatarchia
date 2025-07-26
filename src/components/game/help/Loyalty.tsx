@@ -47,7 +47,7 @@ function chat(adviser: Character, player: Character): ChatEntry[] {
       return [
         {
           author: adviser,
-          statement: "Loyalty, sire? It is a virtue, we are told.",
+          statement: "Loyalty, Sire? It is a virtue, we are told.",
         },
         {
           author: player,

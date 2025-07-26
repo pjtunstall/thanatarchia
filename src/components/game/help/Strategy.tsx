@@ -1,13 +1,13 @@
 import { Chat } from "@/components/game/Chat";
 import { Character, Faction, ChatEntry } from "@/types/gameTypes";
 
-type AdviceProps = {
+type StrategyProps = {
   player: Character;
   playerFaction: Faction;
   adviser: Character;
 };
 
-export function Advice({ player, playerFaction, adviser }: AdviceProps) {
+export function Strategy({ player, playerFaction, adviser }: StrategyProps) {
   const adviceEntries: ChatEntry[] = [
     {
       author: player,
