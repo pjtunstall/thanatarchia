@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 
 import { ChatEntry, Character, BattleReport } from "@/types/gameTypes";
-import { chroniclers } from "@/data/chronicles";
+import { chroniclers, initialChronicles } from "@/data/chronicles";
 import { getDate } from "@/lib/time";
 
 export function useChronicles(currentTurn: number) {
@@ -71,39 +71,6 @@ export function useChronicles(currentTurn: number) {
     generateFinalChronicles,
     resetChronicles,
   };
-}
-
-function getChroniclerByName(chroniclerName: string): Character {
-  return chroniclers.find((c) => c.name === chroniclerName);
-}
-
-function initialChronicles(): ChatEntry[] {
-  return [
-    {
-      author: getChroniclerByName("Priscilla of Byzantium"),
-      date: getDate(1),
-      statement:
-        "I never knew the old Ravenna before the Gothic Wars. Constantinople suited me better...",
-    },
-    {
-      author: getChroniclerByName("Eudaemonia of Rheims"),
-      date: getDate(1),
-      statement:
-        "The barbarous Alamanni continue their senseless raids, pillaging what civilized men have built with crude savagery.",
-    },
-    {
-      author: getChroniclerByName("Athaloc of Smyrna"),
-      date: getDate(1),
-      statement:
-        "The latter days are surely upon us when the heretic and the apostate, little better than the pagan, establish realms amidst the ruins.",
-    },
-    {
-      author: getChroniclerByName("John of Colchis"),
-      date: getDate(1),
-      statement:
-        "Our most glorious and wise leader has graciously expanded our blessed territories, bringing civilization to the grateful lands beyond the Rhine.",
-    },
-  ];
 }
 
 const finalChronicleStatements: Record<

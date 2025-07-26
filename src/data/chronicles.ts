@@ -4,7 +4,43 @@ import chroniclerMosaic from "@/assets/chronicler-mosaic-female.jpg";
 import chroniclerScholar from "@/assets/chronicler-scholar-male.jpg";
 import chroniclerNun from "@/assets/chronicler-nun-female.jpg";
 
-import { Character } from "@/types/gameTypes";
+import { Character, ChatEntry } from "@/types/gameTypes";
+import { getDate } from "@/lib/time";
+
+function getChroniclerByName(chroniclerName: string): Character {
+  return chroniclers.find((c) => c.name === chroniclerName);
+}
+
+export function initialChronicles(): ChatEntry[] {
+  const initialDate = getDate(1);
+
+  return [
+    {
+      author: getChroniclerByName("Priscilla of Byzantium"),
+      date: initialDate,
+      statement:
+        "I never knew the old Ravenna before the Gothic Wars. Constantinople suited me better...",
+    },
+    {
+      author: getChroniclerByName("Eudaemonia of Rheims"),
+      date: initialDate,
+      statement:
+        "The barbarous Alamanni continue their senseless raids, pillaging what civilized men have built with crude savagery.",
+    },
+    {
+      author: getChroniclerByName("Athaloc of Smyrna"),
+      date: initialDate,
+      statement:
+        "The latter days are surely upon us when the heretic and the apostate, little better than the pagan, establish realms amidst the ruins.",
+    },
+    {
+      author: getChroniclerByName("John of Colchis"),
+      date: initialDate,
+      statement:
+        "O blessed turmoil! O what troubled times! I feel such a strange warming of the heart. Does this mean... Can it really be? COME ON APOCALYPSE! Would it be better to die by impaling or fire? Or by an angel's flaming sword? But would that count as martyrdom? I must pray for more answers...",
+    },
+  ];
+}
 
 export const chroniclers: Character[] = [
   {
@@ -47,7 +83,8 @@ export const battleChronicle = (
   success: boolean,
   winners: string,
   losers: string,
-  territoryName: string
+  territoryName: string,
+  leaderCharacter: Character
 ): string => {
   let territory = uninitialBold(territoryName);
   let attackers: string;
@@ -63,12 +100,15 @@ export const battleChronicle = (
   }
   attacker = uninitialBold(attackers.slice(0, -1));
   defender = uninitialBold(defenders.slice(0, -1));
+  const leader = uninitialBold(leaderCharacter.name);
 
   switch (chronicler.name) {
     case "John of Colchis":
       if (bias === "friendly") {
         if (success) {
-          return `Our brave ${attackers} have saved ${territory} from the tyrany of the ${defenders}.`;
+          return Math.random() < 0.5
+            ? `Our brave ${attackers} have saved ${territory} from the tyrany of the ${defenders}.`
+            : `Our might leader, ${leader}, has graciously chosen to expand ${attacker} territory, bringing civilization to the grateful folk of ${territory}.`;
         } else {
           return `In spite of a heroic struggle, our gallant ${attackers} have yet to free ${territory} from ${defender} occupation.`;
         }
@@ -96,7 +136,9 @@ export const battleChronicle = (
     case "Eudaemonia of Rheims":
       if (bias === "friendly") {
         if (success) {
-          return `They say that the ${attackers} took ${territory} from the ${defenders} today. One feels obliged to offer one's congratulations, although I doubt my contribution will be heard much above the belches of the victory feast, or such 'panegyrics' as their bards declaim.`;
+          return Math.random() < 0.5
+            ? `They say that the ${attackers} took ${territory} from the ${defenders} today. One feels obliged to offer one's congratulations, although I doubt my contribution will be heard much above the belches of the victory feast, or such 'panegyrics' as their bards declaim.`
+            : `In an act of almost divine benificence, our great leader, ${leader}, has chosen to expand ${attacker} territory, bringing civilization to the grateful folk of ${territory}. (Those that survive his wrath, of course. And the ensuing famine. And the ensuing plague.)`;
         } else {
           return `Another season, another chronicle. Let's get it over with. The such-and-such (${attackers})--ahem, our beloved protectors, the ${attackers}...--failed to gain whatever it's called (${territory}) from the so-and-sos (${defenders}). And the shadows lengthen.`;
         }

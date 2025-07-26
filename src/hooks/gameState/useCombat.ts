@@ -194,7 +194,8 @@ export const useCombat = ({
           victory,
           winners,
           losers,
-          to
+          to,
+          factionLeaders[playerIndex]
         );
         addChronicleEntry(author, chronicleEntryStatement, turn);
         if (bias === "friendly") {
@@ -213,7 +214,8 @@ export const useCombat = ({
             victory,
             winners,
             losers,
-            to
+            to,
+            factionLeaders[playerIndex]
           );
           entries.push({
             author,
@@ -231,6 +233,7 @@ export const useCombat = ({
       scheduledAttacks,
       territories,
       factions,
+      factionLeaders,
       playerIndex,
       updateTerritories,
       chroniclers,
