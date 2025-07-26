@@ -11,12 +11,14 @@ export function Thanatarchia({ player, adviser }: ThanatarchiaProps) {
 }
 
 function chat(adviser: Character, player: Character): ChatEntry[] {
-  switch (adviser.name) {
+  const adviserName = adviser.name;
+
+  switch (adviserName) {
     case "John of Colchis":
       return [
         {
           author: player,
-          statement: "Excuse me, John of Colchis, what is Thanatarchia?",
+          statement: `Excuse me, ${adviserName}, what is Thanatarchia?`,
         },
         {
           author: adviser,
@@ -50,7 +52,7 @@ function chat(adviser: Character, player: Character): ChatEntry[] {
         },
         {
           author: player,
-          statement: "What sort of a game, Eudaemonia of Rheims?",
+          statement: `What sort of a game, ${adviserName}?`,
         },
         {
           author: adviser,
@@ -67,7 +69,7 @@ function chat(adviser: Character, player: Character): ChatEntry[] {
         },
         {
           author: player,
-          statement: "Then you do not know what it means, Athaloc of Smyrna?",
+          statement: `Then you do not know what it means, ${adviserName}?`,
         },
         {
           author: adviser,
@@ -76,7 +78,7 @@ function chat(adviser: Character, player: Character): ChatEntry[] {
         },
         {
           author: player,
-          statement: "And what would that be, Athaloc of Smyrna?",
+          statement: `And what would that be, ${adviserName}?`,
         },
         {
           author: adviser,

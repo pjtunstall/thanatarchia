@@ -1,6 +1,7 @@
 import { Faction } from "@/types/gameTypes";
 import { Character } from "@/types/gameTypes";
 import { Thanatarchia } from "@/components/game/help/Thanatarchia";
+import { Loyalty } from "@/components/game/help/Loyalty";
 import { Advice } from "@/components/game/help/Advice";
 
 type HelpContentProps = {
@@ -17,7 +18,7 @@ export function HelpContent({
   playerFaction,
 }: HelpContentProps) {
   switch (topic) {
-    case "Advice":
+    case "Strategy":
       return (
         <Advice
           player={player}
@@ -25,6 +26,8 @@ export function HelpContent({
           playerFaction={playerFaction}
         />
       );
+    case "Loyalty":
+      return <Loyalty player={player} adviser={adviser} />;
     default:
       return <Thanatarchia player={player} adviser={adviser} />;
   }

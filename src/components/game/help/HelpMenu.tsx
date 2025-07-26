@@ -45,4 +45,4 @@ export function HelpMenu({ onSelectTopic }: HelpMenuProps) {
   );
 }
 
-const helpTopics = ["Thanatarchia", "Advice"];
+const helpTopics = ["Thanatarchia", "Strategy", "Loyalty"];
