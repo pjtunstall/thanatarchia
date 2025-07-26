@@ -26,6 +26,7 @@ export const useGameState = () => {
     factionTerritories: gameCore.factionTerritories,
     factions,
     factionTreasures: gameCore.factionTreasures,
+    factionLeaders: factionLeaders,
     updateTerritories: gameCore.updateTerritories,
     setFactionTreasures: gameCore.setFactionTreasures,
     addChronicleEntry: chronicles.addChronicleEntry,
@@ -85,7 +86,6 @@ export const useGameState = () => {
     gameCore.resetGame();
     chronicles.resetChronicles();
     setFactionLeaders(initializeLeaders(factions));
-    gameCore.setIsClickedOnMapYet(false);
   }, [gameCore.resetGame, chronicles.resetChronicles]);
 
   const handleEndTurn = useCallback(() => {

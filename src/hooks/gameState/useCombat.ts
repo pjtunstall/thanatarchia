@@ -9,7 +9,11 @@ import {
 } from "@/types/gameTypes";
 import { randomItem } from "@/lib/utils";
 import { costOfRecruiting, troopUnit } from "@/data/gameData";
-import { chroniclers, battleChronicle } from "@/data/chronicles";
+import {
+  chroniclers,
+  battleChronicle,
+  recruitChronicle,
+} from "@/data/chronicles";
 
 type UseCombatProps = {
   territories: Territory[];
@@ -18,6 +22,7 @@ type UseCombatProps = {
   factionTerritories: string[][];
   factions: Faction[];
   factionTreasures: number[];
+  factionLeaders: Character[];
   updateTerritories: (updater: (prev: Territory[]) => Territory[]) => void;
   setFactionTreasures: (updater: (prev: number[]) => number[]) => void;
   addChronicleEntry: (
@@ -40,6 +45,7 @@ export const useCombat = ({
   playerIndex,
   adjacentTerritories,
   factionTerritories,
+  factionLeaders,
   factions,
   factionTreasures,
   updateTerritories,
@@ -48,7 +54,6 @@ export const useCombat = ({
   scheduledAttacks,
   setScheduledAttacks,
   enqueueBattleMessage,
-  selectedTerritoryName,
   adviserIndex,
   turn,
 }: UseCombatProps) => {
@@ -61,7 +66,6 @@ export const useCombat = ({
       );
       if (!selectedTerritory) return;
 
-      const factionName = factions[playerIndex].name;
       updateTerritories((prev) =>
         prev
           .filter((t) => t.name !== selectedTerritoryName)
@@ -77,21 +81,24 @@ export const useCombat = ({
         return updated;
       });
 
-      const r = Math.floor(Math.random() * 4);
-      const chronicler = chroniclers[r];
-      const bias = r === adviserIndex ? "friendly" : "hostile";
-
-      // // Add chronicle entrie sin new style along the lines of:
-      // addChatEntry(
-      //   Math.random() > 0.3
-      //     ? "More savage warriors have been enlisted to bolster the barbarian horde, no doubt lured by promises of plunder."
-      //     : "Our wise leader has strengthened our noble forces with fresh recruits, ready to defend our sacred homeland.",
-      //   Math.random() > 0.3 ? "hostile" : "friendly"
-      // );
+      const author = randomItem(chroniclers);
+      const bias =
+        author.name === chroniclers[adviserIndex].name ? "friendly" : "hostile";
+      const factionName = factions[playerIndex].name;
+      console.log(author, bias, selectedTerritoryName, factionName);
+      const chronicleEntryStatement = recruitChronicle(
+        author,
+        bias,
+        selectedTerritoryName,
+        factionName,
+        factionLeaders[playerIndex]
+      );
+      addChronicleEntry(author, chronicleEntryStatement, turn);
     },
     [
       factionTreasures,
       factionTerritories,
+      factionLeaders,
       factions,
       playerIndex,
       updateTerritories,
@@ -169,14 +176,37 @@ export const useCombat = ({
           );
         }
 
-        chroniclers.forEach((author, index) => {
-          const bias = index === adviserIndex ? "friendly" : "hostile";
-          const winners = victory
-            ? factions[playerIndex].name
-            : toTerritory.owner;
-          const losers = victory
-            ? toTerritory.owner
-            : factions[playerIndex].name;
+        // Pick a chronicler at random and add their comment to the chronicles.
+        // If they happen to be the player's adviser, use their comment as the
+        // battle report. If not, get a battle report from the player adviser.
+        let author = randomItem(chroniclers);
+        let bias =
+          author.name === chroniclers[adviserIndex].name
+            ? "friendly"
+            : "hostile";
+        const winners = victory
+          ? factions[playerIndex].name
+          : toTerritory.owner;
+        const losers = victory ? toTerritory.owner : factions[playerIndex].name;
+        const chronicleEntryStatement = battleChronicle(
+          author,
+          bias,
+          victory,
+          winners,
+          losers,
+          to
+        );
+        addChronicleEntry(author, chronicleEntryStatement, turn);
+        if (bias === "friendly") {
+          entries.push({
+            author,
+            message: chronicleEntryStatement,
+            stats: `Attack strength: ${totalTroops}\nDefense strength: ${toTerritory.troops}\nLosses: ${losses}`,
+            success: victory,
+          });
+        } else {
+          author = chroniclers[adviserIndex];
+          bias = "friendly";
           const chronicleEntryStatement = battleChronicle(
             author,
             bias,
@@ -185,16 +215,13 @@ export const useCombat = ({
             losers,
             to
           );
-          addChronicleEntry(author, chronicleEntryStatement, turn);
-          if (bias === "friendly") {
-            entries.push({
-              author,
-              message: chronicleEntryStatement,
-              stats: `Attack strength: ${totalTroops}\nDefense strength: ${toTerritory.troops}\nLosses: ${losses}`,
-              success: victory,
-            });
-          }
-        });
+          entries.push({
+            author,
+            message: chronicleEntryStatement,
+            stats: `Attack strength: ${totalTroops}\nDefense strength: ${toTerritory.troops}\nLosses: ${losses}`,
+            success: victory,
+          });
+        }
       });
 
       setScheduledAttacks([]);

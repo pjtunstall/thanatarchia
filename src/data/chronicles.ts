@@ -37,7 +37,6 @@ export const chroniclers: Character[] = [
   },
 ];
 
-// Unitalic bold
 function uninitialBold(text: string) {
   return `<span style="font-style: normal;"><strong>${text}</strong></span>`;
 }
@@ -48,10 +47,13 @@ export const battleChronicle = (
   success: boolean,
   winners: string,
   losers: string,
-  territory: string
+  territoryName: string
 ): string => {
+  let territory = uninitialBold(territoryName);
   let attackers: string;
+  let attacker: string;
   let defenders: string;
+  let defender: string;
   if (success) {
     attackers = uninitialBold(winners);
     defenders = uninitialBold(losers);
@@ -59,6 +61,8 @@ export const battleChronicle = (
     defenders = uninitialBold(winners);
     attackers = uninitialBold(losers);
   }
+  attacker = uninitialBold(attackers.slice(0, -1));
+  defender = uninitialBold(defenders.slice(0, -1));
 
   switch (chronicler.name) {
     case "John of Colchis":
@@ -66,10 +70,7 @@ export const battleChronicle = (
         if (success) {
           return `Our brave ${attackers} have saved ${territory} from the tyrany of the ${defenders}.`;
         } else {
-          return `In spite of a heroic struggle, our gallant ${attackers} have yet to free ${territory} from ${defenders.slice(
-            0,
-            -1
-          )} occupation.`;
+          return `In spite of a heroic struggle, our gallant ${attackers} have yet to free ${territory} from ${defender} occupation.`;
         }
       } else {
         if (success) {
@@ -87,9 +88,9 @@ export const battleChronicle = (
         }
       } else {
         if (success) {
-          return `In this year, a great throng of the barbarous ${attackers} descended upon ${territory}, overwhelming the ${defenders} there.`;
+          return `In this year, a great rabble of ${attackers} descended upon ${territory}, overwhelming the ${defenders} there.`;
         } else {
-          return `Today, God saw fit to punish the ${attackers} for their impudent assault on the ${defenders} in ${territory}. One senses imperial training at work here.`;
+          return `Today, God saw fit to punish the ${attackers} for their impudent assault on the ${defenders} in ${territory}. One senses Byzantine training at work here.`;
         }
       }
     case "Eudaemonia of Rheims":
@@ -117,11 +118,51 @@ export const battleChronicle = (
         if (success) {
           return `Inconceivable! Though it strains credulity, we must note the reports coming out of ${territory} of an engagement in which those perfidious knaves, the ${attackers}, routed the ${defenders}.`;
         } else {
-          return `A reckless ${attackers.slice(
-            0,
-            -1
-          )} incursion into ${territory} has been repulsed by the ${defenders}. Indeed lack of faith begets folly: the dull wit that begets sin finding a natural counterpart in such doltish strategems.`;
+          return `A reckless ${attacker} incursion into ${territory} has been repulsed by the ${defenders}. Indeed lack of faith begets folly: the dull wit that begets sin finding a natural counterpart in such doltish stratagems.`;
         }
       }
   }
 };
+
+export function recruitChronicle(
+  author: Character,
+  bias: string,
+  territoryName: string,
+  factionName: string,
+  leaderCharacter: Character
+): string {
+  const territory = uninitialBold(territoryName);
+  const faction = uninitialBold(factionName);
+  const adjective = faction.slice(0, -1);
+  const leader = uninitialBold(leaderCharacter.name);
+  const pronoun = leaderCharacter.gender === "male" ? "his" : "her";
+
+  switch (author.name) {
+    case "John of Colchis":
+      if (bias === "friendly") {
+        return `Our wise leader has strengthened the garrisons of ${territory}.`;
+      } else {
+        return `Yet more brutish ${faction} have been stationed in ${territory}.`;
+      }
+    case "Priscilla of Byzantium":
+      if (bias === "friendly") {
+        return `In a wise move, ${leader} has built up ${pronoun} forces along the borders of ${territory}.`;
+      } else {
+        return `More savage warriors have been enlisted in ${territory} to bolster the ${adjective} horde, no doubt lured by promises of plunder.`;
+      }
+    case "Eudaemonia of Rheims":
+      if (bias === "friendly") {
+        return `${territory} rejoices, no doubt, at the build up of ${adjective} forces there.`;
+      } else {
+        return `The ${faction} are recruiting again. They say it is for the defense of ${territory}.`;
+      }
+    case "Athaloc of Smyrna":
+      if (bias === "friendly") {
+        return `${territory} breathes a sigh of relief as ${leader} augments the ${adjective} defenses there.`;
+      } else {
+        return Math.random() < 0.5
+          ? `${territory} groans under new taxation as ${leader} strengthens ${pronoun} forces.`
+          : `In ${territory}, slaves and vagabonds are lured to join the ${faction}, while decent folk must foot the bill.`;
+      }
+  }
+}
