@@ -38,6 +38,7 @@ export const useGameState = () => {
     selectedTerritoryName: gameCore.selectedTerritoryName,
     adviserIndex: chronicles.adviserIndex,
     turn: gameCore.currentTurn,
+    hasChangedFromEudaemonia: chronicles.hasChangedFromEudaemonia,
   });
 
   const generateResources = useCallback(() => {

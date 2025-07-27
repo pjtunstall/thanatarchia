@@ -151,6 +151,9 @@ export const GameDashboard = () => {
                   onChangeFaith={gameState.handleChangeFaith}
                   setFactionLeaders={gameState.setFactionLeaders}
                   setAdviserIndex={gameState.setAdviserIndex}
+                  setHasChangedFromEudaemonia={
+                    gameState.setHasChangedFromEudaemonia
+                  }
                 />
               </TabsContent>
             </Tabs>

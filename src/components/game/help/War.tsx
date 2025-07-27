@@ -8,6 +8,7 @@ type WarProps = {
   adviser: Character;
   playerFaction: Faction;
   setAdviserIndex: React.Dispatch<React.SetStateAction<number>>;
+  setHasChangedFromEudaemonia: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export function War({
@@ -15,6 +16,7 @@ export function War({
   adviser,
   playerFaction,
   setAdviserIndex,
+  setHasChangedFromEudaemonia,
 }: WarProps) {
   const hasHandledEudaemonia = useRef(false);
 
@@ -42,6 +44,8 @@ export function War({
             // Trigger change for ANY click that's NOT the "Ask about..." button
             if (!isAskAboutButton) {
               setAdviserIndex(0);
+              setHasChangedFromEudaemonia(true);
+
               // Clean up listeners
               window.removeEventListener("click", clickHandler);
               window.removeEventListener("keydown", keyHandler);
@@ -136,7 +140,7 @@ function chat(
           },
           {
             author: player,
-            statement: `Don't think I don't sense your sarcasm, ${adviser.name}. My people crave peace too. Do you think the ${factionOne} or the ${factionTwo} will give it freely? Well, do you have a witty rejoinder? Have the last word? I'm giving you the floor.`,
+            statement: `Don't think I don't sense your sarcasm, ${adviser.name}. My people crave peace too. Do you think the ${factionOne} or the ${factionTwo} will give it freely? Well? do you have a witty rejoinder? Have the last word? I'm giving you the floor.`,
           },
           {
             author: adviser,
@@ -168,7 +172,7 @@ function chat(
           },
           {
             author: adviser,
-            statement: `Very well the, my ${
+            statement: `Very well, my ${
               player.gender === "male" ? "Lord" : "Lady"
             }. Tell that to the bones of the innocents you massacred when you took ${
               playerFaction.capital

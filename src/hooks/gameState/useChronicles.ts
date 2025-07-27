@@ -9,6 +9,8 @@ export function useChronicles(currentTurn: number) {
   const [adviserIndex, setAdviserIndex] = useState(
     Math.floor(Math.random() * chroniclers.length)
   );
+  const [hasChangedFromEudaemonia, setHasChangedFromEudaemonia] =
+    useState(false);
 
   const [battleMessageQueue, setBattleMessageQueue] = useState<BattleReport[]>(
     []
@@ -65,12 +67,14 @@ export function useChronicles(currentTurn: number) {
     adviserIndex,
     battleMessage,
     battleMessageQueue,
+    hasChangedFromEudaemonia,
     enqueueBattleMessage,
     dequeueBattleMessage,
     addChronicleEntry,
     generateFinalChronicles,
     resetChronicles,
     setAdviserIndex,
+    setHasChangedFromEudaemonia,
   };
 }
 

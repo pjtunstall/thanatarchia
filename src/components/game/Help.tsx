@@ -10,6 +10,7 @@ type HelpProps = {
   playerFaction: Faction;
   adviser: Character;
   setAdviserIndex: React.Dispatch<React.SetStateAction<number>>;
+  setHasChangedFromEudaemonia: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export function Help({
@@ -17,6 +18,7 @@ export function Help({
   playerFaction,
   adviser,
   setAdviserIndex,
+  setHasChangedFromEudaemonia,
 }: HelpProps) {
   const [topic, setTopic] = useState<string | null>(null);
 
@@ -30,6 +32,7 @@ export function Help({
             player={player}
             playerFaction={playerFaction}
             setAdviserIndex={setAdviserIndex}
+            setHasChangedFromEudaemonia={setHasChangedFromEudaemonia}
           />
         ) : (
           <Chat items={getInitialHint(adviser)} />

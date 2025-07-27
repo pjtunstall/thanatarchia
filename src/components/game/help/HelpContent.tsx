@@ -11,6 +11,7 @@ type HelpContentProps = {
   adviser: Character;
   playerFaction: Faction;
   setAdviserIndex: React.Dispatch<React.SetStateAction<number>>;
+  setHasChangedFromEudaemonia: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export function HelpContent({
@@ -19,6 +20,7 @@ export function HelpContent({
   adviser,
   playerFaction,
   setAdviserIndex,
+  setHasChangedFromEudaemonia,
 }: HelpContentProps) {
   switch (topic) {
     case "Strategy":
@@ -36,6 +38,7 @@ export function HelpContent({
           adviser={adviser}
           playerFaction={playerFaction}
           setAdviserIndex={setAdviserIndex}
+          setHasChangedFromEudaemonia={setHasChangedFromEudaemonia}
         />
       );
     case "Loyalty":

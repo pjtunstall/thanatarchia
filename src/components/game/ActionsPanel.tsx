@@ -40,6 +40,7 @@ type ActionsPanelProps = {
   ) => void;
   setFactionLeaders: React.Dispatch<React.SetStateAction<Character[]>>;
   setAdviserIndex: React.Dispatch<React.SetStateAction<number>>;
+  setHasChangedFromEudaemonia: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export function ActionsPanel({
@@ -62,6 +63,7 @@ export function ActionsPanel({
   onChangeFaith,
   setFactionLeaders,
   setAdviserIndex,
+  setHasChangedFromEudaemonia,
 }: ActionsPanelProps) {
   return (
     <Card className="h-full flex flex-col">
@@ -97,6 +99,7 @@ export function ActionsPanel({
               player={playerCharacter}
               playerFaction={playerFaction}
               setAdviserIndex={setAdviserIndex}
+              setHasChangedFromEudaemonia={setHasChangedFromEudaemonia}
             ></Help>
           )}
         </div>

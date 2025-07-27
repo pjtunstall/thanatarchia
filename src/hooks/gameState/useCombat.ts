@@ -38,6 +38,7 @@ type UseCombatProps = {
   selectedTerritoryName: string | null;
   adviserIndex: number;
   turn: number;
+  hasChangedFromEudaemonia: boolean;
 };
 
 export const useCombat = ({
@@ -56,6 +57,7 @@ export const useCombat = ({
   enqueueBattleMessage,
   adviserIndex,
   turn,
+  hasChangedFromEudaemonia,
 }: UseCombatProps) => {
   const handleRecruit = useCallback(
     (selectedTerritoryName) => {
@@ -81,7 +83,7 @@ export const useCombat = ({
         return updated;
       });
 
-      const author = randomItem(chroniclers);
+      const author = pickAValidChronicler(hasChangedFromEudaemonia);
       const bias =
         author.name === chroniclers[adviserIndex].name ? "friendly" : "hostile";
       const factionName = factions[playerIndex].name;
@@ -179,7 +181,7 @@ export const useCombat = ({
         // Pick a chronicler at random and add their comment to the chronicles.
         // If they happen to be the player's adviser, use their comment as the
         // battle report. If not, get a battle report from the player adviser.
-        let author = randomItem(chroniclers);
+        let author = pickAValidChronicler(hasChangedFromEudaemonia);
         let bias =
           author.name === chroniclers[adviserIndex].name
             ? "friendly"
@@ -518,4 +520,19 @@ function enqueueBattleReports(
   for (const entry of entries) {
     enqueueBattleMessage(entry);
   }
+}
+
+let tries = 0;
+
+function pickAValidChronicler(hasChangedFromEudaemonia: boolean): Character {
+  const c = randomItem(chroniclers);
+  if (
+    tries > 99 ||
+    !hasChangedFromEudaemonia ||
+    c.name !== "Eudaemonia of Rheims"
+  ) {
+    return c;
+  }
+  tries++;
+  return pickAValidChronicler(hasChangedFromEudaemonia);
 }
