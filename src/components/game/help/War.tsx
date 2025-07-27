@@ -10,21 +10,17 @@ type WarProps = {
   setAdviserIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
-// If the player asks Eudaemonia about war, this leads to a change of adviser.
-// The change only takes effect the next time the player interacts with the
-// page after choosing this help topic. This delay is to allow the player to
-// actually see the conversation with Eudaemonia that triggered the change.
 export function War({
   player,
   adviser,
   playerFaction,
   setAdviserIndex,
 }: WarProps) {
-  // Prevents setting up multiple listeners if the component re-renders
   const hasHandledEudaemonia = useRef(false);
 
-  // useLayoutEffect runs synchronously after all DOM mutations but before
-  // the browser paints, so Eudaemonia should be in the DOM
+  // Declare the random boolean at the top
+  const shouldReplace = Math.random() < 0.5;
+
   useLayoutEffect(() => {
     if (
       adviser.name === "Eudaemonia of Rheims" &&
@@ -32,22 +28,45 @@ export function War({
     ) {
       hasHandledEudaemonia.current = true;
 
-      // Set up the interaction listener AFTER this render is complete
-      const setupListener = () => {
-        const handler = () => {
-          setAdviserIndex(0);
+      if (shouldReplace) {
+        // Set up the interaction listener AFTER this render is complete
+        const setupListener = () => {
+          const clickHandler = (event) => {
+            // Check if the click is specifically on the "Ask about..." button
+            const target = event.target;
+            const isAskAboutButton =
+              target.closest("[data-radix-dropdown-menu-trigger]") ||
+              (target.textContent &&
+                target.textContent.includes("Ask about..."));
+
+            // Trigger change for ANY click that's NOT the "Ask about..." button
+            if (!isAskAboutButton) {
+              setAdviserIndex(0);
+              // Clean up listeners
+              window.removeEventListener("click", clickHandler);
+              window.removeEventListener("keydown", keyHandler);
+            }
+          };
+
+          const keyHandler = () => {
+            // Any keypress triggers the change
+            setAdviserIndex(0);
+            // Clean up listeners
+            window.removeEventListener("click", clickHandler);
+            window.removeEventListener("keydown", keyHandler);
+          };
+
+          window.addEventListener("click", clickHandler);
+          window.addEventListener("keydown", keyHandler);
         };
 
-        window.addEventListener("click", handler, { once: true });
-        window.addEventListener("keydown", handler, { once: true });
-      };
-
-      // Use setTimeout to ensure this happens after the current render
-      setTimeout(setupListener, 0);
+        // Use setTimeout to ensure this happens after the current render
+        setTimeout(setupListener, 0);
+      }
     }
-  }, [adviser.name, setAdviserIndex]);
+  }, [adviser.name, setAdviserIndex, shouldReplace]);
 
-  return <Chat items={chat(adviser, player, playerFaction)} />;
+  return <Chat items={chat(adviser, player, playerFaction, shouldReplace)} />;
 }
 
 let recursionLimit: number;
@@ -73,7 +92,8 @@ function getRandomFaction(
 function chat(
   adviser: Character,
   player: Character,
-  playerFaction: Faction
+  playerFaction: Faction,
+  shouldReplaceEudaemonia: boolean
 ): ChatEntry[] {
   const person = adviser.gender === "male" ? "man" : "woman";
 
@@ -108,40 +128,66 @@ function chat(
         },
       ];
     case "Eudaemonia of Rheims":
-      return [
-        {
-          author: adviser,
-          statement: "It is quite glorious, I'm sure.",
-        },
-        {
-          author: player,
-          statement: `Don't think I don't sense your sarcasm, ${adviser.name}. My people crave peace too. Do you think the ${factionOne} or the ${factionTwo} will give it freely? Well, do you have a witty rejoinder? Have the last word? I'm giving you the floor.`,
-        },
-        {
-          author: adviser,
-          statement: "Tell that to the...",
-        },
-        {
-          author: player,
-          statement: "Eh?",
-        },
-        {
-          author: adviser,
-          statement: "May I be excused, Sire.",
-        },
-        {
-          author: player,
-          statement: `To the bones of the innocents we massacred when we took ${playerFaction.capital}? They were traitors. That is war.`,
-        },
-        {
-          author: adviser,
-          statement: "How reassuringly abstract, Sire.",
-        },
-        {
-          author: player,
-          statement: `That's it, ${adviser.name}. A traitor sympathizes with traitors. Guards! ...`,
-        },
-      ];
+      if (!shouldReplaceEudaemonia) {
+        return [
+          {
+            author: adviser,
+            statement: "It is quite glorious, I'm sure.",
+          },
+          {
+            author: player,
+            statement: `Don't think I don't sense your sarcasm, ${adviser.name}. My people crave peace too. Do you think the ${factionOne} or the ${factionTwo} will give it freely? Well, do you have a witty rejoinder? Have the last word? I'm giving you the floor.`,
+          },
+          {
+            author: adviser,
+            statement: "Tell that to the...",
+          },
+          {
+            author: player,
+            statement: "Eh?",
+          },
+          {
+            author: adviser,
+            statement:
+              "May I be excused, Sire? Before one of us does something regretable.",
+          },
+          {
+            author: player,
+            statement: `Go on then. I like your panegyrics, ${adviser.name}, but you are sailing very, very close to the wind.`,
+          },
+        ];
+      } else {
+        return [
+          {
+            author: adviser,
+            statement: "It is quite glorious, I'm sure.",
+          },
+          {
+            author: player,
+            statement: `Don't think I don't sense your sarcasm, ${adviser.name}. My people crave peace too. Do you think the ${factionOne} or the ${factionTwo} will give it freely? Well, do you have a witty rejoinder? Have the last word? I'm giving you the floor.`,
+          },
+          {
+            author: adviser,
+            statement: `Very well the, my ${
+              player.gender === "male" ? "Lord" : "Lady"
+            }. Tell that to the bones of the innocents you massacred when you took ${
+              playerFaction.capital
+            }. Tell it to the women you enslaved. The starving...`,
+          },
+          {
+            author: player,
+            statement: "They were traitors. That is war.",
+          },
+          {
+            author: adviser,
+            statement: "How reassuringly abstract, Sire.",
+          },
+          {
+            author: player,
+            statement: `That's it, ${adviser.name}. A traitor sympathizes with traitors. Guards! ...`,
+          },
+        ];
+      }
     case "Athaloc of Smyrna":
       return [
         {
