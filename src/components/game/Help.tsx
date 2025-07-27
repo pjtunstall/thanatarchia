@@ -9,10 +9,17 @@ type HelpProps = {
   player: Character;
   playerFaction: Faction;
   adviser: Character;
+  setAdviserIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export function Help({ player, playerFaction, adviser }: HelpProps) {
+export function Help({
+  player,
+  playerFaction,
+  adviser,
+  setAdviserIndex,
+}: HelpProps) {
   const [topic, setTopic] = useState<string | null>(null);
+
   return (
     <div className="flex flex-col flex-1 min-h-0 pt-3 space-y-4">
       <div className="flex-1 min-h-0">
@@ -22,6 +29,7 @@ export function Help({ player, playerFaction, adviser }: HelpProps) {
             adviser={adviser}
             player={player}
             playerFaction={playerFaction}
+            setAdviserIndex={setAdviserIndex}
           />
         ) : (
           <Chat items={getInitialHint(adviser)} />

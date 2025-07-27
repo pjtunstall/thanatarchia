@@ -10,6 +10,7 @@ type HelpContentProps = {
   player: Character;
   adviser: Character;
   playerFaction: Faction;
+  setAdviserIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export function HelpContent({
@@ -17,6 +18,7 @@ export function HelpContent({
   player,
   adviser,
   playerFaction,
+  setAdviserIndex,
 }: HelpContentProps) {
   switch (topic) {
     case "Strategy":
@@ -29,11 +31,16 @@ export function HelpContent({
       );
     case "War":
       return (
-        <War player={player} adviser={adviser} playerFaction={playerFaction} />
+        <War
+          player={player}
+          adviser={adviser}
+          playerFaction={playerFaction}
+          setAdviserIndex={setAdviserIndex}
+        />
       );
     case "Loyalty":
       return <Loyalty player={player} adviser={adviser} />;
-    default:
+    case "Thanatarchia":
       return <Thanatarchia player={player} adviser={adviser} />;
   }
 }

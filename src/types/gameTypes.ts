@@ -1,6 +1,7 @@
 export type Faction = {
   name: string;
   formalName: string;
+  capital: string;
   type: "imperial" | "barbarian" | "bagaudae";
   color: string;
   symbol: string;

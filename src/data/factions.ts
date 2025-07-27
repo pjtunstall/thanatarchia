@@ -22,6 +22,7 @@ export const factions: Faction[] = [
   {
     name: "Romans",
     formalName: "Roman Empire",
+    capital: "Constantinople",
     type: "imperial",
     color: "hsl(var(--imperial))",
     symbol: "⳩",
@@ -53,6 +54,7 @@ export const factions: Faction[] = [
   {
     name: "Britons",
     formalName: "Kindom of the Britons",
+    capital: "Londinium",
     type: "barbarian",
     color: "hsl(var(--britons))",
     symbol: "𐃏",
@@ -85,6 +87,7 @@ export const factions: Faction[] = [
   {
     name: "Moors",
     formalName: "Kingdom of the Moors",
+    capital: "Hippo Regius",
     type: "barbarian",
     color: "hsl(var(--moors))",
     symbol: "ⵣ",
@@ -111,6 +114,7 @@ export const factions: Faction[] = [
   {
     name: "Bagaudae",
     formalName: "Bagaudae of Armorica",
+    capital: "Condate Reidonum",
     type: "bagaudae",
     color: "hsl(var(--bagaudae))",
     symbol: "⚒",
@@ -137,6 +141,7 @@ export const factions: Faction[] = [
   {
     name: "Ostrogoths",
     formalName: "Kingdom of the Ostrogoths",
+    capital: "Ravenna",
     type: "barbarian",
     color: "hsl(var(--ostrogoths))",
     symbol: "𐌸",
@@ -163,6 +168,7 @@ export const factions: Faction[] = [
   {
     name: "Visigoths",
     formalName: "Kingdom of the Visigoths",
+    capital: "Burgidala",
     type: "barbarian",
     color: "hsl(var(--visigoths))",
     symbol: "𐌸",
@@ -189,6 +195,7 @@ export const factions: Faction[] = [
   {
     name: "Vandals",
     formalName: "Kingdom of the Vandals",
+    capital: "Carthago",
     type: "barbarian",
     color: "hsl(var(--vandals))",
     symbol: "♰",
@@ -215,6 +222,7 @@ export const factions: Faction[] = [
   {
     name: "Burgundians",
     formalName: "Kingdom of the Burgundians",
+    capital: "Borbetomagus",
     type: "barbarian",
     color: "hsl(var(--burgundians))",
     symbol: "✖",
@@ -246,6 +254,7 @@ export const factions: Faction[] = [
   {
     name: "Franks",
     formalName: "Kingdom of the Franks",
+    capital: "Parisius",
     type: "barbarian",
     color: "hsl(var(--franks))",
     symbol: "⚜",
@@ -272,6 +281,7 @@ export const factions: Faction[] = [
   {
     name: "Gepids",
     formalName: "Kingdom of the Gepids",
+    capital: "Serdica",
     type: "barbarian",
     color: "hsl(var(--gepids))",
     symbol: "⚓",
@@ -298,6 +308,7 @@ export const factions: Faction[] = [
   {
     name: "Rugians",
     formalName: "Kingdom of the Rugians",
+    capital: "Hlaidōzgardaz",
     type: "barbarian",
     color: "hsl(var(--rugians))",
     symbol: "♛",
@@ -324,6 +335,7 @@ export const factions: Faction[] = [
   {
     name: "Heruls",
     formalName: "Kingdom of the Heruls",
+    capital: "Vistula",
     type: "barbarian",
     color: "hsl(var(--heruls))",
     symbol: "◎",
@@ -350,6 +362,7 @@ export const factions: Faction[] = [
   {
     name: "Lombards",
     formalName: "Kingdom of the Lombards",
+    capital: "Sirmium",
     type: "barbarian",
     color: "hsl(var(--langobards))",
     symbol: "✤",
@@ -381,6 +394,7 @@ export const factions: Faction[] = [
   {
     name: "Saxons",
     formalName: "Saxon Confederation",
+    capital: "Colonia",
     type: "barbarian",
     color: "hsl(var(--saxons))",
     symbol: "ᛳ",
@@ -407,6 +421,7 @@ export const factions: Faction[] = [
   {
     name: "Suebians",
     formalName: "Suebian Confederation",
+    capital: "Toletum",
     type: "barbarian",
     color: "hsl(var(--suebians))",
     symbol: "⌘",
@@ -433,6 +448,7 @@ export const factions: Faction[] = [
   {
     name: "Alans",
     formalName: "Kingdom of the Alans",
+    capital: "Salona",
     type: "barbarian",
     color: "hsl(var(--alans))",
     symbol: "☀",
@@ -466,6 +482,7 @@ export const factions: Faction[] = [
   {
     name: "Isaurians",
     formalName: "Kingom of the Isaurians",
+    capital: "Ancyra",
     type: "barbarian",
     color: "hsl(var(--isaurians))",
     symbol: "⳩",
@@ -492,6 +509,7 @@ export const factions: Faction[] = [
   {
     name: "Huns",
     formalName: "Hunnic Horde",
+    capital: "Tomis",
     type: "barbarian",
     color: "hsl(var(--huns))",
     symbol: "➹",

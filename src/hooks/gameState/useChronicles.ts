@@ -70,6 +70,7 @@ export function useChronicles(currentTurn: number) {
     addChronicleEntry,
     generateFinalChronicles,
     resetChronicles,
+    setAdviserIndex,
   };
 }
 

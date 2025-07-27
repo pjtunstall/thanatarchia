@@ -39,6 +39,7 @@ type ActionsPanelProps = {
     setLeaders: React.Dispatch<React.SetStateAction<Character[]>>
   ) => void;
   setFactionLeaders: React.Dispatch<React.SetStateAction<Character[]>>;
+  setAdviserIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export function ActionsPanel({
@@ -60,6 +61,7 @@ export function ActionsPanel({
   onEndTurn,
   onChangeFaith,
   setFactionLeaders,
+  setAdviserIndex,
 }: ActionsPanelProps) {
   return (
     <Card className="h-full flex flex-col">
@@ -94,6 +96,7 @@ export function ActionsPanel({
               adviser={chroniclers[adviserIndex]}
               player={playerCharacter}
               playerFaction={playerFaction}
+              setAdviserIndex={setAdviserIndex}
             ></Help>
           )}
         </div>

@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef } from "react";
 import { Chat } from "@/components/game/Chat";
 import { Character, ChatEntry, Faction } from "@/types/gameTypes";
 import { factions } from "@/data/factions";
@@ -6,9 +7,46 @@ type WarProps = {
   player: Character;
   adviser: Character;
   playerFaction: Faction;
+  setAdviserIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export function War({ player, adviser, playerFaction }: WarProps) {
+// If the player asks Eudaemonia about war, this leads to a change of adviser.
+// The change only takes effect the next time the player interacts with the
+// page after choosing this help topic. This delay is to allow the player to
+// actually see the conversation with Eudaemonia that triggered the change.
+export function War({
+  player,
+  adviser,
+  playerFaction,
+  setAdviserIndex,
+}: WarProps) {
+  // Prevents setting up multiple listeners if the component re-renders
+  const hasHandledEudaemonia = useRef(false);
+
+  // useLayoutEffect runs synchronously after all DOM mutations but before
+  // the browser paints, so Eudaemonia should be in the DOM
+  useLayoutEffect(() => {
+    if (
+      adviser.name === "Eudaemonia of Rheims" &&
+      !hasHandledEudaemonia.current
+    ) {
+      hasHandledEudaemonia.current = true;
+
+      // Set up the interaction listener AFTER this render is complete
+      const setupListener = () => {
+        const handler = () => {
+          setAdviserIndex(0);
+        };
+
+        window.addEventListener("click", handler, { once: true });
+        window.addEventListener("keydown", handler, { once: true });
+      };
+
+      // Use setTimeout to ensure this happens after the current render
+      setTimeout(setupListener, 0);
+    }
+  }, [adviser.name, setAdviserIndex]);
+
   return <Chat items={chat(adviser, player, playerFaction)} />;
 }
 
@@ -77,7 +115,7 @@ function chat(
         },
         {
           author: player,
-          statement: `Don't think I don't sense your sarcasm, ${adviser.name}. My people crave peace too. Do you think the ${factionOne} or the ${factionTwo} will give it? Well, do you have a witty rejoinder? Have the last word? I'm giving you the floor.`,
+          statement: `Don't think I don't sense your sarcasm, ${adviser.name}. My people crave peace too. Do you think the ${factionOne} or the ${factionTwo} will give it freely? Well, do you have a witty rejoinder? Have the last word? I'm giving you the floor.`,
         },
         {
           author: adviser,
@@ -89,11 +127,19 @@ function chat(
         },
         {
           author: adviser,
-          statement: "Maybe I be excused, Sire.",
+          statement: "May I be excused, Sire.",
         },
         {
           author: player,
-          statement: "Go on then.",
+          statement: `To the bones of the innocents we massacred when we took ${playerFaction.capital}? They were traitors. That is war.`,
+        },
+        {
+          author: adviser,
+          statement: "How reassuringly abstract, Sire.",
+        },
+        {
+          author: player,
+          statement: `That's it, ${adviser.name}. A traitor sympathizes with traitors. Guards! ...`,
         },
       ];
     case "Athaloc of Smyrna":

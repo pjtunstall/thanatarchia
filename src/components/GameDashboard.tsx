@@ -150,6 +150,7 @@ export const GameDashboard = () => {
                   factionFaiths={gameState.factionFaiths}
                   onChangeFaith={gameState.handleChangeFaith}
                   setFactionLeaders={gameState.setFactionLeaders}
+                  setAdviserIndex={gameState.setAdviserIndex}
                 />
               </TabsContent>
             </Tabs>
