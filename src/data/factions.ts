@@ -60,7 +60,7 @@ export const factions: Faction[] = [
     symbol: "𐃏",
     leader: {
       male: {
-        name: "Cymbeline",
+        name: "Uther",
         gender: "male",
         image: romanEmperor,
         biography: "",
@@ -78,7 +78,8 @@ export const factions: Faction[] = [
       "Daughter Brangaine",
       "Son Vortigern",
       "Son Catigern",
-      "Cousin Constantine",
+      "Son Constantine",
+      "Son Cymbaline",
     ],
     territories: ["Britannia"],
     troops: 1000,

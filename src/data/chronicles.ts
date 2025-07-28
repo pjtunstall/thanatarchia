@@ -4,7 +4,7 @@ import chroniclerScholar from "@/assets/chroniclers/chronicler-scholar-male.jpg"
 import chroniclerNun from "@/assets/chroniclers/chronicler-nun-female.jpg";
 import chroniclerBard from "@/assets/chroniclers/chronicler-bard-female.jpg";
 
-import { Character, ChatEntry, Gender } from "@/types/gameTypes";
+import { Character, ChatEntry, Gender, Faction } from "@/types/gameTypes";
 import { getDate } from "@/lib/time";
 import { uninitialBold } from "@/lib/utils";
 
@@ -185,9 +185,7 @@ export const battleChronicle = ({
         }
       }
     case "Agilu Agisildsdaughter":
-      // Only the hostile case needs implementing unless, at
-      // some point, I decide to let this Easter-egg character
-      // also be an adviser.
+      // Only the hostile case needs implementing unless, atsome point, I decide to let this Easter-egg character also be an adviser.
       if (success) {
         return `In battle have fallen many brave ${defenders}, defending their homes in ${territory} land. ${attackers}, in blood, their blades have reddened. A dark day indeed as the sun goes down.`;
       } else {
@@ -240,3 +238,89 @@ export function recruitChronicle(
       return `Flock now to the ${faction} fighters aplenty. Lavish the largess of their leader, I'm told.`;
   }
 }
+
+type endChronicleProps = {
+  chronicler: Character;
+  bias: string;
+  success: boolean;
+  player: Character;
+  faction: Faction;
+};
+
+export const endChronicle = ({
+  chronicler,
+  bias,
+  success,
+  player,
+  faction,
+}: endChronicleProps): string => {
+  const they = player.gender === "male" ? "he" : "she";
+  const They = player.gender === "male" ? "He" : "She";
+  const their = player.gender === "male" ? "his" : "her";
+
+  switch (chronicler.name) {
+    case "John of Colchis":
+      if (bias === "friendly") {
+        if (success) {
+          return `O happy day! After many trials, our beloved sovereign, ${player.name}, has established such a mighty realm that none may assail it. God bless you, ${player.name}!`;
+        } else {
+          return `Alas! Though cruel fate taken our noble leader, ${their} deeds will shine down the ages as an inspiration to all. It is said that ${they} died as ${they} lived, cut down in the thick of battle. In a way, surely, that is the greater victory. I wouldn't mind being cut down in the thick of battle, to be pieced by spears or hacked up with a sword. Although... I must say, I am rather gravitating towards being torn apart by wild horses. I know some friends who were martyred that way in Scythia and it does sound rather exhilarating.`;
+        }
+      } else {
+        if (success) {
+          return `Hard times are upon us. ${player.name} has led the ${faction.name} to victory, carving out a realm by violence and persecution of God's children. We can only pray that ${they} will get their just deserts in the end.`;
+        } else {
+          return `Hallelluja! God has answered our preyers. The tyrant ${player.name} is dead. The people rejoice. I cannot describe how happy the people are. Such songs of joy. Such exhultation. I saw ${their} body dragged in the street by a jeering mob. Even the ${faction.name} cast stones.`;
+        }
+      }
+    case "Priscilla of Byzantium":
+      if (bias === "friendly") {
+        if (success) {
+          return `.`;
+        } else {
+          return `.`;
+        }
+      } else {
+        if (success) {
+          return ``;
+        } else {
+          return `.`;
+        }
+      }
+    case "Eudaemonia of Rheims":
+      if (bias === "friendly") {
+        if (success) {
+          return `.`;
+        } else {
+          return `.`;
+        }
+      } else {
+        if (success) {
+          return `.`;
+        } else {
+          return `.`;
+        }
+      }
+    case "Athaloc of Smyrna":
+      if (bias === "friendly") {
+        if (success) {
+          return `.`;
+        } else {
+          return `.`;
+        }
+      } else {
+        if (success) {
+          return `How curious! ${player.name} has read the classics but has not understood them. I doubt ${they} got much further than the first chapter of Vegetius. And yet, fascinating how these loutish ${faction.name} have eked out a realm after all.`;
+        } else {
+          return `Most predictable! Anyone acquainted with even the most basic of hermeneutics could have seen this coming. The heretic ${faction.name} have finally had the good sense to surrender. Rumor has it, ${player.name}, had ${their} throat slit by one of ${their} own retainers while attempting to flee. I leave it to the reader to decide what credence to give that.`;
+        }
+      }
+    case "Agilu Agisildsdaughter":
+      // Only the hostile case needs implementing unless, at some point, I decide to let this Easter-egg character also be an adviser.
+      if (success) {
+        return `.`;
+      } else {
+        return `.`;
+      }
+  }
+};
