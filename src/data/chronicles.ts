@@ -38,7 +38,7 @@ export function initialChronicles(): ChatEntry[] {
       author: getChroniclerByName("John of Colchis"),
       date: initialDate,
       statement:
-        "O blessed turmoil! O what troubled times! I feel such a strange warming of the heart. Does this mean... Can it really be? COME ON APOCALYPSE! Would it be better to die by impaling or fire? Or by an angel's flaming sword? But would that count as martyrdom? I must pray for more answers...",
+        "O blessed turmoil! O what troubled times! I feel such a strange warming of the heart. Does this mean... Can it really be? COME ON APOCALYPSE! (Now, would it be better to die by impaling or fire? Or by an angel's flaming sword? But would that count as martyrdom? I must pray for more answers...)",
     },
   ];
 }
@@ -84,15 +84,25 @@ const agilu: Character = {
 
 export const chroniclersAfterTheIncident = [...chroniclers.slice(0, 3), agilu];
 
-export const battleChronicle = (
-  chronicler: Character,
-  bias: string,
-  success: boolean,
-  winners: string,
-  losers: string,
-  territoryName: string,
-  leaderCharacter: Character
-): string => {
+type battleChronicleProps = {
+  chronicler: Character;
+  bias: string;
+  success: boolean;
+  winners: string;
+  losers: string;
+  territoryName: string;
+  leaderCharacter: Character;
+};
+
+export const battleChronicle = ({
+  chronicler,
+  bias,
+  success,
+  winners,
+  losers,
+  territoryName,
+  leaderCharacter,
+}: battleChronicleProps): string => {
   let territory = uninitialBold(territoryName);
   let attackers: string;
   let attacker: string;

@@ -188,15 +188,15 @@ export const useCombat = ({
           ? factions[playerIndex].name
           : toTerritory.owner;
         const losers = victory ? toTerritory.owner : factions[playerIndex].name;
-        const chronicleEntryStatement = battleChronicle(
-          author,
+        const chronicleEntryStatement = battleChronicle({
+          chronicler: author,
           bias,
-          victory,
+          success: victory,
           winners,
           losers,
-          to,
-          factionLeaders[playerIndex]
-        );
+          territoryName: to,
+          leaderCharacter: factionLeaders[playerIndex],
+        });
         addChronicleEntry(author, chronicleEntryStatement, turn);
         if (bias === "friendly") {
           entries.push({
@@ -208,15 +208,15 @@ export const useCombat = ({
         } else {
           author = chroniclers[adviserIndex];
           bias = "friendly";
-          const chronicleEntryStatement = battleChronicle(
-            author,
+          const chronicleEntryStatement = battleChronicle({
+            chronicler: author,
             bias,
-            victory,
+            success: victory,
             winners,
             losers,
-            to,
-            factionLeaders[playerIndex]
-          );
+            territoryName: to,
+            leaderCharacter: factionLeaders[playerIndex],
+          });
           entries.push({
             author,
             message: chronicleEntryStatement,
