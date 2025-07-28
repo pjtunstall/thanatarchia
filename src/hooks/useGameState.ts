@@ -11,7 +11,7 @@ export const useGameState = () => {
     initializeLeaders(factions)
   );
   const gameCore = useGameCore();
-  const chronicles = useChronicles(gameCore.currentTurn);
+  const chroniclesHook = useChronicles(gameCore.currentTurn);
   const {
     handleRecruit,
     executeAITurn,
@@ -29,16 +29,16 @@ export const useGameState = () => {
     factionLeaders: factionLeaders,
     updateTerritories: gameCore.updateTerritories,
     setFactionTreasures: gameCore.setFactionTreasures,
-    addChronicleEntry: chronicles.addChronicleEntry,
+    addChronicleEntry: chroniclesHook.addChronicleEntry,
     success: gameCore.success,
     setSuccess: gameCore.setSuccess,
     scheduledAttacks: gameCore.scheduledAttacks,
     setScheduledAttacks: gameCore.setScheduledAttacks,
-    enqueueBattleMessage: chronicles.enqueueBattleMessage,
+    enqueueBattleMessage: chroniclesHook.enqueueBattleMessage,
     selectedTerritoryName: gameCore.selectedTerritoryName,
-    adviserIndex: chronicles.adviserIndex,
+    adviserIndex: chroniclesHook.adviserIndex,
     turn: gameCore.currentTurn,
-    hasChangedFromEudaemonia: chronicles.hasChangedFromEudaemonia,
+    hasChangedFromEudaemonia: chroniclesHook.hasChangedFromEudaemonia,
   });
 
   const generateResources = useCallback(() => {
@@ -58,7 +58,7 @@ export const useGameState = () => {
   }, [
     gameCore.factionTerritories,
     gameCore.playerIndex,
-    chronicles.addChronicleEntry,
+    chroniclesHook.addChronicleEntry,
   ]);
 
   const checkGameStatus = useCallback(() => {
@@ -69,28 +69,28 @@ export const useGameState = () => {
     );
     if (playerTerritories >= 9) {
       gameCore.setGameStatus("victory");
-      chronicles.generateFinalChronicles("victory", gameCore.currentTurn);
+      chroniclesHook.generateFinalChronicles("victory", gameCore.currentTurn);
       return "victory";
     } else if (playerTerritories === 0 || playerTroops < 1) {
       gameCore.setGameStatus("defeat");
-      chronicles.generateFinalChronicles("defeat", gameCore.currentTurn);
+      chroniclesHook.generateFinalChronicles("defeat", gameCore.currentTurn);
       return "defeat";
     }
     return "playing";
   }, [
     gameCore.factionTerritories,
     gameCore.playerIndex,
-    chronicles.generateFinalChronicles,
+    chroniclesHook.generateFinalChronicles,
   ]);
 
   const resetGame = useCallback(() => {
     gameCore.resetGame();
-    chronicles.resetChronicles();
+    chroniclesHook.resetChronicles();
     setFactionLeaders(initializeLeaders(factions));
-  }, [gameCore.resetGame, chronicles.resetChronicles]);
+  }, [gameCore.resetGame, chroniclesHook.resetChronicles]);
 
   const handleEndTurn = useCallback(() => {
-    handleScheduledAttacks(chronicles.adviserIndex, gameCore.currentTurn);
+    handleScheduledAttacks(chroniclesHook.adviserIndex, gameCore.currentTurn);
     generateResources();
     executeAITurn();
     gameCore.setCurrentTurn((prev) => prev + 1);
@@ -119,7 +119,7 @@ export const useGameState = () => {
     ...gameCore,
     factionLeaders,
     setFactionLeaders,
-    ...chronicles,
+    ...chroniclesHook,
     ...otherCombat,
     resetGame,
     handleRecruit,
