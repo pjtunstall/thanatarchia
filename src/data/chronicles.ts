@@ -79,7 +79,7 @@ const agilu: Character = {
   gender: "female",
   image: chroniclerBard,
   biography:
-    "Vandal 'slam-bard', Agilu, keeps it real on the streets of Carthage. She's been among Romans and Rugians, their rulers so lavish. She's been among heathens and heroes when hard fights went down. She sings of Attila the Open-Handed. She'll sing of you too, peerless and bold. (Payment in gold.)",
+    "Vandal 'slam-bard', Agilu, keeps it real on the streets of Carthage. She's been among Romans and Rugians, rulers so lavish. She's been among heathens and heroes when hard fights went down. She sings of Attila the Open-Handed. She'll sing of you too. 'Peerless and bold.' (Payment in gold.)",
 };
 
 export const chroniclersAfterTheIncident = [...chroniclers.slice(0, 3), agilu];
@@ -265,13 +265,13 @@ export const endChronicle = ({
         if (success) {
           return `O happy day! After many trials, our beloved sovereign, ${player.name}, has established such a mighty realm that none may assail it. God bless you, ${player.name}!`;
         } else {
-          return `Alas! Though cruel fate taken our noble leader, ${their} deeds will shine down the ages as an inspiration to all. It is said that ${they} died as ${they} lived, cut down in the thick of battle. In a way, surely, that is the greater victory. I wouldn't mind being cut down in the thick of battle, to be pieced by spears or hacked up with a sword. Although... I must say, I am rather gravitating towards being torn apart by wild horses. I know some friends who were martyred that way in Scythia and it does sound rather exhilarating.`;
+          return `Alas! Though cruel fate taken our noble leader, ${their} deeds will shine down the ages as an inspiration to all. It is said that ${they} died as ${they} lived, cut down in the thick of battle. In a way, surely, that is the greater victory. I wouldn't mind being cut down in the thick of battle, to be pieced by spears or hacked up with a big sword. Although... I must say, I am rather gravitating towards being torn apart by wild horses. I know some friends who were martyred that way in Scythia and it does sound rather exhilarating.`;
         }
       } else {
         if (success) {
           return `Hard times are upon us. ${player.name} has led the ${faction.name} to victory, carving out a realm by violence and persecution of God's children. We can only pray that ${they} will get their just deserts in the end.`;
         } else {
-          return `Hallelluja! God has answered our preyers. The tyrant ${player.name} is dead. The people rejoice. I cannot describe how happy the people are. Such songs of joy. Such exhultation. I saw ${their} body dragged in the street by a jeering mob. Even the ${faction.name} cast stones.`;
+          return `Hallelluja! God has answered our preyers. The tyrant ${player.name} is dead. The people rejoice. I cannot describe how happy we are. Such songs of joy. Such exhultation. I saw ${their} body dragged in the street by a jeering mob. Even the ${faction.name} cast stones.`;
         }
       }
     case "Priscilla of Byzantium":
@@ -307,13 +307,13 @@ export const endChronicle = ({
         if (success) {
           return `Well, I think congratulations are in order. ${player.name} has done a absolutely stirling job of leading the ${faction.name} to victory. I for one will be raising a glass of water if I can find a moment between prayers.`;
         } else {
-          return `Oh what a shame. It seems now certain that the reports are true. ${faction.name} made a pretty decent last stand, by all accounts, and ${player.name} acquitted ${themselves} magnificantly. Hacked to bits, they say. I look forward to watching it when the mimes come round.`;
+          return `Oh what a shame. It seems now certain that the reports are true. The ${faction.name} made a pretty decent last stand, by all accounts, and ${player.name} acquitted ${themselves} magnificantly. Hacked to bits, they say. I look forward to watching it when the mimes come round.`;
         }
       } else {
         if (success) {
           return `How curious! ${player.name} has read the classics but has not understood them. I doubt ${they} got much further than the first chapter of Vegetius. And yet, fascinating how these loutish ${faction.name} have eked out a realm after all.`;
         } else {
-          return `Most predictable! Anyone acquainted with even the most basic of hermeneutics could have seen this coming. The heretic ${faction.name} have finally had the good sense to surrender. Rumor has it, ${player.name}, had ${their} throat slit by one of ${their} own retainers while attempting to flee. I leave it to the reader to decide what credence to give that.`;
+          return `Most predictable! Anyone acquainted with even the most basic hermeneutics could have seen this coming. The heretic ${faction.name} have finally had the good sense to surrender. Rumor has it, ${player.name}, tripped and fell on ${their} own sword while attempting to flee. I leave it to the reader to decide what credence to give that.`;
         }
       }
     case "Agilu Agisildsdaughter":

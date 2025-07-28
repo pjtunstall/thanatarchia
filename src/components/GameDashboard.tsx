@@ -38,6 +38,10 @@ export const GameDashboard = () => {
         <GameOverlay
           gameStatus={gameState.gameStatus}
           onResetGame={gameState.resetGame}
+          hasChangedFromEudaemonia={gameState.hasChangedFromEudaemonia}
+          adviserIndex={gameState.adviserIndex}
+          playerIndex={gameState.playerIndex}
+          factionLeaders={gameState.factionLeaders}
         />
 
         {/* Change from h-screen to calc to account for padding */}
