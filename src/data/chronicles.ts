@@ -297,7 +297,7 @@ export const endChronicle = ({
         if (success) {
           return `Classic pincer move. ${They}'s a military genius. No doubt about it now: trained in Byzantium. Must have been.`;
         } else {
-          return `Such a gallant effort. ${They} went down fighting, like true Romans, whatever their origins. Honestly, the only word that comes to mind is Byzantine. Ah Byzantium... Now. what was I talking about?`;
+          return `Such a gallant effort. ${They} went down fighting, like true Romans, whatever their origins. Honestly, the only word that comes to mind is Byzantine. Ah Byzantium... Now, what was I talking about?`;
         }
       } else {
         if (success) {

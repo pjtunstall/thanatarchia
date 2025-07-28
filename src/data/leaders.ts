@@ -224,10 +224,13 @@ export const adjectives = [
   "blunt",
   "damp",
   "golden",
+  "exquisite bronze",
   "rusty",
   "flaming",
   "sawn-off",
   "bejeweled",
+  "ornamental",
+  "fermented",
 ];
 export const relatives = [
   "father",
@@ -244,11 +247,12 @@ export const weapons = [
   "tapestry",
   "candlestick",
   "spatha",
-  "New testament and Psalms",
+  "New Testament and Psalms",
   "hauberk",
   "diadem",
   "scepter",
   "orb",
+  "pillow",
 ];
 
 export const qualities = [
