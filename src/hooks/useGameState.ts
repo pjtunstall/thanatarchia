@@ -83,10 +83,15 @@ export const useGameState = () => {
     chroniclesHook.generateFinalChronicles,
   ]);
 
+  // Note how this wraps gameCore.resetGame. The reason for the wrapper
+  // here in useGameState is that we need to reset items from the
+  // chroniclesHook, which gameCore doesn't have access to. Consider
+  // refactoring to make only one resetGame necessary.
   const resetGame = useCallback(() => {
     gameCore.resetGame();
-    chroniclesHook.resetChronicles();
     setFactionLeaders(initializeLeaders(factions));
+    chroniclesHook.resetChronicles();
+    chroniclesHook.setHasChangedFromEudaemonia(false);
   }, [gameCore.resetGame, chroniclesHook.resetChronicles]);
 
   const handleEndTurn = useCallback(() => {

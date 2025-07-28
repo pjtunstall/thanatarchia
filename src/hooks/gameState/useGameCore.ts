@@ -84,6 +84,7 @@ export const useGameCore = () => {
     []
   );
 
+  // This resetGame is wrapped in another resetGame in useGameState
   const resetGame = useCallback(() => {
     const freshTerritories = initialTerritories;
     const freshFactionTerritories = factions.map((f) => f.territories);
