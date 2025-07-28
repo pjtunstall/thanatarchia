@@ -283,7 +283,7 @@ export const endChronicle = ({
         if (success) {
           return `Hard times are upon us. ${player.name} has led the ${faction.name} to victory, carving out a realm by violence and persecution of God's children. We can only pray that ${they} will get their just deserts in the end.`;
         } else {
-          return `Hallelluja! God has answered our prayers. The tyrant ${player.name} is dead. The people rejoice. I cannot describe how happy we are. Such songs of joy. Such exhultation. I saw ${their} body dragged in the street by a jeering mob. Even the ${faction.name} cast stones.`;
+          return `Hallelluja! God has answered our prayers. The tyrant ${player.name} is dead. The people rejoice. I cannot describe how happy we are. Such songs of joy. Such exhultation. I saw ${their} body dragged in the street by a jeering mob, stray dogs in tow, waiting their turn. Even the ${faction.name} cast stones.`;
         }
       }
     case "Priscilla of Byzantium":
@@ -316,7 +316,7 @@ export const endChronicle = ({
             -1
           )} now—which will be fantastic for those of us who don't get chopped into little pieces.`;
         } else {
-          return `I picture ${player.name} sitting now on the porch of the villa ${they} received in the terms of surrender. It's magic hour. Late summer. The time when ripeness turns to rot. The neighbors have come over to hear the same old stories: the time when ${they} was a conqueror, the time ${they} nearly held the world in ${their} hands. What a character, they'll chuckle later. Now those hands hold a cup of Falernian wine, and another cup of Falernian wine... But the light is already fading on the Pontine slopes. Does anyone remember the ${faction.name}?`;
+          return `I picture ${player.name} sitting now on the porch of the villa ${they} received in the terms of surrender. It's magic hour. Late summer. The time when ripeness turns to rot. The neighbors have come over to hear the same old stories: the time when ${they} was a conqueror, the time ${they} nearly held the world in ${their} hands. What a character, they'll chuckle to themselves later. Now those hands hold a cup of Falernian wine, and another cup of Falernian wine... But the light is already fading on the Pontine slopes. Does anyone remember the ${faction.name}?`;
         }
       }
     case "Athaloc of Smyrna":
