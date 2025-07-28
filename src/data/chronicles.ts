@@ -254,10 +254,22 @@ export const endChronicle = ({
   player,
   faction,
 }: endChronicleProps): string => {
-  const they = player.gender === "male" ? "he" : "she";
-  const They = player.gender === "male" ? "He" : "She";
-  const their = player.gender === "male" ? "his" : "her";
-  const themselves = player.gender === "male" ? "himself" : "herself";
+  let they: string;
+  let their: string;
+  let themselves: string;
+  let monarch: string;
+
+  if (player.gender === "male") {
+    they = "he";
+    their = "his";
+    themselves = "himself";
+    monarch = "King";
+  } else {
+    they = "she";
+    their = "her";
+    themselves = "herself";
+    monarch = "Queen";
+  }
 
   switch (chronicler.name) {
     case "John of Colchis":
@@ -291,13 +303,18 @@ export const endChronicle = ({
     case "Eudaemonia of Rheims":
       if (bias === "friendly") {
         if (success) {
-          return `.`;
+          return `Another year, another turn of the world's wheel. Another conqueror. Enjoy your hour, ${player.name}. I suppose that is your part in the clockwork.`;
         } else {
-          return `.`;
+          return `In this year, we must bid our farewells to ${monarch} ${player.name}, who showed such promise. What a dashing figure they used to make on their steed. I wonder what they'll do with the statue.`;
         }
       } else {
         if (success) {
-          return `.`;
+          return `Yet more lands have fallen to the ${
+            faction.name
+          }. They seem unstoppable now. The word emperor is being bandied about. I suppose we shall be enjoying a Pax ${faction.name.slice(
+            0,
+            -1
+          )} now—which will be fantastic for those of us who don't get chopped into little pieces.`;
         } else {
           return `I picture ${player.name} sitting now on the porch of the villa ${they} received in the terms of surrender. It's magic hour. Late summer. The time when ripeness turns to rot. The neighbors have come over to hear the same old stories: the time when ${they} was a conqueror, the time ${they} nearly held the world in ${their} hands. What a character, they'll chuckle later. Now those hands hold a cup of Falernian wine, and another cup of Falernian wine... But the light is already fading on the Pontine slopes. Does anyone remember the ${faction.name}?`;
         }
