@@ -49,7 +49,8 @@ function chat(adviser: Character, player: Character): ChatEntry[] {
       return [
         {
           author: adviser,
-          statement: "The best answer to most choices is no, your Majesty.",
+          statement:
+            "If you want my opinion, your Majesty, the best answer to most choices is 'no'.",
         },
       ];
     case "Eudaemonia of Rheims":
