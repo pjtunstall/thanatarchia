@@ -114,7 +114,7 @@ export const factions: Faction[] = [
   {
     name: "Bagaudae",
     formalName: "Bagaudae of Armorica",
-    capital: "Condate Reidonum",
+    capital: "Condate Riedonum",
     type: "bagaudae",
     color: "hsl(var(--bagaudae))",
     symbol: "⚒",

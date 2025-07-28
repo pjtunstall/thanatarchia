@@ -4,6 +4,7 @@ import { Thanatarchia } from "@/components/game/help/Thanatarchia";
 import { Loyalty } from "@/components/game/help/Loyalty";
 import { Strategy } from "@/components/game/help/Strategy";
 import { War } from "@/components/game/help/War";
+import { Choice } from "@/components/game/help/Choice";
 
 type HelpContentProps = {
   topic: string;
@@ -43,6 +44,8 @@ export function HelpContent({
       );
     case "Loyalty":
       return <Loyalty player={player} adviser={adviser} />;
+    case "Choice":
+      return <Choice player={player} adviser={adviser} />;
     case "Thanatarchia":
       return <Thanatarchia player={player} adviser={adviser} />;
   }
