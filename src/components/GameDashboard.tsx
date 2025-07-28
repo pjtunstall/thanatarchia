@@ -1,16 +1,7 @@
 import React, { useState } from "react";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogClose,
-} from "@/components/ui/dialog";
-import { Badge } from "@/components/ui/badge";
-
-import { Character, BattleReport } from "@/types/gameTypes";
+import { BattleReportDialog } from "@/components/game/BattleReportDialog";
 import { factions } from "@/data/gameData.ts";
 import { useGameState } from "@/hooks/useGameState";
 import { GameMap } from "@/components/game/GameMap";
@@ -18,7 +9,6 @@ import { StatusPanel } from "@/components/game/StatusPanel";
 import { ChroniclesPanel } from "@/components/game/ChroniclesPanel";
 import { ActionsPanel } from "@/components/game/ActionsPanel";
 import { GameOverlay } from "@/components/game/GameOverlay";
-import { CharacterDialog } from "@/components/game/CharacterProfile";
 
 export const GameDashboard = () => {
   const [activeTab, setActiveTab] = useState("status");
@@ -166,75 +156,5 @@ export const GameDashboard = () => {
         dequeueBattleMessage={gameState.dequeueBattleMessage}
       />
     </>
-  );
-};
-
-const BattleReportDialog: React.FC<{
-  battleMessage: BattleReport | null;
-  dequeueBattleMessage: () => void;
-}> = ({ battleMessage, dequeueBattleMessage }) => {
-  if (!battleMessage) return null;
-
-  return (
-    <Dialog
-      open={true}
-      onOpenChange={(open) => {
-        if (!open) dequeueBattleMessage();
-      }}
-    >
-      <DialogContent>
-        <BattleReportComponent
-          chronicler={battleMessage.author}
-          chronicle={battleMessage.message}
-          stats={battleMessage.stats}
-          success={battleMessage.success}
-        />
-        <DialogClose />
-      </DialogContent>
-    </Dialog>
-  );
-};
-
-const BattleReportComponent: React.FC<{
-  chronicler: Character;
-  chronicle: string;
-  stats: string;
-  success: boolean;
-}> = ({ chronicler, chronicle, stats, success }) => {
-  return (
-    <div className="flex flex-col md:flex-row gap-6 items-start">
-      <img
-        src="src/assets/battle.jpg"
-        alt="Battle scene"
-        className="w-full md:w-1/2 rounded object-cover max-h-[300px]"
-      />
-      <div className="flex-1 space-y-4 max-h-[300px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
-        <DialogHeader>
-          <DialogTitle className="text-xl">
-            {success ? "Huzzah!" : "Alas!"}
-          </DialogTitle>
-        </DialogHeader>
-        <div className="border-l-4 border-primary pl-4 py-2">
-          <div className="flex items-center gap-3 mb-2">
-            <CharacterDialog character={chronicler} />
-            <Badge variant="secondary">{chronicler.name}</Badge>
-          </div>
-          <p
-            className="text-sm italic font-serif leading-relaxed"
-            style={{ whiteSpace: "pre-wrap" }}
-            dangerouslySetInnerHTML={{
-              __html: `"${chronicle}"`,
-            }}
-          ></p>
-          <p className="h-4" />
-          <p
-            className="text-sm font-serif leading-relaxed text-gray-500"
-            style={{ whiteSpace: "pre-wrap" }}
-          >
-            {stats}
-          </p>
-        </div>
-      </div>
-    </div>
   );
 };
