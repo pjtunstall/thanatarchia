@@ -299,7 +299,7 @@ export const endChronicle = ({
         if (success) {
           return `.`;
         } else {
-          return `.`;
+          return `I picture ${player.name} sitting now on the porch of the villa ${they} received in the terms of surrender. It's magic hour. Late summer. The time when ripeness turns to rot. The neighbors have come over to hear the same old stories: the time when ${they} was a conqueror, the time ${they} nearly held the world in ${their} hands. What a character, they'll chuckle later. Now those hands hold a cup of Falernian wine, and another cup of Falernian wine... But the light is already fading on the Pontine slopes. Does anyone remember the ${faction.name}?`;
         }
       }
     case "Athaloc of Smyrna":
