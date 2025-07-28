@@ -4,7 +4,6 @@ import { ScrollText } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-import { randomItem } from "@/lib/utils";
 import { GameStatus, Character } from "@/types/gameTypes";
 import {
   endChronicle,
@@ -36,7 +35,11 @@ export const GameOverlay: React.FC<GameOverlayProps> = ({
   let chronicler: Character;
   let bias = "hostile";
   if (hasChangedFromEudaemonia) {
-    chronicler = randomItem(chroniclersAfterTheIncident);
+    const i = Math.floor(Math.random() * chroniclersAfterTheIncident.length);
+    chronicler = chroniclersAfterTheIncident[i];
+    if (adviserIndex === i && i !== 3) {
+      bias = "friendly";
+    }
   } else {
     const i = Math.floor(Math.random() * chroniclers.length);
     chronicler = chroniclers[i];

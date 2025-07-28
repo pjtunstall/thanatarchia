@@ -289,7 +289,7 @@ export const endChronicle = ({
         if (success) {
           return `Hard times are upon us. ${player.name} has led the ${faction.name} to victory, carving out a realm by violence and persecution of God's children. We can only pray that ${they} will get their just deserts in the end.`;
         } else {
-          return `Hallelluja! God has answered our prayers. The tyrant ${player.name} is dead. The people rejoice. I cannot describe how happy we are. Such songs of joy. Such exhultation. I saw ${their} body dragged in the street by a jeering mob, stray dogs in tow, waiting their turn. Even the ${faction.name} cast stones. But this gets me thinking... I've always focused on the pain side of martyrdom, but actually there's a whole world of humiliation to explore. Note to self: say more prayers about this.`;
+          return `Hallelluja! God has answered our prayers. The tyrant ${player.name} is dead. The people rejoice. I cannot describe how happy we are. Such songs of joy. Such exhultation. I saw ${their} body dragged through the streets by a jeering mob, stray dogs in tow, waiting their turn. Even the ${faction.name} cast stones. But this gets me thinking... I've always focused on the pain side of martyrdom, but actually there's a whole world of humiliation to explore. Note to self: say more prayers about this.`;
         }
       }
     case "Priscilla of Byzantium":

@@ -88,7 +88,6 @@ export const useCombat = ({
       const bias =
         author.name === chroniclers[adviserIndex].name ? "friendly" : "hostile";
       const factionName = factions[playerIndex].name;
-      console.log(author, bias, selectedTerritoryName, factionName);
       const chronicleEntryStatement = recruitChronicle(
         author,
         bias,
@@ -113,7 +112,7 @@ export const useCombat = ({
   const handleScheduledAttacks = useCallback(
     (adviserIndex: number, turn: number) => {
       const groupedAttacks = groupScheduledAttacks(scheduledAttacks);
-      const entries: BattleReport[] = [];
+      const battleReportEntries: BattleReport[] = [];
       let losses = 0;
 
       groupedAttacks.forEach(({ to, from, totalTroops, sources }) => {
@@ -198,36 +197,16 @@ export const useCombat = ({
           leaderCharacter: factionLeaders[playerIndex],
         });
         addChronicleEntry(author, chronicleEntryStatement, turn);
-        if (bias === "friendly") {
-          entries.push({
-            author,
-            message: chronicleEntryStatement,
-            stats: `Attack strength: ${totalTroops}\nDefense strength: ${toTerritory.troops}\nLosses: ${losses}`,
-            success: victory,
-          });
-        } else {
-          author = chroniclers[adviserIndex];
-          bias = "friendly";
-          const chronicleEntryStatement = battleChronicle({
-            chronicler: author,
-            bias,
-            success: victory,
-            winners,
-            losers,
-            territoryName: to,
-            leaderCharacter: factionLeaders[playerIndex],
-          });
-          entries.push({
-            author,
-            message: chronicleEntryStatement,
-            stats: `Attack strength: ${totalTroops}\nDefense strength: ${toTerritory.troops}\nLosses: ${losses}`,
-            success: victory,
-          });
-        }
+        battleReportEntries.push({
+          author,
+          message: chronicleEntryStatement,
+          stats: `Attack strength: ${totalTroops}\nDefense strength: ${toTerritory.troops}\nLosses: ${losses}`,
+          success: victory,
+        });
       });
 
       setScheduledAttacks([]);
-      enqueueBattleReports(entries, enqueueBattleMessage);
+      enqueueBattleReports(battleReportEntries, enqueueBattleMessage);
     },
     [
       scheduledAttacks,
