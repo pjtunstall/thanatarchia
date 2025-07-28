@@ -254,17 +254,20 @@ export const endChronicle = ({
   player,
   faction,
 }: endChronicleProps): string => {
+  let They;
   let they: string;
   let their: string;
   let themselves: string;
   let monarch: string;
 
   if (player.gender === "male") {
+    They = "He";
     they = "he";
     their = "his";
     themselves = "himself";
     monarch = "King";
   } else {
+    they = "She";
     they = "she";
     their = "her";
     themselves = "herself";
@@ -283,15 +286,15 @@ export const endChronicle = ({
         if (success) {
           return `Hard times are upon us. ${player.name} has led the ${faction.name} to victory, carving out a realm by violence and persecution of God's children. We can only pray that ${they} will get their just deserts in the end.`;
         } else {
-          return `Hallelluja! God has answered our prayers. The tyrant ${player.name} is dead. The people rejoice. I cannot describe how happy we are. Such songs of joy. Such exhultation. I saw ${their} body dragged in the street by a jeering mob, stray dogs in tow, waiting their turn. Even the ${faction.name} cast stones.`;
+          return `Hallelluja! God has answered our prayers. The tyrant ${player.name} is dead. The people rejoice. I cannot describe how happy we are. Such songs of joy. Such exhultation. I saw ${their} body dragged in the street by a jeering mob, stray dogs in tow, waiting their turn. Even the ${faction.name} cast stones. But this gets me thinking... I've always focused on the pain side of martyrdom, but actually there's a whole world of humiliation to explore. Note to self: say more prayers about this.`;
         }
       }
     case "Priscilla of Byzantium":
       if (bias === "friendly") {
         if (success) {
-          return `.`;
+          return `Classic pincer move. ${They}'s a military genius. No doubt about it now: trained in Byzantium. Must have been.`;
         } else {
-          return `.`;
+          return `Such a gallant effort. ${They} went down fighting.`;
         }
       } else {
         if (success) {
