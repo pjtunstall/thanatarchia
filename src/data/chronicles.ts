@@ -257,6 +257,7 @@ export const endChronicle = ({
   let They;
   let they: string;
   let their: string;
+  let them: string;
   let themselves: string;
   let monarch: string;
 
@@ -264,12 +265,14 @@ export const endChronicle = ({
     They = "He";
     they = "he";
     their = "his";
+    them = "him";
     themselves = "himself";
     monarch = "King";
   } else {
     they = "She";
     they = "she";
     their = "her";
+    them = "her";
     themselves = "herself";
     monarch = "Queen";
   }
@@ -294,13 +297,18 @@ export const endChronicle = ({
         if (success) {
           return `Classic pincer move. ${They}'s a military genius. No doubt about it now: trained in Byzantium. Must have been.`;
         } else {
-          return `Such a gallant effort. ${They} went down fighting.`;
+          return `Such a gallant effort. ${They} went down fighting, like true Romans, whatever their origins. Honestly, the only word that comes to mind is Byzantine. Ah Byzantium... Now. what was I talking about?`;
         }
       } else {
         if (success) {
-          return ``;
+          return `Bravo, ${
+            player.name
+          }! I suppose that means you're the winner. But what a palaver, all these conquests. It's hard to keep track of them all. I suppose we shall all be speaking ${faction.name.slice(
+            0,
+            -1
+          )} now.`;
         } else {
-          return `.`;
+          return `There goes ${player.name}, and good riddance. I always said. Didn't I always say ${they} was no good? You don't remember? Well I'm saying it now.`;
         }
       }
     case "Eudaemonia of Rheims":
@@ -333,15 +341,15 @@ export const endChronicle = ({
         if (success) {
           return `How curious! ${player.name} has read the classics but has not understood them. I doubt ${they} got much further than the first chapter of Vegetius. And yet, fascinating how these loutish ${faction.name} have eked out a realm after all.`;
         } else {
-          return `Most predictable! Anyone acquainted with even the most basic hermeneutics could have seen this coming. The heretic ${faction.name} have finally had the good sense to surrender. Rumor has it, ${player.name}, tripped and fell on ${their} own sword while attempting to flee. I leave it to the reader to decide what credence to give that.`;
+          return `Most predictable! Anyone acquainted with even the most basic hermeneutics could have seen this coming. The heretic ${faction.name} have finally had the good sense to surrender. Rumor has it, ${player.name}, tripped and fell on ${their} own spear while attempting to flee. I leave it to the reader to decide what credence to give that.`;
         }
       }
     case "Agilu Agisildsdaughter":
       // Never an adviser, hence never technically friendly, but she probably would celebrate success.
       if (success) {
-        return `.`;
+        return `In storm of swords ${they} stole lives away, ${player.name} in battle play. I'll sing ${their} name, I'll bring bring ${them} fame. O how ${they}'ll cause ${their} enemies pain. Now pay your bard, your loyal minstrel—O $*!&, what rhymes with minstrel...`;
       } else {
-        return `.`;
+        return `Haha, you're dead, ${player.name}. Blood, blood, blood, blood. Blood, blood, blood. Oooooo, wonderful blood! That'll be 12 solidi and sixpence.`;
       }
   }
 };
