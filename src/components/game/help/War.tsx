@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
-import { Chat } from "@/components/game/Chat";
+
 import { Character, ChatEntry, Faction } from "@/types/gameTypes";
+import { Chat } from "@/components/game/Chat";
 import { factions } from "@/data/factions";
 
 type WarProps = {

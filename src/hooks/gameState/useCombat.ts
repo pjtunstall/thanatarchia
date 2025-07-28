@@ -11,6 +11,7 @@ import { randomItem } from "@/lib/utils";
 import { costOfRecruiting, troopUnit } from "@/data/gameData";
 import {
   chroniclers,
+  chroniclersAfterTheIncident,
   battleChronicle,
   recruitChronicle,
 } from "@/data/chronicles";
@@ -178,9 +179,6 @@ export const useCombat = ({
           );
         }
 
-        // Pick a chronicler at random and add their comment to the chronicles.
-        // If they happen to be the player's adviser, use their comment as the
-        // battle report. If not, get a battle report from the player adviser.
         let author = pickAValidChronicler(hasChangedFromEudaemonia);
         let bias =
           author.name === chroniclers[adviserIndex].name
@@ -522,17 +520,10 @@ function enqueueBattleReports(
   }
 }
 
-let tries = 0;
-
 function pickAValidChronicler(hasChangedFromEudaemonia: boolean): Character {
-  const c = randomItem(chroniclers);
-  if (
-    tries > 99 ||
-    !hasChangedFromEudaemonia ||
-    c.name !== "Eudaemonia of Rheims"
-  ) {
-    return c;
+  if (hasChangedFromEudaemonia) {
+    return randomItem(chroniclersAfterTheIncident);
+  } else {
+    return randomItem(chroniclers);
   }
-  tries++;
-  return pickAValidChronicler(hasChangedFromEudaemonia);
 }

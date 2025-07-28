@@ -1,11 +1,12 @@
-import chroniclerMonk from "@/assets/chronicler-monk-male.jpg";
-import chroniclerScribe from "@/assets/chronicler-scribe-male.jpg";
-import chroniclerMosaic from "@/assets/chronicler-mosaic-female.jpg";
-import chroniclerScholar from "@/assets/chronicler-scholar-male.jpg";
-import chroniclerNun from "@/assets/chronicler-nun-female.jpg";
+import chroniclerScribe from "@/assets/chroniclers/chronicler-scribe-male.jpg";
+import chroniclerPoet from "@/assets/chroniclers/chronicler-poet-female.jpg";
+import chroniclerScholar from "@/assets/chroniclers/chronicler-scholar-male.jpg";
+import chroniclerNun from "@/assets/chroniclers/chronicler-nun-female.jpg";
+import chroniclerBard from "@/assets/chroniclers/chronicler-bard-female.jpg";
 
-import { Character, ChatEntry } from "@/types/gameTypes";
+import { Character, ChatEntry, Gender } from "@/types/gameTypes";
 import { getDate } from "@/lib/time";
+import { uninitialBold } from "@/lib/utils";
 
 function getChroniclerByName(chroniclerName: string): Character {
   return chroniclers.find((c) => c.name === chroniclerName);
@@ -51,13 +52,6 @@ export const chroniclers: Character[] = [
       "A devout ascetic, who seeks martyrdom at every opportunity, John has escaped death on multiple occasions only through the timely intervention of his disciples. He takes the Bible literally, but considers life largely allegorical. When not too delirious from fasting, John's hobbies are exegesis and speaking in voices. (He does a good Attila.) Rumor has it that he once accidentally excommunicated himself in an 'excess of piety' and was only brought back into the fold by special decree of the Pope.",
   },
   {
-    name: "Eudaemonia of Rheims",
-    gender: "female",
-    image: chroniclerMosaic,
-    biography:
-      "World-weary poet, Eudaemonia 'the Jackdaw' of Rheims, casts a jaded eye over this twilight of civilization. She puts her classical education to good use, penning ransom notes for local tyrants. They're always in impeccable hexameters, although she fears the allusions to Cicero may me lost on some warlords.",
-  },
-  {
     name: "Athaloc of Smyrna",
     gender: "male",
     image: chroniclerScholar,
@@ -71,11 +65,24 @@ export const chroniclers: Character[] = [
     biography:
       "A former imperial court lady turned nun after a scandal involving the Emperor's favorite horse and a misunderstanding about inheritance laws. Maintains that everything was better 'in Constantinople', despite having fled the city in disgrace.",
   },
+  {
+    name: "Eudaemonia of Rheims",
+    gender: "female" as Gender,
+    image: chroniclerPoet,
+    biography:
+      "World-weary poet, Eudaemonia 'the Jackdaw' of Rheims, casts a jaded eye over this twilight of civilization. She puts her classical education to good use, penning ransom notes for local tyrants. They're always in impeccable hexameters, although she fears the allusions to Cicero may me lost on some warlords.",
+  },
 ];
 
-function uninitialBold(text: string) {
-  return `<span style="font-style: normal;"><strong>${text}</strong></span>`;
-}
+const agilu: Character = {
+  name: "Agilu Agisildsdaughter",
+  gender: "female",
+  image: chroniclerBard,
+  biography:
+    "Vandal 'slam-bard', Agilu, keeps it real on the streets of Carthage. She's been among Romans and Rugians, their rulers so lavish. She's been among heathens and heroes when hard fights went down. She sings of Attila the Open-Handed. She'll sing of you too, peerless and bold. (Payment in gold.)",
+};
+
+export const chroniclersAfterTheIncident = [...chroniclers.slice(0, 3), agilu];
 
 export const battleChronicle = (
   chronicler: Character,
@@ -93,13 +100,15 @@ export const battleChronicle = (
   let defender: string;
   if (success) {
     attackers = uninitialBold(winners);
+    attacker = uninitialBold(winners.slice(0, -1));
     defenders = uninitialBold(losers);
+    defender = uninitialBold(losers.slice(0, -1));
   } else {
     defenders = uninitialBold(winners);
+    defender = uninitialBold(winners.slice(0, -1));
     attackers = uninitialBold(losers);
+    attacker = uninitialBold(losers.slice(0, -1));
   }
-  attacker = uninitialBold(attackers.slice(0, -1));
-  defender = uninitialBold(defenders.slice(0, -1));
   const leader = uninitialBold(leaderCharacter.name);
 
   switch (chronicler.name) {
@@ -165,6 +174,15 @@ export const battleChronicle = (
           return `A reckless ${attacker} incursion into ${territory} has been repulsed by the ${defenders}. Indeed lack of faith begets folly: the dull wit that begets sin finding a natural counterpart in such doltish stratagems.`;
         }
       }
+    case "Agilu Agisildsdaughter":
+      // Only the hostile case needs implementing unless, at
+      // some point, I decide to let this Easter-egg character
+      // also be an adviser.
+      if (success) {
+        return `In battle have fallen many brave ${defenders}, defending their homes in ${territory} land. ${attackers}, in blood, their blades have reddened. A dark day indeed as the sun goes down.`;
+      } else {
+        return `Today the raven will dine on ${attackers}. The great ${defenders} won glory in ${territory} land. The ${leaderCharacter.gender} === "male" ? "lord" : "lady" of ${attacker} won't be laughing now.`;
+      }
   }
 };
 
@@ -208,5 +226,7 @@ export function recruitChronicle(
           ? `${territory} groans under new taxation as ${leader} strengthens ${pronoun} forces.`
           : `In ${territory}, slaves and vagabonds are lured to join the ${faction}, while decent folk must foot the bill.`;
       }
+    case "Agilu Agisildsdaughter":
+      return `Flock now to the ${faction} fighters aplenty. Lavish the largess of their leader, I'm told.`;
   }
 }

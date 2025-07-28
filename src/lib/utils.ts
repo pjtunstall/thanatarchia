@@ -8,3 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 export function randomItem<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
+
+export function uninitialBold(text: string) {
+  return `<span style="font-style: normal;"><strong>${text}</strong></span>`;
+}
