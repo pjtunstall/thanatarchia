@@ -257,6 +257,7 @@ export const endChronicle = ({
   const they = player.gender === "male" ? "he" : "she";
   const They = player.gender === "male" ? "He" : "She";
   const their = player.gender === "male" ? "his" : "her";
+  const themselves = player.gender === "male" ? "himself" : "herself";
 
   switch (chronicler.name) {
     case "John of Colchis":
@@ -304,9 +305,9 @@ export const endChronicle = ({
     case "Athaloc of Smyrna":
       if (bias === "friendly") {
         if (success) {
-          return `.`;
+          return `Well, I think congratulations are in order. ${player.name} has done a absolutely stirling job of leading the ${faction.name} to victory. I for one will be raising a glass of water if I can find a moment between prayers.`;
         } else {
-          return `.`;
+          return `Oh what a shame. It seems now certain that the reports are true. ${faction.name} made a pretty decent last stand, by all accounts, and ${player.name} acquitted ${themselves} magnificantly. Hacked to bits, they say. I look forward to watching it when the mimes come round.`;
         }
       } else {
         if (success) {
