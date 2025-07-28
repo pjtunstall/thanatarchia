@@ -120,6 +120,7 @@ export const battleChronicle = ({
     attacker = uninitialBold(losers.slice(0, -1));
   }
   const leader = uninitialBold(leaderCharacter.name);
+  const their = leaderCharacter.gender === "male" ? "his" : "her";
 
   switch (chronicler.name) {
     case "John of Colchis":
@@ -157,9 +158,9 @@ export const battleChronicle = ({
         if (success) {
           return Math.random() < 0.5
             ? `They say that the ${attackers} took ${territory} from the ${defenders} today. One feels obliged to offer one's congratulations, although I doubt my contribution will be heard much above the belches of the victory feast, or such 'panegyrics' as their bards declaim.`
-            : `In an act of almost divine benificence, our great leader, ${leader}, has chosen to expand ${attacker} territory, bringing civilization to the grateful folk of ${territory}. (Those that survive his wrath, of course. And the ensuing famine. And the ensuing plague.)`;
+            : `In an act of almost divine benificence, our great leader, ${leader}, has chosen to expand ${attacker} territory, bringing civilization to the grateful folk of ${territory}. (Those that survive ${their} wrath, of course. And the ensuing famine. And the ensuing plague.)`;
         } else {
-          return `Another season, another chronicle. Let's get it over with. The such-and-such (${attackers})--ahem, our beloved protectors, the ${attackers}...--failed to gain whatever it's called (${territory}) from the so-and-sos (${defenders}). And the shadows lengthen.`;
+          return `Another season, another chronicle. Let's get it over with. The such-and-such (${attackers})—ahem, our beloved protectors, the ${attackers}—failed to gain whatever it's called (${territory}) from the so-and-sos (${defenders}). And the shadows lengthen.`;
         }
       } else {
         if (success) {
@@ -254,7 +255,7 @@ export const endChronicle = ({
   player,
   faction,
 }: endChronicleProps): string => {
-  let They;
+  let They: string;
   let they: string;
   let their: string;
   let them: string;
@@ -269,7 +270,7 @@ export const endChronicle = ({
     themselves = "himself";
     monarch = "King";
   } else {
-    they = "She";
+    They = "She";
     they = "she";
     their = "her";
     them = "her";

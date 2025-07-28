@@ -74,7 +74,6 @@ export const factions: Faction[] = [
     },
     faith: "Pelagian",
     relatives: [
-      "Daughter Guinevere",
       "Daughter Brangaine",
       "Son Vortigern",
       "Son Catigern",

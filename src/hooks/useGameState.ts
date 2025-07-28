@@ -69,19 +69,13 @@ export const useGameState = () => {
     );
     if (playerTerritories >= 9) {
       gameCore.setGameStatus("victory");
-      chroniclesHook.generateFinalChronicles("victory", gameCore.currentTurn);
       return "victory";
     } else if (playerTerritories === 0 || playerTroops < 1) {
       gameCore.setGameStatus("defeat");
-      chroniclesHook.generateFinalChronicles("defeat", gameCore.currentTurn);
       return "defeat";
     }
     return "playing";
-  }, [
-    gameCore.factionTerritories,
-    gameCore.playerIndex,
-    chroniclesHook.generateFinalChronicles,
-  ]);
+  }, [gameCore.factionTerritories, gameCore.playerIndex]);
 
   // Note how this wraps gameCore.resetGame. The reason for the wrapper
   // here in useGameState is that we need to reset items from the
