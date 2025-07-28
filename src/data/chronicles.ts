@@ -271,7 +271,7 @@ export const endChronicle = ({
         if (success) {
           return `Hard times are upon us. ${player.name} has led the ${faction.name} to victory, carving out a realm by violence and persecution of God's children. We can only pray that ${they} will get their just deserts in the end.`;
         } else {
-          return `Hallelluja! God has answered our preyers. The tyrant ${player.name} is dead. The people rejoice. I cannot describe how happy we are. Such songs of joy. Such exhultation. I saw ${their} body dragged in the street by a jeering mob. Even the ${faction.name} cast stones.`;
+          return `Hallelluja! God has answered our prayers. The tyrant ${player.name} is dead. The people rejoice. I cannot describe how happy we are. Such songs of joy. Such exhultation. I saw ${their} body dragged in the street by a jeering mob. Even the ${faction.name} cast stones.`;
         }
       }
     case "Priscilla of Byzantium":
@@ -317,7 +317,7 @@ export const endChronicle = ({
         }
       }
     case "Agilu Agisildsdaughter":
-      // Only the hostile case needs implementing unless, at some point, I decide to let this Easter-egg character also be an adviser.
+      // Never an adviser, hence never technically friendly, but she probably would celebrate success.
       if (success) {
         return `.`;
       } else {
