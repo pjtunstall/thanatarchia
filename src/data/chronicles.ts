@@ -38,7 +38,7 @@ export function initialChronicles(): ChatEntry[] {
       author: getChroniclerByName("John of Colchis"),
       date: initialDate,
       statement:
-        "O blessed turmoil! O what troubled times! I feel such a strange warming of the heart. Does this mean... Can it really be? COME ON APOCALYPSE! (Now, would it be better to die by impaling or fire? Or by an angel's flaming sword? But would that count as martyrdom? I must pray for more answers...)",
+        "O blessed turmoil! O what troubled times! I feel such a strange warming of the heart. Does this mean... Can it really be? COME ON APOCALYPSE! (Now, what would be better: to die by impaling or by fire? Or by an angel's flaming sword? But would that count as martyrdom? I must pray for more answers...)",
     },
   ];
 }
