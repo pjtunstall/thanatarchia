@@ -222,10 +222,10 @@ export const factions: Faction[] = [
   {
     name: "Burgundians",
     formalName: "Kingdom of the Burgundians",
-    capital: "Borbetomagus",
+    capital: "Vormatia",
     type: "barbarian",
     color: "hsl(var(--burgundians))",
-    symbol: "✖",
+    symbol: "🗝",
     leader: {
       male: {
         name: "Gundobad",
