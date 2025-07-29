@@ -1,14 +1,4 @@
-import { Chat } from "@/components/game/Chat";
 import { Character, ChatEntry } from "@/types/gameTypes";
-
-type LoyaltyProps = {
-  player: Character;
-  adviser: Character;
-};
-
-export function Loyalty({ player, adviser }: LoyaltyProps) {
-  return <Chat items={loyaltyChat(adviser, player)} />;
-}
 
 export function loyaltyChat(
   adviser: Character,

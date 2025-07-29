@@ -1,14 +1,4 @@
-import { Chat } from "@/components/game/Chat";
 import { Character, ChatEntry } from "@/types/gameTypes";
-
-type ChoiceProps = {
-  player: Character;
-  adviser: Character;
-};
-
-export function Choice({ player, adviser }: ChoiceProps) {
-  return <Chat items={choiceChat(adviser, player)} />;
-}
 
 export function choiceChat(adviser: Character, player: Character): ChatEntry[] {
   const adviserName = adviser.name;

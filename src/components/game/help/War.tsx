@@ -10,6 +10,7 @@ type WarProps = {
   playerFaction: Faction;
   setAdviserIndex: React.Dispatch<React.SetStateAction<number>>;
   setHasChangedFromEudaemonia: React.Dispatch<React.SetStateAction<boolean>>;
+  getBadgeColor: (entry: ChatEntry) => string;
 };
 
 export function War({
@@ -18,6 +19,7 @@ export function War({
   playerFaction,
   setAdviserIndex,
   setHasChangedFromEudaemonia,
+  getBadgeColor,
 }: WarProps) {
   const hasHandledEudaemonia = useRef(false);
   const shouldReplace = Math.random() < 0.5;
@@ -69,7 +71,12 @@ export function War({
     }
   }, [adviser.name, setAdviserIndex, shouldReplace]);
 
-  return <Chat items={chat(adviser, player, playerFaction, shouldReplace)} />;
+  return (
+    <Chat
+      items={chat(adviser, player, playerFaction, shouldReplace)}
+      options={{ getBadgeColor }}
+    />
+  );
 }
 
 let recursionLimit: number;

@@ -21,6 +21,7 @@ export function Help({
   setHasChangedFromEudaemonia,
 }: HelpProps) {
   const [topic, setTopic] = useState<string | null>(null);
+  const getBadgeColor = (entry: ChatEntry) => playerFaction.color;
 
   return (
     <div className="flex flex-col flex-1 min-h-0 pt-3 space-y-4">
@@ -33,9 +34,10 @@ export function Help({
             playerFaction={playerFaction}
             setAdviserIndex={setAdviserIndex}
             setHasChangedFromEudaemonia={setHasChangedFromEudaemonia}
+            getBadgeColor={getBadgeColor}
           />
         ) : (
-          <Chat items={getInitialHint(adviser)} />
+          <Chat items={getInitialHint(adviser)} options={{ getBadgeColor }} />
         )}
       </div>
 

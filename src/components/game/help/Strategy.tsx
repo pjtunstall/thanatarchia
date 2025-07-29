@@ -5,9 +5,15 @@ type StrategyProps = {
   player: Character;
   playerFaction: Faction;
   adviser: Character;
+  getBadgeColor: (entry: ChatEntry) => string;
 };
 
-export function Strategy({ player, playerFaction, adviser }: StrategyProps) {
+export function Strategy({
+  player,
+  playerFaction,
+  adviser,
+  getBadgeColor,
+}: StrategyProps) {
   const adviceEntries: ChatEntry[] = [
     {
       author: player,
@@ -23,7 +29,7 @@ export function Strategy({ player, playerFaction, adviser }: StrategyProps) {
     },
   ];
 
-  return <Chat items={adviceEntries} />;
+  return <Chat items={adviceEntries} options={{ getBadgeColor }} />;
 }
 
 const initialAdvice = (adviser: Character): string => {

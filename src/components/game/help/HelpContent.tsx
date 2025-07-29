@@ -1,5 +1,5 @@
 import { Faction } from "@/types/gameTypes";
-import { Character } from "@/types/gameTypes";
+import { Character, ChatEntry } from "@/types/gameTypes";
 import { Thanatarchia } from "@/components/game/help/Thanatarchia";
 import { Strategy } from "@/components/game/help/Strategy";
 import { War } from "@/components/game/help/War";
@@ -14,6 +14,7 @@ type HelpContentProps = {
   playerFaction: Faction;
   setAdviserIndex: React.Dispatch<React.SetStateAction<number>>;
   setHasChangedFromEudaemonia: React.Dispatch<React.SetStateAction<boolean>>;
+  getBadgeColor: (entry: ChatEntry) => string;
 };
 
 export function HelpContent({
@@ -23,6 +24,7 @@ export function HelpContent({
   playerFaction,
   setAdviserIndex,
   setHasChangedFromEudaemonia,
+  getBadgeColor,
 }: HelpContentProps) {
   switch (topic) {
     case "Strategy":
@@ -31,6 +33,7 @@ export function HelpContent({
           player={player}
           adviser={adviser}
           playerFaction={playerFaction}
+          getBadgeColor={getBadgeColor}
         />
       );
     case "War":
@@ -41,13 +44,27 @@ export function HelpContent({
           playerFaction={playerFaction}
           setAdviserIndex={setAdviserIndex}
           setHasChangedFromEudaemonia={setHasChangedFromEudaemonia}
+          getBadgeColor={getBadgeColor}
         />
       );
     case "Loyalty":
-      return <Chat items={loyaltyChat(adviser, player)} />;
+      return (
+        <Chat
+          items={loyaltyChat(adviser, player)}
+          options={{ getBadgeColor }}
+        />
+      );
     case "Choice":
-      return <Chat items={choiceChat(adviser, player)} />;
+      return (
+        <Chat items={choiceChat(adviser, player)} options={{ getBadgeColor }} />
+      );
     case "Thanatarchia":
-      return <Thanatarchia player={player} adviser={adviser} />;
+      return (
+        <Thanatarchia
+          player={player}
+          adviser={adviser}
+          getBadgeColor={getBadgeColor}
+        />
+      );
   }
 }
