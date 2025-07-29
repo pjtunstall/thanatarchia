@@ -79,39 +79,14 @@ export function War({
   );
 }
 
-let recursionLimit: number;
-
-function getRandomFaction(
-  playerFaction: Faction,
-  otherFactionName: string
-): string {
-  recursionLimit++;
-  let r = Math.floor(Math.random() * factions.length);
-  const randomFactionName = factions[r].name;
-  if (
-    (randomFactionName !== playerFaction.name &&
-      randomFactionName !== otherFactionName) ||
-    recursionLimit > 99
-  ) {
-    return randomFactionName;
-  } else {
-    return getRandomFaction(playerFaction, otherFactionName);
-  }
-}
-
 function chat(
   adviser: Character,
   player: Character,
   playerFaction: Faction,
   shouldReplaceEudaemonia: boolean
 ): ChatEntry[] {
-  const person = adviser.gender === "male" ? "man" : "woman";
-
-  recursionLimit = 100;
-  const factionOne = getRandomFaction(playerFaction, "");
-
-  recursionLimit = 100;
-  const factionTwo = getRandomFaction(playerFaction, factionOne);
+  const person = player.gender === "male" ? "man" : "woman";
+  const [factionOne, factionTwo] = getRandomFactions(playerFaction);
 
   switch (adviser.name) {
     case "John of Colchis":
@@ -208,4 +183,24 @@ function chat(
         },
       ];
   }
+}
+
+function getRandomFactions(playerFaction: Faction): [string, string] {
+  const playerIndex = factions.indexOf(playerFaction);
+
+  let otherFactions = [
+    ...factions.slice(0, playerIndex),
+    ...factions.slice(playerIndex + 1),
+  ];
+  const r = Math.floor(Math.random() * otherFactions.length);
+  const first = otherFactions[r].name;
+
+  const otherOtherFactions = [
+    ...otherFactions.slice(0, r),
+    ...otherFactions.slice(r + 1),
+  ];
+  const s = Math.floor(Math.random() * otherOtherFactions.length);
+  const second = otherOtherFactions[s].name;
+
+  return [first, second];
 }
