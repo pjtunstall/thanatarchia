@@ -64,18 +64,19 @@ export const useGameState = () => {
   const checkGameStatus = useCallback(() => {
     const playerTerritories =
       gameCore.factionTerritories[gameCore.playerIndex].length;
-    const playerTroops = gameCore.factionTroops.reduce(
-      (sum, item) => sum + item
-    );
+    const playerTroops = gameCore.factionTroops[gameCore.playerIndex];
     if (playerTerritories >= 9) {
       gameCore.setGameStatus("victory");
       return "victory";
-    } else if (playerTerritories === 0 || playerTroops < 1) {
+    }
+
+    if (playerTerritories === 0 || playerTroops < 1) {
       gameCore.setGameStatus("defeat");
       return "defeat";
     }
+
     return "playing";
-  }, [gameCore.factionTerritories, gameCore.playerIndex]);
+  }, [gameCore.factionTerritories, gameCore.factionTroops]);
 
   // Note how this wraps gameCore.resetGame. The reason for the wrapper
   // here in useGameState is that we need to reset items from the
