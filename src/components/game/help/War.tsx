@@ -153,15 +153,17 @@ function chat(
           },
           {
             author: adviser,
-            statement: `Very well, my ${
+            statement: `So be it, my ${
               player.gender === "male" ? "Lord" : "Lady"
-            }. Tell that to the bones of the innocents you massacred when you took ${
+            }. Tell that to innocents you massacred when you took ${
               playerFaction.capital
-            }. Tell it to the women you enslaved. The starving...`,
+            }; the survivors, still grieving, whom you enslaved; or the starving children of ${
+              playerFaction.territories[0]
+            }.`,
           },
           {
             author: player,
-            statement: "They were traitors. That is war.",
+            statement: "That is war.",
           },
           {
             author: adviser,
