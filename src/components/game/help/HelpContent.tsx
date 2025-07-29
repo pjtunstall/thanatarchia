@@ -1,10 +1,11 @@
 import { Faction } from "@/types/gameTypes";
 import { Character } from "@/types/gameTypes";
 import { Thanatarchia } from "@/components/game/help/Thanatarchia";
-import { Loyalty } from "@/components/game/help/Loyalty";
 import { Strategy } from "@/components/game/help/Strategy";
 import { War } from "@/components/game/help/War";
-import { Choice } from "@/components/game/help/Choice";
+import { Chat } from "@/components/game/Chat";
+import { loyaltyChat } from "@/components/game/help/Loyalty";
+import { choiceChat } from "@/components/game/help/Choice";
 
 type HelpContentProps = {
   topic: string;
@@ -43,9 +44,9 @@ export function HelpContent({
         />
       );
     case "Loyalty":
-      return <Loyalty player={player} adviser={adviser} />;
+      return <Chat items={loyaltyChat(adviser, player)} />;
     case "Choice":
-      return <Choice player={player} adviser={adviser} />;
+      return <Chat items={choiceChat(adviser, player)} />;
     case "Thanatarchia":
       return <Thanatarchia player={player} adviser={adviser} />;
   }

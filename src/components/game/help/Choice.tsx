@@ -7,10 +7,10 @@ type ChoiceProps = {
 };
 
 export function Choice({ player, adviser }: ChoiceProps) {
-  return <Chat items={chat(adviser, player)} />;
+  return <Chat items={choiceChat(adviser, player)} />;
 }
 
-function chat(adviser: Character, player: Character): ChatEntry[] {
+export function choiceChat(adviser: Character, player: Character): ChatEntry[] {
   const adviserName = adviser.name;
 
   switch (adviserName) {

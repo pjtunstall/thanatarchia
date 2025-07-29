@@ -20,8 +20,6 @@ export function War({
   setHasChangedFromEudaemonia,
 }: WarProps) {
   const hasHandledEudaemonia = useRef(false);
-
-  // Declare the random boolean at the top
   const shouldReplace = Math.random() < 0.5;
 
   useLayoutEffect(() => {
@@ -32,31 +30,31 @@ export function War({
       hasHandledEudaemonia.current = true;
 
       if (shouldReplace) {
-        // Set up the interaction listener AFTER this render is complete
+        // Set up the interaction listener AFTER this render is complete.
         const setupListener = () => {
           const clickHandler = (event) => {
-            // Check if the click is specifically on the "Ask about..." button
+            // Check if the click is specifically on the "Ask about..." button.
             const target = event.target;
             const isAskAboutButton =
               target.closest("[data-radix-dropdown-menu-trigger]") ||
               (target.textContent &&
                 target.textContent.includes("Ask about..."));
 
-            // Trigger change for ANY click that's NOT the "Ask about..." button
+            // Trigger change for ANY click that's NOT the "Ask about..." button.
             if (!isAskAboutButton) {
               setAdviserIndex(0);
               setHasChangedFromEudaemonia(true);
 
-              // Clean up listeners
+              // Clean up listeners.
               window.removeEventListener("click", clickHandler);
               window.removeEventListener("keydown", keyHandler);
             }
           };
 
           const keyHandler = () => {
-            // Any keypress triggers the change
+            // Any keypress triggers the change.
             setAdviserIndex(0);
-            // Clean up listeners
+            // Clean up listeners.
             window.removeEventListener("click", clickHandler);
             window.removeEventListener("keydown", keyHandler);
           };
@@ -65,7 +63,7 @@ export function War({
           window.addEventListener("keydown", keyHandler);
         };
 
-        // Use setTimeout to ensure this happens after the current render
+        // Use setTimeout to ensure this happens after the current render.
         setTimeout(setupListener, 0);
       }
     }

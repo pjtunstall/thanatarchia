@@ -7,10 +7,13 @@ type LoyaltyProps = {
 };
 
 export function Loyalty({ player, adviser }: LoyaltyProps) {
-  return <Chat items={chat(adviser, player)} />;
+  return <Chat items={loyaltyChat(adviser, player)} />;
 }
 
-function chat(adviser: Character, player: Character): ChatEntry[] {
+export function loyaltyChat(
+  adviser: Character,
+  player: Character
+): ChatEntry[] {
   const adviserName = adviser.name;
 
   switch (adviserName) {
