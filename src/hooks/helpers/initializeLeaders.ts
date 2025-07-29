@@ -61,15 +61,18 @@ function writeBiography(leader: Character, faction: Faction): string {
   const victim1 = randomItem(victims1);
   const victim2 = randomItem(victims2);
 
-  let subjectPronoun: string;
-  let possessivePronoun: string;
+  let They: string;
+  let they: string;
+  let their: string;
 
   if (leader.gender === "male") {
-    subjectPronoun = "He";
-    possessivePronoun = "his";
+    They = "He";
+    they = "he";
+    their = "his";
   } else {
-    subjectPronoun = "She";
-    possessivePronoun = "her";
+    They = "She";
+    they = "she";
+    their = "her";
   }
 
   const fullName = leader.name;
@@ -77,16 +80,16 @@ function writeBiography(leader: Character, faction: Faction): string {
 
   let famedFor: string;
   if (Math.random() < 0.5) {
-    famedFor = `${title} ${firstName} is renowned for ${possessivePronoun} ${quality} and patronage of ${benefactor}.`;
+    famedFor = `${title} ${firstName} is renowned for ${their} ${quality} and how much ${they} cares for ${benefactor}.`;
   } else {
     const threat =
       Math.random() < 0.5
         ? `—and YOU if you don't play your cards right.`
         : `—and YOU if you have a problem with that?`;
-    famedFor = `${title} ${firstName} is widely respected for ${possessivePronoun} persecution of ${victim1}, ${victim2}${threat}`;
+    famedFor = `${title} ${firstName} is widely respected for ${their} persecution of ${victim1}, ${victim2}${threat}`;
   }
 
   return `${fullName}, by the grace of God, ${title} of the ${
     faction.name
-  }, was unanimously elected after ${scapegoat} tragically ${action} ${possessivePronoun} ${relative} with a ${adjective} ${weapon}. (Particularly harrowing for young ${firstName}, as ${subjectPronoun.toLowerCase()} was the only witness.) ${famedFor}`;
+  }, was unanimously elected after ${scapegoat} tragically ${action} ${their} ${relative} with a ${adjective} ${weapon}. (Particularly harrowing for young ${firstName}, as ${They.toLowerCase()} was the only witness.) ${famedFor}`;
 }

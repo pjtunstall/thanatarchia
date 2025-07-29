@@ -8,13 +8,29 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 import { Character, BattleReport } from "@/types/gameTypes";
+import { factions } from "@/data/factions";
+import { chroniclers } from "@/data/chronicles";
 import { CharacterDialog } from "@/components/game/CharacterProfile";
 
-export const BattleReportDialog: React.FC<{
+type BattleReportDialogProps = {
   battleMessage: BattleReport | null;
   dequeueBattleMessage: () => void;
-}> = ({ battleMessage, dequeueBattleMessage }) => {
+  playerIndex: number;
+  adviserIndex: number;
+};
+
+export function BattleReportDialog({
+  battleMessage,
+  dequeueBattleMessage,
+  playerIndex,
+  adviserIndex,
+}: BattleReportDialogProps) {
   if (!battleMessage) return null;
+
+  const badgeColor =
+    battleMessage.author.name === chroniclers[adviserIndex].name
+      ? factions[playerIndex].color
+      : null;
 
   return (
     <Dialog
@@ -29,19 +45,29 @@ export const BattleReportDialog: React.FC<{
           chronicle={battleMessage.message}
           stats={battleMessage.stats}
           success={battleMessage.success}
+          badgeColor={badgeColor}
         />
         <DialogClose />
       </DialogContent>
     </Dialog>
   );
-};
+}
 
-const BattleReportContent: React.FC<{
+type BattleReportContentProps = {
   chronicler: Character;
   chronicle: string;
   stats: string;
   success: boolean;
-}> = ({ chronicler, chronicle, stats, success }) => {
+  badgeColor: string;
+};
+
+function BattleReportContent({
+  chronicler,
+  chronicle,
+  stats,
+  success,
+  badgeColor,
+}: BattleReportContentProps) {
   const image =
     Math.random() < 0.5
       ? "src/assets/battle.jpg"
@@ -72,7 +98,12 @@ const BattleReportContent: React.FC<{
 
         <div className="flex items-center gap-3 mb-2">
           <CharacterDialog character={chronicler} />
-          <Badge variant="secondary">{chronicler.name}</Badge>
+          <Badge
+            variant="secondary"
+            style={badgeColor ? { backgroundColor: badgeColor } : undefined}
+          >
+            {chronicler.name}
+          </Badge>
         </div>
 
         <p
@@ -85,4 +116,4 @@ const BattleReportContent: React.FC<{
       </div>
     </div>
   );
-};
+}

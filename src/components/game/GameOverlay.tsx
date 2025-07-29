@@ -4,7 +4,7 @@ import { ScrollText } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-import { GameStatus, Character } from "@/types/gameTypes";
+import { GameStatus, Character, ChatEntry } from "@/types/gameTypes";
 import {
   endChronicle,
   chroniclers,
@@ -60,6 +60,11 @@ export const GameOverlay: React.FC<GameOverlayProps> = ({
     statement,
   };
 
+  const getBadgeColor = (entry: ChatEntry) =>
+    entry.author.name === chroniclers[adviserIndex].name
+      ? factions[playerIndex].color
+      : null;
+
   const finalItems = [entry];
 
   return (
@@ -77,7 +82,7 @@ export const GameOverlay: React.FC<GameOverlayProps> = ({
           </div>
         </CardHeader>
         <CardContent className="space-y-6">
-          <Chat items={finalItems}></Chat>
+          <Chat items={finalItems} options={{ getBadgeColor }}></Chat>
 
           <div className="pt-6 border-t border-[hsl(var(--border))] text-center">
             <Button onClick={onResetGame} size="lg" className="px-8">

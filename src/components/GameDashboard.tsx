@@ -158,6 +158,8 @@ export const GameDashboard = () => {
       <BattleReportDialog
         battleMessage={gameState.battleMessageQueue[0] ?? null}
         dequeueBattleMessage={gameState.dequeueBattleMessage}
+        playerIndex={gameState.playerIndex}
+        adviserIndex={gameState.adviserIndex}
       />
     </>
   );

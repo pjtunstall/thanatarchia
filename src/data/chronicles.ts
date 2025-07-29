@@ -182,7 +182,7 @@ export const battleChronicle = ({
         if (success) {
           return `Inconceivable! Though it strains credulity, we must note the reports coming out of ${territory} of an engagement in which those perfidious knaves, the ${attackers}, routed the ${defenders}.`;
         } else {
-          return `A reckless ${attacker} incursion into ${territory} has been repulsed by the ${defenders}. Indeed lack of faith begets folly: the dull wit that begets sin finding a natural counterpart in such doltish stratagems.`;
+          return `A reckless ${attacker} incursion into ${territory} has been repulsed by the ${defenders}. Indeed lack of faith begets folly: the dull wit that engenders sin finding a natural counterpart in such doltish stratagems.`;
         }
       }
     case "Agilu Agisildsdaughter":
@@ -304,12 +304,12 @@ export const endChronicle = ({
         if (success) {
           return `Bravo, ${
             player.name
-          }! I suppose that means you're the winner. But what a palaver, all these conquests. It's hard to keep track of them all. I suppose we shall all be speaking ${faction.name.slice(
+          }! I suppose that means you're the winner. But what a palaver, all these conquests. It's hard to keep track of them. I suppose we shall all be speaking ${faction.name.slice(
             0,
             -1
           )} now.`;
         } else {
-          return `There goes ${player.name}, and good riddance. I always said. Didn't I always say ${they} was no good? You don't remember? Well I'm saying it now.`;
+          return `There goes ${player.name}, and good riddance, I say. I never liked ${them}. Didn't I always say ${they} was a bad ${monarch}? You don't remember? Well I'm saying it now.`;
         }
       }
     case "Eudaemonia of Rheims":
