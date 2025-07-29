@@ -42,11 +42,16 @@ const BattleReportContent: React.FC<{
   stats: string;
   success: boolean;
 }> = ({ chronicler, chronicle, stats, success }) => {
+  const image =
+    Math.random() < 0.5
+      ? "src/assets/battle.jpg"
+      : "src/assets/battle-mosaic.jpg";
+
   return (
     <div className="relative">
       <div className="float-left w-1/2 max-w-[300px] mr-6 mb-4">
         <img
-          src="src/assets/battle.jpg"
+          src={image}
           alt="Battle scene"
           className="w-full h-auto max-h-[300px] rounded object-cover mb-4"
         />

@@ -66,7 +66,7 @@ export function loyaltyChat(
         },
         {
           author: adviser,
-          statement: "You could say that, my Liege.",
+          statement: "If you like, Sire.",
         },
       ];
     case "Athaloc of Smyrna":
