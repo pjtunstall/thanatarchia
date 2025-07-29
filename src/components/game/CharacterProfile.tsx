@@ -17,7 +17,7 @@ type PlayerCharacterProps = {
 
 export function CharacterProfile({ playerCharacter }: PlayerCharacterProps) {
   return (
-    <div className="flex items-center space-x-4 p-4 bg-muted/30 rounded-lg">
+    <div className="flex items-center space-x-4 p-4 bg-muted/30 rounded-lg border">
       <CharacterDialog character={playerCharacter} size="lg" />
       <div className="flex-1">
         <h3 className="font-semibold text-lg">{playerCharacter.name}</h3>

@@ -5,6 +5,7 @@ import { Coins, Users } from "lucide-react";
 import { Faction, Character, AttackOrder } from "@/types/gameTypes";
 import { getFaithColor } from "@/data/faiths";
 import { CharacterProfile } from "@/components/game/CharacterProfile";
+import { ScrollAreaWithFade } from "@/components/game/ScrollAreaWithFade";
 
 type StatusPanelProps = {
   playerFaction: Faction;
@@ -45,10 +46,12 @@ export function StatusPanel({
       </CardHeader>
 
       <CardContent className="flex-1 flex flex-col min-h-0 overflow-hidden">
-        <div className="p-4 space-y-4">
+        <div className="p-4">
           <CharacterProfile playerCharacter={playerCharacter} />
+        </div>
 
-          <div className="space-y-3">
+        <ScrollAreaWithFade className="flex-1 min-h-0">
+          <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Coins className="w-4 h-4 text-yellow-600" />
               <span className="text-sm font-semibold">Treasure:</span>
@@ -87,7 +90,7 @@ export function StatusPanel({
               ))}
             </div>
           </div>
-        </div>
+        </ScrollAreaWithFade>
       </CardContent>
     </Card>
   );

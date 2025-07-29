@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 type ScrollAreaWithFadeProps = {
   children: ReactNode;
-  height: string;
+  height?: string;
   className?: string;
   fadeOffset?: string;
   startScrolledToBottom?: boolean;
