@@ -49,7 +49,7 @@ export const factions: Faction[] = [
     ],
     territories: ["Thracia", "Aegyptus", "Syria", "Cappadocia"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
   {
     name: "Britons",
@@ -82,7 +82,7 @@ export const factions: Faction[] = [
     ],
     territories: ["Britannia"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
   {
     name: "Moors",
@@ -109,7 +109,7 @@ export const factions: Faction[] = [
     relatives: ["Son Masties", "Son Masgiven", "Cousin Garmul"],
     territories: ["Mauretania"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
   {
     name: "Bagaudae",
@@ -136,7 +136,7 @@ export const factions: Faction[] = [
     relatives: ["Sister Spartaca", "Brother Amandus"],
     territories: ["Armorica"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
   {
     name: "Ostrogoths",
@@ -163,7 +163,7 @@ export const factions: Faction[] = [
     relatives: ["Daughter Hildesuintha", "Nephew Athalaric", "Nephew Eutharic"],
     territories: ["Italia", "Sicilia"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
   {
     name: "Visigoths",
@@ -190,7 +190,7 @@ export const factions: Faction[] = [
     relatives: ["Son Sigismund", "Daughter Galsuintha", "Cousin Reccared"],
     territories: ["Aquitania"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
   {
     name: "Vandals",
@@ -217,7 +217,7 @@ export const factions: Faction[] = [
     relatives: ["Daughter Guiliaruna", "Brother Unthank"],
     territories: ["Africa"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
   {
     name: "Burgundians",
@@ -249,7 +249,7 @@ export const factions: Faction[] = [
     ],
     territories: ["Septimania"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
   {
     name: "Franks",
@@ -276,7 +276,7 @@ export const factions: Faction[] = [
     relatives: ["Daughter Clotilde", "Daughter Ermengarde", "Son Clothar"],
     territories: ["Gallia"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
   {
     name: "Gepids",
@@ -303,7 +303,7 @@ export const factions: Faction[] = [
     relatives: ["Son Gunderit", "Daughter Rosamunda"],
     territories: ["Dacia"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
   {
     name: "Rugians",
@@ -330,7 +330,7 @@ export const factions: Faction[] = [
     relatives: ["Son Felatheus", "Son Flaccitheus", "Son Frideric"],
     territories: ["Scandia"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
   {
     name: "Heruls",
@@ -357,7 +357,7 @@ export const factions: Faction[] = [
     relatives: ["Son Aruth"],
     territories: ["Vistula"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
   {
     name: "Lombards",
@@ -389,7 +389,7 @@ export const factions: Faction[] = [
     ],
     territories: ["Pannonia"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
   {
     name: "Saxons",
@@ -416,7 +416,7 @@ export const factions: Faction[] = [
     relatives: ["Brother Abbio"],
     territories: ["Germania"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
   {
     name: "Suebians",
@@ -443,7 +443,7 @@ export const factions: Faction[] = [
     relatives: ["Son Rechila", "Daughter Ingunde"],
     territories: ["Hispania"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
   {
     name: "Alans",
@@ -477,7 +477,7 @@ export const factions: Faction[] = [
     ],
     territories: ["Dalmatia"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
   {
     name: "Isaurians",
@@ -504,7 +504,7 @@ export const factions: Faction[] = [
     relatives: ["Son Trocundes", "Son Longinus"],
     territories: ["Galatia"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
   {
     name: "Huns",
@@ -531,6 +531,6 @@ export const factions: Faction[] = [
     relatives: ["Brother Ernakh", "Sister Kreka", "Nephew Mundo"],
     territories: ["Scythia"],
     troops: 1000,
-    treasure: 100,
+    treasure: 6000,
   },
 ];

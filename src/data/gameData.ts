@@ -8,6 +8,6 @@ export const factions = initialFactions;
 export const territories = initialTerritories;
 export const adjacentTerritories = neighbors;
 
-export const costOfSpying = 25;
-export const costOfRecruiting = 50;
+export const costOfSpying = 500;
+export const costOfRecruiting = 3000;
 export const troopUnit = 500;
