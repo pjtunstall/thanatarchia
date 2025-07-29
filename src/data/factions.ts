@@ -214,7 +214,7 @@ export const factions: Faction[] = [
       },
     },
     faith: "Arian",
-    relatives: ["Daughter Guiliaruna", "Brother Unthank"],
+    relatives: ["Daughter Guiliaruna", "Son Unthank"],
     territories: ["Africa"],
     troops: 1000,
     treasure: 6000,
