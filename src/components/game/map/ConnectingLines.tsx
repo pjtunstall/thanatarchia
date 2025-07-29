@@ -12,7 +12,7 @@ export function ConnectingLines({
 }: ConnectingLinesProps) {
   return (
     <svg
-      className="absolute inset-0 w-full h-full pointer-events-none"
+      className="absolute inset-0 w-full h-full pointer-events-none z-[1]"
       viewBox="0 0 100 100"
       preserveAspectRatio="none"
     >

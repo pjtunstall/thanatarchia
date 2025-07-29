@@ -1,4 +1,3 @@
-import React from "react";
 import { ScrollText } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,21 +14,21 @@ import { Chat } from "@/components/game/Chat";
 
 type GameOverlayProps = {
   gameStatus: GameStatus;
-  onResetGame: () => void;
   hasChangedFromEudaemonia: boolean;
   adviserIndex: number;
   playerIndex: number;
   factionLeaders: Character[];
+  onResetGame: () => void;
 };
 
-export const GameOverlay: React.FC<GameOverlayProps> = ({
+export function GameOverlay({
   gameStatus,
-  onResetGame,
   hasChangedFromEudaemonia,
   adviserIndex,
   playerIndex,
   factionLeaders,
-}) => {
+  onResetGame,
+}: GameOverlayProps) {
   if (gameStatus === "playing") return null;
 
   let chronicler: Character;
@@ -75,8 +74,8 @@ export const GameOverlay: React.FC<GameOverlayProps> = ({
             <ScrollText className="w-8 h-8 text-[hsl(var(--primary))]" />
             <CardTitle className="text-4xl ancient-title uncial">
               {gameStatus === "victory"
-                ? "CHRONICLES OF TRIUMPH"
-                : "CHRONICLES OF DEFEAT"}
+                ? "Chronicles of Triumph"
+                : "Chronicles of Defeat"}
             </CardTitle>
             <ScrollText className="w-8 h-8 text-[hsl(var(--primary))]" />
           </div>
@@ -85,12 +84,12 @@ export const GameOverlay: React.FC<GameOverlayProps> = ({
           <Chat items={finalItems} options={{ getBadgeColor }}></Chat>
 
           <div className="pt-6 border-t border-[hsl(var(--border))] text-center">
-            <Button onClick={onResetGame} size="lg" className="px-8">
-              Live Again
+            <Button onClick={onResetGame} size="lg" className="px-8 uncial">
+              Play Again?
             </Button>
           </div>
         </CardContent>
       </Card>
     </div>
   );
-};
+}
