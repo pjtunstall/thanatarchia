@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { initializeLeaders } from "@/hooks/gameState/initializeLeaders";
+import { initializeLeaders } from "@/hooks/helpers/initializeLeaders";
 import { factions, adjacentTerritories } from "@/data/gameData";
 import { useGameCore } from "@/hooks/gameState/useGameCore";
 import { useCombat } from "@/hooks/gameState/useCombat";
