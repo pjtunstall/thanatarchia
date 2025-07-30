@@ -113,6 +113,10 @@ export function useGameState() {
     checkGameStatus,
   ]);
 
+  const handleEndGame = () => {
+    gameCore.setGameStatus("defeat");
+  };
+
   useEffect(() => {
     checkGameStatus();
   }, [gameCore.territories]);
@@ -128,5 +132,6 @@ export function useGameState() {
     handleReinforce,
     handleUndoReinforce,
     handleEndTurn,
+    handleEndGame,
   };
 }

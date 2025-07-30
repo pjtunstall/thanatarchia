@@ -7,6 +7,7 @@ import { SelectedTerritoryPanel } from "@/components/game/SelectedTerritoryPanel
 import { Faction, Territory } from "@/types/gameTypes";
 import { chroniclers } from "@/data/chronicles";
 import { BasicActions } from "@/components/game/actions/BasicActions";
+import { BonusActions } from "@/components/game/actions/BonusActions";
 import { factions } from "@/data/factions";
 import { Help } from "@/components/game/Help";
 
@@ -22,6 +23,7 @@ type ActionsPanelProps = {
   scheduledAttacks: AttackOrder[];
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
   onEndTurn: () => void;
+  onEndGame: () => void;
   onRecruit: (territoryName: string) => void;
   onSpy: (territoryId: string) => void;
   onReinforce: (fromTerritoryId: string, toTerritoryId: string) => void;
@@ -60,6 +62,7 @@ export function ActionsPanel({
   onRecruit,
   onSpy,
   onEndTurn,
+  onEndGame,
   onChangeFaith,
   setFactionLeaders,
   setAdviserIndex,
@@ -95,14 +98,7 @@ export function ActionsPanel({
                 factionFaiths={factionFaiths}
               />
 
-              <BasicActions
-                onEndTurn={onEndTurn}
-                onChangeFaith={onChangeFaith}
-                playerIndex={playerIndex}
-                factionFaiths={factionFaiths}
-                factionLeaders={factionLeaders}
-                setFactionLeaders={setFactionLeaders}
-              />
+              <BonusActions onEndTurn={onEndTurn} onEndGame={onEndGame} />
             </>
           ) : (
             <Help

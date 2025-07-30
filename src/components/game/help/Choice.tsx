@@ -52,7 +52,7 @@ export function choiceChat(adviser: Character, player: Character): ChatEntry[] {
         {
           author: adviser,
           statement:
-            "Oh, that is the best part, Sire, when one is surprised, or even shocked, by one's own characters.",
+            "Oh, that is the best part, Sire, when one is surprised, or even shocked, by one's own pen.",
         },
         {
           author: player,

@@ -132,6 +132,7 @@ export function GameDashboard() {
                   scheduledAttacks={gameState.scheduledAttacks}
                   setScheduledAttacks={gameState.setScheduledAttacks}
                   onEndTurn={gameState.handleEndTurn}
+                  onEndGame={gameState.handleEndGame}
                   onRecruit={gameState.handleRecruit}
                   onSpy={gameState.handleSpy}
                   onReinforce={gameState.handleReinforce}

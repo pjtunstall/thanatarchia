@@ -1,17 +1,14 @@
+import { useState } from "react";
+import { Church, Check, ArrowBigRight } from "lucide-react";
+
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { Church, Check, ArrowBigRight } from "lucide-react";
-import { faiths } from "@/data/faiths";
-import { Character } from "@/types/gameTypes";
-import { useState } from "react";
 import {
   AlertDialog,
-  AlertDialogTrigger,
   AlertDialogContent,
   AlertDialogHeader,
   AlertDialogTitle,
@@ -19,6 +16,10 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
+
+import { faiths } from "@/data/faiths";
+import { Character } from "@/types/gameTypes";
 
 type BasicActionsProps = {
   playerIndex: number;
