@@ -50,15 +50,15 @@ export function useCombat({
   factionLeaders,
   factions,
   factionTreasures,
-  updateTerritories,
-  setFactionTreasures,
-  addChronicleEntry,
   scheduledAttacks,
-  setScheduledAttacks,
-  enqueueBattleMessage,
   adviserIndex,
   turn,
   hasChangedFromEudaemonia,
+  updateTerritories,
+  setFactionTreasures,
+  addChronicleEntry,
+  setScheduledAttacks,
+  enqueueBattleMessage,
 }: UseCombatProps) {
   const handleRecruit = useCallback(
     (selectedTerritoryName) => {
@@ -416,14 +416,14 @@ export function useCombat({
 
         const adjacentNames = adjacentTerritories[aiTerritoryName] || [];
 
-        // Filter those adjacent territories owned by the player
+        // Filter those adjacent territories owned by the player.
         const adjacentPlayerTerritories = adjacentNames
           .map((name) => territories.find((t) => t.name === name))
           .filter((t) => t && t.owner === factions[playerIndex].name);
 
         if (adjacentPlayerTerritories.length === 0) return;
 
-        // Only consider attacking if AI territory has enough troops
+        // Only consider attacking if AI territory has enough troops.
         if (aiTerritory.troops && aiTerritory.troops > 500) {
           // Find weakest adjacent player territory to attack
           const weakestTarget = adjacentPlayerTerritories.reduce(
