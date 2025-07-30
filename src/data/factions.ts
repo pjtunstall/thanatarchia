@@ -17,6 +17,9 @@ import vandalChief from "@/assets/vandal-chief-portrait.jpg";
 import hunnicWarlord from "@/assets/hunnic-warlord-portrait.jpg";
 import frankishKing from "@/assets/frankish-king-portrait.jpg";
 import manuscriptQueen from "@/assets/manuscript-queen.jpg";
+import suebianKing from "@/assets/suebian-king.jpg";
+import suebianQueen from "@/assets/suebian-queen.jpg";
+import helmetedMosaicQueen from "@/assets/helmeted-mosaic-queen.jpg";
 
 export const factions: Faction[] = [
   {
@@ -429,13 +432,13 @@ export const factions: Faction[] = [
       male: {
         name: "Hermeric",
         gender: "male",
-        image: barbarianKing,
+        image: suebianKing,
         biography: "",
       },
       female: {
         name: "Ingunde",
         gender: "female",
-        image: visigothicQueen,
+        image: suebianQueen,
         biography: "",
       },
     },
@@ -462,7 +465,7 @@ export const factions: Faction[] = [
       female: {
         name: "Sagdukht",
         gender: "female",
-        image: visigothicQueen,
+        image: helmetedMosaicQueen,
         biography: "",
       },
     },
@@ -474,6 +477,7 @@ export const factions: Faction[] = [
       "Son Addac",
       "Son Sangiban",
       "Son Safrac",
+      "Son Aspar",
     ],
     territories: ["Dalmatia"],
     troops: 1000,

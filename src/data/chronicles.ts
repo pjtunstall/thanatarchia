@@ -169,7 +169,7 @@ export const battleChronicle = ({
       } else {
         if (success) {
           return Math.random() > 0.5
-            ? `It is said that the ${attackers} scored a fabulous win against the ${defenders} at this time. How the starving folk of ${territory} must rejoice at their liberation.`
+            ? `It is said that the ${attackers} scored a fabulous win against the ${defenders} at this time. How the hungry, terrified folk of ${territory} must rejoice at their liberation.`
             : `How tedious! The names of these factions flow on like endless rain: their meaningless triumphs and defeats of equal insignificance. I run my finger over the parchment's roughness as the dying light briefly catches the page. I suppose we must do our duty and record here that the ${attackers} took ${territory} from the ${defenders}.`;
         } else {
           return `The glimmer of a smile almost touches one's face. News reached us today that the ${attackers} failed to wrest ${territory} from the ${defenders}. But it is a cheap pleasure. I might swap the names or swap them back, for all the difference it would make to the suffering people.`;
@@ -292,9 +292,9 @@ export const endChronicle = ({
         }
       } else {
         if (success) {
-          return `Hard times are upon us. ${player.name} has led the ${faction.name} to victory, carving out a realm by violence and persecution of God's children. We can only pray that ${they} will get their just deserts in the end.`;
+          return `Hard times are upon us. ${player.name} has led the ${faction.name} to victory, carving out a realm by violence. We can only pray that ${they} will get their just deserts. Although... Hopefully not too soon. I wouldn't want to miss out on a decent martyrdom. Ah, to be strung up on a gibbet or have a lot of bones thrown in my face. Even beheading? I know it's just having your head lopped off, but if they draw it out right, and maybe do some good tortures first. I don't know, we'll see what God wants.`;
         } else {
-          return `Hallelluja! God has answered our prayers. The tyrant ${player.name} is dead. The people rejoice. I cannot describe how happy we are. Such songs of joy. Such exhultation. I saw ${their} body dragged through the streets by a jeering mob, stray dogs in tow, waiting their turn. Even the ${faction.name} cast stones. But this gets me thinking... I've always focused on the pain side of martyrdom, but actually there's a whole world of humiliation to explore. Note to self: say more prayers about this.`;
+          return `Hallelluja! God has answered our prayers. The tyrant ${player.name} is dead. The people rejoice. I cannot describe how happy we are. Such songs of joy. Such exhultation. I saw ${their} body dragged through the streets by a jeering mob. Even the ${faction.name} cast stones. But this gets me thinking... I've always focused on the pain side of martyrdom, but actually there's a whole world of humiliation to explore. Note to self: say more prayers about this.`;
         }
       }
     case "Priscilla of Byzantium":
@@ -302,7 +302,7 @@ export const endChronicle = ({
         if (success) {
           return `Classic pincer move. ${They}'s a military genius. No doubt about it now: trained in Byzantium. Must have been.`;
         } else {
-          return `Such a gallant effort. ${They} went down fighting, like true Romans, whatever their origins. Honestly, the only word that comes to mind is Byzantine. Ah Byzantium... Now, what was I talking about?`;
+          return `Such a gallant effort. ${They} went down fighting, I'll give ${them} that, like a true Roman, whatever ${their} origins. Honestly, the only word that comes to mind is Byzantine. Ah Constantinople... Now, what was I talking about?`;
         }
       } else {
         if (success) {

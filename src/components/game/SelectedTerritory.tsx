@@ -39,7 +39,7 @@ type SelectedTerritoryInfoProps = {
   factionFaiths: string[];
 };
 
-export function SelectedTerritoryInfo({
+export function SelectedTerritory({
   territories,
   territoryName,
   playerFactionName,

@@ -3,7 +3,7 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
 import { AttackOrder, Character } from "@/types/gameTypes";
-import { SelectedTerritoryInfo } from "@/components/game/SelectedTerritoryInfo";
+import { SelectedTerritory } from "@/components/game/SelectedTerritory";
 import { Faction, Territory } from "@/types/gameTypes";
 import { chroniclers } from "@/data/chronicles";
 import { BasicActions } from "@/components/game/actions/BasicActions";
@@ -79,7 +79,7 @@ export function ActionsPanel({
           />
 
           {selectedTerritoryName ? (
-            <SelectedTerritoryInfo
+            <SelectedTerritory
               territories={territories}
               territoryName={selectedTerritoryName}
               factionLeaders={factionLeaders}
