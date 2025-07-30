@@ -1,16 +1,6 @@
-import { useState } from "react";
 import { ArrowBigRight } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogFooter,
-  AlertDialogCancel,
-  AlertDialogAction,
-} from "@/components/ui/alert-dialog";
+import { useConfirm } from "@/hooks/useConfirm";
 
 type BonusActionsProps = {
   onEndTurn: () => void;
@@ -18,16 +8,15 @@ type BonusActionsProps = {
 };
 
 export function BonusActions({ onEndTurn, onEndGame }: BonusActionsProps) {
-  const [confirmEndGameOpen, setConfirmEndGameOpen] = useState(false);
+  const { openDialog, dialog } = useConfirm(
+    onEndGame,
+    "Are you sure you want to end the game?"
+  );
 
   return (
     <>
       <div className="grid grid-cols-2 gap-2">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setConfirmEndGameOpen(true)}
-        >
+        <Button onClick={openDialog} variant="outline" size="sm">
           End Game
         </Button>
 
@@ -37,22 +26,7 @@ export function BonusActions({ onEndTurn, onEndGame }: BonusActionsProps) {
         </Button>
       </div>
 
-      <AlertDialog
-        open={confirmEndGameOpen}
-        onOpenChange={setConfirmEndGameOpen}
-      >
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>
-              Are you sure you want to end the game?
-            </AlertDialogTitle>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={onEndGame}>Confirm</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      {dialog}
     </>
   );
 }

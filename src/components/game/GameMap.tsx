@@ -15,6 +15,7 @@ import { Legend } from "@/components/game/map/Legend";
 import { CompassRose } from "@/components/game/map/CompassRose";
 import { ConnectingLines } from "@/components/game/map/ConnectingLines";
 import { TerritoryMarkers } from "@/components/game/map/TerritoryMarkers";
+import { useConfirm } from "@/hooks/useConfirm";
 
 type GameMapProps = {
   territories: Territory[];
@@ -28,6 +29,7 @@ type GameMapProps = {
   scheduledAttacks: AttackOrder[];
   onTerritoryClick: (territoryId: string) => void;
   factionFaiths: string[];
+  onEndGame: () => void;
 };
 
 export function GameMap({
@@ -42,8 +44,9 @@ export function GameMap({
   playerFactionSymbol,
   scheduledAttacks,
   onTerritoryClick,
+  onEndGame,
 }: GameMapProps) {
-  // Create faction lookup from centralized data + filter to only show factions with territories
+  // Create faction lookup from centralized data + filter to only show factions with territories.
   const factionLookup = React.useMemo(() => {
     const lookup: Record<string, FactionMiniInfo> = {};
 
@@ -71,13 +74,31 @@ export function GameMap({
     return lookup;
   }, [playerFactionName, playerFactionColor, territories]);
 
+  const { openDialog, dialog } = useConfirm(
+    onEndGame,
+    "Are you sure you want to end the game?"
+  );
+
   return (
     <Card className="h-full">
       <CardHeader className="pb-0">
         <CardTitle className="text-3xl font-bold ancient-title text-center">
-          <span className="initial">☠</span>
-          <span className="uncial">~Thanatarchia~</span>
-          <span className="initial">☠</span>
+          <div className="flex items-center justify-center gap-2">
+            <span
+              onClick={openDialog}
+              className="initial cursor-pointer transition-transform duration-200 hover:scale-125"
+            >
+              ☠
+            </span>
+            <span className="uncial">~Thanatarchia~</span>
+            <span
+              onClick={openDialog}
+              className="initial cursor-pointer transition-transform duration-200 hover:scale-125"
+            >
+              ☠
+            </span>
+            {dialog}
+          </div>
         </CardTitle>
         <p className="h-4" />
         <p className="uncial text-center">

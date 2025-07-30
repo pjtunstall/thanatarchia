@@ -63,6 +63,7 @@ export function GameDashboard() {
               scheduledAttacks={gameState.scheduledAttacks}
               onTerritoryClick={gameState.handleTerritoryClick}
               factionFaiths={gameState.factionFaiths}
+              onEndGame={gameState.handleEndGame}
             />
           </div>
 
