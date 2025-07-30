@@ -302,14 +302,14 @@ export const endChronicle = ({
         }
       } else {
         if (success) {
-          return `Bravo, ${
+          return `Bravo to ${monarch} ${
             player.name
-          }! I suppose that means you're the winner. But what a palaver, all these conquests. It's hard to keep track of them. I suppose we shall all be speaking ${faction.name.slice(
+          }! And what a stylish way to triumph, too. I always did like ${them}. Didn't I always say they were a good ${monarch}? You don't remember? Well I'm saying it now. But what a palaver, all these conquests. It's hard to keep track of them. I suppose we shall all be speaking ${faction.name.slice(
             0,
             -1
           )} now.`;
         } else {
-          return `There goes ${player.name}, and good riddance, I say. I never liked ${them}. Didn't I always say ${they} was a bad ${monarch}? You don't remember? Well I'm saying it now.`;
+          return `Ha, there goes ${player.name}, and good riddance, I say. I never did like ${them}. Didn't I always say there was something a bit off about ${them}? You don't remember? Well I'm saying it now.`;
         }
       }
     case "Eudaemonia of Rheims":
