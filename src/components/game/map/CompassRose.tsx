@@ -1,4 +1,4 @@
-export const CompassRose = () => {
+export function CompassRose() {
   return (
     <svg
       width="60"
@@ -63,4 +63,4 @@ export const CompassRose = () => {
       </text>
     </svg>
   );
-};
+}

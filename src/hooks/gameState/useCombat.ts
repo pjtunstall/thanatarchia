@@ -42,7 +42,7 @@ type UseCombatProps = {
   hasChangedFromEudaemonia: boolean;
 };
 
-export const useCombat = ({
+export function useCombat({
   territories,
   playerIndex,
   adjacentTerritories,
@@ -59,7 +59,7 @@ export const useCombat = ({
   adviserIndex,
   turn,
   hasChangedFromEudaemonia,
-}: UseCombatProps) => {
+}: UseCombatProps) {
   const handleRecruit = useCallback(
     (selectedTerritoryName) => {
       const playerTreasury = factionTreasures[playerIndex];
@@ -457,7 +457,7 @@ export const useCombat = ({
     getValidAttackTargets,
     executeAITurn,
   };
-};
+}
 
 type AttackGroup = {
   to: string;

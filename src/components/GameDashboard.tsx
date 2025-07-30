@@ -10,7 +10,7 @@ import { ChroniclesPanel } from "@/components/game/ChroniclesPanel";
 import { ActionsPanel } from "@/components/game/ActionsPanel";
 import { GameOverlay } from "@/components/game/GameOverlay";
 
-export const GameDashboard = () => {
+export function GameDashboard() {
   const [activeTab, setActiveTab] = useState("status");
   const gameState = useGameState();
 
@@ -163,4 +163,4 @@ export const GameDashboard = () => {
       />
     </>
   );
-};
+}

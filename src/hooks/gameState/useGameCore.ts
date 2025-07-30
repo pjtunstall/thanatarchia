@@ -9,7 +9,7 @@ import {
 import { factions, territories as initialTerritories } from "@/data/gameData";
 import { chroniclers } from "@/data/chronicles";
 
-export const useGameCore = () => {
+export function useGameCore() {
   const [currentTurn, setCurrentTurn] = useState(1);
   const [selectedTerritoryName, setSelectedTerritoryName] = useState<
     string | null
@@ -153,7 +153,7 @@ export const useGameCore = () => {
     setFactionFaiths,
     handleChangeFaith,
   };
-};
+}
 
 function randomPlayerIndex(factionTerritories: string[][]): number {
   for (let i = 0; i < 256; i++) {

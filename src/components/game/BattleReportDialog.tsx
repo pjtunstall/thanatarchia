@@ -21,9 +21,9 @@ type BattleReportDialogProps = {
 
 export function BattleReportDialog({
   battleMessage,
-  dequeueBattleMessage,
   playerIndex,
   adviserIndex,
+  dequeueBattleMessage,
 }: BattleReportDialogProps) {
   if (!battleMessage) return null;
 

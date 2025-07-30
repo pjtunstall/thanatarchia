@@ -1,3 +1,9 @@
+export type Season = "autumn" | "winter" | "spring" | "summer";
+
+export type GameStatus = "playing" | "victory" | "defeat";
+
+export type Gender = "male" | "female";
+
 export type Faction = {
   name: string;
   formalName: string;
@@ -59,10 +65,6 @@ export type Character = {
   image: string;
   biography: string;
 };
-
-export type GameStatus = "playing" | "victory" | "defeat";
-
-export type Gender = "male" | "female";
 
 export type AttackOrder = {
   from: string;

@@ -8,10 +8,9 @@ export const faiths = [
   "Dyophysite",
   "Nestorian",
   "Donatist",
-  "Gnostic",
 ];
 
-export const getFaithColor = (faith: string): string => {
+export function getFaithColor(faith: string): string {
   switch (faith) {
     case "Chalcedonian":
       return "bg-blue-100 text-blue-800 border-blue-200";
@@ -32,4 +31,4 @@ export const getFaithColor = (faith: string): string => {
     default:
       return "bg-gray-100 text-gray-800 border-gray-200";
   }
-};
+}

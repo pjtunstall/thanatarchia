@@ -6,7 +6,7 @@ import { useGameCore } from "@/hooks/gameState/useGameCore";
 import { useCombat } from "@/hooks/gameState/useCombat";
 import { useChronicles } from "@/hooks/gameState/useChronicles";
 
-export const useGameState = () => {
+export function useGameState() {
   const [factionLeaders, setFactionLeaders] = useState(
     initializeLeaders(factions)
   );
@@ -129,4 +129,4 @@ export const useGameState = () => {
     handleUndoReinforce,
     handleEndTurn,
   };
-};
+}
