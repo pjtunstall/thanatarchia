@@ -3,7 +3,7 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
 import { AttackOrder, Character } from "@/types/gameTypes";
-import { SelectedTerritory } from "@/components/game/SelectedTerritory";
+import { SelectedTerritoryPanel } from "@/components/game/SelectedTerritoryPanel";
 import { Faction, Territory } from "@/types/gameTypes";
 import { chroniclers } from "@/data/chronicles";
 import { BasicActions } from "@/components/game/actions/BasicActions";
@@ -79,20 +79,31 @@ export function ActionsPanel({
           />
 
           {selectedTerritoryName ? (
-            <SelectedTerritory
-              territories={territories}
-              territoryName={selectedTerritoryName}
-              factionLeaders={factionLeaders}
-              playerFactionName={factions[playerIndex].name}
-              playerTreasure={factionTreasures[playerIndex]}
-              scheduledAttacks={scheduledAttacks}
-              setScheduledAttacks={setScheduledAttacks}
-              onRecruit={onRecruit}
-              onSpy={onSpy}
-              onReinforce={onReinforce}
-              onUndoReinforce={onUndoReinforce}
-              factionFaiths={factionFaiths}
-            />
+            <>
+              <SelectedTerritoryPanel
+                territories={territories}
+                territoryName={selectedTerritoryName}
+                factionLeaders={factionLeaders}
+                playerFactionName={factions[playerIndex].name}
+                playerTreasure={factionTreasures[playerIndex]}
+                scheduledAttacks={scheduledAttacks}
+                setScheduledAttacks={setScheduledAttacks}
+                onRecruit={onRecruit}
+                onSpy={onSpy}
+                onReinforce={onReinforce}
+                onUndoReinforce={onUndoReinforce}
+                factionFaiths={factionFaiths}
+              />
+
+              <BasicActions
+                onEndTurn={onEndTurn}
+                onChangeFaith={onChangeFaith}
+                playerIndex={playerIndex}
+                factionFaiths={factionFaiths}
+                factionLeaders={factionLeaders}
+                setFactionLeaders={setFactionLeaders}
+              />
+            </>
           ) : (
             <Help
               adviser={chroniclers[adviserIndex]}

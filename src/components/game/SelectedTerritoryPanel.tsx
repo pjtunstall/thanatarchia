@@ -40,7 +40,7 @@ type SelectedTerritoryInfoProps = {
   factionFaiths: string[];
 };
 
-export function SelectedTerritory({
+export function SelectedTerritoryPanel({
   territories,
   territoryName,
   playerFactionName,
@@ -127,113 +127,115 @@ export function SelectedTerritory({
   const faction = factions.find((f) => f.name === territory.owner);
 
   return (
-    <div className="flex flex-col h-96 p-4">
-      <ScrollAreaWithFade
-        fadeOffset="0px"
-        height="h-full"
-        className="mb-2 rounded border border-muted bg-muted text-sm"
-      >
-        {/* Title Row */}
-        <div className="flex items-center justify-between text-sm mb-8 mt-4">
-          <div className="flex items-center gap-4">
-            <MapPin className="w-4 h-4 text-muted-foreground" />
-            <span className="font-bold text-lg">{territory.name}</span>
-            <Popover>
-              <PopoverTrigger asChild>
-                <div>
-                  <Badge
-                    variant={isPlayerTerritory ? "default" : "secondary"}
-                    className="text-xs cursor-pointer"
-                    style={{ backgroundColor: faction.color }}
-                  >
-                    {territory.owner}
-                  </Badge>
-                </div>
-              </PopoverTrigger>
-              <PopoverContent
-                side="bottom"
-                align="start"
-                sideOffset={8}
-                avoidCollisions
-                collisionBoundary={document.body}
-                collisionPadding={{ top: 9999, bottom: 0, left: 8, right: 8 }}
-                className="p-0 w-[20rem] max-w-[90vw] max-h-[90vh] overflow-y-auto overflow-x-hidden"
-              >
-                <FactionDetails
-                  faction={faction}
-                  leader={factionLeaders[factions.indexOf(faction)]}
-                  isPlayerFaction={faction.name === playerFactionName}
-                  factionFaiths={factionFaiths}
-                />
-              </PopoverContent>
-            </Popover>
+    <div className="flex flex-col flex-1 min-h-0 p-4 overflow-hidden">
+      <div className="flex flex-col flex-1 min-h-0 p-4 overflow-hidden">
+        <ScrollAreaWithFade
+          fadeOffset="0px"
+          height="h-full"
+          className="mb-2 rounded border border-muted bg-muted text-sm flex-1 min-h-0"
+        >
+          {/* Title Row */}
+          <div className="flex items-center justify-between text-sm mb-8 mt-4">
+            <div className="flex items-center gap-4">
+              <MapPin className="w-4 h-4 text-muted-foreground" />
+              <span className="font-bold text-lg">{territory.name}</span>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <div>
+                    <Badge
+                      variant={isPlayerTerritory ? "default" : "secondary"}
+                      className="text-xs cursor-pointer"
+                      style={{ backgroundColor: faction.color }}
+                    >
+                      {territory.owner}
+                    </Badge>
+                  </div>
+                </PopoverTrigger>
+                <PopoverContent
+                  side="bottom"
+                  align="start"
+                  sideOffset={8}
+                  avoidCollisions
+                  collisionBoundary={document.body}
+                  collisionPadding={{ top: 9999, bottom: 0, left: 8, right: 8 }}
+                  className="p-0 w-[20rem] max-w-[90vw] max-h-[90vh] overflow-y-auto overflow-x-hidden"
+                >
+                  <FactionDetails
+                    faction={faction}
+                    leader={factionLeaders[factions.indexOf(faction)]}
+                    isPlayerFaction={faction.name === playerFactionName}
+                    factionFaiths={factionFaiths}
+                  />
+                </PopoverContent>
+              </Popover>
+            </div>
           </div>
-        </div>
 
-        <TreasuryActions
-          territory={territory}
-          territoryName={territoryName}
-          isPlayerTerritory={isPlayerTerritory}
-          playerTreasure={playerTreasure}
-          onRecruit={onRecruit}
-          onSpy={onSpy}
-        />
+          <TreasuryActions
+            territory={territory}
+            territoryName={territoryName}
+            isPlayerTerritory={isPlayerTerritory}
+            playerTreasure={playerTreasure}
+            onRecruit={onRecruit}
+            onSpy={onSpy}
+          />
 
-        {/* Troop Info Row */}
-        <div className="mb-7 text-sm flex items-center gap-4">
-          <Users className="w-4 h-4 text-muted-foreground" />
-          <span className="font-semibold">Troops</span>
-          <div className="flex-1 flex justify-center">
-            {isPlayerTerritory && (
-              <span className="text-muted-foreground">
-                Available: <span className="font-medium">{available}</span>
+          {/* Troop Info Row */}
+          <div className="mb-7 text-sm flex items-center gap-4">
+            <Users className="w-4 h-4 text-muted-foreground" />
+            <span className="font-semibold">Troops</span>
+            <div className="flex-1 flex justify-center">
+              {isPlayerTerritory && (
+                <span className="text-muted-foreground">
+                  Available: <span className="font-medium">{available}</span>
+                </span>
+              )}
+            </div>
+            <div className="flex items-center gap-1">
+              <span className="text-muted-foreground">Total:</span>
+              <span className="font-medium">
+                {isPlayerTerritory || territory.spiedOn ? troopCount : "?"}
               </span>
-            )}
+            </div>
           </div>
-          <div className="flex items-center gap-1">
-            <span className="text-muted-foreground">Total:</span>
-            <span className="font-medium">
-              {isPlayerTerritory || territory.spiedOn ? troopCount : "?"}
-            </span>
-          </div>
-        </div>
 
-        {isPlayerTerritory && (
-          <div className="flex flex-col gap-3 text-sm">
-            <WaxSealButton
-              onClick={() => setAttackExpanded(!attackExpanded)}
-              className="flex items-center gap-2 justify-start text-xs font-semibold text-red-700"
-            >
-              {attackExpanded ? (
-                <ChevronDown className="w-5 h-5 text-red-700" />
-              ) : (
-                <ChevronRight className="w-5 h-5 text-red-700" />
+          {isPlayerTerritory && (
+            <div className="flex flex-col gap-3 text-sm">
+              <WaxSealButton
+                onClick={() => setAttackExpanded(!attackExpanded)}
+                className="flex items-center gap-2 justify-start text-xs font-semibold text-red-700"
+              >
+                {attackExpanded ? (
+                  <ChevronDown className="w-5 h-5 text-red-700" />
+                ) : (
+                  <ChevronRight className="w-5 h-5 text-red-700" />
+                )}
+                Attack
+              </WaxSealButton>
+
+              {attackExpanded && attackRows.length > 0 && (
+                <div className="space-y-1">{attackRows}</div>
               )}
-              Attack
-            </WaxSealButton>
 
-            {attackExpanded && attackRows.length > 0 && (
-              <div className="space-y-1">{attackRows}</div>
-            )}
+              <WaxSealButton
+                onClick={() => setReinforceExpanded(!reinforceExpanded)}
+                className="flex items-center gap-2 justify-start text-xs font-semibold text-green-700"
+              >
+                {reinforceExpanded ? (
+                  <ChevronDown className="w-5 h-5 text-green-700" />
+                ) : (
+                  <ChevronRight className="w-5 h-5 text-green-700" />
+                )}
+                Reinforce
+              </WaxSealButton>
 
-            <WaxSealButton
-              onClick={() => setReinforceExpanded(!reinforceExpanded)}
-              className="flex items-center gap-2 justify-start text-xs font-semibold text-green-700"
-            >
-              {reinforceExpanded ? (
-                <ChevronDown className="w-5 h-5 text-green-700" />
-              ) : (
-                <ChevronRight className="w-5 h-5 text-green-700" />
+              {reinforceExpanded && reinforceRows.length > 0 && (
+                <div className="space-y-1">{reinforceRows}</div>
               )}
-              Reinforce
-            </WaxSealButton>
-
-            {reinforceExpanded && reinforceRows.length > 0 && (
-              <div className="space-y-1">{reinforceRows}</div>
-            )}
-          </div>
-        )}
-      </ScrollAreaWithFade>
+            </div>
+          )}
+        </ScrollAreaWithFade>
+      </div>
     </div>
   );
 }
