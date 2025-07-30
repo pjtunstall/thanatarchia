@@ -144,7 +144,7 @@ export const battleChronicle = ({
         if (success) {
           return `A plucky band of ${attackers}, masterfully led, as if by Constantine himself reborn, have seized ${territory} from the ${defenders}.`;
         } else {
-          return `Alas, though they took the fight to the enemy time and again, the ${attackers} have failed to take ${territory} from the ${defenders}.`;
+          return `Alas, though they took the fight to the enemy time and again, our brave ${attackers} have failed to take ${territory} from the ${defenders}.`;
         }
       } else {
         if (success) {
@@ -288,7 +288,7 @@ export const endChronicle = ({
         if (success) {
           return `O happy day! After many trials, our beloved sovereign, ${player.name}, has established such a mighty realm that none may assail it. God bless you, ${player.name}!`;
         } else {
-          return `Alas! Though cruel fate taken our noble leader, ${their} deeds will shine down the ages as an inspiration to all. It is said that ${they} died as ${they} lived, cut down in the thick of battle. In a way, surely, that is the greater victory. I wouldn't mind being cut down in the thick of battle, to be pieced by spears or hacked up with a big sword. Although... I must say, I am rather gravitating towards being torn apart by wild horses. I know some friends who were martyred that way in Scythia and it does sound rather exhilarating.`;
+          return `Alas! Though cruel fate has stolen our noble leader froom us, ${their} deeds will shine down the ages as an inspiration to all. It is said that ${they} died as ${they} lived, cut down in the thick of battle. In a way, surely, that is the greater victory. I wouldn't mind being cut down in the thick of battle, to be pieced by spears or hacked up with a big sword. Although... I must say, I am rather gravitating towards being torn apart by wild horses. I know some friends who were martyred that way in Scythia and it does sound rather exhilarating.`;
         }
       } else {
         if (success) {

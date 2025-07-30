@@ -44,13 +44,7 @@ export function useGameState() {
   const generateResources = useCallback(() => {
     gameCore.setFactionTreasures((prev) => {
       const updated = prev.map((t, i) => {
-        const income = gameCore.factionTerritories[i].length * 20;
-        // if (i === gameCore.playerIndex) {
-        //   chronicles.addChronicleEntry(
-        //     `Our territories have generated ${income} solidi in tribute and taxes.`,
-        //     "friendly"
-        //   );
-        // }
+        const income = gameCore.factionTerritories[i].length * 1200;
         return t + income;
       });
       return updated;
