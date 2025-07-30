@@ -4,7 +4,7 @@ import { ChatEntry, Character, BattleReport } from "@/types/gameTypes";
 import { chroniclers, initialChronicles } from "@/data/chronicles";
 import { getDate } from "@/lib/time";
 
-export function useChronicles(currentTurn: number) {
+export function useChronicles() {
   const [chronicles, setChronicles] = useState<ChatEntry[]>(initialChronicles);
   const [adviserIndex, setAdviserIndex] = useState(
     Math.floor(Math.random() * chroniclers.length)

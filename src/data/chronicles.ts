@@ -208,7 +208,7 @@ export function recruitChronicle(
 ): string {
   const territory = uninitialBold(territoryName);
   const faction = uninitialBold(factionName);
-  const adjective = faction.slice(0, -1);
+  const adjective = uninitialBold(factionName.slice(0, -1));
   const leader = uninitialBold(leaderCharacter.name);
   const pronoun = leaderCharacter.gender === "male" ? "his" : "her";
 
@@ -221,22 +221,22 @@ export function recruitChronicle(
       }
     case "Priscilla of Byzantium":
       if (bias === "friendly") {
-        return `In a wise move, ${leader} has built up ${pronoun} forces along the borders of ${territory}.`;
+        return `In a wise move, ${leader} has built up ${pronoun} defenses along the borders of ${territory}.`;
       } else {
-        return `More savage warriors have been enlisted in ${territory} to bolster the ${adjective} horde, no doubt lured by promises of plunder.`;
+        return `More savage warriors have been enlisted in ${territory} to bolster the ${adjective} horde.`;
       }
     case "Eudaemonia of Rheims":
       if (bias === "friendly") {
-        return `${territory} rejoices, no doubt, at the build up of ${adjective} forces there.`;
+        return `${territory} rejoices, no doubt, at the build-up of ${adjective} 'defenders' along its borders.`;
       } else {
         return `The ${faction} are recruiting again. They say it is for the defense of ${territory}.`;
       }
     case "Athaloc of Smyrna":
       if (bias === "friendly") {
-        return `${territory} breathes a sigh of relief as ${leader} augments the ${adjective} defenses there.`;
+        return `${territory} breathes a sigh of relief as ${leader} reinforces ${pronoun} retinue there.`;
       } else {
         return Math.random() < 0.5
-          ? `${territory} groans under new taxation as ${leader} strengthens ${pronoun} forces.`
+          ? `${territory} groans under new taxation as ${leader} recruits new marauders.`
           : `In ${territory}, slaves and vagabonds are lured to join the ${faction}, while decent folk must foot the bill.`;
       }
     case "Agilu Agisildsdaughter":

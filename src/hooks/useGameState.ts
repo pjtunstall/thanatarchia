@@ -11,7 +11,7 @@ export function useGameState() {
     initializeLeaders(factions)
   );
   const gameCore = useGameCore();
-  const chroniclesHook = useChronicles(gameCore.currentTurn);
+  const chroniclesState = useChronicles();
   const {
     handleRecruit,
     executeAITurn,
@@ -29,16 +29,16 @@ export function useGameState() {
     factionLeaders: factionLeaders,
     updateTerritories: gameCore.updateTerritories,
     setFactionTreasures: gameCore.setFactionTreasures,
-    addChronicleEntry: chroniclesHook.addChronicleEntry,
+    addChronicleEntry: chroniclesState.addChronicleEntry,
     success: gameCore.success,
     setSuccess: gameCore.setSuccess,
     scheduledAttacks: gameCore.scheduledAttacks,
     setScheduledAttacks: gameCore.setScheduledAttacks,
-    enqueueBattleMessage: chroniclesHook.enqueueBattleMessage,
+    enqueueBattleMessage: chroniclesState.enqueueBattleMessage,
     selectedTerritoryName: gameCore.selectedTerritoryName,
-    adviserIndex: chroniclesHook.adviserIndex,
+    adviserIndex: chroniclesState.adviserIndex,
     turn: gameCore.currentTurn,
-    hasChangedFromEudaemonia: chroniclesHook.hasChangedFromEudaemonia,
+    hasChangedFromEudaemonia: chroniclesState.hasChangedFromEudaemonia,
   });
 
   const generateResources = useCallback(() => {
@@ -58,7 +58,7 @@ export function useGameState() {
   }, [
     gameCore.factionTerritories,
     gameCore.playerIndex,
-    chroniclesHook.addChronicleEntry,
+    chroniclesState.addChronicleEntry,
   ]);
 
   const checkGameStatus = useCallback(() => {
@@ -80,19 +80,19 @@ export function useGameState() {
 
   // Note how this wraps gameCore.resetGame. The reason for the wrapper
   // here in useGameState is that we need to reset items from the
-  // chroniclesHook, which gameCore doesn't have access to. Consider
+  // chroniclesState, which gameCore doesn't have access to. Consider
   // refactoring to make only one resetGame necessary. The current
   // way separates concerns more. The other way might be easier to
   // read.
   const resetGame = useCallback(() => {
     gameCore.resetGame();
     setFactionLeaders(initializeLeaders(factions));
-    chroniclesHook.resetChronicles();
-    chroniclesHook.setHasChangedFromEudaemonia(false);
-  }, [gameCore.resetGame, chroniclesHook.resetChronicles]);
+    chroniclesState.resetChronicles();
+    chroniclesState.setHasChangedFromEudaemonia(false);
+  }, [gameCore.resetGame, chroniclesState.resetChronicles]);
 
   const handleEndTurn = useCallback(() => {
-    handleScheduledAttacks(chroniclesHook.adviserIndex, gameCore.currentTurn);
+    handleScheduledAttacks(chroniclesState.adviserIndex, gameCore.currentTurn);
     generateResources();
     executeAITurn();
     gameCore.setCurrentTurn((prev) => prev + 1);
@@ -121,7 +121,7 @@ export function useGameState() {
     ...gameCore,
     factionLeaders,
     setFactionLeaders,
-    ...chroniclesHook,
+    ...chroniclesState,
     ...otherCombat,
     resetGame,
     handleRecruit,
