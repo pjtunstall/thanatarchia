@@ -330,7 +330,7 @@ export const endChronicle = ({
           }. They seem unstoppable now. The word emperor is being bandied about. I suppose we shall be enjoying a Pax ${faction.name.slice(
             0,
             -1
-          )} now—which will be fantastic for those of us who don't get chopped into little pieces.`;
+          )}a now—which will be fantastic for those of us who don't get chopped into little pieces.`;
         } else {
           return `I picture ${player.name} sitting now on the porch of the villa ${they} received in the terms of surrender. It's magic hour. Late summer. The time when ripeness turns to rot. The neighbors have come over to hear the same old stories: the time when ${they} was a conqueror, the time ${they} nearly held the world in ${their} hands. What a character, they'll chuckle to themselves later. Now those hands hold a cup of Falernian wine, and another cup of Falernian wine... But the light is already fading on the Pontine slopes. Does anyone remember the ${faction.name}?`;
         }

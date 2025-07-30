@@ -23,6 +23,7 @@ import { ScrollAreaWithFade } from "@/components/game/ScrollAreaWithFade";
 import { neighbors } from "@/data/territories";
 import { FactionDetails } from "@/components/game/FactionDetails";
 import { TreasuryActions } from "@/components/game/actions/TreasuryActions";
+import { WaxSealButton } from "@/components/game/actions/WaxSealButton";
 
 type SelectedTerritoryInfoProps = {
   territories: Territory[];
@@ -199,32 +200,34 @@ export function SelectedTerritory({
 
         {isPlayerTerritory && (
           <div className="flex flex-col gap-3 text-sm">
-            <div
-              className="cursor-pointer select-none flex items-center gap-1"
+            <WaxSealButton
               onClick={() => setAttackExpanded(!attackExpanded)}
+              className="flex items-center gap-2 justify-start text-xs font-semibold text-red-700"
             >
               {attackExpanded ? (
-                <ChevronDown className="w-4 h-4 text-red-600" />
+                <ChevronDown className="w-5 h-5 text-red-700" />
               ) : (
-                <ChevronRight className="w-4 h-4 text-red-600" />
+                <ChevronRight className="w-5 h-5 text-red-700" />
               )}
-              <p className="text-xs font-semibold text-red-700">Attack</p>
-            </div>
+              Attack
+            </WaxSealButton>
+
             {attackExpanded && attackRows.length > 0 && (
               <div className="space-y-1">{attackRows}</div>
             )}
 
-            <div
-              className="cursor-pointer select-none flex items-center gap-1"
+            <WaxSealButton
               onClick={() => setReinforceExpanded(!reinforceExpanded)}
+              className="flex items-center gap-2 justify-start text-xs font-semibold text-green-700"
             >
               {reinforceExpanded ? (
-                <ChevronDown className="w-4 h-4 text-green-600" />
+                <ChevronDown className="w-5 h-5 text-green-700" />
               ) : (
-                <ChevronRight className="w-4 h-4 text-green-600" />
+                <ChevronRight className="w-5 h-5 text-green-700" />
               )}
-              <p className="text-xs font-semibold text-green-700">Reinforce</p>
-            </div>
+              Reinforce
+            </WaxSealButton>
+
             {reinforceExpanded && reinforceRows.length > 0 && (
               <div className="space-y-1">{reinforceRows}</div>
             )}
@@ -361,3 +364,48 @@ function adjustAttacks(
     }
   });
 }
+
+const ManuscriptBorder = ({ children, className = "" }) => (
+  <div
+    className={`relative ${className}`}
+    style={{
+      background: `
+        linear-gradient(45deg, #f4f1e8 0%, #ede6d3 25%, #f4f1e8 50%, #e8dcc0 75%, #f4f1e8 100%),
+        radial-gradient(circle at 20% 20%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(101, 67, 33, 0.08) 0%, transparent 50%)
+      `,
+      boxShadow: `
+        inset 0 0 20px rgba(139, 69, 19, 0.1),
+        0 4px 8px rgba(0, 0, 0, 0.15),
+        0 0 0 2px #8B4513,
+        0 0 0 4px #D2B48C,
+        0 0 0 6px #8B4513
+      `,
+      clipPath: `polygon(
+        0% 8px, 8px 0%, calc(100% - 8px) 0%, 100% 8px,
+        100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0% calc(100% - 8px)
+      )`,
+    }}
+  >
+    {children}
+  </div>
+);
+
+const ScrollDivider = () => (
+  <div
+    className="my-4 h-px"
+    style={{
+      background: `repeating-linear-gradient(
+        to right,
+        #8B4513 0px,
+        #8B4513 10px,
+        transparent 10px,
+        transparent 15px,
+        #D2B48C 15px,
+        #D2B48C 25px,
+        transparent 25px,
+        transparent 30px
+      )`,
+    }}
+  />
+);

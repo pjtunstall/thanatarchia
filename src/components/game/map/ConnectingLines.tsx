@@ -63,7 +63,7 @@ export function ConnectingLines({
               x2={to.x}
               y2={to.y}
               stroke="red"
-              strokeWidth="0.8"
+              strokeWidth="0.4"
               markerEnd="url(#arrow)"
               filter="url(#glow)"
             />
