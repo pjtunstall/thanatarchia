@@ -127,11 +127,11 @@ export function SelectedTerritory({
   const faction = factions.find((f) => f.name === territory.owner);
 
   return (
-    <div className="flex flex-col h-full p-4">
+    <div className="flex flex-col h-96 p-4">
       <ScrollAreaWithFade
         fadeOffset="0px"
         height="h-full"
-        className="mb-2 rounded border border-muted bg-muted/30 text-sm"
+        className="mb-2 rounded border border-muted bg-muted text-sm"
       >
         {/* Title Row */}
         <div className="flex items-center justify-between text-sm mb-8 mt-4">
@@ -364,48 +364,3 @@ function adjustAttacks(
     }
   });
 }
-
-const ManuscriptBorder = ({ children, className = "" }) => (
-  <div
-    className={`relative ${className}`}
-    style={{
-      background: `
-        linear-gradient(45deg, #f4f1e8 0%, #ede6d3 25%, #f4f1e8 50%, #e8dcc0 75%, #f4f1e8 100%),
-        radial-gradient(circle at 20% 20%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(101, 67, 33, 0.08) 0%, transparent 50%)
-      `,
-      boxShadow: `
-        inset 0 0 20px rgba(139, 69, 19, 0.1),
-        0 4px 8px rgba(0, 0, 0, 0.15),
-        0 0 0 2px #8B4513,
-        0 0 0 4px #D2B48C,
-        0 0 0 6px #8B4513
-      `,
-      clipPath: `polygon(
-        0% 8px, 8px 0%, calc(100% - 8px) 0%, 100% 8px,
-        100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0% calc(100% - 8px)
-      )`,
-    }}
-  >
-    {children}
-  </div>
-);
-
-const ScrollDivider = () => (
-  <div
-    className="my-4 h-px"
-    style={{
-      background: `repeating-linear-gradient(
-        to right,
-        #8B4513 0px,
-        #8B4513 10px,
-        transparent 10px,
-        transparent 15px,
-        #D2B48C 15px,
-        #D2B48C 25px,
-        transparent 25px,
-        transparent 30px
-      )`,
-    }}
-  />
-);

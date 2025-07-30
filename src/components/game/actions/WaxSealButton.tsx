@@ -29,7 +29,7 @@ export function WaxSealButton({
       disabled={disabled}
       className={`
           relative w-full py-1 px-2 rounded-full border-2 transition-all duration-200 ${className}
-          ${disabled ? "opacity-50" : "hover:scale-105 cursor-pointer"}
+          ${disabled ? "opacity-50" : "hover:scale-[1.02] cursor-pointer"}
         `}
       style={{
         cursor: disabled ? "default" : "pointer",
