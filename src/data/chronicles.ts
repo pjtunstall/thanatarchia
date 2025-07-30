@@ -150,7 +150,11 @@ export const battleChronicle = ({
         if (success) {
           return `In this year, a great rabble of ${attackers} descended upon ${territory}, overwhelming the ${defenders} there.`;
         } else {
-          return `Today, God saw fit to punish the ${attackers} for their impudent assault on the ${defenders} in ${territory}. One senses Byzantine training at work here.`;
+          let msg = `Today, God saw fit to punish the ${attackers} for their impudent assault on the ${defenders} in ${territory}.`;
+          if (attackers !== "Romans" && defenders !== "Romans") {
+            msg += " One senses Byzantine training at work here.";
+          }
+          return msg;
         }
       }
     case "Eudaemonia of Rheims":
