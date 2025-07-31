@@ -162,7 +162,7 @@ export const battleChronicle = ({
         if (success) {
           return Math.random() < 0.5
             ? `They say that the ${attackers} took ${territory} from the ${defenders} today. One feels obliged to offer one's congratulations, although I doubt my contribution will be heard much above the belches of the victory feast, or such 'panegyrics' as their bards declaim.`
-            : `In an act of almost divine benificence, our great leader, ${leader}, has chosen to expand ${attacker} territory, bringing civilization to the grateful folk of ${territory}. (Those that survive ${their} wrath, of course. And the ensuing famine. And the ensuing plague.)`;
+            : `In an act of almost divine benificence, our great leader, ${leader}, has chosen to expand ${their} territory, bringing what passes for ${attacker} civilization to the grateful folk of ${territory}.`;
         } else {
           return `Another season, another chronicle. Let's get it over with. The such-and-such (${attackers})—ahem, our beloved protectors, the ${attackers}—failed to gain whatever it's called (${territory}) from the so-and-sos (${defenders}). And the shadows lengthen.`;
         }
@@ -310,7 +310,7 @@ export const endChronicle = ({
         if (success) {
           return `Bravo to ${monarch} ${
             player.name
-          }! And what a stylish way to triumph, too. I always did like ${them}. Didn't I always say they were a good ${monarch}? You don't remember? Well I'm saying it now. But what a palaver, all these conquests. It's hard to keep track of them. I suppose we shall all be speaking ${faction.name.slice(
+          }! And what a stylish way to triumph, too. I always did like ${them}. Didn't I always say ${they} was a good ${monarch}? You don't remember? Well I'm saying it now. But what a palaver, all these conquests. It's hard to keep track of them. I suppose we shall all be speaking ${faction.name.slice(
             0,
             -1
           )} now.`;

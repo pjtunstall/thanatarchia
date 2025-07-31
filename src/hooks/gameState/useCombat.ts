@@ -383,7 +383,8 @@ export function useCombat({
       const attackForce = Math.floor(fromTerritory.troops! * 0.6);
       const defenseForce = toTerritory.troops!;
       const attackStrength = attackForce + Math.random() * 400;
-      const defenseStrength = defenseForce + Math.random() * 600;
+      const defenseStrength =
+        defenseForce < 100 ? 0 : defenseForce + Math.random() * 600;
       const victory = attackStrength > defenseStrength;
 
       let losses = 0;
@@ -445,17 +446,19 @@ export function useCombat({
 
       addChronicleEntry(author, chronicleEntryStatement, turn);
 
-      enqueueBattleReports(
-        [
-          {
-            author,
-            message: chronicleEntryStatement,
-            stats: `Attack strength: ${attackForce}\nDefense strength: ${defenseForce}\nLosses: ${losses}`,
-            success: !victory,
-          },
-        ],
-        enqueueBattleMessage
-      );
+      if (toTerritory.owner === factions[playerIndex].name) {
+        enqueueBattleReports(
+          [
+            {
+              author,
+              message: chronicleEntryStatement,
+              stats: `Attack strength: ${attackForce}\nDefense strength: ${defenseForce}\nLosses: ${losses}`,
+              success: !victory,
+            },
+          ],
+          enqueueBattleMessage
+        );
+      }
     },
     [
       territories,
@@ -481,10 +484,9 @@ export function useCombat({
 
         const adjacentNames = adjacentTerritories[aiTerritoryName] || [];
 
-        // Filter those adjacent territories owned by the player.
-        const adjacentPlayerTerritories = adjacentNames
-          .map((name) => territories.find((t) => t.name === name))
-          .filter((t) => t && t.owner === factions[playerIndex].name);
+        const adjacentPlayerTerritories = adjacentNames.map((name) =>
+          territories.find((t) => t.name === name)
+        );
 
         if (adjacentPlayerTerritories.length === 0) return;
 
