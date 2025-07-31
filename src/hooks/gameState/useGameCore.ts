@@ -33,25 +33,10 @@ export function useGameCore() {
   );
 
   const handleChangeFaith = useCallback(
-    (
-      factionIndex: number,
-      faith: string,
-      factionLeaders: Character[],
-      setFactionLeaders: React.Dispatch<React.SetStateAction<Character[]>>
-    ) => {
-      const oldFath = factionFaiths[factionIndex];
+    (factionIndex: number, faith: string) => {
       const newFaiths = [...factionFaiths];
       newFaiths[factionIndex] = faith;
       setFactionFaiths(newFaiths);
-      if (faith === "Pagan" && oldFath !== "Pagan") {
-        const leader = { ...factionLeaders[factionIndex] };
-        leader.name = leader.name.split(" ")[0] + " the Apostate";
-        setFactionLeaders((prevLeaders) => {
-          const newLeaders = [...prevLeaders];
-          newLeaders[factionIndex] = leader;
-          return newLeaders;
-        });
-      }
     },
     [factionFaiths]
   );
