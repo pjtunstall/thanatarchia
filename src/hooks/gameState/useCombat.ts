@@ -222,7 +222,11 @@ export function useCombat({
   );
 
   const handleReinforce = useCallback(
-    (fromTerritoryName: string, toTerritoryName: string) => {
+    (
+      fromTerritoryName: string,
+      toTerritoryName: string,
+      playMarch: () => void
+    ) => {
       const fromTerritory = territories.find(
         (t) => t.name === fromTerritoryName
       );
@@ -246,6 +250,8 @@ export function useCombat({
 
       // ...and abort reinforcement if all troops are assigned
       if (availableTroops < 1) return;
+
+      playMarch();
 
       const reinforcements = Math.min(troopUnit, availableTroops);
 
@@ -272,7 +278,11 @@ export function useCombat({
   );
 
   const handleUndoReinforce = useCallback(
-    (fromTerritoryName: string, toTerritoryName: string) => {
+    (
+      fromTerritoryName: string,
+      toTerritoryName: string,
+      playMarch: () => void
+    ) => {
       const fromTerritory = territories.find(
         (t) => t.name === fromTerritoryName
       );
@@ -290,6 +300,8 @@ export function useCombat({
       const troopsToMoveBack = Math.min(troopUnit, fromTerritory.troops);
 
       if (troopsToMoveBack < 1) return;
+
+      playMarch();
 
       updateTerritories((prev) =>
         prev.map((t) => {

@@ -56,8 +56,6 @@ export function SelectedTerritoryPanel({
   onReinforce,
   onUndoReinforce,
 }: SelectedTerritoryInfoProps) {
-  const playerName = factions[playerIndex].name;
-
   const territory = territories.find((t) => t.name === territoryName);
   if (!territory) return null;
 
@@ -169,7 +167,7 @@ export function SelectedTerritoryPanel({
                     leader={factionLeaders[factions.indexOf(faction)]}
                     isPlayerFaction={faction.name === playerFactionName}
                     factionFaiths={factionFaiths}
-                    playerName={playerName}
+                    player={factionLeaders[playerIndex]}
                   />
                 </PopoverContent>
               </Popover>
@@ -251,8 +249,8 @@ type TroopControlsProps = {
   scheduledAttacks: AttackOrder[];
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
   type: "attack" | "reinforce";
-  onReinforce?: (from: string, to: string) => void;
-  onUndoReinforce?: (from: string, to: string) => void;
+  onReinforce: (from: string, to: string, callback: () => void) => void;
+  onUndoReinforce: (from: string, to: string, callback: () => void) => void;
   territories: Territory[];
   available: number;
 };
@@ -273,13 +271,13 @@ function TroopControls({
   const handleDelta = (delta: number) => {
     if (type === "reinforce") {
       if (delta > 0 && onReinforce && available >= 1) {
-        onReinforce(territory.name, to);
+        onReinforce(territory.name, to, playMarch);
       } else if (
         delta < 0 &&
         onUndoReinforce &&
         reinforcedTerritory?.troops > 0
       ) {
-        onUndoReinforce(to, territory.name);
+        onUndoReinforce(to, territory.name, playMarch);
       }
       return;
     }
@@ -344,6 +342,13 @@ function shouldDisableUnassignButton(
   return !attack || attack.troops < 1;
 }
 
+const march = new Audio("/sfx/march.mp3");
+function playMarch() {
+  const clone = march.cloneNode(true) as HTMLAudioElement;
+  clone.volume = 0.2;
+  clone.play();
+}
+
 function adjustAttacks(
   territoryName: Territory,
   from: string,
@@ -357,8 +362,9 @@ function adjustAttacks(
     const attack = prev.find((a) => a.from === from && a.to === to);
 
     if (!attack) {
-      if (delta < 1) return [...prev]; // Trying to unassign from a non-existent attack
+      if (delta < 1) return [...prev]; // Trying to unassign from a non-existent attack.
       const troops = Math.min(available, 500);
+      playMarch();
       return [...prev, { from, to, troops }];
     } else {
       let troops =
@@ -367,6 +373,7 @@ function adjustAttacks(
           : attack.troops + Math.min(available, 500);
 
       const filtered = prev.filter((a) => !(a.from === from && a.to === to));
+      playMarch();
       return troops < 1 ? filtered : [...filtered, { from, to, troops }];
     }
   });
