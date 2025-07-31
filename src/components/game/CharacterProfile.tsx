@@ -146,7 +146,7 @@ function ThreatDialog({
       <DialogTrigger asChild>
         <div className="relative group">
           <span className="absolute right-0 top-full mt-2 text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-amber-600 font-serif italic">
-            Threaten
+            Provoke
           </span>
           <div className="w-7 h-7 flex items-center justify-center rounded-md cursor-pointer">
             <Grab className="w-5 h-5 transition-transform duration-200 hover:scale-125" />
