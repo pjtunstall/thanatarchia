@@ -233,7 +233,9 @@ export function recruitChronicle(
       }
     case "Athaloc of Smyrna":
       if (bias === "friendly") {
-        return `${territory} breathes a sigh of relief as ${leader} reinforces ${pronoun} retinue there.`;
+        return Math.random() < 0.5
+          ? `${territory} breathes a sigh of relief as ${leader} reinforces ${pronoun} retinue there.`
+          : `${territory} will rest easier tonight as ${leader} assigns more ${adjective} heroes to its defense.`;
       } else {
         return Math.random() < 0.5
           ? `${territory} groans under new taxation as ${leader} recruits new marauders.`

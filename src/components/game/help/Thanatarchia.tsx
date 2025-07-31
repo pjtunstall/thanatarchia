@@ -79,7 +79,7 @@ function chat(adviser: Character, player: Character): ChatEntry[] {
         {
           author: adviser,
           statement:
-            "Of course I know what it means, your Majesty! It is obviously a composite of two elements. The latter, 'archia', is from ἀρχή, authority. The former, 'thanato-', is from θάνατος, which is... Well. That is to say... It indicates that which, in this case, has authority.",
+            "Of course I know what it means, your Majesty! It is obviously a composite of two elements. The latter, 'archia', is from ἀρχή, authority. The former, 'thanato', is from θάνατος, which is... Well. That is to say... It indicates that which, in this case, has authority.",
         },
         {
           author: player,
