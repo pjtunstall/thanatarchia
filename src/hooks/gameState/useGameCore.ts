@@ -31,6 +31,9 @@ export function useGameCore() {
   const [factionFaiths, setFactionFaiths] = useState<string[]>(
     factions.map((f) => f.faith)
   );
+  const [factionAggressions, setFactionAggressions] = useState<number[]>(
+    factions.map((_) => 0.3)
+  );
 
   const handleChangeFaith = useCallback(
     (factionIndex: number, faith: string) => {
@@ -116,6 +119,7 @@ export function useGameCore() {
     stats,
     scheduledAttacks,
     factionFaiths,
+    factionAggressions,
 
     // Derived state
     factionTerritories,
@@ -137,6 +141,7 @@ export function useGameCore() {
     setScheduledAttacks,
     setFactionFaiths,
     handleChangeFaith,
+    setFactionAggressions,
   };
 }
 

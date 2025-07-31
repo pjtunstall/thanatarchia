@@ -36,8 +36,8 @@ type SelectedTerritoryInfoProps = {
   onRecruit: (territoryName: string) => void;
   onSpy: (territoryName: string) => void;
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
-  onReinforce: (from: string, to: string) => void;
-  onUndoReinforce: (from: string, to: string) => void;
+  onReinforce: (from: string, to: string, callback: () => void) => void;
+  onUndoReinforce: (from: string, to: string, callback: () => void) => void;
   factionFaiths: string[];
 };
 

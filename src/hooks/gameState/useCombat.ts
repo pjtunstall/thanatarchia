@@ -40,6 +40,8 @@ type UseCombatProps = {
   adviserIndex: number;
   turn: number;
   hasChangedFromEudaemonia: boolean;
+  factionAggressions: number[];
+  setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 export function useCombat({
@@ -54,6 +56,8 @@ export function useCombat({
   adviserIndex,
   turn,
   hasChangedFromEudaemonia,
+  factionAggressions,
+  setFactionAggressions,
   updateTerritories,
   setFactionTreasures,
   addChronicleEntry,
@@ -121,6 +125,14 @@ export function useCombat({
 
         const isEnemy = toTerritory.owner !== factions[playerIndex].name;
         if (!isEnemy) return;
+
+        setFactionAggressions((prev) => {
+          const updated = [...prev];
+          updated[
+            factions.indexOf(factions.find((f) => f.name === toTerritory.owner))
+          ] = 0.7;
+          return updated;
+        });
 
         const attackStrength = totalTroops + Math.random() * 500;
         const defenseStrength =
@@ -248,7 +260,7 @@ export function useCombat({
 
       const availableTroops = fromTerritory.troops - troopsAssignedToAttack;
 
-      // ...and abort reinforcement if all troops are assigned
+      // ...and abort reinforcement if all troops are assigned.
       if (availableTroops < 1) return;
 
       playMarch();
@@ -445,7 +457,7 @@ export function useCombat({
                 : weakest
           );
 
-          if (weakestTarget && Math.random() > 0.7) {
+          if (weakestTarget && Math.random() < factionAggressions[i]) {
             executeAIAttack(aiTerritoryName, weakestTarget.name);
           }
         }

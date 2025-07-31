@@ -45,8 +45,16 @@ type ActionsPanelProps = {
   onEndTurn: () => void;
   onRecruit: (territoryName: string) => void;
   onSpy: (territoryId: string) => void;
-  onReinforce: (fromTerritoryId: string, toTerritoryId: string) => void;
-  onUndoReinforce: (fromTerritoryName: string, toTerritoryName: string) => void;
+  onReinforce: (
+    fromTerritoryId: string,
+    toTerritoryId: string,
+    callback: () => void
+  ) => void;
+  onUndoReinforce: (
+    fromTerritoryName: string,
+    toTerritoryName: string,
+    callback: () => void
+  ) => void;
   getValidAttackTargets: (fromTerritoryId: string) => Territory[];
   success: boolean | null;
   setSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;

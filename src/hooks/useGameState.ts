@@ -39,6 +39,8 @@ export function useGameState() {
     adviserIndex: chroniclesState.adviserIndex,
     turn: gameCore.currentTurn,
     hasChangedFromEudaemonia: chroniclesState.hasChangedFromEudaemonia,
+    factionAggressions: gameCore.factionAggressions,
+    setFactionAggressions: gameCore.setFactionAggressions,
   });
 
   const generateResources = useCallback(() => {
