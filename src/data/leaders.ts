@@ -11,6 +11,7 @@ export const epithets = [
   "Calm",
   "Cruel",
   "Stern",
+  "Depraved",
   "Dire",
   "Dreadful",
   "Embezzler",
@@ -44,7 +45,6 @@ export const epithets = [
   "Tyrant",
   "Unkind",
   "Unpredictable",
-  "Vainglorious",
   "Vicious",
   "Vile",
 ];
