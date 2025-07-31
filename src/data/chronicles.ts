@@ -172,7 +172,7 @@ export const battleChronicle = ({
             ? `It is said that the ${attackers} scored a fabulous win against the ${defenders} at this time. How the hungry, terrified folk of ${territory} must rejoice at their liberation.`
             : `How tedious! The names of these factions flow on like endless rain: their meaningless triumphs and defeats of equal insignificance. I run my finger over the parchment's roughness as the dying light briefly catches the page. I suppose we must do our duty and record here that the ${attackers} took ${territory} from the ${defenders}.`;
         } else {
-          return `The glimmer of a smile almost touches one's face. News reached us today that the ${attackers} failed to wrest ${territory} from the ${defenders}. But it is a cheap pleasure. I might swap the names or swap them back, for all the difference it would make to the suffering people.`;
+          return `News reached us today that the ${attackers} failed to wrest ${territory} from the ${defenders}. I might swap the names or swap them back, for all the difference it would make to the suffering people.`;
         }
       }
     case "Athaloc of Smyrna":
@@ -323,7 +323,7 @@ export const endChronicle = ({
         if (success) {
           return `Another year, another turn of the world's wheel. Another conqueror. Enjoy your hour, ${player.name}. I suppose that is your part in the clockwork.`;
         } else {
-          return `In this year, we must bid our farewells to ${monarch} ${player.name}, who showed such promise. What a dashing figure they used to make on their steed. I wonder what they'll do with the statue.`;
+          return `In this year, we must bid our farewells to ${monarch} ${player.name}, who showed such promise. What a dashing figure ${they} used to make on ${their} steed. I wonder what they'll do with the statue.`;
         }
       } else {
         if (success) {

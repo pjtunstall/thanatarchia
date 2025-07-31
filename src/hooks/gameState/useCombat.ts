@@ -373,7 +373,6 @@ export function useCombat({
     ]
   );
 
-  // AI attack logic
   const executeAIAttack = useCallback(
     (fromId: string, toId: string) => {
       const fromTerritory = territories.find((t) => t.name === fromId);
@@ -383,11 +382,11 @@ export function useCombat({
 
       const attackForce = Math.floor(fromTerritory.troops! * 0.6);
       const defenseForce = toTerritory.troops!;
-
       const attackStrength = attackForce + Math.random() * 400;
       const defenseStrength = defenseForce + Math.random() * 600;
-
       const victory = attackStrength > defenseStrength;
+
+      let losses = 0;
 
       if (victory) {
         updateTerritories((prev) =>
@@ -405,8 +404,7 @@ export function useCombat({
             return t;
           })
         );
-
-        // Add chronicle entries along the lines of `The barbarians have lost ${toTerritory.name} to enemy forces!`.
+        losses = defenseForce;
       } else {
         updateTerritories((prev) =>
           prev.map((t) =>
@@ -421,9 +419,52 @@ export function useCombat({
               : t
           )
         );
+        losses = Math.floor(attackForce * 0.3);
       }
+
+      const author = pickAValidChronicler(hasChangedFromEudaemonia);
+      const bias = author.name === fromTerritory.owner ? "friendly" : "hostile";
+      const winners = victory ? fromTerritory.owner : toTerritory.owner;
+      const losers = victory ? toTerritory.owner : fromTerritory.owner;
+
+      const attackerFaction = factions.find(
+        (f) => f.name === fromTerritory.owner
+      );
+      const attackerIndex = factions.indexOf(attackerFaction!);
+      const leaderCharacter = factionLeaders[attackerIndex];
+
+      const chronicleEntryStatement = battleChronicle({
+        chronicler: author,
+        bias,
+        success: victory,
+        winners,
+        losers,
+        territoryName: toId,
+        leaderCharacter,
+      });
+
+      addChronicleEntry(author, chronicleEntryStatement, turn);
+
+      enqueueBattleReports(
+        [
+          {
+            author,
+            message: chronicleEntryStatement,
+            stats: `Attack strength: ${attackForce}\nDefense strength: ${defenseForce}\nLosses: ${losses}`,
+            success: !victory,
+          },
+        ],
+        enqueueBattleMessage
+      );
     },
-    [territories, updateTerritories, addChronicleEntry]
+    [
+      territories,
+      updateTerritories,
+      addChronicleEntry,
+      enqueueBattleMessage,
+      factionLeaders,
+      hasChangedFromEudaemonia,
+    ]
   );
 
   const executeAITurn = useCallback(() => {
