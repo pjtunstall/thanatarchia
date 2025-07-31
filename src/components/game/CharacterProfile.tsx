@@ -123,7 +123,7 @@ function TributeDialog({
         </DialogHeader>
         <p>
           Please accept this small token of my appreciation. I know it's not
-          much, but the treasure is rather empty at the moment. Rest assured
+          much, but the treasury is rather empty at the moment. Rest assured
           that more will follow just as soon as the raiding season is over. Keep
           up the good work!
         </p>
@@ -141,6 +141,8 @@ function ThreatDialog({
   character: Character;
   playerName: string;
 }) {
+  const their = character.gender === "male" ? "his" : "her";
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -162,8 +164,8 @@ function ThreatDialog({
         <p>
           It saddens me that a ruler such as yourself, one with so much promise
           and so much to give, a gentle soul, not suited to the rigors of war,
-          should risk their own life and those of their people by seeking power.
-          You must know that all who oppose me die?
+          should risk ${their} own life and those of ${their} people by seeking
+          power. You must know that all who oppose me die?
         </p>
         <p>Yours sincerely,</p>
         <p>{playerName}</p>
