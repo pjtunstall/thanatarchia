@@ -4,6 +4,8 @@ import { Territory } from "@/types/gameTypes";
 import { costOfSpying, costOfRecruiting } from "@/data/gameData";
 import { WaxSealButton } from "@/components/game/actions/WaxSealButton";
 
+const coinbag = new Audio("/sfx/coinbag.mp3");
+
 type TreasuryActionsProps = {
   territory: Territory;
   isPlayerTerritory: boolean;
@@ -26,7 +28,10 @@ export function TreasuryActions({
       <div className="relative group min-w-0">
         <WaxSealButton
           className="w-full"
-          onClick={() => territoryName && onRecruit(territoryName)}
+          onClick={() => {
+            (coinbag.cloneNode(true) as HTMLAudioElement).play();
+            return territoryName && onRecruit(territoryName);
+          }}
           variant="default"
           disabled={!isPlayerTerritory || playerTreasure < costOfRecruiting}
         >
@@ -40,7 +45,10 @@ export function TreasuryActions({
 
       <div className="relative group min-w-0">
         <WaxSealButton
-          onClick={() => territoryName && onSpy(territoryName)}
+          onClick={() => {
+            (coinbag.cloneNode(true) as HTMLAudioElement).play();
+            return territoryName && onSpy(territoryName);
+          }}
           disabled={
             isPlayerTerritory ||
             playerTreasure < costOfSpying ||

@@ -27,7 +27,6 @@ import { faiths } from "@/data/faiths";
 import { SelectedTerritoryPanel } from "@/components/game/SelectedTerritoryPanel";
 import { Faction, Territory } from "@/types/gameTypes";
 import { chroniclers } from "@/data/chronicles";
-import { BasicActions } from "@/components/game/actions/BasicActions";
 import { factions } from "@/data/factions";
 import { Help } from "@/components/game/Help";
 import { FactionDetails } from "@/components/game/FactionDetails";
@@ -249,12 +248,12 @@ export function ActionsPanel({
   );
 }
 
+const chime = new Audio("/sfx/chime.mp3");
 function onPray() {
-  const chime = new Audio("/sfx/chime.mp3");
-  chime.play();
+  (chime.cloneNode(true) as HTMLAudioElement).play();
 }
 
+const squirrel = new Audio("/sfx/squirrel.mp3");
 function onSacrifice() {
-  const squirrel = new Audio("/sfx/squirrel.mp3");
-  squirrel.play();
+  (squirrel.cloneNode(true) as HTMLAudioElement).play();
 }
