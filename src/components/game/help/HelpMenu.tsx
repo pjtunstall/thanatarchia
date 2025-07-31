@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { BookOpenText } from "lucide-react";
+
 import { Dialog } from "@/components/ui/dialog";
 import {
   DropdownMenu,
@@ -6,8 +9,6 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { BookOpenText } from "lucide-react";
-import { useState } from "react";
 
 type HelpMenuProps = {
   onSelectTopic: (topic: string) => void;
@@ -23,7 +24,7 @@ export function HelpMenu({ onSelectTopic }: HelpMenuProps) {
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="sm">
               <BookOpenText className="w-3 h-3 mr-1" />
-              Ask about...
+              Ask About...
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>

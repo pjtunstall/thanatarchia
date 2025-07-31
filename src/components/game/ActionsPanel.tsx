@@ -1,15 +1,36 @@
 import React from "react";
+import { useState } from "react";
+import { ArrowBigRight, Squirrel, Church, Check, Crown } from "lucide-react";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 
 import { AttackOrder, Character } from "@/types/gameTypes";
+import { faiths } from "@/data/faiths";
 import { SelectedTerritoryPanel } from "@/components/game/SelectedTerritoryPanel";
 import { Faction, Territory } from "@/types/gameTypes";
 import { chroniclers } from "@/data/chronicles";
 import { BasicActions } from "@/components/game/actions/BasicActions";
-import { BonusActions } from "@/components/game/actions/BonusActions";
 import { factions } from "@/data/factions";
 import { Help } from "@/components/game/Help";
+import { FactionDetails } from "@/components/game/FactionDetails";
 
 type ActionsPanelProps = {
   playerCharacter: Character;
@@ -68,52 +89,170 @@ export function ActionsPanel({
   setHasChangedFromEudaemonia,
   setSelectedTerritoryName,
 }: ActionsPanelProps) {
+  const [pendingFaith, setPendingFaith] = useState<string | null>(null);
+  const confirmFaithChange = () => {
+    if (pendingFaith) {
+      onChangeFaith(
+        playerIndex,
+        pendingFaith,
+        factionLeaders,
+        setFactionLeaders
+      );
+      setPendingFaith(null);
+    }
+  };
+
   return (
-    <Card className="h-full flex flex-col">
-      <CardContent className="flex-1 overflow-hidden min-h-0">
-        <div className="space-y-4 pt-8 h-full flex flex-col">
-          <BasicActions
-            onEndTurn={onEndTurn}
-            onChangeFaith={onChangeFaith}
-            playerIndex={playerIndex}
-            factionFaiths={factionFaiths}
-            factionLeaders={factionLeaders}
-            setFactionLeaders={setFactionLeaders}
-          />
+    <>
+      <Card className="h-full flex flex-col">
+        <CardHeader>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="flex flex-col gap-2 items-start">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="outline" size="sm" className="w-full">
+                    <Crown className="w-3 h-3 mr-1" />
+                    <Badge
+                      className="w-fit"
+                      style={{ backgroundColor: playerFaction.color }}
+                    >
+                      {playerFaction.name}
+                    </Badge>
+                  </Button>
+                </DialogTrigger>
 
-          {selectedTerritoryName ? (
-            <>
-              <SelectedTerritoryPanel
-                territories={territories}
-                territoryName={selectedTerritoryName}
-                factionLeaders={factionLeaders}
-                playerFactionName={factions[playerIndex].name}
-                playerTreasure={factionTreasures[playerIndex]}
-                scheduledAttacks={scheduledAttacks}
-                setScheduledAttacks={setScheduledAttacks}
-                onRecruit={onRecruit}
-                onSpy={onSpy}
-                onReinforce={onReinforce}
-                onUndoReinforce={onUndoReinforce}
-                factionFaiths={factionFaiths}
-              />
+                <DialogContent className="p-0 bg-transparent border-none max-w-fit">
+                  <FactionDetails
+                    faction={playerFaction}
+                    leader={factionLeaders[playerIndex]}
+                    isPlayerFaction={true}
+                    factionFaiths={factionFaiths}
+                  />
+                </DialogContent>
+              </Dialog>
 
-              <BonusActions
-                faith={factionFaiths[playerIndex]}
-                setSelectedTerritoryName={setSelectedTerritoryName}
-              />
-            </>
-          ) : (
-            <Help
-              adviser={chroniclers[adviserIndex]}
-              player={playerCharacter}
-              playerFaction={playerFaction}
-              setAdviserIndex={setAdviserIndex}
-              setHasChangedFromEudaemonia={setHasChangedFromEudaemonia}
-            ></Help>
-          )}
-        </div>
-      </CardContent>
-    </Card>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm" className="w-full">
+                    <Church className="w-3 h-3 mr-1" />
+                    Change Faith
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  {faiths.map((faith) => (
+                    <DropdownMenuItem
+                      key={faith}
+                      onSelect={(e) => {
+                        e.preventDefault();
+                        setPendingFaith(faith);
+                      }}
+                    >
+                      {faith}
+                      {faith === factionFaiths[playerIndex] && (
+                        <Check className="h-4 w-4 text-muted-foreground" />
+                      )}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+
+            <div className="flex flex-col gap-2 items-start">
+              <Button
+                onClick={onEndTurn}
+                variant="outline"
+                size="sm"
+                className="w-full"
+              >
+                <ArrowBigRight className="w-3 h-3 mr-1" />
+                End Turn
+              </Button>
+
+              {factionFaiths[playerIndex] === "Pagan" ? (
+                <Button
+                  onClick={onSacrifice}
+                  variant="outline"
+                  size="sm"
+                  className="w-full"
+                >
+                  <Squirrel className="w-3 h-3 mr-1" />
+                  Sacrifice
+                </Button>
+              ) : (
+                <Button
+                  onClick={onPray}
+                  variant="outline"
+                  size="sm"
+                  className="w-full"
+                >
+                  <Church className="w-3 h-3 mr-1" />
+                  Pray
+                </Button>
+              )}
+            </div>
+          </div>
+        </CardHeader>
+
+        <CardContent className="flex-1 overflow-hidden min-h-0">
+          <div className="h-full flex flex-col">
+            {selectedTerritoryName ? (
+              <>
+                <SelectedTerritoryPanel
+                  territories={territories}
+                  territoryName={selectedTerritoryName}
+                  factionLeaders={factionLeaders}
+                  playerFactionName={factions[playerIndex].name}
+                  playerTreasure={factionTreasures[playerIndex]}
+                  scheduledAttacks={scheduledAttacks}
+                  setScheduledAttacks={setScheduledAttacks}
+                  onRecruit={onRecruit}
+                  onSpy={onSpy}
+                  onReinforce={onReinforce}
+                  onUndoReinforce={onUndoReinforce}
+                  factionFaiths={factionFaiths}
+                />
+              </>
+            ) : (
+              <Help
+                adviser={chroniclers[adviserIndex]}
+                player={playerCharacter}
+                playerFaction={playerFaction}
+                setAdviserIndex={setAdviserIndex}
+                setHasChangedFromEudaemonia={setHasChangedFromEudaemonia}
+              ></Help>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
+      <AlertDialog
+        open={!!pendingFaith}
+        onOpenChange={() => setPendingFaith(null)}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              Are you sure you want to change faith?
+            </AlertDialogTitle>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmFaithChange}>
+              Confirm
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
+}
+
+function onPray() {
+  const chime = new Audio("/sfx/chime.mp3");
+  chime.play();
+}
+
+function onSacrifice() {
+  const squirrel = new Audio("/sfx/squirrel.mp3");
+  squirrel.play();
 }

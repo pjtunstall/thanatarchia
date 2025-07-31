@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Church, Check, ArrowBigRight } from "lucide-react";
+import {
+  Church,
+  Check,
+  ArrowBigRight,
+  Squirrel,
+  BookOpenText,
+} from "lucide-react";
 
 import {
   DropdownMenu,
@@ -33,6 +39,7 @@ type BasicActionsProps = {
     setFactionLeaders: React.Dispatch<React.SetStateAction<Character[]>>
   ) => void;
   setFactionLeaders: React.Dispatch<React.SetStateAction<Character[]>>;
+  setSelectedTerritoryName: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 export function BasicActions({
@@ -42,6 +49,7 @@ export function BasicActions({
   onEndTurn,
   onChangeFaith,
   setFactionLeaders,
+  setSelectedTerritoryName,
 }: BasicActionsProps) {
   const [pendingFaith, setPendingFaith] = useState<string | null>(null);
 
@@ -57,8 +65,21 @@ export function BasicActions({
     }
   };
 
+  const faith = factionFaiths[playerIndex];
+
   return (
     <>
+      <div className="grid grid-cols-2 gap-2">
+        <Button
+          onClick={() => setSelectedTerritoryName(null)}
+          variant="outline"
+          size="sm"
+        >
+          <BookOpenText className="w-3 h-3 mr-1" />
+          Help
+        </Button>
+      </div>
+
       <div className="grid grid-cols-2 gap-2">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

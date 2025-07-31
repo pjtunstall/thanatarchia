@@ -29,7 +29,7 @@ export function Legend({
     <div className="absolute bottom-4 right-4 z-20">
       <Popover>
         <PopoverTrigger asChild>
-          <button className="text-sm uncial hover:text-primary transition-colors bg-white/50 text-black text-xs px-2 py-1 rounded whitespace-nowrap">
+          <button className="uncial hover:text-primary transition-colors bg-white/50 text-black text-xs px-2 py-1 rounded whitespace-nowrap">
             Legend
           </button>
         </PopoverTrigger>
