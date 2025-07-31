@@ -47,7 +47,8 @@ function defaultRenderChatItem(
   return (
     <div key={index} className="py-2">
       <div className="flex items-center gap-3 mb-2">
-        <CharacterDialog character={entry.author} />
+        {/* player is a dummy value here; we assume any necessary comparison has already been made */}
+        <CharacterDialog character={entry.author} player={entry.author} />
         <div className="flex items-center gap-2">
           <Badge
             variant="secondary"

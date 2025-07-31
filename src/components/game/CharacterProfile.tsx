@@ -7,7 +7,6 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { Handshake, Grab } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -15,20 +14,13 @@ import { Character } from "@/types/gameTypes";
 
 type CharacterProfileProps = {
   character: Character;
-  playerName?: string;
+  player: Character;
 };
 
-export function CharacterProfile({
-  character,
-  playerName = "",
-}: CharacterProfileProps) {
+export function CharacterProfile({ character, player }: CharacterProfileProps) {
   return (
     <div className="flex items-center justify-between p-4 bg-muted/30 rounded-lg border gap-4">
-      <CharacterDialog
-        character={character}
-        size="lg"
-        playerName={playerName}
-      />
+      <CharacterDialog character={character} size="lg" player={player} />
       <div className="flex flex-col flex-1">
         <div className="flex items-center justify-between gap-2">
           <h3 className="font-semibold text-lg">{character.name}</h3>
@@ -40,16 +32,20 @@ export function CharacterProfile({
 
 type CharacterDialogProps = {
   character: Character;
+  player: Character;
   size?: "sm" | "lg";
-  playerName?: string;
 };
 
 export function CharacterDialog({
   character,
   size = "sm",
-  playerName = "",
+  player,
 }: CharacterDialogProps) {
   const triggerSize = size === "lg" ? "w-16 h-16" : "w-12 h-12";
+
+  if (!player) {
+    player = character;
+  }
 
   return (
     <Dialog>
@@ -77,10 +73,10 @@ export function CharacterDialog({
               </Avatar>
               <span className="text-lg font-semibold">{character.name}</span>
             </div>
-            {playerName !== "" && (
+            {player.name !== character.name && (
               <div className="flex items-center gap-2">
-                <TributeDialog character={character} playerName={playerName} />
-                <ThreatDialog character={character} playerName={playerName} />
+                <TributeDialog character={character} player={player} />
+                <ThreatDialog character={character} player={player} />
               </div>
             )}
           </DialogTitle>
@@ -98,10 +94,10 @@ export function CharacterDialog({
 
 function TributeDialog({
   character,
-  playerName,
+  player,
 }: {
   character: Character;
-  playerName: string;
+  player: Character;
 }) {
   return (
     <Dialog>
@@ -128,7 +124,7 @@ function TributeDialog({
           up the good work!
         </p>
         <p>Yours sincerely,</p>
-        <p>{playerName}</p>
+        <p>{player.name}</p>
       </DialogContent>
     </Dialog>
   );
@@ -136,10 +132,10 @@ function TributeDialog({
 
 function ThreatDialog({
   character,
-  playerName,
+  player,
 }: {
   character: Character;
-  playerName: string;
+  player: Character;
 }) {
   const their = character.gender === "male" ? "his" : "her";
 
@@ -168,7 +164,7 @@ function ThreatDialog({
           power. You must know that all who oppose me die?
         </p>
         <p>Yours sincerely,</p>
-        <p>{playerName}</p>
+        <p>{player.name}</p>
       </DialogContent>
     </Dialog>
   );

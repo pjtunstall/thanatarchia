@@ -24,6 +24,7 @@ export function PlayerFactionDialog({
           leader={leader}
           isPlayerFaction={true}
           factionFaiths={factionFaiths}
+          player={leader}
         />
       </DialogContent>
     </Dialog>

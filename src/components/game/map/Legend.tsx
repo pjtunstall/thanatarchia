@@ -16,7 +16,7 @@ type LegendProps = {
   playerFactionName: string;
   factionLeaders: Character[];
   factionFaiths: string[];
-  playerName: string;
+  player: Character;
 };
 
 export function Legend({
@@ -25,7 +25,7 @@ export function Legend({
   playerFactionName,
   factionLeaders,
   factionFaiths,
-  playerName,
+  player,
 }: LegendProps) {
   return (
     <div className="absolute bottom-4 right-4 z-20">
@@ -59,7 +59,7 @@ export function Legend({
                   fullFaction={fullFaction}
                   factionInfo={factionInfo}
                   factionFaiths={factionFaiths}
-                  playerName={playerName}
+                  player={player}
                 />
               );
             })}
@@ -76,7 +76,7 @@ type FactionDetailsPopoverProps = {
   leader: Character;
   fullFaction: Faction;
   factionFaiths: string[];
-  playerName: string;
+  player: Character;
 };
 
 function FactionDetailsPopover({
@@ -85,7 +85,7 @@ function FactionDetailsPopover({
   fullFaction,
   leader,
   factionFaiths,
-  playerName,
+  player,
 }: FactionDetailsPopoverProps) {
   return (
     <Popover>
@@ -124,7 +124,7 @@ function FactionDetailsPopover({
           leader={leader}
           isPlayerFaction={isSelected}
           factionFaiths={factionFaiths}
-          playerName={playerName}
+          player={player}
         />
       </PopoverContent>
     </Popover>

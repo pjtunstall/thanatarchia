@@ -126,7 +126,7 @@ export function ActionsPanel({
                     leader={factionLeaders[playerIndex]}
                     isPlayerFaction={true}
                     factionFaiths={factionFaiths}
-                    playerName={playerCharacter.name}
+                    player={playerCharacter}
                   />
                 </DialogContent>
               </Dialog>

@@ -13,7 +13,7 @@ type FactionDetailsProps = {
   leader: Character;
   isPlayerFaction: boolean;
   factionFaiths: string[];
-  playerName: string;
+  player: Character;
 };
 
 export function FactionDetails({
@@ -21,7 +21,7 @@ export function FactionDetails({
   leader,
   isPlayerFaction,
   factionFaiths,
-  playerName,
+  player,
 }: FactionDetailsProps) {
   const faith = factionFaiths[factions.indexOf(faction)];
 
@@ -29,11 +29,7 @@ export function FactionDetails({
     <Card className="w-80">
       <CardHeader className="pb-3 bg-muted/30">
         <div className="flex items-center gap-3">
-          <CharacterDialog
-            character={leader}
-            playerName={isPlayerFaction ? "" : playerName}
-            size="lg"
-          />
+          <CharacterDialog character={leader} player={player} size="lg" />
           <div className="flex-1">
             <CardTitle className="text-lg flex items-center gap-2">
               {isPlayerFaction && <Crown className="w-4 h-4 text-yellow-500" />}

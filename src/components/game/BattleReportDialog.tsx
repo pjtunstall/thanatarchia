@@ -97,7 +97,8 @@ function BattleReportContent({
         </DialogHeader>
 
         <div className="flex items-center gap-3 mb-2">
-          <CharacterDialog character={chronicler} />
+          {/* chronicler passed as a dummy value, since not needed here */}
+          <CharacterDialog character={chronicler} player={chronicler} />
           <Badge
             variant="secondary"
             style={badgeColor ? { backgroundColor: badgeColor } : undefined}
