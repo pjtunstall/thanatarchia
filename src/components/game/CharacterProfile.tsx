@@ -104,7 +104,7 @@ function TributeDialog({
       <DialogTrigger asChild>
         <div className="relative group">
           <span className="absolute left-0 bottom-full mb-2 text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-teal-600 font-serif italic">
-            Bestow Tribute
+            Pay Tribute
           </span>
           <div className="w-7 h-7 flex items-center justify-center rounded-md cursor-pointer">
             <Handshake className="w-5 h-5 transition-transform duration-200 hover:scale-125" />
