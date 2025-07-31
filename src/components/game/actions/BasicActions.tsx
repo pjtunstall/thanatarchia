@@ -23,6 +23,8 @@ import { Character } from "@/types/gameTypes";
 
 type BasicActionsProps = {
   playerIndex: number;
+  factionFaiths: string[];
+  factionLeaders: Character[];
   onEndTurn: () => void;
   onChangeFaith: (
     factionIndex: number,
@@ -30,17 +32,15 @@ type BasicActionsProps = {
     factionLeaders: Character[],
     setFactionLeaders: React.Dispatch<React.SetStateAction<Character[]>>
   ) => void;
-  factionFaiths: string[];
-  factionLeaders: Character[];
   setFactionLeaders: React.Dispatch<React.SetStateAction<Character[]>>;
 };
 
 export function BasicActions({
   playerIndex,
-  onEndTurn,
-  onChangeFaith,
   factionFaiths,
   factionLeaders,
+  onEndTurn,
+  onChangeFaith,
   setFactionLeaders,
 }: BasicActionsProps) {
   const [pendingFaith, setPendingFaith] = useState<string | null>(null);

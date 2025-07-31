@@ -98,7 +98,7 @@ export function ActionsPanel({
                 factionFaiths={factionFaiths}
               />
 
-              <BonusActions onEndTurn={onEndTurn} onEndGame={onEndGame} />
+              <BonusActions faith={factionFaiths[playerIndex]} />
             </>
           ) : (
             <Help

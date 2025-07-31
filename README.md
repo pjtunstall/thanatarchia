@@ -11,3 +11,5 @@ The year is 499. In the West, the Roman Empire is a patchwork of barbarian succe
 Eagle brooch image from [the Morgan Librar & Museum](https://www.themorgan.org/objects/item/290015), New York.
 
 [The Dark Ages Podcast](https://darkagespod.com/).
+
+Singing bowl chime and squirrel sound, [freesound_community](https://pixabay.com/users/freesound_community-46691455/) via Pixabay.
