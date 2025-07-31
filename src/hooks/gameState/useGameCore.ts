@@ -67,7 +67,6 @@ export function useGameCore() {
   const updateTerritories = useCallback(
     (updater: (prev: Territory[]) => Territory[]) => {
       setTerritories(updater);
-      // Game status will be checked by the component that calls this
     },
     []
   );

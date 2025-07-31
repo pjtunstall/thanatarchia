@@ -373,29 +373,66 @@ export function useCombat({
     ]
   );
 
-  const executeAIAttack = useCallback(
-    (fromId: string, toId: string) => {
-      const fromTerritory = territories.find((t) => t.name === fromId);
-      const toTerritory = territories.find((t) => t.name === toId);
+  const executeAITerritoryTurn = useCallback(
+    (factionIndex: number, territoryName: string) => {
+      updateTerritories((currentTerritories) => {
+        const aiTerritory = currentTerritories.find(
+          (t) => t.name === territoryName
+        );
 
-      if (!fromTerritory || !toTerritory) return;
+        // Skip if this territory no longer belongs to this faction (conquered earlier this turn).
+        if (!aiTerritory || aiTerritory.owner !== factions[factionIndex].name) {
+          return currentTerritories;
+        }
 
-      const attackForce = Math.floor(fromTerritory.troops! * 0.6);
-      const defenseForce = toTerritory.troops!;
-      const attackStrength = attackForce + Math.random() * 400;
-      const defenseStrength =
-        defenseForce < 100 ? 0 : defenseForce + Math.random() * 600;
-      const victory = attackStrength > defenseStrength;
+        const adjacentNames = adjacentTerritories[territoryName] || [];
 
-      let losses = 0;
+        const adjacentEnemyTerritories = adjacentNames
+          .map((name) => currentTerritories.find((t) => t.name === name))
+          .filter((t) => t && t.owner !== factions[factionIndex].name);
 
-      if (victory) {
-        updateTerritories((prev) =>
-          prev.map((t) => {
-            if (t.name === fromId) {
+        if (adjacentEnemyTerritories.length === 0) return currentTerritories;
+
+        // Only consider attacking if AI territory has enough troops.
+        if (!aiTerritory.troops || aiTerritory.troops <= 500) {
+          return currentTerritories;
+        }
+
+        // Find weakest adjacent enemy territory to attack.
+        const weakestTarget = adjacentEnemyTerritories.reduce(
+          (weakest, current) =>
+            (current!.troops ?? Infinity) < (weakest!.troops ?? Infinity)
+              ? current
+              : weakest
+        );
+
+        if (
+          !weakestTarget ||
+          Math.random() >= factionAggressions[factionIndex]
+        ) {
+          return currentTerritories;
+        }
+
+        // Execute attack logic directly here with current territory data.
+        const fromTerritory = aiTerritory;
+        const toTerritory = weakestTarget;
+
+        const attackForce = Math.floor(fromTerritory.troops! * 0.6);
+        const defenseForce = toTerritory.troops!;
+        const attackStrength = attackForce + Math.random() * 400;
+        const defenseStrength =
+          defenseForce < 100 ? 0 : defenseForce + Math.random() * 600;
+        const victory = attackStrength > defenseStrength;
+
+        let losses = 0;
+        let updatedTerritories: Territory[];
+
+        if (victory) {
+          updatedTerritories = currentTerritories.map((t) => {
+            if (t.name === territoryName) {
               return { ...t, troops: t.troops! - attackForce };
             }
-            if (t.name === toId) {
+            if (t.name === weakestTarget.name) {
               return {
                 ...t,
                 owner: fromTerritory.owner,
@@ -403,13 +440,11 @@ export function useCombat({
               };
             }
             return t;
-          })
-        );
-        losses = defenseForce;
-      } else {
-        updateTerritories((prev) =>
-          prev.map((t) =>
-            t.name === fromId
+          });
+          losses = defenseForce;
+        } else {
+          updatedTerritories = currentTerritories.map((t) =>
+            t.name === territoryName
               ? {
                   ...t,
                   troops: Math.max(
@@ -418,55 +453,62 @@ export function useCombat({
                   ),
                 }
               : t
-          )
+          );
+          losses = Math.floor(attackForce * 0.3);
+        }
+
+        // Handle chronicles and battle reports.
+        const author: Character = pickAValidChronicler(
+          hasChangedFromEudaemonia
         );
-        losses = Math.floor(attackForce * 0.3);
-      }
+        const bias =
+          author.name === fromTerritory.owner ? "friendly" : "hostile";
+        const winners = victory ? fromTerritory.owner : toTerritory.owner;
+        const losers = victory ? toTerritory.owner : fromTerritory.owner;
 
-      const author = pickAValidChronicler(hasChangedFromEudaemonia);
-      const bias = author.name === fromTerritory.owner ? "friendly" : "hostile";
-      const winners = victory ? fromTerritory.owner : toTerritory.owner;
-      const losers = victory ? toTerritory.owner : fromTerritory.owner;
+        const attackerFaction = factions.find(
+          (f) => f.name === fromTerritory.owner
+        );
+        const attackerIndex = factions.indexOf(attackerFaction!);
+        const leaderCharacter = factionLeaders[attackerIndex];
 
-      const attackerFaction = factions.find(
-        (f) => f.name === fromTerritory.owner
-      );
-      const attackerIndex = factions.indexOf(attackerFaction!);
-      const leaderCharacter = factionLeaders[attackerIndex];
+        const chronicleEntryStatement = battleChronicle({
+          chronicler: author,
+          bias,
+          success: victory,
+          winners,
+          losers,
+          territoryName: weakestTarget.name,
+          leaderCharacter,
+        });
 
-      const chronicleEntryStatement = battleChronicle({
-        chronicler: author,
-        bias,
-        success: victory,
-        winners,
-        losers,
-        territoryName: toId,
-        leaderCharacter,
+        addChronicleEntry(author, chronicleEntryStatement, turn);
+
+        if (toTerritory.owner === factions[playerIndex].name) {
+          const battleReport: BattleReport = {
+            author,
+            message: chronicleEntryStatement,
+            stats: `Attack strength: ${attackForce}\nDefense strength: ${defenseForce}\nLosses: ${losses}`,
+            success: !victory,
+          };
+
+          enqueueBattleReports([battleReport], enqueueBattleMessage);
+        }
+
+        return updatedTerritories;
       });
-
-      addChronicleEntry(author, chronicleEntryStatement, turn);
-
-      if (toTerritory.owner === factions[playerIndex].name) {
-        enqueueBattleReports(
-          [
-            {
-              author,
-              message: chronicleEntryStatement,
-              stats: `Attack strength: ${attackForce}\nDefense strength: ${defenseForce}\nLosses: ${losses}`,
-              success: !victory,
-            },
-          ],
-          enqueueBattleMessage
-        );
-      }
     },
     [
-      territories,
       updateTerritories,
+      factions,
+      adjacentTerritories,
+      factionAggressions,
       addChronicleEntry,
       enqueueBattleMessage,
       factionLeaders,
       hasChangedFromEudaemonia,
+      playerIndex,
+      turn,
     ]
   );
 
@@ -479,41 +521,15 @@ export function useCombat({
       const aiTerritoryNames = factionTerritories[i];
 
       aiTerritoryNames.forEach((aiTerritoryName) => {
-        const aiTerritory = territories.find((t) => t.name === aiTerritoryName);
-        if (!aiTerritory) return;
-
-        const adjacentNames = adjacentTerritories[aiTerritoryName] || [];
-
-        const adjacentPlayerTerritories = adjacentNames.map((name) =>
-          territories.find((t) => t.name === name)
-        );
-
-        if (adjacentPlayerTerritories.length === 0) return;
-
-        // Only consider attacking if AI territory has enough troops.
-        if (aiTerritory.troops && aiTerritory.troops > 500) {
-          // Find weakest adjacent player territory to attack
-          const weakestTarget = adjacentPlayerTerritories.reduce(
-            (weakest, current) =>
-              (current!.troops ?? Infinity) < (weakest!.troops ?? Infinity)
-                ? current
-                : weakest
-          );
-
-          if (weakestTarget && Math.random() < factionAggressions[i]) {
-            executeAIAttack(aiTerritoryName, weakestTarget.name);
-          }
-        }
+        executeAITerritoryTurn(i, aiTerritoryName);
       });
     });
   }, [
     factions,
     playerIndex,
-    factionTerritories,
-    territories,
-    adjacentTerritories,
     aiRecruit,
-    executeAIAttack,
+    factionTerritories,
+    executeAITerritoryTurn,
   ]);
 
   return {
