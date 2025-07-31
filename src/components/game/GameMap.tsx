@@ -18,6 +18,7 @@ import { TerritoryMarkers } from "@/components/game/map/TerritoryMarkers";
 import { useConfirm } from "@/hooks/useConfirm";
 
 type GameMapProps = {
+  playerIndex: number;
   territories: Territory[];
   selectedTerritoryName: string | null;
   currentTurn: number;
@@ -33,6 +34,7 @@ type GameMapProps = {
 };
 
 export function GameMap({
+  playerIndex,
   territories,
   selectedTerritoryName,
   currentTurn,
@@ -46,6 +48,8 @@ export function GameMap({
   onTerritoryClick,
   onEndGame,
 }: GameMapProps) {
+  const playerName = factionLeaders[playerIndex].name;
+
   // Create faction lookup from centralized data + filter to only show factions with territories.
   const factionLookup = React.useMemo(() => {
     const lookup: Record<string, FactionMiniInfo> = {};
@@ -138,6 +142,7 @@ export function GameMap({
             playerFactionName={playerFactionName}
             factionLeaders={factionLeaders}
             factionFaiths={factionFaiths}
+            playerName={playerName}
           ></Legend>
         </div>
       </CardContent>

@@ -64,6 +64,7 @@ export function GameDashboard() {
               onTerritoryClick={gameState.handleTerritoryClick}
               factionFaiths={gameState.factionFaiths}
               onEndGame={gameState.handleEndGame}
+              playerIndex={gameState.playerIndex}
             />
           </div>
 

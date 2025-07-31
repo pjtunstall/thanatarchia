@@ -127,6 +127,7 @@ export function ActionsPanel({
                     leader={factionLeaders[playerIndex]}
                     isPlayerFaction={true}
                     factionFaiths={factionFaiths}
+                    playerName={playerCharacter.name}
                   />
                 </DialogContent>
               </Dialog>
@@ -210,6 +211,7 @@ export function ActionsPanel({
                   onReinforce={onReinforce}
                   onUndoReinforce={onUndoReinforce}
                   factionFaiths={factionFaiths}
+                  playerIndex={playerIndex}
                 />
               </>
             ) : (

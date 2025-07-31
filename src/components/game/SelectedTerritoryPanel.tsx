@@ -28,6 +28,7 @@ import { WaxSealButton } from "@/components/game/actions/WaxSealButton";
 type SelectedTerritoryInfoProps = {
   territories: Territory[];
   territoryName: string;
+  playerIndex: number;
   playerFactionName: string;
   playerTreasure: number;
   scheduledAttacks: AttackOrder[];
@@ -43,6 +44,7 @@ type SelectedTerritoryInfoProps = {
 export function SelectedTerritoryPanel({
   territories,
   territoryName,
+  playerIndex,
   playerFactionName,
   playerTreasure,
   scheduledAttacks,
@@ -54,6 +56,8 @@ export function SelectedTerritoryPanel({
   onReinforce,
   onUndoReinforce,
 }: SelectedTerritoryInfoProps) {
+  const playerName = factions[playerIndex].name;
+
   const territory = territories.find((t) => t.name === territoryName);
   if (!territory) return null;
 
@@ -165,6 +169,7 @@ export function SelectedTerritoryPanel({
                     leader={factionLeaders[factions.indexOf(faction)]}
                     isPlayerFaction={faction.name === playerFactionName}
                     factionFaiths={factionFaiths}
+                    playerName={playerName}
                   />
                 </PopoverContent>
               </Popover>
