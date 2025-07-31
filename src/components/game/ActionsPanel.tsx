@@ -23,7 +23,6 @@ type ActionsPanelProps = {
   scheduledAttacks: AttackOrder[];
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
   onEndTurn: () => void;
-  onEndGame: () => void;
   onRecruit: (territoryName: string) => void;
   onSpy: (territoryId: string) => void;
   onReinforce: (fromTerritoryId: string, toTerritoryId: string) => void;
@@ -43,6 +42,7 @@ type ActionsPanelProps = {
   setFactionLeaders: React.Dispatch<React.SetStateAction<Character[]>>;
   setAdviserIndex: React.Dispatch<React.SetStateAction<number>>;
   setHasChangedFromEudaemonia: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedTerritoryName: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 export function ActionsPanel({
@@ -62,11 +62,11 @@ export function ActionsPanel({
   onRecruit,
   onSpy,
   onEndTurn,
-  onEndGame,
   onChangeFaith,
   setFactionLeaders,
   setAdviserIndex,
   setHasChangedFromEudaemonia,
+  setSelectedTerritoryName,
 }: ActionsPanelProps) {
   return (
     <Card className="h-full flex flex-col">
@@ -98,7 +98,10 @@ export function ActionsPanel({
                 factionFaiths={factionFaiths}
               />
 
-              <BonusActions faith={factionFaiths[playerIndex]} />
+              <BonusActions
+                faith={factionFaiths[playerIndex]}
+                setSelectedTerritoryName={setSelectedTerritoryName}
+              />
             </>
           ) : (
             <Help

@@ -1,13 +1,23 @@
-import { Church, Handshake, Squirrel, Coins, LibraryBig } from "lucide-react";
+import {
+  Church,
+  Handshake,
+  Squirrel,
+  BookOpenText,
+  LibraryBig,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HelpMenu } from "@/components/game/help/HelpMenu";
 import { useConfirm } from "@/hooks/useConfirm";
 
 type BonusActionsProps = {
   faith: string;
+  setSelectedTerritoryName;
 };
 
-export function BonusActions({ faith }: BonusActionsProps) {
+export function BonusActions({
+  faith,
+  setSelectedTerritoryName,
+}: BonusActionsProps) {
   return (
     <>
       <div className="grid grid-cols-2 gap-2">
@@ -35,9 +45,13 @@ export function BonusActions({ faith }: BonusActionsProps) {
           Study
         </Button>
 
-        <Button variant="outline" size="sm">
-          <Coins className="w-3 h-3 mr-1" />
-          Tax
+        <Button
+          onClick={() => setSelectedTerritoryName(null)}
+          variant="outline"
+          size="sm"
+        >
+          <BookOpenText className="w-3 h-3 mr-1" />
+          Help
         </Button>
       </div>
     </>

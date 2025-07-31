@@ -133,7 +133,6 @@ export function GameDashboard() {
                   scheduledAttacks={gameState.scheduledAttacks}
                   setScheduledAttacks={gameState.setScheduledAttacks}
                   onEndTurn={gameState.handleEndTurn}
-                  onEndGame={gameState.handleEndGame}
                   onRecruit={gameState.handleRecruit}
                   onSpy={gameState.handleSpy}
                   onReinforce={gameState.handleReinforce}
@@ -150,6 +149,7 @@ export function GameDashboard() {
                   setHasChangedFromEudaemonia={
                     gameState.setHasChangedFromEudaemonia
                   }
+                  setSelectedTerritoryName={gameState.setSelectedTerritoryName}
                 />
               </TabsContent>
             </Tabs>
