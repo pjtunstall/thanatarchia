@@ -160,8 +160,8 @@ function ThreatDialog({
         <p>
           It saddens me that a ruler such as yourself, one with so much promise
           and so much to give, a gentle soul, not suited to the rigors of war,
-          should risk ${their} own life and those of ${their} people by seeking
-          power. You must know that all who oppose me die?
+          should risk not only {their} own life but also those of {their} people
+          by seeking power. You do know that all who oppose me must die?
         </p>
         <p>Yours sincerely,</p>
         <p>{player.name}</p>
