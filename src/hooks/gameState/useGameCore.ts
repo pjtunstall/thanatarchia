@@ -1,11 +1,6 @@
 import { useState, useCallback, useMemo } from "react";
 
-import {
-  Territory,
-  GameStatus,
-  AttackOrder,
-  Character,
-} from "@/types/gameTypes";
+import { Territory, GameStatus, AttackOrder } from "@/types/gameTypes";
 import { factions, territories as initialTerritories } from "@/data/gameData";
 import { chroniclers } from "@/data/chronicles";
 
@@ -15,8 +10,14 @@ export function useGameCore() {
     string | null
   >(null);
   const [gameStatus, setGameStatus] = useState<GameStatus>("playing");
-  const [territories, setTerritories] =
-    useState<Territory[]>(initialTerritories);
+  const [territories, setTerritories] = useState<Territory[]>(() => {
+    const territories = initialTerritories;
+    const plusOrMinus = 300;
+    territories.forEach((t) => {
+      t.troops -= plusOrMinus + Math.floor(Math.random() * 2 * plusOrMinus);
+    });
+    return [...territories];
+  });
   const [factionTreasures, setFactionTreasures] = useState<number[]>(
     factions.map((f) => f.treasure)
   );

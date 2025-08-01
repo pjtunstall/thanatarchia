@@ -151,7 +151,7 @@ export const battleChronicle = ({
           return `In this year, a great rabble of ${attackers} descended upon ${territory}, overwhelming the ${defenders} there.`;
         } else {
           let msg = `Today, God saw fit to punish the ${attackers} for their impudent assault on the ${defenders} in ${territory}.`;
-          if (attackers !== "Romans" && defenders !== "Romans") {
+          if (winners !== "Romans" && losers !== "Romans") {
             msg += " One senses Byzantine training at work here.";
           }
           return msg;

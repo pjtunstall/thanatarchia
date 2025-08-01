@@ -21,9 +21,13 @@ export function ScrollAreaWithFade({
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (startScrolledToBottom && scrollRef.current) {
-      const el = scrollRef.current;
+    const el = scrollRef.current;
+    if (!el) return;
+
+    if (startScrolledToBottom) {
       el.scrollTop = el.scrollHeight;
+    } else {
+      el.scrollTop = 0; // Scroll to top by default.
     }
   }, [startScrolledToBottom, children]);
 
