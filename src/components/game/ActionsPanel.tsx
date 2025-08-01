@@ -270,8 +270,3 @@ const squirrel = new Audio("/sfx/squirrel.mp3");
 function onSacrifice() {
   (squirrel.cloneNode(true) as HTMLAudioElement).play();
 }
-
-const sword = new Audio("/sfx/sword.mp3");
-function playSword() {
-  (sword.cloneNode(true) as HTMLAudioElement).play();
-}
