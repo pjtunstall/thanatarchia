@@ -291,8 +291,8 @@ export const victims2 = [
   "the arts",
 ];
 
-const vandalFirsElements = [
-  "Aria",
+const vandalFirstElements = [
+  "Ari",
   "Bluma",
   "Eua",
   "Geila",
@@ -301,15 +301,17 @@ const vandalFirsElements = [
   "Guilia",
   "Guiti",
   "Gunda",
-  "Hildi",
-  "Huni",
+  "Ildi",
+  "Uni",
   "Iulia",
   "Oa",
   "Ragina",
   "Sigis",
+  "Sindi",
   "Supse",
-  "Theodo",
-  "Thrasa",
+  "Tanca",
+  "Teodo",
+  "Trasa",
 ];
 const vandalMaleLastElements = [
   "geis",
@@ -318,12 +320,13 @@ const vandalMaleLastElements = [
   "mund",
   "mut",
   "ric",
+  "tank",
   "vult",
 ];
 const vandalFemaleLastElements = ["frida", "hild", "runa"];
 
-export function randomVandalhName(gender: Gender): string {
-  let firstElement = randomItem(vandalFirsElements);
+export function randomVandalName(gender: Gender): string {
+  let firstElement = randomItem(vandalFirstElements);
 
   if (Math.random() < 0.5) {
     if (firstElement !== "Sigis") {
