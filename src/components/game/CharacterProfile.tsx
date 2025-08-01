@@ -27,6 +27,13 @@ export function playRaven(): HTMLAudioElement {
   return audio;
 }
 
+const wolf = new Audio("/sfx/wolf.mp3");
+export function playWolf(): HTMLAudioElement {
+  const audio = wolf.cloneNode(true) as HTMLAudioElement;
+  audio.play();
+  return audio;
+}
+
 type CharacterProfileProps = {
   character: Character;
   player: Character;
@@ -223,6 +230,7 @@ function ThreatDialog({
     );
     const quillSound = playQuill();
     quillSound.addEventListener("ended", () => {
+      playWolf();
       playRaven();
     });
   };

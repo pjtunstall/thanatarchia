@@ -12,6 +12,7 @@ import { factions } from "@/data/factions";
 import { chroniclers } from "@/data/chronicles";
 import { CharacterDialog } from "@/components/game/CharacterProfile";
 import { playRaven } from "@/components/game/CharacterProfile";
+import { playWolf } from "@/components/game/CharacterProfile";
 
 type BattleReportDialogProps = {
   battleMessage: BattleReport | null;
@@ -32,7 +33,7 @@ export function BattleReportDialog({
 }: BattleReportDialogProps) {
   if (!battleMessage) return null;
 
-  playRaven();
+  Math.random() < 0.7 ? playRaven() : playWolf();
 
   const badgeColor =
     battleMessage.author.name === chroniclers[adviserIndex].name

@@ -39,12 +39,12 @@ export function robberyChat(
     case "Priscilla of Byzantium":
       return [
         {
-          author: adviser,
+          author: player,
           statement: `Am I a thief, ${adviserName}?`,
         },
         {
           author: adviser,
-          statement: "No, your Majesty: you are a bold robber!",
+          statement: "No, your Majesty, you are a bold robber!",
         },
         {
           author: player,

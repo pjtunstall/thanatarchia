@@ -51,7 +51,7 @@ function chat(adviser: Character, player: Character): ChatEntry[] {
         {
           author: adviser,
           statement:
-            "Thanatarchia? Why, that is a Greek word, Sire. Ah Greek... The language of Byzantium. A language of so many beautiful words. How curious that I do not recall ever hearing this one before. And yet it has a familiar ring. A memory from childhood? A game, perhaps?",
+            "Thanatarchia? Why, that is a Greek word, Sire. Ah Greek... The language of Constantinople. A language of so many beautiful words. How curious that I do not recall ever hearing this one before. And yet it has a familiar ring. A memory from childhood? A game, perhaps?",
         },
       ];
     case "Eudaemonia of Rheims":
