@@ -293,29 +293,42 @@ export const victims2 = [
 
 const vandalFirstElements = [
   "Ari",
+  "Bere",
   "Bluma",
+  "Daga",
+  "Duma",
   "Eua",
+  "Fridu",
   "Geila",
   "Geisa",
   "Giba",
+  "Guala",
+  "Gualia",
+  "Guda",
   "Guilia",
   "Guiti",
   "Gunda",
-  "Ildi",
-  "Uni",
+  "Hildi",
+  "Huni",
   "Iulia",
+  "Mura",
   "Oa",
   "Ragina",
+  "Sifia",
   "Sigis",
   "Sindi",
   "Supse",
-  "Tanca",
-  "Teodo",
-  "Trasa",
+  "Suarti",
+  "Thanca",
+  "Theodo",
+  "Thrasa",
+  "Triggua",
+  "Unthanc",
 ];
 const vandalMaleLastElements = [
   "geis",
   "hari",
+  "mir",
   "mir",
   "mund",
   "mut",
@@ -327,9 +340,15 @@ const vandalFemaleLastElements = ["frida", "hild", "runa"];
 
 export function randomVandalName(gender: Gender): string {
   let firstElement = randomItem(vandalFirstElements);
+  if (firstElement === "Unthanc") {
+    return gender === "male" ? firstElement : "Unthanca";
+  }
 
-  if (Math.random() < 0.5) {
+  if (Math.random() < 0.3) {
     if (firstElement !== "Sigis") {
+      firstElement = firstElement.slice(0, -1);
+    }
+    if (firstElement[firstElement.length - 1] === "i") {
       firstElement = firstElement.slice(0, -1);
     }
     if (gender === "male") return firstElement + "ila";
