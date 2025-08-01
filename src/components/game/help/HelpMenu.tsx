@@ -46,4 +46,11 @@ export function HelpMenu({ onSelectTopic }: HelpMenuProps) {
   );
 }
 
-const helpTopics = ["Strategy", "Loyalty", "Choice", "War", "Thanatarchia"];
+const helpTopics = [
+  "Strategy",
+  "Loyalty",
+  "Robbery",
+  "Choice",
+  "War",
+  "Thanatarchia",
+];

@@ -6,6 +6,7 @@ import { War } from "@/components/game/help/War";
 import { Chat } from "@/components/game/Chat";
 import { loyaltyChat } from "@/components/game/help/Loyalty";
 import { choiceChat } from "@/components/game/help/Choice";
+import { robberyChat } from "@/components/game/help/Robbery";
 
 type HelpContentProps = {
   topic: string;
@@ -51,6 +52,13 @@ export function HelpContent({
       return (
         <Chat
           items={loyaltyChat(adviser, player)}
+          options={{ getBadgeColor }}
+        />
+      );
+    case "Robbery":
+      return (
+        <Chat
+          items={robberyChat(adviser, player)}
           options={{ getBadgeColor }}
         />
       );
