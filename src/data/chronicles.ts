@@ -162,7 +162,7 @@ export const battleChronicle = ({
         if (success) {
           return Math.random() < 0.5
             ? `They say that the ${attackers} took ${territory} from the ${defenders} today. One feels obliged to offer one's congratulations, although I doubt my contribution will be heard much above the belches of the victory feast, or such 'panegyrics' as their bards declaim.`
-            : `In an act of almost divine benificence, our great leader, ${leader}, has chosen to expand ${their} territory, bringing what passes for ${attacker} civilization ${territory}.`;
+            : `In an act of almost divine benificence, our great leader, ${leader}, has chosen to expand ${their} territory, bringing ${attacker} 'civilization' to lucky ${territory}.`;
         } else {
           return `Another season, another chronicle. Let's get it over with. Marauding ${attackers})—ahem, our beloved protectors, the ${attackers}—failed to take ${territory} from the ${defenders}. And the shadows lengthen.`;
         }
@@ -170,7 +170,7 @@ export const battleChronicle = ({
         if (success) {
           return Math.random() > 0.1
             ? `It is said that the ${attackers} scored a fabulous win against the ${defenders} at this time. How the hungry, terrified folk of ${territory} must rejoice at their liberation.`
-            : `How tedious! The names of these factions flow on like endless rain: their meaningless triumphs and defeats of equal insignificance. I run my finger over the parchment's roughness as the dying light briefly catches the page. I suppose one must do one's duty and record here that the ${attackers} took ${territory} from the ${defenders}.`;
+            : `Ah how the names of these factions flow on like endless rain: their meaningless triumphs and defeats of equal insignificance. I run my finger over the parchment's roughness as the dying light briefly catches the page. I suppose one must do one's duty and record here that the ${attackers} took ${territory} from the ${defenders}.`;
         } else {
           const addendum =
             Math.random() < 0.3
@@ -191,7 +191,7 @@ export const battleChronicle = ({
         }
       } else {
         if (success) {
-          return `Inconceivable! Though it strains credulity, we must note the reports coming out of ${territory} of an engagement in which those perfidious knaves, the ${attackers}, routed the ${defenders}.`;
+          return `Inconceivable! Though it strains credulity, we must note the reports coming out of ${territory} of an engagement in which those perfidious knaves, the ${attackers}, overran the ${defenders} there.`;
         } else {
           return `A reckless ${attacker} incursion into ${territory} has been repulsed by the ${defenders}. Indeed lack of faith begets folly: the dull wit that engenders sin finding a natural counterpart in such doltish stratagems.`;
         }
@@ -199,9 +199,11 @@ export const battleChronicle = ({
     case "Agilu Agisildsdaughter":
       // Only the hostile case needs implementing unless, atsome point, I decide to let this Easter-egg character also be an adviser.
       if (success) {
-        return `In battle have fallen many brave ${defenders}, defending their homes in ${territory} land. ${attackers}, in blood, their blades have reddened. A dark day indeed as the sun goes down.`;
+        return `In battle are broken many bold ${defenders}, defending their homes in ${territory} land. ${attackers}, in blood, their blades have reddened. A dark day indeed as the sun goes down.`;
       } else {
-        return `Today the raven will dine on ${attackers}. The great ${defenders} won glory in ${territory} land. The ${leaderCharacter.gender} === "male" ? "lord" : "lady" of ${attacker} won't be laughing now.`;
+        return `Today will dine dark-coated raven. Great ${defenders} won glory in ${territory} land. The ${
+          leaderCharacter.gender === "male" ? "lord" : "lady"
+        } of the ${attackers} won't be laughing now.`;
       }
   }
 };
