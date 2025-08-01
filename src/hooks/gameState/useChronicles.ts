@@ -17,7 +17,7 @@ export function useChronicles() {
   );
   const battleMessage = battleMessageQueue[0] ?? null;
 
-  const enqueueBattleMessage = (entry: BattleReport) => {
+  const enqueueBattleReport = (entry: BattleReport) => {
     setBattleMessageQueue((prev) => [...prev, entry]);
   };
   const dequeueBattleMessage = () => {
@@ -47,7 +47,7 @@ export function useChronicles() {
     battleMessage,
     battleMessageQueue,
     hasChangedFromEudaemonia,
-    enqueueBattleMessage,
+    enqueueBattleReport,
     dequeueBattleMessage,
     addChronicleEntry,
     resetChronicles,

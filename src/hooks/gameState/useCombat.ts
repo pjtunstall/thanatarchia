@@ -35,7 +35,7 @@ type UseCombatProps = {
   setSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
   scheduledAttacks: AttackOrder[];
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
-  enqueueBattleMessage: (BattleReport) => void;
+  enqueueBattleReport: (BattleReport) => void;
   selectedTerritoryName: string | null;
   adviserIndex: number;
   turn: number;
@@ -62,7 +62,7 @@ export function useCombat({
   setFactionTreasures,
   addChronicleEntry,
   setScheduledAttacks,
-  enqueueBattleMessage,
+  enqueueBattleReport,
 }: UseCombatProps) {
   const handleRecruit = useCallback(
     (selectedTerritoryName) => {
@@ -218,7 +218,7 @@ export function useCombat({
       });
 
       setScheduledAttacks([]);
-      enqueueBattleReports(battleReportEntries, enqueueBattleMessage);
+      populateBattleReportQueue(battleReportEntries, enqueueBattleReport);
     },
     [
       scheduledAttacks,
@@ -229,7 +229,7 @@ export function useCombat({
       updateTerritories,
       chroniclers,
       setScheduledAttacks,
-      enqueueBattleMessage,
+      enqueueBattleReport,
     ]
   );
 
@@ -492,7 +492,7 @@ export function useCombat({
             success: !victory,
           };
 
-          enqueueBattleReports([battleReport], enqueueBattleMessage);
+          populateBattleReportQueue([battleReport], enqueueBattleReport);
         }
 
         return updatedTerritories;
@@ -504,7 +504,7 @@ export function useCombat({
       adjacentTerritories,
       factionAggressions,
       addChronicleEntry,
-      enqueueBattleMessage,
+      enqueueBattleReport,
       factionLeaders,
       hasChangedFromEudaemonia,
       playerIndex,
@@ -573,12 +573,12 @@ function groupScheduledAttacks(scheduledAttacks: AttackOrder[]): AttackGroup[] {
   return Object.values(grouped);
 }
 
-function enqueueBattleReports(
+function populateBattleReportQueue(
   entries: BattleReport[],
-  enqueueBattleMessage: (message: BattleReport) => void
+  enqueueBattleReport: (message: BattleReport) => void
 ) {
   for (const entry of entries) {
-    enqueueBattleMessage(entry);
+    enqueueBattleReport(entry);
   }
 }
 

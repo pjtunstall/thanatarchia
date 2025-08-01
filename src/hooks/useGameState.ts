@@ -34,7 +34,7 @@ export function useGameState() {
     setSuccess: gameCore.setSuccess,
     scheduledAttacks: gameCore.scheduledAttacks,
     setScheduledAttacks: gameCore.setScheduledAttacks,
-    enqueueBattleMessage: chroniclesState.enqueueBattleMessage,
+    enqueueBattleReport: chroniclesState.enqueueBattleReport,
     selectedTerritoryName: gameCore.selectedTerritoryName,
     adviserIndex: chroniclesState.adviserIndex,
     turn: gameCore.currentTurn,
