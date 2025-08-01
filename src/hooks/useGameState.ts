@@ -7,6 +7,7 @@ import { useCombat } from "@/hooks/gameState/useCombat";
 import { useChronicles } from "@/hooks/gameState/useChronicles";
 
 export function useGameState() {
+  const [activeTab, setActiveTab] = useState("status");
   const [factionLeaders, setFactionLeaders] = useState(
     initializeLeaders(factions)
   );
@@ -82,6 +83,7 @@ export function useGameState() {
   // read.
   const resetGame = useCallback(() => {
     gameCore.resetGame();
+    setActiveTab("status");
     setFactionLeaders(initializeLeaders(factions));
     chroniclesState.resetChronicles();
     chroniclesState.setHasChangedFromEudaemonia(false);
@@ -119,6 +121,8 @@ export function useGameState() {
   }, [gameCore.territories]);
 
   return {
+    activeTab,
+    setActiveTab,
     ...gameCore,
     factionLeaders,
     setFactionLeaders,

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BattleReportDialog } from "@/components/game/BattleReportDialog";
-import { factions } from "@/data/gameData.ts";
+import { factions, tabs } from "@/data/gameData.ts";
 import { useGameState } from "@/hooks/useGameState";
 import { GameMap } from "@/components/game/GameMap";
 import { StatusPanel } from "@/components/game/StatusPanel";
@@ -11,23 +11,21 @@ import { ActionsPanel } from "@/components/game/ActionsPanel";
 import { GameOverlay } from "@/components/game/GameOverlay";
 
 export function GameDashboard() {
-  const [activeTab, setActiveTab] = useState("status");
   const gameState = useGameState();
 
   const handleTabKeyDown = (e: React.KeyboardEvent) => {
-    const tabs = ["chronicles", "status", "actions"];
-    const currentIndex = tabs.indexOf(activeTab);
+    const currentIndex = tabs.indexOf(gameState.activeTab);
 
     switch (e.key) {
       case "ArrowLeft":
         e.preventDefault();
         const prevIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
-        setActiveTab(tabs[prevIndex]);
+        gameState.setActiveTab(tabs[prevIndex]);
         break;
       case "ArrowRight":
         e.preventDefault();
         const nextIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
-        setActiveTab(tabs[nextIndex]);
+        gameState.setActiveTab(tabs[nextIndex]);
         break;
     }
   };
@@ -71,8 +69,8 @@ export function GameDashboard() {
           {/* Right Panel - Tabbed Interface */}
           <div className="col-span-5 h-full flex flex-col min-h-0">
             <Tabs
-              value={activeTab}
-              onValueChange={setActiveTab}
+              value={gameState.activeTab}
+              onValueChange={gameState.setActiveTab}
               className="h-full flex flex-col min-h-0"
             >
               <TabsList
