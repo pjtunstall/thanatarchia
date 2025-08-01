@@ -57,27 +57,6 @@ export function FactionDetails({
 
         <Separator />
 
-        {/* Relatives */}
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <Users className="w-4 h-4 text-muted-foreground" />
-            <span className="text-sm font-medium">Available Relatives:</span>
-          </div>
-          <div className="space-y-1">
-            {faction.relatives.map((relative, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-between text-xs bg-muted/30 rounded px-2 py-1"
-              >
-                <span>{relative}</span>
-                <Badge variant="secondary" className="text-xs">
-                  Available
-                </Badge>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {isPlayerFaction && (
           <>
             <Separator />

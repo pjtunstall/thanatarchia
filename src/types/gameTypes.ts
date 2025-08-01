@@ -12,7 +12,6 @@ export type Faction = {
   color: string;
   symbol: string;
   territories: string[];
-  relatives: string[];
   troops: number;
   treasure: number;
   leader: {

@@ -47,7 +47,10 @@ export function StatusPanel({
 
       <CardContent className="flex-1 flex flex-col min-h-0 overflow-hidden">
         <div className="bg-muted/30">
-          <CharacterProfile character={playerCharacter} />
+          <CharacterProfile
+            character={playerCharacter}
+            player={playerCharacter}
+          />
         </div>
 
         <ScrollAreaWithFade className="flex-1 min-h-0">
@@ -79,16 +82,6 @@ export function StatusPanel({
                 ? "none"
                 : playerTerritories.join(", ").replace(/, $/, "")}
             </p>
-            <div>
-              <p className="text-sm font-semibold mb-2">
-                Available for Marriage:
-              </p>
-              {playerFaction.relatives.map((relative, index) => (
-                <Badge key={index} variant="outline" className="mr-1 mb-1">
-                  {relative}
-                </Badge>
-              ))}
-            </div>
           </div>
         </ScrollAreaWithFade>
       </CardContent>
