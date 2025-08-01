@@ -12,4 +12,4 @@ Eagle brooch image from [the Morgan Librar & Museum](https://www.themorgan.org/o
 
 [The Dark Ages Podcast](https://darkagespod.com/).
 
-Chime, squirrel, and coinbag sounds, [freesound_community](https://pixabay.com/users/freesound_community-46691455/), marching sound from [kakaist](https://pixabay.com/users/kakaist-48093450), all via Pixabay.
+Squirrel, sword, and coinbag sounds, [freesound_community](https://pixabay.com/users/freesound_community-46691455/). Marching sound from [kakaist](https://pixabay.com/users/kakaist-48093450). Church bell from [Universfield](https://pixabay.com/users/universfield-28281460). All via Pixabay.

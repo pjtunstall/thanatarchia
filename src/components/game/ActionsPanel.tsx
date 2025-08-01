@@ -188,7 +188,7 @@ export function ActionsPanel({
                 </Button>
               ) : (
                 <Button
-                  onClick={onPray}
+                  onClick={playBell}
                   variant="outline"
                   size="sm"
                   className="w-full"
@@ -246,7 +246,12 @@ export function ActionsPanel({
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={confirmFaithChange}>
+            <AlertDialogAction
+              onClick={() => {
+                playBell();
+                confirmFaithChange();
+              }}
+            >
               Confirm
             </AlertDialogAction>
           </AlertDialogFooter>
@@ -256,12 +261,17 @@ export function ActionsPanel({
   );
 }
 
-const chime = new Audio("/sfx/chime.mp3");
-function onPray() {
-  (chime.cloneNode(true) as HTMLAudioElement).play();
+const bell = new Audio("/sfx/bell.mp3");
+function playBell() {
+  (bell.cloneNode(true) as HTMLAudioElement).play();
 }
 
 const squirrel = new Audio("/sfx/squirrel.mp3");
 function onSacrifice() {
   (squirrel.cloneNode(true) as HTMLAudioElement).play();
+}
+
+const sword = new Audio("/sfx/sword.mp3");
+function playSword() {
+  (sword.cloneNode(true) as HTMLAudioElement).play();
 }
