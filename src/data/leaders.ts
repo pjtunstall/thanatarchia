@@ -160,6 +160,7 @@ const visigothMaleFirstElements = [
 ];
 const visigothFemaleFirstElements = [
   "Goi",
+  "Gaile",
   "Ragna",
   "Theode",
   "Hilde",
@@ -289,3 +290,63 @@ export const victims2 = [
   "the gullible",
   "the arts",
 ];
+
+const vandalFirsElements = [
+  "Aria",
+  "Bluma",
+  "Eua",
+  "Geila",
+  "Geisa",
+  "Giba",
+  "Guilia",
+  "Guiti",
+  "Gunda",
+  "Hildi",
+  "Huni",
+  "Iulia",
+  "Oa",
+  "Ragina",
+  "Sigis",
+  "Supse",
+  "Theodo",
+  "Thrasa",
+];
+const vandalMaleLastElements = [
+  "geis",
+  "hari",
+  "mir",
+  "mund",
+  "mut",
+  "ric",
+  "vult",
+];
+const vandalFemaleLastElements = ["frida", "hild", "runa"];
+
+export function randomVandalhName(gender: Gender): string {
+  let firstElement = randomItem(vandalFirsElements);
+
+  if (Math.random() < 0.5) {
+    if (firstElement !== "Sigis") {
+      firstElement = firstElement.slice(0, -1);
+    }
+    if (gender === "male") return firstElement + "ila";
+    return firstElement + "ilu";
+  }
+
+  let lastElement;
+
+  if (gender === "male") {
+    lastElement = randomItem(vandalMaleLastElements);
+  } else {
+    lastElement = randomItem(vandalFemaleLastElements);
+  }
+
+  if (lastElement[0] === "h") {
+    if (firstElement !== "Sigis") {
+      firstElement = firstElement.slice(0, -1);
+    }
+    return firstElement + lastElement.slice(1);
+  } else {
+    return firstElement + lastElement;
+  }
+}

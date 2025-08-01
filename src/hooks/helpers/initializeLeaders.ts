@@ -13,6 +13,7 @@ import {
   epithets,
   randomOstrogothName,
   randomVisigothName,
+  randomVandalName,
 } from "@/data/leaders.ts";
 
 export function initializeLeaders(factions: Faction[]): Character[] {
@@ -27,6 +28,9 @@ export function initializeLeaders(factions: Faction[]): Character[] {
         break;
       case "Visigoths":
         leader.name = randomVisigothName(leader.gender);
+        break;
+      case "Vandals":
+        leader.name = randomVandalName(leader.gender);
         break;
     }
 
