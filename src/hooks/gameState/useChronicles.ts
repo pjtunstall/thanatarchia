@@ -43,6 +43,7 @@ export function useChronicles() {
 
   return {
     chronicles,
+    setChronicles,
     adviserIndex,
     battleMessage,
     battleMessageQueue,

@@ -79,7 +79,7 @@ const agilu: Character = {
   gender: "female",
   image: chroniclerBard,
   biography:
-    "Vandal 'slam-bard', Agilu, keeps it real on the streets of Carthage. She's been among Romans and Rugians, rulers so lavish. She's been among heathens and heroes when hard fights went down. She sings of Attila the Open-Handed. She'll sing of you too. 'Peerless and bold.' (Payment in gold.)",
+    "Vandal 'slam-bard', Agilu, keeps it real on the streets of Carthage. She's been among Romans and Rugians, rulers so lavish. She's been among heathens and heroes when hard fights went down. She sings of Attila the Open-Handed. She'll sing of you too: 'peerless and bold.' (Payment in gold.)",
 };
 
 export const chroniclersAfterTheIncident = [...chroniclers.slice(0, 3), agilu];

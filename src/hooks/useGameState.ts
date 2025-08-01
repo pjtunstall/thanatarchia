@@ -88,6 +88,7 @@ export function useGameState() {
   }, [gameCore.resetGame, chroniclesState.resetChronicles]);
 
   const handleEndTurn = useCallback(() => {
+    chroniclesState.setChronicles([]);
     handleScheduledAttacks(chroniclesState.adviserIndex, gameCore.currentTurn);
     generateResources();
     executeAITurn();
