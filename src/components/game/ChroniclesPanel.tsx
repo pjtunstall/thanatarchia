@@ -24,7 +24,11 @@ export function ChroniclesPanel({
   return (
     <Card className="h-full flex flex-col">
       <CardContent className="flex-1 p-0 min-h-0 overflow-hidden">
-        <Chat items={chronicles} options={{ getBadgeColor }} />
+        <Chat
+          items={chronicles}
+          options={{ getBadgeColor }}
+          scrollToTop={true}
+        />
       </CardContent>
     </Card>
   );

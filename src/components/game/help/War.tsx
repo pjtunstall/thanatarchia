@@ -75,6 +75,7 @@ export function War({
     <Chat
       items={chat(adviser, player, playerFaction, shouldReplace)}
       options={{ getBadgeColor }}
+      scrollToTop={true}
     />
   );
 }
@@ -179,7 +180,7 @@ function chat(
       return [
         {
           author: adviser,
-          statement: `Ah, war. It is a dreadful business, is it not? And yet it is part of a ruler's duty. But if it is how to wage war that you're asking, my ${
+          statement: `Ah, war. It is a dreadful business, is it not? And yet it is a ruler's duty. But if it is how to wage war that you're asking, my ${
             player.gender === "male" ? "Lord" : "Lady"
           }, then you could do a lot worse than to study Vegetius. That, and get a good night's sleep. And prayer. Certainly, say the odd prayer or two. They can do wonders for military succes, I gather.`,
         },

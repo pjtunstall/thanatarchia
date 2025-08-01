@@ -81,7 +81,11 @@ export function GameOverlay({
           </div>
         </CardHeader>
         <CardContent className="space-y-6">
-          <Chat items={finalItems} options={{ getBadgeColor }}></Chat>
+          <Chat
+            items={finalItems}
+            options={{ getBadgeColor }}
+            scrollToTop={true}
+          ></Chat>
 
           <div className="pt-6 border-t border-[hsl(var(--border))] text-center">
             <Button onClick={onResetGame} size="lg" className="px-8 uncial">

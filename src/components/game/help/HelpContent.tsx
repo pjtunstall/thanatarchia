@@ -53,6 +53,7 @@ export function HelpContent({
         <Chat
           items={loyaltyChat(adviser, player)}
           options={{ getBadgeColor }}
+          scrollToTop={true}
         />
       );
     case "Robbery":
@@ -60,11 +61,16 @@ export function HelpContent({
         <Chat
           items={robberyChat(adviser, player)}
           options={{ getBadgeColor }}
+          scrollToTop={true}
         />
       );
     case "Choice":
       return (
-        <Chat items={choiceChat(adviser, player)} options={{ getBadgeColor }} />
+        <Chat
+          items={choiceChat(adviser, player)}
+          options={{ getBadgeColor }}
+          scrollToTop={true}
+        />
       );
     case "Thanatarchia":
       return (

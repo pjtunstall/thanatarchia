@@ -17,6 +17,8 @@ type StatusPanelProps = {
   factionTreasures: number[];
   playerIndex: number;
   factionFaiths: string[];
+  setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
+  setFactionTreasures: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 export function StatusPanel({
@@ -27,6 +29,8 @@ export function StatusPanel({
   factionTreasures,
   playerIndex,
   factionFaiths,
+  setFactionAggressions,
+  setFactionTreasures,
 }: StatusPanelProps) {
   const playerFaith = factionFaiths[playerIndex];
 
@@ -50,6 +54,9 @@ export function StatusPanel({
           <CharacterProfile
             character={playerCharacter}
             player={playerCharacter}
+            playerIndex={playerIndex}
+            setFactionAggressions={setFactionAggressions}
+            setFactionTreasures={setFactionTreasures}
           />
         </div>
 

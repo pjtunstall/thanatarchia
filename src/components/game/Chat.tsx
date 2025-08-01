@@ -14,19 +14,28 @@ type ChatProps = {
   items: ChatEntry[];
   renderItem?: (item: ChatEntry, index: number) => React.ReactNode;
   options?: ChatItemRenderingOptions;
-  startScrolledToBottom?: boolean;
+  scrollToTop?: boolean;
+  scrollToBottom?: boolean;
+  playerIndex?: number;
+  setFactionAggressions?: React.Dispatch<React.SetStateAction<number[]>>;
+  setFactionTreasures?: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 export function Chat({
   items,
   renderItem,
   options,
-  startScrolledToBottom = false,
+  scrollToBottom = false,
+  scrollToTop = false,
+  playerIndex = 0,
+  setFactionAggressions = () => {},
+  setFactionTreasures = () => {},
 }: ChatProps) {
   return (
     <ScrollAreaWithFade
       height="h-full"
-      startScrolledToBottom={startScrolledToBottom}
+      scrollToBottom={scrollToBottom}
+      scrollToTop={scrollToTop}
     >
       <div className="space-y-4 p-4 pb-8">
         {items.map((item, index) =>
@@ -40,7 +49,10 @@ export function Chat({
 function defaultRenderChatItem(
   entry: ChatEntry,
   index: number,
-  options?: ChatItemRenderingOptions
+  options?: ChatItemRenderingOptions,
+  playerIndex = 0,
+  setFactionAggressions = () => {},
+  setFactionTreasures = () => {}
 ) {
   const badgeColor = options?.getBadgeColor?.(entry);
 
@@ -48,7 +60,13 @@ function defaultRenderChatItem(
     <div key={index} className="py-2">
       <div className="flex items-center gap-3 mb-2">
         {/* player is a dummy value here; we assume any necessary comparison has already been made */}
-        <CharacterDialog character={entry.author} player={entry.author} />
+        <CharacterDialog
+          character={entry.author}
+          player={entry.author}
+          playerIndex={playerIndex}
+          setFactionAggressions={setFactionAggressions}
+          setFactionTreasures={setFactionTreasures}
+        />
         <div className="flex items-center gap-2">
           <Badge
             variant="secondary"

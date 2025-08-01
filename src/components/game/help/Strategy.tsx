@@ -29,7 +29,13 @@ export function Strategy({
     },
   ];
 
-  return <Chat items={adviceEntries} options={{ getBadgeColor }} />;
+  return (
+    <Chat
+      items={adviceEntries}
+      options={{ getBadgeColor }}
+      scrollToTop={true}
+    />
+  );
 }
 
 const initialAdvice = (adviser: Character): string => {

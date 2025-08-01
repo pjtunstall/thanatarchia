@@ -5,11 +5,15 @@ import { costOfSpying, costOfRecruiting } from "@/data/gameData";
 import { WaxSealButton } from "@/components/game/actions/WaxSealButton";
 
 const coinbag = new Audio("/sfx/coinbag.mp3");
+export function playCoinbag() {
+  (coinbag.cloneNode(true) as HTMLAudioElement).play();
+}
 
 type TreasuryActionsProps = {
   territory: Territory;
   isPlayerTerritory: boolean;
-  playerTreasure: number;
+  factionTreasures: number[];
+  playerIndex: number;
   territoryName: string | null;
   onRecruit: (territoryName: string) => void;
   onSpy: (territoryName: string) => void;
@@ -18,7 +22,8 @@ type TreasuryActionsProps = {
 export function TreasuryActions({
   territory,
   isPlayerTerritory,
-  playerTreasure,
+  factionTreasures,
+  playerIndex,
   territoryName,
   onRecruit,
   onSpy,
@@ -33,7 +38,10 @@ export function TreasuryActions({
             return territoryName && onRecruit(territoryName);
           }}
           variant="default"
-          disabled={!isPlayerTerritory || playerTreasure < costOfRecruiting}
+          disabled={
+            !isPlayerTerritory ||
+            factionTreasures[playerIndex] < costOfRecruiting
+          }
         >
           <Users className="w-3 h-3 mr-1" />
           Recruit
@@ -51,7 +59,7 @@ export function TreasuryActions({
           }}
           disabled={
             isPlayerTerritory ||
-            playerTreasure < costOfSpying ||
+            factionTreasures[playerIndex] < costOfSpying ||
             territory.spiedOn
           }
         >

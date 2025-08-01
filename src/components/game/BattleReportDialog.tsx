@@ -11,12 +11,15 @@ import { Character, BattleReport } from "@/types/gameTypes";
 import { factions } from "@/data/factions";
 import { chroniclers } from "@/data/chronicles";
 import { CharacterDialog } from "@/components/game/CharacterProfile";
+import { playRaven } from "@/components/game/CharacterProfile";
 
 type BattleReportDialogProps = {
   battleMessage: BattleReport | null;
   dequeueBattleMessage: () => void;
   playerIndex: number;
   adviserIndex: number;
+  setFactionAggressions: (aggressions: number[]) => void;
+  setFactionTreasures: (treasures: number[]) => void;
 };
 
 export function BattleReportDialog({
@@ -24,8 +27,12 @@ export function BattleReportDialog({
   playerIndex,
   adviserIndex,
   dequeueBattleMessage,
+  setFactionAggressions,
+  setFactionTreasures,
 }: BattleReportDialogProps) {
   if (!battleMessage) return null;
+
+  playRaven();
 
   const badgeColor =
     battleMessage.author.name === chroniclers[adviserIndex].name
@@ -46,6 +53,9 @@ export function BattleReportDialog({
           stats={battleMessage.stats}
           success={battleMessage.success}
           badgeColor={badgeColor}
+          playerIndex={playerIndex}
+          setFactionAggressions={setFactionAggressions}
+          setFactionTreasures={setFactionTreasures}
         />
         <DialogClose />
       </DialogContent>
@@ -59,6 +69,9 @@ type BattleReportContentProps = {
   stats: string;
   success: boolean;
   badgeColor: string;
+  playerIndex: number;
+  setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
+  setFactionTreasures: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 function BattleReportContent({
@@ -67,6 +80,9 @@ function BattleReportContent({
   stats,
   success,
   badgeColor,
+  playerIndex,
+  setFactionAggressions,
+  setFactionTreasures,
 }: BattleReportContentProps) {
   const image =
     Math.random() < 0.5
@@ -98,7 +114,13 @@ function BattleReportContent({
 
         <div className="flex items-center gap-3 mb-2">
           {/* chronicler passed as a dummy value, since not needed here */}
-          <CharacterDialog character={chronicler} player={chronicler} />
+          <CharacterDialog
+            character={chronicler}
+            player={chronicler}
+            playerIndex={playerIndex}
+            setFactionTreasures={setFactionTreasures}
+            setFactionAggressions={setFactionAggressions}
+          />
           <Badge
             variant="secondary"
             style={badgeColor ? { backgroundColor: badgeColor } : undefined}

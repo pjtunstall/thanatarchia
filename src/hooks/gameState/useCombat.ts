@@ -66,8 +66,8 @@ export function useCombat({
 }: UseCombatProps) {
   const handleRecruit = useCallback(
     (selectedTerritoryName) => {
-      const playerTreasury = factionTreasures[playerIndex];
-      if (playerTreasury < costOfRecruiting) return;
+      const playerTreasure = factionTreasures[playerIndex];
+      if (playerTreasure < costOfRecruiting) return;
       const selectedTerritory = territories.find(
         (t) => t.name === selectedTerritoryName
       );

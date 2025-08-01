@@ -6,7 +6,8 @@ type ScrollAreaWithFadeProps = {
   height?: string;
   className?: string;
   fadeOffset?: string;
-  startScrolledToBottom?: boolean;
+  scrollToTop?: boolean;
+  scrollToBottom?: boolean;
 };
 
 export function ScrollAreaWithFade({
@@ -14,7 +15,8 @@ export function ScrollAreaWithFade({
   height,
   className = "",
   fadeOffset = "16px",
-  startScrolledToBottom = false,
+  scrollToTop = false,
+  scrollToBottom = false,
 }: ScrollAreaWithFadeProps) {
   const fadeHeight = "h-6";
   const contentPadding = "py-6";
@@ -24,12 +26,13 @@ export function ScrollAreaWithFade({
     const el = scrollRef.current;
     if (!el) return;
 
-    if (startScrolledToBottom) {
+    if (scrollToBottom) {
       el.scrollTop = el.scrollHeight;
-    } else {
-      el.scrollTop = 0; // Scroll to top by default.
+    } else if (scrollToTop) {
+      el.scrollTop = 0;
     }
-  }, [startScrolledToBottom, children]);
+    // else do nothing (preserve scroll position)
+  }, [scrollToTop, scrollToBottom]); // no children in deps to avoid unwanted resets
 
   return (
     <div className={cn(`relative ${height}`, className)}>

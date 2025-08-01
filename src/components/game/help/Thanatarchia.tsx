@@ -12,7 +12,13 @@ export function Thanatarchia({
   adviser,
   getBadgeColor,
 }: ThanatarchiaProps) {
-  return <Chat items={chat(adviser, player)} options={{ getBadgeColor }} />;
+  return (
+    <Chat
+      items={chat(adviser, player)}
+      options={{ getBadgeColor }}
+      scrollToTop={true}
+    />
+  );
 }
 
 function chat(adviser: Character, player: Character): ChatEntry[] {
@@ -70,7 +76,7 @@ function chat(adviser: Character, player: Character): ChatEntry[] {
         {
           author: adviser,
           statement:
-            "Hum, Thanatarchia. The word is a Greek word, of course, although hardly an important one. It is not attested in scripture nor in the writings of the Church Fathers. Indeed it is not even part of my extensive vocabulary.",
+            "Hum, Thanatarchia. The word is a Greek word, of course, although hardly an important one. It is not attested in scripture nor in the writings of the Church Fathers. Indeed it is not even in my extensive vocabulary.",
         },
         {
           author: player,

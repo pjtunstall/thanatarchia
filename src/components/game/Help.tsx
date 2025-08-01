@@ -37,7 +37,11 @@ export function Help({
             getBadgeColor={getBadgeColor}
           />
         ) : (
-          <Chat items={getInitialHint(adviser)} options={{ getBadgeColor }} />
+          <Chat
+            items={getInitialHint(adviser)}
+            options={{ getBadgeColor }}
+            scrollToTop={true}
+          />
         )}
       </div>
 

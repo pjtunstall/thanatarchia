@@ -11,16 +11,47 @@ import { Handshake, Grab } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { Character } from "@/types/gameTypes";
+import { playCoinbag } from "@/components/game/actions/TreasuryActions";
+
+const quill = new Audio("/sfx/quill.mp3");
+function playQuill(): HTMLAudioElement {
+  const audio = quill.cloneNode(true) as HTMLAudioElement;
+  audio.play();
+  return audio;
+}
+
+const raven = new Audio("/sfx/raven.mp3");
+export function playRaven(): HTMLAudioElement {
+  const audio = raven.cloneNode(true) as HTMLAudioElement;
+  audio.play();
+  return audio;
+}
 
 type CharacterProfileProps = {
   character: Character;
   player: Character;
+  playerIndex?: number;
+  setFactionAggressions?: React.Dispatch<React.SetStateAction<number[]>>;
+  setFactionTreasures?: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
-export function CharacterProfile({ character, player }: CharacterProfileProps) {
+export function CharacterProfile({
+  character,
+  player,
+  playerIndex,
+  setFactionAggressions,
+  setFactionTreasures,
+}: CharacterProfileProps) {
   return (
     <div className="flex items-center justify-between p-4 bg-muted/30 rounded-lg border gap-4">
-      <CharacterDialog character={character} size="lg" player={player} />
+      <CharacterDialog
+        character={character}
+        size="lg"
+        player={player}
+        playerIndex={playerIndex}
+        setFactionAggressions={setFactionAggressions}
+        setFactionTreasures={setFactionTreasures}
+      />
       <div className="flex flex-col flex-1">
         <div className="flex items-center justify-between gap-2">
           <h3 className="font-semibold text-lg">{character.name}</h3>
@@ -33,6 +64,9 @@ export function CharacterProfile({ character, player }: CharacterProfileProps) {
 type CharacterDialogProps = {
   character: Character;
   player: Character;
+  playerIndex: number;
+  setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
+  setFactionTreasures: React.Dispatch<React.SetStateAction<number[]>>;
   size?: "sm" | "lg";
 };
 
@@ -40,6 +74,9 @@ export function CharacterDialog({
   character,
   size = "sm",
   player,
+  playerIndex,
+  setFactionAggressions,
+  setFactionTreasures,
 }: CharacterDialogProps) {
   const triggerSize = size === "lg" ? "w-16 h-16" : "w-12 h-12";
 
@@ -75,8 +112,19 @@ export function CharacterDialog({
             </div>
             {player.name !== character.name && (
               <div className="flex items-center gap-2">
-                <TributeDialog character={character} player={player} />
-                <ThreatDialog character={character} player={player} />
+                <TributeDialog
+                  character={character}
+                  player={player}
+                  playerIndex={playerIndex}
+                  setFactionTreasures={setFactionTreasures}
+                  setFactionAggressions={setFactionAggressions}
+                />
+                <ThreatDialog
+                  character={character}
+                  player={player}
+                  playerIndex={playerIndex}
+                  setFactionAggressions={setFactionAggressions}
+                />
               </div>
             )}
           </DialogTitle>
@@ -92,24 +140,48 @@ export function CharacterDialog({
   );
 }
 
+type TributeDialogProps = {
+  character: Character;
+  player: Character;
+  playerIndex: number;
+  setFactionTreasures: React.Dispatch<React.SetStateAction<number[]>>;
+  setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
+};
+
 function TributeDialog({
   character,
   player,
-}: {
-  character: Character;
-  player: Character;
-}) {
+  playerIndex,
+  setFactionTreasures,
+  setFactionAggressions,
+}: TributeDialogProps) {
+  const handlePayTribute = () => {
+    setFactionTreasures((prev) =>
+      prev.map((t, i) => (i === playerIndex ? Math.max(t - 200, 0) : t))
+    );
+    setFactionAggressions((prev) =>
+      prev.map((a, i) => (i === playerIndex ? Math.max(a - 0.1, 0.1) : a))
+    );
+    const quillSound = playQuill();
+    quillSound.addEventListener("ended", () => {
+      playCoinbag();
+    });
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="relative group">
+        <button
+          onClick={handlePayTribute}
+          className="relative group w-7 h-7 flex items-center justify-center rounded-md cursor-pointer"
+          type="button"
+          aria-label="Pay Tribute"
+        >
           <span className="absolute left-0 bottom-full mb-2 text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-teal-600 font-serif italic">
-            Pay Tribute
+            Pay Tribute (200 solidi)
           </span>
-          <div className="w-7 h-7 flex items-center justify-center rounded-md cursor-pointer">
-            <Handshake className="w-5 h-5 transition-transform duration-200 hover:scale-125" />
-          </div>
-        </div>
+          <Handshake className="w-5 h-5 transition-transform duration-200 hover:scale-125" />
+        </button>
       </DialogTrigger>
       <DialogContent className="max-w-sm font-serif italic bg-muted">
         <DialogHeader>
@@ -130,26 +202,45 @@ function TributeDialog({
   );
 }
 
+type ThreatDialogProps = {
+  character: Character;
+  player: Character;
+  playerIndex: number;
+  setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
+};
+
 function ThreatDialog({
   character,
   player,
-}: {
-  character: Character;
-  player: Character;
-}) {
+  playerIndex,
+  setFactionAggressions,
+}: ThreatDialogProps) {
   const their = character.gender === "male" ? "his" : "her";
+
+  const handleProvoke = () => {
+    setFactionAggressions((prev) =>
+      prev.map((a, i) => (i === playerIndex ? Math.min(a + 0.2, 1) : a))
+    );
+    const quillSound = playQuill();
+    quillSound.addEventListener("ended", () => {
+      playRaven();
+    });
+  };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="relative group">
+        <button
+          onClick={handleProvoke}
+          className="relative group w-7 h-7 flex items-center justify-center rounded-md cursor-pointer"
+          type="button"
+          aria-label="Provoke"
+        >
           <span className="absolute right-0 top-full mt-2 text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-amber-600 font-serif italic">
             Provoke
           </span>
-          <div className="w-7 h-7 flex items-center justify-center rounded-md cursor-pointer">
-            <Grab className="w-5 h-5 transition-transform duration-200 hover:scale-125" />
-          </div>
-        </div>
+          <Grab className="w-5 h-5 transition-transform duration-200 hover:scale-125" />
+        </button>
       </DialogTrigger>
       <DialogContent className="max-w-sm font-serif italic bg-muted">
         <DialogHeader>

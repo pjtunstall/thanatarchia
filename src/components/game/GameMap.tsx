@@ -31,6 +31,8 @@ type GameMapProps = {
   onTerritoryClick: (territoryId: string) => void;
   factionFaiths: string[];
   onEndGame: () => void;
+  setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
+  setFactionTreasures: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 export function GameMap({
@@ -47,6 +49,8 @@ export function GameMap({
   scheduledAttacks,
   onTerritoryClick,
   onEndGame,
+  setFactionAggressions,
+  setFactionTreasures,
 }: GameMapProps) {
   // Create faction lookup from centralized data + filter to only show factions with territories.
   const factionLookup = React.useMemo(() => {
@@ -141,6 +145,9 @@ export function GameMap({
             factionLeaders={factionLeaders}
             factionFaiths={factionFaiths}
             player={factionLeaders[playerIndex]}
+            playerIndex={playerIndex}
+            setFactionAggressions={setFactionAggressions}
+            setFactionTreasures={setFactionTreasures}
           ></Legend>
         </div>
       </CardContent>

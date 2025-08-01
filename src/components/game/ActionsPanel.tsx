@@ -71,6 +71,8 @@ type ActionsPanelProps = {
   setAdviserIndex: React.Dispatch<React.SetStateAction<number>>;
   setHasChangedFromEudaemonia: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedTerritoryName: React.Dispatch<React.SetStateAction<string | null>>;
+  setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
+  setFactionTreasures: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 export function ActionsPanel({
@@ -94,7 +96,8 @@ export function ActionsPanel({
   setFactionLeaders,
   setAdviserIndex,
   setHasChangedFromEudaemonia,
-  setSelectedTerritoryName,
+  setFactionAggressions,
+  setFactionTreasures,
 }: ActionsPanelProps) {
   const [pendingFaith, setPendingFaith] = useState<string | null>(null);
   const confirmFaithChange = () => {
@@ -135,6 +138,9 @@ export function ActionsPanel({
                     isPlayerFaction={true}
                     factionFaiths={factionFaiths}
                     player={playerCharacter}
+                    playerIndex={playerIndex}
+                    setFactionAggressions={setFactionAggressions}
+                    setFactionTreasures={setFactionTreasures}
                   />
                 </DialogContent>
               </Dialog>
@@ -210,7 +216,6 @@ export function ActionsPanel({
                   territoryName={selectedTerritoryName}
                   factionLeaders={factionLeaders}
                   playerFactionName={factions[playerIndex].name}
-                  playerTreasure={factionTreasures[playerIndex]}
                   scheduledAttacks={scheduledAttacks}
                   setScheduledAttacks={setScheduledAttacks}
                   onRecruit={onRecruit}
@@ -219,6 +224,9 @@ export function ActionsPanel({
                   onUndoReinforce={onUndoReinforce}
                   factionFaiths={factionFaiths}
                   playerIndex={playerIndex}
+                  factionTreasures={factionTreasures}
+                  setFactionTreasures={setFactionTreasures}
+                  setFactionAggressions={setFactionAggressions}
                 />
               </>
             ) : (
@@ -262,7 +270,7 @@ export function ActionsPanel({
 }
 
 const bell = new Audio("/sfx/bell.mp3");
-function playBell() {
+export function playBell() {
   (bell.cloneNode(true) as HTMLAudioElement).play();
 }
 

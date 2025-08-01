@@ -30,15 +30,17 @@ type SelectedTerritoryInfoProps = {
   territoryName: string;
   playerIndex: number;
   playerFactionName: string;
-  playerTreasure: number;
   scheduledAttacks: AttackOrder[];
   factionLeaders: Character[];
+  factionTreasures: number[];
   onRecruit: (territoryName: string) => void;
   onSpy: (territoryName: string) => void;
   setScheduledAttacks: React.Dispatch<React.SetStateAction<AttackOrder[]>>;
   onReinforce: (from: string, to: string, callback: () => void) => void;
   onUndoReinforce: (from: string, to: string, callback: () => void) => void;
   factionFaiths: string[];
+  setFactionTreasures: React.Dispatch<React.SetStateAction<number[]>>;
+  setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 export function SelectedTerritoryPanel({
@@ -46,15 +48,17 @@ export function SelectedTerritoryPanel({
   territoryName,
   playerIndex,
   playerFactionName,
-  playerTreasure,
   scheduledAttacks,
   factionLeaders,
   factionFaiths,
+  factionTreasures,
   onRecruit,
   onSpy,
   setScheduledAttacks,
   onReinforce,
   onUndoReinforce,
+  setFactionAggressions,
+  setFactionTreasures,
 }: SelectedTerritoryInfoProps) {
   const territory = territories.find((t) => t.name === territoryName);
   if (!territory) return null;
@@ -168,6 +172,9 @@ export function SelectedTerritoryPanel({
                     isPlayerFaction={faction.name === playerFactionName}
                     factionFaiths={factionFaiths}
                     player={factionLeaders[playerIndex]}
+                    playerIndex={playerIndex}
+                    setFactionAggressions={setFactionAggressions}
+                    setFactionTreasures={setFactionTreasures}
                   />
                 </PopoverContent>
               </Popover>
@@ -178,9 +185,10 @@ export function SelectedTerritoryPanel({
             territory={territory}
             territoryName={territoryName}
             isPlayerTerritory={isPlayerTerritory}
-            playerTreasure={playerTreasure}
             onRecruit={onRecruit}
             onSpy={onSpy}
+            factionTreasures={factionTreasures}
+            playerIndex={playerIndex}
           />
 
           {/* Troop Info Row */}

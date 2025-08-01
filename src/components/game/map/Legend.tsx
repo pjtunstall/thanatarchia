@@ -17,6 +17,9 @@ type LegendProps = {
   factionLeaders: Character[];
   factionFaiths: string[];
   player: Character;
+  playerIndex: number;
+  setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
+  setFactionTreasures: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 export function Legend({
@@ -26,6 +29,9 @@ export function Legend({
   factionLeaders,
   factionFaiths,
   player,
+  playerIndex,
+  setFactionAggressions,
+  setFactionTreasures,
 }: LegendProps) {
   return (
     <div className="absolute bottom-4 right-4 z-20">
@@ -60,6 +66,9 @@ export function Legend({
                   factionInfo={factionInfo}
                   factionFaiths={factionFaiths}
                   player={player}
+                  playerIndex={playerIndex}
+                  setFactionAggressions={setFactionAggressions}
+                  setFactionTreasures={setFactionTreasures}
                 />
               );
             })}
@@ -77,6 +86,9 @@ type FactionDetailsPopoverProps = {
   fullFaction: Faction;
   factionFaiths: string[];
   player: Character;
+  playerIndex: number;
+  setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
+  setFactionTreasures: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 function FactionDetailsPopover({
@@ -86,6 +98,9 @@ function FactionDetailsPopover({
   leader,
   factionFaiths,
   player,
+  playerIndex,
+  setFactionAggressions,
+  setFactionTreasures,
 }: FactionDetailsPopoverProps) {
   return (
     <Popover>
@@ -125,6 +140,9 @@ function FactionDetailsPopover({
           isPlayerFaction={isSelected}
           factionFaiths={factionFaiths}
           player={player}
+          playerIndex={playerIndex}
+          setFactionAggressions={setFactionAggressions}
+          setFactionTreasures={setFactionTreasures}
         />
       </PopoverContent>
     </Popover>

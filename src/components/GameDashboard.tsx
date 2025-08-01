@@ -63,6 +63,8 @@ export function GameDashboard() {
               factionFaiths={gameState.factionFaiths}
               onEndGame={gameState.handleEndGame}
               playerIndex={gameState.playerIndex}
+              setFactionAggressions={gameState.setFactionAggressions}
+              setFactionTreasures={gameState.setFactionTreasures}
             />
           </div>
 
@@ -111,6 +113,8 @@ export function GameDashboard() {
                   factionTreasures={gameState.factionTreasures}
                   playerIndex={gameState.playerIndex}
                   factionFaiths={gameState.factionFaiths}
+                  setFactionAggressions={gameState.setFactionAggressions}
+                  setFactionTreasures={gameState.setFactionTreasures}
                 />
               </TabsContent>
 
@@ -149,6 +153,8 @@ export function GameDashboard() {
                     gameState.setHasChangedFromEudaemonia
                   }
                   setSelectedTerritoryName={gameState.setSelectedTerritoryName}
+                  setFactionAggressions={gameState.setFactionAggressions}
+                  setFactionTreasures={gameState.setFactionTreasures}
                 />
               </TabsContent>
             </Tabs>
@@ -161,6 +167,8 @@ export function GameDashboard() {
         dequeueBattleMessage={gameState.dequeueBattleMessage}
         playerIndex={gameState.playerIndex}
         adviserIndex={gameState.adviserIndex}
+        setFactionAggressions={gameState.setFactionAggressions}
+        setFactionTreasures={gameState.setFactionTreasures}
       />
     </>
   );
