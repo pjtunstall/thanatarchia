@@ -30,6 +30,7 @@ import { chroniclers } from "@/data/chronicles";
 import { factions } from "@/data/factions";
 import { Help } from "@/components/game/Help";
 import { FactionDetails } from "@/components/game/FactionDetails";
+import { playBell, playSquirrel } from "@/lib/sounds";
 
 type ActionsPanelProps = {
   playerCharacter: Character;
@@ -184,7 +185,7 @@ export function ActionsPanel({
 
               {factionFaiths[playerIndex] === "Pagan" ? (
                 <Button
-                  onClick={onSacrifice}
+                  onClick={playSquirrel}
                   variant="outline"
                   size="sm"
                   className="w-full"
@@ -267,14 +268,4 @@ export function ActionsPanel({
       </AlertDialog>
     </>
   );
-}
-
-const bell = new Audio("/sfx/bell.mp3");
-export function playBell() {
-  (bell.cloneNode(true) as HTMLAudioElement).play();
-}
-
-const squirrel = new Audio("/sfx/squirrel.mp3");
-function onSacrifice() {
-  (squirrel.cloneNode(true) as HTMLAudioElement).play();
 }

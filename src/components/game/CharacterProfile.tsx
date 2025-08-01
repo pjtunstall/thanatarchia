@@ -11,28 +11,7 @@ import { Handshake, Grab } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { Character } from "@/types/gameTypes";
-import { playCoinbag } from "@/components/game/actions/TreasuryActions";
-
-const quill = new Audio("/sfx/quill.mp3");
-function playQuill(): HTMLAudioElement {
-  const audio = quill.cloneNode(true) as HTMLAudioElement;
-  audio.play();
-  return audio;
-}
-
-const raven = new Audio("/sfx/raven.mp3");
-export function playRaven(): HTMLAudioElement {
-  const audio = raven.cloneNode(true) as HTMLAudioElement;
-  audio.play();
-  return audio;
-}
-
-const wolf = new Audio("/sfx/wolf.mp3");
-export function playWolf(): HTMLAudioElement {
-  const audio = wolf.cloneNode(true) as HTMLAudioElement;
-  audio.play();
-  return audio;
-}
+import { playQuill, playCoinbag, playRaven } from "@/lib/sounds";
 
 type CharacterProfileProps = {
   character: Character;
@@ -129,7 +108,6 @@ export function CharacterDialog({
                 <ThreatDialog
                   character={character}
                   player={player}
-                  playerIndex={playerIndex}
                   setFactionAggressions={setFactionAggressions}
                 />
               </div>
@@ -212,25 +190,22 @@ function TributeDialog({
 type ThreatDialogProps = {
   character: Character;
   player: Character;
-  playerIndex: number;
   setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 function ThreatDialog({
   character,
   player,
-  playerIndex,
   setFactionAggressions,
 }: ThreatDialogProps) {
   const their = character.gender === "male" ? "his" : "her";
 
   const handleProvoke = () => {
     setFactionAggressions((prev) =>
-      prev.map((a, i) => (i === playerIndex ? Math.min(a + 0.2, 1) : a))
+      prev.map((a, i) => (i === character.index ? Math.min(a + 0.2, 1) : a))
     );
     const quillSound = playQuill();
     quillSound.addEventListener("ended", () => {
-      playWolf();
       playRaven();
     });
   };

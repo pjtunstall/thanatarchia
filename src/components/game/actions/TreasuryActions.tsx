@@ -3,11 +3,7 @@ import { Users, Eye } from "lucide-react";
 import { Territory } from "@/types/gameTypes";
 import { costOfSpying, costOfRecruiting } from "@/data/gameData";
 import { WaxSealButton } from "@/components/game/actions/WaxSealButton";
-
-const coinbag = new Audio("/sfx/coinbag.mp3");
-export function playCoinbag() {
-  (coinbag.cloneNode(true) as HTMLAudioElement).play();
-}
+import { playCoinbag } from "@/lib/sounds";
 
 type TreasuryActionsProps = {
   territory: Territory;
@@ -34,7 +30,7 @@ export function TreasuryActions({
         <WaxSealButton
           className="w-full"
           onClick={() => {
-            (coinbag.cloneNode(true) as HTMLAudioElement).play();
+            playCoinbag();
             return territoryName && onRecruit(territoryName);
           }}
           variant="default"
@@ -54,7 +50,7 @@ export function TreasuryActions({
       <div className="relative group min-w-0">
         <WaxSealButton
           onClick={() => {
-            (coinbag.cloneNode(true) as HTMLAudioElement).play();
+            playCoinbag();
             return territoryName && onSpy(territoryName);
           }}
           disabled={

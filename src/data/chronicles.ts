@@ -50,6 +50,7 @@ export const chroniclers: Character[] = [
     image: chroniclerScribe,
     biography:
       "A devout ascetic, who seeks martyrdom at every opportunity, John has escaped death on multiple occasions only through the timely intervention of his disciples. He takes the Bible literally, but considers life largely allegorical. When not too delirious from fasting, John's hobbies are exegesis and speaking in voices. (He does a good Attila.) Rumor has it that he once accidentally excommunicated himself in an 'excess of piety' and was only brought back into the fold by special decree of the Pope.",
+    index: 0,
   },
   {
     name: "Athaloc of Smyrna",
@@ -57,6 +58,7 @@ export const chroniclers: Character[] = [
     image: chroniclerScholar,
     biography:
       "Tireless denouncer of those fools who proclaim that Christ is of two natures but not in two natures, when clearly He is in but not of. Preposterous! And the Spirit? Don't even go there...",
+    index: 1,
   },
   {
     name: "Priscilla of Byzantium",
@@ -64,6 +66,7 @@ export const chroniclers: Character[] = [
     image: chroniclerNun,
     biography:
       "A former imperial court lady turned nun after a scandal involving the Emperor's favorite horse and a misunderstanding about inheritance laws. Maintains that everything was better 'in Constantinople', despite having fled the city in disgrace.",
+    index: 2,
   },
   {
     name: "Eudaemonia of Rheims",
@@ -71,6 +74,7 @@ export const chroniclers: Character[] = [
     image: chroniclerPoet,
     biography:
       "World-weary poet, Eudaemonia 'the Jackdaw' of Rheims, casts a jaded eye over this twilight of civilization. She puts her classical education to good use, penning ransom notes for local tyrants. They're always in impeccable hexameters, although she fears the allusions to Cicero may me lost on some warlords.",
+    index: 3,
   },
 ];
 
@@ -80,6 +84,7 @@ const agilu: Character = {
   image: chroniclerBard,
   biography:
     "Vandal 'slam-bard', Agilu, keeps it real on the streets of Carthage. She's been among Romans and Rugians, rulers so lavish. She's been among heathens and heroes when hard fights went down. She sings of Attila the Open-Handed. She'll sing of you too: 'peerless and bold.' (Payment in gold.)",
+  index: 3,
 };
 
 export const chroniclersAfterTheIncident = [...chroniclers.slice(0, 3), agilu];

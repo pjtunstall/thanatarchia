@@ -12,9 +12,9 @@ export function useGameCore() {
   const [gameStatus, setGameStatus] = useState<GameStatus>("playing");
   const [territories, setTerritories] = useState<Territory[]>(() => {
     const territories = initialTerritories;
-    const plusOrMinus = 300;
+    const range = 600;
     territories.forEach((t) => {
-      t.troops -= plusOrMinus + Math.floor(Math.random() * 2 * plusOrMinus);
+      t.troops = 700 + Math.floor(Math.random() * range);
     });
     return [...territories];
   });
@@ -72,7 +72,7 @@ export function useGameCore() {
     []
   );
 
-  // This resetGame is wrapped in another resetGame in useGameState
+  // This resetGame is wrapped in another resetGame in useGameState.
   const resetGame = useCallback(() => {
     const freshTerritories = initialTerritories;
     const freshFactionTerritories = factions.map((f) => f.territories);

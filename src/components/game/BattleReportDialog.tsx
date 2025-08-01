@@ -11,8 +11,7 @@ import { Character, BattleReport } from "@/types/gameTypes";
 import { factions } from "@/data/factions";
 import { chroniclers } from "@/data/chronicles";
 import { CharacterDialog } from "@/components/game/CharacterProfile";
-import { playRaven } from "@/components/game/CharacterProfile";
-import { playWolf } from "@/components/game/CharacterProfile";
+import { playRaven, playWolf } from "@/lib/sounds";
 
 type BattleReportDialogProps = {
   battleMessage: BattleReport | null;

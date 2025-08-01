@@ -63,6 +63,7 @@ export type Character = {
   gender: Gender;
   image: string;
   biography: string;
+  index: number;
 };
 
 export type AttackOrder = {

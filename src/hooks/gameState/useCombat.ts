@@ -117,7 +117,9 @@ export function useCombat({
     (adviserIndex: number, turn: number) => {
       const groupedAttacks = groupScheduledAttacks(scheduledAttacks);
       const battleReportEntries: BattleReport[] = [];
-      let losses = 0;
+
+      let attackerLosses = 0;
+      let defenderLosses = 0;
 
       groupedAttacks.forEach(({ to, from, totalTroops, sources }) => {
         const toTerritory = territories.find((t) => t.name === to);
@@ -143,13 +145,18 @@ export function useCombat({
         const victory = attackStrength > defenseStrength;
 
         if (victory) {
+          const defendersInitial = toTerritory.troops;
           const survivors = Math.max(
             0,
-            toTerritory.troops === 0
+            defendersInitial === 0
               ? totalTroops
-              : Math.floor(totalTroops - toTerritory.troops * 0.3)
+              : Math.floor(totalTroops - defendersInitial * 0.3)
           );
-          losses = totalTroops - survivors;
+          attackerLosses = totalTroops - survivors;
+          defenderLosses = Math.min(
+            defendersInitial,
+            Math.floor(defendersInitial * 0.3)
+          );
 
           updateTerritories((prev) =>
             prev.map((t) => {
@@ -172,7 +179,9 @@ export function useCombat({
           );
         } else {
           const casualties = Math.floor(Math.random() * 300 + 200);
-          losses = casualties;
+          attackerLosses = casualties;
+          defenderLosses = 0;
+
           updateTerritories((prev) =>
             prev.map((t) => {
               const match = sources.find((s) => s.from === t.name);
@@ -212,7 +221,7 @@ export function useCombat({
         battleReportEntries.push({
           author,
           message: chronicleEntryStatement,
-          stats: `Attack strength: ${totalTroops}\nDefense strength: ${toTerritory.troops}\nLosses: ${losses}`,
+          stats: `Attack strength: ${totalTroops}\nDefense strength: ${toTerritory.troops}\nYour losses: ${attackerLosses}\nDefender losses: ${defenderLosses}`,
           success: victory,
         });
       });
@@ -341,7 +350,6 @@ export function useCombat({
     [territories, playerIndex, factions, adjacentTerritories]
   );
 
-  // AI recruitment logic
   const aiRecruit = useCallback(
     (factionIndex: number) => {
       if (factionTreasures[factionIndex] < costOfRecruiting) return;
@@ -357,7 +365,6 @@ export function useCombat({
         });
       });
 
-      // Update faction treasures
       setFactionTreasures((prev) => {
         const updated = [...prev];
         updated[factionIndex] -= costOfRecruiting;
@@ -380,7 +387,6 @@ export function useCombat({
           (t) => t.name === territoryName
         );
 
-        // Skip if this territory no longer belongs to this faction (conquered earlier this turn).
         if (!aiTerritory || aiTerritory.owner !== factions[factionIndex].name) {
           return currentTerritories;
         }
@@ -393,29 +399,30 @@ export function useCombat({
 
         if (adjacentEnemyTerritories.length === 0) return currentTerritories;
 
-        // Only consider attacking if AI territory has enough troops.
         if (!aiTerritory.troops || aiTerritory.troops <= 500) {
           return currentTerritories;
         }
 
-        // Find weakest adjacent enemy territory to attack.
-        const weakestTarget = adjacentEnemyTerritories.reduce(
-          (weakest, current) =>
-            (current!.troops ?? Infinity) < (weakest!.troops ?? Infinity)
-              ? current
-              : weakest
+        const aggression = factionAggressions[factionIndex];
+
+        const scoredTarget = adjacentEnemyTerritories.reduce(
+          (best, current) => {
+            const isPlayerOwned = current.owner === factions[playerIndex].name;
+            const troopScore = current.troops ?? Infinity;
+            const score = troopScore - (isPlayerOwned ? aggression * 10 : 0);
+            return !best || score < best.score
+              ? { territory: current, score }
+              : best;
+          },
+          null as null | { territory: Territory; score: number }
         );
 
-        if (
-          !weakestTarget ||
-          Math.random() >= factionAggressions[factionIndex]
-        ) {
+        if (!scoredTarget || Math.random() >= aggression) {
           return currentTerritories;
         }
 
-        // Execute attack logic directly here with current territory data.
         const fromTerritory = aiTerritory;
-        const toTerritory = weakestTarget;
+        const toTerritory = scoredTarget.territory;
 
         const attackForce = Math.floor(fromTerritory.troops! * 0.6);
         const defenseForce = toTerritory.troops!;
@@ -424,40 +431,59 @@ export function useCombat({
           defenseForce < 100 ? 0 : defenseForce + Math.random() * 600;
         const victory = attackStrength > defenseStrength;
 
-        let losses = 0;
+        const calculatedAttackerLosses = victory
+          ? Math.floor(attackForce * 0.1 + Math.random() * 50)
+          : Math.floor(attackForce * 0.3);
+        const attackerLosses =
+          defenseForce === 0
+            ? 0
+            : Math.min(fromTerritory.troops, calculatedAttackerLosses);
+
+        const calculatedDefenderLosses = victory
+          ? Math.floor(attackForce * 0.3)
+          : Math.floor(Math.random() * 150 + 50);
+        const defenderLosses = Math.min(
+          toTerritory.troops,
+          calculatedDefenderLosses
+        );
+
         let updatedTerritories: Territory[];
 
         if (victory) {
           updatedTerritories = currentTerritories.map((t) => {
             if (t.name === territoryName) {
-              return { ...t, troops: t.troops! - attackForce };
-            }
-            if (t.name === weakestTarget.name) {
               return {
                 ...t,
+                troops: Math.max(0, t.troops! - attackForce),
+              };
+            }
+            if (t.name === toTerritory.name) {
+              return {
+                ...t,
+                troops: Math.max(200, t.troops! - defenderLosses),
                 owner: fromTerritory.owner,
-                troops: Math.floor(attackForce * 0.6),
               };
             }
             return t;
           });
-          losses = defenseForce;
         } else {
-          updatedTerritories = currentTerritories.map((t) =>
-            t.name === territoryName
-              ? {
-                  ...t,
-                  troops: Math.max(
-                    200,
-                    t.troops! - Math.floor(attackForce * 0.3)
-                  ),
-                }
-              : t
-          );
-          losses = Math.floor(attackForce * 0.3);
+          updatedTerritories = currentTerritories.map((t) => {
+            if (t.name === territoryName) {
+              return {
+                ...t,
+                troops: Math.max(200, t.troops! - attackerLosses),
+              };
+            }
+            if (t.name === toTerritory.name) {
+              return {
+                ...t,
+                troops: Math.max(0, t.troops! - defenderLosses),
+              };
+            }
+            return t;
+          });
         }
 
-        // Handle chronicles and battle reports.
         const author: Character = pickAValidChronicler(
           hasChangedFromEudaemonia
         );
@@ -478,7 +504,7 @@ export function useCombat({
           success: victory,
           winners,
           losers,
-          territoryName: weakestTarget.name,
+          territoryName: toTerritory.name,
           leaderCharacter,
         });
 
@@ -488,7 +514,7 @@ export function useCombat({
           const battleReport: BattleReport = {
             author,
             message: chronicleEntryStatement,
-            stats: `Attack strength: ${attackForce}\nDefense strength: ${defenseForce}\nLosses: ${losses}`,
+            stats: `Attack strength: ${attackForce}\nDefense strength: ${defenseForce}\nAttacker losses: ${attackerLosses}\nYour losses: ${defenderLosses}`,
             success: !victory,
           };
 
