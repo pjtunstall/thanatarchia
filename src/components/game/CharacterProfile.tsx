@@ -11,7 +11,7 @@ import { Handshake, Grab } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { Character } from "@/types/gameTypes";
-import { playQuill, playCoinbag, playRaven } from "@/lib/sounds";
+import { playQuill, playCoinbag } from "@/lib/sounds";
 
 type CharacterProfileProps = {
   character: Character;
@@ -204,10 +204,7 @@ function ThreatDialog({
     setFactionAggressions((prev) =>
       prev.map((a, i) => (i === character.index ? Math.min(a + 0.2, 1) : a))
     );
-    const quillSound = playQuill();
-    quillSound.addEventListener("ended", () => {
-      playRaven();
-    });
+    playQuill();
   };
 
   return (
