@@ -354,16 +354,13 @@ export function randomVandalName(gender: Gender): string {
   }
 
   if (Math.random() < 0.3) {
-    if (firstElement !== "Sigis") {
-      firstElement = firstElement.slice(0, -1);
-    }
-    if (firstElement[firstElement.length - 1] === "i") {
-      firstElement = firstElement.slice(0, -1);
-    }
+    // Return a diminutive.
+    firstElement = deleteStemVowels(firstElement);
     if (gender === "male") return firstElement + "ila";
     return firstElement + "ilu";
   }
 
+  // Otherwise add a last element,
   let lastElement;
 
   if (gender === "male") {
@@ -372,12 +369,21 @@ export function randomVandalName(gender: Gender): string {
     lastElement = randomItem(vandalFemaleLastElements);
   }
 
+  // eliding vowels before an underlying 'h',
   if (lastElement[0] === "h") {
-    if (firstElement !== "Sigis") {
-      firstElement = firstElement.slice(0, -1);
-    }
-    return firstElement + lastElement.slice(1);
+    firstElement = deleteStemVowels(firstElement);
+    return firstElement + lastElement.slice(1); // and dropping the 'h'.
   } else {
     return firstElement + lastElement;
   }
+}
+
+function deleteStemVowels(firstElement: string): string {
+  if (firstElement !== "Sigis") {
+    firstElement = firstElement.slice(0, -1);
+  }
+  if (firstElement[firstElement.length - 1] === "i") {
+    firstElement = firstElement.slice(0, -1);
+  }
+  return firstElement;
 }
