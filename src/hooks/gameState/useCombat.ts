@@ -368,7 +368,7 @@ export function useCombat({
     ]
   );
 
-  const executeAITerritoryTurn = useCallback(
+  const handleAIAttacks = useCallback(
     (factionIndex: number, territoryName: string) => {
       updateTerritories((currentTerritories) => {
         const aiTerritory = currentTerritories.find(
@@ -525,16 +525,10 @@ export function useCombat({
       const aiTerritoryNames = factionTerritories[i];
 
       aiTerritoryNames.forEach((aiTerritoryName) => {
-        executeAITerritoryTurn(i, aiTerritoryName);
+        handleAIAttacks(i, aiTerritoryName);
       });
     });
-  }, [
-    factions,
-    playerIndex,
-    aiRecruit,
-    factionTerritories,
-    executeAITerritoryTurn,
-  ]);
+  }, [factions, playerIndex, aiRecruit, factionTerritories, handleAIAttacks]);
 
   return {
     handleRecruit,
