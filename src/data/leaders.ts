@@ -179,7 +179,7 @@ const visigothMaleLastElements = [
   "gern",
   "mund",
   "mir",
-  "thank",
+  "thanc",
   "lec",
 ];
 const visigothFemaleLastElements = ["suintha", "gotho", "berga"];

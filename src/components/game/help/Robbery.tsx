@@ -46,10 +46,6 @@ export function robberyChat(
           author: adviser,
           statement: "No, your Majesty, you are a bold robber!",
         },
-        {
-          author: player,
-          statement: "I'm cool with that if you are.",
-        },
       ];
     case "Eudaemonia of Rheims":
       return [

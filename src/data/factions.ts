@@ -2,8 +2,8 @@ import { Faction } from "@/types/gameTypes";
 
 import bagaudaeMaleRebel from "@/assets/bagaudae-male-rebel.jpg";
 import bagaudaeFemaleRebel from "@/assets/bagaudae-female-rebel.jpg";
-import mauriMaleLeader from "@/assets/mauri-male.jpg";
-import mauriFemaleLeader from "@/assets/mauri-female.jpg";
+import mauriMaleLeader from "@/assets/moor-king.jpg";
+import mauriFemaleLeader from "@/assets/moor-queen.jpg";
 import mosaicKing from "@/assets/mosaic-king.jpg";
 import mosaicQueen from "@/assets/mosaic-queen.jpg";
 import mosaicWarriorQueen from "@/assets/mosaic-warrior-queen.jpg";
@@ -20,6 +20,9 @@ import manuscriptQueen from "@/assets/manuscript-queen.jpg";
 import suebianKing from "@/assets/suebian-king.jpg";
 import suebianQueen from "@/assets/suebian-queen.jpg";
 import helmetedMosaicQueen from "@/assets/helmeted-mosaic-queen.jpg";
+import moustacheKing from "@/assets/moustache-king.jpg";
+import hunQueen from "@/assets/hun-queen.jpg";
+import byzantineMosaicQueen from "@/assets/byzantine-mosaic-queen.jpg";
 
 export const factions: Faction[] = [
   {
@@ -40,7 +43,7 @@ export const factions: Faction[] = [
       female: {
         name: "Theodora Augusta",
         gender: "female",
-        image: byzantineQueen,
+        image: byzantineMosaicQueen,
         biography: "",
         index: 0,
       },
@@ -145,7 +148,7 @@ export const factions: Faction[] = [
       male: {
         name: "Theodemir",
         gender: "male",
-        image: mosaicKing,
+        image: moustacheKing,
         biography: "",
         index: 4,
       },
@@ -516,7 +519,7 @@ export const factions: Faction[] = [
       female: {
         name: "Kreka",
         gender: "female",
-        image: visigothicQueen,
+        image: hunQueen,
         biography: "",
         index: 17,
       },
