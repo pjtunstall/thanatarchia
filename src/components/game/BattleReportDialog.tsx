@@ -113,14 +113,7 @@ function BattleReportContent({
         </DialogHeader>
 
         <div className="flex items-center gap-3 mb-2">
-          {/* chronicler passed as a dummy value, since not needed here */}
-          <CharacterDialog
-            character={chronicler}
-            player={chronicler}
-            playerIndex={playerIndex}
-            setFactionTreasures={setFactionTreasures}
-            setFactionAggressions={setFactionAggressions}
-          />
+          <CharacterDialog character={chronicler} />
           <Badge
             variant="secondary"
             style={badgeColor ? { backgroundColor: badgeColor } : undefined}

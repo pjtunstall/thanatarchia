@@ -145,7 +145,6 @@ export function GameMap({
             factionLeaders={factionLeaders}
             factionFaiths={factionFaiths}
             player={factionLeaders[playerIndex]}
-            playerIndex={playerIndex}
             setFactionAggressions={setFactionAggressions}
             setFactionTreasures={setFactionTreasures}
           ></Legend>

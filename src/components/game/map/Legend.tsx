@@ -4,6 +4,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
+
 import { Character, Faction, FactionMiniInfo } from "@/types/gameTypes";
 import { FactionDetails } from "@/components/game/FactionDetails";
 
@@ -17,7 +19,6 @@ type LegendProps = {
   factionLeaders: Character[];
   factionFaiths: string[];
   player: Character;
-  playerIndex: number;
   setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
   setFactionTreasures: React.Dispatch<React.SetStateAction<number[]>>;
 };
@@ -29,7 +30,6 @@ export function Legend({
   factionLeaders,
   factionFaiths,
   player,
-  playerIndex,
   setFactionAggressions,
   setFactionTreasures,
 }: LegendProps) {
@@ -58,7 +58,7 @@ export function Legend({
               const leader = factionLeaders[factions.indexOf(fullFaction)];
 
               return (
-                <FactionDetailsPopover
+                <FactionDetailsDialog
                   key={key}
                   isSelected={isSelected}
                   leader={leader}
@@ -66,7 +66,6 @@ export function Legend({
                   factionInfo={factionInfo}
                   factionFaiths={factionFaiths}
                   player={player}
-                  playerIndex={playerIndex}
                   setFactionAggressions={setFactionAggressions}
                   setFactionTreasures={setFactionTreasures}
                 />
@@ -79,32 +78,30 @@ export function Legend({
   );
 }
 
-type FactionDetailsPopoverProps = {
+type FactionDetailsDialogProps = {
   isSelected: boolean;
   factionInfo: FactionMiniInfo;
   leader: Character;
   fullFaction: Faction;
   factionFaiths: string[];
   player: Character;
-  playerIndex: number;
   setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
   setFactionTreasures: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
-function FactionDetailsPopover({
+function FactionDetailsDialog({
   isSelected,
   factionInfo,
   fullFaction,
   leader,
   factionFaiths,
   player,
-  playerIndex,
   setFactionAggressions,
   setFactionTreasures,
-}: FactionDetailsPopoverProps) {
+}: FactionDetailsDialogProps) {
   return (
-    <Popover>
-      <PopoverTrigger asChild>
+    <Dialog>
+      <DialogTrigger asChild>
         <div
           className={`group flex items-center gap-2 px-2 py-1 rounded cursor-pointer hover:bg-primary/30 transition-colors ${
             isSelected ? "bg-primary/10 border border-primary/30" : ""
@@ -124,27 +121,18 @@ function FactionDetailsPopover({
             {fullFaction.name}
           </span>
         </div>
-      </PopoverTrigger>
-      <PopoverContent
-        side="top"
-        align="end"
-        sideOffset={16}
-        alignOffset={64}
-        collisionPadding={0}
-        avoidCollisions={true}
-        className="p-0"
-      >
+      </DialogTrigger>
+      <DialogContent className="p-0 max-w-sm w-fit">
         <FactionDetails
           faction={fullFaction}
           leader={leader}
           isPlayerFaction={isSelected}
           factionFaiths={factionFaiths}
           player={player}
-          playerIndex={playerIndex}
           setFactionAggressions={setFactionAggressions}
           setFactionTreasures={setFactionTreasures}
         />
-      </PopoverContent>
-    </Popover>
+      </DialogContent>
+    </Dialog>
   );
 }
