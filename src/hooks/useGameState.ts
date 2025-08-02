@@ -5,6 +5,7 @@ import { factions, adjacentTerritories } from "@/data/gameData";
 import { useGameCore } from "@/hooks/gameState/useGameCore";
 import { useCombat } from "@/hooks/gameState/useCombat";
 import { useChronicles } from "@/hooks/gameState/useChronicles";
+import { abandonTerritoryToBagaudaeChronicle } from "@/data/chronicles";
 
 export function useGameState() {
   const [activeTab, setActiveTab] = useState("status");
@@ -92,12 +93,29 @@ export function useGameState() {
   const handleEndTurn = useCallback(() => {
     chroniclesState.setChronicles([]);
     handlePlayerAttacks(chroniclesState.adviserIndex, gameCore.currentTurn);
-    generateResources();
     executeAITurn();
+    console.log("AI turn executed");
+    generateResources();
     gameCore.setCurrentTurn((prev) => prev + 1);
     gameCore.setSelectedTerritoryName(null);
     gameCore.updateTerritories((prev) => {
+      const playerFactionName = factions[gameCore.playerIndex].name;
       return prev.map((t) => {
+        if (t.owner === playerFactionName && t.troops === 0) {
+          const { author, statement } = abandonTerritoryToBagaudaeChronicle({
+            territoryName: t.name,
+            playerFactionName,
+            adviserIndex: chroniclesState.adviserIndex,
+            hasChangedFromEudaemonia: chroniclesState.hasChangedFromEudaemonia,
+          });
+          chroniclesState.addChronicleEntry(
+            author,
+            statement,
+            gameCore.currentTurn
+          );
+          const rebelNumbers = 300 + Math.floor(Math.random() * 200);
+          return { ...t, owner: "Bagaudae", troops: rebelNumbers };
+        }
         return { ...t, spiedOn: false };
       });
     });
@@ -110,6 +128,9 @@ export function useGameState() {
     gameCore.setCurrentTurn,
     gameCore.setSelectedTerritoryName,
     checkGameStatus,
+    gameCore.updateTerritories,
+    factions,
+    chroniclesState.addChronicleEntry,
   ]);
 
   const handleEndGame = () => {

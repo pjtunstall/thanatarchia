@@ -11,9 +11,12 @@ import { randomItem } from "@/lib/utils";
 import { costOfRecruiting, troopUnit } from "@/data/gameData";
 import {
   chroniclers,
-  chroniclersAfterTheIncident,
   battleChronicle,
   recruitChronicle,
+} from "@/data/chronicles";
+import {
+  pickAValidChronicler,
+  abandonTerritoryToOtherFactionChronicle,
 } from "@/data/chronicles";
 
 type UseCombatProps = {
@@ -412,6 +415,36 @@ export function useCombat({
         const fromTerritory = aiTerritory;
         const toTerritory = scoredTarget.territory;
 
+        if (
+          toTerritory.owner === factions[playerIndex].name &&
+          toTerritory.troops === 0
+        ) {
+          const { author, statement } = abandonTerritoryToOtherFactionChronicle(
+            {
+              territoryName: toTerritory.name,
+              playerFactionName: toTerritory.owner,
+              otherFactionName: fromTerritory.owner,
+              adviserIndex,
+              hasChangedFromEudaemonia,
+            }
+          );
+
+          addChronicleEntry(author, statement, turn);
+
+          const updatedTerritories = currentTerritories.map((t) => {
+            if (t.name === toTerritory.name) {
+              return {
+                ...t,
+                troops: 200,
+                owner: fromTerritory.owner,
+              };
+            }
+            return t;
+          });
+
+          return updatedTerritories;
+        }
+
         const attackForce = Math.floor(fromTerritory.troops! * 0.6);
         const defenseForce = toTerritory.troops!;
         const attackStrength = attackForce + Math.random() * 400;
@@ -577,14 +610,6 @@ function populateBattleReportQueue(
 ) {
   for (const entry of entries) {
     enqueueBattleReport(entry);
-  }
-}
-
-function pickAValidChronicler(hasChangedFromEudaemonia: boolean): Character {
-  if (hasChangedFromEudaemonia) {
-    return randomItem(chroniclersAfterTheIncident);
-  } else {
-    return randomItem(chroniclers);
   }
 }
 

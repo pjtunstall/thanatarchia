@@ -6,7 +6,7 @@ import chroniclerBard from "@/assets/chroniclers/chronicler-bard-female.jpg";
 
 import { Character, ChatEntry, Gender, Faction } from "@/types/gameTypes";
 import { getDate } from "@/lib/time";
-import { uninitialBold } from "@/lib/utils";
+import { uninitialBold, randomItem } from "@/lib/utils";
 
 function getChroniclerByName(chroniclerName: string): Character {
   return chroniclers.find((c) => c.name === chroniclerName);
@@ -202,9 +202,9 @@ export const battleChronicle = ({
         }
       }
     case "Agilu Agisildsdaughter":
-      // Only the hostile case needs implementing unless, atsome point, I decide to let this Easter-egg character also be an adviser.
+      // Only the hostile case needs implementing unless, at some point, I decide to let this Easter-egg character also be an adviser.
       if (success) {
-        return `In battle are broken many bold ${defenders}, defending their homes in ${territory} land. ${attackers}, in blood, their blades have reddened. A dark day indeed as the sun goes down.`;
+        return `In battle were butchered the bold ${defenders}, defending their homes in ${territory} land. ${attackers}, in blood, their blades reddened. A dark day indeed as the sun goes down.`;
       } else {
         return `Today will dine dark-coated raven. Great ${defenders} won glory in ${territory} land. The ${
           leaderCharacter.gender === "male" ? "lord" : "lady"
@@ -374,3 +374,132 @@ export const endChronicle = ({
       }
   }
 };
+
+type abandonTerritoryToBagaudaeProps = {
+  territoryName: string;
+  playerFactionName: string;
+  adviserIndex: number;
+  hasChangedFromEudaemonia: boolean;
+};
+
+export function abandonTerritoryToBagaudaeChronicle({
+  territoryName,
+  playerFactionName,
+  adviserIndex,
+  hasChangedFromEudaemonia,
+}: abandonTerritoryToBagaudaeProps): {
+  author: Character;
+  statement: string;
+} {
+  const author = pickAValidChronicler(hasChangedFromEudaemonia);
+  const bias =
+    author.name === chroniclers[adviserIndex].name ? "friendly" : "hostile";
+  let statement: string;
+
+  switch (author.name) {
+    case "John of Colchis":
+      if (bias === "friendly") {
+        statement = `Bagaudae rebels have seized ${territoryName} as the ${playerFactionName} withdraw for now.`;
+      } else {
+        statement = `Unable to hold ${territoryName}, the ${playerFactionName} have abandoned it to Bagaudae rebels.`;
+      }
+      break;
+    case "Priscilla of Byzantium":
+      if (bias === "friendly") {
+        statement = `The ${playerFactionName} have left ${territoryName}. Boring territory anyway, if you ask me. The rebel Bagaudae are welcome to it.`;
+      } else {
+        statement = `The ${playerFactionName} have fled ${territoryName} and Bagaudae rebels rampage there now.`;
+      }
+      break;
+    case "Eudaemonia of Rheims":
+      if (bias === "friendly") {
+        statement = `The ${playerFactionName} have made a tactical retreat from ${territoryName}, leaving its governance to the tender ministrations of the peasant Bagaudae.`;
+      } else {
+        statement = `The ${playerFactionName} have left ${territoryName} to the rough justice of the Bagaudae.`;
+      }
+      break;
+    case "Athaloc of Smyrna":
+      if (bias === "friendly") {
+        statement = `In a move of consumate strategic brilliance, the ${playerFactionName} have quit ${territoryName}. One's only regret is that a mob of Bagaudae are now terrorizing the land.`;
+      } else {
+        statement = `Weakened, and probably confused, the ${playerFactionName} have fled ${territoryName}. They say a peasant revolt has broken out in their wake.`;
+      }
+      break;
+    case "Agilu Agisildsdaughter":
+      statement = `A gaggle of Bagaudae the glory have stolen of the bowed, battle-weary, once bold ${playerFactionName}. Peasants and peons, took their place in ${territoryName}. Not a shield shattered. A shameful story.`;
+  }
+
+  return {
+    author,
+    statement,
+  };
+}
+
+type abandonTerritoryToOtherFactionChronicleProps = {
+  territoryName: string;
+  playerFactionName: string;
+  otherFactionName: string;
+  adviserIndex: number;
+  hasChangedFromEudaemonia: boolean;
+};
+
+export function abandonTerritoryToOtherFactionChronicle({
+  territoryName,
+  playerFactionName,
+  otherFactionName,
+  adviserIndex,
+  hasChangedFromEudaemonia,
+}: abandonTerritoryToOtherFactionChronicleProps) {
+  const author = pickAValidChronicler(hasChangedFromEudaemonia);
+  const bias =
+    author.name === chroniclers[adviserIndex].name ? "friendly" : "hostile";
+  let statement: string;
+
+  switch (author.name) {
+    case "John of Colchis":
+      if (bias === "friendly") {
+        statement = `The ${otherFactionName} have poured into ${territoryName} unopposed as the ${playerFactionName} withdraw for now.`;
+      } else {
+        statement = `Unable to hold ${territoryName}, the ${playerFactionName} have abandoned it to the ${otherFactionName}.`;
+      }
+      break;
+    case "Priscilla of Byzantium":
+      if (bias === "friendly") {
+        statement = `The ${playerFactionName} have withdrawn from ${territoryName}. One senses that the ${otherFactionName} may be walking into a trap...`;
+      } else {
+        statement = `The ${otherFactionName} have taken ${territoryName} from the ${playerFactionName} without a fight.`;
+      }
+      break;
+    case "Eudaemonia of Rheims":
+      if (bias === "friendly") {
+        statement = `The ${playerFactionName} have made a tactical retreat from ${territoryName}, leaving its fate in the hands of the ${otherFactionName}.`;
+      } else {
+        statement = `The ${playerFactionName} have absconded from ${territoryName}. They say the ${otherFactionName} quickly took their place.`;
+      }
+      break;
+    case "Athaloc of Smyrna":
+      if (bias === "friendly") {
+        statement = `In a bold gambit, the ${playerFactionName} have ceded ${territoryName} to the ${otherFactionName}.`;
+      } else {
+        statement = `The ${playerFactionName}, weak and poorly led, have fled ${territoryName} with the ${otherFactionName} hard on their heels.`;
+      }
+      break;
+    case "Agilu Agisildsdaughter":
+      statement = `I have heard that the ${playerFactionName} high-tailed it from ${territoryName}. Rumor has it the ${otherFactionName} rule now in their stead.`;
+  }
+
+  return {
+    author,
+    statement,
+  };
+}
+
+export function pickAValidChronicler(
+  hasChangedFromEudaemonia: boolean
+): Character {
+  if (hasChangedFromEudaemonia) {
+    return randomItem(chroniclersAfterTheIncident);
+  } else {
+    return randomItem(chroniclers);
+  }
+}
