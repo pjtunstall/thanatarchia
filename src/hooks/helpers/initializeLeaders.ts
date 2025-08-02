@@ -45,7 +45,21 @@ export function initializeLeaders(factions: Faction[]): Character[] {
   });
 }
 
+function getPronouns(gender: string) {
+  if (gender === "male") {
+    return { They: "He", they: "he", their: "his", them: "him" };
+  } else {
+    return { They: "She", they: "she", their: "her", them: "her" };
+  }
+}
+
 function writeBiography(leader: Character, faction: Faction): string {
+  const { They, they, their } = getPronouns(leader.gender);
+
+  if (faction.name === "Bagaudae") {
+    return `The Dread Bagauda, ${leader.name}, is a name spoken in hushed tones by patricians and landowners everywhere. More than once, slaves have flocked to ${their} call. Some say ${they}'s a myth, a story told to frighten children. But you don't want to bet on that.`;
+  }
+
   let title: string;
   if (faction.type === "imperial") {
     title = leader.gender === "male" ? "Emperor" : "Empress";
@@ -64,20 +78,6 @@ function writeBiography(leader: Character, faction: Faction): string {
   const benefactor = randomItem(benefactors);
   const victim1 = randomItem(victims1);
   const victim2 = randomItem(victims2);
-
-  let They: string;
-  let they: string;
-  let their: string;
-
-  if (leader.gender === "male") {
-    They = "He";
-    they = "he";
-    their = "his";
-  } else {
-    They = "She";
-    they = "she";
-    their = "her";
-  }
 
   const fullName = leader.name;
   const firstName = fullName.split(" ")[0];
