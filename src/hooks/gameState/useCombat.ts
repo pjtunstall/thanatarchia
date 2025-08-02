@@ -113,15 +113,12 @@ export function useCombat({
     ]
   );
 
-  const handleScheduledAttacks = useCallback(
+  const handlePlayerAttacks = useCallback(
     (adviserIndex: number, turn: number) => {
       const groupedAttacks = groupScheduledAttacks(scheduledAttacks);
       const battleReportEntries: BattleReport[] = [];
 
-      let attackerLosses = 0;
-      let defenderLosses = 0;
-
-      groupedAttacks.forEach(({ to, from, totalTroops, sources }) => {
+      groupedAttacks.forEach(({ to, totalTroops, sources }) => {
         const toTerritory = territories.find((t) => t.name === to);
         if (!toTerritory) return;
 
@@ -144,19 +141,14 @@ export function useCombat({
 
         const victory = attackStrength > defenseStrength;
 
+        const { attackerLosses, defenderLosses } = calculateCasualties({
+          attackForce: totalTroops,
+          defenseForce: toTerritory.troops!,
+          victory,
+        });
+
         if (victory) {
-          const defendersInitial = toTerritory.troops;
-          const survivors = Math.max(
-            0,
-            defendersInitial === 0
-              ? totalTroops
-              : Math.floor(totalTroops - defendersInitial * 0.3)
-          );
-          attackerLosses = totalTroops - survivors;
-          defenderLosses = Math.min(
-            defendersInitial,
-            Math.floor(defendersInitial * 0.3)
-          );
+          const survivors = Math.max(0, totalTroops - attackerLosses);
 
           updateTerritories((prev) =>
             prev.map((t) => {
@@ -178,10 +170,6 @@ export function useCombat({
             })
           );
         } else {
-          const casualties = Math.floor(Math.random() * 300 + 200);
-          attackerLosses = casualties;
-          defenderLosses = 0;
-
           updateTerritories((prev) =>
             prev.map((t) => {
               const match = sources.find((s) => s.from === t.name);
@@ -190,7 +178,7 @@ export function useCombat({
                   ...t,
                   troops: Math.max(
                     0,
-                    t.troops! - Math.floor(casualties / sources.length)
+                    t.troops! - Math.floor(attackerLosses / sources.length)
                   ),
                 };
               }
@@ -431,21 +419,11 @@ export function useCombat({
           defenseForce < 100 ? 0 : defenseForce + Math.random() * 600;
         const victory = attackStrength > defenseStrength;
 
-        const calculatedAttackerLosses = victory
-          ? Math.floor(attackForce * 0.1 + Math.random() * 50)
-          : Math.floor(attackForce * 0.3);
-        const attackerLosses =
-          defenseForce === 0
-            ? 0
-            : Math.min(fromTerritory.troops, calculatedAttackerLosses);
-
-        const calculatedDefenderLosses = victory
-          ? Math.floor(attackForce * 0.3)
-          : Math.floor(Math.random() * 150 + 50);
-        const defenderLosses = Math.min(
-          toTerritory.troops,
-          calculatedDefenderLosses
-        );
+        const { attackerLosses, defenderLosses } = calculateCasualties({
+          attackForce,
+          defenseForce,
+          victory,
+        });
 
         let updatedTerritories: Territory[];
 
@@ -560,7 +538,7 @@ export function useCombat({
 
   return {
     handleRecruit,
-    handleScheduledAttacks,
+    handlePlayerAttacks,
     handleReinforce,
     handleUndoReinforce,
     getValidAttackTargets,
@@ -614,4 +592,39 @@ function pickAValidChronicler(hasChangedFromEudaemonia: boolean): Character {
   } else {
     return randomItem(chroniclers);
   }
+}
+
+type CasualtyResult = {
+  attackerLosses: number;
+  defenderLosses: number;
+};
+
+function calculateCasualties({
+  attackForce,
+  defenseForce,
+  victory,
+}: {
+  attackForce: number;
+  defenseForce: number;
+  victory: boolean;
+}): CasualtyResult {
+  if (defenseForce === 0) {
+    return { attackerLosses: 0, defenderLosses: 0 };
+  }
+
+  let attackerLosses: number;
+  let defenderLosses: number;
+
+  if (victory) {
+    attackerLosses = Math.floor(attackForce * 0.08 + Math.random() * 40);
+    defenderLosses = Math.floor(defenseForce * 0.5 + Math.random() * 100);
+  } else {
+    attackerLosses = Math.floor(attackForce * 0.5 + Math.random() * 150);
+    defenderLosses = Math.floor(defenseForce * 0.05 + Math.random() * 30);
+  }
+
+  return {
+    attackerLosses: Math.min(attackForce, attackerLosses),
+    defenderLosses: Math.min(defenseForce, defenderLosses),
+  };
 }
