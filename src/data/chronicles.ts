@@ -196,7 +196,7 @@ export const battleChronicle = ({
         }
       } else {
         if (success) {
-          return `Inconceivable! Though it strains credulity, we must note the reports coming out of ${territory} of an engagement in which those perfidious knaves, the ${attackers}, overran the ${defenders} there.`;
+          return `Inconceivable! Though it strains credulity, we must note the reports coming out of ${territory} of an engagement in which those perfidious knaves, the ${attackers}, vanquished the ${defenders}.`;
         } else {
           return `A reckless ${attacker} incursion into ${territory} has been repulsed by the ${defenders}. Indeed lack of faith begets folly: the dull wit that engenders sin finding a natural counterpart in such doltish stratagems.`;
         }
