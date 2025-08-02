@@ -153,7 +153,7 @@ export const battleChronicle = ({
         }
       } else {
         if (success) {
-          return `In this year, a great rabble of ${attackers} descended upon ${territory}, overwhelming the ${defenders} there.`;
+          return `In this year, a great rabble of ${attackers} overran ${territory}, driving out the ${defenders}.`;
         } else {
           let msg = `Today, God saw fit to punish the ${attackers} for their impudent assault on the ${defenders} in ${territory}.`;
           if (winners !== "Romans" && losers !== "Romans") {
@@ -202,11 +202,10 @@ export const battleChronicle = ({
         }
       }
     case "Agilu Agisildsdaughter":
-      // Only the hostile case needs implementing unless, at some point, I decide to let this Easter-egg character also be an adviser.
       if (success) {
-        return `In battle were butchered the bold ${defenders}, defending their homes in ${territory} land. ${attackers}, in blood, their blades reddened. A dark day indeed as the sun goes down.`;
+        return `O, we have heard of a hard onslaught, many ${defenders} fallen defending ${territory}. Battle-keen ${attackers}, their blades reddened. In dance of spears, they spared no one.`;
       } else {
-        return `Today will dine dark-coated raven. Great ${defenders} won glory in ${territory} land. The ${
+        return `Today will dine dark-coated raven. Hard fought the ${defenders} on the hills of ${territory}. The ${
           leaderCharacter.gender === "male" ? "lord" : "lady"
         } of the ${attackers} won't be laughing now.`;
       }
@@ -366,11 +365,10 @@ export const endChronicle = ({
         }
       }
     case "Agilu Agisildsdaughter":
-      // Never an adviser, hence never technically friendly, but she probably would celebrate success.
       if (success) {
         return `In storm of swords ${they} stole lives away, ${player.name} in battle play. I'll sing ${their} name, I'll bring bring ${them} fame. O how ${they}'ll cause ${their} enemies pain. Now pay your bard, your loyal minstrel—O $*!&, what rhymes with minstrel...`;
       } else {
-        return `Haha, you're dead, ${player.name}. Blood, blood, blood, blood. Blood, blood, blood. Oooooo, wonderful blood! That'll be 12 solidi and sixpence.`;
+        return `Haha, you're dead, ${player.name}. Blood, blood, blood, blood. Blood, blood, blood. O, wonderful bloooooood! That'll be 12 solidi and sixpence.`;
       }
   }
 };
@@ -396,37 +394,41 @@ export function abandonTerritoryToBagaudaeChronicle({
     author.name === chroniclers[adviserIndex].name ? "friendly" : "hostile";
   let statement: string;
 
+  const territory = uninitialBold(territoryName);
+  const faction = uninitialBold(playerFactionName);
+  const bagaudae = uninitialBold("Bagaudae");
+
   switch (author.name) {
     case "John of Colchis":
       if (bias === "friendly") {
-        statement = `Bagaudae rebels have seized ${territoryName} as the ${playerFactionName} withdraw for now.`;
+        statement = `${bagaudae} rebels have seized ${territory} as the ${faction} withdraw for now.`;
       } else {
-        statement = `Unable to hold ${territoryName}, the ${playerFactionName} have abandoned it to Bagaudae rebels.`;
+        statement = `Unable to hold ${territory}, the ${faction} have abandoned it to ${bagaudae} rebels.`;
       }
       break;
     case "Priscilla of Byzantium":
       if (bias === "friendly") {
-        statement = `The ${playerFactionName} have left ${territoryName}. Boring territory anyway, if you ask me. The rebel Bagaudae are welcome to it.`;
+        statement = `The ${faction} have left ${territory}. Boring territory anyway, if you ask me. The rebel ${bagaudae} are welcome to it.`;
       } else {
-        statement = `The ${playerFactionName} have fled ${territoryName} and Bagaudae rebels rampage there now.`;
+        statement = `The ${faction} have fled ${territory} and ${bagaudae} rebels rampage there now.`;
       }
       break;
     case "Eudaemonia of Rheims":
       if (bias === "friendly") {
-        statement = `The ${playerFactionName} have made a tactical retreat from ${territoryName}, leaving its governance to the tender ministrations of the peasant Bagaudae.`;
+        statement = `The ${faction} have made a tactical retreat from ${territory}, leaving its governance to the tender ministrations of the peasant ${bagaudae}.`;
       } else {
-        statement = `The ${playerFactionName} have left ${territoryName} to the rough justice of the Bagaudae.`;
+        statement = `The ${faction} have left ${territory} to the rough justice of the ${bagaudae}.`;
       }
       break;
     case "Athaloc of Smyrna":
       if (bias === "friendly") {
-        statement = `In a move of consumate strategic brilliance, the ${playerFactionName} have quit ${territoryName}. One's only regret is that a mob of Bagaudae are now terrorizing the land.`;
+        statement = `In a move of consumate strategic brilliance, the ${faction} have quit ${territory}. One's only regret is that a mob of ${bagaudae} are now terrorizing the land.`;
       } else {
-        statement = `Weakened, and probably confused, the ${playerFactionName} have fled ${territoryName}. They say a peasant revolt has broken out in their wake.`;
+        statement = `Weakened, and probably confused, the ${faction} have fled ${territory}. They say a peasant revolt has broken out in their wake.`;
       }
       break;
     case "Agilu Agisildsdaughter":
-      statement = `A gaggle of Bagaudae the glory have stolen of the bowed, battle-weary, once bold ${playerFactionName}. Peasants and peons, took their place in ${territoryName}. Not a shield shattered. A shameful story.`;
+      statement = `A gaggle of ${bagaudae} the glory have stolen of the bowed, battle-weary, once bold ${faction}. Peasants and peons, took their place in ${territory}. Not a shield shattered. A shameful story.`;
   }
 
   return {
@@ -455,37 +457,41 @@ export function abandonTerritoryToOtherFactionChronicle({
     author.name === chroniclers[adviserIndex].name ? "friendly" : "hostile";
   let statement: string;
 
+  const playerFaction = uninitialBold(playerFactionName);
+  const otherFaction = uninitialBold(otherFactionName);
+  const territory = uninitialBold(territoryName);
+
   switch (author.name) {
     case "John of Colchis":
       if (bias === "friendly") {
-        statement = `The ${otherFactionName} have poured into ${territoryName} unopposed as the ${playerFactionName} withdraw for now.`;
+        statement = `The ${otherFaction} have poured into ${territory} unopposed as the ${playerFaction} withdraw for now.`;
       } else {
-        statement = `Unable to hold ${territoryName}, the ${playerFactionName} have abandoned it to the ${otherFactionName}.`;
+        statement = `Unable to hold ${territory}, the ${playerFaction} have abandoned it to the ${otherFaction}.`;
       }
       break;
     case "Priscilla of Byzantium":
       if (bias === "friendly") {
-        statement = `The ${playerFactionName} have withdrawn from ${territoryName}. One senses that the ${otherFactionName} may be walking into a trap...`;
+        statement = `The ${playerFaction} have withdrawn from ${territory}. One senses that the ${otherFaction} may be walking into a trap...`;
       } else {
-        statement = `The ${otherFactionName} have taken ${territoryName} from the ${playerFactionName} without a fight.`;
+        statement = `The ${otherFaction} have taken ${territory} from the ${playerFaction} without a fight.`;
       }
       break;
     case "Eudaemonia of Rheims":
       if (bias === "friendly") {
-        statement = `The ${playerFactionName} have made a tactical retreat from ${territoryName}, leaving its fate in the hands of the ${otherFactionName}.`;
+        statement = `The ${playerFaction} have made a tactical retreat from ${territory}, leaving its fate in the hands of the ${otherFaction}.`;
       } else {
-        statement = `The ${playerFactionName} have absconded from ${territoryName}. They say the ${otherFactionName} quickly took their place.`;
+        statement = `For some reason, the ${playerFaction} have absconded from ${territory}. The ${otherFaction} quickly took their place.`;
       }
       break;
     case "Athaloc of Smyrna":
       if (bias === "friendly") {
-        statement = `In a bold gambit, the ${playerFactionName} have ceded ${territoryName} to the ${otherFactionName}.`;
+        statement = `In a bold gambit, the ${playerFaction} have ceded ${territory} to the ${otherFaction}.`;
       } else {
-        statement = `The ${playerFactionName}, weak and poorly led, have fled ${territoryName} with the ${otherFactionName} hard on their heels.`;
+        statement = `The ${playerFaction}, weak and poorly led, have fled ${territory} with the ${otherFaction} hard on their heels.`;
       }
       break;
     case "Agilu Agisildsdaughter":
-      statement = `I have heard that the ${playerFactionName} high-tailed it from ${territoryName}. Rumor has it the ${otherFactionName} rule now in their stead.`;
+      statement = `I have heard that the ${playerFaction} high-tailed it from ${territory}. Rumor has it the ${otherFaction} rule now in their stead.`;
   }
 
   return {

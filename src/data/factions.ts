@@ -305,7 +305,7 @@ export const factions: Faction[] = [
   {
     name: "Rugians",
     formalName: "Kingdom of the Rugians",
-    capital: "Hlaidōzgardaz",
+    capital: "Lejre",
     type: "barbarian",
     color: "hsl(var(--rugians))",
     symbol: "♛",
