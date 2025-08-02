@@ -1,36 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import { ArrowBigRight, Squirrel, Church, Check, Crown } from "lucide-react";
 
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogFooter,
-  AlertDialogCancel,
-  AlertDialogAction,
-} from "@/components/ui/alert-dialog";
-import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 
 import { AttackOrder, Character } from "@/types/gameTypes";
-import { faiths } from "@/data/faiths";
 import { SelectedTerritoryPanel } from "@/components/game/SelectedTerritoryPanel";
 import { Faction, Territory } from "@/types/gameTypes";
 import { chroniclers } from "@/data/chronicles";
 import { factions } from "@/data/factions";
 import { Help } from "@/components/game/Help";
-import { FactionDetails } from "@/components/game/FactionDetails";
-import { playBell, playSquirrel } from "@/lib/sounds";
+import { HeaderActions } from "@/components/game/actions/HeaderActions";
+import { PendingFaithAlert } from "@/components/game/actions/PendingFaithAlert";
 
 type ActionsPanelProps = {
   playerCharacter: Character;
@@ -117,95 +97,17 @@ export function ActionsPanel({
     <>
       <Card className="h-full flex flex-col">
         <CardHeader>
-          <div className="grid grid-cols-2 gap-2">
-            <div className="flex flex-col gap-2 items-start">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button variant="outline" size="sm" className="w-full">
-                    <Crown className="w-3 h-3 mr-1" />
-                    <Badge
-                      className="w-fit"
-                      style={{ backgroundColor: playerFaction.color }}
-                    >
-                      {playerFaction.name}
-                    </Badge>
-                  </Button>
-                </DialogTrigger>
-
-                <DialogContent className="p-0 bg-transparent border-none max-w-fit">
-                  <FactionDetails
-                    faction={playerFaction}
-                    leader={factionLeaders[playerIndex]}
-                    isPlayerFaction={true}
-                    factionFaiths={factionFaiths}
-                    player={playerCharacter}
-                    playerIndex={playerIndex}
-                    setFactionAggressions={setFactionAggressions}
-                    setFactionTreasures={setFactionTreasures}
-                  />
-                </DialogContent>
-              </Dialog>
-
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="sm" className="w-full">
-                    <Church className="w-3 h-3 mr-1" />
-                    Change Faith
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  {faiths.map((faith) => (
-                    <DropdownMenuItem
-                      key={faith}
-                      onSelect={(e) => {
-                        e.preventDefault();
-                        setPendingFaith(faith);
-                      }}
-                    >
-                      {faith}
-                      {faith === factionFaiths[playerIndex] && (
-                        <Check className="h-4 w-4 text-muted-foreground" />
-                      )}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-
-            <div className="flex flex-col gap-2 items-start">
-              <Button
-                onClick={onEndTurn}
-                variant="outline"
-                size="sm"
-                className="w-full"
-              >
-                <ArrowBigRight className="w-3 h-3 mr-1" />
-                End Turn
-              </Button>
-
-              {factionFaiths[playerIndex] === "Pagan" ? (
-                <Button
-                  onClick={playSquirrel}
-                  variant="outline"
-                  size="sm"
-                  className="w-full"
-                >
-                  <Squirrel className="w-3 h-3 mr-1" />
-                  Sacrifice
-                </Button>
-              ) : (
-                <Button
-                  onClick={playBell}
-                  variant="outline"
-                  size="sm"
-                  className="w-full"
-                >
-                  <Church className="w-3 h-3 mr-1" />
-                  Pray
-                </Button>
-              )}
-            </div>
-          </div>
+          <HeaderActions
+            onEndTurn={onEndTurn}
+            setPendingFaith={setPendingFaith}
+            factionFaiths={factionFaiths}
+            playerIndex={playerIndex}
+            playerFaction={playerFaction}
+            playerCharacter={playerCharacter}
+            factionLeaders={factionLeaders}
+            setFactionAggressions={setFactionAggressions}
+            setFactionTreasures={setFactionTreasures}
+          ></HeaderActions>
         </CardHeader>
 
         <CardContent className="flex-1 overflow-hidden min-h-0">
@@ -243,29 +145,11 @@ export function ActionsPanel({
         </CardContent>
       </Card>
 
-      <AlertDialog
-        open={!!pendingFaith}
-        onOpenChange={() => setPendingFaith(null)}
-      >
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>
-              Are you sure you want to change faith?
-            </AlertDialogTitle>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={() => {
-                playBell();
-                confirmFaithChange();
-              }}
-            >
-              Confirm
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <PendingFaithAlert
+        pendingFaith={pendingFaith}
+        setPendingFaith={setPendingFaith}
+        confirmFaithChange={confirmFaithChange}
+      ></PendingFaithAlert>
     </>
   );
 }
