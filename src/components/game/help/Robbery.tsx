@@ -50,7 +50,7 @@ export function robberyChat(
     case "Eudaemonia of Rheims":
       return [
         {
-          author: adviser,
+          author: player,
           statement: `Do you think I get more than I deserve, ${adviserName}?`,
         },
         {
