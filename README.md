@@ -6,10 +6,18 @@
 
 The year is 499. In the West, the Roman Empire is a patchwork of barbarian successor states. In the East, it lives on as Byzantium, still a force to be reckoned with. Who will survive? Who will triumph? What even is triumph anyway?
 
+## Play Online
+
+...
+
+## Play Locally
+
+...
+
 ## Credits
 
 Eagle brooch image from [the Morgan Librar & Museum](https://www.themorgan.org/objects/item/290015), New York.
 
-[The Dark Ages Podcast](https://darkagespod.com/).
-
 Raven, squirrel, and coinbag sounds, [freesound_community](https://pixabay.com/users/freesound_community-46691455/). Marching sound from [kakaist](https://pixabay.com/users/kakaist-48093450). Church bell from [Universfield](https://pixabay.com/users/universfield-28281460). Pen writing from [ALIENIGHTMARE](https://pixabay.com/users/alienightmare-42489797). All via Pixabay.
+
+Inspiration: [The Dark Ages Podcast](https://darkagespod.com/).
