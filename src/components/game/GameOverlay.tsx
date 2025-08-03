@@ -1,8 +1,7 @@
-import { ScrollText } from "lucide-react";
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
+import sunbeams from "@/assets/sunbeams.jpg";
 import { GameStatus, Character, ChatEntry } from "@/types/gameTypes";
 import {
   endChronicle,
@@ -87,7 +86,7 @@ export function GameOverlay({
           <CardContent className="space-y-6">
             <div className="flex flex-col md:flex-row gap-6">
               <img
-                src="src/assets/sunbeams.jpg"
+                src={sunbeams}
                 alt="End of game scene"
                 loading="lazy"
                 className="w-full md:w-1/2 max-h-96 object-cover rounded-lg border"
