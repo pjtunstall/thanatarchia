@@ -12,9 +12,9 @@ export function useGameCore() {
   const [gameStatus, setGameStatus] = useState<GameStatus>("playing");
   const [territories, setTerritories] = useState<Territory[]>(() => {
     const territories = initialTerritories;
-    const range = 600;
+    const range = 2000;
     territories.forEach((t) => {
-      t.troops = 700 + Math.floor(Math.random() * range);
+      t.troops = 1000 + Math.floor(Math.random() * range);
     });
     return [...territories];
   });
