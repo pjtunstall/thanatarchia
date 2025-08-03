@@ -13,6 +13,7 @@ import { HeaderActions } from "@/components/game/actions/HeaderActions";
 import { PendingFaithAlert } from "@/components/game/actions/PendingFaithAlert";
 
 type ActionsPanelProps = {
+  currentTurn: number;
   playerCharacter: Character;
   playerFaction: Faction;
   playerIndex: number;
@@ -57,6 +58,7 @@ type ActionsPanelProps = {
 };
 
 export function ActionsPanel({
+  currentTurn,
   playerCharacter,
   playerFaction,
   playerIndex,
@@ -134,6 +136,7 @@ export function ActionsPanel({
               </>
             ) : (
               <Help
+                currentTurn={currentTurn}
                 adviser={chroniclers[adviserIndex]}
                 player={playerCharacter}
                 playerFaction={playerFaction}

@@ -6,6 +6,7 @@ export const avatarFilenames: Record<string, string> = {
   chroniclerScholar: "chronicler-scholar-male.jpg",
   bagaudaeMaleRebel: "bagaudae-male-rebel.jpg",
   bagaudaeFemaleRebel: "bagaudae-female-rebel.jpg",
+  britishKing: "british-king.jpg",
   moorKing: "moor-king.jpg",
   moorQueen: "moor-queen.jpg",
   mosaicKing: "mosaic-king.jpg",

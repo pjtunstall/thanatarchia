@@ -123,6 +123,7 @@ export function GameDashboard() {
                 className="mt-4 flex-1 overflow-hidden"
               >
                 <ActionsPanel
+                  currentTurn={gameState.currentTurn}
                   playerCharacter={
                     gameState.factionLeaders[gameState.playerIndex]
                   }

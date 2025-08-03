@@ -374,14 +374,14 @@ export const factions: Faction[] = [
     symbol: "ᛳ",
     leader: {
       male: {
-        name: "Hengist",
+        name: "Widukind",
         gender: "male",
         image: "crisscrossKing",
         biography: "",
         index: 13,
       },
       female: {
-        name: "Hildeswith",
+        name: "Giesela",
         gender: "female",
         image: "spearQueen",
         biography: "",

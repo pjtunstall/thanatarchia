@@ -94,7 +94,6 @@ export function useGameState() {
     chroniclesState.setChronicles([]);
     handlePlayerAttacks(chroniclesState.adviserIndex, gameCore.currentTurn);
     executeAITurn();
-    console.log("AI turn executed");
     generateResources();
     gameCore.setCurrentTurn((prev) => prev + 1);
     gameCore.setSelectedTerritoryName(null);

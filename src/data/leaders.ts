@@ -290,7 +290,6 @@ export const victims2 = [
   "the elderly",
   "the poor",
   "the tired",
-  "the gullible",
   "the arts",
 ];
 

@@ -3,9 +3,15 @@ import { useState } from "react";
 import { Character, Faction, ChatEntry } from "@/types/gameTypes";
 import { HelpMenu } from "@/components/game/help/HelpMenu";
 import { HelpContent } from "@/components/game/help/HelpContent";
-import { Chat } from "./Chat";
+import { Chat } from "@/components/game/Chat";
+import { deathChat } from "@/components/game/help/death";
+import {
+  shouldShowDeathVision,
+  markDeathVisionAsShown,
+} from "@/components/game/help/counter";
 
 type HelpProps = {
+  currentTurn: number;
   player: Character;
   playerFaction: Faction;
   adviser: Character;
@@ -14,6 +20,7 @@ type HelpProps = {
 };
 
 export function Help({
+  currentTurn,
   player,
   playerFaction,
   adviser,
@@ -22,6 +29,12 @@ export function Help({
 }: HelpProps) {
   const [topic, setTopic] = useState<string | null>(null);
   const getBadgeColor = (entry: ChatEntry) => playerFaction.color;
+
+  let showDeathVision = false;
+  if (currentTurn === 4 && shouldShowDeathVision()) {
+    markDeathVisionAsShown();
+    showDeathVision = true;
+  }
 
   return (
     <div className="flex flex-col flex-1 min-h-0 pt-3 space-y-4">
@@ -35,6 +48,12 @@ export function Help({
             setAdviserIndex={setAdviserIndex}
             setHasChangedFromEudaemonia={setHasChangedFromEudaemonia}
             getBadgeColor={getBadgeColor}
+          />
+        ) : showDeathVision ? (
+          <Chat
+            items={deathChat({ player, playerFaction })}
+            options={{ getBadgeColor }}
+            scrollToTop={true}
           />
         ) : (
           <Chat
