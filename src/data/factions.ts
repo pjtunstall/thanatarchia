@@ -19,7 +19,7 @@ export const factions: Faction[] = [
       female: {
         name: "Theodora Augusta",
         gender: "female",
-        image: "byzantineMosaicQueen",
+        image: "jeweledMosaicQueen",
         biography: "",
         index: 0,
       },
@@ -40,7 +40,7 @@ export const factions: Faction[] = [
       male: {
         name: "Uther",
         gender: "male",
-        image: "romanEmperor",
+        image: "britishKing",
         biography: "",
         index: 1,
       },
