@@ -6,10 +6,11 @@ import {
   DialogTitle,
   DialogClose,
 } from "@/components/ui/dialog";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 
 import { Character } from "@/types/gameTypes";
+import { AsyncAvatarImage } from "@/components/game/AsyncAvatarImage";
 
 type CharacterProfileProps = {
   character: Character;
@@ -48,7 +49,7 @@ export function CharacterDialog({
             "relative cursor-pointer transition-transform duration-200 hover:scale-125 hover:z-10"
           )}
         >
-          <AvatarImage src={character.image} alt={character.name} />
+          <AsyncAvatarImage src={character.image} alt={character.name} />
           <AvatarFallback className="text-xs">
             {character.name.charAt(0)}
           </AvatarFallback>
@@ -60,7 +61,7 @@ export function CharacterDialog({
           <DialogTitle className="flex items-center justify-between gap-3 w-full">
             <div className="flex items-center gap-3">
               <Avatar className="w-20 h-20">
-                <AvatarImage src={character.image} alt={character.name} />
+                <AsyncAvatarImage src={character.image} alt={character.name} />
                 <AvatarFallback>{character.name.charAt(0)}</AvatarFallback>
               </Avatar>
               <span className="text-lg font-semibold">{character.name}</span>

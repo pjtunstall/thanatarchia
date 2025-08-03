@@ -83,6 +83,8 @@ const ostrogothMaleFirstElements = [
   "Witi",
   "Era",
   "Hildi",
+  "Sunia",
+  "Ufta",
 ];
 const ostrogothFemaleFirstElements = [
   "Amala",
@@ -106,7 +108,7 @@ const ostrogothMaleLastElements = [
   "nand",
   "rith",
   "mod",
-  "frid",
+  "frithus",
 ];
 const ostrogothFemaleLastElements = [
   "suintha",
@@ -181,6 +183,7 @@ const visigothMaleLastElements = [
   "mir",
   "thanc",
   "lec",
+  "funs",
 ];
 const visigothFemaleLastElements = ["suintha", "gotho", "berga"];
 

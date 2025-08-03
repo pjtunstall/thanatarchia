@@ -89,6 +89,7 @@ export function GameOverlay({
               <img
                 src="src/assets/sunbeams.jpg"
                 alt="End of game scene"
+                loading="lazy"
                 className="w-full md:w-1/2 max-h-96 object-cover rounded-lg border"
               />
               <div className="flex-1">

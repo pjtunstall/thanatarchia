@@ -1,29 +1,5 @@
 import { Faction } from "@/types/gameTypes";
 
-import bagaudaeMaleRebel from "@/assets/bagaudae-male-rebel.jpg";
-import bagaudaeFemaleRebel from "@/assets/bagaudae-female-rebel.jpg";
-import mauriMaleLeader from "@/assets/moor-king.jpg";
-import mauriFemaleLeader from "@/assets/moor-queen.jpg";
-import mosaicKing from "@/assets/mosaic-king.jpg";
-import mosaicQueen from "@/assets/mosaic-queen.jpg";
-import mosaicWarriorQueen from "@/assets/mosaic-warrior-queen.jpg";
-import byzantineQueen from "@/assets/byzantine-queen-portrait.jpg";
-import byzantineChief from "@/assets/byzantine-chief-portrait.jpg";
-import romanEmperor from "@/assets/roman-emperor-portrait.jpg";
-import barbarianKing from "@/assets/barbarian-king-portrait.jpg";
-import barbarianQueen from "@/assets/barbarian-queen.jpg";
-import visigothicQueen from "@/assets/visigothic-queen-portrait.jpg";
-import vandalChief from "@/assets/vandal-chief-portrait.jpg";
-import hunnicWarlord from "@/assets/hunnic-warlord-portrait.jpg";
-import frankishKing from "@/assets/frankish-king-portrait.jpg";
-import manuscriptQueen from "@/assets/manuscript-queen.jpg";
-import suebianKing from "@/assets/suebian-king.jpg";
-import suebianQueen from "@/assets/suebian-queen.jpg";
-import helmetedMosaicQueen from "@/assets/helmeted-mosaic-queen.jpg";
-import moustacheKing from "@/assets/moustache-king.jpg";
-import hunQueen from "@/assets/hun-queen.jpg";
-import byzantineMosaicQueen from "@/assets/byzantine-mosaic-queen.jpg";
-
 export const factions: Faction[] = [
   {
     name: "Romans",
@@ -36,14 +12,14 @@ export const factions: Faction[] = [
       male: {
         name: "Theodosius Augustus",
         gender: "male",
-        image: romanEmperor,
+        image: "romanEmperor",
         biography: "",
         index: 0,
       },
       female: {
         name: "Theodora Augusta",
         gender: "female",
-        image: byzantineMosaicQueen,
+        image: "byzantineMosaicQueen",
         biography: "",
         index: 0,
       },
@@ -64,14 +40,14 @@ export const factions: Faction[] = [
       male: {
         name: "Uther",
         gender: "male",
-        image: romanEmperor,
+        image: "romanEmperor",
         biography: "",
         index: 1,
       },
       female: {
         name: "Elaine",
         gender: "female",
-        image: byzantineQueen,
+        image: "byzantineQueen",
         biography: "",
         index: 1,
       },
@@ -92,14 +68,14 @@ export const factions: Faction[] = [
       male: {
         name: "Masuna",
         gender: "male",
-        image: mauriMaleLeader,
+        image: "mauriMaleLeader",
         biography: "",
         index: 2,
       },
       female: {
         name: "Kahina",
         gender: "female",
-        image: mauriFemaleLeader,
+        image: "mauriFemaleLeader",
         biography: "",
         index: 2,
       },
@@ -120,14 +96,14 @@ export const factions: Faction[] = [
       male: {
         name: "Tibatto",
         gender: "male",
-        image: bagaudaeMaleRebel,
+        image: "bagaudaeMaleRebel",
         biography: "",
         index: 3,
       },
       female: {
         name: "Brigit",
         gender: "female",
-        image: bagaudaeFemaleRebel,
+        image: "bagaudaeFemaleRebel",
         biography: "",
         index: 3,
       },
@@ -148,14 +124,14 @@ export const factions: Faction[] = [
       male: {
         name: "Theodemir",
         gender: "male",
-        image: moustacheKing,
+        image: "moustacheKing",
         biography: "",
         index: 4,
       },
       female: {
         name: "Amalasuintha",
         gender: "female",
-        image: mosaicQueen,
+        image: "mosaicQueen",
         biography: "",
         index: 4,
       },
@@ -176,14 +152,14 @@ export const factions: Faction[] = [
       male: {
         name: "Balthila",
         gender: "male",
-        image: mosaicKing,
+        image: "mosaicKing",
         biography: "",
         index: 5,
       },
       female: {
         name: "Brunhild",
         gender: "female",
-        image: manuscriptQueen,
+        image: "manuscriptQueen",
         biography: "",
         index: 5,
       },
@@ -204,14 +180,14 @@ export const factions: Faction[] = [
       male: {
         name: "Huneric",
         gender: "male",
-        image: vandalChief,
+        image: "vandalChief",
         biography: "",
         index: 6,
       },
       female: {
         name: "Eudocia",
         gender: "female",
-        image: visigothicQueen,
+        image: "visigothicQueen",
         biography: "",
         index: 6,
       },
@@ -232,14 +208,14 @@ export const factions: Faction[] = [
       male: {
         name: "Gundobad",
         gender: "male",
-        image: barbarianKing,
+        image: "barbarianKing",
         biography: "",
         index: 7,
       },
       female: {
         name: "Clotilde",
         gender: "female",
-        image: mosaicWarriorQueen,
+        image: "mosaicWarriorQueen",
         biography: "",
         index: 7,
       },
@@ -260,14 +236,14 @@ export const factions: Faction[] = [
       male: {
         name: "Clovis",
         gender: "male",
-        image: frankishKing,
+        image: "frankishKing",
         biography: "",
         index: 8,
       },
       female: {
         name: "Fredegund",
         gender: "female",
-        image: visigothicQueen,
+        image: "visigothicQueen",
         biography: "",
         index: 8,
       },
@@ -288,14 +264,14 @@ export const factions: Faction[] = [
       male: {
         name: "Ardaric",
         gender: "male",
-        image: barbarianKing,
+        image: "barbarianKing",
         biography: "",
         index: 9,
       },
       female: {
         name: "Rosamunda",
         gender: "female",
-        image: visigothicQueen,
+        image: "visigothicQueen",
         biography: "",
         index: 9,
       },
@@ -316,14 +292,14 @@ export const factions: Faction[] = [
       male: {
         name: "Eraric",
         gender: "male",
-        image: barbarianKing,
+        image: "barbarianKing",
         biography: "",
         index: 10,
       },
       female: {
         name: "Gisa",
         gender: "female",
-        image: barbarianQueen,
+        image: "barbarianQueen",
         biography: "",
         index: 10,
       },
@@ -344,14 +320,14 @@ export const factions: Faction[] = [
       male: {
         name: "Aruth",
         gender: "male",
-        image: barbarianKing,
+        image: "barbarianKing",
         biography: "",
         index: 11,
       },
       female: {
         name: "Rodehild",
         gender: "female",
-        image: barbarianQueen,
+        image: "barbarianQueen",
         biography: "",
         index: 11,
       },
@@ -372,14 +348,14 @@ export const factions: Faction[] = [
       male: {
         name: "Wacho",
         gender: "male",
-        image: barbarianKing,
+        image: "barbarianKing",
         biography: "",
         index: 12,
       },
       female: {
         name: "Rosamund",
         gender: "female",
-        image: visigothicQueen,
+        image: "visigothicQueen",
         biography: "",
         index: 12,
       },
@@ -400,14 +376,14 @@ export const factions: Faction[] = [
       male: {
         name: "Hengist",
         gender: "male",
-        image: barbarianKing,
+        image: "barbarianKing",
         biography: "",
         index: 13,
       },
       female: {
         name: "Hildeswith",
         gender: "female",
-        image: barbarianQueen,
+        image: "barbarianQueen",
         biography: "",
         index: 13,
       },
@@ -428,14 +404,14 @@ export const factions: Faction[] = [
       male: {
         name: "Hermeric",
         gender: "male",
-        image: suebianKing,
+        image: "suebianKing",
         biography: "",
         index: 14,
       },
       female: {
         name: "Ingunde",
         gender: "female",
-        image: suebianQueen,
+        image: "suebianQueen",
         biography: "",
         index: 14,
       },
@@ -456,14 +432,14 @@ export const factions: Faction[] = [
       male: {
         name: "Respendial",
         gender: "male",
-        image: byzantineChief,
+        image: "byzantineChief",
         biography: "",
         index: 15,
       },
       female: {
         name: "Sagdukht",
         gender: "female",
-        image: helmetedMosaicQueen,
+        image: "helmetedMosaicQueen",
         biography: "",
         index: 15,
       },
@@ -484,14 +460,14 @@ export const factions: Faction[] = [
       male: {
         name: "Tarasicodissa",
         gender: "male",
-        image: byzantineChief,
+        image: "byzantineChief",
         biography: "",
         index: 16,
       },
       female: {
         name: "Zena",
         gender: "female",
-        image: byzantineQueen,
+        image: "byzantineQueen",
         biography: "",
         index: 16,
       },
@@ -512,14 +488,14 @@ export const factions: Faction[] = [
       male: {
         name: "Dengizich",
         gender: "male",
-        image: hunnicWarlord,
+        image: "hunnicWarlord",
         biography: "",
         index: 17,
       },
       female: {
         name: "Kreka",
         gender: "female",
-        image: hunQueen,
+        image: "hunQueen",
         biography: "",
         index: 17,
       },

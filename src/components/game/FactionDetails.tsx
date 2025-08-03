@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import { Faction, Character } from "@/types/gameTypes";
 import { Crown, Church } from "lucide-react";
 
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   Dialog,
   DialogTrigger,
@@ -15,9 +15,9 @@ import {
 import { Handshake, Grab } from "lucide-react";
 
 import { playQuill, playCoinbag } from "@/lib/sounds";
-
 import { getFaithColor } from "@/data/faiths";
 import { factions } from "@/data/factions";
+import { AsyncAvatarImage } from "@/components/game/AsyncAvatarImage";
 
 type FactionDetailsProps = {
   faction: Faction;
@@ -45,7 +45,7 @@ export function FactionDetails({
       <CardHeader className="pb-3 bg-muted/30">
         <div className="flex items-center gap-3">
           <Avatar className="h-14 w-14">
-            <AvatarImage src={leader.image} alt={leader.name} />
+            <AsyncAvatarImage src={leader.image} alt={leader.name} />
             <AvatarFallback className="text-xs">
               {leader.name.charAt(0)}
             </AvatarFallback>

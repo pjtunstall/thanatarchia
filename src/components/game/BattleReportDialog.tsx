@@ -94,6 +94,7 @@ function BattleReportContent({
       <div className="float-left w-1/2 max-w-[300px] mr-6 mb-4">
         <img
           src={image}
+          loading="lazy"
           alt="Battle scene"
           className="w-full h-auto max-h-[300px] rounded object-cover mb-4"
         />

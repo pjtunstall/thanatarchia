@@ -1,9 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-import { Character } from "@/types/gameTypes";
-import { chroniclers, chroniclersAfterTheIncident } from "@/data/chronicles";
-
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
