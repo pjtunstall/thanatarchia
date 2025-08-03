@@ -88,7 +88,7 @@ const ostrogothMaleFirstElements = [
 ];
 const ostrogothFemaleFirstElements = [
   "Amala",
-  "Mata",
+  "Matha",
   "Ostro",
   "Odo",
   "Vada",
