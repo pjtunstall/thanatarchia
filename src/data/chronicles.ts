@@ -163,7 +163,7 @@ export const battleChronicle = ({
             ? `They say that the ${attackers} took ${territory} from the ${defenders} today. One feels obliged to offer one's congratulations, although I doubt my contribution will be heard much above the belches of the victory feast, or such 'panegyrics' as their bards declaim.`
             : `In an act of almost divine benificence, our great leader, ${leader}, has chosen to expand ${their} territory, bringing ${attacker} 'civilization' to lucky ${territory}.`;
         } else {
-          return `Another season, another chronicle. Let's get it over with. Marauding ${attackers})—ahem, our beloved protectors, the ${attackers}—failed to take ${territory} from the ${defenders}. And the shadows lengthen.`;
+          return `Another season, another chronicle. Marauding ${attackers}—ahem, our beloved protectors, the ${attackers}—failed to take ${territory} from the ${defenders}. And the shadows lengthen.`;
         }
       } else {
         if (success) {
