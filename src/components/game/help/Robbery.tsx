@@ -72,7 +72,7 @@ export function robberyChat(
         {
           author: adviser,
           statement:
-            "It might surprise you, your Majesty, but I don't care much for this notion of deserving either. I've poured my joys and sorrows into this art for, oh, a little longer than you have practiced yours. I never considered what it would earn me. Well, that is not quite true. But I do not believe there is any earning or deserving. We give what we have. We receive what we may. The rest is just our pride.",
+            "It might surprise you, your Majesty, but I don't care much for this notion of deserving either. I've poured my joys and sorrows into my art for, oh, a little longer than you have practiced yours. I never considered what it would earn me. Well, that is not quite true. But I do not believe there is any earning or deserving. We give what we have. We receive what we may. The rest is just our pride.",
         },
       ];
     case "Athaloc of Smyrna":
