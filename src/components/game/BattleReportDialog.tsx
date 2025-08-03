@@ -7,6 +7,8 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 
+import battleImage from "@/assets/battle.jpg";
+import mosaicBattleImage from "@/assets/battle-mosaic.jpg";
 import { Character, BattleReport } from "@/types/gameTypes";
 import { factions } from "@/data/factions";
 import { chroniclers } from "@/data/chronicles";
@@ -27,8 +29,6 @@ export function BattleReportDialog({
   playerIndex,
   adviserIndex,
   dequeueBattleMessage,
-  setFactionAggressions,
-  setFactionTreasures,
 }: BattleReportDialogProps) {
   if (!battleMessage) return null;
 
@@ -53,9 +53,6 @@ export function BattleReportDialog({
           stats={battleMessage.stats}
           success={battleMessage.success}
           badgeColor={badgeColor}
-          playerIndex={playerIndex}
-          setFactionAggressions={setFactionAggressions}
-          setFactionTreasures={setFactionTreasures}
         />
         <DialogClose />
       </DialogContent>
@@ -69,9 +66,6 @@ type BattleReportContentProps = {
   stats: string;
   success: boolean;
   badgeColor: string;
-  playerIndex: number;
-  setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
-  setFactionTreasures: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 function BattleReportContent({
@@ -80,14 +74,8 @@ function BattleReportContent({
   stats,
   success,
   badgeColor,
-  playerIndex,
-  setFactionAggressions,
-  setFactionTreasures,
 }: BattleReportContentProps) {
-  const image =
-    Math.random() < 0.5
-      ? "src/assets/battle.jpg"
-      : "src/assets/battle-mosaic.jpg";
+  const image = Math.random() < 0.5 ? battleImage : mosaicBattleImage;
 
   return (
     <div className="relative">
