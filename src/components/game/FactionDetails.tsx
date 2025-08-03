@@ -44,7 +44,7 @@ export function FactionDetails({
     <Card className="w-80">
       <CardHeader className="pb-3 bg-muted/30">
         <div className="flex items-center gap-3">
-          <Avatar className="h-14 w-14">
+          <Avatar className="h-24 w-24">
             <AsyncAvatarImage src={leader.image} alt={leader.name} />
             <AvatarFallback className="text-xs">
               {leader.name.charAt(0)}

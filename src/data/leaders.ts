@@ -338,14 +338,14 @@ const vandalFirstElements = [
 const vandalMaleLastElements = [
   "but",
   "geis",
-  "gisl",
+  "gisel",
   "hari",
   "mir",
   "mir",
   "mund",
   "mut",
   "ric",
-  "tank",
+  "thanc",
   "vult",
 ];
 const vandalFemaleLastElements = ["frida", "hild", "runa"];
