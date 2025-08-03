@@ -23,7 +23,7 @@ export function choiceChat(adviser: Character, player: Character): ChatEntry[] {
         },
         {
           author: adviser,
-          statement: "You're exactly right to question that, Sire.",
+          statement: "You're absolutely right to question that, Sire.",
         },
         {
           author: player,
