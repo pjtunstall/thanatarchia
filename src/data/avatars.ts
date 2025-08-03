@@ -29,4 +29,5 @@ export const avatarFilenames: Record<string, string> = {
   crisscrossKing: "crisscross-king.jpg",
   necklaceQueen: "necklace-queen.jpg",
   kingDeath: "king-death.jpg",
+  outlineQueen: "outline-queen.jpg",
 };
