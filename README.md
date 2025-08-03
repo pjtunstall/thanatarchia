@@ -40,8 +40,12 @@ Then open a browser and navigate to [http://localhost:8080](http://localhost:808
 
 ## Credits
 
+Thanks to Lovable AI for helping me whip up the initial prototype in a day, and to Chat for massive help and encouragement over the rest of the month that it took me till I had something ready to deploy. Salutes too to AI genius of last resort, Claude.
+
 Eagle brooch image from [the Morgan Librar & Museum](https://www.themorgan.org/objects/item/290015), New York.
 
 Raven, squirrel, and coinbag sounds, [freesound_community](https://pixabay.com/users/freesound_community-46691455/). Marching sound from [kakaist](https://pixabay.com/users/kakaist-48093450). Church bell from [Universfield](https://pixabay.com/users/universfield-28281460). Pen writing from [ALIENIGHTMARE](https://pixabay.com/users/alienightmare-42489797). All via Pixabay.
 
-Inspiration: [The Dark Ages Podcast](https://darkagespod.com/).
+The Vandal name generator owes a lot to Nicholetta Francovich Onesti's "[Tracing the language of the Vandals](https://www.academia.edu/691311/Tracing_the_Language_of_the_Vandals)". Goti e Vandali. Rome: Artemide. pp. 179–195, and "[The Language and Names of the Vandals](https://www.academia.edu/1516556/THE_LANGUAGE_AND_NAMES_OF_THE_VANDALS)", Das Konigreich der Vandalen: Erben des Imperiums in Nordafrika, Karlsruhe 2009.
+
+Thematic inspiration: Herbert F. Bushman's [The Dark Ages Podcast](https://darkagespod.com/). I've been listening to it night and day. I fall asleep listening to it, and it gets into my dreams.
