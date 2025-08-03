@@ -5,10 +5,8 @@ import { HelpMenu } from "@/components/game/help/HelpMenu";
 import { HelpContent } from "@/components/game/help/HelpContent";
 import { Chat } from "@/components/game/Chat";
 import { deathChat } from "@/components/game/help/death";
-import {
-  shouldShowDeathVision,
-  markDeathVisionAsShown,
-} from "@/components/game/help/counter";
+
+let hasShownDeathVision = false;
 
 type HelpProps = {
   currentTurn: number;
@@ -31,8 +29,8 @@ export function Help({
   const getBadgeColor = (entry: ChatEntry) => playerFaction.color;
 
   let showDeathVision = false;
-  if (currentTurn === 4 && shouldShowDeathVision()) {
-    markDeathVisionAsShown();
+  if (currentTurn === 40 && !hasShownDeathVision) {
+    hasShownDeathVision = true;
     showDeathVision = true;
   }
 

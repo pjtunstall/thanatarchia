@@ -418,7 +418,7 @@ export function abandonTerritoryToBagaudaeChronicle({
       if (bias === "friendly") {
         statement = `In a move of consumate strategic brilliance, the ${faction} have quit ${territory}. One's only regret is that a mob of ${bagaudae} are now terrorizing the land.`;
       } else {
-        statement = `Weakened, and probably confused, the ${faction} have fled ${territory}. They say a peasant revolt has broken out in their wake.`;
+        statement = `Weakened, and probably confused, the ${faction} have fled ${territory}. Inevitably, the peasants have revolted.`;
       }
       break;
     case "Agilu Agisildsdaughter":
