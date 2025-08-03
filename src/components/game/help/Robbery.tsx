@@ -59,7 +59,7 @@ export function robberyChat(
         },
         {
           author: player,
-          statement: `Haha, good one, ${adviserName}. But I've been 30 winters in this world as yet. I've seen more of it than most. We come in screaming. We go out screaming. And as far as I've seen, each of us deserves exactly what they CAN and WILL take.`,
+          statement: `Haha, good one, ${adviserName}. But I've been 33 winters in this world as yet. I've seen more of it than most. We come in screaming. We go out screaming. And as far as I've seen, each of us deserves exactly what they CAN and WILL take.`,
         },
         {
           author: adviser,
@@ -72,14 +72,14 @@ export function robberyChat(
         {
           author: adviser,
           statement:
-            "It might surprise you, your Majesty, but I don't care much for this notion of deserving either. I've poured my joys and sorrows into my own art for, oh, a little longer than you have practiced yours. I never considered what it would earn me. Well, that is not quite true. But I do not believe there is any earning or deserving in this world. We give what we have. We receive what we may. The rest is just our pride.",
+            "It might surprise you, your Majesty, but I don't care much for this notion of deserving either. I've poured my joys and sorrows into this art for, oh, a little longer than you have practiced yours. I never considered what it would earn me. Well, that is not quite true. But I do not believe there is any earning or deserving. We give what we have. We receive what we may. The rest is just our pride.",
         },
       ];
     case "Athaloc of Smyrna":
       return [
         {
           author: player,
-          statement: `Would you describe me as a robber, ${adviserName}?`,
+          statement: `Would you call me a robber, ${adviserName}?`,
         },
         {
           author: adviser,
@@ -95,12 +95,13 @@ export function robberyChat(
         },
         {
           author: player,
-          statement: "Truth to tell, Atheloc, I keep most of them for myself.",
+          statement:
+            "Truth to tell, Atheloc, I keep most of them for myself. I also pass of the deeds of my followers as my own achievements and blame them when things go wrong.",
         },
         {
           author: adviser,
           statement:
-            "As is your prerogative, Sire. Besides, we wouldn't want to lose your talent to another tribe.",
+            "As is your prerogative, Sire. We wouldn't want to lose your talent to another tribe.",
         },
       ];
   }
