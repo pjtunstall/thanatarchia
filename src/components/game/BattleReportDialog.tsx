@@ -9,11 +9,11 @@ import { Badge } from "@/components/ui/badge";
 
 import battleImage from "@/assets/battle.jpg";
 import mosaicBattleImage from "@/assets/battle-mosaic.jpg";
+import { playRaven } from "@/lib/sounds";
 import { Character, BattleReport } from "@/types/gameTypes";
 import { factions } from "@/data/factions";
 import { chroniclers } from "@/data/chronicles";
 import { CharacterDialog } from "@/components/game/CharacterProfile";
-import { playRaven, playWolf } from "@/lib/sounds";
 
 type BattleReportDialogProps = {
   battleMessage: BattleReport | null;
@@ -32,7 +32,7 @@ export function BattleReportDialog({
 }: BattleReportDialogProps) {
   if (!battleMessage) return null;
 
-  Math.random() < 0.7 ? playRaven() : playWolf();
+  playRaven();
 
   const badgeColor =
     battleMessage.author.name === chroniclers[adviserIndex].name

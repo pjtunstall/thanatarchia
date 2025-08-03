@@ -12,13 +12,6 @@ export function playRaven(): HTMLAudioElement {
   return audio;
 }
 
-const wolf = new Audio("/sfx/wolf.mp3");
-export function playWolf(): HTMLAudioElement {
-  const audio = wolf.cloneNode(true) as HTMLAudioElement;
-  audio.play();
-  return audio;
-}
-
 const coinbag = new Audio("/sfx/coinbag.mp3");
 export function playCoinbag() {
   (coinbag.cloneNode(true) as HTMLAudioElement).play();
