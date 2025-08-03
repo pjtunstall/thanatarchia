@@ -197,7 +197,7 @@ export const battleChronicle = ({
       }
     case "Agilu Agisildsdaughter":
       if (success) {
-        return `O, we have heard of a hard onslaught, many ${defenders} fallen defending ${territory}. Battle-keen ${attackers}, their blades reddened. In dance of spears, they spared no one.`;
+        return `O, we have heard of a hard onslaught, ${defenders} fallen defending ${territory}. Battle-keen ${attackers}, their blades reddened. In dance of spears, they spared no one.`;
       } else {
         return `Today will dine dark-coated raven. Hard fought the ${defenders} on the hills of ${territory}. The ${
           leaderCharacter.gender === "male" ? "lord" : "lady"
