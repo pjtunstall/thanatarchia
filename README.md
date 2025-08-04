@@ -45,9 +45,9 @@ Then open a browser and navigate to [http://localhost:8080](http://localhost:808
 
 ## Credits
 
-Thanks to Lovable AI for helping me whip up the initial prototype in a day (including the map and some of the chronicler images), and to Chat for massive help and encouragement over the rest of the month that it took me till I had something ready to deploy. Salutes too to AI genius of last resort, Claude.
+Thanks to Lovable AI for helping me whip up the initial prototype in a day (including the map and some of the chronicler images), and to ChatGPT for massive help and encouragement over the rest of the month that it took me till I had something ready to deploy. Salutes too to AI genius of last resort, Claude.
 
-AI images mainly from Copilot, with a few from Open AI's Image Generator.
+AI images mainly from Copilot, with a few from Chat.
 
 Eagle brooch image from [the Morgan Librar & Museum](https://www.themorgan.org/objects/item/290015), New York.
 
@@ -61,4 +61,4 @@ I must also credit Lovable with one of the jokes. I'll let you guess which.
 
 ## Future plans
 
-I have a notebook full of these. There are a few little things that I might chip away at in the immediate future, such as adding distinct profile pictures for every faction. In the longer term, I'd like it to have more conversations and more interactive conversations, including correspondence with rival leaders. More outcomes. More intrigue. More choice. More banter and philosophy. A whole parallel system of playing the game where you try to make alliances by marrying off relatives, investing in their education to make them more eligible, but the relatives sometimes have other ideas. Change of religion might be necessary to make such an alliance, but could come at the risk of desertions. That sort of thing.
+I have a notebook full of these. There are a few little things that I might chip away at in the immediate future, such as adding distinct profile pictures for every faction, more pictures in general, progressive loading of images, custom images for faction symbols, and a more historical-looking map, maybe styled after the [Tabula Peuteringiana](https://en.wikipedia.org/wiki/Tabula_Peutingeriana). In the longer term, I'd like it to have more conversations and more interactive conversations, including correspondence with rival leaders. More outcomes. More intrigue. More choice. More banter and philosophy. A whole parallel system of playing the game where you try to make alliances by marrying off relatives, investing in their education to make them more eligible, but the relatives sometimes have other ideas. Change of religion might be necessary to make such an alliance, but could come at the risk of desertions. That sort of thing.
