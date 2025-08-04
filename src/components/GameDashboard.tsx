@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BattleReportDialog } from "@/components/game/BattleReportDialog";
 import { factions, tabs } from "@/data/gameData.ts";
@@ -42,13 +40,12 @@ export function GameDashboard() {
           factionLeaders={gameState.factionLeaders}
         />
 
-        {/* Change from h-screen to calc to account for padding */}
         <div
-          className="grid grid-cols-12 gap-4"
+          className="grid gap-4 md:grid-cols-12"
           style={{ height: "calc(100vh - 2rem)" }}
         >
           {/* Map Panel */}
-          <div className="col-span-7 h-full">
+          <div className="md:col-span-7 h-full">
             <GameMap
               territories={gameState.territories}
               selectedTerritoryName={gameState.selectedTerritoryName}
@@ -68,8 +65,8 @@ export function GameDashboard() {
             />
           </div>
 
-          {/* Right Panel - Tabbed Interface */}
-          <div className="col-span-5 h-full flex flex-col min-h-0">
+          {/* Right Panel */}
+          <div className="md:col-span-5 md:h-full flex flex-col md:min-h-0">
             <Tabs
               value={gameState.activeTab}
               onValueChange={gameState.setActiveTab}
@@ -78,6 +75,7 @@ export function GameDashboard() {
               <TabsList
                 className="grid w-full grid-cols-3 flex-shrink-0"
                 onKeyDown={handleTabKeyDown}
+                style={{ pointerEvents: "auto", zIndex: 9999 }}
               >
                 <TabsTrigger value="chronicles">Chronicles</TabsTrigger>
                 <TabsTrigger value="status">Status</TabsTrigger>
@@ -86,7 +84,7 @@ export function GameDashboard() {
 
               <TabsContent
                 value="chronicles"
-                className="mt-4 flex-1 overflow-hidden min-h-0"
+                className="mt-4 flex-1 md:overflow-hidden md:min-h-0 overflow-auto"
               >
                 <ChroniclesPanel
                   chronicles={gameState.chronicles}
@@ -97,7 +95,7 @@ export function GameDashboard() {
 
               <TabsContent
                 value="status"
-                className="mt-4 flex-1 overflow-hidden min-h-0"
+                className="mt-4 flex-1 md:overflow-hidden md:min-h-0 overflow-auto"
               >
                 <StatusPanel
                   playerFaction={factions[gameState.playerIndex]}
@@ -120,7 +118,7 @@ export function GameDashboard() {
 
               <TabsContent
                 value="actions"
-                className="mt-4 flex-1 overflow-hidden"
+                className="mt-4 flex-1 md:overflow-hidden md:min-h-0 overflow-auto"
               >
                 <ActionsPanel
                   currentTurn={gameState.currentTurn}

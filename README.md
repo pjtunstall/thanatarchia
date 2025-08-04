@@ -6,7 +6,7 @@
 
 > _House against house, town against town; if you see a man, knock him down._
 
-&nbsp;&nbsp;&nbsp;&nbsp;— Traditional (from the rules of the [Haxey Hood](https://en.wikipedia.org/wiki/Haxey_Hood), a rough English 'folk football')
+&nbsp;&nbsp;&nbsp;&nbsp;— Traditional (from the rules of the [Haxey Hood](https://en.wikipedia.org/wiki/Haxey_Hood), a rough English 'folk football' game)
 
 The year is 499. In the west, the Roman Empire is a patchwork of barbarian successor states. In the east, it lives on as Byzantium, still a force to be reckoned with. Who will survive? Who will triumph? What even is triumph anyway?
 
@@ -42,10 +42,16 @@ Then open a browser and navigate to [http://localhost:8080](http://localhost:808
 
 Thanks to Lovable AI for helping me whip up the initial prototype in a day, and to Chat for massive help and encouragement over the rest of the month that it took me till I had something ready to deploy. Salutes too to AI genius of last resort, Claude.
 
+AI images mainly from Copilot, with a few from Open AI's Image Generator.
+
 Eagle brooch image from [the Morgan Librar & Museum](https://www.themorgan.org/objects/item/290015), New York.
 
 Raven, squirrel, and coinbag sounds, [freesound_community](https://pixabay.com/users/freesound_community-46691455/). Marching sound from [kakaist](https://pixabay.com/users/kakaist-48093450). Church bell from [Universfield](https://pixabay.com/users/universfield-28281460). Pen writing from [ALIENIGHTMARE](https://pixabay.com/users/alienightmare-42489797). All via Pixabay.
 
 The Vandal name generator owes a lot to Nicholetta Francovich Onesti's "[Tracing the language of the Vandals](https://www.academia.edu/691311/Tracing_the_Language_of_the_Vandals)". Goti e Vandali. Rome: Artemide. pp. 179–195, and "[The Language and Names of the Vandals](https://www.academia.edu/1516556/THE_LANGUAGE_AND_NAMES_OF_THE_VANDALS)", Das Konigreich der Vandalen: Erben des Imperiums in Nordafrika, Karlsruhe 2009.
 
-Thematic inspiration: Herbert F. Bushman's [The Dark Ages Podcast](https://darkagespod.com/). I've been listening to it night and day. I fall asleep listening to it, and it gets into my dreams.
+Thematic inspiration: Herbert F. Bushman's [The Dark Ages Podcast](https://darkagespod.com/), which I listened to night and day this month. I fell asleep listening to it, and it got into my dreams.
+
+## Future plans
+
+I have a notebook full of these. There are a few little things that I might chip away at in the immediate future, such as adding distinct profile pictures for every faction. In the longer term, I'd like it to have more conversations and more interactive conversations, including correspondence with rival leaders. More outcomes. More intrigue. More choice. More banter and philosophy. A whole parallel system of playing the game where you try to make alliances by marrying off relatives, investing in their education to make them more eligible, but the relatives sometimes have other ideas. Change of religion might be necessary to make such an alliance, but could come at the risk of desertions. That sort of thing.
