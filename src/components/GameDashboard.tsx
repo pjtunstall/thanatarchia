@@ -75,7 +75,7 @@ export function GameDashboard() {
               <TabsList
                 className="grid w-full grid-cols-3 flex-shrink-0"
                 onKeyDown={handleTabKeyDown}
-                style={{ pointerEvents: "auto", zIndex: 9999 }}
+                style={{ pointerEvents: "auto", zIndex: 20 }}
               >
                 <TabsTrigger value="chronicles">Chronicles</TabsTrigger>
                 <TabsTrigger value="status">Status</TabsTrigger>
