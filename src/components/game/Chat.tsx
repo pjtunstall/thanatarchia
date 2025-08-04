@@ -27,9 +27,6 @@ export function Chat({
   options,
   scrollToBottom = false,
   scrollToTop = false,
-  playerIndex = 0,
-  setFactionAggressions = () => {},
-  setFactionTreasures = () => {},
 }: ChatProps) {
   return (
     <ScrollAreaWithFade
@@ -49,10 +46,7 @@ export function Chat({
 function defaultRenderChatItem(
   entry: ChatEntry,
   index: number,
-  options?: ChatItemRenderingOptions,
-  playerIndex = 0,
-  setFactionAggressions = () => {},
-  setFactionTreasures = () => {}
+  options?: ChatItemRenderingOptions
 ) {
   const badgeColor = options?.getBadgeColor?.(entry);
 
