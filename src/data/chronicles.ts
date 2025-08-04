@@ -14,13 +14,13 @@ export function initialChronicles(): ChatEntry[] {
       author: getChroniclerByName("Priscilla of Byzantium"),
       date: initialDate,
       statement:
-        "I never knew the old Ravenna before the Gothic Wars. Constantinople suited me better...",
+        "I never knew the old Ravenna before the Gothic Wars. Constantinople suited me better.",
     },
     {
       author: getChroniclerByName("Eudaemonia of Rheims"),
       date: initialDate,
       statement:
-        "The barbarous Alamanni continue their senseless raids, pillaging what civilized men have built with crude savagery.",
+        "The barbarous Alamanni continue their senseless raids, pillaging what civilized folk have built with crude savagery.",
     },
     {
       author: getChroniclerByName("Athaloc of Smyrna"),
