@@ -9,13 +9,9 @@ import {
   ShieldPlus,
 } from "lucide-react";
 
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-} from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 
 import { AttackOrder, Territory, Character } from "@/types/gameTypes";
 import { factions } from "@/data/gameData";
@@ -145,8 +141,8 @@ export function SelectedTerritoryPanel({
             <div className="flex items-center gap-4">
               <MapPin className="w-4 h-4 text-muted-foreground" />
               <span className="font-bold text-lg">{territory.name}</span>
-              <Popover>
-                <PopoverTrigger asChild>
+              <Dialog>
+                <DialogTrigger asChild>
                   <div>
                     <Badge
                       variant={isPlayerTerritory ? "default" : "secondary"}
@@ -156,28 +152,19 @@ export function SelectedTerritoryPanel({
                       {territory.owner}
                     </Badge>
                   </div>
-                </PopoverTrigger>
-                <PopoverContent
-                  side="bottom"
-                  align="start"
-                  sideOffset={8}
-                  avoidCollisions
-                  collisionBoundary={document.body}
-                  collisionPadding={{ top: 9999, bottom: 0, left: 8, right: 8 }}
-                  className="p-0 w-[20rem] max-w-[90vw] max-h-[90vh] overflow-y-auto overflow-x-hidden"
-                >
+                </DialogTrigger>
+                <DialogContent className="p-0 w-[20rem] max-w-[90vw] max-h-[90vh] overflow-y-auto overflow-x-hidden">
                   <FactionDetails
                     faction={faction}
                     leader={factionLeaders[factions.indexOf(faction)]}
                     isPlayerFaction={faction.name === playerFactionName}
                     factionFaiths={factionFaiths}
                     player={factionLeaders[playerIndex]}
-                    playerIndex={playerIndex}
                     setFactionAggressions={setFactionAggressions}
                     setFactionTreasures={setFactionTreasures}
                   />
-                </PopoverContent>
-              </Popover>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
 
