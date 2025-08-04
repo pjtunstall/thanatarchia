@@ -35,14 +35,13 @@ export function War({
         // Set up the interaction listener AFTER this render is complete.
         const setupListener = () => {
           const clickHandler = (event) => {
-            // Check if the click is specifically on the "Ask about..." button.
+            // Check if the click is specifically on the "Ask About..." button.
             const target = event.target;
             const isAskAboutButton =
               target.closest("[data-radix-dropdown-menu-trigger]") ||
-              (target.textContent &&
-                target.textContent.includes("Ask about..."));
+              (target.textContent && target.textContent.includes("Ask"));
 
-            // Trigger change for ANY click that's NOT the "Ask about..." button.
+            // Trigger change for ANY click that's NOT the "Ask About..." button.
             if (!isAskAboutButton) {
               setAdviserIndex(0);
               setHasChangedFromEudaemonia(true);
