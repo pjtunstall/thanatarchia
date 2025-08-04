@@ -96,7 +96,7 @@ export function robberyChat(
         {
           author: player,
           statement:
-            "Truth to tell, Atheloc, I keep most of them for myself. I also pass of the deeds of my followers as my own achievements and blame them when things go wrong.",
+            "Truth to tell, Atheloc, I keep most of them for myself. I also pass off the deeds of my followers as my own achievements and blame them when things go wrong.",
         },
         {
           author: adviser,
