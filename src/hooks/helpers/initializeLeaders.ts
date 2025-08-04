@@ -11,6 +11,7 @@ import {
   adjectives,
   scapegoats,
   epithets,
+  randomRomanName,
   randomOstrogothName,
   randomVisigothName,
   randomVandalName,
@@ -23,6 +24,9 @@ export function initializeLeaders(factions: Faction[]): Character[] {
     const leader = { ...leaderTemplate };
 
     switch (faction.name) {
+      case "Romans":
+        leader.name = randomRomanName(leader.gender);
+        break;
       case "Ostrogoths":
         leader.name = randomOstrogothName(leader.gender);
         break;

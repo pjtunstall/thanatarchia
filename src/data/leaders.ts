@@ -49,6 +49,42 @@ export const epithets = [
   "Vile",
 ];
 
+export function randomRomanName(gender: Gender): string {
+  if (gender === "male") {
+    return randomItem(romanMaleNames) + " Agustus";
+  } else {
+    return randomItem(romanFemaleNames) + " Augusta";
+  }
+}
+
+const romanMaleNames = [
+  "Aelius",
+  "Anastasius",
+  "Arcadius",
+  "Basil",
+  "Constantine",
+  "Constantius",
+  "Flavius",
+  "Hypatius",
+  "Tiberius",
+  "Theodosius",
+];
+
+const romanFemaleNames = [
+  "Aelia",
+  "Anastasia",
+  "Antonina",
+  "Arcadia",
+  "Euphemia",
+  "Flavia",
+  "Helena",
+  "Justina",
+  "Pulcheria",
+  "Sophia",
+  "Theorora",
+  "Vigilantia",
+];
+
 export function randomOstrogothName(gender: Gender): string {
   if (gender === "male") {
     if (Math.random() < 0.5) {
