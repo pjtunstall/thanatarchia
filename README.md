@@ -1,5 +1,10 @@
 # Thanatarchia
 
+- [Play online](#play-online)
+- [Play locally](#play-locally)
+- [Credits](#credits)
+- [Future plans](#future-plans)
+
 > _The unruly Moorish tribe rages against its own flesh, the Goths utterly destroy the Burgundians, and again the Alamanni wear arms for the conquered, and the Tervingi too, ... with the help of a band of Taifali join battle with the Vandals and Gepids. ... The Burgundians have taken over the land of the Alamanni, but obtained at great cost to themselves. The Alamanni have lost the land but seek to regain it._
 
 &nbsp;&nbsp;&nbsp;&nbsp;— [Genethliacus of Maximian Augustus, Panegyrici Latini XI, 17](https://www.jassa.org/?p=7497)
@@ -10,11 +15,11 @@
 
 The year is 499. In the west, the Roman Empire is a patchwork of barbarian successor states. In the east, it lives on as Byzantium, still a force to be reckoned with. Who will survive? Who will triumph? What even is triumph anyway?
 
-## Play Online
+## Play online
 
 [Thanatarchia](https://thanatarchia.netlify.app/)
 
-## Play Locally
+## Play locally
 
 Clone this repository:
 
