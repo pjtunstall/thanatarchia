@@ -38,7 +38,7 @@ export function War({
             // Check if the click is specifically on the "Ask About..." button.
             const target = event.target;
             const isAskAboutButton =
-              target.textContent && target.textContent.includes("Ask About...");
+              target.textContent && target.textContent.includes("Ask About");
 
             // Trigger change for ANY click that's NOT the "Ask About..." button.
             if (!isAskAboutButton) {
