@@ -3,6 +3,10 @@ import { Territory } from "@/types/gameTypes";
 type TerritoryMarkersProps = {
   selectedTerritoryName: string;
   territories: Territory[];
+  factionLookup: Record<string, { color: string; symbol: string }>;
+  onTerritoryClick: (name: string) => void;
+  isUnderAttack: (territory: Territory, scheduledAttacks: any[]) => boolean;
+  scheduledAttacks: any[];
 };
 
 export function TerritoryMarkers({
@@ -12,7 +16,7 @@ export function TerritoryMarkers({
   onTerritoryClick,
   isUnderAttack,
   scheduledAttacks,
-}) {
+}: TerritoryMarkersProps) {
   return (
     <>
       {territories.map((territory) => (
@@ -34,24 +38,28 @@ export function TerritoryMarkers({
           }}
         >
           <div
-            className={`w-6 h-6 rounded-full border-2 shadow-lg flex items-center justify-center text-white text-l font-bold
-    transition-transform duration-200 hover:scale-125
-    ${
-      isUnderAttack(territory, scheduledAttacks)
-        ? "ring-white animate-pulse"
-        : ""
-    }
-  `}
+            className={`
+              rounded-full border-2 shadow-lg flex items-center justify-center text-white font-bold
+              transition-transform duration-200 hover:scale-125
+              ${
+                isUnderAttack(territory, scheduledAttacks)
+                  ? "ring-white animate-pulse"
+                  : ""
+              }
+            `}
             style={{
               backgroundColor: factionLookup[territory.owner]?.color ?? "gray",
               fontFamily: `'Segoe UI Symbol', 'Apple Color Emoji', 'Noto Color Emoji', 'Twemoji Mozilla', 'Symbola', sans-serif`,
               lineHeight: 1,
+              width: "clamp(16px, 2.5vw, 24px)",
+              height: "clamp(16px, 2.5vw, 24px)",
+              fontSize: "clamp(10px, 1.5vw, 16px)",
             }}
           >
             {factionLookup[territory.owner]?.symbol ?? "⚔"}
           </div>
 
-          <div className="absolute top-7 left-1/2 transform -translate-x-1/2 bg-black/50 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
+          <div className="absolute top-[130%] left-1/2 transform -translate-x-1/2 bg-black/50 text-white text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded whitespace-nowrap">
             {territory.name}
           </div>
         </div>
