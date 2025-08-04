@@ -38,8 +38,7 @@ export function War({
             // Check if the click is specifically on the "Ask About..." button.
             const target = event.target;
             const isAskAboutButton =
-              target.closest("[data-radix-dropdown-menu-trigger]") ||
-              (target.textContent && target.textContent.includes("Ask"));
+              target.textContent && target.textContent.includes("Ask About...");
 
             // Trigger change for ANY click that's NOT the "Ask About..." button.
             if (!isAskAboutButton) {
