@@ -31,8 +31,7 @@ export function ScrollAreaWithFade({
     } else if (scrollToTop) {
       el.scrollTop = 0;
     }
-    // else do nothing (preserve scroll position)
-  }, [scrollToTop, scrollToBottom]); // no children in deps to avoid unwanted resets
+  }, []);
 
   return (
     <div className={cn(`relative ${height}`, className)}>
