@@ -31,7 +31,7 @@ export function ScrollAreaWithFade({
     } else if (scrollToTop) {
       el.scrollTop = 0;
     }
-  }, []);
+  });
 
   return (
     <div className={cn(`relative ${height}`, className)}>
