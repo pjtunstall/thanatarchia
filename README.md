@@ -45,7 +45,7 @@ Then open a browser and navigate to [http://localhost:8080](http://localhost:808
 
 ## Credits
 
-Thanks to Lovable AI for helping me whip up the initial prototype in a day, and to Chat for massive help and encouragement over the rest of the month that it took me till I had something ready to deploy. Salutes too to AI genius of last resort, Claude.
+Thanks to Lovable AI for helping me whip up the initial prototype in a day (including the map and some of the chronicler images), and to Chat for massive help and encouragement over the rest of the month that it took me till I had something ready to deploy. Salutes too to AI genius of last resort, Claude.
 
 AI images mainly from Copilot, with a few from Open AI's Image Generator.
 
@@ -56,6 +56,8 @@ Raven, squirrel, and coinbag sounds, [freesound_community](https://pixabay.com/u
 The Vandal name generator owes a lot to Nicholetta Francovich Onesti's "[Tracing the language of the Vandals](https://www.academia.edu/691311/Tracing_the_Language_of_the_Vandals)". Goti e Vandali. Rome: Artemide. pp. 179–195, and "[The Language and Names of the Vandals](https://www.academia.edu/1516556/THE_LANGUAGE_AND_NAMES_OF_THE_VANDALS)", Das Konigreich der Vandalen: Erben des Imperiums in Nordafrika, Karlsruhe 2009.
 
 Thematic inspiration: Herbert F. Bushman's [The Dark Ages Podcast](https://darkagespod.com/), which I listened to night and day this month. I fell asleep listening to it, and it got into my dreams.
+
+I must also credit Lovable with one of the jokes. I'll let you guess which.
 
 ## Future plans
 

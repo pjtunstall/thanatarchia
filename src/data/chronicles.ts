@@ -147,7 +147,9 @@ export const battleChronicle = ({
         }
       } else {
         if (success) {
-          return `In this year, a great rabble of ${attackers} overran ${territory}, driving out the ${defenders}.`;
+          return winners === "Romans"
+            ? `A well-planned assault has forced the ${defenders} out of ${territory}. Only imperial legionaries are this precise.`
+            : `In this year, a great rabble of ${attackers} overran ${territory}, driving out the ${defenders}.`;
         } else {
           let msg = `Today, God saw fit to punish the ${attackers} for their impudent assault on the ${defenders} in ${territory}.`;
           if (winners !== "Romans" && losers !== "Romans") {
@@ -355,7 +357,7 @@ export const endChronicle = ({
         if (success) {
           return `How curious! ${player.name} has read the classics but has not understood them. I doubt ${they} got much further than the first chapter of Vegetius. And yet, fascinating how these loutish ${faction.name} have eked out a realm after all.`;
         } else {
-          return `Most predictable! Anyone acquainted with even the most basic hermeneutics could have seen this coming. The heretic ${faction.name} have finally had the good sense to surrender. Rumor has it, ${player.name}, tripped and fell on ${their} own spear while attempting to flee. I leave it to the reader to decide what credence to give that.`;
+          return `Most predictable! Anyone acquainted with even the most basic hermeneutics could have seen this coming. The heretic ${faction.name} have finally had the good sense to surrender. Rumor has it, ${player.name}, tripped and fell on ${their} own spear while attempting to flee. I find this highly likely.`;
         }
       }
     case "Agilu Agisildsdaughter":
