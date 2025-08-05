@@ -29,7 +29,7 @@ export function Help({
   const getBadgeColor = (entry: ChatEntry) => playerFaction.color;
 
   let showDeathVision = false;
-  if (currentTurn === 20 && !hasShownDeathVision) {
+  if (currentTurn === 16 && !hasShownDeathVision) {
     hasShownDeathVision = true;
     showDeathVision = true;
   }

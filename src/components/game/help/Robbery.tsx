@@ -46,6 +46,19 @@ export function robberyChat(
           author: adviser,
           statement: "No, your Majesty, you are a bold robber!",
         },
+        {
+          author: player,
+          statement: `Well, thanks, ${adviserName}, it's kind of you to say so. I guess I'm a vibe ruler. Some of the other rulers got me onto it. I didn't really belive in it at first, but now I vibe everything: attacks, reinforcements, who to burn alive or impale... It's amazing. It's like a superpower. But sometimes I feel like it's a will-o-the-whisp, leading me out ever further onto thin ice.`,
+        },
+        {
+          author: adviser,
+          statement: "Are these even...",
+        },
+        {
+          author: player,
+          statement:
+            "Are these even my thoughts? You advisers are so quick to complete my sentences. Sometimes I just don't know anymore",
+        },
       ];
     case "Eudaemonia of Rheims":
       return [
