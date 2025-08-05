@@ -5,13 +5,10 @@ export function robberyChat(
   player: Character
 ): ChatEntry[] {
   const adviserName = adviser.name;
-  let kingOrQueen;
-  let lordOrLady;
+  let lordOrLady: string;
   if (player.gender === "male") {
-    kingOrQueen = "King";
     lordOrLady = "Lord";
   } else {
-    kingOrQueen = "Queen";
     lordOrLady = "Lady";
   }
 
@@ -21,7 +18,7 @@ export function robberyChat(
         {
           author: adviser,
           statement:
-            "I say, I say, I say: Never go into a strong man's house and steal his pots",
+            "I say, I say, I say: Never go into a strong man's house and steal his pots.",
         },
         {
           author: player,
@@ -108,8 +105,9 @@ export function robberyChat(
         },
         {
           author: player,
-          statement:
-            "Truth to tell, Atheloc, I keep most of them for myself. I also pass off the deeds of my followers as my own achievements and blame them when things go wrong.",
+          statement: `Truth to tell, ${
+            adviserName.split(" ")[0]
+          } I keep most of them for myself. I also pass off the deeds of my followers as my own achievements and blame them when things go wrong.`,
         },
         {
           author: adviser,

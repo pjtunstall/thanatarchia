@@ -7,6 +7,7 @@ import { Chat } from "@/components/game/Chat";
 import { loyaltyChat } from "@/components/game/help/Loyalty";
 import { choiceChat } from "@/components/game/help/Choice";
 import { robberyChat } from "@/components/game/help/Robbery";
+import { historyChat } from "@/components/game/help/History";
 
 type HelpContentProps = {
   topic: string;
@@ -60,6 +61,14 @@ export function HelpContent({
       return (
         <Chat
           items={robberyChat(adviser, player)}
+          options={{ getBadgeColor }}
+          scrollToTop={true}
+        />
+      );
+    case "History":
+      return (
+        <Chat
+          items={historyChat(adviser, player)}
           options={{ getBadgeColor }}
           scrollToTop={true}
         />

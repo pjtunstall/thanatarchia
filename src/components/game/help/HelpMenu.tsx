@@ -50,6 +50,7 @@ const helpTopics = [
   "Strategy",
   "Loyalty",
   "Robbery",
+  "History",
   "Choice",
   "War",
   "Thanatarchia",
