@@ -54,7 +54,7 @@ export function robberyChat(
         {
           author: player,
           statement:
-            "Are these even my thoughts? You advisers are so quick to complete my sentences. Sometimes I just don't know anymore",
+            "Are these even my thoughts? You advisers are so quick to complete my sentences. Sometimes I just don't know anymore.",
         },
       ];
     case "Eudaemonia of Rheims":
