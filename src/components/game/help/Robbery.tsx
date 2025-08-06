@@ -45,7 +45,7 @@ export function robberyChat(
         },
         {
           author: player,
-          statement: `Well, thanks, ${adviserName}, it's kind of you to say so. I guess I'm a vibe ruler. Some of the other rulers got me onto it. I didn't really belive in it at first, but now I vibe everything: attacks, reinforcements, who to burn alive or impale... It's amazing. It's like a superpower. But sometimes I feel like it's a will-o-the-whisp, leading me out ever further onto thin ice.`,
+          statement: `Well, thanks, ${adviserName}, it's kind of you to say so. I guess I'm a vibe ruler. Some of the other rulers got me onto it. I didn't really believe in it at first, but now I vibe everything: attacks, reinforcements, who to burn alive... It's amazing. It's like a superpower. But sometimes I feel like it's a will-o-the-whisp, leading me out ever further onto thin ice.`,
         },
         {
           author: adviser,
