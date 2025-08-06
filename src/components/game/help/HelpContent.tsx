@@ -1,6 +1,6 @@
 import { Faction } from "@/types/gameTypes";
 import { Character, ChatEntry } from "@/types/gameTypes";
-import { Thanatarchia } from "@/components/game/help/Thanatarchia";
+import { thanatarchiaChat } from "@/components/game/help/Thanatarchia";
 import { Strategy } from "@/components/game/help/Strategy";
 import { War } from "@/components/game/help/War";
 import { Chat } from "@/components/game/Chat";
@@ -55,6 +55,8 @@ export function HelpContent({
           items={loyaltyChat(adviser, player)}
           options={{ getBadgeColor }}
           scrollToTop={true}
+          isHelpTopic={true}
+          scrollKey="loyalty"
         />
       );
     case "Robbery":
@@ -63,6 +65,8 @@ export function HelpContent({
           items={robberyChat(adviser, player)}
           options={{ getBadgeColor }}
           scrollToTop={true}
+          isHelpTopic={true}
+          scrollKey="robbery"
         />
       );
     case "History":
@@ -71,6 +75,8 @@ export function HelpContent({
           items={historyChat(adviser, player)}
           options={{ getBadgeColor }}
           scrollToTop={true}
+          isHelpTopic={true}
+          scrollKey="history"
         />
       );
     case "Choice":
@@ -79,14 +85,18 @@ export function HelpContent({
           items={choiceChat(adviser, player)}
           options={{ getBadgeColor }}
           scrollToTop={true}
+          isHelpTopic={true}
+          scrollKey="choice"
         />
       );
     case "Thanatarchia":
       return (
-        <Thanatarchia
-          player={player}
-          adviser={adviser}
-          getBadgeColor={getBadgeColor}
+        <Chat
+          items={thanatarchiaChat(adviser, player)}
+          options={{ getBadgeColor }}
+          scrollToTop={true}
+          isHelpTopic={true}
+          scrollKey="thanatarchia"
         />
       );
   }

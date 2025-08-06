@@ -1,27 +1,9 @@
-import { Chat } from "@/components/game/Chat";
 import { Character, ChatEntry } from "@/types/gameTypes";
 
-type ThanatarchiaProps = {
-  player: Character;
-  adviser: Character;
-  getBadgeColor: (entry: ChatEntry) => string;
-};
-
-export function Thanatarchia({
-  player,
-  adviser,
-  getBadgeColor,
-}: ThanatarchiaProps) {
-  return (
-    <Chat
-      items={chat(adviser, player)}
-      options={{ getBadgeColor }}
-      scrollToTop={true}
-    />
-  );
-}
-
-function chat(adviser: Character, player: Character): ChatEntry[] {
+export function thanatarchiaChat(
+  adviser: Character,
+  player: Character
+): ChatEntry[] {
   const adviserName = adviser.name;
 
   switch (adviserName) {

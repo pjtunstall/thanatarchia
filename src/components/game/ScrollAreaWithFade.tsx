@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useLayoutEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 type ScrollAreaWithFadeProps = {
@@ -8,6 +8,8 @@ type ScrollAreaWithFadeProps = {
   fadeOffset?: string;
   scrollToTop?: boolean;
   scrollToBottom?: boolean;
+  isHelpTopic?: boolean;
+  scrollKey?: string | number;
 };
 
 export function ScrollAreaWithFade({
@@ -17,12 +19,14 @@ export function ScrollAreaWithFade({
   fadeOffset = "16px",
   scrollToTop = false,
   scrollToBottom = false,
+  isHelpTopic = false,
+  scrollKey = 0,
 }: ScrollAreaWithFadeProps) {
   const fadeHeight = "h-6";
   const contentPadding = "py-6";
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
 
@@ -30,6 +34,14 @@ export function ScrollAreaWithFade({
       el.scrollTop = el.scrollHeight;
     } else if (scrollToTop) {
       el.scrollTop = 0;
+
+      if (isHelpTopic) {
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          });
+        }, 300);
+      }
     }
   });
 

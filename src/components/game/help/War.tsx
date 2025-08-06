@@ -74,6 +74,8 @@ export function War({
       items={chat(adviser, player, playerFaction, shouldReplace)}
       options={{ getBadgeColor }}
       scrollToTop={true}
+      isHelpTopic={true}
+      scrollKey="war"
     />
   );
 }

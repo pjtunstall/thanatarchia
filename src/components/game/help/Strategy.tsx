@@ -34,6 +34,8 @@ export function Strategy({
       items={adviceEntries}
       options={{ getBadgeColor }}
       scrollToTop={true}
+      isHelpTopic={true}
+      scrollKey="strategy"
     />
   );
 }

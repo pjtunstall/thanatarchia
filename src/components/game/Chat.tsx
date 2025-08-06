@@ -16,6 +16,8 @@ type ChatProps = {
   options?: ChatItemRenderingOptions;
   scrollToTop?: boolean;
   scrollToBottom?: boolean;
+  isHelpTopic?: boolean;
+  scrollKey?: string | number;
   playerIndex?: number;
   setFactionAggressions?: React.Dispatch<React.SetStateAction<number[]>>;
   setFactionTreasures?: React.Dispatch<React.SetStateAction<number[]>>;
@@ -27,12 +29,16 @@ export function Chat({
   options,
   scrollToBottom = false,
   scrollToTop = false,
+  isHelpTopic = false,
+  scrollKey = 0,
 }: ChatProps) {
   return (
     <ScrollAreaWithFade
       height="h-full"
       scrollToBottom={scrollToBottom}
       scrollToTop={scrollToTop}
+      isHelpTopic={isHelpTopic}
+      scrollKey={scrollKey}
     >
       <div className="space-y-4 p-4 pb-8">
         {items.map((item, index) =>
