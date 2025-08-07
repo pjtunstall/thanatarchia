@@ -203,7 +203,7 @@ export const factions: Faction[] = [
     capital: "Vormatia",
     type: "barbarian",
     color: "hsl(var(--burgundians))",
-    symbol: "ᛯ",
+    symbol: "Ω",
     leader: {
       male: {
         name: "Gundobad",
@@ -371,7 +371,7 @@ export const factions: Faction[] = [
     capital: "Colonia",
     type: "barbarian",
     color: "hsl(var(--saxons))",
-    symbol: "ᛝ",
+    symbol: "◇",
     leader: {
       male: {
         name: "Widukind",
