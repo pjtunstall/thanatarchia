@@ -203,7 +203,7 @@ export const factions: Faction[] = [
     capital: "Vormatia",
     type: "barbarian",
     color: "hsl(var(--burgundians))",
-    symbol: "Ω",
+    symbol: "𐂓",
     leader: {
       male: {
         name: "Gundobad",
@@ -259,7 +259,7 @@ export const factions: Faction[] = [
     capital: "Serdica",
     type: "barbarian",
     color: "hsl(var(--gepids))",
-    symbol: "⚓",
+    symbol: "𐛗",
     leader: {
       male: {
         name: "Ardaric",
@@ -287,7 +287,7 @@ export const factions: Faction[] = [
     capital: "Lejre",
     type: "barbarian",
     color: "hsl(var(--rugians))",
-    symbol: "♛",
+    symbol: "𐝠",
     leader: {
       male: {
         name: "Eraric",
