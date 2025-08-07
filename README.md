@@ -58,11 +58,3 @@ The Vandal name generator owes a lot to Nicholetta Francovich Onesti's "[Tracing
 Thematic inspiration: Herbert F. Bushman's [The Dark Ages Podcast](https://darkagespod.com/), which I listened to night and day this month. I fell asleep listening to it, and it got into my dreams.
 
 I must also credit Lovable with one of the jokes. I'll let you guess which.
-
-## Future plans
-
-I have a notebook full of these. There are a few little things that I might chip away at in the immediate future, such as adding distinct profile pictures for every faction, more pictures in general, progressive loading of images, custom images for faction symbols, and a more historical-looking map, maybe styled after the [Tabula Peuteringiana](https://en.wikipedia.org/wiki/Tabula_Peutingeriana). I'll probabably want to adjust the difficulty (and other aspects of gameplay) when I've had a bit of feedback.
-
-On the code side, I'd like to refactor a bit: break up some of those long functions, put components in dedicated modules, review variable names, and reorganize `gameState` in the light of the structure that's emerged.
-
-In the longer term, it could be fun to add more conversations, including correspondence with rival leaders, and make them more interactive. More outcomes. More intrigue. More choice. More banter and philosophy. More variety of leader bios. I also a plan for a whole alternative way of playing the game where you try to make alliances by marrying off relatives, investing in their education to make them more eligible, but the relatives often have other ideas. Change of religion could be necessary to make such an alliance, but come at the risk of desertions.
