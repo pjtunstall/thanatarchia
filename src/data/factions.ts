@@ -259,7 +259,7 @@ export const factions: Faction[] = [
     capital: "Serdica",
     type: "barbarian",
     color: "hsl(var(--gepids))",
-    symbol: "𐛗",
+    symbol: "",
     leader: {
       male: {
         name: "Ardaric",

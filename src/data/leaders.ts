@@ -429,3 +429,88 @@ function deleteStemVowels(firstElement: string): string {
   }
   return firstElement;
 }
+
+const lombardFirsElements = [
+  "Adal",
+  "Agil",
+  "Aist",
+  "Alb",
+  "Aldi",
+  "Ans",
+  "Ard",
+  "Ari",
+  "Aten",
+  "Aud",
+  "Cuni",
+  "Gaitel",
+  "Gari",
+  "Gis",
+  "Gode",
+  "Gras",
+  "Grim",
+  "Gunde",
+  "Hilde",
+  "Land",
+  "Liut",
+  "Ort",
+  "Pand",
+  "Ragin",
+  "Rode",
+  "Rome",
+  "Sichel",
+  "Oald",
+];
+const lombardMaleLastElements = [
+  "mar",
+  "mund",
+  "nit",
+  "oald",
+  "oin",
+  "pald",
+  "pert",
+  "prand",
+  "ulf",
+];
+const lombardMaleFullNames = [
+  "Claffo",
+  "Cleph",
+  "Guaimar",
+  "Tato",
+  "Wacho",
+  "Zotto",
+];
+const lombardFemaleLastElements = [
+  "gaita",
+  "grima",
+  "linda",
+  "munda",
+  "rada",
+  "runa",
+  "trud",
+];
+const lombardFemaleFullNames = ["Austrigusa", "Gella", "Gambara"];
+
+export function randomLombardName(gender: Gender): string {
+  const r = Math.random();
+
+  if (r < 0.1) {
+    return gender === "male"
+      ? randomItem(lombardMaleFullNames)
+      : randomItem(lombardFemaleFullNames);
+  } else {
+    let first = randomItem(lombardFirsElements);
+    let last: string;
+    if (gender === "male") {
+      last = randomItem(lombardMaleLastElements);
+    } else {
+      last = randomItem(lombardFemaleLastElements);
+    }
+
+    const vowels = ["aeiou"];
+    if (vowels.includes(first[first.length - 1]) && vowels.includes(last[0])) {
+      first = first.slice(0, -1);
+    }
+
+    return first + last;
+  }
+}
