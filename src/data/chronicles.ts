@@ -169,8 +169,8 @@ export const battleChronicle = ({
         }
       } else {
         if (success) {
-          return Math.random() > 0.1
-            ? `It is said that the ${attackers} scored a fabulous win against the ${defenders} at this time. How the hungry, terrified folk of ${territory} must rejoice at their liberation.`
+          return Math.random() > 0.05
+            ? `It is said that the ${attackers} scored a fabulous win against the ${defenders} at this time. How the hungry, terrified folk of ${territory} must rejoice at their latest liberation.`
             : `Ah how the names of these factions flow on like endless rain: their meaningless triumphs and defeats of equal insignificance. I run my finger over the parchment's roughness as the dying light briefly catches the page. I suppose one must do one's duty and record here that the ${attackers} took ${territory} from the ${defenders}.`;
         } else {
           const addendum =

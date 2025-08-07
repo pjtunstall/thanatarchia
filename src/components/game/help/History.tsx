@@ -81,6 +81,10 @@ export function historyChat(
     case "Athaloc of Smyrna":
       return [
         {
+          author: player,
+          statement: `Has history, in some sense, already happened, ${adviserName}?`,
+        },
+        {
           author: adviser,
           statement: `Déja vu, my ${lordOrLady}? It is an affliction of the philosophicaly inclined. Quite common, I gather, among those who fail to drown out their thoughts at all time with prayer. Harmless if nipped in the bud. If left untreated, however, it may progress into something more serious. The next stage is to start to see things as they really are, a simulation.`,
         },
@@ -95,7 +99,8 @@ export function historyChat(
         },
         {
           author: player,
-          statement: "Oh, God, I think you've convinced me...",
+          statement:
+            "Oh, God, I think you've convinced me. Know any good prayers?",
         },
       ];
   }
