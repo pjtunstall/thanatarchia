@@ -19,15 +19,16 @@ export type Faction = {
     female: Character;
   };
   faith:
-    | "Chalcedonian"
     | "Arian"
-    | "Pagan"
-    | "Manichean"
-    | "Pelagian"
-    | "Miaphysite"
+    | "Chalcedonian"
+    | "Donatist"
     | "Dyophysite"
-    | "Nestorian"
-    | "Donatist";
+    | "Gnostic"
+    | "Pagan"
+    | "Manichaean"
+    | "Miaphysite"
+    | "Pelagian"
+    | "Nestorian";
 };
 
 export type FactionMiniInfo = { color: string; name: string; symbol: string };

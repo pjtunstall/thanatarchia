@@ -10,7 +10,6 @@ export const epithets = [
   "Brusque",
   "Calm",
   "Cruel",
-  "Stern",
   "Depraved",
   "Dire",
   "Dreadful",
@@ -37,7 +36,6 @@ export const epithets = [
   "Tactical Oath-Breaker",
   "Petulant",
   "'Pious'",
-  "Proud",
   "Rascal",
   "Rude",
   "Terrible",
@@ -442,6 +440,7 @@ const lombardFirsElements = [
   "Aten",
   "Aud",
   "Austri",
+  "Chloth",
   "Cuni",
   "Cuninc",
   "Gaitel",
@@ -451,6 +450,7 @@ const lombardFirsElements = [
   "Gras",
   "Grim",
   "Gunde",
+  "Helmi",
   "Hilde",
   "Land",
   "Liut",
@@ -497,6 +497,8 @@ const lombardFemaleLastElements = [
   "munda",
   "rada",
   "runa",
+  "sind",
+  "suinda",
   "trud",
 ];
 const lombardFemaleFullNames = ["Austrigusa", "Gella", "Gambara"];
@@ -525,3 +527,23 @@ export function randomLombardName(gender: Gender): string {
     return first + last;
   }
 }
+
+export function randomGepidName(gender: Gender): string {
+  if (gender === "male") {
+    return randomItem(gepidMaleNames);
+  } else {
+    return randomItem(gepidFemaleNames);
+  }
+}
+
+const gepidMaleNames = [
+  "Ardaric",
+  "Fastida",
+  "Flaccitheus",
+  "Mundus",
+  "Thraustila",
+  "Thurisind",
+  "Thurismod",
+];
+
+const gepidFemaleNames = ["Rosamunda"];

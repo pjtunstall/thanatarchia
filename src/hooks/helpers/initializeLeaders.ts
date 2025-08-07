@@ -16,6 +16,7 @@ import {
   randomOstrogothName,
   randomVisigothName,
   randomVandalName,
+  randomGepidName,
 } from "@/data/leaders.ts";
 
 export function initializeLeaders(factions: Faction[]): Character[] {
@@ -25,6 +26,9 @@ export function initializeLeaders(factions: Faction[]): Character[] {
     const leader = { ...leaderTemplate };
 
     switch (faction.name) {
+      case "Gepids":
+        leader.name = randomGepidName(leader.gender);
+        break;
       case "Lombards":
         leader.name = randomLombardName(leader.gender);
         break;
