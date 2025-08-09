@@ -136,9 +136,13 @@ export function useCombat({
           return updated;
         });
 
+        // Store original defender info before any updates.
+        const originalDefenderName = toTerritory.owner;
+        const originalDefenseForce = toTerritory.troops!;
+
         const attackStrength = totalTroops + Math.random() * 500;
         const defenseStrength =
-          toTerritory.troops +
+          originalDefenseForce +
           Math.random() * 500 +
           (toTerritory.conditionModifier || 0);
 
@@ -146,50 +150,95 @@ export function useCombat({
 
         const { attackerLosses, defenderLosses } = calculateCasualties({
           attackForce: totalTroops,
-          defenseForce: toTerritory.troops!,
+          defenseForce: originalDefenseForce,
           victory,
         });
 
-        if (victory) {
-          const survivors = Math.max(0, totalTroops - attackerLosses);
+        // Calculate survivors.
+        const attackerSurvivors = totalTroops - attackerLosses;
+        const defenderSurvivors = originalDefenseForce - defenderLosses;
 
-          updateTerritories((prev) =>
-            prev.map((t) => {
-              if (sources.some((s) => s.from === t.name)) {
-                const sent = sources.find((s) => s.from === t.name)!.troops;
-                return {
-                  ...t,
-                  troops: Math.max(0, t.troops! - sent),
-                };
-              }
-              if (t.name === to) {
+        updateTerritories((prev) => {
+          let updatedTerritories = prev.map((t) => {
+            // Update target territory first
+            if (t.name === to) {
+              if (victory) {
+                // Player won: survivors occupy the territory.
                 return {
                   ...t,
                   owner: factions[playerIndex].name,
-                  troops: survivors,
+                  troops: attackerSurvivors,
                 };
-              }
-              return t;
-            })
-          );
-        } else {
-          updateTerritories((prev) =>
-            prev.map((t) => {
-              const match = sources.find((s) => s.from === t.name);
-              if (match) {
+              } else {
+                // Player lost: defenders keep their survivors.
                 return {
                   ...t,
-                  troops: Math.max(
-                    0,
-                    t.troops! - Math.floor(attackerLosses / sources.length)
-                  ),
+                  troops: defenderSurvivors,
                 };
               }
-              return t;
-            })
-          );
-        }
+            }
+            return t;
+          });
 
+          // Handle source territories: remove sent troops initially.
+          updatedTerritories = updatedTerritories.map((t) => {
+            const sourceMatch = sources.find((s) => s.from === t.name);
+            if (sourceMatch) {
+              return {
+                ...t,
+                troops: Math.max(0, t.troops! - sourceMatch.troops),
+              };
+            }
+            return t;
+          });
+
+          // If attack failed, distribute survivors back to source territories proportionally.
+          if (!victory && attackerSurvivors > 0) {
+            let survivorsDistributed = 0;
+
+            sources.forEach((source, index) => {
+              const proportion = source.troops / totalTroops;
+              const survivorsForThisSource =
+                index === sources.length - 1
+                  ? attackerSurvivors - survivorsDistributed // Last source gets remainder to avoid rounding errors.
+                  : Math.floor(attackerSurvivors * proportion);
+
+              survivorsDistributed += survivorsForThisSource;
+
+              updatedTerritories = updatedTerritories.map((t) => {
+                if (t.name === source.from) {
+                  return {
+                    ...t,
+                    troops: t.troops! + survivorsForThisSource,
+                  };
+                }
+                return t;
+              });
+            });
+          }
+
+          // Handle defender survivor redistribution (only if player won and defenders have survivors).
+          if (victory && defenderSurvivors > 0) {
+            const defenderTerritories = updatedTerritories.filter(
+              (t) => t.owner === originalDefenderName
+            );
+
+            if (defenderTerritories.length > 0) {
+              const randomDefenderTerritory = randomItem(defenderTerritories);
+              updatedTerritories = updatedTerritories.map((t) => {
+                if (t.name === randomDefenderTerritory.name) {
+                  return { ...t, troops: (t.troops || 0) + defenderSurvivors };
+                }
+                return t;
+              });
+            }
+            // If no defender territories exist, survivors are lost.
+          }
+
+          return updatedTerritories;
+        });
+
+        // Chronicle and battle report.
         let author = pickAValidChronicler(hasChangedFromEudaemonia);
         let bias =
           author.name === chroniclers[adviserIndex].name
@@ -197,8 +246,10 @@ export function useCombat({
             : "hostile";
         const winners = victory
           ? factions[playerIndex].name
-          : toTerritory.owner;
-        const losers = victory ? toTerritory.owner : factions[playerIndex].name;
+          : originalDefenderName;
+        const losers = victory
+          ? originalDefenderName
+          : factions[playerIndex].name;
         const chronicleEntryStatement = battleChronicle({
           chronicler: author,
           bias,
@@ -212,7 +263,12 @@ export function useCombat({
         battleReportEntries.push({
           author,
           message: chronicleEntryStatement,
-          stats: `Attack strength: ${totalTroops}\nDefense strength: ${toTerritory.troops}\nYour losses: ${attackerLosses}\nDefender losses: ${defenderLosses}`,
+          stats: `Attack strength: ${attackStrength.toFixed(0)}
+Defense strength: ${defenseStrength.toFixed(0)}
+Attack force: ${totalTroops}
+Defense force: ${originalDefenseForce}
+Your losses: ${attackerLosses}
+Defender losses: ${defenderLosses}`,
           success: victory,
         });
       });
@@ -230,6 +286,9 @@ export function useCombat({
       chroniclers,
       setScheduledAttacks,
       enqueueBattleReport,
+      addChronicleEntry,
+      hasChangedFromEudaemonia,
+      setFactionAggressions,
     ]
   );
 
@@ -452,6 +511,7 @@ export function useCombat({
         }
 
         // Standard battle resolution.
+        const defenderName = toTerritory.owner;
         const defenseForce = toTerritory.troops!;
         const attackStrength = attackForce + Math.random() * 400;
         const defenseStrength = defenseForce + Math.random() * 600;
@@ -467,7 +527,7 @@ export function useCombat({
         const attackerSurvivors = attackForce - attackerLosses;
         const defenderSurvivors = defenseForce - defenderLosses;
 
-        const updatedTerritories = currentTerritories.map((t) => {
+        let updatedTerritories = currentTerritories.map((t) => {
           if (t.name === fromTerritory.name) {
             if (victory) {
               // Attackers won: only garrison remains in origin territory.
@@ -501,6 +561,24 @@ export function useCombat({
           }
           return t;
         });
+
+        // If defenders lost and have survivors, relocate them.
+        if (victory && defenderSurvivors > 0) {
+          const defenderTerritories = updatedTerritories.filter(
+            (t) => t.owner === defenderName
+          );
+
+          if (defenderTerritories.length > 0) {
+            const randomDefenderTerritory = randomItem(defenderTerritories);
+            updatedTerritories = updatedTerritories.map((t) => {
+              if (t.name === randomDefenderTerritory.name) {
+                return { ...t, troops: (t.troops || 0) + defenderSurvivors };
+              }
+              return t;
+            });
+          }
+          // If no defender territories exist, survivors are lost.
+        }
 
         // Chronicle and player battle report.
         const author: Character = pickAValidChronicler(
