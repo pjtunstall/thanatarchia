@@ -1,28 +1,35 @@
 import { useState, useCallback, useMemo } from "react";
 
 import { Territory, GameStatus, AttackOrder } from "@/types/gameTypes";
-import { factions, territories as initialTerritories } from "@/data/gameData";
+import {
+  costOfSpying,
+  factions,
+  territories as initialTerritories,
+} from "@/data/gameData";
 import { chroniclers } from "@/data/chronicles";
 
 export function useGameCore() {
+  const [playerIndex, setPlayerIndex] = useState(() =>
+    randomPlayerIndex(factions.map((f) => f.territories))
+  );
   const [currentTurn, setCurrentTurn] = useState(1);
   const [selectedTerritoryName, setSelectedTerritoryName] = useState<
     string | null
   >(null);
   const [gameStatus, setGameStatus] = useState<GameStatus>("playing");
   const [territories, setTerritories] = useState<Territory[]>(() => {
-    const territories = initialTerritories;
+    const territories = [...initialTerritories];
     const range = 2000;
     territories.forEach((t) => {
       t.troops = 1000 + Math.floor(Math.random() * range);
+      if (t.owner !== factions[playerIndex].name) {
+        t.troops += 1000;
+      }
     });
-    return [...territories];
+    return territories;
   });
   const [factionTreasures, setFactionTreasures] = useState<number[]>(
     factions.map((f) => f.treasure)
-  );
-  const [playerIndex, setPlayerIndex] = useState(() =>
-    randomPlayerIndex(factions.map((f) => f.territories))
   );
   const [success, setSuccess] = useState<boolean | null>(null);
   const [currentChronicler, setCurrentChronicler] = useState(chroniclers[0]);
@@ -95,6 +102,9 @@ export function useGameCore() {
     (territoryName: string) => {
       const territory = territories.find((t) => t.name === territoryName);
       if (territory) {
+        setFactionTreasures((prev) =>
+          prev.map((ft, i) => (i === playerIndex ? ft - costOfSpying : ft))
+        );
         const newTerritory = { ...territory };
         newTerritory.spiedOn = true;
         updateTerritories((prev) =>
