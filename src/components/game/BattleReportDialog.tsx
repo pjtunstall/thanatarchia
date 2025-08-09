@@ -14,6 +14,7 @@ import { Character, BattleReport } from "@/types/gameTypes";
 import { factions } from "@/data/factions";
 import { chroniclers } from "@/data/chronicles";
 import { CharacterDialog } from "@/components/game/CharacterProfile";
+import { ProgressiveImage } from "@/components/game/ProgressiveImage";
 
 type BattleReportDialogProps = {
   battleMessage: BattleReport | null;
@@ -83,11 +84,10 @@ function BattleReportContent({
   return (
     <div className="relative">
       <div className="float-left w-1/2 max-w-[300px] mr-6 mb-4">
-        <img
+        <ProgressiveImage
           src={image}
-          loading="lazy"
           alt="Battle scene"
-          className="w-full h-auto max-h-[300px] rounded object-cover mb-4"
+          className="w-full max-h-[300px] rounded mb-4 object-cover"
         />
         <p
           className="text-sm font-serif leading-relaxed text-gray-500"

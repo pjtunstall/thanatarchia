@@ -16,6 +16,7 @@ import { CompassRose } from "@/components/game/map/CompassRose";
 import { ConnectingLines } from "@/components/game/map/ConnectingLines";
 import { TerritoryMarkers } from "@/components/game/map/TerritoryMarkers";
 import { useConfirm } from "@/hooks/useConfirm";
+import { ProgressiveImage } from "@/components/game/ProgressiveImage";
 
 type GameMapProps = {
   playerIndex: number;
@@ -117,10 +118,11 @@ export function GameMap({
           className="relative w-full aspect-[4/3] map-decorative-border rounded-lg overflow-hidden"
           onClick={() => onTerritoryClick(null)}
         >
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-80"
-            style={{ backgroundImage: `url(${romanEmpireMap})` }}
-          ></div>
+          <ProgressiveImage
+            src={romanEmpireMap}
+            fillContainer={true}
+            alt="Roman Empire Map"
+          />
 
           <CompassRose />
 

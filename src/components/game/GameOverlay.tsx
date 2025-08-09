@@ -10,6 +10,7 @@ import {
 } from "@/data/chronicles";
 import { factions } from "@/data/factions";
 import { Chat } from "@/components/game/Chat";
+import { ProgressiveImage } from "@/components/game/ProgressiveImage";
 
 type GameOverlayProps = {
   gameStatus: GameStatus;
@@ -85,10 +86,9 @@ export function GameOverlay({
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="flex flex-col md:flex-row gap-6">
-              <img
+              <ProgressiveImage
                 src={sunbeams}
                 alt="End of game scene"
-                loading="lazy"
                 className="w-full md:w-1/2 max-h-96 object-cover rounded-lg border"
               />
               <div className="flex-1">

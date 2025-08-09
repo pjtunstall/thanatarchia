@@ -10,7 +10,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 
 import { Character } from "@/types/gameTypes";
-import { AsyncAvatarImage } from "@/components/game/AsyncAvatarImage";
+import { ProgressiveImage } from "@/components/game/ProgressiveImage";
 
 type CharacterProfileProps = {
   character: Character;
@@ -38,7 +38,7 @@ export function CharacterDialog({
   character,
   size = "sm",
 }: CharacterDialogProps) {
-  const triggerSize = size === "lg" ? "w-16 h-16" : "w-12 h-12";
+  const triggerSize = size === "lg" ? "w-20 h-20" : "w-16 h-16";
 
   return (
     <Dialog>
@@ -46,10 +46,14 @@ export function CharacterDialog({
         <Avatar
           className={cn(
             triggerSize,
-            "relative cursor-pointer transition-transform duration-200 hover:scale-125 hover:z-10"
+            "relative cursor-pointer transition-transform duration-200 hover:scale-110 hover:z-10"
           )}
         >
-          <AsyncAvatarImage src={character.image} alt={character.name} />
+          <ProgressiveImage
+            src={character.image}
+            alt={character.name}
+            useAvatar={true}
+          />
           <AvatarFallback className="text-xs">
             {character.name.charAt(0)}
           </AvatarFallback>
@@ -61,7 +65,11 @@ export function CharacterDialog({
           <DialogTitle className="flex items-center justify-between gap-3 w-full">
             <div className="flex items-center gap-3">
               <Avatar className="w-20 h-20">
-                <AsyncAvatarImage src={character.image} alt={character.name} />
+                <ProgressiveImage
+                  src={character.image}
+                  alt={character.name}
+                  useAvatar={true}
+                />
                 <AvatarFallback>{character.name.charAt(0)}</AvatarFallback>
               </Avatar>
               <span className="text-lg font-semibold">{character.name}</span>
