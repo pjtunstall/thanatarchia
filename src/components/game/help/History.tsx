@@ -75,7 +75,7 @@ export function historyChat(
         },
         {
           author: player,
-          statement: "But I must protect my tribe.",
+          statement: "But I must protect my people.",
         },
       ];
     case "Athaloc of Smyrna":
