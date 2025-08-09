@@ -46,7 +46,10 @@ export function BattleReportDialog({
         if (!open) dequeueBattleMessage();
       }}
     >
-      <DialogContent className="max-h-[90vh] overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+      <DialogContent
+        style={{ paddingBottom: 0 }}
+        className="max-h-[90vh] overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent"
+      >
         <BattleReportContent
           chronicler={battleMessage.author}
           chronicle={battleMessage.message}

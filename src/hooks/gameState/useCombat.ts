@@ -263,12 +263,7 @@ export function useCombat({
         battleReportEntries.push({
           author,
           message: chronicleEntryStatement,
-          stats: `Attack strength: ${attackStrength.toFixed(0)}
-Defense strength: ${defenseStrength.toFixed(0)}
-Attack force: ${totalTroops}
-Defense force: ${originalDefenseForce}
-Your losses: ${attackerLosses}
-Defender losses: ${defenderLosses}`,
+          stats: `Attackers: ${totalTroops}\nDefenders: ${originalDefenseForce}\nYour losses: ${attackerLosses}\nDefender losses: ${defenderLosses}`,
           success: victory,
         });
       });
@@ -611,11 +606,7 @@ Defender losses: ${defenderLosses}`,
           const battleReport: BattleReport = {
             author,
             message: chronicleEntryStatement,
-            stats: `Attack strength: ${attackStrength.toFixed(
-              0
-            )}\nDefense strength: ${defenseStrength.toFixed(
-              0
-            )}\nAttack force: ${attackForce}\nDefense force: ${defenseForce}\nAttacker losses: ${attackerLosses}\nYour losses: ${defenderLosses}`,
+            stats: `Attackers: ${attackForce}\nDefenders: ${defenseForce}\nAttacker losses: ${attackerLosses}\nYour losses: ${defenderLosses}`,
             success: !victory,
           };
           populateBattleReportQueue([battleReport], enqueueBattleReport);
