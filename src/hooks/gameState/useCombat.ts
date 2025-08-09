@@ -382,39 +382,48 @@ export function useCombat({
           return currentTerritories;
         }
 
-        const adjacentNames = adjacentTerritories[territoryName] || [];
+        if (!aiTerritory.troops || aiTerritory.troops < 600) {
+          // Need at least 600: 100 garrison + 500 minimum attack.
+          return currentTerritories;
+        }
 
+        const adjacentNames = adjacentTerritories[territoryName] || [];
         const adjacentEnemyTerritories = adjacentNames
           .map((name) => currentTerritories.find((t) => t.name === name))
           .filter((t) => t && t.owner !== factions[factionIndex].name);
 
         if (adjacentEnemyTerritories.length === 0) return currentTerritories;
 
-        if (!aiTerritory.troops || aiTerritory.troops <= 500) {
-          return currentTerritories;
-        }
-
         const aggression = factionAggressions[factionIndex];
 
+        // Score targets: aggression biases targeting player-owned territories.
         const scoredTarget = adjacentEnemyTerritories.reduce(
           (best, current) => {
             const isPlayerOwned = current.owner === factions[playerIndex].name;
             const troopScore = current.troops ?? Infinity;
             const score = troopScore - (isPlayerOwned ? aggression * 10 : 0);
             return !best || score < best.score
-              ? { territory: current, score }
+              ? { territory: current, score, isPlayerOwned }
               : best;
           },
-          null as null | { territory: Territory; score: number }
+          null as null | {
+            territory: Territory;
+            score: number;
+            isPlayerOwned: boolean;
+          }
         );
 
-        if (!scoredTarget || Math.random() >= aggression) {
-          return currentTerritories;
-        }
+        if (!scoredTarget) return currentTerritories;
 
         const fromTerritory = aiTerritory;
         const toTerritory = scoredTarget.territory;
 
+        // Calculate attack force: 80% of troops above garrison requirement.
+        const availableForAttack = fromTerritory.troops! - 100; // Leave 100 as garrison.
+        const attackForce = Math.floor(availableForAttack * 0.8);
+        const garrisonLeft = fromTerritory.troops! - attackForce; // This will be at least 100.
+
+        // Abandoned player-owned territory: no battle, just move in troops.
         if (
           toTerritory.owner === factions[playerIndex].name &&
           toTerritory.troops === 0
@@ -431,25 +440,21 @@ export function useCombat({
 
           addChronicleEntry(author, statement, turn);
 
-          const updatedTerritories = currentTerritories.map((t) => {
+          return currentTerritories.map((t) => {
+            if (t.name === fromTerritory.name) {
+              return { ...t, troops: garrisonLeft };
+            }
             if (t.name === toTerritory.name) {
-              return {
-                ...t,
-                troops: 200,
-                owner: fromTerritory.owner,
-              };
+              return { ...t, troops: attackForce, owner: fromTerritory.owner };
             }
             return t;
           });
-
-          return updatedTerritories;
         }
 
-        const attackForce = Math.floor(fromTerritory.troops! * 0.6);
+        // Standard battle resolution.
         const defenseForce = toTerritory.troops!;
         const attackStrength = attackForce + Math.random() * 400;
-        const defenseStrength =
-          defenseForce < 100 ? 0 : defenseForce + Math.random() * 600;
+        const defenseStrength = defenseForce + Math.random() * 600;
         const victory = attackStrength > defenseStrength;
 
         const { attackerLosses, defenderLosses } = calculateCasualties({
@@ -458,43 +463,46 @@ export function useCombat({
           victory,
         });
 
-        let updatedTerritories: Territory[];
+        // Calculate survivors.
+        const attackerSurvivors = attackForce - attackerLosses;
+        const defenderSurvivors = defenseForce - defenderLosses;
 
-        if (victory) {
-          updatedTerritories = currentTerritories.map((t) => {
-            if (t.name === territoryName) {
+        const updatedTerritories = currentTerritories.map((t) => {
+          if (t.name === fromTerritory.name) {
+            if (victory) {
+              // Attackers won: only garrison remains in origin territory.
               return {
                 ...t,
-                troops: Math.max(0, t.troops! - attackForce),
+                troops: garrisonLeft,
+              };
+            } else {
+              // Attackers lost: survivors return to origin territory.
+              return {
+                ...t,
+                troops: garrisonLeft + attackerSurvivors,
               };
             }
-            if (t.name === toTerritory.name) {
+          }
+          if (t.name === toTerritory.name) {
+            if (victory) {
+              // Attackers won: survivors occupy the territory.
               return {
                 ...t,
-                troops: Math.max(200, t.troops! - defenderLosses),
+                troops: attackerSurvivors,
                 owner: fromTerritory.owner,
               };
-            }
-            return t;
-          });
-        } else {
-          updatedTerritories = currentTerritories.map((t) => {
-            if (t.name === territoryName) {
+            } else {
+              // Defenders won: survivors remain.
               return {
                 ...t,
-                troops: Math.max(200, t.troops! - attackerLosses),
+                troops: defenderSurvivors,
               };
             }
-            if (t.name === toTerritory.name) {
-              return {
-                ...t,
-                troops: Math.max(0, t.troops! - defenderLosses),
-              };
-            }
-            return t;
-          });
-        }
+          }
+          return t;
+        });
 
+        // Chronicle and player battle report.
         const author: Character = pickAValidChronicler(
           hasChangedFromEudaemonia
         );
@@ -525,10 +533,13 @@ export function useCombat({
           const battleReport: BattleReport = {
             author,
             message: chronicleEntryStatement,
-            stats: `Attack strength: ${attackForce}\nDefense strength: ${defenseForce}\nAttacker losses: ${attackerLosses}\nYour losses: ${defenderLosses}`,
+            stats: `Attack strength: ${attackStrength.toFixed(
+              0
+            )}\nDefense strength: ${defenseStrength.toFixed(
+              0
+            )}\nAttack force: ${attackForce}\nDefense force: ${defenseForce}\nAttacker losses: ${attackerLosses}\nYour losses: ${defenderLosses}`,
             success: !victory,
           };
-
           populateBattleReportQueue([battleReport], enqueueBattleReport);
         }
 
