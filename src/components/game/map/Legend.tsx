@@ -1,30 +1,15 @@
+import { useState, useEffect } from "react";
+
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
-
-import { useState, useEffect } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 import { Character, Faction, FactionMiniInfo } from "@/types/gameTypes";
 import { FactionDetails } from "@/components/game/FactionDetails";
-
-function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(() =>
-    typeof window !== "undefined" ? window.matchMedia(query).matches : false
-  );
-
-  useEffect(() => {
-    const media = window.matchMedia(query);
-    const listener = () => setMatches(media.matches);
-    media.addListener(listener);
-    return () => media.removeListener(listener);
-  }, [query]);
-
-  return matches;
-}
 
 type LegendProps = {
   factionLookup: Record<
@@ -50,7 +35,7 @@ export function Legend({
   setFactionAggressions,
   setFactionTreasures,
 }: LegendProps) {
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useIsMobile();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
