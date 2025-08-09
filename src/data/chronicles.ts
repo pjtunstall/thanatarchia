@@ -303,7 +303,7 @@ export const endChronicle = ({
         }
       } else {
         if (success) {
-          return `Hard times are upon us. ${player.name} has led the ${faction.name} to victory, carving out a realm by violence. We can only pray that ${they} will get their just deserts. Although... Hopefully not too soon. I wouldn't want to miss out on a decent martyrdom. Ah, to be strung up on a gibbet or have a lot of bones thrown in my face. Even beheading? I know it's just having your head lopped off, but if they draw it out right, and maybe do some good tortures first. I don't know, we'll see what God wants.`;
+          return `Hard times are upon us. ${player.name} has led the ${faction.name} to victory, carving out a realm by violence. We can only pray that ${they} will get ${their} just deserts. Although... Hopefully not too soon. I wouldn't want to miss out on a decent martyrdom. Ah, to be strung up on a gibbet or stoned with bones. Even beheading? I know it's just having your head lopped off, but if they draw it out right, and maybe do some good tortures first. I don't know, we'll see what God wants.`;
         } else {
           return `Hallelluja! God has answered our prayers. The tyrant ${player.name} is dead. The people rejoice. I cannot describe how happy we are. Such songs of joy. Such exhultation. I saw ${their} body dragged through the streets by a jeering mob. Even the ${faction.name} cast stones. But this gets me thinking... I've always focused on the pain side of martyrdom, but actually there's a whole world of humiliation to explore. Note to self: Say more prayers about this.`;
         }
