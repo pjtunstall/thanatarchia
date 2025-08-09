@@ -49,7 +49,7 @@ Thanks to Lovable AI for helping me whip up the initial prototype in a day (incl
 
 AI images mainly from Copilot, with a few from Chat.
 
-Eagle brooch image from [the Morgan Librar & Museum](https://www.themorgan.org/objects/item/290015), New York.
+Eagle brooch image from [The Morgan Library & Museum](https://www.themorgan.org/objects/item/290015), New York.
 
 Raven, squirrel, and coinbag sounds, [freesound_community](https://pixabay.com/users/freesound_community-46691455/). Marching sound from [kakaist](https://pixabay.com/users/kakaist-48093450). Church bell from [Universfield](https://pixabay.com/users/universfield-28281460). Pen writing from [ALIENIGHTMARE](https://pixabay.com/users/alienightmare-42489797). All via Pixabay.
 
