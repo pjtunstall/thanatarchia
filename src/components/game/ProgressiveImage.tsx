@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { AvatarImage } from "@/components/ui/avatar";
 import { loadAvatar } from "@/lib/images";
 
-interface ProgressiveImageProps {
+type ProgressiveImageProps = {
   src: string;
   alt: string;
   className?: string;
@@ -10,7 +10,7 @@ interface ProgressiveImageProps {
   fillContainer?: boolean;
   useAvatar?: boolean;
   placeholder?: React.ReactNode;
-}
+};
 
 function loadImage(src: string): Promise<void> {
   return new Promise((resolve, reject) => {
