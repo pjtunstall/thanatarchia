@@ -33,7 +33,7 @@ export function identityChat(
         },
         {
           author: adviser,
-          statement: "In my dreams, I'm always back in Constantinople.",
+          statement: "How can I be fake, Sire? I'm Byzantine.",
         },
       ];
     case "Eudaemonia of Rheims":
