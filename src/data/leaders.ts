@@ -236,7 +236,7 @@ const visigothMaleLastElements = [
 ];
 const visigothFemaleLastElements = [
   "suintha",
-  "druda",
+  "thruda",
   "gotho",
   "gundi",
   "hildi",
