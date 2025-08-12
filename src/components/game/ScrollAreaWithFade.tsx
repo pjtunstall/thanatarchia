@@ -37,7 +37,7 @@ export function ScrollAreaWithFade({
     if (scrollToBottom) {
       el.scrollTop = el.scrollHeight;
     } else if (scrollToTop) {
-      el.scrollTop = 0;
+      el.scrollTo({ top: 0, behavior: "smooth" });
 
       if (isHelpTopic) {
         setTimeout(() => {

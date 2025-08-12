@@ -561,9 +561,9 @@ export function randomGepidName(gender: Gender): string {
 const gepidMaleNames = [
   "Ardaric",
   "Fastida",
-  "Flaccitheus",
+  "Flaccitheu",
   "Mundus",
-  "Thraustila",
+  "Thrafstila",
   "Thurisind",
   "Thurismod",
 ];
