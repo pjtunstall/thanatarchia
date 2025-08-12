@@ -59,13 +59,15 @@ const romanMaleNames = [
   "Aelius",
   "Anastasius",
   "Arcadius",
-  "Basil",
-  "Constantine",
+  "Basilius",
+  "Constantinus",
   "Constantius",
   "Flavius",
   "Hypatius",
+  "Leo",
   "Tiberius",
   "Theodosius",
+  "Zeno",
 ];
 
 const romanFemaleNames = [
@@ -73,6 +75,7 @@ const romanFemaleNames = [
   "Anastasia",
   "Antonina",
   "Arcadia",
+  "Ariadne",
   "Euphemia",
   "Flavia",
   "Helena",
@@ -80,6 +83,7 @@ const romanFemaleNames = [
   "Pulcheria",
   "Sophia",
   "Theorora",
+  "Valeriana",
   "Vigilantia",
 ];
 
@@ -101,6 +105,7 @@ export function randomOstrogothName(gender: Gender): string {
 
 const ostrogothMaleFirstElements = [
   "Ala",
+  "Ali",
   "Amala",
   "Eutha",
   "Theode",
@@ -119,6 +124,7 @@ const ostrogothMaleFirstElements = [
   "Hildi",
   "Sunia",
   "Ufta",
+  "Usda",
 ];
 const ostrogothFemaleFirstElements = [
   "Amala",
@@ -137,6 +143,7 @@ const ostrogothMaleLastElements = [
   "mer",
   "theus",
   "had",
+  "gern",
   "ges",
   "gisel",
   "nand",
@@ -154,7 +161,13 @@ const ostrogothFemaleLastElements = [
   "nanda",
 ];
 
-const ostroGothicMaleDiminutives = ["Ansila", "Totila", "Merila", "Frithila"];
+const ostroGothicMaleDiminutives = [
+  "Ansila",
+  "Baduila",
+  "Merila",
+  "Frithila",
+  "Usdila",
+];
 
 export function randomVisigothName(gender: Gender): string {
   if (gender === "male") {
@@ -186,7 +199,7 @@ const visigothMaleFirstElements = [
   "Athana",
   "Rode",
   "Chinda",
-  "Hermane",
+  "Ermane",
   "Wildi",
   "Gunde",
   "Sinde",
@@ -203,6 +216,8 @@ const visigothFemaleFirstElements = [
   "Recci",
   "Agi",
   "Liuvi",
+  "Ara",
+  "Ermen",
 ];
 
 const visigothMaleLastElements = [
@@ -219,7 +234,14 @@ const visigothMaleLastElements = [
   "lec",
   "funs",
 ];
-const visigothFemaleLastElements = ["suintha", "gotho", "berga"];
+const visigothFemaleLastElements = [
+  "suintha",
+  "druda",
+  "gotho",
+  "gundi",
+  "hildi",
+  "berga",
+];
 
 const visiGothicMaleDiminutives = [
   "Suinthila",
