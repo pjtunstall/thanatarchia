@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { AvatarImage } from "@/components/ui/avatar";
-import { loadAvatar } from "@/lib/images";
 
 type ProgressiveImageProps = {
   src: string;
@@ -8,7 +6,6 @@ type ProgressiveImageProps = {
   className?: string;
   style?: React.CSSProperties;
   fillContainer?: boolean;
-  useAvatar?: boolean;
   placeholder?: React.ReactNode;
 };
 
@@ -27,7 +24,6 @@ export function ProgressiveImage({
   className = "",
   style,
   fillContainer = false,
-  useAvatar = false,
   placeholder = null,
 }: ProgressiveImageProps) {
   const [currentSrc, setCurrentSrc] = useState<string>("");
@@ -69,35 +65,16 @@ export function ProgressiveImage({
       } catch {}
     }
 
-    (async () => {
-      if (useAvatar) {
-        try {
-          const resolved = await loadAvatar(src as any);
-          if (!cancelled.current && resolved) {
-            await progressiveLoad(resolved);
-          } else if (!cancelled.current) {
-            setCurrentSrc(src);
-          }
-        } catch {
-          if (!cancelled.current) setCurrentSrc(src);
-        }
-      } else {
-        await progressiveLoad(src);
-      }
-    })();
+    progressiveLoad(src);
 
     return () => {
       cancelled.current = true;
     };
-  }, [src, useAvatar]);
+  }, [src]);
 
   if (!currentSrc) {
     if (placeholder) return <>{placeholder}</>;
     return null;
-  }
-
-  if (useAvatar) {
-    return <AvatarImage src={currentSrc} alt={alt} className={className} />;
   }
 
   if (fillContainer) {

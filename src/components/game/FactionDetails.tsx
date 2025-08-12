@@ -17,7 +17,8 @@ import { Handshake, Grab } from "lucide-react";
 import { playQuill, playCoinbag } from "@/lib/sounds";
 import { getFaithColor } from "@/data/faiths";
 import { factions } from "@/data/factions";
-import { AsyncAvatarImage } from "@/components/game/AsyncAvatarImage";
+import { ProgressiveImage } from "@/components/game/ProgressiveImage";
+import { getAvatarUrl } from "@/lib/images";
 
 type FactionDetailsProps = {
   faction: Faction;
@@ -45,7 +46,10 @@ export function FactionDetails({
       <CardHeader className="pb-3 bg-muted/30">
         <div className="flex items-center gap-3">
           <Avatar className="h-24 w-24">
-            <AsyncAvatarImage src={leader.image} alt={leader.name} />
+            <ProgressiveImage
+              src={getAvatarUrl(leader.image)}
+              alt={leader.name}
+            />
             <AvatarFallback className="text-xs">
               {leader.name.charAt(0)}
             </AvatarFallback>

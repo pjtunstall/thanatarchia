@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 
 import { Character } from "@/types/gameTypes";
 import { ProgressiveImage } from "@/components/game/ProgressiveImage";
+import { getAvatarUrl } from "@/lib/images";
 
 type CharacterProfileProps = {
   character: Character;
@@ -50,9 +51,8 @@ export function CharacterDialog({
           )}
         >
           <ProgressiveImage
-            src={character.image}
+            src={getAvatarUrl(character.image)}
             alt={character.name}
-            useAvatar={true}
           />
           <AvatarFallback className="text-xs">
             {character.name.charAt(0)}
@@ -66,9 +66,8 @@ export function CharacterDialog({
             <div className="flex items-center gap-3">
               <Avatar className="w-20 h-20">
                 <ProgressiveImage
-                  src={character.image}
+                  src={getAvatarUrl(character.image)}
                   alt={character.name}
-                  useAvatar={true}
                 />
                 <AvatarFallback>{character.name.charAt(0)}</AvatarFallback>
               </Avatar>

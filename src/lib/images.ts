@@ -1,8 +1,6 @@
 import { avatarFilenames } from "@/data/avatars";
 
-export async function loadAvatar(
-  key: keyof typeof avatarFilenames
-): Promise<string> {
+export function getAvatarUrl(key: keyof typeof avatarFilenames) {
   const filename = avatarFilenames[key];
   if (!filename) throw new Error(`Missing avatar: ${key}`);
   return `/images/${filename}`;
