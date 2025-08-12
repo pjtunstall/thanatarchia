@@ -32,7 +32,7 @@ export function historyChat(
         {
           author: adviser,
           statement:
-            "The state you describe is called déja vu. It's probably caused by the devil. Most things are. If you like, I can pray for you. Would you like that?",
+            "The state you describe is called déja vu. It's probably caused by the devil. Most things are. If you like, I can pray for you. Would you like that, your Majesty?",
         },
         {
           author: player,
