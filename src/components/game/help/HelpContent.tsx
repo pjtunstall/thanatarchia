@@ -1,13 +1,14 @@
 import { Faction } from "@/types/gameTypes";
 import { Character, ChatEntry } from "@/types/gameTypes";
-import { thanatarchiaChat } from "@/components/game/help/Thanatarchia";
+import { thanatarchiaChat } from "@/components/game/help/thanatarchia";
 import { Strategy } from "@/components/game/help/Strategy";
 import { War } from "@/components/game/help/War";
 import { Chat } from "@/components/game/Chat";
-import { loyaltyChat } from "@/components/game/help/Loyalty";
-import { choiceChat } from "@/components/game/help/Choice";
-import { robberyChat } from "@/components/game/help/Robbery";
-import { historyChat } from "@/components/game/help/History";
+import { loyaltyChat } from "@/components/game/help/loyalty";
+import { choiceChat } from "@/components/game/help/choice";
+import { robberyChat } from "@/components/game/help/robbery";
+import { historyChat } from "@/components/game/help/history";
+import { identityChat } from "@/components/game/help/identity";
 
 type HelpContentProps = {
   topic: string;
@@ -77,6 +78,16 @@ export function HelpContent({
           scrollToTop={true}
           isHelpTopic={true}
           scrollKey="history"
+        />
+      );
+    case "Identity":
+      return (
+        <Chat
+          items={identityChat(adviser, player)}
+          options={{ getBadgeColor }}
+          scrollToTop={true}
+          isHelpTopic={true}
+          scrollKey="identity"
         />
       );
     case "Choice":

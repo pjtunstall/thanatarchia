@@ -48,7 +48,7 @@ export function historyChat(
         {
           author: adviser,
           statement:
-            "No, your Majesty. People are swine. They will remember nothing except maybe a charicature. They will remember you only in so far as you fit the story.",
+            "No, your Majesty. People are swine. They will remember nothing. They will remember you only in so far as you fit the story.",
         },
         {
           author: player,
