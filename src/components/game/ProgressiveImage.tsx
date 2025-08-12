@@ -35,7 +35,7 @@ export function ProgressiveImage({
 
   useEffect(() => {
     cancelled.current = false;
-    setCurrentSrc(""); // Reset on src change.
+    setCurrentSrc("");
 
     async function progressiveLoad(resolvedSrc: string) {
       const basePath = resolvedSrc.replace(/\.(jpg|jpeg|png|webp)$/i, "");

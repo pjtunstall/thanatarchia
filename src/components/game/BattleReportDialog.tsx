@@ -7,8 +7,6 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 
-import battleImage from "@/assets/battle.jpg";
-import mosaicBattleImage from "@/assets/battle-mosaic.jpg";
 import { playRaven } from "@/lib/sounds";
 import { Character, BattleReport } from "@/types/gameTypes";
 import { factions } from "@/data/factions";
@@ -79,7 +77,8 @@ function BattleReportContent({
   success,
   badgeColor,
 }: BattleReportContentProps) {
-  const image = Math.random() < 0.5 ? battleImage : mosaicBattleImage;
+  const image =
+    Math.random() < 0.5 ? "/images/battle.jpg" : "/images/battle-mosaic.jpg";
 
   return (
     <div className="relative">

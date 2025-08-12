@@ -10,7 +10,6 @@ import {
   AttackOrder,
 } from "@/types/gameTypes";
 import { getDate } from "@/lib/time";
-import romanEmpireMap from "@/assets/map.jpg";
 import { Legend } from "@/components/game/map/Legend";
 import { CompassRose } from "@/components/game/map/CompassRose";
 import { ConnectingLines } from "@/components/game/map/ConnectingLines";
@@ -119,7 +118,7 @@ export function GameMap({
           onClick={() => onTerritoryClick(null)}
         >
           <ProgressiveImage
-            src={romanEmpireMap}
+            src={"/images/map.jpg"}
             fillContainer={true}
             alt="Roman Empire Map"
           />
