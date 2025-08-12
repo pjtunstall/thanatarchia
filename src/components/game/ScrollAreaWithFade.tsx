@@ -26,6 +26,10 @@ export function ScrollAreaWithFade({
   const contentPadding = "py-6";
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  const isMobile =
+    typeof window !== "undefined" &&
+    window.matchMedia("(max-width: 768px)").matches;
+
   useLayoutEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
@@ -38,7 +42,14 @@ export function ScrollAreaWithFade({
       if (isHelpTopic) {
         setTimeout(() => {
           requestAnimationFrame(() => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            const target = document.querySelector(".actions-panel");
+            if (target && isMobile) {
+              const top =
+                target.getBoundingClientRect().top + window.pageYOffset;
+              window.scrollTo({ top, behavior: "smooth" });
+            } else {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
           });
         }, 300);
       }

@@ -97,7 +97,7 @@ export function ActionsPanel({
 
   return (
     <>
-      <Card className="h-full flex flex-col">
+      <Card className="h-full flex flex-col actions-panel">
         <CardHeader>
           <HeaderActions
             onEndTurn={onEndTurn}
