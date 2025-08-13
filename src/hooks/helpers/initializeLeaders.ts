@@ -12,6 +12,7 @@ import {
   scapegoats,
   epithets,
   randomLombardName,
+  randomHunName,
   randomRomanName,
   randomOstrogothName,
   randomVisigothName,
@@ -29,6 +30,8 @@ export function initializeLeaders(factions: Faction[]): Character[] {
       case "Gepids":
         leader.name = randomGepidName(leader.gender);
         break;
+      case "Huns":
+        leader.name = randomHunName(leader.gender);
       case "Lombards":
         leader.name = randomLombardName(leader.gender);
         break;

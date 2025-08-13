@@ -73,7 +73,7 @@ export const factions: Faction[] = [
         index: 2,
       },
       female: {
-        name: "Kahina",
+        name: "Dihya",
         gender: "female",
         image: "moorQueen",
         biography: "",

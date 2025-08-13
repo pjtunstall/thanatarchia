@@ -47,13 +47,21 @@ export const epithets = [
   "Vile",
 ];
 
-export function randomRomanName(gender: Gender): string {
-  if (gender === "male") {
-    return randomItem(romanMaleNames) + " Agustus";
-  } else {
-    return randomItem(romanFemaleNames) + " Augusta";
-  }
-}
+const hunMaleNames = [
+  "Attila",
+  "Bleda",
+  "Dengizich",
+  "Edica",
+  "Ellac",
+  "Ernak",
+  "Mundzuk",
+  "Octar",
+  "Ruga",
+  "Tuldila",
+  "Uldin",
+];
+
+const hunFemaleNames = ["Kreka"];
 
 const romanMaleNames = [
   "Aelius",
@@ -87,34 +95,21 @@ const romanFemaleNames = [
   "Vigilantia",
 ];
 
-export function randomOstrogothName(gender: Gender): string {
-  if (gender === "male") {
-    if (Math.random() < 0.5) {
-      const firstElement = randomItem(ostrogothMaleFirstElements);
-      const lastElement = randomItem(ostrogothMaleLastElements);
-      return `${firstElement}${lastElement}`;
-    } else {
-      return randomItem(ostroGothicMaleDiminutives);
-    }
-  } else {
-    const firstElement = randomItem(ostrogothFemaleFirstElements);
-    const lastElement = randomItem(ostrogothFemaleLastElements);
-    return `${firstElement}${lastElement}`;
-  }
-}
-
-const ostrogothMaleFirstElements = [
+const ostrogothFirstElements = [
   "Ala",
   "Ali",
   "Amala",
   "Eutha",
   "Theode",
   "Ermana",
+  "Vada",
   "Vala",
   "Vulthu",
   "Athala",
   "Sige",
+  "Matha",
   "Odo",
+  "Ostro",
   "Vithi",
   "Agi",
   "Vilia",
@@ -122,17 +117,8 @@ const ostrogothMaleFirstElements = [
   "Witi",
   "Era",
   "Hildi",
-  "Sunia",
   "Ufta",
   "Usda",
-];
-const ostrogothFemaleFirstElements = [
-  "Amala",
-  "Matha",
-  "Ostro",
-  "Odo",
-  "Vada",
-  "Theode",
 ];
 
 const ostrogothMaleLastElements = [
@@ -151,6 +137,7 @@ const ostrogothMaleLastElements = [
   "mod",
   "frid",
 ];
+
 const ostrogothFemaleLastElements = [
   "suintha",
   "frida",
@@ -161,13 +148,46 @@ const ostrogothFemaleLastElements = [
   "nanda",
 ];
 
-const ostroGothicMaleDiminutives = [
+const ostroGothMaleDiminutives = [
   "Ansila",
   "Baduila",
   "Merila",
   "Frithila",
   "Usdila",
 ];
+
+export function randomHunName(gender: Gender): string {
+  if (gender === "male") {
+    return randomItem(hunMaleNames);
+  } else {
+    return randomItem(hunFemaleNames);
+  }
+}
+
+export function randomRomanName(gender: Gender): string {
+  if (gender === "male") {
+    return randomItem(romanMaleNames) + " Agustus";
+  } else {
+    return randomItem(romanFemaleNames) + " Augusta";
+  }
+}
+
+export function randomOstrogothName(gender: Gender): string {
+  const firstElement = randomItem(ostrogothFirstElements);
+  let lastElement;
+
+  if (gender === "male") {
+    if (Math.random() < 0.1) {
+      return randomItem(ostroGothMaleDiminutives);
+    } else {
+      lastElement = randomItem(ostrogothMaleLastElements);
+    }
+  } else {
+    lastElement = randomItem(ostrogothFemaleLastElements);
+  }
+
+  return `${firstElement}${lastElement}`;
+}
 
 export function randomVisigothName(gender: Gender): string {
   if (gender === "male") {
@@ -562,10 +582,12 @@ const gepidMaleNames = [
   "Ardaric",
   "Fastida",
   "Flaccitheu",
-  "Mundus",
+  "Cunimund",
   "Thrafstila",
+  "Thrasaric",
   "Thurisind",
   "Thurismod",
+  "Elemund",
 ];
 
 const gepidFemaleNames = ["Rosamunda"];
