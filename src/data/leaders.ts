@@ -227,6 +227,7 @@ const visigothMaleFirstElements = [
   "Rimis",
   "Gesa",
 ];
+
 const visigothFemaleFirstElements = [
   "Goi",
   "Gaile",
@@ -384,7 +385,7 @@ const vandalFirstElements = [
   "Guala",
   "Guda",
   "Giba",
-  "Giuli",
+  "Guili",
   "Guilia",
   "Guiti",
   "Gunda",
