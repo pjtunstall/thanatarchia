@@ -149,7 +149,7 @@ const ostrogothMaleLastElements = [
   "nand",
   "rith",
   "mod",
-  "frithus",
+  "frid",
 ];
 const ostrogothFemaleLastElements = [
   "suintha",
