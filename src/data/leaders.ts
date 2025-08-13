@@ -1,5 +1,6 @@
 import { Gender } from "@/types/gameTypes";
 import { randomItem } from "@/lib/utils";
+import { fromUnixTime } from "date-fns";
 
 export const epithets = [
   "Arrogant",
@@ -95,67 +96,6 @@ const romanFemaleNames = [
   "Vigilantia",
 ];
 
-const ostrogothFirstElements = [
-  "Ala",
-  "Ali",
-  "Amala",
-  "Eutha",
-  "Theode",
-  "Ermana",
-  "Vada",
-  "Vala",
-  "Vulthu",
-  "Athala",
-  "Sige",
-  "Matha",
-  "Odo",
-  "Ostro",
-  "Vithi",
-  "Agi",
-  "Vilia",
-  "Sunia",
-  "Witi",
-  "Era",
-  "Hildi",
-  "Ufta",
-  "Usda",
-];
-
-const ostrogothMaleLastElements = [
-  "bad",
-  "ric",
-  "suinth",
-  "mir",
-  "mer",
-  "theus",
-  "had",
-  "gern",
-  "ges",
-  "gisel",
-  "nand",
-  "rith",
-  "mod",
-  "frid",
-];
-
-const ostrogothFemaleLastElements = [
-  "suintha",
-  "frida",
-  "gotho",
-  "fleda",
-  "berga",
-  "marca",
-  "nanda",
-];
-
-const ostroGothMaleDiminutives = [
-  "Ansila",
-  "Baduila",
-  "Merila",
-  "Frithila",
-  "Usdila",
-];
-
 export function randomHunName(gender: Gender): string {
   if (gender === "male") {
     return randomItem(hunMaleNames);
@@ -171,112 +111,6 @@ export function randomRomanName(gender: Gender): string {
     return randomItem(romanFemaleNames) + " Augusta";
   }
 }
-
-export function randomOstrogothName(gender: Gender): string {
-  const firstElement = randomItem(ostrogothFirstElements);
-  let lastElement;
-
-  if (gender === "male") {
-    if (Math.random() < 0.1) {
-      return randomItem(ostroGothMaleDiminutives);
-    } else {
-      lastElement = randomItem(ostrogothMaleLastElements);
-    }
-  } else {
-    lastElement = randomItem(ostrogothFemaleLastElements);
-  }
-
-  return `${firstElement}${lastElement}`;
-}
-
-export function randomVisigothName(gender: Gender): string {
-  if (gender === "male") {
-    if (Math.random() < 0.5) {
-      const firstElement = randomItem(visigothMaleFirstElements);
-      const lastElement = randomItem(visigothMaleLastElements);
-      return `${firstElement}${lastElement}`;
-    } else {
-      return randomItem(visiGothicMaleDiminutives);
-    }
-  } else {
-    if (Math.random() < 0.5) {
-      const firstElement = randomItem(visigothFemaleFirstElements);
-      const lastElement = randomItem(visigothFemaleLastElements);
-      return `${firstElement}${lastElement}`;
-    } else {
-      return randomItem(visiGothicFemaleDiminutives);
-    }
-  }
-}
-
-const visigothMaleFirstElements = [
-  "Ala",
-  "Liuvi",
-  "Recce",
-  "Sise",
-  "Eu",
-  "Theode",
-  "Athana",
-  "Rode",
-  "Chinda",
-  "Ermane",
-  "Wildi",
-  "Gunde",
-  "Sinde",
-  "Ragna",
-  "Rimis",
-  "Gesa",
-];
-
-const visigothFemaleFirstElements = [
-  "Goi",
-  "Gaile",
-  "Ragna",
-  "Theode",
-  "Hilde",
-  "Recci",
-  "Agi",
-  "Liuvi",
-  "Ara",
-  "Ermen",
-];
-
-const visigothMaleLastElements = [
-  "ric",
-  "suinth",
-  "nand",
-  "but",
-  "gild",
-  "red",
-  "gern",
-  "mund",
-  "mir",
-  "thanc",
-  "lec",
-  "funs",
-];
-const visigothFemaleLastElements = [
-  "suintha",
-  "thruda",
-  "gotho",
-  "gundi",
-  "hildi",
-  "berga",
-];
-
-const visiGothicMaleDiminutives = [
-  "Suinthila",
-  "Chindila",
-  "Wamba",
-  "Wallia",
-  "Liuvila",
-  "Sunna",
-  "Sigila",
-  "Freula",
-  "Witta",
-  "Agila",
-];
-const visiGothicFemaleDiminutives = ["Cixilo", "Baddo"];
 
 export const scapegoats = [
   "unbelievers",
@@ -414,12 +248,12 @@ const vandalFirstElements = [
   "Vili",
   "Vilia",
 ];
+
 const vandalMaleLastElements = [
   "but",
   "geis",
   "gisel",
   "hari",
-  "mir",
   "mir",
   "mund",
   "mut",
@@ -428,6 +262,7 @@ const vandalMaleLastElements = [
   "thanc",
   "vult",
 ];
+
 const vandalFemaleLastElements = ["frida", "hild", "runa"];
 
 export function randomVandalName(gender: Gender): string {
@@ -592,3 +427,238 @@ const gepidMaleNames = [
 ];
 
 const gepidFemaleNames = ["Rosamunda"];
+
+const gothFirstElements = [
+  "Agi",
+  "Agis",
+  "Ala",
+  "Ana",
+  "Anda",
+  "Anse",
+  "Ara",
+  "Ali",
+  "Amala",
+  "Angel",
+  "Atha",
+  "Athala",
+  "Athana",
+  "Badua",
+  "Balda",
+  "Baltha",
+  "Bere",
+  "Bert",
+  "Bloma",
+  "Bluma",
+  "Brandi",
+  "Buta",
+  "Bruni",
+  "Cuni",
+  "Cunie",
+  "Chinda",
+  "Daga",
+  "Doma",
+  "Drocti",
+  "Duma",
+  "Drocti",
+  "Ele",
+  "Era",
+  "Ermen",
+  "Eua",
+  "Eutha",
+  "Ever",
+  "Fandi",
+  "Fasta",
+  "Feua",
+  "Fili",
+  "Flacci",
+  "Frada",
+  "Fridi",
+  "Fruma",
+  "Fulde",
+  "Gala",
+  "Ganda",
+  "Gaude",
+  "Gause",
+  "Gele",
+  "Gesa",
+  "Giba",
+  "Gildi",
+  "Gisla",
+  "Goda",
+  "Gudi",
+  "Goi",
+  "Gunde",
+  "Gunthi",
+  "Haria",
+  "Hoha",
+  "Hildi",
+  "Harda",
+  "Landa",
+  "Leo",
+  "Leobi",
+  "Leube",
+  "Leude",
+  "Liuvi",
+  "Mala",
+  "Mara",
+  "Matha",
+  "Mera",
+  "Moda",
+  "Munde",
+  "Mura",
+  "Nanda",
+  "Nida",
+  "Odo",
+  "Ostro",
+  "Panta",
+  "Rada",
+  "Ragna",
+  "Randa",
+  "Rani",
+  "Recce",
+  "Rimis",
+  "Rode",
+  "Rome",
+  "Rude",
+  "Rume",
+  "Rosa",
+  "Sala",
+  "Sanda",
+  "Sibia",
+  "Sifia",
+  "Sige",
+  "Sigis",
+  "Sila",
+  "Sinde",
+  "Sise",
+  "Sunia",
+  "Sunna",
+  "Theode",
+  "Thrasa",
+  "Thrafsta",
+  "Thruda",
+  "Thunda",
+  "Thulda",
+  "Tila",
+  "Triggua",
+  "Thuris",
+  "Ufta",
+  "Usda",
+  "Vaci",
+  "Vada",
+  "Vala",
+  "Vinith",
+  "Vidar",
+  "Vidu",
+  "Vildi",
+  "Vilia",
+  "Vini",
+  "Visi",
+  "Vistre",
+  "Viti",
+  "Vulthu",
+];
+
+const gothMaleLastElements = [
+  "ari",
+  "bad",
+  "bald",
+  "bert",
+  "but",
+  "fara",
+  "frid",
+  "funs",
+  "gern",
+  "ges",
+  "gild",
+  "gisel",
+  "had",
+  "hari",
+  "lec",
+  "lub",
+  "mer",
+  "mir",
+  "mod",
+  "muth",
+  "mund",
+  "nand",
+  "oacer",
+  "oald",
+  "red",
+  "ric",
+  "rith",
+  "suinth",
+  "thanc",
+  "theu",
+  "uald",
+  "ulf",
+];
+
+const gothFemaleLastElements = [
+  "berga",
+  "fleda",
+  "frida",
+  "gotho",
+  "gundi",
+  "hildi",
+  "marca",
+  "nanda",
+  "suintha",
+  "thruda",
+];
+
+function isVowel(c): boolean {
+  const vowels = "aeiou";
+  return vowels.includes(c);
+}
+
+function getFinalLetter(s: string): string {
+  return s[s.length - 1];
+}
+
+function trimFinalVowel(first: string, last: string) {
+  if (!isVowel(last[0])) {
+    return first; // No need to trim if last doesn't start with a vowel.
+  }
+  let finalLetter = getFinalLetter(first);
+  first = isVowel(finalLetter) ? first.slice(0, first.length - 1) : first;
+  return first;
+}
+
+export function randomGothicName(gender): string {
+  let first = randomItem(gothFirstElements);
+
+  const r = Math.random();
+
+  if (r < 0.3) {
+    let diminutive: string;
+    if (r < 0.02) {
+      diminutive = "itt";
+    } else if (r < 0.1) {
+      diminutive = "ic";
+    } else {
+      diminutive = "il";
+    }
+
+    const suffix = gender === "male" ? "a" : "o";
+
+    first = trimFinalVowel(first, suffix);
+
+    // Remove a final "i", e.g. "Vilia" -> "Vili" -> "Vil".
+    const finalLetter = getFinalLetter(first);
+    first = finalLetter === "i" ? first.slice(0, first.length - 1) : first;
+
+    return first + diminutive + suffix;
+  }
+
+  const last =
+    gender === "male"
+      ? randomItem(gothMaleLastElements)
+      : randomItem(gothFemaleLastElements);
+
+  const combine = (first, last) => {
+    first = trimFinalVowel(first, last);
+    return `${first}${last}`;
+  };
+  return combine(first, last);
+}
