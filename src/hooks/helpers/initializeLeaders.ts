@@ -31,6 +31,7 @@ export function initializeLeaders(factions: Faction[]): Character[] {
         break;
       case "Huns":
         leader.name = randomHunName(leader.gender);
+        break;
       case "Lombards":
         leader.name = randomLombardName(leader.gender);
         break;

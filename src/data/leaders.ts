@@ -206,6 +206,7 @@ export const victims2 = [
 
 const vandalFirstElements = [
   "Ari",
+  "Ata",
   "Bere",
   "Bluma",
   "Daga",
@@ -432,11 +433,12 @@ const gothFirstElements = [
   "Agi",
   "Agis",
   "Ala",
+  "Alba",
+  "Alia",
   "Ana",
   "Anda",
   "Anse",
   "Ara",
-  "Ali",
   "Amala",
   "Angel",
   "Atha",
@@ -446,6 +448,7 @@ const gothFirstElements = [
   "Balda",
   "Baltha",
   "Bere",
+  "Berga",
   "Bert",
   "Bloma",
   "Bluma",
@@ -456,6 +459,7 @@ const gothFirstElements = [
   "Cunie",
   "Chinda",
   "Daga",
+  "Dani",
   "Doma",
   "Drocti",
   "Duma",
@@ -463,42 +467,47 @@ const gothFirstElements = [
   "Ele",
   "Era",
   "Ermen",
+  "Eu",
   "Eua",
   "Eutha",
-  "Ever",
   "Fandi",
+  "Fara",
   "Fasta",
   "Feua",
   "Fili",
   "Flacci",
   "Frada",
+  "Fravi",
+  "Frida",
   "Fridi",
+  "Froia",
   "Fruma",
+  "Fulca",
   "Fulde",
   "Gala",
   "Ganda",
-  "Gaude",
-  "Gause",
+  "Gavi",
   "Gele",
   "Gesa",
   "Giba",
   "Gildi",
   "Gisla",
   "Goda",
+  "Goia",
   "Gudi",
-  "Goi",
+  "Goia",
   "Gunde",
   "Gunthi",
   "Haria",
   "Hoha",
   "Hildi",
   "Harda",
+  "Ibra",
+  "Iuba",
   "Landa",
   "Leo",
-  "Leobi",
-  "Leube",
   "Leude",
-  "Liuvi",
+  "Liubi",
   "Mala",
   "Mara",
   "Matha",
@@ -519,9 +528,11 @@ const gothFirstElements = [
   "Rimis",
   "Rode",
   "Rome",
+  "Rothe",
   "Rude",
   "Rume",
   "Rosa",
+  "Saba",
   "Sala",
   "Sanda",
   "Sibia",
@@ -554,10 +565,22 @@ const gothFirstElements = [
   "Vilia",
   "Vini",
   "Visi",
-  "Vistre",
+  "Vistri",
   "Viti",
   "Vulthu",
 ];
+
+const gothBiSyllabicRoots = [
+  "Agis",
+  "Angel",
+  "Athala",
+  "Athana",
+  "Rimis",
+  "Sigis",
+  "Vinith",
+];
+
+const gothRootsEndingInVowel = ["Leo", "Eu"];
 
 const gothMaleLastElements = [
   "ari",
@@ -586,6 +609,7 @@ const gothMaleLastElements = [
   "oald",
   "red",
   "ric",
+  "rid",
   "rith",
   "suinth",
   "thanc",
@@ -596,19 +620,30 @@ const gothMaleLastElements = [
 
 const gothFemaleLastElements = [
   "berga",
+  "berta",
   "fleda",
   "frida",
+  "funsa",
+  "giba",
+  "gilda",
   "gotho",
+  "guto",
   "gundi",
   "hildi",
+  "liuba",
   "marca",
+  "mera",
+  "mira",
+  "moda",
+  "muda",
   "nanda",
+  "runa",
   "suintha",
   "thruda",
 ];
 
 function isVowel(c): boolean {
-  const vowels = "aeiou";
+  const vowels = "AEIOUaeiou";
   return vowels.includes(c);
 }
 
@@ -618,35 +653,60 @@ function getFinalLetter(s: string): string {
 
 function trimFinalVowel(first: string, last: string) {
   if (!isVowel(last[0])) {
-    return first; // No need to trim if last doesn't start with a vowel.
+    return first;
   }
   let finalLetter = getFinalLetter(first);
   first = isVowel(finalLetter) ? first.slice(0, first.length - 1) : first;
   return first;
 }
 
+// Assumes s.length > 1.
+function firstConsonantAfterVowelAndItsIndex(s: string): [string, number] {
+  for (let i = 0; i < s.length - 2; i++) {
+    if (isVowel(s[i]) && !isVowel(s[i + 1])) {
+      return [s[i + 1], i + 1];
+    }
+  }
+  return ["", -1];
+}
+
 export function randomGothicName(gender): string {
   let first = randomItem(gothFirstElements);
-
   const r = Math.random();
 
-  if (r < 0.3) {
+  if (r < 0.3 && !gothBiSyllabicRoots.includes(first)) {
     let diminutive: string;
     if (r < 0.02) {
       diminutive = "itt";
     } else if (r < 0.1) {
       diminutive = "ic";
     } else {
+      const stops = ["b", "d", "g", "c", "p", "t"];
+      const [c, i] = firstConsonantAfterVowelAndItsIndex(first);
+      if (
+        c &&
+        r < 0.2 &&
+        stops.includes(c) &&
+        i + 1 < first.length &&
+        first[i + 1] !== "h"
+      ) {
+        first = first.slice(0, i + 1) + c;
+        if (gender === "male") {
+          return first + "a";
+        } else return first + "o";
+      }
       diminutive = "il";
     }
 
     const suffix = gender === "male" ? "a" : "o";
 
-    first = trimFinalVowel(first, suffix);
+    if (!gothRootsEndingInVowel.includes(first)) {
+      first = trimFinalVowel(first, suffix);
 
-    // Remove a final "i", e.g. "Vilia" -> "Vili" -> "Vil".
-    const finalLetter = getFinalLetter(first);
-    first = finalLetter === "i" ? first.slice(0, first.length - 1) : first;
+      // Remove a final "i", e.g. "Vilia" -> "Vili" -> "Vil".
+      const finalLetter = getFinalLetter(first);
+      first = finalLetter === "i" ? first.slice(0, first.length - 1) : first;
+    }
 
     return first + diminutive + suffix;
   }
@@ -658,6 +718,12 @@ export function randomGothicName(gender): string {
 
   const combine = (first, last) => {
     first = trimFinalVowel(first, last);
+    if (
+      (last[0] === "u" || last[0] === "o") &&
+      (first[first.length - 1] === "u" || first[first.length - 1] === "o")
+    ) {
+      first = first.slice(0, -1); // Avoid collisions between high back vowels, e.g. "Leo" + "oald" -> "Leoald", "Badua" + "oacer" -> "Badoacer".
+    }
     return `${first}${last}`;
   };
   return combine(first, last);
