@@ -552,6 +552,7 @@ const gothFirstElements = [
   "Thulda",
   "Tila",
   "Triggua",
+  "Triva",
   "Thuris",
   "Ufta",
   "Usda",
@@ -560,7 +561,7 @@ const gothFirstElements = [
   "Vala",
   "Vinith",
   "Vidar",
-  "Vidu",
+  "Vidi",
   "Vildi",
   "Vilia",
   "Vini",
@@ -607,6 +608,8 @@ const gothMaleLastElements = [
   "nand",
   "oacer",
   "oald",
+  "uin",
+  "raban",
   "red",
   "ric",
   "rid",
@@ -684,6 +687,7 @@ export function randomGothicName(gender): string {
       const stops = ["b", "d", "g", "c", "p", "t"];
       const [c, i] = firstConsonantAfterVowelAndItsIndex(first);
       if (
+        first !== "Triggua" &&
         c &&
         r < 0.2 &&
         stops.includes(c) &&
