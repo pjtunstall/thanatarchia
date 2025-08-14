@@ -504,7 +504,6 @@ const gothFirstElements = [
   "Ibra",
   "Iuba",
   "Landa",
-  "Leo",
   "Leude",
   "Liubi",
   "Mala",
@@ -580,7 +579,7 @@ const gothBiSyllabicRoots = [
   "Uinith",
 ];
 
-const gothRootsEndingInVowel = ["Leo", "Eu"];
+const gothRootsEndingInVowel = ["Eu"];
 
 const gothMaleLastElements = [
   "ari",
@@ -725,7 +724,7 @@ export function randomGothicName(gender): string {
       (last[0] === "u" || last[0] === "o") &&
       (first[first.length - 1] === "u" || first[first.length - 1] === "o")
     ) {
-      first = first.slice(0, -1); // Avoid collisions between high back vowels, e.g. "Leo" + "oald" -> "Leoald", "Badua" + "oacer" -> "Badoacer".
+      first = first.slice(0, -1); // Avoid collisions between high back vowels, e.g. "Badua" + "oacer" -> "Badoacer".
     }
     return `${first}${last}`;
   };
