@@ -240,14 +240,13 @@ const vandalFirstElements = [
   "Thanca",
   "Theodo",
   "Thrasa",
-  "Triva",
   "Triggua",
   "Triuua",
   "Unthanc",
-  "Vada",
-  "Vala",
-  "Vili",
-  "Vilia",
+  "Uada",
+  "Uala",
+  "Uili",
+  "Uilia",
 ];
 
 const vandalMaleLastElements = [
@@ -453,7 +452,7 @@ const gothFirstElements = [
   "Bloma",
   "Bluma",
   "Brandi",
-  "Buta",
+  "Bota",
   "Bruni",
   "Cuni",
   "Cunie",
@@ -477,7 +476,7 @@ const gothFirstElements = [
   "Fili",
   "Flacci",
   "Frada",
-  "Fravi",
+  "Fraui",
   "Frida",
   "Fridi",
   "Froia",
@@ -486,7 +485,7 @@ const gothFirstElements = [
   "Fulde",
   "Gala",
   "Ganda",
-  "Gavi",
+  "Gaui",
   "Gele",
   "Gesa",
   "Giba",
@@ -552,23 +551,23 @@ const gothFirstElements = [
   "Thulda",
   "Tila",
   "Triggua",
-  "Triva",
+  "Triua",
   "Thuris",
   "Ufta",
   "Usda",
-  "Vaci",
-  "Vada",
-  "Vala",
-  "Vinith",
-  "Vidar",
-  "Vidi",
-  "Vildi",
-  "Vilia",
-  "Vini",
-  "Visi",
-  "Vistri",
-  "Viti",
-  "Vulthu",
+  "Uaci",
+  "Uada",
+  "Uala",
+  "Uinith",
+  "Uidar",
+  "Uidi",
+  "Uildi",
+  "Uilia",
+  "Uini",
+  "Uisi",
+  "Uistri",
+  "Uiti",
+  "Uulthu",
 ];
 
 const gothBiSyllabicRoots = [
@@ -578,7 +577,7 @@ const gothBiSyllabicRoots = [
   "Athana",
   "Rimis",
   "Sigis",
-  "Vinith",
+  "Uinith",
 ];
 
 const gothRootsEndingInVowel = ["Leo", "Eu"];
@@ -707,7 +706,7 @@ export function randomGothicName(gender): string {
     if (!gothRootsEndingInVowel.includes(first)) {
       first = trimFinalVowel(first, suffix);
 
-      // Remove a final "i", e.g. "Vilia" -> "Vili" -> "Vil".
+      // Remove a final "i", e.g. "Uilia" -> "Uili" -> "Uil".
       const finalLetter = getFinalLetter(first);
       first = finalLetter === "i" ? first.slice(0, first.length - 1) : first;
     }
