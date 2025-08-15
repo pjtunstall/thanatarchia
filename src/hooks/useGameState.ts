@@ -9,6 +9,7 @@ import { abandonTerritoryToBagaudaeChronicle } from "@/data/chronicles";
 import { conditionChronicle, chroniclers } from "@/data/chronicles";
 import { neighbors, territories } from "@/data/territories";
 import { randomItem } from "@/lib/utils";
+import { Territory } from "@/types/gameTypes";
 
 export function useGameState() {
   const [activeTab, setActiveTab] = useState("status");
@@ -93,70 +94,69 @@ export function useGameState() {
     chroniclesState.setHasChangedFromEudaemonia(false);
   }, [gameCore.resetGame, chroniclesState.resetChronicles]);
 
-  const addConditionChronicle = useCallback(() => {
-    const playerFaction = factions[gameCore.playerIndex];
-    const playerTerritoryNames = gameCore.territories
-      .filter((t) => t.owner === playerFaction.name)
-      .map((t) => t.name);
-    const adjacentTerritories = gameCore.territories.filter(
-      (t) =>
-        t.owner !== playerFaction.name &&
-        neighbors[t.name].some((neighbor) =>
-          playerTerritoryNames.includes(neighbor)
-        )
-    );
-    if (adjacentTerritories.length === 0) {
-      return;
-    }
-    const territory =
-      adjacentTerritories[
-        Math.floor(Math.random() * adjacentTerritories.length)
-      ];
+  const addConditionAndConditionChronicle = useCallback(
+    (previousTerritories: Territory[]): Territory[] => {
+      const playerFaction = factions[gameCore.playerIndex];
+      const playerTerritoryNames = previousTerritories
+        .filter((t) => t.owner === playerFaction.name)
+        .map((t) => t.name);
+      const adjacentTerritories = previousTerritories.filter(
+        (t) =>
+          t.owner !== playerFaction.name &&
+          neighbors[t.name].some((neighbor) =>
+            playerTerritoryNames.includes(neighbor)
+          )
+      );
+      if (adjacentTerritories.length === 0) {
+        return;
+      }
+      const territory =
+        adjacentTerritories[
+          Math.floor(Math.random() * adjacentTerritories.length)
+        ];
 
-    const conditionModifier = Math.random() < 0.5 ? 1 : -1;
-    gameCore.updateTerritories((prev) =>
-      prev.map((t) =>
+      const conditionModifier = Math.random() < 0.5 ? 1 : -1;
+
+      const author = chroniclesState.hasChangedFromEudaemonia
+        ? randomItem(chroniclers)
+        : randomItem(chroniclers.filter((c) => c.name !== "Eudaemonia"));
+
+      const entry = conditionChronicle({
+        territory,
+        conditionModifier,
+        author,
+      });
+      chroniclesState.addChronicleEntry(author, entry, gameCore.currentTurn);
+
+      return previousTerritories.map((t: Territory) =>
         t.name === territory.name
           ? { ...t, conditionModifier }
           : { ...t, conditionModifier: 0 }
-      )
-    );
-
-    const author = chroniclesState.hasChangedFromEudaemonia
-      ? randomItem(chroniclers)
-      : randomItem(chroniclers.filter((c) => c.name !== "Eudaemonia"));
-
-    const entry = conditionChronicle({
-      territory,
-      conditionModifier,
-      author,
-    });
-
-    chroniclesState.addChronicleEntry(author, entry, gameCore.currentTurn);
-  }, [
-    gameCore.territories,
-    gameCore.playerIndex,
-    chroniclesState.addChronicleEntry,
-    factions,
-    gameCore.updateTerritories,
-    gameCore.currentTurn,
-    chroniclesState.hasChangedFromEudaemonia,
-    chroniclesState.addChronicleEntry,
-    factionLeaders,
-  ]);
+      );
+    },
+    [
+      gameCore.playerIndex,
+      factions,
+      gameCore.currentTurn,
+      chroniclesState.hasChangedFromEudaemonia,
+      factionLeaders,
+    ]
+  );
 
   const handleEndTurn = useCallback(() => {
     chroniclesState.setChronicles([]);
-    addConditionChronicle();
     handlePlayerAttacks(chroniclesState.adviserIndex, gameCore.currentTurn);
     executeAITurn();
     generateResources();
     gameCore.setCurrentTurn((prev) => prev + 1);
     gameCore.setSelectedTerritoryName(null);
+
     gameCore.updateTerritories((prev) => {
       const playerFactionName = factions[gameCore.playerIndex].name;
-      return prev.map((t) => {
+      const prevWithCondition = addConditionAndConditionChronicle([...prev]);
+      return prevWithCondition.map((t) => {
         t.conditionModifier = 0;
+
         if (t.owner === playerFactionName && t.troops === 0) {
           const { author, statement } = abandonTerritoryToBagaudaeChronicle({
             territoryName: t.name,
@@ -171,10 +171,12 @@ export function useGameState() {
           );
           const rebelNumbers = 300 + Math.floor(Math.random() * 200);
           return { ...t, owner: "Bagaudae", troops: rebelNumbers };
+        } else {
+          return { ...t, spiedOn: false };
         }
-        return { ...t, spiedOn: false };
       });
     });
+
     checkGameStatus();
     setActiveTab("chronicles");
   }, [

@@ -117,7 +117,7 @@ export function conditionChronicle({
       }
     case "Priscilla of Byzantium":
       if (conditionModifier > 0) {
-        return `Morale in ${territoryName} is said to be particularly good right now.`;
+        return `Morale among the ${factionName} in ${territoryName} is said to be particularly good right now.`;
       } else {
         return `There is talk of plague again in ${territoryName}.`;
       }
@@ -142,7 +142,7 @@ export function conditionChronicle({
     case "Athaloc of Smyrna":
       if (conditionModifier > 0) {
         return Math.random() < 0.5
-          ? `Reports speak of religious fervor, strengthening the ${factionName} in ${territoryName}.`
+          ? `Reports speak of an outbreak of religious fervor in ${territoryName}, enthusing the garrisons there.`
           : `The high incidence of miracles in ${territoryName} this year will surely give heart to its defenders.`;
       } else {
         if (Math.random() < 0.5) {

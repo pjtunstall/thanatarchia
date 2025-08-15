@@ -27,7 +27,7 @@ export function ChroniclesPanel({
         <Chat
           items={chronicles}
           options={{ getBadgeColor }}
-          scrollToTop={true}
+          scrollToTop={false}
         />
       </CardContent>
     </Card>
