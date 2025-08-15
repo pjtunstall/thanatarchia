@@ -94,6 +94,10 @@ export function useGameState() {
   }, [gameCore.resetGame, chroniclesState.resetChronicles]);
 
   const addConditionChronicle = useCallback(() => {
+    if (Math.random() < 0.8) {
+      return;
+    }
+
     const playerFaction = factions[gameCore.playerIndex];
     const playerTerritoryNames = gameCore.territories
       .filter((t) => t.owner === playerFaction.name)

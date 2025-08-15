@@ -576,6 +576,7 @@ const gothBiSyllabicRoots = [
   "Athana",
   "Rimis",
   "Sigis",
+  "Thuris",
   "Uinith",
 ];
 

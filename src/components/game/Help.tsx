@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Character, Faction, ChatEntry } from "@/types/gameTypes";
 import { HelpMenu } from "@/components/game/help/HelpMenu";
 import { HelpContent } from "@/components/game/help/HelpContent";
@@ -25,6 +26,7 @@ export function Help({
   setAdviserIndex,
   setHasChangedFromEudaemonia,
 }: HelpProps) {
+  const isMobile = useIsMobile();
   const [topic, setTopic] = useState<string | null>(null);
   const getBadgeColor = (entry: ChatEntry) => playerFaction.color;
 
@@ -37,6 +39,12 @@ export function Help({
   return (
     <div className="flex flex-col flex-1 min-h-0 pt-3 space-y-4">
       <div className="flex-1 min-h-0">
+        {isMobile && (
+          <div className="flex-shrink-0">
+            <HelpMenu onSelectTopic={setTopic} />
+          </div>
+        )}
+
         {topic ? (
           <HelpContent
             topic={topic}
@@ -62,9 +70,11 @@ export function Help({
         )}
       </div>
 
-      <div className="flex-shrink-0">
-        <HelpMenu onSelectTopic={setTopic} />
-      </div>
+      {!isMobile && (
+        <div className="flex-shrink-0">
+          <HelpMenu onSelectTopic={setTopic} />
+        </div>
+      )}
     </div>
   );
 }

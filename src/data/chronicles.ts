@@ -105,7 +105,7 @@ export function conditionChronicle({
       if (conditionModifier > 0) {
         return `Morale in ${territoryName} is said to be particularly good right now.`;
       } else {
-        return `There are rumors of plague in ${territoryName}.`;
+        return `There is talk of plague in ${territoryName}.`;
       }
     case "Eudaemonia of Rheims":
       if (conditionModifier > 0) {
@@ -118,23 +118,29 @@ export function conditionChronicle({
         return `Reports speak of new fortifications, strengthening the defenses in ${territoryName}.`;
       } else {
         const animals = [
-          "cow",
-          "pig",
-          "goat",
-          "sheep",
-          "chicken",
-          "serpent",
-          "ape",
-          "locust",
-          "goose",
-          "crow",
+          "a cow",
+          "a pig",
+          "a goat",
+          "a sheep",
+          "a chicken",
+          "a serpent",
+          "an ape",
+          "a locust",
+          "a goose",
+          "a crow",
+          "a snail",
+          "a golden retriever",
         ];
         const animal1 = randomItem(animals);
         const animal2 = randomItem(animals);
         if (animal1 === animal2) {
-          return `There are rumors of a ${animal2} born in ${territoryName} with the face of the blessed Saint Agatha, causing quite mixed feelings in the ranks.`;
+          return `There are rumors of ${animal2} born in ${territoryName} with the face of the blessed Saint Agatha, causing quite mixed feelings in the ranks.`;
         } else {
-          return `There are credible reports that a ${animal1} gave birth to a ${animal2} in ${territoryName}, causing great consternation.`;
+          return Math.random() < 0.8
+            ? `There are credible reports that ${animal1} gave birth to ${animal2} in ${territoryName}, causing great consternation.`
+            : `Pilgrims from ${territoryName} tell of ${animal1} giving birth to a talking ${
+                animal2.split(" ")[1]
+              }. No one understood it, but still, this cannot be good for morale.`;
         }
       }
   }
