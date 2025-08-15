@@ -110,7 +110,7 @@ export function conditionChronicle({
           case 0:
             return `The portents are good in ${territoryName}, inspiring its defenders.`;
           case 1:
-            return `Such wonderful signs have been seen in ${territoryName} this year, filling the ${factionName} with confidence.`;
+            return `Such wonderful signs have been seen in ${territoryName} this season, filling the ${factionName} with confidence.`;
         }
       } else {
         return `${territoryName} is reeling under bad omens of late.`;
@@ -169,7 +169,7 @@ export function conditionChronicle({
           return `There are rumors of ${animal2} born in ${territoryName} with the face of the blessed Saint Agatha, causing quite mixed feelings in the ranks.`;
         } else {
           return Math.random() < 0.8
-            ? `There are credible reports that ${animal1} gave birth to ${animal2} in ${territoryName}, causing great consternation.`
+            ? `There are credible reports that ${animal1} gave birth to ${animal2} in ${territoryName}, causing great consternation among the ${factionName} there.`
             : `Pilgrims returning from ${territoryName} tell of ${animal1} giving birth to a talking ${
                 animal2.split(" ")[1]
               }. No one understood it, but still, this cannot be good for morale.`;
