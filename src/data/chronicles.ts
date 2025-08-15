@@ -102,6 +102,7 @@ export function conditionChronicle({
 }: ConditionChronicleProps): string {
   const territoryName = uninitialBold(territory.name);
   const factionName = uninitialBold(territory.owner);
+  const adjective = uninitialBold(territory.owner.slice(0, -1));
 
   switch (author.name) {
     case "John of Colchis":
@@ -142,8 +143,8 @@ export function conditionChronicle({
     case "Athaloc of Smyrna":
       if (conditionModifier > 0) {
         return Math.random() < 0.5
-          ? `Reports speak of an outbreak of religious fervor in ${territoryName}, enthusing the garrisons there.`
-          : `The high incidence of miracles in ${territoryName} this year will surely give heart to its defenders.`;
+          ? `Reports speak of an outbreak of religious fervor in ${territoryName}, enthusing the ${adjective} garrisons there.`
+          : `The high incidence of miracles in ${territoryName} this year will surely give heart to its ${adjective} defenders.`;
       } else {
         if (Math.random() < 0.5) {
           return `Religious disputes are weakening the ${factionName} in ${territoryName}. As to the quality of those disputes, one shudders to think.`;
