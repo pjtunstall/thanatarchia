@@ -109,7 +109,7 @@ export function conditionChronicle({
       if (conditionModifier > 0) {
         switch (Math.floor(Math.random() * 2)) {
           case 0:
-            return `The portents are good in ${territoryName}, inspiring its defenders.`;
+            return `The portents are positive in ${territoryName}, inspiring its defenders.`;
           case 1:
             return `Such wonderful signs have been seen in ${territoryName} this season, filling the ${factionName} with confidence.`;
         }
