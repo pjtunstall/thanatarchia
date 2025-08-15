@@ -156,15 +156,19 @@ export function useGameCore() {
 }
 
 function randomPlayerIndex(factionTerritories: string[][]): number {
-  for (let i = 0; i < 256; i++) {
-    const r = Math.floor(Math.random() * factionTerritories.length);
-    // Make sure player faction has territory and is not Bagaudae.
-    if (factionTerritories[r].length > 0 && r !== 3) {
-      return r;
-    }
-  }
-  console.error(
-    "Something is amiss: failed to find any faction with territory"
+  const validPlayerIndices = Array.from(factionTerritories.keys()).filter(
+    (index) =>
+      factionTerritories[index].length > 0 && index !== 0 && index !== 3
   );
-  return 0;
+
+  if (validPlayerIndices.length === 0) {
+    console.error(
+      "Something is amiss: failed to find any faction with territory."
+    );
+    return -1;
+  }
+
+  const randomIndex = Math.floor(Math.random() * validPlayerIndices.length);
+
+  return validPlayerIndices[randomIndex];
 }

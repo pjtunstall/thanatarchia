@@ -1,4 +1,10 @@
-import { Character, ChatEntry, Gender, Faction } from "@/types/gameTypes";
+import {
+  Character,
+  ChatEntry,
+  Gender,
+  Faction,
+  Territory,
+} from "@/types/gameTypes";
 import { getDate } from "@/lib/time";
 import { uninitialBold, randomItem } from "@/lib/utils";
 
@@ -84,22 +90,28 @@ const agilu: Character = {
 export const chroniclersAfterTheIncident = [...chroniclers.slice(0, 3), agilu];
 
 type ConditionChronicleProps = {
-  territoryName: string;
+  territory: Territory;
   conditionModifier: number;
   author: Character;
 };
 
 export function conditionChronicle({
-  territoryName,
+  territory,
   conditionModifier,
   author,
 }: ConditionChronicleProps): string {
+  const territoryName = uninitialBold(territory.name);
+  const factionName = uninitialBold(territory.owner);
+
   switch (author.name) {
     case "John of Colchis":
       if (conditionModifier > 0) {
-        return Math.random() < 0.5
-          ? `The portents are good in ${territoryName}, inspiring its defenders.`
-          : `Such wonderful signs have been seen in ${territoryName} this year, filling its defenders with confidence.`;
+        switch (Math.floor(Math.random() * 2)) {
+          case 0:
+            return `The portents are good in ${territoryName}, inspiring its defenders.`;
+          case 1:
+            return `Such wonderful signs have been seen in ${territoryName} this year, filling the ${factionName} with confidence.`;
+        }
       } else {
         return `${territoryName} is reeling under bad omens of late.`;
       }
@@ -111,18 +123,30 @@ export function conditionChronicle({
       }
     case "Eudaemonia of Rheims":
       if (conditionModifier > 0) {
-        return `They say the defenders of ${territoryName} are buoyed up by yet another 'discovery' of treasure.`;
+        switch (Math.floor(Math.random() * 2)) {
+          case 0:
+            return `Judging by their performance in the raids, the ${factionName} in ${territoryName} are on top form this season.`;
+          case 1:
+            return `They say the defenders of ${territoryName} are buoyed up by yet another 'discovery' of treasure.`;
+        }
       } else {
-        return `Bad dreams trouble the defenders of ${territoryName}.`;
+        switch (Math.floor(Math.random() * 3)) {
+          case 0:
+            return `Bad dreams trouble the defenders of ${territoryName}.`;
+          case 1:
+            return `Wistfulness pervades ${territoryName}, sapping the spirits of the ${factionName}.`;
+          case 2:
+            return `The ${factionName} in ${territoryName} are recovering from an outbreak of ergot poisoning.`;
+        }
       }
     case "Athaloc of Smyrna":
       if (conditionModifier > 0) {
         return Math.random() < 0.5
-          ? `Reports speak of religious fervor, strengthening the forces in ${territoryName}.`
+          ? `Reports speak of religious fervor, strengthening the ${factionName} in ${territoryName}.`
           : `The high incidence of miracles in ${territoryName} this year will surely give heart to its defenders.`;
       } else {
         if (Math.random() < 0.5) {
-          return `Religious disputes are weakening the troops in ${territoryName}. As to the quality of those disputes, one shudders to think.`;
+          return `Religious disputes are weakening the ${factionName} in ${territoryName}. As to the quality of those disputes, one shudders to think.`;
         }
 
         const animals = [

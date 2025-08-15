@@ -108,16 +108,15 @@ export function useGameState() {
     if (adjacentTerritories.length === 0) {
       return;
     }
-    const randomTerritory =
+    const territory =
       adjacentTerritories[
         Math.floor(Math.random() * adjacentTerritories.length)
       ];
-    const territoryName = randomTerritory.name;
 
     const conditionModifier = Math.random() < 0.5 ? 1 : -1;
     gameCore.updateTerritories((prev) =>
       prev.map((t) =>
-        t.name === territoryName
+        t.name === territory.name
           ? { ...t, conditionModifier }
           : { ...t, conditionModifier: 0 }
       )
@@ -128,7 +127,7 @@ export function useGameState() {
       : randomItem(chroniclers.filter((c) => c.name !== "Eudaemonia"));
 
     const entry = conditionChronicle({
-      territoryName,
+      territory,
       conditionModifier,
       author,
     });
