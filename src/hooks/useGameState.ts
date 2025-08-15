@@ -7,7 +7,7 @@ import { useCombat } from "@/hooks/gameState/useCombat";
 import { useChronicles } from "@/hooks/gameState/useChronicles";
 import { abandonTerritoryToBagaudaeChronicle } from "@/data/chronicles";
 import { conditionChronicle, chroniclers } from "@/data/chronicles";
-import { neighbors } from "@/data/territories";
+import { neighbors, territories } from "@/data/territories";
 import { randomItem } from "@/lib/utils";
 
 export function useGameState() {
@@ -66,7 +66,7 @@ export function useGameState() {
     const playerTerritories =
       gameCore.factionTerritories[gameCore.playerIndex].length;
     const playerTroops = gameCore.factionTroops[gameCore.playerIndex];
-    if (playerTerritories >= 9) {
+    if (playerTerritories === territories.length) {
       gameCore.setGameStatus("victory");
       return "victory";
     }

@@ -406,7 +406,7 @@ export const endChronicle = ({
     case "Priscilla of Byzantium":
       if (bias === "friendly") {
         if (success) {
-          return `Classic pincer move. ${They}'s a military genius. No doubt about it now: trained in Byzantium. Must have been.`;
+          return `Now monarch ${player.name} has established a new Rome, proper empire, this time, where peace can flourish. And what a way to win. Classic pincer move. ${They}'s a military genius. No doubt about it now: trained in Byzantium. Must have been.`;
         } else {
           return `Such a gallant effort. ${They} went down fighting, I'll give ${them} that, like a true Roman, whatever ${their} origins. Honestly, the only word that comes to mind is Byzantine. Ah Constantinople... Now, what was I talking about?`;
         }
@@ -450,7 +450,7 @@ export const endChronicle = ({
         }
       } else {
         if (success) {
-          return `How curious! ${player.name} has read the classics but has not understood them. I doubt ${they} got much further than the first chapter of Vegetius. And yet, fascinating how these loutish ${faction.name} have eked out a realm after all.`;
+          return `How curious! ${player.name} has read the classics but has not understood them. I doubt ${they} got much further than the first chapter of Vegetius. And yet, fascinating how these loutish ${faction.name} have eked out an empire after all.`;
         } else {
           return `Most predictable! Anyone acquainted with even the most basic hermeneutics could have seen this coming. The heretic ${faction.name} have finally had the good sense to surrender. Rumor has it, ${player.name}, tripped and fell on ${their} own spear while attempting to flee. I find this highly likely.`;
         }
