@@ -28,23 +28,6 @@ export function ConnectingLines({
         >
           <path d="M 0 0 L 20 5 L 0 10 z" fill="red" />
         </marker>
-
-        <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
-          <feDropShadow
-            dx="0"
-            dy="0"
-            stdDeviation="2.5"
-            floodColor="red"
-            floodOpacity="1"
-          />
-          <feDropShadow
-            dx="0"
-            dy="0"
-            stdDeviation="4"
-            floodColor="red"
-            floodOpacity="0.7"
-          />
-        </filter>
       </defs>
 
       {selectedTerritoryName &&
@@ -65,7 +48,6 @@ export function ConnectingLines({
               stroke="red"
               strokeWidth="0.4"
               markerEnd="url(#arrow)"
-              filter="url(#glow)"
             />
           );
         })}
