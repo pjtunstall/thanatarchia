@@ -140,11 +140,11 @@ export function useCombat({
         const originalDefenderName = toTerritory.owner;
         const originalDefenseForce = toTerritory.troops!;
 
-        const attackStrength = totalTroops + Math.random() * 500;
-        const defenseStrength =
-          originalDefenseForce +
-          Math.random() * 500 +
-          (toTerritory.conditionModifier || 0);
+        const attackStrength = totalTroops + Math.random() * 400;
+        let defenseStrength = originalDefenseForce + Math.random() * 600;
+        if (toTerritory.conditionModifier) {
+          defenseStrength += toTerritory.conditionModifier * 300;
+        }
 
         const victory = attackStrength > defenseStrength;
 
@@ -427,6 +427,10 @@ export function useCombat({
 
   const handleAIAttacks = useCallback(
     (factionIndex: number, territoryName: string) => {
+      if (Math.random() > 0.3) {
+        return;
+      }
+
       updateTerritories((currentTerritories) => {
         const aiTerritory = currentTerritories.find(
           (t) => t.name === territoryName

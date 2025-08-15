@@ -6,6 +6,9 @@ import { useGameCore } from "@/hooks/gameState/useGameCore";
 import { useCombat } from "@/hooks/gameState/useCombat";
 import { useChronicles } from "@/hooks/gameState/useChronicles";
 import { abandonTerritoryToBagaudaeChronicle } from "@/data/chronicles";
+import { conditionChronicle, chroniclers } from "@/data/chronicles";
+import { neighbors } from "@/data/territories";
+import { randomItem } from "@/lib/utils";
 
 export function useGameState() {
   const [activeTab, setActiveTab] = useState("status");
@@ -90,9 +93,63 @@ export function useGameState() {
     chroniclesState.setHasChangedFromEudaemonia(false);
   }, [gameCore.resetGame, chroniclesState.resetChronicles]);
 
+  const addConditionChronicle = useCallback(() => {
+    const playerFaction = factions[gameCore.playerIndex];
+    const playerTerritoryNames = gameCore.territories
+      .filter((t) => t.owner === playerFaction.name)
+      .map((t) => t.name);
+    const adjacentTerritories = gameCore.territories.filter(
+      (t) =>
+        t.owner !== playerFaction.name &&
+        neighbors[t.name].some((neighbor) =>
+          playerTerritoryNames.includes(neighbor)
+        )
+    );
+    if (adjacentTerritories.length === 0) {
+      return;
+    }
+    const randomTerritory =
+      adjacentTerritories[
+        Math.floor(Math.random() * adjacentTerritories.length)
+      ];
+    const territoryName = randomTerritory.name;
+
+    const conditionModifier = Math.random() < 0.5 ? 1 : -1;
+    gameCore.updateTerritories((prev) =>
+      prev.map((t) =>
+        t.name === territoryName
+          ? { ...t, conditionModifier }
+          : { ...t, conditionModifier: 0 }
+      )
+    );
+
+    const author = chroniclesState.hasChangedFromEudaemonia
+      ? randomItem(chroniclers)
+      : randomItem(chroniclers.filter((c) => c.name !== "Eudaemonia"));
+
+    const entry = conditionChronicle({
+      territoryName,
+      conditionModifier,
+      author,
+    });
+
+    chroniclesState.addChronicleEntry(author, entry, gameCore.currentTurn);
+  }, [
+    gameCore.territories,
+    gameCore.playerIndex,
+    chroniclesState.addChronicleEntry,
+    factions,
+    gameCore.updateTerritories,
+    gameCore.currentTurn,
+    chroniclesState.hasChangedFromEudaemonia,
+    chroniclesState.addChronicleEntry,
+    factionLeaders,
+  ]);
+
   const handleEndTurn = useCallback(() => {
     chroniclesState.setChronicles([]);
     handlePlayerAttacks(chroniclesState.adviserIndex, gameCore.currentTurn);
+    addConditionChronicle();
     executeAITurn();
     generateResources();
     gameCore.setCurrentTurn((prev) => prev + 1);
@@ -100,6 +157,7 @@ export function useGameState() {
     gameCore.updateTerritories((prev) => {
       const playerFactionName = factions[gameCore.playerIndex].name;
       return prev.map((t) => {
+        t.conditionModifier = 0;
         if (t.owner === playerFactionName && t.troops === 0) {
           const { author, statement } = abandonTerritoryToBagaudaeChronicle({
             territoryName: t.name,

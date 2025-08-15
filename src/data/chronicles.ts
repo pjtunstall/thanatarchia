@@ -83,6 +83,63 @@ const agilu: Character = {
 
 export const chroniclersAfterTheIncident = [...chroniclers.slice(0, 3), agilu];
 
+type ConditionChronicleProps = {
+  territoryName: string;
+  conditionModifier: number;
+  author: Character;
+};
+
+export function conditionChronicle({
+  territoryName,
+  conditionModifier,
+  author,
+}: ConditionChronicleProps): string {
+  switch (author.name) {
+    case "John of Colchis":
+      if (conditionModifier > 0) {
+        return `Reports coming out of ${territoryName} speak of various miracles, inspiring its defenders.`;
+      } else {
+        return `${territoryName} is reeling under bad omens of late.`;
+      }
+    case "Priscilla of Byzantium":
+      if (conditionModifier > 0) {
+        return `Morale in ${territoryName} is said to be particularly good right now.`;
+      } else {
+        return `There are rumors of plague in ${territoryName}.`;
+      }
+    case "Eudaemonia of Rheims":
+      if (conditionModifier > 0) {
+        return `They say the defenders of ${territoryName} are buoyed up by a 'discovery' of treasure.`;
+      } else {
+        return `Bad dreams trouble the defenders of ${territoryName}.`;
+      }
+    case "Athaloc of Smyrna":
+      if (conditionModifier > 0) {
+        return `Reports speak of new fortifications, strengthening the defenses in ${territoryName}.`;
+      } else {
+        const animals = [
+          "cow",
+          "pig",
+          "goat",
+          "sheep",
+          "chicken",
+          "serpent",
+          "ape",
+          "locust",
+          "goose",
+          "crow",
+        ];
+        const animal1 = randomItem(animals);
+        const animal2 = randomItem(animals);
+        if (animal1 === animal2) {
+          return `There are rumors of a ${animal2} born in ${territoryName} with the face of the blessed Saint Agatha, causing quite mixed feelings in the ranks.`;
+        } else {
+          return `There are credible reports that a ${animal1} gave birth to a ${animal2} in ${territoryName}, causing great consternation.`;
+        }
+      }
+  }
+}
+
 type battleChronicleProps = {
   chronicler: Character;
   bias: string;
@@ -93,7 +150,7 @@ type battleChronicleProps = {
   leaderCharacter: Character;
 };
 
-export const battleChronicle = ({
+export function battleChronicle({
   chronicler,
   bias,
   success,
@@ -101,7 +158,7 @@ export const battleChronicle = ({
   losers,
   territoryName,
   leaderCharacter,
-}: battleChronicleProps): string => {
+}: battleChronicleProps): string {
   let territory = uninitialBold(territoryName);
   let attackers: string;
   let attacker: string;
@@ -206,7 +263,7 @@ export const battleChronicle = ({
         } of the ${attackers} won't be laughing now.`;
       }
   }
-};
+}
 
 export function recruitChronicle(
   author: Character,
