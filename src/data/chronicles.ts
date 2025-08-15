@@ -97,7 +97,9 @@ export function conditionChronicle({
   switch (author.name) {
     case "John of Colchis":
       if (conditionModifier > 0) {
-        return `Reports coming out of ${territoryName} speak of various miracles, inspiring its defenders.`;
+        return Math.random() < 0.5
+          ? `The portents are good in ${territoryName}, inspiring its defenders.`
+          : `Such wonderful signs have been seen in ${territoryName} this year, filling its defenders with confidence.`;
       } else {
         return `${territoryName} is reeling under bad omens of late.`;
       }
@@ -105,20 +107,22 @@ export function conditionChronicle({
       if (conditionModifier > 0) {
         return `Morale in ${territoryName} is said to be particularly good right now.`;
       } else {
-        return `There is talk of plague in ${territoryName}.`;
+        return `There is talk of plague again in ${territoryName}.`;
       }
     case "Eudaemonia of Rheims":
       if (conditionModifier > 0) {
-        return `They say the defenders of ${territoryName} are buoyed up by a 'discovery' of treasure.`;
+        return `They say the defenders of ${territoryName} are buoyed up by yet another 'discovery' of treasure.`;
       } else {
         return `Bad dreams trouble the defenders of ${territoryName}.`;
       }
     case "Athaloc of Smyrna":
       if (conditionModifier > 0) {
-        return `Reports speak of religious fervor, strengthening the forces in ${territoryName}.`;
+        return Math.random() < 0.5
+          ? `Reports speak of religious fervor, strengthening the forces in ${territoryName}.`
+          : `The high incidence of miracles in ${territoryName} this year will surely give heart to its defenders.`;
       } else {
         if (Math.random() < 0.5) {
-          return `I hear tell of religious disputes, weakening the troops in ${territoryName}. As to the quality of those disputes, I shudder to think.`;
+          return `Religious disputes are weakening the troops in ${territoryName}. As to the quality of those disputes, one shudders to think.`;
         }
 
         const animals = [
