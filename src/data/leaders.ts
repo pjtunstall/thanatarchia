@@ -206,7 +206,6 @@ export const victims2 = [
 
 const vandalFirstElements = [
   "Ari",
-  "Ata",
   "Bere",
   "Bluma",
   "Daga",
