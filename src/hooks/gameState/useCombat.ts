@@ -427,7 +427,7 @@ export function useCombat({
 
   const handleAIAttacks = useCallback(
     (factionIndex: number, territoryName: string) => {
-      if (Math.random() > 0.1) {
+      if (Math.random() > 0.2) {
         return;
       }
 

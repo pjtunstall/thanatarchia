@@ -94,10 +94,6 @@ export function useGameState() {
   }, [gameCore.resetGame, chroniclesState.resetChronicles]);
 
   const addConditionChronicle = useCallback(() => {
-    if (Math.random() < 0.8) {
-      return;
-    }
-
     const playerFaction = factions[gameCore.playerIndex];
     const playerTerritoryNames = gameCore.territories
       .filter((t) => t.owner === playerFaction.name)
@@ -152,8 +148,8 @@ export function useGameState() {
 
   const handleEndTurn = useCallback(() => {
     chroniclesState.setChronicles([]);
-    handlePlayerAttacks(chroniclesState.adviserIndex, gameCore.currentTurn);
     addConditionChronicle();
+    handlePlayerAttacks(chroniclesState.adviserIndex, gameCore.currentTurn);
     executeAITurn();
     generateResources();
     gameCore.setCurrentTurn((prev) => prev + 1);
@@ -181,6 +177,7 @@ export function useGameState() {
       });
     });
     checkGameStatus();
+    setActiveTab("chronicles");
   }, [
     handlePlayerAttacks,
     generateResources,
@@ -192,6 +189,7 @@ export function useGameState() {
     gameCore.updateTerritories,
     factions,
     chroniclesState.addChronicleEntry,
+    setActiveTab,
   ]);
 
   const handleEndGame = () => {

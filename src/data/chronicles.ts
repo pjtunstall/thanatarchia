@@ -115,8 +115,12 @@ export function conditionChronicle({
       }
     case "Athaloc of Smyrna":
       if (conditionModifier > 0) {
-        return `Reports speak of new fortifications, strengthening the defenses in ${territoryName}.`;
+        return `Reports speak of religious fervor, strengthening the forces in ${territoryName}.`;
       } else {
+        if (Math.random() < 0.5) {
+          return `I hear tell of religious disputes, weakening the troops in ${territoryName}. As to the quality of those disputes, I shudder to think.`;
+        }
+
         const animals = [
           "a cow",
           "a pig",
@@ -138,7 +142,7 @@ export function conditionChronicle({
         } else {
           return Math.random() < 0.8
             ? `There are credible reports that ${animal1} gave birth to ${animal2} in ${territoryName}, causing great consternation.`
-            : `Pilgrims from ${territoryName} tell of ${animal1} giving birth to a talking ${
+            : `Pilgrims returning from ${territoryName} tell of ${animal1} giving birth to a talking ${
                 animal2.split(" ")[1]
               }. No one understood it, but still, this cannot be good for morale.`;
         }
