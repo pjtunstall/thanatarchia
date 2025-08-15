@@ -33,7 +33,7 @@ export function loyaltyChat(
         {
           author: adviser,
           statement:
-            "What does loyalty mean to me, Sire? Well, we Constantinopolitans are renowned for our loyalty.",
+            "What does loyalty mean to me, Sire? Well, we Byzantines are practically synonymous with loyalty.",
         },
       ];
     case "Eudaemonia of Rheims":
