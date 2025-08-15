@@ -7,7 +7,7 @@ export const territories: Territory[] = [
     x: 14,
     y: 10,
     owner: "Britons",
-    troops: 900,
+    troops: 1000,
     terrain: "forest",
   },
   {
@@ -15,7 +15,7 @@ export const territories: Territory[] = [
     x: 25,
     y: 30,
     owner: "Franks",
-    troops: 1200,
+    troops: 1000,
     terrain: "forest",
   },
   {
@@ -31,7 +31,7 @@ export const territories: Territory[] = [
     x: 28,
     y: 42,
     owner: "Burgundians",
-    troops: 800,
+    troops: 1000,
     terrain: "mountains",
   },
   {
@@ -39,7 +39,7 @@ export const territories: Territory[] = [
     x: 8,
     y: 52,
     owner: "Suebians",
-    troops: 800,
+    troops: 1000,
     terrain: "mountains",
   },
   {
@@ -55,7 +55,7 @@ export const territories: Territory[] = [
     x: 35,
     y: 20,
     owner: "Saxons",
-    troops: 1500,
+    troops: 1000,
     terrain: "forest",
   },
   {
@@ -79,7 +79,7 @@ export const territories: Territory[] = [
     x: 40,
     y: 35,
     owner: "Lombards",
-    troops: 1800,
+    troops: 1000,
     terrain: "plains",
   },
   {
@@ -87,7 +87,7 @@ export const territories: Territory[] = [
     x: 50,
     y: 34,
     owner: "Gepids",
-    troops: 1300,
+    troops: 1000,
     terrain: "mountains",
   },
   {
@@ -111,7 +111,7 @@ export const territories: Territory[] = [
     x: 37,
     y: 50,
     owner: "Ostrogoths",
-    troops: 2000,
+    troops: 800,
     terrain: "plains",
   },
   {
@@ -119,7 +119,7 @@ export const territories: Territory[] = [
     x: 41,
     y: 65,
     owner: "Ostrogoths",
-    troops: 900,
+    troops: 400,
     terrain: "plains",
   },
   {
@@ -135,7 +135,7 @@ export const territories: Territory[] = [
     x: 60,
     y: 80,
     owner: "Romans",
-    troops: 1400,
+    troops: 1000,
     terrain: "river",
   },
   {
@@ -143,7 +143,7 @@ export const territories: Territory[] = [
     x: 80,
     y: 70,
     owner: "Romans",
-    troops: 1700,
+    troops: 1400,
     terrain: "plains",
   },
   {
@@ -167,7 +167,7 @@ export const territories: Territory[] = [
     x: 65,
     y: 25,
     owner: "Huns",
-    troops: 2500,
+    troops: 1600,
     terrain: "plains",
   },
   {
@@ -175,7 +175,7 @@ export const territories: Territory[] = [
     x: 13,
     y: 28,
     owner: "Bagaudae",
-    troops: 1000,
+    troops: 900,
     terrain: "forest",
   },
 ];

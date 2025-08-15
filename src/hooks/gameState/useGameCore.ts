@@ -21,7 +21,7 @@ export function useGameCore() {
     const territories = [...initialTerritories];
     const range = 2000;
     territories.forEach((t) => {
-      t.troops = 1000 + Math.floor(Math.random() * range);
+      t.troops += Math.floor(Math.random() * range);
       if (t.owner !== factions[playerIndex].name) {
         t.troops += 1000;
       }
