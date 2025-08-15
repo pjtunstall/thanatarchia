@@ -108,7 +108,7 @@ export function useGameState() {
           )
       );
       if (adjacentTerritories.length === 0) {
-        return;
+        return [...previousTerritories];
       }
       const territory =
         adjacentTerritories[
