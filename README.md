@@ -19,6 +19,8 @@ The year is 499. In the west, the Roman Empire is a patchwork of barbarian succe
 
 [Thanatarchia](https://thanatarchia.netlify.app/)
 
+Go to Actions to get started. Select the territory with your faction colour to schedule attacks. Select another territory to spy on it. End Turn to execute all scheduled attacks. Explore the (not-yet-terribly-helpful) help menu.
+
 ## Play locally
 
 Clone this repository:
