@@ -55,4 +55,5 @@ const helpTopics = [
   "Choice",
   "War",
   "Thanatarchia",
+  "How to Play",
 ];

@@ -9,6 +9,7 @@ import { choiceChat } from "@/components/game/help/choice";
 import { robberyChat } from "@/components/game/help/robbery";
 import { historyChat } from "@/components/game/help/history";
 import { identityChat } from "@/components/game/help/identity";
+import { howChat } from "@/components/game/help/how";
 
 type HelpContentProps = {
   topic: string;
@@ -108,6 +109,16 @@ export function HelpContent({
           scrollToTop={true}
           isHelpTopic={true}
           scrollKey="thanatarchia"
+        />
+      );
+    case "How to Play":
+      return (
+        <Chat
+          items={howChat(adviser, player)}
+          options={{ getBadgeColor }}
+          scrollToTop={true}
+          isHelpTopic={true}
+          scrollKey="how"
         />
       );
   }
