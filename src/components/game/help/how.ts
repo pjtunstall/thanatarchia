@@ -25,11 +25,11 @@ export function howChat(adviser: Character, player: Character): ChatEntry[] {
     },
     {
       author: adviser,
-      statement: `Select any territory on the map and you'll see its neighbors. Choose your own to see more choices. Click elsewhere on the map to return to the Help menu. Now, in Actions, with your territory chosen, you'll find some options. If you can afford it, you can recruit in this territory.`,
+      statement: `Select any territory on the map to see which are its neighbors. Click elsewhere on the map to return to the Help menu. If you pick a territory you own, Actions will show you more options. Recruit, for example, if you can afford it.`,
     },
     {
       author: player,
-      statement: `How will I know if I can afford it?`,
+      statement: `How will I know if I can afford to recruit?`,
     },
     {
       author: adviser,
@@ -37,7 +37,7 @@ export function howChat(adviser: Character, player: Character): ChatEntry[] {
     },
     {
       author: player,
-      statement: `What about spying? What does that do?`,
+      statement: `What about spying?`,
     },
     {
       author: adviser,
@@ -73,7 +73,7 @@ export function howChat(adviser: Character, player: Character): ChatEntry[] {
     },
     {
       author: adviser,
-      statement: `If you select a territory you own and go to Actions, there will be a choice to attack. Click on the Attack bar to see neighboring territories. The Up chevron at the right of a neighboring land's name is to assign more troops to attack it. The Down chevron returns them to your pool of available troops.`,
+      statement: `If you select a territory you own and go to Actions, there will be a choice to attack. Click on the Attack bar to see neighboring territories. The Up chevron at the right of a neighboring land's name lets you assign more troops to attack it. The Down chevron returns them to your pool of available troops.`,
     },
     {
       author: player,
@@ -89,7 +89,7 @@ export function howChat(adviser: Character, player: Character): ChatEntry[] {
     },
     {
       author: adviser,
-      statement: `As you capture more territories, you'll be able to send troops between them. Again, the Up chevron moves troops the neighboring territory; the Down chevron brings them back to the selected territory. But reinforments happen immediately. So you can perform any number of them in a turn.`,
+      statement: `When you have multiple territories, you can send troops between them. The Up chevron moves troops to the neighboring territory; the Down chevron brings them back to the selected territory. Unlike attacks, which you schedule in advance, these reinforments happen immediately. So you can perform any number of them in a turn.`,
     },
     {
       author: player,
