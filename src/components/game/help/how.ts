@@ -65,7 +65,7 @@ export function howChat(adviser: Character, player: Character): ChatEntry[] {
     },
     {
       author: adviser,
-      statement: `Several, your Majesty. Generally quite plainful. You'll find them all too easily.`,
+      statement: `Several, your Majesty. Generally quite painful. You'll find them all too easily.`,
     },
     {
       author: player,
