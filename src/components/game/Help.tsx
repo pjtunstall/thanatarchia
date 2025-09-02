@@ -92,7 +92,7 @@ function getInitialHint(adviser: Character): ChatEntry[] {
       break;
     case "Eudaemonia of Rheims":
       statement =
-        "Just pick a territory on this chart, Sire, and let's make a plan for the season.";
+        "Pick a territory on this chart, Sire, and let's make a plan for the season.";
       break;
     case "Athaloc of Smyrna":
       statement =

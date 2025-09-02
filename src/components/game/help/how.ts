@@ -93,7 +93,7 @@ export function howChat(adviser: Character, player: Character): ChatEntry[] {
     },
     {
       author: player,
-      statement: `What about Religion?`,
+      statement: `What about Faith?`,
     },
     {
       author: adviser,
@@ -101,7 +101,15 @@ export function howChat(adviser: Character, player: Character): ChatEntry[] {
     },
     {
       author: player,
-      statement: `Is there anything else I should know.`,
+      statement: `What are these skulls I see above me, either side of the title?`,
+    },
+    {
+      author: adviser,
+      statement: `Probably just a touch of ergot poisoning, but I suppose you could always click on them if you're curious.`,
+    },
+    {
+      author: player,
+      statement: `Is there anything else I should know?`,
     },
     {
       author: adviser,
