@@ -105,7 +105,7 @@ export function howChat(adviser: Character, player: Character): ChatEntry[] {
     },
     {
       author: adviser,
-      statement: `Probably just a touch of ergot poisoning, but I suppose you could always click on them if you're curious.`,
+      statement: `Probably just a touch of ergot poisoning, but I suppose you can always click on one if you're curious.`,
     },
     {
       author: player,
