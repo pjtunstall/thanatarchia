@@ -78,8 +78,8 @@ export function GameDashboard() {
                 style={{ pointerEvents: "auto", zIndex: 20 }}
               >
                 <TabsTrigger value="chronicles">Chronicles</TabsTrigger>
-                <TabsTrigger value="status">Status</TabsTrigger>
                 <TabsTrigger value="actions">Actions</TabsTrigger>
+                <TabsTrigger value="status">Status</TabsTrigger>
               </TabsList>
 
               <TabsContent

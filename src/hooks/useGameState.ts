@@ -12,7 +12,7 @@ import { randomItem } from "@/lib/utils";
 import { Territory } from "@/types/gameTypes";
 
 export function useGameState() {
-  const [activeTab, setActiveTab] = useState("status");
+  const [activeTab, setActiveTab] = useState("actions");
   const [factionLeaders, setFactionLeaders] = useState(
     initializeLeaders(factions)
   );
@@ -88,7 +88,7 @@ export function useGameState() {
   // read.
   const resetGame = useCallback(() => {
     gameCore.resetGame();
-    setActiveTab("status");
+    setActiveTab("actions");
     setFactionLeaders(initializeLeaders(factions));
     chroniclesState.resetChronicles();
     chroniclesState.setHasChangedFromEudaemonia(false);
