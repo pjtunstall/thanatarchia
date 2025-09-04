@@ -62,7 +62,6 @@ export function HeaderActions({
                 isPlayerFaction={true}
                 factionFaiths={factionFaiths}
                 player={playerCharacter}
-                playerIndex={playerIndex}
                 setFactionAggressions={setFactionAggressions}
                 setFactionTreasures={setFactionTreasures}
               />
@@ -108,7 +107,7 @@ export function HeaderActions({
             End Turn
           </Button>
 
-          {/* Plray or sacrifice button */}
+          {/* Pray or sacrifice button */}
           {factionFaiths[playerIndex] === "Pagan" ? (
             <Button
               onClick={playSquirrel}
