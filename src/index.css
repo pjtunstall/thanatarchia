@@ -64,14 +64,9 @@ All colors MUST be HSL.
     --input: 30 15% 20%;
     --ring: 15 60% 55%;
 
-    /* Ancient theme colors - dark mode */
-    --parchment: 30 15% 15%;
+    /* Faction colors */
     --imperial: 340 70% 55%;
-    --barbarian: 120 40% 45%;
     --bagaudae: 60 50% 60%;
-    --chronicle: 30 10% 25%;
-
-    /* Specific faction colors - dark mode */
     --ostrogoths: 360 35% 50%;
     --visigoths: 360 35% 25%;
     --vandals: 30 80% 50%;
@@ -102,12 +97,6 @@ All colors MUST be HSL.
 
 /* Ancient Map Styling */
 @layer components {
-  .ancient-map-container {
-    background: linear-gradient(135deg, #f4f1e8 0%, #e6dcc3 100%);
-    position: relative;
-    overflow: hidden;
-  }
-
   .map-decorative-border {
     border: 4px solid;
     border-image: linear-gradient(45deg, #8b7047, #6b5537, #8b7047, #6b5537) 1;
