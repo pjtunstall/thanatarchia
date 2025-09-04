@@ -23,8 +23,8 @@ type HeaderActionsProps = {
   playerFaction: Faction;
   factionLeaders: Character[];
   playerCharacter: Character;
-  setFactionAggressions: (fn: (prev: any) => any) => void;
-  setFactionTreasures: (fn: (prev: any) => any) => void;
+  setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
+  setFactionTreasures: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 export function HeaderActions({
