@@ -2,9 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  overscroll-behavior-y: contain;
+/* Prevent accidentally reloading the page due to scrolling too far on a mobile device. */
+@media (pointer: coarse) {
+  html,
+  body {
+    overscroll-behavior-y: contain;
+  }
 }
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
