@@ -2,8 +2,8 @@
 
 - [Play online](#play-online)
 - [Play locally](#play-locally)
-- [Credits](#credits)
 - [Future plans](#future-plans)
+- [Credits](#credits)
 
 > _The unruly Moorish tribe rages against its own flesh, the Goths utterly destroy the Burgundians, and again the Alamanni wear arms for the conquered, and the Tervingi too, ... with the help of a band of Taifali join battle with the Vandals and Gepids. ... The Burgundians have taken over the land of the Alamanni, but obtained at great cost to themselves. The Alamanni have lost the land but seek to regain it._
 
@@ -19,7 +19,7 @@ The year is 499. In the west, the Roman Empire is a patchwork of barbarian succe
 
 [Thanatarchia](https://thanatarchia.netlify.app/)
 
-Go to Actions to get started. Select the territory with your faction colour to schedule attacks. Select another territory to spy on it. End Turn to execute all scheduled attacks. Explore the (not-yet-terribly-helpful) help menu.
+Go to Actions to get started. Select the territory with your faction colour to schedule attacks. Select another territory to spy on it. End Turn to execute all scheduled attacks. Explore the help menu.
 
 ## Play locally
 
@@ -45,9 +45,25 @@ npm run dev
 
 Then open a browser and navigate to [http://localhost:8080](http://localhost:8080).
 
+## Future plans
+
+Feedback has been that the game is far from intuitive. I've started to address this with a "how to play" guide in the help topics, but the UI should ideally be clearer. I could feed in info more incrementally, maybe with hints relating it individual parts the first time you interact with them.
+
+Religion is a placeholder for now. Eventually, this could be made to affect fiendliness/hostility of factions or who you can make alliances with if I add a system of alliances.
+
+Too much of the game is random. I'd like there to be real choices you can make that will affect the course and outcomes of conversations.
+
+There could be a safety buffer to protect you from losing too abruptly or on the first turn. Game over could present more information about how well you did, and let you see the map still. The game-over screen shouldn't be visible at all behind the modals that show the outcome of battles.
+
+There should be more variety of actions to make it interesting.
+
+It would be nice to add a variety of conversations with other rulers, with meaningful choices to be made.
+
+A few more images would be nice: in particular, different avatars for all faction leaders.
+
 ## Credits
 
-Thanks to Lovable AI for helping me whip up the initial prototype in a day (including the map and some of the chronicler images), and to ChatGPT for massive help and encouragement over the rest of the month that it took me till I had something ready to deploy. Salutes too to AI genius of last resort, Claude.
+Thanks to Lovable AI for helping me whip up the initial prototype in a day (including the map and some of the chronicler images), and to ChatGPT 4 for much help over the rest of the month that it took me till I had something ready to deploy. Salutes too to AI genius of last resort, Claude.
 
 AI images mainly from Copilot, with a few from Chat.
 
