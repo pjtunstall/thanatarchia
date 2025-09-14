@@ -19,7 +19,7 @@ The year is 499. In the west, the Roman Empire is a patchwork of barbarian succe
 
 [Thanatarchia](https://thanatarchia.netlify.app/)
 
-Go to Actions to get started. Select the territory with your faction colour to schedule attacks. Select another territory to spy on it. End Turn to execute all scheduled attacks. Explore the help menu.
+Select the territory with your faction colour to schedule attacks. Select another territory to spy on it. End Turn to execute all scheduled attacks. Explore the help menu. In particular, ask about how to play.
 
 ## Play locally
 
@@ -49,17 +49,19 @@ Then open a browser and navigate to [http://localhost:8080](http://localhost:808
 
 Feedback has been that the game is far from intuitive. I've started to address this with a "how to play" guide in the help topics, but the UI should ideally be clearer. I could feed in info more incrementally, maybe with hints relating it individual parts the first time you interact with them.
 
+The other main issue is that there's not a lot to actually do in the game. There should be more variety of actions to make it interesting.
+
 Religion is a placeholder for now. Eventually, this could be made to affect fiendliness/hostility of factions or who you can make alliances with if I add a system of alliances.
+
+It would be nice to add a variety of conversations with other rulers, with meaningful choices to be made.
 
 Too much of the game is random. I'd like there to be real choices you can make that will affect the course and outcomes of conversations.
 
 There could be a safety buffer to protect you from losing too abruptly or on the first turn. Game over could present more information about how well you did, and let you see the map still. The game-over screen shouldn't be visible at all behind the modals that show the outcome of battles.
 
-There should be more variety of actions to make it interesting.
-
-It would be nice to add a variety of conversations with other rulers, with meaningful choices to be made.
-
 A few more images would be nice: in particular, different avatars for all faction leaders.
+
+It's been a good learning experience though.
 
 ## Credits
 
@@ -72,6 +74,8 @@ Eagle brooch image from [The Morgan Library & Museum](https://www.themorgan.org/
 Raven, squirrel, and coinbag sounds, [freesound_community](https://pixabay.com/users/freesound_community-46691455/). Marching sound from [kakaist](https://pixabay.com/users/kakaist-48093450). Church bell from [Universfield](https://pixabay.com/users/universfield-28281460). Pen writing from [ALIENIGHTMARE](https://pixabay.com/users/alienightmare-42489797). All via Pixabay.
 
 The Vandal name generator owes a lot to Nicholetta Francovich Onesti's "[Tracing the language of the Vandals](https://www.academia.edu/691311/Tracing_the_Language_of_the_Vandals)". Goti e Vandali. Rome: Artemide. pp. 179–195, and "[The Language and Names of the Vandals](https://www.academia.edu/1516556/THE_LANGUAGE_AND_NAMES_OF_THE_VANDALS)", Das Konigreich der Vandalen: Erben des Imperiums in Nordafrika, Karlsruhe 2009.
+
+For the Gothic name generator, I consulted Gerhard Koebler's [Gotisches Wörterbuch](https://www.koeblergerhard.de/gotwbhin.html), Appendix 3: [gotischen Namen](https://www.koeblergerhard.de/got/tg/got_namen.pdf). As with the Vandal names, I chose to let the names reflect post-Wulfilan developments (innovations on the Biblical Gothic of the 4th century), such as loss of the nominative singular ending -s.
 
 Thematic inspiration: Herbert F. Bushman's [The Dark Ages Podcast](https://darkagespod.com/), which I listened to night and day this month. I fell asleep listening to it, and it got into my dreams.
 
