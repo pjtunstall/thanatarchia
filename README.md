@@ -47,21 +47,15 @@ Then open a browser and navigate to [http://localhost:8080](http://localhost:808
 
 ## Future plans
 
-Feedback has been that the game is far from intuitive. I've started to address this with a "how to play" guide in the help topics, but the UI should ideally be clearer. I could feed in info more incrementally, maybe with hints relating it individual parts the first time you interact with them.
+Feedback so far has been that the game is far from intuitive. I've started to address this with a "how to play" guide in the help topics, but the UI should ideally be clearer. I could feed in info more incrementally, maybe with hints relating it individual parts the first time you interact with them.
 
-The other main issue is that there's not a lot to actually do in the game. There should be more variety of actions to make it interesting.
-
-Religion is a placeholder for now. Eventually, this could be made to affect fiendliness/hostility of factions or who you can make alliances with if I add a system of alliances.
-
-It would be nice to add a variety of conversations with other rulers, with meaningful choices to be made.
-
-Too much of the game is random. I'd like there to be real choices you can make that will affect the course and outcomes of conversations.
+Another issue is that there's not a lot to actually do in the game. There should be more variety of actions to make it interesting. Proper conversations with other rulers could be fun, and conversations where you can make meaningful choices. More generally, too much is random.
 
 There could be a safety buffer to protect you from losing too abruptly or on the first turn. Game over could present more information about how well you did, and let you see the map still. The game-over screen shouldn't be visible at all behind the modals that show the outcome of battles.
 
-A few more images would be nice: in particular, different avatars for all faction leaders.
+For now, change of faith is just a placeholder. Eventually, this could be made to affect fiendliness of factions or who you can make alliances with if I add a system of alliances.
 
-It's been a good learning experience though.
+I'd like to add more images: in particular, different avatars for all faction leaders.
 
 ## Credits
 
