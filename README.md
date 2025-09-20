@@ -51,9 +51,9 @@ Feedback so far has been that the game is far from intuitive. I've started to ad
 
 Another issue is that there's not a lot to actually do in the game. There should be more variety of actions to make it interesting. Proper conversations with other rulers could be fun, and conversations where you can make meaningful choices. More generally, too much is random.
 
-There could be a safety buffer to protect you from losing too abruptly or on the first turn. Game over could present more information about how well you did, and let you see the map still. The game-over screen shouldn't be visible at all behind the modals that show the outcome of battles.
+There could be a safety buffer to protect you from losing too abruptly or on the first turn. The game-over screen could present more information about how well you did, and let you see the map still. It shouldn't be visible at all behind the modals that show the outcome of battles.
 
-For now, change of faith is just a placeholder. Eventually, this could be made to affect fiendliness of factions or who you can make alliances with if I add a system of alliances.
+For now, change of faith is just a placeholder. Eventually, this could be made to affect friendliness of factions or who you can make alliances with if I add a system of alliances.
 
 I'd like to add more images: in particular, different avatars for all faction leaders.
 
