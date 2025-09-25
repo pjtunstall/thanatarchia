@@ -109,47 +109,11 @@ export function conditionChronicle({
       if (conditionModifier > 0) {
         switch (Math.floor(Math.random() * 2)) {
           case 0:
-            return `The portents are positive in ${territoryName}, inspiring its defenders.`;
+            return `The portents are positive for the defenders of ${territoryName}.`;
           case 1:
-            return `Such wonderful signs have been seen in ${territoryName} this season, filling the ${factionName} with confidence.`;
+            return `Such wonderful signs have been seen in ${territoryName} this season, filling the ${factionName} with boundless aplomb.`;
         }
       } else {
-        return `${territoryName} is reeling under bad omens of late.`;
-      }
-    case "Priscilla of Byzantium":
-      if (conditionModifier > 0) {
-        return `Morale among the ${factionName} in ${territoryName} is said to be particularly good right now.`;
-      } else {
-        return `There is talk of plague again in ${territoryName}.`;
-      }
-    case "Eudaemonia of Rheims":
-      if (conditionModifier > 0) {
-        switch (Math.floor(Math.random() * 2)) {
-          case 0:
-            return `Judging by their performance in the raids, the ${factionName} in ${territoryName} are on top form this season.`;
-          case 1:
-            return `They say the defenders of ${territoryName} are buoyed up by yet another 'discovery' of treasure.`;
-        }
-      } else {
-        switch (Math.floor(Math.random() * 3)) {
-          case 0:
-            return `Bad dreams trouble the defenders of ${territoryName}.`;
-          case 1:
-            return `Wistfulness pervades ${territoryName}, sapping the spirits of the ${factionName}.`;
-          case 2:
-            return `The ${factionName} in ${territoryName} are recovering from an outbreak of ergot poisoning.`;
-        }
-      }
-    case "Athaloc of Smyrna":
-      if (conditionModifier > 0) {
-        return Math.random() < 0.5
-          ? `Reports speak of an outbreak of religious fervor in ${territoryName}, enthusing the ${adjective} garrisons there.`
-          : `The high incidence of miracles in ${territoryName} this year will surely give heart to its ${adjective} defenders.`;
-      } else {
-        if (Math.random() < 0.5) {
-          return `Religious disputes are weakening the ${factionName} in ${territoryName}. As to the quality of those disputes, one shudders to think.`;
-        }
-
         const animals = [
           "a cow",
           "a pig",
@@ -175,6 +139,40 @@ export function conditionChronicle({
                 animal2.split(" ")[1]
               }. No one understood it, but still, this cannot be good for morale.`;
         }
+      }
+    case "Priscilla of Byzantium":
+      if (conditionModifier > 0) {
+        return `Morale among the ${factionName} in ${territoryName} is said to be particularly good right now.`;
+      } else {
+        return Math.random() < 0.5
+          ? `There is talk of plague again in ${territoryName}.`
+          : `${territoryName} is reeling under bad omens of late.`;
+      }
+    case "Eudaemonia of Rheims":
+      if (conditionModifier > 0) {
+        switch (Math.floor(Math.random() * 2)) {
+          case 0:
+            return `Judging by their performance in the raids, the ${factionName} in ${territoryName} are on top form this season.`;
+          case 1:
+            return `They say the defenders of ${territoryName} are buoyed up by yet another 'discovery' of treasure.`;
+        }
+      } else {
+        switch (Math.floor(Math.random() * 3)) {
+          case 0:
+            return `Bad dreams trouble the defenders of ${territoryName}.`;
+          case 1:
+            return `Wistfulness pervades ${territoryName}, sapping the spirits of the ${factionName}.`;
+          case 2:
+            return `The ${factionName} in ${territoryName} are recovering from yet another outbreak of ergot poisoning.`;
+        }
+      }
+    case "Athaloc of Smyrna":
+      if (conditionModifier > 0) {
+        return Math.random() < 0.5
+          ? `Reports speak of a surge of religious fervor in ${territoryName}, enthusing the ${adjective} garrisons there.`
+          : `The high incidence of miracles in ${territoryName} this year will surely give heart to its ${adjective} defenders.`;
+      } else {
+        return `Religious disputes are weakening the ${factionName} in ${territoryName}. As to the quality of those disputes, one shudders to think.`;
       }
   }
 }

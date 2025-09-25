@@ -120,7 +120,7 @@ function getHint({
         },
         {
           author: player,
-          statement: `Thank you, ${adviser.name}. Any words of wisom?`,
+          statement: `Thanks and hail to you too, ${adviser.name}. Any words of wisdom?`,
         },
         {
           author: adviser,
