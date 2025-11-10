@@ -47,7 +47,7 @@ Then open a browser and navigate to [http://localhost:8080](http://localhost:808
 
 ## Future plans
 
-Feedback so far has been that the game is far from intuitive. I've started to address this with a "how to play" guide in the help topics, but the UI should ideally be clearer. I could feed in info more incrementally, maybe with hints relating it individual parts the first time you interact with them.
+Feedback so far has been that the game is far from intuitive. I've started to address this with a "how to play" guide in the help topics, but the UI should ideally be clearer. I could feed in info more incrementally, maybe with hints relating it individual parts the first time you interact with them. Or there could be (possibly interactive) tutorial offered when the page loads, with an option to skip it or come back to it later.
 
 Another issue is that there's not a lot to actually do in the game. There should be more variety of actions to make it interesting. Proper conversations with other rulers could be fun, and conversations where you can make meaningful choices. More generally, too much is random.
 
