@@ -227,7 +227,7 @@ export function battleChronicle({
         }
       } else {
         if (success) {
-          return `Like the wolf upon the fold, the treacherous ${attackers}, have fallen upon the ${defenders} with great slaughter in ${territory}.`;
+          return `Like a wolf upon the fold, the treacherous ${attackers}, have fallen upon the ${defenders} with great slaughter in ${territory}.`;
         } else {
           return `At this time, the ${attackers} made an unprovoked attack on the ${defenders} in ${territory}, but were driven back with dreadful losses.`;
         }
