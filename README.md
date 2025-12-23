@@ -5,6 +5,8 @@
 - [Future plans](#future-plans)
 - [Credits](#credits)
 
+![thumbnail](public/thumbnail.jpg)
+
 > _The unruly Moorish tribe rages against its own flesh, the Goths utterly destroy the Burgundians, and again the Alamanni wear arms for the conquered, and the Tervingi too, ... with the help of a band of Taifali join battle with the Vandals and Gepids. ... The Burgundians have taken over the land of the Alamanni, but obtained at great cost to themselves. The Alamanni have lost the land but seek to regain it._
 
 &nbsp;&nbsp;&nbsp;&nbsp;— [Genethliacus of Maximian Augustus, Panegyrici Latini XI, 17](https://www.jassa.org/?p=7497)
@@ -76,3 +78,5 @@ For the Gothic name generator, I consulted Gerhard Koebler's [Gotisches Wörterb
 Thematic inspiration: Herbert F. Bushman's [The Dark Ages Podcast](https://darkagespod.com/), which I listened to night and day this month. I fell asleep listening to it, and it got into my dreams.
 
 I must also credit Lovable with one of the jokes. I'll let you guess which.
+
+![page not found](page-not-found.jpg)
