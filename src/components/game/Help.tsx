@@ -17,6 +17,8 @@ type HelpProps = {
   adviser: Character;
   setAdviserIndex: React.Dispatch<React.SetStateAction<number>>;
   setHasChangedFromEudaemonia: React.Dispatch<React.SetStateAction<boolean>>;
+  isHelpMenuOpen: boolean;
+  setIsHelpMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export function Help({
@@ -26,6 +28,8 @@ export function Help({
   adviser,
   setAdviserIndex,
   setHasChangedFromEudaemonia,
+  isHelpMenuOpen,
+  setIsHelpMenuOpen,
 }: HelpProps) {
   const isMobile = useIsMobile();
   const [topic, setTopic] = useState<string | null>(null);
@@ -49,7 +53,11 @@ export function Help({
       <div className="flex-1 min-h-0">
         {isMobile && (
           <div className="flex-shrink-0">
-            <HelpMenu onSelectTopic={setTopic} />
+            <HelpMenu
+              onSelectTopic={setTopic}
+              isOpen={isHelpMenuOpen}
+              onOpenChange={setIsHelpMenuOpen}
+            />
           </div>
         )}
 
@@ -80,7 +88,11 @@ export function Help({
 
       {!isMobile && (
         <div className="flex-shrink-0">
-          <HelpMenu onSelectTopic={setTopic} />
+          <HelpMenu
+            onSelectTopic={setTopic}
+            isOpen={isHelpMenuOpen}
+            onOpenChange={setIsHelpMenuOpen}
+          />
         </div>
       )}
     </div>

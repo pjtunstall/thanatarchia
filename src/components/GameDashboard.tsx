@@ -62,6 +62,10 @@ export function GameDashboard() {
               playerIndex={gameState.playerIndex}
               setFactionAggressions={gameState.setFactionAggressions}
               setFactionTreasures={gameState.setFactionTreasures}
+              onOpenHelpMenu={() => {
+                gameState.setSelectedTerritoryName(null);
+                gameState.setIsHelpMenuOpen(true);
+              }}
             />
           </div>
 
@@ -154,6 +158,8 @@ export function GameDashboard() {
                   setSelectedTerritoryName={gameState.setSelectedTerritoryName}
                   setFactionAggressions={gameState.setFactionAggressions}
                   setFactionTreasures={gameState.setFactionTreasures}
+                  isHelpMenuOpen={gameState.isHelpMenuOpen}
+                  setIsHelpMenuOpen={gameState.setIsHelpMenuOpen}
                 />
               </TabsContent>
             </Tabs>

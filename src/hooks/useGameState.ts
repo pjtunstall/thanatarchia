@@ -13,6 +13,7 @@ import { Territory } from "@/types/gameTypes";
 
 export function useGameState() {
   const [activeTab, setActiveTab] = useState("actions");
+  const [isHelpMenuOpen, setIsHelpMenuOpen] = useState(false);
   const [factionLeaders, setFactionLeaders] = useState(
     initializeLeaders(factions)
   );
@@ -202,6 +203,8 @@ export function useGameState() {
   }, [gameCore.territories]);
 
   return {
+    isHelpMenuOpen,
+    setIsHelpMenuOpen,
     activeTab,
     setActiveTab,
     ...gameCore,

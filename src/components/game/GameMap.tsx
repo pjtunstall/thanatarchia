@@ -33,6 +33,7 @@ type GameMapProps = {
   onEndGame: () => void;
   setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
   setFactionTreasures: React.Dispatch<React.SetStateAction<number[]>>;
+  onOpenHelpMenu: () => void;
 };
 
 export function GameMap({
@@ -51,6 +52,7 @@ export function GameMap({
   onEndGame,
   setFactionAggressions,
   setFactionTreasures,
+  onOpenHelpMenu,
 }: GameMapProps) {
   // Create faction lookup from centralized data + filter to only show factions with territories.
   const factionLookup = React.useMemo(() => {
@@ -85,24 +87,6 @@ export function GameMap({
     "Are you sure you want to end the game?",
   );
 
-  const toggleTerritorySelectionAndMaybeHelpMenu = (
-    e: React.MouseEvent<HTMLDivElement>,
-  ) => {
-    onTerritoryClick(null);
-    console.log("toggleTerritorySelectionAndMaybeHelpMenu", e.target);
-
-    const target = e.target as HTMLElement;
-    console.log("target", target);
-    console.log(
-      "target.closest('[data-role=\'compass\']')",
-      target.closest("[data-role='compass']"),
-    );
-    if (target.closest("[data-role='compass']")) {
-      console.log("dispatching open-help-menu");
-      window.dispatchEvent(new Event("open-help-menu"));
-    }
-  };
-
   return (
     <Card className="h-full">
       <CardHeader className="pb-0">
@@ -133,7 +117,14 @@ export function GameMap({
       <CardContent className="h-full p-6 relative">
         <div
           className="relative w-full aspect-[4/3] map-decorative-border rounded-lg overflow-hidden"
-          onClick={toggleTerritorySelectionAndMaybeHelpMenu}
+          onClick={(e) => {
+            const target = e.target as HTMLElement;
+            if (target.closest("[data-role='compass']")) {
+              onOpenHelpMenu();
+              return;
+            }
+            onTerritoryClick(null);
+          }}
         >
           <ProgressiveImage
             src={"/images/map.jpg"}

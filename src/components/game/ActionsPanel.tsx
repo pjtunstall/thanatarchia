@@ -55,6 +55,8 @@ type ActionsPanelProps = {
   setSelectedTerritoryName: React.Dispatch<React.SetStateAction<string | null>>;
   setFactionAggressions: React.Dispatch<React.SetStateAction<number[]>>;
   setFactionTreasures: React.Dispatch<React.SetStateAction<number[]>>;
+  isHelpMenuOpen: boolean;
+  setIsHelpMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export function ActionsPanel({
@@ -81,6 +83,8 @@ export function ActionsPanel({
   setHasChangedFromEudaemonia,
   setFactionAggressions,
   setFactionTreasures,
+  isHelpMenuOpen,
+  setIsHelpMenuOpen,
 }: ActionsPanelProps) {
   const [pendingFaith, setPendingFaith] = useState<string | null>(null);
   const confirmFaithChange = () => {
@@ -142,6 +146,8 @@ export function ActionsPanel({
                 playerFaction={playerFaction}
                 setAdviserIndex={setAdviserIndex}
                 setHasChangedFromEudaemonia={setHasChangedFromEudaemonia}
+                isHelpMenuOpen={isHelpMenuOpen}
+                setIsHelpMenuOpen={setIsHelpMenuOpen}
               ></Help>
             )}
           </div>
