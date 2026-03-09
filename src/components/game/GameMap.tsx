@@ -82,8 +82,26 @@ export function GameMap({
 
   const { openDialog, dialog } = useConfirm(
     onEndGame,
-    "Are you sure you want to end the game?"
+    "Are you sure you want to end the game?",
   );
+
+  const toggleTerritorySelectionAndMaybeHelpMenu = (
+    e: React.MouseEvent<HTMLDivElement>,
+  ) => {
+    onTerritoryClick(null);
+    console.log("toggleTerritorySelectionAndMaybeHelpMenu", e.target);
+
+    const target = e.target as HTMLElement;
+    console.log("target", target);
+    console.log(
+      "target.closest('[data-role=\'compass\']')",
+      target.closest("[data-role='compass']"),
+    );
+    if (target.closest("[data-role='compass']")) {
+      console.log("dispatching open-help-menu");
+      window.dispatchEvent(new Event("open-help-menu"));
+    }
+  };
 
   return (
     <Card className="h-full">
@@ -115,7 +133,7 @@ export function GameMap({
       <CardContent className="h-full p-6 relative">
         <div
           className="relative w-full aspect-[4/3] map-decorative-border rounded-lg overflow-hidden"
-          onClick={() => onTerritoryClick(null)}
+          onClick={toggleTerritorySelectionAndMaybeHelpMenu}
         >
           <ProgressiveImage
             src={"/images/map.jpg"}
@@ -157,7 +175,7 @@ export function GameMap({
 
 function isUnderAttack(
   territory: Territory,
-  scheduledAttacks: AttackOrder[]
+  scheduledAttacks: AttackOrder[],
 ): boolean {
   return scheduledAttacks.some((attack) => attack.to === territory.name);
 }

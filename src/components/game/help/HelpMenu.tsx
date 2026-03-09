@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BookOpenText } from "lucide-react";
 
 import { Dialog } from "@/components/ui/dialog";
@@ -15,14 +15,28 @@ type HelpMenuProps = {
 };
 
 export function HelpMenu({ onSelectTopic }: HelpMenuProps) {
-  const [open, setOpen] = useState(false);
+  const [isHelpDialogOpen, setIsHelpDialogOpen] = useState(false);
+  const [isHelpMenuOpen, setIsHelpMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleOpenRequest = () => {
+      setIsHelpMenuOpen(true);
+      console.log("handleOpenRequest");
+    };
+
+    window.addEventListener("open-help-menu", handleOpenRequest, true);
+
+    return () => {
+      window.removeEventListener("open-help-menu", handleOpenRequest);
+    };
+  }, []);
 
   return (
     <div className="flex justify-center">
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DropdownMenu>
+      <Dialog open={isHelpDialogOpen} onOpenChange={setIsHelpDialogOpen}>
+        <DropdownMenu open={isHelpMenuOpen} onOpenChange={setIsHelpMenuOpen}>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm">
+            <Button id="help-ask-about-trigger" variant="outline" size="sm">
               <BookOpenText className="w-3 h-3 mr-1" />
               Ask About...
             </Button>
@@ -33,7 +47,7 @@ export function HelpMenu({ onSelectTopic }: HelpMenuProps) {
                 key={topic}
                 onSelect={() => {
                   onSelectTopic(topic);
-                  setOpen(true);
+                  setIsHelpDialogOpen(true);
                 }}
               >
                 {topic}

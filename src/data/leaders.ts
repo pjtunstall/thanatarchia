@@ -1,6 +1,5 @@
 import { Gender } from "@/types/gameTypes";
 import { randomItem } from "@/lib/utils";
-import { fromUnixTime } from "date-fns";
 
 export const epithets = [
   "Arrogant",
@@ -97,6 +96,17 @@ const romanFemaleNames = [
   "Valeriana",
   "Vigilantia",
 ];
+
+const moorMaleNames = ["Masuna", "Cabaon"];
+const moorFemaleNames = ["Dihya"];
+
+export function randomMoorName(gender: Gender): string {
+  if (gender === "male") {
+    return randomItem(moorMaleNames);
+  } else {
+    return randomItem(moorFemaleNames);
+  }
+}
 
 export function randomHunName(gender: Gender): string {
   if (gender === "male") {
