@@ -16,7 +16,11 @@ type HelpMenuProps = {
   onOpenChange: (open: boolean) => void;
 };
 
-export function HelpMenu({ onSelectTopic, isOpen, onOpenChange }: HelpMenuProps) {
+export function HelpMenu({
+  onSelectTopic,
+  isOpen,
+  onOpenChange,
+}: HelpMenuProps) {
   const [isHelpDialogOpen, setIsHelpDialogOpen] = useState(false);
 
   return (
@@ -24,7 +28,12 @@ export function HelpMenu({ onSelectTopic, isOpen, onOpenChange }: HelpMenuProps)
       <Dialog open={isHelpDialogOpen} onOpenChange={setIsHelpDialogOpen}>
         <DropdownMenu open={isOpen} onOpenChange={onOpenChange}>
           <DropdownMenuTrigger asChild>
-            <Button id="help-ask-about-trigger" variant="outline" size="sm">
+            <Button
+              id="help-ask-about-trigger"
+              variant="outline"
+              size="sm"
+              className="focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none"
+            >
               <BookOpenText className="w-3 h-3 mr-1" />
               Ask About...
             </Button>
