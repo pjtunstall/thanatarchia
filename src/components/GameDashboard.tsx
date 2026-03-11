@@ -63,6 +63,7 @@ export function GameDashboard() {
               setFactionAggressions={gameState.setFactionAggressions}
               setFactionTreasures={gameState.setFactionTreasures}
               onOpenHelpMenu={() => {
+                gameState.setActiveTab("actions");
                 gameState.setSelectedTerritoryName(null);
                 gameState.setIsHelpMenuOpen(true);
               }}
