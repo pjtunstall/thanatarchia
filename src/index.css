@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.ts";
 
 /* Prevent accidentally reloading the page due to scrolling too far on a mobile device. */
 @media (pointer: coarse) {
